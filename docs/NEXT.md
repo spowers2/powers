@@ -1,11 +1,12 @@
 # Next steps
 
-**Canonical order:** [`ROADMAP.md`](./ROADMAP.md)
+**Canonical order:** [`ROADMAP.md`](./ROADMAP.md) · Styling model: [`STYLING.md`](./STYLING.md)
 
 ## Just completed
 
-- [x] Styling architecture: integrated tokens + primitives + utilities  
-- [x] `docs/STYLING.md` · `utilities.css` · Lab recipe “Tokens & utilities”  
+- [x] Integrated styling as product pillar (tokens · primitives · utilities)  
+- [x] `utilities.css` (BEM-ish, token-mapped) + Lab recipe “Tokens & utilities”  
+- [x] Power Lab, islands registry, unified nav (prior)  
 
 ## Immediate next
 
