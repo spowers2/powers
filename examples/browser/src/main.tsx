@@ -262,63 +262,97 @@ function TodosPage() {
 
   return (
     <Container size="md">
-      <Stack gap={4}>
-        <Text as="h2" size="xl">
-          Todos
-        </Text>
-        <Stack direction="row" gap={2} align="center">
-          <Input
-            placeholder="Add a todo…"
-            ref={(el) => {
-              inputEl = el;
-            }}
-            onInput={(e) => draft.set((e.target as HTMLInputElement).value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") add();
-            }}
-          />
-          <Button onClick={add}>Add</Button>
+      <Stack gap={5}>
+        <Stack gap={2}>
+          <Text as="h1" size="2xl">
+            Todos
+          </Text>
+          <Text muted>
+            A small app built only with design-system primitives — no custom
+            form chrome.
+          </Text>
         </Stack>
-        <Text muted size="sm">
-          {() => `${remaining()} remaining`}
-        </Text>
-        <ul class="todo-list">
-          <For each={() => todos()} key={(t) => t.id}>
+
+        <Card variant="elevated">
+          <Stack gap={4}>
+            <Stack direction="row" gap={2} align="center">
+              <Input
+                placeholder="Add a todo…"
+                ref={(el) => {
+                  inputEl = el;
+                }}
+                onInput={(e) =>
+                  draft.set((e.target as HTMLInputElement).value)
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") add();
+                }}
+              />
+              <Button onClick={add}>Add</Button>
+            </Stack>
+            <Stack direction="row" justify="between" align="center">
+              <Text muted size="sm">
+                {() => `${remaining()} remaining`}
+              </Text>
+              <Badge tone="accent">
+                {() => `${todos().length} total`}
+              </Badge>
+            </Stack>
+          </Stack>
+        </Card>
+
+        <Stack gap={2}>
+          <For each={() => todos()}>
             {(item) => (
-              <li class={() => (item().done ? "done" : "")}>
-                <span>{() => item().title}</span>
-                <Stack direction="row" gap={2}>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => {
-                      const id = item().id;
-                      todos.update((all) =>
-                        all.map((t) =>
-                          t.id === id ? { ...t, done: !t.done } : t,
-                        ),
-                      );
-                    }}
+              <Card
+                class={() => (item().done ? "todo-card todo-card--done" : "todo-card")}
+              >
+                <Stack direction="row" justify="between" align="center" gap={3}>
+                  <Text
+                    class={() => (item().done ? "todo-title-done" : undefined)}
                   >
-                    {() => (item().done ? "Undo" : "Done")}
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="danger"
-                    onClick={() => {
-                      const id = item().id;
-                      todos.update((all) => all.filter((t) => t.id !== id));
-                    }}
-                  >
-                    Delete
-                  </Button>
+                    {() => item().title}
+                  </Text>
+                  <Stack direction="row" gap={2}>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => {
+                        const id = item().id;
+                        todos.update((all) =>
+                          all.map((t) =>
+                            t.id === id ? { ...t, done: !t.done } : t,
+                          ),
+                        );
+                      }}
+                    >
+                      {() => (item().done ? "Undo" : "Done")}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      onClick={() => {
+                        const id = item().id;
+                        todos.update((all) =>
+                          all.filter((t) => t.id !== id),
+                        );
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </Stack>
                 </Stack>
-              </li>
+              </Card>
             )}
           </For>
-        </ul>
+        </Stack>
+
         <Show when={() => todos().length === 0}>
-          {() => <Text muted>No todos — add one above.</Text>}
+          {() => (
+            <Card variant="soft">
+              <Text muted>No todos — add one above.</Text>
+            </Card>
+          )}
         </Show>
       </Stack>
     </Container>

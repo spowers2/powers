@@ -1,6 +1,9 @@
 import esbuild from "esbuild-wasm";
 import wasmUrl from "esbuild-wasm/esbuild.wasm?url";
+// Full design system CSS for the Lab iframe (tokens + base + utilities)
+import themeCss from "@power-ui/ui/theme.css?inline";
 import { createLabApi, LAB_API_KEYS, type PowerLabApi } from "./api.js";
+import { injectDesignSystemInto } from "./warmStyles.js";
 
 let esbuildReady: Promise<void> | null = null;
 
@@ -112,9 +115,21 @@ export async function runInFrame(
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style id="pu-lab-theme"></style>
   <style>
-    html, body { margin: 0; min-height: 100%; background: var(--pu-color-bg, #f3f4f6); color: var(--pu-color-text, #13171d); font-family: system-ui, sans-serif; }
-    #root { min-height: 100%; box-sizing: border-box; padding: 8px; }
+    /* Lab shell — tokens come from injected theme */
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--pu-color-bg, #f3f4f6);
+      color: var(--pu-color-text, #13171d);
+      font-family: var(--pu-font-sans, system-ui, sans-serif);
+    }
+    #root {
+      min-height: 100%;
+      box-sizing: border-box;
+      padding: var(--pu-space-5, 1.25rem);
+    }
     * { box-sizing: border-box; }
     button, input, select, textarea { font: inherit; }
   </style>
@@ -221,6 +236,11 @@ export async function runInFrame(
         return;
       }
       try {
+        const doc = iframe.contentDocument;
+        if (doc) {
+          // Design tokens + primitive CSS must live inside the iframe
+          injectDesignSystemInto(doc, themeCss);
+        }
         const w = iframe.contentWindow as (Window & {
           __POWER_BOOT__?: (api: PowerLabApi) => void;
         }) | null;
