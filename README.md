@@ -4,9 +4,9 @@
 
 Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 
-> Status: **Phase 1.2** — core reactivity + signal-native **`@power-ui/animate`**. No DOM yet. Private while foundations harden.
+> Status: **Phase 2** — core + **`@power-ui/animate`** + thin **`@power-ui/dom`**. Compiler not required. Private while foundations harden.
 
-**New here?** Read [`docs/LEARN.md`](./docs/LEARN.md) — five ideas (+ animate), ten minutes.
+**New here?** Read [`docs/LEARN.md`](./docs/LEARN.md) — small surface, real apps.
 
 ---
 
@@ -39,39 +39,34 @@ pnpm install
 pnpm test
 pnpm example:kitchen-sink
 pnpm example:animate
+pnpm example:browser
 pnpm size
 ```
 
-### Hello core + motion
+### Hello browser UI
 
 ```ts
-import { signal, computed, effect, store, resource } from "@power-ui/core";
+import { signal } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
+import { mount, h, bindStyle } from "@power-ui/dom";
 
-// 1. signal
-const count = signal(0);
+mount(document.getElementById("app")!, () => {
+  const count = signal(0);
+  const x = signal(0);
+  const ball = h("div", { class: "ball" });
+  bindStyle(ball, () => ({ transform: `translateX(${x()}px)` }));
 
-// 2. computed
-const label = computed(() => `Count: ${count()}`);
-
-// 3. effect — no dependency array
-effect(() => console.log(label()));
-
-// 4. store — multi-field state
-const app = store({ count: 0, name: "Ada" });
-app.count.set(1);
-app.set({ name: "Grace" });
-
-// 5. resource — async without spaghetti
-const users = resource(async () => {
-  const res = await fetch("/api/users");
-  return res.json();
+  return h("div", null,
+    h("button", {
+      onClick: () => {
+        count.update((n) => n + 1);
+        animate(x, 100, spring());
+      },
+      text: () => `Count: ${count()}`,
+    }),
+    ball,
+  );
 });
-
-// 6. animate — move signals over time
-const x = signal(0);
-animate(x, 100, { duration: 300, ease: "easeOut" });
-animate(x, 0, spring());
 ```
 
 ---
@@ -92,8 +87,9 @@ animate(x, 0, spring());
 | `flush()` | Run pending effects now (tests/demos) |
 | `animate(signal, to, opts?)` | Tween or spring a number signal (`@power-ui/animate`) |
 | `spring(opts?)` | Spring config for `animate` |
+| `mount` / `h` / `bind*` / `show` / `list` | Thin DOM bindings (`@power-ui/dom`) |
 
-Architecture notes: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) · Motion: [`docs/ANIMATION.md`](./docs/ANIMATION.md)
+Docs: [`LEARN`](./docs/LEARN.md) · [`DOM`](./docs/DOM.md) · [`ANIMATION`](./docs/ANIMATION.md) · [`NEXT`](./docs/NEXT.md) (includes parked GSAP adapter)
 
 ---
 
@@ -102,21 +98,18 @@ Architecture notes: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) · Motion: 
 ```
 power-ui/
 ├── packages/
-│   ├── core/       # @power-ui/core v0.1.1
-│   └── animate/    # @power-ui/animate v0.1.0
+│   ├── core/       # @power-ui/core
+│   ├── animate/    # @power-ui/animate
+│   └── dom/        # @power-ui/dom
 ├── examples/
 │   ├── counter/
 │   ├── kitchen-sink/
-│   └── animate-demo/
-├── docs/
-│   ├── LEARN.md
-│   ├── ANIMATION.md
-│   ├── NEXT.md
-│   └── ARCHITECTURE.md
-└── package.json
+│   ├── animate-demo/
+│   └── browser/    # Vite demo
+└── docs/
 ```
 
-**Coming next:** `@power-ui/dom` (Phase 2) — explicit bindings, then syntax sugar. See [`docs/NEXT.md`](./docs/NEXT.md).
+**Coming next:** optional compiler sugar, then (when it makes sense) **GSAP adapter**. See [`docs/NEXT.md`](./docs/NEXT.md).
 
 ---
 
@@ -131,6 +124,7 @@ power-ui/
 | `pnpm example:counter` | Minimal demo |
 | `pnpm example:kitchen-sink` | Full core tour |
 | `pnpm example:animate` | Motion foundation demo |
+| `pnpm example:browser` | Vite UI demo (dom + animate) |
 
 ---
 
@@ -157,7 +151,9 @@ power-ui/
 | **1** | Core signals / effects | ✅ v0.1 |
 | **1.1** | `store`, `resource`, `onError`, stress tests, size budget | ✅ v0.1.1 |
 | **1.2** | Signal-native animation (`@power-ui/animate`) | ✅ v0.1.0 |
-| **2** | DOM runtime + bindings → then compiler sugar | **Next** ([`docs/NEXT.md`](./docs/NEXT.md)) |
+| **2** | Thin DOM bindings (`@power-ui/dom`) + browser demo | ✅ v0.1.0 |
+| **2.x** | Compiler sugar (emit bindings) | Planned |
+| **—** | **GSAP adapter** + richer motion | **Parked** — see [`docs/NEXT.md`](./docs/NEXT.md) |
 | **3** | SSR + selective hydration | Planned |
 | **4** | App kit (router, actions) | Planned |
 | **5** | Design system + docs site | Planned |

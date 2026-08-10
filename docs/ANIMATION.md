@@ -86,9 +86,9 @@ Opt out per call: `{ respectReducedMotion: false }`.
 ```
 ✅ Core 1.1
 ✅ Animate foundation
-→  Phase 2 thin DOM   ← next (docs/NEXT.md)
-→  Wire animate ↔ DOM
-→  Optional GSAP adapter
+✅ Phase 2 thin DOM (+ browser demo wires animate ↔ style)
+→  Compiler sugar / components
+→  Optional GSAP adapter   ← parked, return when it makes sense (docs/NEXT.md)
 ```
 
 ## Size

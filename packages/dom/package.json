@@ -1,0 +1,36 @@
+{
+  "name": "@power-ui/dom",
+  "version": "0.1.0",
+  "description": "Thin DOM bindings for Power UI — explicit, fine-grained, tiny learning curve.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test src/*.test.ts",
+    "size": "node --import tsx scripts/size.ts"
+  },
+  "dependencies": {
+    "@power-ui/core": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.1",
+    "happy-dom": "^17.4.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

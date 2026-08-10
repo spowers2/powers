@@ -2,42 +2,45 @@
 
 Last updated: 2026-08-09
 
-## Completed: Animation foundation (Phase 1.2)
+## Completed: Phase 2 thin DOM (v0.1)
 
-- [x] `@power-ui/animate` — tween + spring on number signals
-- [x] Interrupt / cancel / complete
-- [x] `prefers-reduced-motion` + test clock driver
-- [x] Tests, size budget, `examples/animate-demo`
+- [x] `@power-ui/dom` — `mount`, `h`, `text`, `bind*`, `on`, `show`, `list`
+- [x] Tests (happy-dom)
+- [x] Browser example (`examples/browser` + Vite)
+- [x] Docs: `docs/DOM.md`
+
+---
+
+## Parked — return when it makes sense
+
+### GSAP adapter + richer motion
+
+**Do not drop this.** After DOM/compiler feel solid (or when a user needs cinematic timelines):
+
+1. Optional `@power-ui/animate/gsap` (or `@power-ui/gsap`) peer adapter  
+2. Sync GSAP tweens → signals (or target DOM for marketing pages only)  
+3. Color / multi-value interpolation in `@power-ui/animate`  
+4. Enter/exit + FLIP-style helpers on top of `show` / `list`
 
 See [`docs/ANIMATION.md`](./ANIMATION.md).
 
 ---
 
-## NEXT UP: Phase 2 — thin DOM (resume now)
+## Sensible next engineering milestones
 
-**This is the immediate next engineering milestone.**
+1. **Phase 2.x** — tiny JSX or template compiler that *only* emits existing `h` / `bind*` calls  
+2. **Components** — lightweight `component(setup)` / ownership helpers  
+3. **SSR / islands** (Phase 3)  
+4. **GSAP adapter** (when pro motion demand is real)  
 
-1. `@power-ui/dom` — explicit bindings first (`text`, `attr`, `on`, `show`, `list` / `For`)
-2. Vite browser example (counter + list + optional `animate` on style/transform signals)
-3. Only then: JSX or template compiler that **emits** those bindings
-
-Rationale: same five reactivity ideas + animate + “bind them to the DOM.” Compiler last.
-
-Wire motion into DOM after bindings exist (enter/exit, FLIP-ish later).
-
----
-
-## Later
-
-- Optional GSAP adapter (`@power-ui/animate/gsap` or similar)
-- Color / multi-value interpolation
-- SSR + selective hydration (Phase 3)
+Prefer: dogfood the browser demo, fix binding gaps, then compiler.
 
 ---
 
 ## Completed history
 
-- [x] Phase 0 — manifesto + monorepo
-- [x] Phase 1 — `@power-ui/core` signals / effects
-- [x] Phase 1.1 — store, resource, onError, stress tests, size budget
-- [x] Phase 1.2 — `@power-ui/animate`
+- [x] Phase 0 — manifesto + monorepo  
+- [x] Phase 1 — `@power-ui/core`  
+- [x] Phase 1.1 — store, resource, onError, stress tests, size  
+- [x] Phase 1.2 — `@power-ui/animate`  
+- [x] Phase 2.0 — `@power-ui/dom` thin bindings + browser demo  

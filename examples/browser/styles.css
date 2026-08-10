@@ -1,0 +1,163 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  --bg: #0f1419;
+  --panel: #1a2332;
+  --text: #e7ecf3;
+  --muted: #9aa8bc;
+  --accent: #5b9dff;
+  --accent-2: #7cdecb;
+  --danger: #ff7b72;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #1b3a5f 0%, transparent 50%),
+    radial-gradient(900px 500px at 100% 0%, #2a1f4d 0%, transparent 45%),
+    var(--bg);
+  color: var(--text);
+}
+
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+}
+
+.sub {
+  color: var(--muted);
+  margin: 0 0 1.75rem;
+}
+
+.panel {
+  background: color-mix(in srgb, var(--panel) 92%, black);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+button,
+input[type="text"] {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  background: var(--accent);
+  color: #061018;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
+}
+
+button.danger {
+  background: color-mix(in srgb, var(--danger) 30%, transparent);
+  color: var(--text);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.counter-value {
+  font-variant-numeric: tabular-nums;
+  font-size: 2.5rem;
+  font-weight: 700;
+  min-width: 3ch;
+  display: inline-block;
+}
+
+.ball {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5b9dff, #b388ff);
+  margin: 0.75rem 0 0.25rem;
+  will-change: transform;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 12rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+}
+
+ul.todos {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+
+ul.todos li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  margin-bottom: 0.4rem;
+}
+
+ul.todos li.done span {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+ul.todos li span {
+  flex: 1;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.footer {
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}

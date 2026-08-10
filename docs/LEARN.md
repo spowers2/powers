@@ -143,11 +143,29 @@ Honors `prefers-reduced-motion` by default (snaps to the end).
 
 ---
 
+## 7. DOM — bind signals to the page
+
+```ts
+import { mount, h } from "@power-ui/dom";
+
+mount(document.getElementById("app")!, () => {
+  const count = signal(0);
+  return h("button", {
+    onClick: () => count.update((n) => n + 1),
+    text: () => `Count: ${count()}`,
+  });
+});
+```
+
+Also: `bindText`, `bindAttr`, `show`, `list` — see [`docs/DOM.md`](./DOM.md).
+
+---
+
 ## What you do *not* need yet
 
-- JSX / components (Phase 2 — next after animation foundation)
+- JSX / templates (compiler comes after bindings are solid)
 - Routers, SSR, design system (later)
-- GSAP (optional adapter later for cinematic work)
+- **GSAP adapter** (parked — optional pro path; see [`docs/NEXT.md`](./NEXT.md))
 - Proxies, decorators, or special file extensions
 
-Master the five core ideas (+ `animate` when you need motion) and you know Power UI.
+Master core + animate + these DOM bindings and you can build real UIs.
