@@ -1,0 +1,87 @@
+.app-shell {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: var(--pu-space-6) var(--pu-space-4) var(--pu-space-12);
+}
+
+.app-header {
+  margin-bottom: var(--pu-space-8);
+  padding-bottom: var(--pu-space-4);
+  border-bottom: 1px solid var(--pu-color-border);
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--pu-space-4);
+  flex-wrap: wrap;
+}
+
+.app-nav a {
+  color: var(--pu-color-text-muted);
+  text-decoration: none;
+  font-weight: var(--pu-font-medium);
+  font-size: var(--pu-text-sm);
+}
+
+.app-nav a:hover {
+  color: var(--pu-color-text);
+}
+
+.app-nav a.active {
+  color: var(--pu-color-accent);
+}
+
+.app-main {
+  min-height: 50vh;
+}
+
+.app-footer {
+  margin-top: var(--pu-space-10);
+  padding-top: var(--pu-space-4);
+  border-top: 1px solid var(--pu-color-border);
+}
+
+.demo-ball {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--pu-radius-full);
+  background: linear-gradient(
+    135deg,
+    var(--pu-color-accent),
+    color-mix(in srgb, var(--pu-color-accent) 40%, #b388ff)
+  );
+  will-change: transform;
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pu-space-2);
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pu-space-3);
+  padding: var(--pu-space-3) var(--pu-space-4);
+  border-radius: var(--pu-radius-md);
+  background: var(--pu-color-surface-2);
+  border: 1px solid var(--pu-color-border);
+}
+
+.todo-list li.done span {
+  text-decoration: line-through;
+  color: var(--pu-color-text-muted);
+}
+
+code {
+  font-family: var(--pu-font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--pu-color-surface-2);
+}

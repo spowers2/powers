@@ -9,8 +9,13 @@ export default defineConfig({
     jsx: "automatic",
     jsxImportSource: "@power-ui/dom",
   },
-  // Workspace packages point at TypeScript sources.
   optimizeDeps: {
-    exclude: ["@power-ui/core", "@power-ui/dom", "@power-ui/animate"],
+    exclude: [
+      "@power-ui/core",
+      "@power-ui/dom",
+      "@power-ui/animate",
+      "@power-ui/router",
+      "@power-ui/ui",
+    ],
   },
 });

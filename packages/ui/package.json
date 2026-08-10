@@ -1,0 +1,38 @@
+{
+  "name": "@power-ui/ui",
+  "version": "0.1.0",
+  "description": "Power UI design system — editable tokens, themes, clear primitives.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "./src/styles/tokens.css",
+    "./src/styles/base.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./tokens.css": "./src/styles/tokens.css",
+    "./base.css": "./src/styles/base.css",
+    "./theme.css": "./src/styles/theme.css"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test src/*.test.ts"
+  },
+  "dependencies": {
+    "@power-ui/core": "workspace:*",
+    "@power-ui/dom": "workspace:*"
+  },
+  "devDependencies": {
+    "happy-dom": "^17.4.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

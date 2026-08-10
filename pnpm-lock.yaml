@@ -36,6 +36,12 @@ importers:
       '@power-ui/dom':
         specifier: workspace:*
         version: link:../../packages/dom
+      '@power-ui/router':
+        specifier: workspace:*
+        version: link:../../packages/router
+      '@power-ui/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
     devDependencies:
       vite:
         specifier: ^6.2.2
@@ -98,6 +104,63 @@ importers:
       esbuild:
         specifier: ^0.25.1
         version: 0.25.12
+      happy-dom:
+        specifier: ^17.4.4
+        version: 17.6.3
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  packages/router:
+    dependencies:
+      '@power-ui/core':
+        specifier: workspace:*
+        version: link:../core
+      '@power-ui/dom':
+        specifier: workspace:*
+        version: link:../dom
+    devDependencies:
+      happy-dom:
+        specifier: ^17.4.4
+        version: 17.6.3
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  packages/ssr:
+    dependencies:
+      '@power-ui/core':
+        specifier: workspace:*
+        version: link:../core
+      '@power-ui/dom':
+        specifier: workspace:*
+        version: link:../dom
+      happy-dom:
+        specifier: ^17.4.4
+        version: 17.6.3
+    devDependencies:
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  packages/ui:
+    dependencies:
+      '@power-ui/core':
+        specifier: workspace:*
+        version: link:../core
+      '@power-ui/dom':
+        specifier: workspace:*
+        version: link:../dom
+    devDependencies:
       happy-dom:
         specifier: ^17.4.4
         version: 17.6.3

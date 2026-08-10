@@ -1,0 +1,115 @@
+/**
+ * Power UI design tokens
+ * ----------------------
+ * Edit these variables to re-theme the entire system.
+ * Semantic tokens (surface, text, accent…) map to brand scales.
+ *
+ * Naming: --pu-<category>-<name>
+ */
+
+:root {
+  /* ---- Brand scale (edit freely) ---- */
+  --pu-brand-50: #eef5ff;
+  --pu-brand-100: #d6e7ff;
+  --pu-brand-200: #a8cbff;
+  --pu-brand-300: #75abff;
+  --pu-brand-400: #4d90ff;
+  --pu-brand-500: #2b74f5;
+  --pu-brand-600: #1a5ad1;
+  --pu-brand-700: #1446a3;
+  --pu-brand-800: #12357a;
+  --pu-brand-900: #0f2a5c;
+
+  /* ---- Neutrals ---- */
+  --pu-gray-0: #ffffff;
+  --pu-gray-50: #f6f8fb;
+  --pu-gray-100: #eef1f6;
+  --pu-gray-200: #dde3ec;
+  --pu-gray-300: #c5cedc;
+  --pu-gray-400: #96a3b8;
+  --pu-gray-500: #6b7a92;
+  --pu-gray-600: #4d5b73;
+  --pu-gray-700: #364256;
+  --pu-gray-800: #232d3f;
+  --pu-gray-900: #141b28;
+  --pu-gray-950: #0b1018;
+
+  /* ---- Semantic (light default) ---- */
+  --pu-color-bg: var(--pu-gray-50);
+  --pu-color-surface: var(--pu-gray-0);
+  --pu-color-surface-2: var(--pu-gray-100);
+  --pu-color-border: var(--pu-gray-200);
+  --pu-color-text: var(--pu-gray-900);
+  --pu-color-text-muted: var(--pu-gray-500);
+  --pu-color-accent: var(--pu-brand-500);
+  --pu-color-accent-hover: var(--pu-brand-600);
+  --pu-color-accent-fg: #ffffff;
+  --pu-color-danger: #e5484d;
+  --pu-color-danger-fg: #ffffff;
+  --pu-color-focus: var(--pu-brand-400);
+
+  /* ---- Space (4px grid) ---- */
+  --pu-space-0: 0;
+  --pu-space-1: 0.25rem;
+  --pu-space-2: 0.5rem;
+  --pu-space-3: 0.75rem;
+  --pu-space-4: 1rem;
+  --pu-space-5: 1.25rem;
+  --pu-space-6: 1.5rem;
+  --pu-space-8: 2rem;
+  --pu-space-10: 2.5rem;
+  --pu-space-12: 3rem;
+
+  /* ---- Radius ---- */
+  --pu-radius-sm: 6px;
+  --pu-radius-md: 10px;
+  --pu-radius-lg: 14px;
+  --pu-radius-full: 9999px;
+
+  /* ---- Typography ---- */
+  --pu-font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --pu-font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  --pu-text-xs: 0.75rem;
+  --pu-text-sm: 0.875rem;
+  --pu-text-md: 1rem;
+  --pu-text-lg: 1.125rem;
+  --pu-text-xl: 1.35rem;
+  --pu-text-2xl: 1.75rem;
+  --pu-leading: 1.5;
+  --pu-font-medium: 500;
+  --pu-font-semibold: 600;
+  --pu-font-bold: 700;
+
+  /* ---- Shadow / elevation ---- */
+  --pu-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --pu-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --pu-shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.12);
+
+  /* ---- Motion ---- */
+  --pu-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --pu-duration-fast: 120ms;
+  --pu-duration: 200ms;
+
+  /* ---- Control sizes ---- */
+  --pu-control-h-sm: 2rem;
+  --pu-control-h-md: 2.5rem;
+  --pu-control-h-lg: 3rem;
+  --pu-control-px: 0.9rem;
+}
+
+/* Dark theme: set data-pu-theme="dark" on <html> or a root */
+[data-pu-theme="dark"] {
+  --pu-color-bg: var(--pu-gray-950);
+  --pu-color-surface: var(--pu-gray-900);
+  --pu-color-surface-2: var(--pu-gray-800);
+  --pu-color-border: var(--pu-gray-700);
+  --pu-color-text: var(--pu-gray-50);
+  --pu-color-text-muted: var(--pu-gray-400);
+  --pu-color-accent: var(--pu-brand-400);
+  --pu-color-accent-hover: var(--pu-brand-300);
+  --pu-color-accent-fg: var(--pu-gray-950);
+  --pu-color-focus: var(--pu-brand-300);
+  --pu-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --pu-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --pu-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
