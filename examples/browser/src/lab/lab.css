@@ -173,6 +173,28 @@
   border-right: 1px solid var(--lab-border);
 }
 
+/* Brief highlight when a recipe loads into the editor */
+.lab-editor-pane--flash .lab-pane-label {
+  animation: lab-code-flash 0.7s var(--pu-ease) 1;
+}
+
+@keyframes lab-code-flash {
+  0% {
+    background: color-mix(in srgb, var(--pu-color-accent) 28%, var(--pu-color-surface-2));
+    color: var(--pu-color-accent);
+  }
+  100% {
+    background: var(--pu-color-surface-2);
+    color: var(--pu-color-text-muted);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-editor-pane--flash .lab-pane-label {
+    animation: none;
+  }
+}
+
 .lab-preview-pane {
   border-right: 0;
 }

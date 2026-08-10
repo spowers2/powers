@@ -1,6 +1,6 @@
 /**
  * Power Lab — interactive learning playground.
- * Recipe-first: pick a sample, edit code, live preview.
+ * Pick a recipe → editor + tip + preview all switch to that sample.
  */
 import { signal, effect } from "@power-ui/core";
 import { Button, Badge, Text } from "@power-ui/ui";
@@ -21,7 +21,10 @@ export function LabPage() {
     (initial?.recipeId && recipeById(initial.recipeId)) || recipes[0]!;
 
   const activeId = signal(startRecipe.id);
+  /** Editor source of truth — recipe loads and typing both write here */
   const code = signal(initial?.code ?? startRecipe.code);
+  /** Bumps on every recipe switch so the UI can flash “loaded” feedback */
+  const loadGen = signal(0);
   const status = signal<"idle" | "running" | "ok" | "error">("idle");
   const statusMsg = signal("Ready — pick a recipe or edit the code");
   const logs = signal<LabLog[]>([]);
@@ -31,19 +34,39 @@ export function LabPage() {
   let editorEl: HTMLTextAreaElement | null = null;
   let tipBodyEl: HTMLElement | null = null;
   let titleEl: HTMLElement | null = null;
+  let codeLabelEl: HTMLElement | null = null;
   let runToken = 0;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  /** When true, next code→editor sync is forced even if values look equal */
+  let forceEditorWrite = false;
 
   const activeRecipe = (): Recipe => recipeById(activeId()) ?? recipes[0]!;
 
-  function syncChrome(r: Recipe) {
+  function syncSidebar(active: string) {
+    for (const btn of recipeList.querySelectorAll<HTMLButtonElement>(
+      ".lab-recipe",
+    )) {
+      const id = btn.dataset.recipeId ?? "";
+      const on = id === active;
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-current", on ? "true" : "false");
+    }
+  }
+
+  function writeEditor(next: string) {
+    if (!editorEl) return;
+    // Always replace — setAttribute alone does not update a controlled-looking textarea
+    editorEl.value = next;
+    // Some browsers keep selection at end of previous content; jump to top of recipe
+    editorEl.setSelectionRange(0, 0);
+    editorEl.scrollTop = 0;
+  }
+
+  function applyRecipeChrome(r: Recipe) {
     if (titleEl) titleEl.textContent = r.title;
     if (tipBodyEl) tipBodyEl.textContent = r.tip;
-    for (const btn of recipeList.querySelectorAll<HTMLButtonElement>(".lab-recipe")) {
-      const id = btn.dataset.recipeId;
-      btn.classList.toggle("is-active", id === r.id);
-      btn.setAttribute("aria-current", id === r.id ? "true" : "false");
-    }
+    if (codeLabelEl) codeLabelEl.textContent = `Code · ${r.title}`;
+    syncSidebar(r.id);
   }
 
   async function run() {
@@ -69,6 +92,8 @@ export function LabPage() {
     if (result.ok) {
       status.set("ok");
       statusMsg.set("Running · edit code or pick another recipe");
+    } else if (result.error === "Cancelled") {
+      // superseded by a newer run
     } else {
       status.set("error");
       statusMsg.set(result.error ?? "Error — see console below");
@@ -83,8 +108,9 @@ export function LabPage() {
     }, 450);
   }
 
+  /** Switch recipe: chrome + code editor + re-run preview */
   function loadRecipe(r: Recipe) {
-    // Cancel in-flight preview work
+    // Cancel in-flight preview
     runToken += 1;
     if (debounceTimer) {
       clearTimeout(debounceTimer);
@@ -92,13 +118,15 @@ export function LabPage() {
     }
 
     activeId.set(r.id);
+    forceEditorWrite = true;
     code.set(r.code);
-    if (editorEl) {
-      editorEl.value = r.code;
-      editorEl.scrollTop = 0;
-    }
-    syncChrome(r);
-    statusMsg.set(`Loaded “${r.title}”`);
+    // Write immediately (don’t wait for effect) so the user always sees the swap
+    writeEditor(r.code);
+    forceEditorWrite = false;
+
+    applyRecipeChrome(r);
+    loadGen.update((n) => n + 1);
+    statusMsg.set(`Loaded “${r.title}” — code updated`);
     logs.set([]);
     void run();
   }
@@ -121,16 +149,15 @@ export function LabPage() {
 
   function resetRecipe() {
     const r = activeRecipe();
+    forceEditorWrite = true;
     code.set(r.code);
-    if (editorEl) {
-      editorEl.value = r.code;
-      editorEl.scrollTop = 0;
-    }
+    writeEditor(r.code);
+    forceEditorWrite = false;
     statusMsg.set(`Reset “${r.title}”`);
     void run();
   }
 
-  // Sidebar recipe list (imperative so click → load is bulletproof)
+  // —— Sidebar recipes (event delegation) ——
   const recipeList = document.createElement("div");
   recipeList.className = "lab-recipe-list";
   recipeList.setAttribute("role", "listbox");
@@ -142,26 +169,38 @@ export function LabPage() {
     btn.className = "lab-recipe";
     btn.dataset.recipeId = r.id;
     btn.setAttribute("role", "option");
+    btn.setAttribute("aria-label", `Load recipe: ${r.title}`);
     const strong = document.createElement("strong");
     strong.textContent = r.title;
     const span = document.createElement("span");
     span.textContent = r.blurb;
     btn.append(strong, span);
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      loadRecipe(r);
-    });
     recipeList.appendChild(btn);
   }
+
+  recipeList.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement | null;
+    const btn = target?.closest?.(".lab-recipe") as HTMLButtonElement | null;
+    if (!btn || !recipeList.contains(btn)) return;
+    e.preventDefault();
+    const id = btn.dataset.recipeId;
+    if (!id) return;
+    const r = recipeById(id);
+    if (!r) {
+      statusMsg.set(`Unknown recipe: ${id}`);
+      status.set("error");
+      return;
+    }
+    loadRecipe(r);
+  });
 
   const sidebar = (
     <aside class="lab-sidebar">
       <div class="lab-sidebar-head">
         <h2>Power Lab</h2>
         <Text muted size="xs">
-          Pick a recipe → edit code → live preview. This is the interactive
-          teacher (not a static demo page).
+          Click a recipe — the <strong>Code</strong> panel switches to that
+          sample, then the preview re-runs.
         </Text>
       </div>
       <Badge tone="accent">{recipes.length} recipes</Badge>
@@ -216,12 +255,14 @@ export function LabPage() {
     </p>
   );
 
+  // —— Editor ——
   const editor = document.createElement("textarea");
   editor.className = "lab-editor";
   editor.spellcheck = false;
   editor.setAttribute("aria-label", "Power Lab code editor");
   editor.value = code();
   editorEl = editor;
+
   editor.addEventListener("input", () => {
     code.set(editor.value);
     scheduleAutoRun();
@@ -239,6 +280,16 @@ export function LabPage() {
       editor.value = `${v.slice(0, start)}  ${v.slice(end)}`;
       editor.selectionStart = editor.selectionEnd = start + 2;
       code.set(editor.value);
+    }
+  });
+
+  // Keep textarea in lockstep with the `code` signal (recipe loads + reset)
+  effect(() => {
+    const next = code();
+    loadGen(); // re-run when a recipe is chosen even if code string is identical
+    if (!editorEl) return;
+    if (forceEditorWrite || editorEl.value !== next) {
+      writeEditor(next);
     }
   });
 
@@ -266,8 +317,22 @@ export function LabPage() {
     }
   });
 
-  // Initial chrome + first run
-  syncChrome(startRecipe);
+  codeLabelEl = document.createElement("div");
+  codeLabelEl.className = "lab-pane-label";
+  codeLabelEl.textContent = `Code · ${startRecipe.title}`;
+
+  // Flash the code pane when a recipe loads
+  effect(() => {
+    loadGen();
+    const pane = codeLabelEl?.parentElement;
+    if (!pane || loadGen() === 0) return;
+    pane.classList.remove("lab-editor-pane--flash");
+    // reflow so animation restarts
+    void pane.offsetWidth;
+    pane.classList.add("lab-editor-pane--flash");
+  });
+
+  applyRecipeChrome(startRecipe);
   queueMicrotask(() => {
     void run();
   });
@@ -280,7 +345,7 @@ export function LabPage() {
         {tip}
         <div class="lab-workspace">
           <div class="lab-editor-pane">
-            <div class="lab-pane-label">Code</div>
+            {codeLabelEl}
             {editor}
           </div>
           <div class="lab-preview-pane">
