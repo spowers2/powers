@@ -120,10 +120,34 @@ No virtual DOM. No “re-render the component.” No dependency arrays.
 
 ---
 
+## 6. `animate` — move a signal over time (optional)
+
+```ts
+import { animate, spring } from "@power-ui/animate";
+
+const x = signal(0);
+
+// Tween
+await animate(x, 100, { duration: 300, ease: "easeOut" }).finished;
+
+// Spring (interactive feel)
+animate(x, 0, spring({ stiffness: 200, damping: 20 }));
+
+// Interrupt: just call animate again on the same signal
+animate(x, 50, { duration: 200 });
+```
+
+**Rule:** animate **values** (signals). The DOM (Phase 2) will only *read* those values — one mental model.
+
+Honors `prefers-reduced-motion` by default (snaps to the end).
+
+---
+
 ## What you do *not* need yet
 
-- JSX / components (Phase 2)
+- JSX / components (Phase 2 — next after animation foundation)
 - Routers, SSR, design system (later)
+- GSAP (optional adapter later for cinematic work)
 - Proxies, decorators, or special file extensions
 
-Master the five ideas above and you already know Power UI’s core.
+Master the five core ideas (+ `animate` when you need motion) and you know Power UI.

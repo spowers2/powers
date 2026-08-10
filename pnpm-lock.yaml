@@ -12,6 +12,19 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  examples/animate-demo:
+    dependencies:
+      '@power-ui/animate':
+        specifier: workspace:*
+        version: link:../../packages/animate
+      '@power-ui/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+    devDependencies:
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
+
   examples/counter:
     dependencies:
       '@power-ui/core':
@@ -31,6 +44,22 @@ importers:
       tsx:
         specifier: ^4.19.3
         version: 4.23.11
+
+  packages/animate:
+    dependencies:
+      '@power-ui/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      esbuild:
+        specifier: ^0.25.1
+        version: 0.25.12
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
 
   packages/core:
     devDependencies:

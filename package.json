@@ -14,9 +14,10 @@
     "test:core": "pnpm --filter @power-ui/core test",
     "typecheck": "pnpm -r --filter=./packages/* run typecheck",
     "bench": "pnpm --filter @power-ui/core bench",
-    "size": "pnpm --filter @power-ui/core size",
+    "size": "pnpm --filter @power-ui/core size && pnpm --filter @power-ui/animate size",
     "example:counter": "pnpm --filter @power-ui/example-counter start",
     "example:kitchen-sink": "pnpm --filter @power-ui/example-kitchen-sink start",
+    "example:animate": "pnpm --filter @power-ui/example-animate-demo start",
     "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo"
   },
   "devDependencies": {

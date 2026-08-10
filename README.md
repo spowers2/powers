@@ -4,9 +4,9 @@
 
 Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 
-> Status: **Phase 1.1** — core reactivity (`signal`, `computed`, `effect`, `store`, `resource`). No DOM yet. Private while foundations harden.
+> Status: **Phase 1.2** — core reactivity + signal-native **`@power-ui/animate`**. No DOM yet. Private while foundations harden.
 
-**New here?** Read [`docs/LEARN.md`](./docs/LEARN.md) — five ideas, ten minutes.
+**New here?** Read [`docs/LEARN.md`](./docs/LEARN.md) — five ideas (+ animate), ten minutes.
 
 ---
 
@@ -38,13 +38,15 @@ cd ~/Documents/power-ui
 pnpm install
 pnpm test
 pnpm example:kitchen-sink
+pnpm example:animate
 pnpm size
 ```
 
-### Hello core
+### Hello core + motion
 
 ```ts
 import { signal, computed, effect, store, resource } from "@power-ui/core";
+import { animate, spring } from "@power-ui/animate";
 
 // 1. signal
 const count = signal(0);
@@ -65,7 +67,11 @@ const users = resource(async () => {
   const res = await fetch("/api/users");
   return res.json();
 });
-// users()  users.loading()  users.error()  users.refetch()
+
+// 6. animate — move signals over time
+const x = signal(0);
+animate(x, 100, { duration: 300, ease: "easeOut" });
+animate(x, 0, spring());
 ```
 
 ---
@@ -84,8 +90,10 @@ const users = resource(async () => {
 | `onError(fn)` | Catch effect errors for the current root |
 | `untrack(fn)` | Read without subscribing |
 | `flush()` | Run pending effects now (tests/demos) |
+| `animate(signal, to, opts?)` | Tween or spring a number signal (`@power-ui/animate`) |
+| `spring(opts?)` | Spring config for `animate` |
 
-Architecture notes: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)
+Architecture notes: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) · Motion: [`docs/ANIMATION.md`](./docs/ANIMATION.md)
 
 ---
 
@@ -93,17 +101,22 @@ Architecture notes: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)
 
 ```
 power-ui/
-├── packages/core/     # @power-ui/core v0.1.1
+├── packages/
+│   ├── core/       # @power-ui/core v0.1.1
+│   └── animate/    # @power-ui/animate v0.1.0
 ├── examples/
 │   ├── counter/
-│   └── kitchen-sink/
+│   ├── kitchen-sink/
+│   └── animate-demo/
 ├── docs/
 │   ├── LEARN.md
+│   ├── ANIMATION.md
+│   ├── NEXT.md
 │   └── ARCHITECTURE.md
 └── package.json
 ```
 
-**Coming next:** `@power-ui/dom` (Phase 2) — explicit bindings, then syntax sugar.
+**Coming next:** `@power-ui/dom` (Phase 2) — explicit bindings, then syntax sugar. See [`docs/NEXT.md`](./docs/NEXT.md).
 
 ---
 
@@ -116,7 +129,8 @@ power-ui/
 | `pnpm bench` | Micro-benchmarks |
 | `pnpm size` | Min+gzip budget for core (≤ 8 KB gzip) |
 | `pnpm example:counter` | Minimal demo |
-| `pnpm example:kitchen-sink` | Full Phase 1.1 tour |
+| `pnpm example:kitchen-sink` | Full core tour |
+| `pnpm example:animate` | Motion foundation demo |
 
 ---
 
@@ -142,8 +156,8 @@ power-ui/
 | **0** | Manifesto, monorepo | ✅ |
 | **1** | Core signals / effects | ✅ v0.1 |
 | **1.1** | `store`, `resource`, `onError`, stress tests, size budget | ✅ v0.1.1 |
-| **1.2** | Signal-native animation (`@power-ui/animate`) + optional GSAP later | Next — see [`docs/ANIMATION.md`](./docs/ANIMATION.md) |
-| **2** | DOM runtime + bindings → then compiler sugar | **Parked — resume right after animation** ([`docs/NEXT.md`](./docs/NEXT.md)) |
+| **1.2** | Signal-native animation (`@power-ui/animate`) | ✅ v0.1.0 |
+| **2** | DOM runtime + bindings → then compiler sugar | **Next** ([`docs/NEXT.md`](./docs/NEXT.md)) |
 | **3** | SSR + selective hydration | Planned |
 | **4** | App kit (router, actions) | Planned |
 | **5** | Design system + docs site | Planned |

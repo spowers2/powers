@@ -1,0 +1,16 @@
+{
+  "name": "@power-ui/example-animate-demo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --import tsx src/main.ts"
+  },
+  "dependencies": {
+    "@power-ui/animate": "workspace:*",
+    "@power-ui/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3"
+  }
+}
