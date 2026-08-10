@@ -3,8 +3,8 @@
 **Product stance:** Power UI is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
-**Default palette:** **deep ink navy + forest pine** on quiet graphite neutrals (low-chroma, no neon / electric brights).  
-**Surface language:** layered elevation, soft multi-shadows, optional glass (`--pu-glass-*`), generous radius, tight display type — current product-UI grammar without neon chrome.  
+**Default palette:** **deep ink navy** brand blues + **lime green `#69BE28`** (`--pu-sage-*`) on quiet graphite neutrals.  
+**Surface language:** layered elevation, soft multi-shadows, optional glass (`--pu-glass-*`), generous radius, tight display type.  
 Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
 
 ---

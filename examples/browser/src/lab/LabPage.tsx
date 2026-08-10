@@ -47,7 +47,7 @@ export function LabPage(): HTMLElement {
   const blurb = document.createElement("p");
   blurb.className = "lab-sidebar-blurb";
   blurb.textContent =
-    "Pick a recipe to load sample code. Edit freely — the live preview re-runs as you type.";
+    "Start at 01 and work down. Each card loads code + a short lesson. Edit freely — the preview re-runs as you type.";
   head.append(brand, blurb);
 
   const badge = document.createElement("div");
@@ -89,13 +89,10 @@ export function LabPage(): HTMLElement {
   actions.append(autoLabel, runBtn, resetBtn, shareBtn, statusEl);
   toolbar.append(titleEl, actions);
 
-  const tip = document.createElement("p");
-  tip.className = "lab-tip";
-  const tipStrong = document.createElement("strong");
-  tipStrong.textContent = "Tip · ";
-  const tipBody = document.createElement("span");
-  tipBody.textContent = current.tip;
-  tip.append(tipStrong, tipBody);
+  // Teaching panel (goal · learn · how · try this)
+  const teach = document.createElement("aside");
+  teach.className = "lab-teach";
+  teach.setAttribute("aria-label", "Lesson for this recipe");
 
   const workspace = document.createElement("div");
   workspace.className = "lab-workspace";
@@ -148,7 +145,7 @@ export function LabPage(): HTMLElement {
   consoleEl.setAttribute("aria-label", "Lab console");
   consoleWrap.append(consoleHead, consoleEl);
 
-  main.append(toolbar, tip, workspace, consoleWrap);
+  main.append(toolbar, teach, workspace, consoleWrap);
   sidebar.append(head, badge, recipeList);
   root.append(sidebar, main);
 
@@ -199,10 +196,49 @@ export function LabPage(): HTMLElement {
     editor.scrollTop = 0;
   }
 
+  function paintTeach(r: Recipe) {
+    teach.replaceChildren();
+
+    const goal = document.createElement("div");
+    goal.className = "lab-teach__goal";
+    const goalLabel = document.createElement("span");
+    goalLabel.className = "lab-teach__kicker";
+    goalLabel.textContent = "Goal";
+    const goalText = document.createElement("p");
+    goalText.textContent = r.goal;
+    goal.append(goalLabel, goalText);
+
+    const cols = document.createElement("div");
+    cols.className = "lab-teach__cols";
+
+    const col = (title: string, items: string[], mod: string) => {
+      const box = document.createElement("div");
+      box.className = `lab-teach__col lab-teach__col--${mod}`;
+      const h = document.createElement("h3");
+      h.textContent = title;
+      const ul = document.createElement("ul");
+      for (const item of items) {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      }
+      box.append(h, ul);
+      return box;
+    };
+
+    cols.append(
+      col("What you'll learn", r.learn, "learn"),
+      col("How it works", r.how, "how"),
+      col("Try this", r.tryThis, "try"),
+    );
+
+    teach.append(goal, cols);
+  }
+
   function applyChrome(r: Recipe) {
     titleEl.textContent = r.title;
-    tipBody.textContent = r.tip;
     codeLabelText.textContent = `Code · ${r.title}`;
+    paintTeach(r);
     syncSidebar();
     editorPane.classList.remove("lab-editor-pane--flash");
     void editorPane.offsetWidth;
@@ -350,6 +386,9 @@ export function LabPage(): HTMLElement {
       source = editor.value;
     }
   };
+
+  applyChrome(current);
+  writeEditor(source);
 
   requestAnimationFrame(() => {
     void run();

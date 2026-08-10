@@ -32,16 +32,16 @@ const styles = `
   border-color: color-mix(in srgb, var(--pu-color-accent) 28%, transparent);
 }
 .pu-badge--success {
-  background: color-mix(in srgb, var(--pu-sage-500) 16%, transparent);
-  color: var(--pu-sage-600);
-  border-color: color-mix(in srgb, var(--pu-sage-500) 28%, transparent);
+  background: color-mix(in srgb, var(--pu-sage-500) 14%, transparent);
+  color: var(--pu-sage-700);
+  border-color: color-mix(in srgb, var(--pu-sage-500) 32%, transparent);
 }
 .pu-badge--warning {
   background: color-mix(in srgb, #a67c3d 14%, transparent);
   color: #7a5a28;
   border-color: color-mix(in srgb, #a67c3d 28%, transparent);
 }
-[data-pu-theme="dark"] .pu-badge--success { color: var(--pu-sage-400); }
+[data-pu-theme="dark"] .pu-badge--success { color: var(--pu-sage-300); }
 [data-pu-theme="dark"] .pu-badge--warning { color: #c4a46a; }
 `;
 

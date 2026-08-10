@@ -1,9 +1,8 @@
 /**
- * Power UI design tokens — Deep blue + deep green, modern surfaces
+ * Power UI design tokens — Deep blue + lime green, modern surfaces
  * -----------------------------------------------------------------
- * Ink navy + forest pine (low-chroma, no neon).
- * Structure inspired by current product UI: layered glass, soft
- * multi-shadow elevation, generous radius, tight display type.
+ * Ink navy brand blues (unchanged) + vivid green base #69BE28.
+ * Structure: layered glass, soft multi-shadow, generous radius.
  *
  * Edit this file to rebrand the entire product.
  * Naming: --pu-<category>-<name>
@@ -36,11 +35,13 @@
   --pu-gray-900: #13171d;
   --pu-gray-950: #0a0d11;
 
-  /* ---- Deep green (forest / pine) ---- */
-  --pu-sage-400: #4a6656;
-  --pu-sage-500: #2c4538;
-  --pu-sage-600: #22362c;
-  --pu-sage-700: #1a2a22;
+  /* ---- Green scale (base #69BE28) — secondary, success, accents ---- */
+  --pu-sage-300: #8fd44f;
+  --pu-sage-400: #7ac936;
+  --pu-sage-500: #69be28;
+  --pu-sage-600: #54991f;
+  --pu-sage-700: #3f7217;
+  --pu-sage-800: #2e5411;
 
   /* ---- Semantic surfaces (layered hierarchy) ---- */
   --pu-color-bg: var(--pu-gray-50);
@@ -65,9 +66,9 @@
   --pu-glass-border: color-mix(in srgb, var(--pu-color-border) 70%, transparent);
   --pu-glass-blur: 18px;
 
-  /* Soft glows — low opacity */
+  /* Soft glows — blue + lime, keep restrained */
   --pu-color-glow: color-mix(in srgb, var(--pu-brand-500) 16%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 12%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 14%, transparent);
 
   /* ---- Space (4px grid) ---- */
   --pu-space-0: 0;
@@ -162,7 +163,7 @@
 [data-pu-density="comfortable"] {
 }
 
-/* Dark — abyss ink + forest undertone */
+/* Dark — abyss ink + lime undertone */
 [data-pu-theme="dark"] {
   --pu-color-bg: var(--pu-gray-950);
   --pu-color-surface: var(--pu-gray-900);

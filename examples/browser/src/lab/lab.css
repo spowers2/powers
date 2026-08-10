@@ -194,7 +194,8 @@
 /* —— Main —— */
 .lab-main {
   display: grid;
-  grid-template-rows: auto auto minmax(280px, 1fr) auto;
+  /* toolbar · teach · workspace · console */
+  grid-template-rows: auto auto minmax(260px, 1fr) auto;
   min-width: 0;
   min-height: 0;
   height: 100%;
@@ -320,22 +321,92 @@
   color: var(--pu-color-accent);
 }
 
-.lab-tip {
-  margin: 0;
-  padding: 0.7rem var(--pu-space-4);
-  font-size: var(--pu-text-sm);
-  color: var(--pu-color-text-muted);
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--pu-color-accent) 10%, var(--pu-color-bg)),
-    color-mix(in srgb, var(--pu-sage-500) 6%, var(--pu-color-bg))
-  );
+/* —— Teaching panel (goal / learn / how / try) —— */
+.lab-teach {
   border-bottom: 1px solid var(--lab-border);
-  line-height: 1.5;
+  background: linear-gradient(
+    105deg,
+    color-mix(in srgb, var(--pu-color-accent) 8%, var(--pu-color-bg)),
+    color-mix(in srgb, var(--pu-sage-500) 7%, var(--pu-color-bg)) 55%,
+    var(--pu-color-bg)
+  );
+  padding: 0.85rem var(--pu-space-4) 0.95rem;
 }
-.lab-tip strong {
-  color: var(--pu-color-accent);
+
+.lab-teach__goal {
+  margin-bottom: 0.75rem;
+}
+
+.lab-teach__kicker {
+  display: inline-block;
+  font-size: 0.65rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pu-sage-600);
+  margin-bottom: 0.25rem;
+}
+
+.lab-teach__goal p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--pu-color-text);
+  line-height: 1.35;
+}
+
+.lab-teach__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .lab-teach__cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lab-teach__col h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--pu-color-text-muted);
+}
+
+.lab-teach__col ul {
+  margin: 0;
+  padding: 0 0 0 1.05rem;
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text);
+  line-height: 1.45;
+}
+
+.lab-teach__col li {
+  margin-bottom: 0.28rem;
+}
+
+.lab-teach__col li::marker {
+  color: var(--pu-sage-500);
+}
+
+.lab-teach__col--try {
+  background: color-mix(in srgb, var(--pu-sage-500) 8%, var(--pu-color-surface));
+  border: 1px solid color-mix(in srgb, var(--pu-sage-500) 22%, var(--lab-border));
+  border-radius: var(--pu-radius-md);
+  padding: 0.55rem 0.65rem 0.45rem;
+}
+
+.lab-teach__col--try h3 {
+  color: var(--pu-sage-600);
+}
+
+[data-pu-theme="dark"] .lab-teach__kicker,
+[data-pu-theme="dark"] .lab-teach__col--try h3 {
+  color: var(--pu-sage-300);
 }
 
 /* —— Workspace —— */

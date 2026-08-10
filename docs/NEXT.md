@@ -20,6 +20,8 @@
 - [x] Lab vs System clarified; Playground folded into System  
 - [x] Lab visual polish (IDE chrome, numbered recipes, glass toolbar)  
 - [x] Primitives: Tooltip, Toaster / createToaster  
+- [x] Lab teaching panel (goal / learn / how / try this)  
+- [x] Green base → `#69BE28` (blues unchanged)  
 
 ## Immediate next
 

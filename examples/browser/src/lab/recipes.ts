@@ -1,22 +1,45 @@
 export interface Recipe {
   id: string;
   title: string;
+  /** Short line under the title in the sidebar */
   blurb: string;
-  /** Teaching tip shown beside the editor */
-  tip: string;
+  /** One-line goal for the teaching panel header */
+  goal: string;
+  /** What this experiment teaches (plain language) */
+  learn: string[];
+  /** How the code works — short bullets */
+  how: string[];
+  /** Concrete things to try in the editor / preview */
+  tryThis: string[];
   code: string;
 }
 
 /**
- * All recipes use the design system (@power-ui/ui) so the live preview
- * looks like the product — not browser-default HTML.
+ * All recipes use the design system (@power-ui/ui).
+ * Teaching copy is written for first-time learners — plain language, clear experiments.
  */
 export const recipes: Recipe[] = [
   {
     id: "hello",
     title: "Hello Power UI",
-    blurb: "Signals + Button in under 20 lines",
-    tip: "Read signals by calling them: count(). Update with .set or .update. Children stay live with {() => …}. Prefer Button over raw <button>.",
+    blurb: "Your first signal + button",
+    goal: "Make a number go up when you click a button.",
+    learn: [
+      "A signal is a value that can change over time.",
+      "Read it by calling it: count()",
+      "Update it with count.set(…) or count.update(…)",
+      "In JSX, {() => count()} stays live; {count()} is a one-time snapshot",
+    ],
+    how: [
+      "signal(0) creates the counter",
+      "Button onClick calls count.update(n => n + 1)",
+      "Text re-reads count() whenever it changes — only that text updates",
+    ],
+    tryThis: [
+      "Click “Click me” in the preview — the number should increase",
+      "Change signal(0) to signal(10) and press Run (or wait for auto-run)",
+      "Add a second Button that does count.update(n => n - 1)",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
 import { Button, Card, Stack, Text } from "@power-ui/ui";
@@ -43,8 +66,23 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "computed",
     title: "Computed values",
-    blurb: "Derive state without re-render soup",
-    tip: "computed() caches until its dependencies change. No dependency arrays. Field + Input stay on-token.",
+    blurb: "Auto-updating math from inputs",
+    goal: "Show a total that always equals price × qty.",
+    learn: [
+      "computed() derives a value from other signals",
+      "It re-runs only when those signals change — no dependency arrays",
+      "Field + Input are design-system controls (not bare HTML)",
+    ],
+    how: [
+      "price and qty are signals (editable state)",
+      "total = computed(() => price() * qty())",
+      "When either input changes, total() updates automatically",
+    ],
+    tryThis: [
+      "Type a new price or qty — Total should update immediately",
+      "Click “+ Qty” / “+ Price” and watch total",
+      "Change the formula to price() * qty() + 5 and re-run",
+    ],
     code: `import { signal, computed } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
 import { Button, Card, Field, Input, Stack, Text } from "@power-ui/ui";
@@ -98,8 +136,24 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "animate",
     title: "Spring motion",
-    blurb: "Animate signals, not the whole tree",
-    tip: "animate() tweens a number signal. Bind it to style once — only that binding updates.",
+    blurb: "Move a ball with springs",
+    goal: "Slide a ball right and back using animate() on a signal.",
+    learn: [
+      "animate(signal, target, options) tweens a number over time",
+      "spring() gives a natural bounce; { duration } is a timed ease",
+      "Bind transform to the signal once — only that style re-runs",
+    ],
+    how: [
+      "x is a signal (horizontal offset in px)",
+      "style={() => ({ …, transform: translateX(x()px) })} is reactive",
+      "“Spring →” animates x to 140; “Back” animates to 0",
+    ],
+    tryThis: [
+      "Click “Spring →” — the green/blue ball should slide right",
+      "Click “Back” — it returns",
+      "Change 140 to 220 and try Spring again",
+      "Swap spring() for { duration: 600, ease: \"easeOut\" }",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
 import { mount } from "@power-ui/dom";
@@ -116,7 +170,7 @@ export function App() {
         height: 48,
         borderRadius: 999,
         background:
-          "linear-gradient(145deg, var(--pu-brand-500), var(--pu-sage-600))",
+          "linear-gradient(145deg, var(--pu-brand-500), var(--pu-sage-500))",
         boxShadow: "var(--pu-shadow-md)",
         transform: \`translateX(\${x()}px)\`,
       })}
@@ -153,8 +207,23 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "list",
     title: "Keyed lists",
-    blurb: "For + signals without virtual DOM churn",
-    tip: "Pass a key so rows reuse DOM. item() is a live accessor for that row. Style rows with Card/Stack.",
+    blurb: "Add & remove rows efficiently",
+    goal: "Render a list that can grow and shrink without rebuilding everything.",
+    learn: [
+      "For walks a signal array and builds a row for each item",
+      "key={(t) => t.id} reuses the same DOM row when the list reorders",
+      "item() is a live accessor for that row’s data",
+    ],
+    how: [
+      "todos is a signal of { id, title } objects",
+      "Add pushes a new object; Remove filters by id",
+      "Badge shows todos().length reactively",
+    ],
+    tryThis: [
+      "Click “Add todo” a few times",
+      "Remove a middle item — others should stay put",
+      "Change the default titles in the signal array",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { mount, For } from "@power-ui/dom";
 import { Badge, Button, Card, Stack, Text } from "@power-ui/ui";
@@ -216,8 +285,23 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "ui",
     title: "Design system",
-    blurb: "Buttons & tokens without fighting CSS",
-    tip: "Import @power-ui/ui primitives. Theme tokens come from tokens.css — retheme the product, not each component.",
+    blurb: "Buttons, badges, switch — themed",
+    goal: "Build UI with Power UI components instead of raw HTML.",
+    learn: [
+      "Button / Card / Stack / Text / Switch are design-system primitives",
+      "They read CSS variables from tokens.css (brand, space, radius)",
+      "Variants (soft, ghost) and sizes stay consistent across the app",
+    ],
+    how: [
+      "enabled is a signal wired to Switch",
+      "Primary button toggles the same signal",
+      "Badge is a small status chip using success tone (green)",
+    ],
+    tryThis: [
+      "Toggle the switch and the Primary button — label should stay in sync",
+      "Change Button variant to \"danger\" on one button",
+      "Wrap another Text with muted size=\"sm\"",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
 import {
@@ -266,8 +350,23 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "feedback",
     title: "Alerts & loading",
-    blurb: "Feedback primitives that match the system",
-    tip: "Use Alert for messages and Spinner for in-progress work. Both follow tokens and a11y roles.",
+    blurb: "Status messages + spinner",
+    goal: "Show loading, then a success message after a fake save.",
+    learn: [
+      "Alert shows inline status (info / success / warning / danger)",
+      "Spinner is for in-progress work (a11y + reduced motion)",
+      "Show mounts children only when a condition is true",
+    ],
+    how: [
+      "busy and saved are signals",
+      "Fake save sets busy, then after 1.2s clears busy and sets saved",
+      "Show when={() => busy()} displays the Spinner",
+    ],
+    tryThis: [
+      "Click “Fake save” — spinner, then green success Alert",
+      "Change the timeout from 1200 to 400",
+      "Add Alert tone=\"warning\" that always shows above the divider",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { mount, Show } from "@power-ui/dom";
 import {
@@ -327,8 +426,23 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "tokens",
     title: "Tokens & utilities",
-    blurb: "One look system — no separate CSS framework",
-    tip: "Utilities like pu-gap-4 map to design tokens. Primitives use the same tokens. createTheme() flips light/dark.",
+    blurb: "Theme toggle + utility classes",
+    goal: "Flip light/dark and see one token system restyle the UI.",
+    learn: [
+      "createTheme(\"dark\").bind() sets data-pu-theme on <html>",
+      "Primitives and utilities share the same --pu-* CSS variables",
+      "pu-p-4, pu-max-w-md are optional layout helpers — not a second framework",
+    ],
+    how: [
+      "theme.toggle() switches light ↔ dark",
+      "likes is a simple signal for the counter button",
+      "Card variant glass uses translucent surface tokens",
+    ],
+    tryThis: [
+      "Click “Toggle theme” — surfaces and text should invert",
+      "Click Likes a few times",
+      "Change createTheme(\"dark\") to createTheme(\"light\")",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
 import {
@@ -380,8 +494,23 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "overlays",
     title: "Dialog, Tabs & Progress",
-    blurb: "Modern overlay + chrome primitives",
-    tip: "Dialog is controlled with open + onClose. Tabs use a pill track. Progress reads a 0–100 signal.",
+    blurb: "Modals, tabs, progress bar",
+    goal: "Open a dialog, switch tabs, and move a progress bar.",
+    learn: [
+      "Dialog is controlled: open signal + onClose",
+      "Tabs take items[{ id, label, content }] and a defaultValue",
+      "Progress value is 0–100 (signal-friendly)",
+    ],
+    how: [
+      "open signal drives the modal",
+      "pct signal drives Progress; “Nudge” adds 16%",
+      "Tabs switch between Live (progress) and Loading (skeleton)",
+    ],
+    tryThis: [
+      "Open the dialog, then close with ×, backdrop, or Escape",
+      "Switch to Loading tab — skeleton shimmer",
+      "Nudge progress until 100%",
+    ],
     code: `import { signal } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
 import {
@@ -407,7 +536,7 @@ export function App() {
           <Avatar name="Power UI" />
           <div>
             <Text weight="semibold">Overlays</Text>
-            <Text muted size="sm">Deep blue/green · layered glass</Text>
+            <Text muted size="sm">Ink blue + lime green · layered glass</Text>
           </div>
         </Stack>
         <Tabs
@@ -459,16 +588,30 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "challenge",
     title: "Challenge: double counter",
-    blurb: "Practice — make total = a + b",
-    tip: "Create two signals and one computed. Show all three with Button + Text.",
+    blurb: "Practice — total = a + b",
+    goal: "Prove you understand signals + computed by owning two counters.",
+    learn: [
+      "You already know signal, computed, Button, and live text",
+      "This recipe is a practice pad — break it and fix it",
+    ],
+    how: [
+      "a and b are independent signals",
+      "total = computed(() => a() + b())",
+      "Each button updates only one signal; total follows both",
+    ],
+    tryThis: [
+      "Click +A and +B — total should match a + b",
+      "Add a Reset button that sets a and b back to 1 and 2",
+      "Hard mode: show product (a * b) with a second computed",
+    ],
     code: `import { signal, computed } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
 import { Button, Card, Stack, Text } from "@power-ui/ui";
 
-// TODO: make total track a + b reactively
+// Practice: total should always equal a + b
 const a = signal(1);
 const b = signal(2);
-const total = computed(() => a() + b()); // keep or rewrite
+const total = computed(() => a() + b());
 
 export function App() {
   return (

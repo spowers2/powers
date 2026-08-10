@@ -42,7 +42,7 @@ const styles = `
   background: linear-gradient(
     90deg,
     var(--pu-brand-500),
-    var(--pu-sage-500)
+    var(--pu-sage-400)
   );
   transition: width var(--pu-duration-slow) var(--pu-ease-out);
   box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent);
