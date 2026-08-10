@@ -107,9 +107,9 @@
   background: linear-gradient(
     115deg,
     var(--pu-brand-400) 0%,
-    var(--pu-brand-600) 42%,
-    var(--pu-sage-500) 78%,
-    var(--pu-brand-700) 100%
+    var(--pu-brand-600) 40%,
+    var(--pu-sage-500) 72%,
+    var(--pu-brand-500) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -203,8 +203,8 @@
   margin: var(--pu-space-3) 0 var(--pu-space-4);
   background: linear-gradient(
     145deg,
-    var(--pu-brand-300),
-    var(--pu-brand-500) 45%,
+    var(--pu-brand-400),
+    var(--pu-brand-500) 40%,
     var(--pu-sage-500) 100%
   );
   box-shadow: 0 12px 36px var(--pu-color-glow);
@@ -464,7 +464,7 @@
   border-radius: var(--pu-radius-lg);
   background: var(--pu-gray-900);
   color: var(--pu-gray-100);
-  border: 1px solid color-mix(in srgb, var(--pu-brand-200) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pu-brand-400) 16%, transparent);
   font-family: var(--pu-font-mono);
   font-size: 0.82rem;
   line-height: 1.65;

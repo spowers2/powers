@@ -3,7 +3,7 @@
 **Product stance:** Power UI is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
-**Default palette:** warm **earth / stone / clay** — clean and modern (not neon blue).  
+**Default palette:** clean **ocean blue + emerald green** on cool slate neutrals.  
 Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
 
 ---

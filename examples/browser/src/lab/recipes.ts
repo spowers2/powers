@@ -90,7 +90,7 @@ export function App() {
         width: 48,
         height: 48,
         borderRadius: 999,
-        background: "linear-gradient(145deg,#b08968,#6f7f61)",
+        background: "linear-gradient(145deg,#4d9ef5,#10b981)",
       }}
     />
   ) as HTMLElement;
