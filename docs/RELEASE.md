@@ -1,0 +1,62 @@
+# Public release checklist
+
+Use this before the first public npm publish / website launch.
+
+**Repo today:** private `spowers2/power-ui` · MIT license already present.
+
+---
+
+## Product readiness
+
+- [ ] Core story is clear: **runtime + design system**, not “React alternative + Tailwind”
+- [ ] Demo site routes work: `/` · `/lab` · `/system` · `/todos`
+- [ ] Lab recipes load, teach (goal / learn / how / try), and run with design-system CSS in the iframe
+- [ ] Design tokens retheme via `packages/ui/src/styles/tokens.css` only
+- [ ] Light + dark theme smoke-tested
+- [ ] Dense / comfortable density smoke-tested
+
+## Packages
+
+| Package | Ready? | Notes |
+|---|---|---|
+| `@power-ui/core` | [ ] | signals, computed, effect, store, resource |
+| `@power-ui/dom` | [ ] | mount, JSX, Show, For, props |
+| `@power-ui/animate` | [ ] | tween / spring (GSAP **not** required) |
+| `@power-ui/router` | [ ] | history / hash / memory |
+| `@power-ui/ssr` | [ ] | string render + islands (document limits) |
+| `@power-ui/ui` | [ ] | tokens + primitives |
+
+## Quality gates
+
+- [ ] `pnpm -r typecheck` (or package typechecks) clean  
+- [ ] `pnpm -r test` green  
+- [ ] No accidental private secrets in the repo  
+- [ ] `package.json` names, versions, exports, `sideEffects` for CSS  
+- [ ] README install + 30-second example for public readers  
+
+## Docs (public hub)
+
+- [ ] [`docs/README.md`](./README.md) is the entry  
+- [ ] LEARN · STYLING · DESIGN_SYSTEM · POWER_LAB · ROADMAP current  
+- [ ] CONTRIBUTING present and accurate  
+- [ ] LICENSE (MIT) at repo root  
+
+## Publish sequence (suggested)
+
+1. Set versions (`0.1.0` or coordinated set)  
+2. Build packages that emit `dist` if any  
+3. `npm publish --access public` per package (or changesets)  
+4. Tag `v0.1.0`  
+5. Optional: GitHub Pages / marketing site from `examples/browser` build  
+6. Announce with link to Lab + LEARN  
+
+## Explicitly later
+
+- GSAP optional adapter (parked)  
+- Streaming SSR  
+- Full a11y audit / ARIA cookbook  
+- Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  
+
+---
+
+**Last updated:** with Menu/Popover/Kbd + Lab highlight pass.

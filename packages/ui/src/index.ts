@@ -104,3 +104,6 @@ export type { PopoverProps } from "./components/Popover.js";
 
 export { Menu } from "./components/Menu.js";
 export type { MenuProps, MenuItem } from "./components/Menu.js";
+
+export { Kbd } from "./components/Kbd.js";
+export type { KbdProps } from "./components/Kbd.js";

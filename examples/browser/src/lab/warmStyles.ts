@@ -29,6 +29,7 @@ import {
   Tooltip,
   Popover,
   Menu,
+  Kbd,
 } from "@power-ui/ui";
 
 let warmed = false;
@@ -130,6 +131,7 @@ export function warmUiStyles(): void {
         items: [{ id: "a", label: "A" }],
       }),
     );
+    append(Kbd({ children: "⌘" }));
   } catch {
     // Warm is best-effort — missing a sheet is non-fatal
   } finally {

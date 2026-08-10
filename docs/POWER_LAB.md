@@ -32,7 +32,14 @@ Interactive learning playground for Power UI — **our own**, not a CodePen clon
 
 ## Recipes
 
-Hello · Computed · Spring motion · Keyed lists · Design system · **Tokens & utilities** · Challenge
+Ordered curriculum with **Goal / Learn / How / Try this** on each card:
+
+Hello · Computed · Spring motion · Keyed lists · Design system · Alerts · Tokens · Overlays · **Menu & Popover** · Challenge
+
+## Editor
+
+- Lightweight **syntax highlighting** (keywords, strings, components) under a transparent textarea  
+- Line/char meta · Tab inserts spaces · ⌘/Ctrl+Enter runs
 
 ## Try it
 

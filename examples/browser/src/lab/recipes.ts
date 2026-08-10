@@ -586,6 +586,87 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "menu",
+    title: "Menu & Popover",
+    blurb: "Actions menu + floating panel",
+    goal: "Open a Menu, pick an action, and toggle a Popover.",
+    learn: [
+      "Popover is a controlled panel: open signal + onOpenChange",
+      "Menu builds an action list on top of Popover",
+      "Escape and outside-click dismiss while open",
+    ],
+    how: [
+      "menuPick stores the last selected menu id",
+      "Menu onSelect updates that signal and closes",
+      "Popover wraps custom content under a trigger button",
+    ],
+    tryThis: [
+      "Open Actions → choose Edit or Delete",
+      "Open the popover, then close with Escape or outside click",
+      "Add a third menu item with danger: true",
+    ],
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Button,
+  Card,
+  Kbd,
+  Menu,
+  Popover,
+  Stack,
+  Text,
+} from "@power-ui/ui";
+
+const pick = signal("—");
+const open = signal(false);
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">Menus & popovers</Text>
+        <Text muted size="sm">
+          Product chrome for actions — not raw details/summary hacks.
+        </Text>
+        <Stack direction="row" gap={3} align="center" wrap>
+          <Menu
+            trigger={<Button size="sm">Actions</Button>}
+            items={[
+              { id: "edit", label: "Edit" },
+              { id: "dup", label: "Duplicate" },
+              { id: "del", label: "Delete", danger: true },
+            ]}
+            onSelect={(id) => pick.set(id)}
+          />
+          <Text size="sm" muted>
+            Last pick: {() => pick()}
+          </Text>
+        </Stack>
+        <Popover
+          open={open}
+          onOpenChange={(v) => open.set(v)}
+          trigger={
+            <Button size="sm" variant="soft">
+              {() => (open() ? "Close tip" : "Open tip")}
+            </Button>
+          }
+        >
+          <Stack gap={2}>
+            <Text weight="semibold" size="sm">Shortcut</Text>
+            <Text size="sm" muted>
+              Press <Kbd>Esc</Kbd> to dismiss this panel.
+            </Text>
+          </Stack>
+        </Popover>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "challenge",
     title: "Challenge: double counter",
     blurb: "Practice — total = a + b",

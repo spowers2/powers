@@ -11,6 +11,7 @@ import {
   decodeShare,
   type LabLog,
 } from "./runner.js";
+import { highlightTsx } from "./highlight.js";
 import "./lab.css";
 
 export function LabPage(): HTMLElement {
@@ -107,19 +108,39 @@ export function LabPage(): HTMLElement {
   codeHint.className = "lab-pane-hint";
   codeHint.textContent = "Tab · ⌘↵";
   codeLabel.append(codeLabelText, codeHint);
+
+  // Syntax highlight: colored pre under a transparent textarea
+  const editorWrap = document.createElement("div");
+  editorWrap.className = "lab-editor-wrap";
+  const highlight = document.createElement("pre");
+  highlight.className = "lab-highlight";
+  highlight.setAttribute("aria-hidden", "true");
+  const highlightCode = document.createElement("code");
+  highlight.appendChild(highlightCode);
+
   const editor = document.createElement("textarea");
   editor.className = "lab-editor";
   editor.spellcheck = false;
   editor.setAttribute("aria-label", "Power Lab code editor");
   editor.value = source;
+  editorWrap.append(highlight, editor);
+
   const meta = document.createElement("div");
   meta.className = "lab-editor-meta";
   const lineCount = () => source.split("\n").length;
-  const updateMeta = () => {
-    meta.textContent = `${lineCount()} lines · ${source.length} chars`;
+  const paintHighlight = () => {
+    highlightCode.innerHTML = highlightTsx(source);
   };
+  const updateMeta = () => {
+    meta.textContent = `${lineCount()} lines · ${source.length} chars · highlight on`;
+  };
+  const syncEditorScroll = () => {
+    highlight.scrollTop = editor.scrollTop;
+    highlight.scrollLeft = editor.scrollLeft;
+  };
+  paintHighlight();
   updateMeta();
-  editorPane.append(codeLabel, editor, meta);
+  editorPane.append(codeLabel, editorWrap, meta);
 
   const previewPane = document.createElement("div");
   previewPane.className = "lab-preview-pane";
@@ -201,6 +222,9 @@ export function LabPage(): HTMLElement {
       /* ignore */
     }
     editor.scrollTop = 0;
+    highlight.scrollTop = 0;
+    highlight.scrollLeft = 0;
+    paintHighlight();
     updateMeta();
   }
 
@@ -376,9 +400,11 @@ export function LabPage(): HTMLElement {
 
   editor.oninput = () => {
     source = editor.value;
+    paintHighlight();
     updateMeta();
     scheduleAutoRun();
   };
+  editor.onscroll = () => syncEditorScroll();
 
   editor.onkeydown = (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {

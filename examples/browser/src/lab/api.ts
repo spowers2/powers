@@ -92,6 +92,7 @@ export const LAB_API_KEYS = [
   "createToaster",
   "Popover",
   "Menu",
+  "Kbd",
   "createTheme",
   "createDensity",
   "cx",

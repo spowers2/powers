@@ -14,6 +14,7 @@ Private repo today; these docs are written so they can ship as-is when the proje
 | Styling: tokens, components, utilities | [STYLING.md](./STYLING.md) |
 | Design system primitives reference | [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
 | Interactive coding playground | [POWER_LAB.md](./POWER_LAB.md) + demo `/lab` |
+| Public release checklist | [RELEASE.md](./RELEASE.md) |
 | Ordered product plan | [ROADMAP.md](./ROADMAP.md) |
 
 ---

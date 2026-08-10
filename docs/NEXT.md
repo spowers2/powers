@@ -23,10 +23,13 @@
 - [x] Lab teaching panel (goal / learn / how / try this)  
 - [x] Green base → `#69BE28` (blues unchanged)  
 - [x] Primitives: Popover, Menu  
+- [x] Lab syntax highlight (lightweight overlay) + Menu/Popover recipe  
+- [x] Primitive: Kbd  
+- [x] Public release checklist (`docs/RELEASE.md`)  
 
 ## Immediate next
 
-1. Lab polish (syntax highlighting, more recipes)  
-2. More primitives when demos demand (Popover form patterns, Command, …)  
+1. More primitives when demos demand (Command, Combobox, …)  
+2. Motion polish (enter/exit)  
 3. **GSAP adapter** when cinematic motion is needed (parked)  
-4. Public release checklist (npm, site)  
+4. Execute RELEASE.md for first public npm cut  

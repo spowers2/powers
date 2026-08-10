@@ -31,6 +31,9 @@ Public docs hub: [`docs/README.md`](./README.md)
 | **lab-ux** | Lab recipe switch fix + visual polish |
 | **ui+++** | Tooltip, Toaster |
 | **ui++++** | Popover, Menu |
+| **lab+** | Syntax highlight + Menu recipe + teaching panel |
+| **ui+++++** | Kbd |
+| **pub-doc** | `docs/RELEASE.md` checklist |
 
 ---
 
@@ -38,13 +41,12 @@ Public docs hub: [`docs/README.md`](./README.md)
 
 | # | Milestone | Notes |
 |---|---|---|
-| lab+ | Lab polish | syntax highlighting, more recipes |
-| ui+++++ | More primitives as demos demand | Command palette, combobox, … |
+| ui++++++ | More primitives as demos demand | Command, Combobox, … |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
 | 7 | Color / enter-exit motion | Motion polish |
 | 8 | Hardening | For/`ul` semantics, a11y recipes |
-| pub | Public release checklist | npm publish, website, LICENSE already MIT |
+| pub | Execute release checklist | npm publish, website, LICENSE already MIT |
 
 ---
 
