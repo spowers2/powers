@@ -1,9 +1,9 @@
 /**
  * Power Lab — interactive learning playground.
- * Pick a recipe → editor + tip + preview all switch to that sample.
+ * Click a recipe → Code panel + tip + title update → preview re-runs.
+ *
+ * Fully imperative DOM (no JSX) so selection/handlers cannot get lost.
  */
-import { signal, effect } from "@power-ui/core";
-import { Button, Badge, Text } from "@power-ui/ui";
 import { recipes, recipeById, type Recipe } from "./recipes.js";
 import {
   runInFrame,
@@ -13,261 +13,301 @@ import {
 } from "./runner.js";
 import "./lab.css";
 
-export function LabPage() {
+export function LabPage(): HTMLElement {
   const initial =
     typeof location !== "undefined" ? decodeShare(location.hash) : null;
 
-  const startRecipe =
+  let current: Recipe =
     (initial?.recipeId && recipeById(initial.recipeId)) || recipes[0]!;
-
-  const activeId = signal(startRecipe.id);
-  /** Editor source of truth — recipe loads and typing both write here */
-  const code = signal(initial?.code ?? startRecipe.code);
-  /** Bumps on every recipe switch so the UI can flash “loaded” feedback */
-  const loadGen = signal(0);
-  const status = signal<"idle" | "running" | "ok" | "error">("idle");
-  const statusMsg = signal("Ready — pick a recipe or edit the code");
-  const logs = signal<LabLog[]>([]);
-  const autoRun = signal(true);
-
-  let iframeEl: HTMLIFrameElement | null = null;
-  let editorEl: HTMLTextAreaElement | null = null;
-  let tipBodyEl: HTMLElement | null = null;
-  let titleEl: HTMLElement | null = null;
-  let codeLabelEl: HTMLElement | null = null;
+  let source = initial?.code ?? current.code;
+  let autoRun = true;
   let runToken = 0;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
-  /** When true, next code→editor sync is forced even if values look equal */
-  let forceEditorWrite = false;
+  let running = false;
 
-  const activeRecipe = (): Recipe => recipeById(activeId()) ?? recipes[0]!;
+  // —— DOM ——
+  const root = document.createElement("div");
+  root.className = "lab";
 
-  function syncSidebar(active: string) {
+  const sidebar = document.createElement("aside");
+  sidebar.className = "lab-sidebar";
+
+  const head = document.createElement("div");
+  head.className = "lab-sidebar-head";
+  const h2 = document.createElement("h2");
+  h2.textContent = "Power Lab";
+  const blurb = document.createElement("p");
+  blurb.className = "lab-sidebar-blurb";
+  blurb.textContent =
+    "Click a recipe — the Code panel switches to that sample, then the preview re-runs.";
+  head.append(h2, blurb);
+
+  const badge = document.createElement("div");
+  badge.className = "lab-count-badge";
+  badge.textContent = `${recipes.length} recipes`;
+
+  const recipeList = document.createElement("div");
+  recipeList.className = "lab-recipe-list";
+  recipeList.setAttribute("role", "listbox");
+  recipeList.setAttribute("aria-label", "Recipes");
+
+  const main = document.createElement("div");
+  main.className = "lab-main";
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "lab-toolbar";
+
+  const titleEl = document.createElement("span");
+  titleEl.className = "lab-toolbar-title";
+  titleEl.textContent = current.title;
+
+  const autoLabel = document.createElement("label");
+  autoLabel.className = "lab-auto";
+  const autoInput = document.createElement("input");
+  autoInput.type = "checkbox";
+  autoInput.checked = true;
+  autoLabel.append(autoInput, document.createTextNode(" Auto-run"));
+
+  const runBtn = makeBtn("Run", "lab-btn lab-btn--primary");
+  const resetBtn = makeBtn("Reset", "lab-btn");
+  const shareBtn = makeBtn("Copy share link", "lab-btn lab-btn--soft");
+  const statusEl = document.createElement("span");
+  statusEl.className = "lab-status";
+  statusEl.textContent = "Ready — pick a recipe or edit the code";
+
+  toolbar.append(titleEl, autoLabel, runBtn, resetBtn, shareBtn, statusEl);
+
+  const tip = document.createElement("p");
+  tip.className = "lab-tip";
+  const tipStrong = document.createElement("strong");
+  tipStrong.textContent = "Tip · ";
+  const tipBody = document.createElement("span");
+  tipBody.textContent = current.tip;
+  tip.append(tipStrong, tipBody);
+
+  const workspace = document.createElement("div");
+  workspace.className = "lab-workspace";
+
+  const editorPane = document.createElement("div");
+  editorPane.className = "lab-editor-pane";
+  const codeLabel = document.createElement("div");
+  codeLabel.className = "lab-pane-label";
+  codeLabel.textContent = `Code · ${current.title}`;
+  const editor = document.createElement("textarea");
+  editor.className = "lab-editor";
+  editor.spellcheck = false;
+  editor.setAttribute("aria-label", "Power Lab code editor");
+  editor.value = source;
+  editorPane.append(codeLabel, editor);
+
+  const previewPane = document.createElement("div");
+  previewPane.className = "lab-preview-pane";
+  const previewLabel = document.createElement("div");
+  previewLabel.className = "lab-pane-label";
+  previewLabel.textContent = "Live preview";
+  const iframe = document.createElement("iframe");
+  iframe.className = "lab-preview";
+  iframe.title = "Power Lab preview";
+  iframe.setAttribute(
+    "sandbox",
+    "allow-scripts allow-same-origin allow-modals",
+  );
+  previewPane.append(previewLabel, iframe);
+
+  workspace.append(editorPane, previewPane);
+
+  const consoleEl = document.createElement("div");
+  consoleEl.className = "lab-console";
+  consoleEl.setAttribute("aria-label", "Lab console");
+
+  main.append(toolbar, tip, workspace, consoleEl);
+  sidebar.append(head, badge, recipeList);
+  root.append(sidebar, main);
+
+  // —— helpers ——
+  function setStatus(
+    kind: "idle" | "running" | "ok" | "error",
+    msg: string,
+  ) {
+    statusEl.textContent = msg;
+    statusEl.className =
+      "lab-status" +
+      (kind === "ok" ? " is-ok" : "") +
+      (kind === "error" ? " is-err" : "") +
+      (kind === "running" ? " is-run" : "");
+  }
+
+  function paintConsole(lines: LabLog[]) {
+    consoleEl.replaceChildren();
+    for (const line of lines) {
+      const p = document.createElement("p");
+      p.className = "lab-console-line";
+      if (line.level === "error") p.classList.add("is-error");
+      if (line.level === "warn") p.classList.add("is-warn");
+      p.textContent = `[${line.level}] ${line.args.join(" ")}`;
+      consoleEl.appendChild(p);
+    }
+  }
+
+  function syncSidebar() {
     for (const btn of recipeList.querySelectorAll<HTMLButtonElement>(
       ".lab-recipe",
     )) {
-      const id = btn.dataset.recipeId ?? "";
-      const on = id === active;
+      const on = btn.dataset.recipeId === current.id;
       btn.classList.toggle("is-active", on);
       btn.setAttribute("aria-current", on ? "true" : "false");
     }
   }
 
   function writeEditor(next: string) {
-    if (!editorEl) return;
-    // Always replace — setAttribute alone does not update a controlled-looking textarea
-    editorEl.value = next;
-    // Some browsers keep selection at end of previous content; jump to top of recipe
-    editorEl.setSelectionRange(0, 0);
-    editorEl.scrollTop = 0;
+    source = next;
+    editor.value = next;
+    try {
+      editor.setSelectionRange(0, 0);
+    } catch {
+      /* ignore */
+    }
+    editor.scrollTop = 0;
   }
 
-  function applyRecipeChrome(r: Recipe) {
-    if (titleEl) titleEl.textContent = r.title;
-    if (tipBodyEl) tipBodyEl.textContent = r.tip;
-    if (codeLabelEl) codeLabelEl.textContent = `Code · ${r.title}`;
-    syncSidebar(r.id);
+  function applyChrome(r: Recipe) {
+    titleEl.textContent = r.title;
+    tipBody.textContent = r.tip;
+    codeLabel.textContent = `Code · ${r.title}`;
+    syncSidebar();
+    editorPane.classList.remove("lab-editor-pane--flash");
+    // restart CSS animation
+    void editorPane.offsetWidth;
+    editorPane.classList.add("lab-editor-pane--flash");
   }
 
   async function run() {
-    if (!iframeEl) return;
+    if (running) {
+      // A run is in flight — cancel it by bumping the token; the in-flight
+      // call will exit, then we start a new one below.
+    }
     const token = ++runToken;
-    const source = code();
-    status.set("running");
-    statusMsg.set("Compiling…");
-    logs.set([]);
+    running = true;
+    setStatus("running", "Compiling…");
+    paintConsole([]);
 
-    const result = await runInFrame(
-      iframeEl,
-      source,
-      (log) => {
-        if (token !== runToken) return;
-        logs.update((list) => [...list, log]);
-      },
-      token,
-      () => runToken,
-    );
+    try {
+      const result = await runInFrame(
+        iframe,
+        source,
+        (log) => {
+          if (token !== runToken) return;
+          // Append one line without rebuilding entire console each log
+          const p = document.createElement("p");
+          p.className = "lab-console-line";
+          if (log.level === "error") p.classList.add("is-error");
+          if (log.level === "warn") p.classList.add("is-warn");
+          p.textContent = `[${log.level}] ${log.args.join(" ")}`;
+          consoleEl.appendChild(p);
+        },
+        token,
+        () => runToken,
+      );
 
-    if (token !== runToken) return;
-    if (result.ok) {
-      status.set("ok");
-      statusMsg.set("Running · edit code or pick another recipe");
-    } else if (result.error === "Cancelled") {
-      // superseded by a newer run
-    } else {
-      status.set("error");
-      statusMsg.set(result.error ?? "Error — see console below");
+      if (token !== runToken) return;
+
+      if (result.ok) {
+        setStatus("ok", "Running · edit code or pick another recipe");
+      } else if (result.error !== "Cancelled") {
+        setStatus("error", result.error ?? "Error — see console below");
+      }
+    } catch (e) {
+      if (token !== runToken) return;
+      const msg = e instanceof Error ? e.message : String(e);
+      setStatus("error", msg);
+      paintConsole([{ level: "error", args: [msg] }]);
+    } finally {
+      if (token === runToken) running = false;
     }
   }
 
   function scheduleAutoRun() {
-    if (!autoRun()) return;
+    if (!autoRun) return;
     if (debounceTimer) clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       void run();
-    }, 450);
+    }, 500);
   }
 
-  /** Switch recipe: chrome + code editor + re-run preview */
   function loadRecipe(r: Recipe) {
-    // Cancel in-flight preview
+    // Cancel anything in flight
     runToken += 1;
+    running = false;
     if (debounceTimer) {
       clearTimeout(debounceTimer);
       debounceTimer = null;
     }
 
-    activeId.set(r.id);
-    forceEditorWrite = true;
-    code.set(r.code);
-    // Write immediately (don’t wait for effect) so the user always sees the swap
+    current = r;
     writeEditor(r.code);
-    forceEditorWrite = false;
-
-    applyRecipeChrome(r);
-    loadGen.update((n) => n + 1);
-    statusMsg.set(`Loaded “${r.title}” — code updated`);
-    logs.set([]);
+    applyChrome(r);
+    setStatus("ok", `Loaded “${r.title}” — code updated`);
+    paintConsole([]);
     void run();
   }
 
-  function share() {
-    const hash = "lab/" + encodeShare(code(), activeId());
-    const path = `${location.pathname}${location.search}#${hash}`;
-    history.replaceState(null, "", path);
-    const url = `${location.origin}${path}`;
-    void navigator.clipboard?.writeText(url).then(
-      () => {
-        statusMsg.set("Share link copied");
-        status.set("ok");
-      },
-      () => {
-        statusMsg.set("Copy failed — URL is in the address bar");
-      },
-    );
-  }
-
-  function resetRecipe() {
-    const r = activeRecipe();
-    forceEditorWrite = true;
-    code.set(r.code);
-    writeEditor(r.code);
-    forceEditorWrite = false;
-    statusMsg.set(`Reset “${r.title}”`);
-    void run();
-  }
-
-  // —— Sidebar recipes (event delegation) ——
-  const recipeList = document.createElement("div");
-  recipeList.className = "lab-recipe-list";
-  recipeList.setAttribute("role", "listbox");
-  recipeList.setAttribute("aria-label", "Recipes");
-
+  // —— Recipe buttons (direct onclick — most reliable) ——
   for (const r of recipes) {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "lab-recipe";
+    btn.className = "lab-recipe" + (r.id === current.id ? " is-active" : "");
     btn.dataset.recipeId = r.id;
     btn.setAttribute("role", "option");
     btn.setAttribute("aria-label", `Load recipe: ${r.title}`);
+    if (r.id === current.id) btn.setAttribute("aria-current", "true");
+
     const strong = document.createElement("strong");
     strong.textContent = r.title;
     const span = document.createElement("span");
     span.textContent = r.blurb;
     btn.append(strong, span);
+
+    btn.onclick = (ev) => {
+      ev.preventDefault();
+      loadRecipe(r);
+    };
+
     recipeList.appendChild(btn);
   }
 
-  recipeList.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement | null;
-    const btn = target?.closest?.(".lab-recipe") as HTMLButtonElement | null;
-    if (!btn || !recipeList.contains(btn)) return;
-    e.preventDefault();
-    const id = btn.dataset.recipeId;
-    if (!id) return;
-    const r = recipeById(id);
-    if (!r) {
-      statusMsg.set(`Unknown recipe: ${id}`);
-      status.set("error");
-      return;
-    }
-    loadRecipe(r);
-  });
+  // —— Controls ——
+  autoInput.onchange = () => {
+    autoRun = autoInput.checked;
+    if (autoRun) scheduleAutoRun();
+  };
 
-  const sidebar = (
-    <aside class="lab-sidebar">
-      <div class="lab-sidebar-head">
-        <h2>Power Lab</h2>
-        <Text muted size="xs">
-          Click a recipe — the <strong>Code</strong> panel switches to that
-          sample, then the preview re-runs.
-        </Text>
-      </div>
-      <Badge tone="accent">{recipes.length} recipes</Badge>
-      {recipeList}
-    </aside>
-  );
+  runBtn.onclick = () => {
+    void run();
+  };
 
-  const auto = document.createElement("label");
-  auto.className = "lab-auto";
-  const autoInput = document.createElement("input");
-  autoInput.type = "checkbox";
-  autoInput.checked = true;
-  autoInput.addEventListener("change", () => {
-    autoRun.set(autoInput.checked);
-    if (autoRun()) scheduleAutoRun();
-  });
-  auto.append(autoInput, document.createTextNode(" Auto-run"));
+  resetBtn.onclick = () => {
+    writeEditor(current.code);
+    setStatus("ok", `Reset “${current.title}”`);
+    void run();
+  };
 
-  titleEl = document.createElement("span");
-  titleEl.className = "lab-toolbar-title";
-  titleEl.textContent = startRecipe.title;
+  shareBtn.onclick = () => {
+    const hash = "lab/" + encodeShare(source, current.id);
+    const path = `${location.pathname}${location.search}#${hash}`;
+    history.replaceState(null, "", path);
+    const url = `${location.origin}${path}`;
+    void navigator.clipboard?.writeText(url).then(
+      () => setStatus("ok", "Share link copied"),
+      () => setStatus("ok", "Copy failed — URL is in the address bar"),
+    );
+  };
 
-  const toolbar = (
-    <div class="lab-toolbar">
-      {titleEl}
-      {auto}
-      <Button size="sm" onClick={() => void run()}>
-        Run
-      </Button>
-      <Button size="sm" variant="ghost" onClick={resetRecipe}>
-        Reset
-      </Button>
-      <Button size="sm" variant="soft" onClick={share}>
-        Copy share link
-      </Button>
-      <span
-        class={() =>
-          `lab-status${status() === "ok" ? " is-ok" : ""}${status() === "error" ? " is-err" : ""}${status() === "running" ? " is-run" : ""}`
-        }
-      >
-        {() => statusMsg()}
-      </span>
-    </div>
-  );
-
-  tipBodyEl = document.createElement("span");
-  tipBodyEl.textContent = startRecipe.tip;
-  const tip = (
-    <p class="lab-tip">
-      <strong>Tip · </strong>
-      {tipBodyEl}
-    </p>
-  );
-
-  // —— Editor ——
-  const editor = document.createElement("textarea");
-  editor.className = "lab-editor";
-  editor.spellcheck = false;
-  editor.setAttribute("aria-label", "Power Lab code editor");
-  editor.value = code();
-  editorEl = editor;
-
-  editor.addEventListener("input", () => {
-    code.set(editor.value);
+  editor.oninput = () => {
+    source = editor.value;
     scheduleAutoRun();
-  });
-  editor.addEventListener("keydown", (e) => {
+  };
+
+  editor.onkeydown = (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
       e.preventDefault();
       void run();
@@ -279,82 +319,22 @@ export function LabPage() {
       const v = editor.value;
       editor.value = `${v.slice(0, start)}  ${v.slice(end)}`;
       editor.selectionStart = editor.selectionEnd = start + 2;
-      code.set(editor.value);
+      source = editor.value;
     }
-  });
+  };
 
-  // Keep textarea in lockstep with the `code` signal (recipe loads + reset)
-  effect(() => {
-    const next = code();
-    loadGen(); // re-run when a recipe is chosen even if code string is identical
-    if (!editorEl) return;
-    if (forceEditorWrite || editorEl.value !== next) {
-      writeEditor(next);
-    }
-  });
-
-  const iframe = document.createElement("iframe");
-  iframe.className = "lab-preview";
-  iframe.title = "Power Lab preview";
-  iframe.setAttribute(
-    "sandbox",
-    "allow-scripts allow-same-origin allow-modals",
-  );
-  iframeEl = iframe;
-
-  const consoleEl = document.createElement("div");
-  consoleEl.className = "lab-console";
-  consoleEl.setAttribute("aria-label", "Lab console");
-  effect(() => {
-    const items = logs();
-    consoleEl.replaceChildren();
-    if (items.length === 0) return;
-    for (const line of items) {
-      const p = document.createElement("p");
-      p.className = `lab-console-line${line.level === "error" ? " is-error" : ""}${line.level === "warn" ? " is-warn" : ""}`;
-      p.textContent = `[${line.level}] ${line.args.join(" ")}`;
-      consoleEl.appendChild(p);
-    }
-  });
-
-  codeLabelEl = document.createElement("div");
-  codeLabelEl.className = "lab-pane-label";
-  codeLabelEl.textContent = `Code · ${startRecipe.title}`;
-
-  // Flash the code pane when a recipe loads
-  effect(() => {
-    loadGen();
-    const pane = codeLabelEl?.parentElement;
-    if (!pane || loadGen() === 0) return;
-    pane.classList.remove("lab-editor-pane--flash");
-    // reflow so animation restarts
-    void pane.offsetWidth;
-    pane.classList.add("lab-editor-pane--flash");
-  });
-
-  applyRecipeChrome(startRecipe);
-  queueMicrotask(() => {
+  // First preview after paint (not during construction)
+  requestAnimationFrame(() => {
     void run();
   });
 
-  return (
-    <div class="lab">
-      {sidebar}
-      <div class="lab-main">
-        {toolbar}
-        {tip}
-        <div class="lab-workspace">
-          <div class="lab-editor-pane">
-            {codeLabelEl}
-            {editor}
-          </div>
-          <div class="lab-preview-pane">
-            <div class="lab-pane-label">Live preview</div>
-            {iframe}
-          </div>
-        </div>
-        {consoleEl}
-      </div>
-    </div>
-  );
+  return root;
+}
+
+function makeBtn(label: string, className: string): HTMLButtonElement {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = className;
+  b.textContent = label;
+  return b;
 }

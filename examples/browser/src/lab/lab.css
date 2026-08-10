@@ -114,6 +114,56 @@
   cursor: pointer;
 }
 
+.lab-sidebar-blurb {
+  margin: 0;
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text-muted);
+  line-height: 1.4;
+}
+
+.lab-count-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.2em 0.65em;
+  border-radius: var(--pu-radius-full);
+  font-size: var(--pu-text-xs);
+  font-weight: var(--pu-font-semibold);
+  background: color-mix(in srgb, var(--pu-color-accent) 14%, transparent);
+  color: var(--pu-color-accent);
+  border: 1px solid color-mix(in srgb, var(--pu-color-accent) 25%, transparent);
+}
+
+/* Lab toolbar buttons (imperative — not pu-btn, avoids event quirks) */
+.lab-btn {
+  appearance: none;
+  border: 1px solid var(--pu-color-border);
+  background: var(--pu-color-surface);
+  color: var(--pu-color-text);
+  font: inherit;
+  font-size: var(--pu-text-sm);
+  font-weight: var(--pu-font-semibold);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--pu-radius-md);
+  cursor: pointer;
+  line-height: 1.2;
+}
+.lab-btn:hover {
+  background: var(--pu-color-surface-2);
+}
+.lab-btn--primary {
+  background: var(--pu-color-accent);
+  color: var(--pu-color-accent-fg);
+  border-color: transparent;
+}
+.lab-btn--primary:hover {
+  background: var(--pu-color-accent-hover);
+}
+.lab-btn--soft {
+  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
+  color: var(--pu-color-accent);
+  border-color: color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
+}
+
 .lab-toolbar {
   display: flex;
   flex-wrap: wrap;
