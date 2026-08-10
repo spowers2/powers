@@ -1,0 +1,23 @@
+{
+  "name": "power-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Fine-grained reactive UI system — ownership-first, near-zero runtime, AI-readable.",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter=./packages/* run build",
+    "test": "pnpm -r --filter=./packages/* run test",
+    "test:core": "pnpm --filter @power-ui/core test",
+    "typecheck": "pnpm -r --filter=./packages/* run typecheck",
+    "bench": "pnpm --filter @power-ui/core bench",
+    "example:counter": "pnpm --filter @power-ui/example-counter start",
+    "clean": "pnpm -r exec rm -rf dist coverage *.tsbuildinfo"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
