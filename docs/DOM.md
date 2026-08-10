@@ -1,35 +1,54 @@
 # `@power-ui/dom` — Phase 2 DOM + JSX
 
-**Status:** v0.2.0 — explicit bindings **and** automatic JSX runtime.
+**Status:** v0.3.0 — bindings, JSX, and **reactive component props**.
 
 ## Learn order
 
 ```
-mount → h / JSX → component → Show / For → bind* when you need escape hatches
+mount → h / JSX → component → reactive props → Show / For
 ```
 
 Same reactivity you already know (`signal`, `effect`). The DOM layer only **subscribes** and **writes nodes**.
 
-## Quick example (JSX)
+## Quick example (JSX + props)
 
 ```tsx
 import { signal } from "@power-ui/core";
-import { mount, component } from "@power-ui/dom";
+import { mount, component, mergeProps } from "@power-ui/dom";
 
-const Counter = component(() => {
-  const count = signal(0);
+const Hello = component((props: { name: string; mood?: string }) => {
+  const p = mergeProps({ mood: "🙂" }, props);
+  return <p>{() => `${p.mood} Hello, ${p.name}`}</p>;
+});
+
+const App = component(() => {
+  const name = signal("Ada");
   return (
-    <button type="button" onClick={() => count.update((n) => n + 1)}>
-      {() => `Count: ${count()}`}
-    </button>
+    <div>
+      {/* Live: pass the signal (or () => name()) */}
+      <Hello name={name} />
+      <button type="button" onClick={() => name.set("Grace")}>
+        Rename
+      </button>
+    </div>
   );
 });
 
-mount(document.getElementById("app")!, () => <Counter />);
+mount(document.getElementById("app")!, () => <App />);
 ```
 
-**Reactive rule:** pass a **function** for anything that should update — children, `class`, `style`, etc.  
-`{count()}` runs once; `{() => count()}` stays live.
+### Reactive rules (memorize these)
+
+| Write | Live? |
+|---|---|
+| `{() => count()}` child | ✅ |
+| `{count()}` child | ❌ once at create |
+| `<Child name={name} />` signal | ✅ |
+| `<Child name={() => user().name} />` | ✅ |
+| `<Child name={name()} />` snapshot | ❌ once at create |
+| `class={() => …}` / `style={() => …}` | ✅ |
+
+Setup in `component()` runs **once**. Props stay live via accessors — the child does **not** re-mount.
 
 ### Vite / TS config
 
@@ -53,7 +72,8 @@ esbuild: {
 |---|---|
 | `mount(parent, app)` | Create root, append nodes, return dispose |
 | `h` / JSX | Create elements; functions in props/children are reactive |
-| `component(setup)` | Function component helper (types + name) |
+| `component(setup)` | Function component; props are reactive |
+| `createProps` / `mergeProps` / `splitProps` | Reactive props utilities |
 | `Show` / `For` | JSX control flow (conditional + keyed list) |
 | `Fragment` | JSX fragments |
 | `text` / `bind*` / `on` | Explicit bindings |

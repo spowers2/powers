@@ -1,7 +1,7 @@
 {
   "name": "@power-ui/dom",
-  "version": "0.2.0",
-  "description": "Thin DOM bindings + JSX for Power UI — explicit, fine-grained, tiny learning curve.",
+  "version": "0.3.0",
+  "description": "Thin DOM bindings + JSX + reactive props for Power UI.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,

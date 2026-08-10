@@ -4,7 +4,7 @@
 
 Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 
-> Status: **Phase 2.x** — core + animate + **`@power-ui/dom` with JSX**. Private while foundations harden.
+> Status: **Phase 2.y** — core + animate + DOM/JSX + **reactive props**. Private while foundations harden.
 
 **New here?** Read [`docs/LEARN.md`](./docs/LEARN.md) — small surface, real apps.
 
@@ -94,6 +94,7 @@ mount(document.getElementById("app")!, () => <App />);
 | `animate(signal, to, opts?)` | Tween or spring a number signal (`@power-ui/animate`) |
 | `spring(opts?)` | Spring config for `animate` |
 | `mount` / JSX / `component` / `Show` / `For` | DOM + JSX (`@power-ui/dom`) |
+| `mergeProps` / `splitProps` / `createProps` | Reactive component props |
 
 Docs: [`LEARN`](./docs/LEARN.md) · [`DOM`](./docs/DOM.md) · [`ANIMATION`](./docs/ANIMATION.md) · [`NEXT`](./docs/NEXT.md) (includes parked GSAP adapter)
 
@@ -158,7 +159,8 @@ power-ui/
 | **1.1** | `store`, `resource`, `onError`, stress tests, size budget | ✅ v0.1.1 |
 | **1.2** | Signal-native animation (`@power-ui/animate`) | ✅ v0.1.0 |
 | **2** | Thin DOM bindings (`@power-ui/dom`) + browser demo | ✅ |
-| **2.x** | JSX runtime + `component` / `Show` / `For` | ✅ v0.2.0 |
+| **2.x** | JSX runtime + `component` / `Show` / `For` | ✅ |
+| **2.y** | Reactive props (`mergeProps`, …) | ✅ v0.3.0 |
 | **—** | **GSAP adapter** + richer motion | **Parked** — see [`docs/NEXT.md`](./docs/NEXT.md) |
 | **3** | SSR + selective hydration | Planned |
 | **4** | App kit (router, actions) | Planned |

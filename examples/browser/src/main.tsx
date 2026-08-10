@@ -1,11 +1,28 @@
 /**
- * Phase 2.x browser demo — core + dom (JSX) + animate
+ * Browser demo — core + JSX + reactive props + animate
  */
 import { signal, computed } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
-import { mount, component, Show, For, bindStyle } from "@power-ui/dom";
+import {
+  mount,
+  component,
+  Show,
+  For,
+  bindStyle,
+  mergeProps,
+} from "@power-ui/dom";
 
 type Todo = { id: number; title: string; done: boolean };
+
+/** Child that tracks parent props live (pass a signal or accessor). */
+const HelloBadge = component((props: { name: string; mood?: string }) => {
+  const p = mergeProps({ mood: "🙂" }, props);
+  return (
+    <p class="empty">
+      {() => `${p.mood} Hello, ${p.name}`}
+    </p>
+  );
+});
 
 const CounterPanel = component(() => {
   const count = signal(0);
@@ -46,11 +63,44 @@ const CounterPanel = component(() => {
   );
 });
 
+const PropsPanel = component(() => {
+  const name = signal("Ada");
+  return (
+    <section class="panel">
+      <h2>Reactive props</h2>
+      <p class="empty">
+        Pass a signal into a child — the child stays mounted and updates.
+      </p>
+      {/* Live: pass the signal itself (or () => name()) */}
+      <HelloBadge name={name} mood="⚡" />
+      <div class="row">
+        <button
+          type="button"
+          class="secondary"
+          onClick={() => name.set("Ada")}
+        >
+          Ada
+        </button>
+        <button
+          type="button"
+          class="secondary"
+          onClick={() => name.set("Grace")}
+        >
+          Grace
+        </button>
+        <button type="button" onClick={() => name.set("Katherine")}>
+          Katherine
+        </button>
+      </div>
+    </section>
+  );
+});
+
 const TodosPanel = component(() => {
   let nextId = 1;
   const todos = signal<Todo[]>([
     { id: nextId++, title: "Learn signal → effect", done: true },
-    { id: nextId++, title: "Try JSX + component()", done: false },
+    { id: nextId++, title: "Try reactive props", done: false },
   ]);
   const draft = signal("");
   const remaining = computed(() => todos().filter((t) => !t.done).length);
@@ -131,12 +181,14 @@ const App = component(() => (
   <div>
     <header>
       <h1>Power UI</h1>
-      <p class="sub">Phase 2.x demo — core · JSX · animate</p>
+      <p class="sub">core · JSX · reactive props · animate</p>
     </header>
     <CounterPanel />
+    <PropsPanel />
     <TodosPanel />
     <p class="footer">
-      signal → JSX bind → animate values. GSAP adapter still parked for later.
+      Pass signals or {"() =>"} accessors into components. GSAP adapter still
+      parked.
     </p>
   </div>
 ));

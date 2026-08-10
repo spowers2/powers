@@ -5,7 +5,8 @@ Last updated: 2026-08-09
 ## Completed recently
 
 - [x] Phase 2.0 — `@power-ui/dom` thin bindings + browser demo  
-- [x] Phase 2.x — JSX runtime (`jsx-runtime`), `component`, `Show`, `For`  
+- [x] Phase 2.x — JSX runtime, `component`, `Show`, `For`  
+- [x] Phase 2.y — **reactive props** (`createProps`, `mergeProps`, `splitProps`)  
 
 ---
 
@@ -13,12 +14,12 @@ Last updated: 2026-08-09
 
 ### GSAP adapter + richer motion
 
-**Do not drop this.** After components/JSX feel solid in real apps, or when cinematic timelines are needed:
+**Do not drop this.** When apps need cinematic timelines / SVG / ScrollTrigger-class work:
 
-1. Optional `@power-ui/animate/gsap` (or `@power-ui/gsap`) peer adapter  
-2. Sync GSAP tweens → signals (or target DOM for marketing pages only)  
-3. Color / multi-value interpolation in `@power-ui/animate`  
-4. Enter/exit + FLIP-style helpers on top of `Show` / `For`  
+1. Optional `@power-ui/animate/gsap` peer adapter  
+2. Sync GSAP tweens → signals (or DOM-only marketing pages)  
+3. Color / multi-value interpolation  
+4. Enter/exit + FLIP-style helpers  
 
 See [`docs/ANIMATION.md`](./ANIMATION.md).
 
@@ -26,11 +27,10 @@ See [`docs/ANIMATION.md`](./ANIMATION.md).
 
 ## Sensible next milestones
 
-1. Reactive props helpers (`mergeProps` / props as store) for reusable components  
-2. Small router package  
-3. SSR / islands (Phase 3)  
-4. **GSAP adapter** when pro motion demand is real  
-5. Hardening: better `For` without wrapper-in-`ul` edge cases, a11y recipes  
+1. Small **router** package  
+2. **SSR / islands** (Phase 3)  
+3. **GSAP adapter** when pro motion demand is real  
+4. Hardening: `For` HTML list edge cases, a11y recipes, prop typing polish  
 
 ---
 
@@ -42,3 +42,4 @@ See [`docs/ANIMATION.md`](./ANIMATION.md).
 - [x] Phase 1.2 — `@power-ui/animate`  
 - [x] Phase 2.0 — `@power-ui/dom`  
 - [x] Phase 2.x — JSX + `component` / `Show` / `For`  
+- [x] Phase 2.y — reactive props  

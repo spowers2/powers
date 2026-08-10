@@ -5,19 +5,21 @@
  *   jsx: "react-jsx"
  *   jsxImportSource: "@power-ui/dom"
  *
- * Compiles:
- *   <button onClick={...}>{() => count()}</button>
- * into:
- *   jsx("button", { onClick: ..., children: () => count() })
+ * Function components receive **reactive props** via `createProps`
+ * (unless they already wrapped themselves with `component()`).
  */
 import { h, type Props } from "./h.js";
 import { Fragment, normalizeChildren } from "./fragment.js";
+import { createProps } from "./props.js";
 
 export { Fragment };
 
 export type FunctionComponent<P = Record<string, unknown>> = (
   props: P,
 ) => Node | DocumentFragment | null | undefined;
+
+/** Marker set on components that already apply createProps. */
+export const REACTIVE_PROPS = Symbol.for("power-ui.reactiveProps");
 
 export function jsx(
   type: string | FunctionComponent<Record<string, unknown>>,
@@ -27,7 +29,6 @@ export function jsx(
   return create(type, props);
 }
 
-/** Same as jsx — esbuild uses jsxs for static multi-child elements. */
 export function jsxs(
   type: string | FunctionComponent<Record<string, unknown>>,
   props: (Props & { children?: unknown }) | null,
@@ -36,7 +37,6 @@ export function jsxs(
   return create(type, props);
 }
 
-/** Dev runtime alias (same behavior; no extra checks yet). */
 export function jsxDEV(
   type: string | FunctionComponent<Record<string, unknown>>,
   props: (Props & { children?: unknown }) | null,
@@ -53,8 +53,11 @@ function create(
   const { children, ...rest } = p;
 
   if (typeof type === "function") {
-    // Function components receive props including children.
-    const result = type(p as Record<string, unknown>);
+    // Always pass through createProps so bare function components get
+    // reactive field access. component() also wraps — double-wrap is OK
+    // (outer raw object, inner Proxy of raw; component's createProps runs first).
+    const reactive = createProps(p as Record<string, unknown>);
+    const result = type(reactive as Record<string, unknown>);
     if (result == null) {
       return document.createComment("power-ui");
     }
@@ -65,7 +68,6 @@ function create(
   return h(type, rest as Props, ...childList);
 }
 
-// JSX namespace for TypeScript (consumed via jsxImportSource).
 export namespace JSX {
   export type Element = Node | DocumentFragment;
   export type ElementType = string | FunctionComponent<any>;
@@ -83,7 +85,6 @@ export namespace JSX {
     key?: string | number;
   }
 
-  /** Allow any HTML tag + Power UI reactive props (functions). */
   export type IntrinsicElements = {
     [K in keyof HTMLElementTagNameMap]: Props & {
       children?: unknown;

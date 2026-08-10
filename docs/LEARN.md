@@ -146,23 +146,33 @@ Honors `prefers-reduced-motion` by default (snaps to the end).
 ## 7. DOM / JSX — bind signals to the page
 
 ```tsx
-import { mount, component } from "@power-ui/dom";
+import { mount, component, mergeProps } from "@power-ui/dom";
 
-const Counter = component(() => {
-  const count = signal(0);
+const Hello = component((props: { name: string }) => (
+  <p>{() => `Hello, ${props.name}`}</p>
+));
+
+const App = component(() => {
+  const name = signal("Ada");
   return (
-    <button type="button" onClick={() => count.update((n) => n + 1)}>
-      {() => `Count: ${count()}`}
-    </button>
+    <div>
+      <Hello name={name} />
+      <button type="button" onClick={() => name.set("Grace")}>
+        Rename
+      </button>
+    </div>
   );
 });
 
-mount(document.getElementById("app")!, () => <Counter />);
+mount(document.getElementById("app")!, () => <App />);
 ```
 
-**Remember:** `{() => count()}` updates; `{count()}` does not.
+**Remember:**
 
-Also: `Show`, `For`, `bindStyle`, … — see [`docs/DOM.md`](./DOM.md).
+- `{() => count()}` updates; `{count()}` does not  
+- Pass **`name={name}`** (signal) or **`name={() => …}`** for live props — not `name={name()}`  
+
+Also: `mergeProps`, `Show`, `For`, … — see [`docs/DOM.md`](./DOM.md).
 
 ---
 
