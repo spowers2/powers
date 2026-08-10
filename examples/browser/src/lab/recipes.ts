@@ -208,6 +208,61 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "feedback",
+    title: "Alerts & loading",
+    blurb: "Feedback primitives that match the system",
+    tip: "Use Alert for messages and Spinner for in-progress work. Both follow tokens and a11y roles — no extra CSS framework.",
+    code: `import { signal } from "@power-ui/core";
+import { mount, Show } from "@power-ui/dom";
+import { Alert, Button, Divider, Spinner, Stack } from "@power-ui/ui";
+import "@power-ui/ui/theme.css";
+
+const busy = signal(false);
+const saved = signal(false);
+
+export function App() {
+  return (
+    <div class="pu-p-6">
+      <div class="pu-max-w-md">
+        <Stack gap={4}>
+          <Alert tone="info" title="Heads up">
+            Power UI ships feedback components with the runtime.
+          </Alert>
+          <Divider label="demo" />
+          <Stack direction="row" gap={3} align="center">
+            <Button
+              onClick={() => {
+                busy.set(true);
+                saved.set(false);
+                setTimeout(() => {
+                  busy.set(false);
+                  saved.set(true);
+                }, 1200);
+              }}
+            >
+              Fake save
+            </Button>
+            <Show when={() => busy()}>
+              {() => <Spinner label="Saving" />}
+            </Show>
+          </Stack>
+          <Show when={() => saved() && !busy()}>
+            {() => (
+              <Alert tone="success" title="Saved">
+                Your changes are in.
+              </Alert>
+            )}
+          </Show>
+        </Stack>
+      </div>
+    </div>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "tokens",
     title: "Tokens & utilities",
     blurb: "One look system — no separate CSS framework required",

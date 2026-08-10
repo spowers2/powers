@@ -117,4 +117,12 @@ For Power UI it would mean:
 
 > **Write signals for behavior. Use primitives for UI. Edit tokens to rebrand. Sprinkle utilities only when layout needs a one-liner.**
 
-See also: [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) · Power Lab recipe “Tokens & utilities”.
+## Public learning path
+
+1. [docs/README.md](./README.md) — hub  
+2. [LEARN.md](./LEARN.md) — runtime  
+3. This file — styling  
+4. [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) — primitive list  
+5. Demo `/system` + Power Lab recipe **“Tokens & utilities”**  
+
+See also: Power Lab ([POWER_LAB.md](./POWER_LAB.md)).

@@ -176,10 +176,39 @@ Also: `mergeProps`, `Show`, `For`, … — see [`docs/DOM.md`](./DOM.md).
 
 ---
 
-## What you do *not* need yet
+## 8. Styling — built in (not a second framework)
 
-- Routers, SSR, design system (later)
-- **GSAP adapter** (parked — optional pro path; see [`docs/NEXT.md`](./NEXT.md))
-- Proxies or special file extensions
+```tsx
+import "@power-ui/ui/theme.css";
+import { Button, Stack, createTheme } from "@power-ui/ui";
 
-Master core + animate + JSX and you can build real UIs.
+createTheme("light").bind();
+
+// Prefer primitives…
+<Button variant="soft">Save</Button>
+
+// …token-mapped utilities for one-off layout (BEM-ish):
+<div class="pu-flex pu-gap-3 pu-p-4">…</div>
+```
+
+**Rule:** retheme via `tokens.css`. Prefer components over inventing CSS.  
+Full story: [`STYLING.md`](./STYLING.md).
+
+---
+
+## Practice in the browser
+
+- **Power Lab** (`/lab`) — edit real recipes, live preview  
+- **System** (`/system`) — tokens & primitives explorer  
+
+See the docs hub: [`docs/README.md`](./README.md).
+
+---
+
+## What you do *not* need
+
+- A separate CSS framework to look good  
+- Dependency arrays  
+- **GSAP** for everyday motion (optional adapter planned later)  
+
+Master signals + JSX + UI tokens/primitives and you can ship real apps.

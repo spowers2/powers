@@ -62,6 +62,9 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Container` | max-width page shell |
 | `Grid` | responsive columns |
 | `Code` | inline + block code |
+| `Alert` | info / success / warning / danger messages |
+| `Divider` | section rule (± label) |
+| `Spinner` | loading indicator (a11y + reduced motion) |
 | `Label` / `Field` | accessible form layout + hint/error |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |

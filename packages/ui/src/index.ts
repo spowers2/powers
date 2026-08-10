@@ -8,6 +8,7 @@
  * 3. Use Button, Field, Stack… (prefer primitives over raw utilities)
  *
  * Edit brand in: packages/ui/src/styles/tokens.css
+ * Public docs hub: docs/README.md
  */
 
 export { createTheme } from "./theme.js";
@@ -62,3 +63,12 @@ export type { GridProps } from "./components/Grid.js";
 
 export { Code } from "./components/Code.js";
 export type { CodeProps } from "./components/Code.js";
+
+export { Alert } from "./components/Alert.js";
+export type { AlertProps, AlertTone } from "./components/Alert.js";
+
+export { Divider } from "./components/Divider.js";
+export type { DividerProps } from "./components/Divider.js";
+
+export { Spinner } from "./components/Spinner.js";
+export type { SpinnerProps, SpinnerSize } from "./components/Spinner.js";

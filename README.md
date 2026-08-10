@@ -7,7 +7,7 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
 > Private while foundations harden.
 
-**New here?** [`docs/LEARN.md`](./docs/LEARN.md) · **Plan order:** [`docs/ROADMAP.md`](./docs/ROADMAP.md)
+**New here?** Start at the **[docs hub](./docs/README.md)** · quick path: [`LEARN.md`](./docs/LEARN.md) · styling: [`STYLING.md`](./docs/STYLING.md)
 
 ---
 

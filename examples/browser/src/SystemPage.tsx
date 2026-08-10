@@ -3,16 +3,19 @@
  */
 import { signal } from "@power-ui/core";
 import {
+  Alert,
   Badge,
   Button,
   Card,
   Checkbox,
   Code,
   Container,
+  Divider,
   Field,
   Grid,
   Input,
   Select,
+  Spinner,
   Stack,
   Switch,
   Text,
@@ -80,6 +83,7 @@ export function SystemPage(props: {
           <a href="#sys-controls">Controls</a>
           <a href="#sys-type">Type</a>
           <a href="#sys-forms">Forms</a>
+          <a href="#sys-feedback">Feedback</a>
           <a href="#sys-color">Color</a>
           <a href="#sys-space">Space</a>
           <a href="#sys-code">Code</a>
@@ -225,6 +229,35 @@ export function SystemPage(props: {
                   checked={check}
                   onChange={(v) => check.set(v)}
                 />
+              </Stack>
+            </Stack>
+          </Card>
+        </section>
+
+        <section id="sys-feedback">
+          <Card>
+            <Stack gap={4}>
+              <Text weight="semibold">Feedback</Text>
+              <Alert tone="info" title="Info">
+                Integrated styling means tokens + components in one library.
+              </Alert>
+              <Alert tone="success" title="Success">
+                Form saved (example message).
+              </Alert>
+              <Alert tone="warning" title="Warning">
+                Check your density setting on small screens.
+              </Alert>
+              <Alert tone="danger" title="Error">
+                Something failed — try again.
+              </Alert>
+              <Divider label="or" />
+              <Stack direction="row" gap={3} align="center">
+                <Spinner size="sm" />
+                <Spinner />
+                <Spinner size="lg" label="Loading data" />
+                <Text muted size="sm">
+                  Spinners respect reduced motion.
+                </Text>
               </Stack>
             </Stack>
           </Card>

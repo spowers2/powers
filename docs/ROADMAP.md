@@ -3,6 +3,8 @@
 **Last updated:** 2026-08-10  
 **Source of truth for sequence.** Keep this file current when priorities change.
 
+Public docs hub: [`docs/README.md`](./README.md)
+
 ---
 
 ## Principles (always)
@@ -12,7 +14,8 @@
 3. Explicit ownership & dispose  
 4. **Integrated styling** — tokens + primitives + thin utilities (not “React + Tailwind” as default)  
 5. Easy to retheme via one token file  
-6. GSAP is optional power-user path — not the default motion engine  
+6. Docs written for **public readers** from day one  
+7. GSAP is optional power-user path — not the default motion engine  
 
 ---
 
@@ -20,10 +23,9 @@
 
 | # | Milestone |
 |---|---|
-| … | Core → animate → dom → props → router → SSR → UI → landing → forms → density → Lab |
-| **style** | **Styling architecture** — `docs/STYLING.md` + `utilities.css` (BEM-ish, token-mapped) |
-| **lab** | Power Lab (`/lab`) |
-| **5c** | Islands: `defineIslands`, hydrate options |
+| … | Core → animate → dom → router → SSR/islands → UI → Lab → styling architecture |
+| **docs** | Public docs hub (`docs/README.md`), launch-ready CONTRIBUTING |
+| **ui+** | Alert, Divider, Spinner + utility expansion |
 
 ---
 
@@ -31,12 +33,13 @@
 
 | # | Milestone | Notes |
 |---|---|---|
-| style+ | Grow primitives + utilities carefully | No full Tailwind clone |
+| ui++ | More primitives as needed | Dialog, Tabs — only when demos demand |
 | lab+ | Lab polish | highlighting, more recipes |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
-| 6 | **GSAP adapter** (parked until needed) | Optional peer; cinematic timelines |
-| 7 | Color / multi-value animate, enter-exit / FLIP | Motion polish |
+| 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
+| 7 | Color / enter-exit motion | Motion polish |
 | 8 | Hardening | For/`ul` semantics, a11y recipes |
+| pub | Public release checklist | npm publish, website, LICENSE already MIT |
 
 ---
 
@@ -60,7 +63,7 @@ When apps need ScrollTrigger-class / SVG morph / timeline studio work:
 @power-ui/dom      mount, h, JSX, props, Show, For
 @power-ui/router   createRouter, Link, navigate
 @power-ui/ssr      renderToString + defineIslands / hydrate
-@power-ui/ui       tokens + base + utilities + primitives (default look)
+@power-ui/ui       tokens + base + utilities + primitives
 ```
 
-See `docs/STYLING.md` · `docs/DESIGN_SYSTEM.md` · `docs/SSR.md` · `docs/POWER_LAB.md`
+See `docs/STYLING.md` · `docs/DESIGN_SYSTEM.md` · `docs/POWER_LAB.md`

@@ -132,3 +132,22 @@
   padding: var(--pu-space-5);
   box-shadow: var(--pu-shadow-sm);
 }
+
+/* ---- Position / overflow ---- */
+.pu-relative { position: relative; }
+.pu-absolute { position: absolute; }
+.pu-sticky { position: sticky; }
+.pu-inset-0 { inset: 0; }
+.pu-overflow-auto { overflow: auto; }
+.pu-overflow-hidden { overflow: hidden; }
+
+/* ---- Visibility helpers ---- */
+.pu-opacity-50 { opacity: 0.5; }
+.pu-opacity-75 { opacity: 0.75; }
+.pu-pointer-none { pointer-events: none; }
+.pu-select-none { user-select: none; }
+
+/* ---- Stacking ---- */
+.pu-z-10 { z-index: 10; }
+.pu-z-20 { z-index: 20; }
+.pu-z-50 { z-index: 50; }

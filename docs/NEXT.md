@@ -1,16 +1,18 @@
 # Next steps
 
-**Canonical order:** [`ROADMAP.md`](./ROADMAP.md) · Styling model: [`STYLING.md`](./STYLING.md)
+**Canonical order:** [`ROADMAP.md`](./ROADMAP.md)  
+**Public docs hub:** [`README.md`](./README.md)
 
 ## Just completed
 
-- [x] Integrated styling as product pillar (tokens · primitives · utilities)  
-- [x] `utilities.css` (BEM-ish, token-mapped) + Lab recipe “Tokens & utilities”  
-- [x] Power Lab, islands registry, unified nav (prior)  
+- [x] Public docs hub + launch-ready CONTRIBUTING  
+- [x] LEARN / STYLING cross-links for public readers  
+- [x] Primitives: Alert, Divider, Spinner  
+- [x] Utilities expansion + Lab recipe “Alerts & loading”  
 
 ## Immediate next
 
-1. Grow primitives / utilities carefully (no full Tailwind clone)  
+1. More primitives only when demos demand (Dialog, Tabs, …)  
 2. Lab polish (highlighting, more recipes)  
-3. **GSAP adapter** when cinematic motion is needed (parked, not dropped)  
-4. Motion polish · a11y hardening  
+3. **GSAP adapter** when cinematic motion is needed (parked)  
+4. Public release checklist (npm, site)  
