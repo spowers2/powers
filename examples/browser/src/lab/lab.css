@@ -81,9 +81,37 @@
 
 .lab-main {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  /* toolbar · tip · workspace · console */
+  grid-template-rows: auto auto minmax(280px, 1fr) auto;
   min-width: 0;
   min-height: 0;
+  height: 100%;
+}
+
+.lab-sidebar-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.lab-recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  padding-right: 2px;
+}
+
+.lab-auto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text-muted);
+  user-select: none;
+  cursor: pointer;
 }
 
 .lab-toolbar {
@@ -229,4 +257,8 @@
 
 .lab-status.is-err {
   color: var(--pu-color-danger);
+}
+
+.lab-status.is-run {
+  color: var(--pu-color-accent);
 }

@@ -82,8 +82,12 @@ export function SystemPage(props: {
           <Text muted>
             Living reference for Power UI primitives — modern layered surfaces,
             glass, and deep blue/green tokens. Edit{" "}
-            <Code>packages/ui/src/styles/tokens.css</Code> to retheme. To learn
-            by coding, open <strong>Lab</strong> in the top nav.
+            <Code>packages/ui/src/styles/tokens.css</Code> to retheme.
+          </Text>
+          <Text muted size="sm">
+            <strong>Lab</strong> is for editing live code recipes.{" "}
+            <strong>System</strong> is this static component catalog. Use Lab to
+            learn the runtime; use System to browse the design kit.
           </Text>
         </Stack>
 

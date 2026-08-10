@@ -13,6 +13,12 @@
 - [x] Primitives: Dialog, Tabs, Progress, Skeleton, Avatar  
 - [x] Lab recipe “Dialog, Tabs & Progress”  
 
+## Just fixed (UX)
+
+- [x] Landing: smooth section scroll + sticky anchors + back-to-top  
+- [x] Lab: recipe switching updates editor / tip / preview (race-safe)  
+- [x] Lab vs System clarified; Playground folded into System  
+
 ## Immediate next
 
 1. Lab polish (highlighting, more recipes)  

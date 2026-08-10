@@ -332,7 +332,18 @@ const router = createRouter({
       component: () => LandingPage({ router }),
     },
     { path: "/lab", component: () => LabPage() },
-    { path: "/playground", component: () => PlaygroundPage() },
+    // Playground folded into System — keep redirect so old links work
+    {
+      path: "/playground",
+      component: () => {
+        queueMicrotask(() => router.navigate("/system", { replace: true }));
+        return (
+          <Container size="md">
+            <Text muted>Redirecting to Design system…</Text>
+          </Container>
+        );
+      },
+    },
     { path: "/todos", component: () => TodosPage() },
     {
       path: "/system",

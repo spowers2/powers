@@ -1,5 +1,5 @@
 /**
- * Single site navigation — same on landing, playground, todos, etc.
+ * Single site navigation — Home, Lab, System, Todos.
  */
 import type { Router } from "@power-ui/router";
 import { Link } from "@power-ui/router";
@@ -27,14 +27,11 @@ export function SiteNav(props: {
             <Link router={router} to="/lab" activeClass="active">
               Lab
             </Link>
-            <Link router={router} to="/playground" activeClass="active">
-              Playground
+            <Link router={router} to="/system" activeClass="active">
+              System
             </Link>
             <Link router={router} to="/todos" activeClass="active">
               Todos
-            </Link>
-            <Link router={router} to="/system" activeClass="active">
-              System
             </Link>
           </nav>
 

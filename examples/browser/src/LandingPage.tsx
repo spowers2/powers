@@ -2,13 +2,37 @@
  * Marketing landing — modern, token-driven, live demos.
  * Navigation is provided by the shared SiteNav in AppShell.
  */
-import { signal } from "@power-ui/core";
+import { signal, effect } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
 import { bindStyle } from "@power-ui/dom";
 import type { Router } from "@power-ui/router";
-import { Link } from "@power-ui/router";
 import { Badge, Button, Container, Stack } from "@power-ui/ui";
 import "./landing.css";
+
+const SECTION_IDS = ["features", "learn", "compare"] as const;
+
+function prefersReducedMotion(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+/** Smooth-scroll to a section; accounts for sticky chrome. */
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
+    block: "start",
+  });
+  // Keep URL shareable without fighting the history router path
+  if (id === "top") {
+    history.replaceState(null, "", location.pathname + location.search);
+  } else {
+    history.replaceState(null, "", `${location.pathname}${location.search}#${id}`);
+  }
+}
 
 export function LandingPage(props: { router: Router }) {
   const { router } = props;
@@ -16,6 +40,8 @@ export function LandingPage(props: { router: Router }) {
   // Live hero demo
   const count = signal(0);
   const x = signal(0);
+  const activeSection = signal<string>("top");
+  const showBackTop = signal(false);
   const orb = (<div class="lp-orb" />) as HTMLElement;
   bindStyle(orb, () => ({ transform: `translateX(${x()}px)` }));
 
@@ -26,18 +52,77 @@ export function LandingPage(props: { router: Router }) {
 
   const go = (path: string) => () => router.navigate(path);
 
+  // Active section + back-to-top visibility
+  effect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      showBackTop.set(y > 420);
+
+      let current: string = "top";
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        // Section is active once its top crosses under sticky chrome
+        if (top <= 120) current = id;
+      }
+      activeSection.set(current);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  });
+
+  // Honor deep-link hash on first paint
+  queueMicrotask(() => {
+    const hash = location.hash.replace(/^#/, "");
+    if (hash && (SECTION_IDS as readonly string[]).includes(hash)) {
+      scrollToSection(hash);
+    }
+  });
+
+  const anchorClass = (id: string) => () =>
+    activeSection() === id ? "is-active" : "";
+
   return (
     <div class="lp lp-full">
       <div class="lp-mesh" aria-hidden="true" />
 
       <main id="top">
-        {/* In-page anchors (secondary) */}
+        {/* Sticky in-page anchors */}
         <div class="lp-anchors">
           <Container size="xl">
             <nav class="lp-anchors-inner" aria-label="On this page">
-              <a href="#features">Features</a>
-              <a href="#learn">Learn</a>
-              <a href="#compare">Why</a>
+              <button
+                type="button"
+                class={anchorClass("features")}
+                onClick={() => scrollToSection("features")}
+              >
+                Features
+              </button>
+              <button
+                type="button"
+                class={anchorClass("learn")}
+                onClick={() => scrollToSection("learn")}
+              >
+                Learn
+              </button>
+              <button
+                type="button"
+                class={anchorClass("compare")}
+                onClick={() => scrollToSection("compare")}
+              >
+                Why
+              </button>
+              <span class="lp-anchors-sep" aria-hidden="true" />
+              <button
+                type="button"
+                class="lp-anchors-top"
+                onClick={() => scrollToSection("top")}
+              >
+                ↑ Top
+              </button>
             </nav>
           </Container>
         </div>
@@ -65,8 +150,8 @@ export function LandingPage(props: { router: Router }) {
                   <Button size="lg" onClick={go("/lab")}>
                     Open Power Lab
                   </Button>
-                  <Button size="lg" variant="ghost" onClick={go("/playground")}>
-                    Component playground
+                  <Button size="lg" variant="ghost" onClick={go("/system")}>
+                    Design system
                   </Button>
                 </div>
                 <div class="lp-meta">
@@ -307,16 +392,16 @@ mount(document.getElementById("app")!, () => (
               <div>
                 <h2>Ship something that feels inevitable</h2>
                 <p>
-                  Open the playground, flip the theme, break the counter, then
-                  retheme the world from tokens.css.
+                  Learn in the Lab (edit live recipes), explore the design system,
+                  then retheme everything from one tokens.css.
                 </p>
               </div>
               <Stack direction="row" gap={2} wrap>
-                <Button size="lg" onClick={go("/playground")}>
-                  Launch playground
+                <Button size="lg" onClick={go("/lab")}>
+                  Open Power Lab
                 </Button>
-                <Button size="lg" variant="soft" onClick={go("/todos")}>
-                  Todos example
+                <Button size="lg" variant="soft" onClick={go("/system")}>
+                  Design system
                 </Button>
               </Stack>
             </div>
@@ -329,12 +414,15 @@ mount(document.getElementById("app")!, () => (
           <div class="lp-footer-inner">
             <span>Power UI — MIT · private foundations</span>
             <Stack direction="row" gap={4}>
-              <Link router={router} to="/playground">
-                Playground
-              </Link>
-              <Link router={router} to="/todos">
+              <button type="button" class="lp-footer-link" onClick={go("/lab")}>
+                Lab
+              </button>
+              <button type="button" class="lp-footer-link" onClick={go("/system")}>
+                System
+              </button>
+              <button type="button" class="lp-footer-link" onClick={go("/todos")}>
                 Todos
-              </Link>
+              </button>
               <a
                 href="https://github.com/spowers2/power-ui"
                 target="_blank"
@@ -346,6 +434,16 @@ mount(document.getElementById("app")!, () => (
           </div>
         </Container>
       </footer>
+
+      {/* Floating return control when deep in the page */}
+      <button
+        type="button"
+        class={() => `lp-back-top${showBackTop() ? " is-visible" : ""}`}
+        aria-label="Back to top"
+        onClick={() => scrollToSection("top")}
+      >
+        ↑ Top
+      </button>
     </div>
   );
 }

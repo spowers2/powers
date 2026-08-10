@@ -69,7 +69,8 @@ pnpm install
 pnpm example:browser   # http://localhost:5173
 # /lab     — Power Lab
 # /system  — design system explorer
-# /playground — forms & density
+# /system — design system (primitives + tokens)
+# /lab — interactive recipes (edit code live)
 ```
 
 ---

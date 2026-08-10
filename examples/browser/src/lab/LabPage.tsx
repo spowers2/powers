@@ -1,6 +1,6 @@
 /**
  * Power Lab — interactive learning playground.
- * Our own take on CodePen/JSFiddle: Power-UI-native, recipe-first, shareable.
+ * Recipe-first: pick a sample, edit code, live preview.
  */
 import { signal, effect } from "@power-ui/core";
 import { Button, Badge, Text } from "@power-ui/ui";
@@ -23,35 +23,55 @@ export function LabPage() {
   const activeId = signal(startRecipe.id);
   const code = signal(initial?.code ?? startRecipe.code);
   const status = signal<"idle" | "running" | "ok" | "error">("idle");
-  const statusMsg = signal("Ready — Run or ⌘/Ctrl+Enter");
+  const statusMsg = signal("Ready — pick a recipe or edit the code");
   const logs = signal<LabLog[]>([]);
   const autoRun = signal(true);
 
   let iframeEl: HTMLIFrameElement | null = null;
   let editorEl: HTMLTextAreaElement | null = null;
+  let tipBodyEl: HTMLElement | null = null;
+  let titleEl: HTMLElement | null = null;
   let runToken = 0;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  const activeRecipe = () => recipeById(activeId()) ?? recipes[0]!;
+  const activeRecipe = (): Recipe => recipeById(activeId()) ?? recipes[0]!;
+
+  function syncChrome(r: Recipe) {
+    if (titleEl) titleEl.textContent = r.title;
+    if (tipBodyEl) tipBodyEl.textContent = r.tip;
+    for (const btn of recipeList.querySelectorAll<HTMLButtonElement>(".lab-recipe")) {
+      const id = btn.dataset.recipeId;
+      btn.classList.toggle("is-active", id === r.id);
+      btn.setAttribute("aria-current", id === r.id ? "true" : "false");
+    }
+  }
 
   async function run() {
     if (!iframeEl) return;
     const token = ++runToken;
+    const source = code();
     status.set("running");
     statusMsg.set("Compiling…");
     logs.set([]);
 
-    const result = await runInFrame(iframeEl, code(), (log) => {
-      logs.update((list) => [...list, log]);
-    });
+    const result = await runInFrame(
+      iframeEl,
+      source,
+      (log) => {
+        if (token !== runToken) return;
+        logs.update((list) => [...list, log]);
+      },
+      token,
+      () => runToken,
+    );
 
     if (token !== runToken) return;
     if (result.ok) {
       status.set("ok");
-      statusMsg.set("Running");
+      statusMsg.set("Running · edit code or pick another recipe");
     } else {
       status.set("error");
-      statusMsg.set(result.error ?? "Error");
+      statusMsg.set(result.error ?? "Error — see console below");
     }
   }
 
@@ -60,72 +80,97 @@ export function LabPage() {
     if (debounceTimer) clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       void run();
-    }, 550);
+    }, 450);
   }
 
   function loadRecipe(r: Recipe) {
+    // Cancel in-flight preview work
+    runToken += 1;
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+      debounceTimer = null;
+    }
+
     activeId.set(r.id);
     code.set(r.code);
-    if (editorEl) editorEl.value = r.code;
+    if (editorEl) {
+      editorEl.value = r.code;
+      editorEl.scrollTop = 0;
+    }
+    syncChrome(r);
+    statusMsg.set(`Loaded “${r.title}”`);
+    logs.set([]);
     void run();
   }
 
   function share() {
     const hash = "lab/" + encodeShare(code(), activeId());
-    history.replaceState(null, "", `#${hash}`);
-    const url = `${location.origin}${location.pathname}#${hash}`;
-    void navigator.clipboard?.writeText(url);
-    statusMsg.set("Share link copied");
-    status.set("ok");
+    const path = `${location.pathname}${location.search}#${hash}`;
+    history.replaceState(null, "", path);
+    const url = `${location.origin}${path}`;
+    void navigator.clipboard?.writeText(url).then(
+      () => {
+        statusMsg.set("Share link copied");
+        status.set("ok");
+      },
+      () => {
+        statusMsg.set("Copy failed — URL is in the address bar");
+      },
+    );
   }
 
   function resetRecipe() {
     const r = activeRecipe();
     code.set(r.code);
-    if (editorEl) editorEl.value = r.code;
+    if (editorEl) {
+      editorEl.value = r.code;
+      editorEl.scrollTop = 0;
+    }
+    statusMsg.set(`Reset “${r.title}”`);
     void run();
   }
 
-  // Sidebar recipes
+  // Sidebar recipe list (imperative so click → load is bulletproof)
   const recipeList = document.createElement("div");
-  recipeList.style.display = "flex";
-  recipeList.style.flexDirection = "column";
-  recipeList.style.gap = "0.35rem";
+  recipeList.className = "lab-recipe-list";
+  recipeList.setAttribute("role", "listbox");
+  recipeList.setAttribute("aria-label", "Recipes");
+
   for (const r of recipes) {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "lab-recipe";
+    btn.dataset.recipeId = r.id;
+    btn.setAttribute("role", "option");
     const strong = document.createElement("strong");
     strong.textContent = r.title;
     const span = document.createElement("span");
     span.textContent = r.blurb;
     btn.append(strong, span);
-    btn.addEventListener("click", () => loadRecipe(r));
-    effect(() => {
-      btn.classList.toggle("is-active", activeId() === r.id);
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      loadRecipe(r);
     });
     recipeList.appendChild(btn);
   }
 
   const sidebar = (
     <aside class="lab-sidebar">
-      <div>
+      <div class="lab-sidebar-head">
         <h2>Power Lab</h2>
         <Text muted size="xs">
-          Learn by editing — live preview, no account, no build step.
+          Pick a recipe → edit code → live preview. This is the interactive
+          teacher (not a static demo page).
         </Text>
       </div>
-      <Badge tone="accent">Made for Power UI</Badge>
+      <Badge tone="accent">{recipes.length} recipes</Badge>
       {recipeList}
     </aside>
   );
 
-  // Auto-run checkbox
   const auto = document.createElement("label");
-  auto.className = "lab-status";
-  auto.style.display = "inline-flex";
-  auto.style.gap = "0.35rem";
-  auto.style.alignItems = "center";
+  auto.className = "lab-auto";
   const autoInput = document.createElement("input");
   autoInput.type = "checkbox";
   autoInput.checked = true;
@@ -133,11 +178,15 @@ export function LabPage() {
     autoRun.set(autoInput.checked);
     if (autoRun()) scheduleAutoRun();
   });
-  auto.append(autoInput, document.createTextNode("Auto-run"));
+  auto.append(autoInput, document.createTextNode(" Auto-run"));
+
+  titleEl = document.createElement("span");
+  titleEl.className = "lab-toolbar-title";
+  titleEl.textContent = startRecipe.title;
 
   const toolbar = (
     <div class="lab-toolbar">
-      <span class="lab-toolbar-title">{() => activeRecipe().title}</span>
+      {titleEl}
       {auto}
       <Button size="sm" onClick={() => void run()}>
         Run
@@ -150,7 +199,7 @@ export function LabPage() {
       </Button>
       <span
         class={() =>
-          `lab-status${status() === "ok" ? " is-ok" : ""}${status() === "error" ? " is-err" : ""}`
+          `lab-status${status() === "ok" ? " is-ok" : ""}${status() === "error" ? " is-err" : ""}${status() === "running" ? " is-run" : ""}`
         }
       >
         {() => statusMsg()}
@@ -158,10 +207,12 @@ export function LabPage() {
     </div>
   );
 
+  tipBodyEl = document.createElement("span");
+  tipBodyEl.textContent = startRecipe.tip;
   const tip = (
     <p class="lab-tip">
       <strong>Tip · </strong>
-      <span>{() => activeRecipe().tip}</span>
+      {tipBodyEl}
     </p>
   );
 
@@ -206,14 +257,17 @@ export function LabPage() {
   effect(() => {
     const items = logs();
     consoleEl.replaceChildren();
+    if (items.length === 0) return;
     for (const line of items) {
       const p = document.createElement("p");
       p.className = `lab-console-line${line.level === "error" ? " is-error" : ""}${line.level === "warn" ? " is-warn" : ""}`;
-      p.textContent = line.args.join(" ");
+      p.textContent = `[${line.level}] ${line.args.join(" ")}`;
       consoleEl.appendChild(p);
     }
   });
 
+  // Initial chrome + first run
+  syncChrome(startRecipe);
   queueMicrotask(() => {
     void run();
   });

@@ -60,14 +60,21 @@ export async function compileLabCode(source: string): Promise<string> {
 /**
  * Compile + execute user code inside a sandboxed iframe.
  * Live Power UI modules are injected from the parent (same-origin srcdoc).
+ *
+ * `runId` + `getLatestRunId` cancel stale runs when the user switches recipes fast.
  */
 export async function runInFrame(
   iframe: HTMLIFrameElement,
   source: string,
   onLog: (log: LabLog) => void,
+  runId = 0,
+  getLatestRunId: () => number = () => runId,
 ): Promise<RunResult> {
+  const isStale = () => getLatestRunId() !== runId;
+
   const logs: LabLog[] = [];
   const push = (level: LabLog["level"], args: unknown[]) => {
+    if (isStale()) return;
     const entry = {
       level,
       args: args.map((a) => {
@@ -93,6 +100,10 @@ export async function runInFrame(
     return { ok: false, logs, error: msg };
   }
 
+  if (isStale()) {
+    return { ok: false, logs, error: "Cancelled" };
+  }
+
   const api = createLabApi();
   const keys = LAB_API_KEYS.filter((k) => k in (api as Record<string, unknown>));
 
@@ -102,8 +113,8 @@ export async function runInFrame(
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    html, body { margin: 0; min-height: 100%; background: var(--pu-color-bg, #f6f8fb); color: var(--pu-color-text, #141b28); font-family: system-ui, sans-serif; }
-    #root { min-height: 100vh; box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--pu-color-bg, #f3f4f6); color: var(--pu-color-text, #13171d); font-family: system-ui, sans-serif; }
+    #root { min-height: 100%; box-sizing: border-box; padding: 8px; }
     * { box-sizing: border-box; }
     button, input, select, textarea { font: inherit; }
   </style>
@@ -161,11 +172,17 @@ export async function runInFrame(
     const finish = (r: RunResult) => {
       if (settled) return;
       settled = true;
+      window.clearTimeout(timeoutId);
       window.removeEventListener("message", onMessage);
+      // Only clear onload if we still own this generation
+      if (!isStale()) {
+        iframe.onload = null;
+      }
       resolve(r);
     };
 
     const onMessage = (ev: MessageEvent) => {
+      if (isStale()) return;
       if (ev.source !== iframe.contentWindow) return;
       const data = ev.data as {
         type?: string;
@@ -176,6 +193,7 @@ export async function runInFrame(
       if (!data || typeof data !== "object") return;
 
       if (data.type === "power-lab-ready") {
+        if (isStale()) return;
         iframe.contentWindow?.postMessage(
           { type: "power-lab-run", code: compiled },
           "*",
@@ -193,7 +211,15 @@ export async function runInFrame(
 
     window.addEventListener("message", onMessage);
 
+    // Tag this load so a superseded onload cannot boot the wrong generation
+    const bootTag = String(runId);
+    iframe.dataset.labRun = bootTag;
+
     iframe.onload = () => {
+      if (iframe.dataset.labRun !== bootTag || isStale()) {
+        finish({ ok: false, logs, error: "Cancelled" });
+        return;
+      }
       try {
         const w = iframe.contentWindow as (Window & {
           __POWER_BOOT__?: (api: PowerLabApi) => void;
@@ -210,9 +236,14 @@ export async function runInFrame(
       }
     };
 
+    // Assigning srcdoc reloads the frame for a clean sandbox each run
     iframe.srcdoc = srcdoc;
 
-    window.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
+      if (isStale()) {
+        finish({ ok: false, logs, error: "Cancelled" });
+        return;
+      }
       finish({
         ok: false,
         logs,
