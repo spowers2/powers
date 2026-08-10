@@ -35,9 +35,9 @@
   border-radius: 8px;
   background: linear-gradient(
     145deg,
-    var(--pu-brand-400),
-    var(--pu-brand-600) 50%,
-    var(--pu-sage-500)
+    var(--pu-brand-500),
+    var(--pu-brand-700) 50%,
+    var(--pu-sage-600)
   );
   box-shadow:
     0 0 0 1px color-mix(in srgb, #fff 25%, transparent),
@@ -108,9 +108,9 @@
   border-radius: var(--pu-radius-full);
   background: linear-gradient(
     145deg,
-    var(--pu-brand-400),
-    var(--pu-sage-400) 55%,
-    var(--pu-brand-600)
+    var(--pu-brand-500),
+    var(--pu-sage-500) 55%,
+    var(--pu-brand-700)
   );
   will-change: transform;
 }

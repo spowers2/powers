@@ -3,7 +3,7 @@
 **Product stance:** Power UI is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
-**Default palette:** **deep ink blue + forest green** on quiet graphite neutrals (no neon).  
+**Default palette:** **deep ink navy + forest pine** on quiet graphite neutrals (low-chroma, no neon / electric brights).  
 Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
 
 ---

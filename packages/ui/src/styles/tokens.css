@@ -1,43 +1,45 @@
 /**
  * Power UI design tokens — Deep blue + deep green
  * -----------------------------------------------
- * Muted, sophisticated palette. No neon / electric brights.
+ * Ink navy and forest pine. Muted and low-chroma — no neon,
+ * electric, or sky-bright accents.
  * Edit this file to rebrand the entire product.
  *
  * Naming: --pu-<category>-<name>
  */
 
 :root {
-  /* ---- Brand scale (deep ocean / ink blue) ---- */
-  --pu-brand-50: #eef2f6;
-  --pu-brand-100: #d5dee8;
-  --pu-brand-200: #a8b9cc;
-  --pu-brand-300: #6f8aab;
-  --pu-brand-400: #4a6d94;
-  --pu-brand-500: #2f5278;
-  --pu-brand-600: #244266;
-  --pu-brand-700: #1c3452;
-  --pu-brand-800: #162a42;
-  --pu-brand-900: #111f32;
+  /* ---- Brand scale (deep ink / abyss navy) ---- */
+  --pu-brand-50: #eef1f4;
+  --pu-brand-100: #cfd7e0;
+  --pu-brand-200: #96a6b8;
+  --pu-brand-300: #5c738c;
+  --pu-brand-400: #3a536d;
+  --pu-brand-500: #243d56;
+  --pu-brand-600: #1b3045;
+  --pu-brand-700: #152636;
+  --pu-brand-800: #0f1c28;
+  --pu-brand-900: #0a141d;
 
   /* ---- Neutrals (cool graphite — clean, quiet) ---- */
   --pu-gray-0: #fcfcfd;
-  --pu-gray-50: #f4f5f7;
-  --pu-gray-100: #e8eaee;
-  --pu-gray-200: #d4d8e0;
-  --pu-gray-300: #b0b7c3;
-  --pu-gray-400: #848d9c;
-  --pu-gray-500: #5c6573;
-  --pu-gray-600: #454d59;
-  --pu-gray-700: #333a45;
-  --pu-gray-800: #222830;
-  --pu-gray-900: #151920;
-  --pu-gray-950: #0c0f14;
+  --pu-gray-50: #f3f4f6;
+  --pu-gray-100: #e6e8ec;
+  --pu-gray-200: #d0d4dc;
+  --pu-gray-300: #a8afbb;
+  --pu-gray-400: #7c8594;
+  --pu-gray-500: #575f6c;
+  --pu-gray-600: #424955;
+  --pu-gray-700: #303640;
+  --pu-gray-800: #1f242c;
+  --pu-gray-900: #13171d;
+  --pu-gray-950: #0a0d11;
 
   /* ---- Deep green (forest / pine — secondary & success) ---- */
-  --pu-sage-400: #5a7d68;
-  --pu-sage-500: #3d5c4a;
-  --pu-sage-600: #2f483a;
+  --pu-sage-400: #4a6656;
+  --pu-sage-500: #2c4538;
+  --pu-sage-600: #22362c;
+  --pu-sage-700: #1a2a22;
 
   /* ---- Semantic (light default) ---- */
   --pu-color-bg: var(--pu-gray-50);
@@ -48,13 +50,13 @@
   --pu-color-text-muted: var(--pu-gray-500);
   --pu-color-accent: var(--pu-brand-500);
   --pu-color-accent-hover: var(--pu-brand-600);
-  --pu-color-accent-fg: #f7f8fa;
-  --pu-color-danger: #9b3b3b;
-  --pu-color-danger-fg: #f7f8fa;
+  --pu-color-accent-fg: #f4f5f7;
+  --pu-color-danger: #8a3838;
+  --pu-color-danger-fg: #f4f5f7;
   --pu-color-focus: var(--pu-brand-400);
-  /* Soft glows — desaturated, not neon */
-  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 28%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 22%, transparent);
+  /* Soft glows — low opacity, no halo neon */
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-500) 18%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 14%, transparent);
 
   /* ---- Space (4px grid) ---- */
   --pu-space-0: 0;
@@ -88,10 +90,10 @@
   --pu-font-semibold: 600;
   --pu-font-bold: 700;
 
-  /* ---- Shadow (quiet, cool) ---- */
-  --pu-shadow-sm: 0 1px 2px rgba(17, 31, 50, 0.05);
-  --pu-shadow-md: 0 10px 28px rgba(17, 31, 50, 0.07);
-  --pu-shadow-lg: 0 20px 50px rgba(17, 31, 50, 0.09);
+  /* ---- Shadow (quiet, cool ink) ---- */
+  --pu-shadow-sm: 0 1px 2px rgba(10, 20, 29, 0.05);
+  --pu-shadow-md: 0 10px 28px rgba(10, 20, 29, 0.07);
+  --pu-shadow-lg: 0 20px 50px rgba(10, 20, 29, 0.09);
 
   /* ---- Motion ---- */
   --pu-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -123,7 +125,7 @@
 [data-pu-density="comfortable"] {
 }
 
-/* Dark — deep ink + forest undertone */
+/* Dark — abyss ink + forest undertone (muted accents, not electric) */
 [data-pu-theme="dark"] {
   --pu-color-bg: var(--pu-gray-950);
   --pu-color-surface: var(--pu-gray-900);
@@ -131,13 +133,14 @@
   --pu-color-border: var(--pu-gray-700);
   --pu-color-text: var(--pu-gray-50);
   --pu-color-text-muted: var(--pu-gray-400);
+  /* Steel blue mid — readable, not sky-bright */
   --pu-color-accent: var(--pu-brand-300);
   --pu-color-accent-hover: var(--pu-brand-200);
   --pu-color-accent-fg: var(--pu-gray-950);
   --pu-color-focus: var(--pu-brand-300);
-  --pu-color-danger: #c46a6a;
-  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 22%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-400) 18%, transparent);
+  --pu-color-danger: #b86868;
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-500) 16%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 12%, transparent);
   --pu-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
   --pu-shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
   --pu-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.55);
