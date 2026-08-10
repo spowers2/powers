@@ -72,6 +72,8 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Avatar` | initials / image |
 | `Tooltip` | hover/focus tip |
 | `Toaster` / `createToaster` | ephemeral toast stack |
+| `Popover` | anchored panel (open + onOpenChange) |
+| `Menu` | action list built on Popover |
 | `Label` / `Field` | accessible form layout + hint/error |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |

@@ -98,3 +98,9 @@ export type {
   ToastItem,
   ToastTone,
 } from "./components/Toast.js";
+
+export { Popover } from "./components/Popover.js";
+export type { PopoverProps } from "./components/Popover.js";
+
+export { Menu } from "./components/Menu.js";
+export type { MenuProps, MenuItem } from "./components/Menu.js";

@@ -500,6 +500,17 @@
   caret-color: color-mix(in srgb, var(--pu-brand-300) 80%, #fff);
 }
 
+.lab-editor-meta {
+  flex-shrink: 0;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.65rem;
+  font-family: var(--pu-font-mono);
+  letter-spacing: 0.02em;
+  color: var(--pu-color-text-muted);
+  border-top: 1px solid color-mix(in srgb, var(--lab-border) 80%, transparent);
+  background: color-mix(in srgb, #0a1018 92%, var(--pu-color-surface));
+}
+
 [data-pu-theme="dark"] .lab-editor {
   background: #06090e;
   color: #d0d8e4;

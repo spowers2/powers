@@ -17,6 +17,8 @@ import {
   Field,
   Grid,
   Input,
+  Menu,
+  Popover,
   Progress,
   Select,
   Skeleton,
@@ -70,6 +72,8 @@ export function SystemPage(props: {
   const dialogOpen = signal(false);
   const progress = signal(42);
   const toaster = createToaster();
+  const popoverOpen = signal(false);
+  const menuPick = signal("—");
   const emailError = () => {
     const v = email().trim();
     if (!v) return "";
@@ -448,6 +452,62 @@ export function SystemPage(props: {
                   </Button>
                 </Stack>
                 <Toaster toaster={toaster} />
+              </Stack>
+            </Card>
+            <Card variant="elevated">
+              <Stack gap={3}>
+                <Text weight="semibold">Popover</Text>
+                <Text muted size="sm">
+                  Anchored panel — Escape + outside click to dismiss.
+                </Text>
+                <Popover
+                  open={popoverOpen}
+                  onOpenChange={(v) => popoverOpen.set(v)}
+                  trigger={
+                    <Button size="sm" variant="soft">
+                      {() => (popoverOpen() ? "Close panel" : "Open panel")}
+                    </Button>
+                  }
+                >
+                  <Stack gap={2}>
+                    <Text weight="semibold" size="sm">
+                      Quick note
+                    </Text>
+                    <Text muted size="sm">
+                      Popovers float under their trigger and use the same
+                      elevation tokens as dialogs.
+                    </Text>
+                    <Button
+                      size="sm"
+                      onClick={() => popoverOpen.set(false)}
+                    >
+                      Got it
+                    </Button>
+                  </Stack>
+                </Popover>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={3}>
+                <Text weight="semibold">Menu</Text>
+                <Text muted size="sm">
+                  Action list on Popover — select closes the menu.
+                </Text>
+                <Stack direction="row" gap={3} align="center" wrap>
+                  <Menu
+                    trigger={<Button size="sm">Actions</Button>}
+                    items={[
+                      { id: "edit", label: "Edit" },
+                      { id: "duplicate", label: "Duplicate" },
+                      { id: "archive", label: "Archive", disabled: true },
+                      { id: "delete", label: "Delete", danger: true },
+                    ]}
+                    onSelect={(id) => menuPick.set(id)}
+                  />
+                  <Text muted size="sm">
+                    Last pick: {() => menuPick()}
+                  </Text>
+                </Stack>
               </Stack>
             </Card>
           </Grid>

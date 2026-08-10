@@ -27,6 +27,8 @@ import {
   Text,
   Textarea,
   Tooltip,
+  Popover,
+  Menu,
 } from "@power-ui/ui";
 
 let warmed = false;
@@ -113,6 +115,19 @@ export function warmUiStyles(): void {
       Tooltip({
         content: "tip",
         children: Button({ children: "?" }),
+      }),
+    );
+    append(
+      Popover({
+        open: false,
+        trigger: Button({ children: "P" }),
+        children: "panel",
+      }),
+    );
+    append(
+      Menu({
+        trigger: Button({ children: "M" }),
+        items: [{ id: "a", label: "A" }],
       }),
     );
   } catch {

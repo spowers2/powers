@@ -8,6 +8,8 @@ import { Dialog } from "./components/Dialog.js";
 import { Tabs } from "./components/Tabs.js";
 import { Progress } from "./components/Progress.js";
 import { createToaster, Toaster } from "./components/Toast.js";
+import { Menu } from "./components/Menu.js";
+import { Popover } from "./components/Popover.js";
 import { createTheme } from "./theme.js";
 import { cx } from "./utils.js";
 
@@ -119,5 +121,43 @@ describe("@power-ui/ui", () => {
     const toasts = root.querySelectorAll(".pu-toast");
     assert.equal(toasts.length, 1);
     assert.match(toasts[0]!.textContent ?? "", /Hello/);
+  });
+
+  it("Popover toggles open class", async () => {
+    const { flush } = await import("@power-ui/core");
+    const open = signal(false);
+    mount(root, () =>
+      Popover({
+        open,
+        onOpenChange: (v) => open.set(v),
+        trigger: "Open",
+        children: "Panel body",
+      }),
+    );
+    const el = root.querySelector(".pu-popover");
+    assert.ok(el);
+    assert.equal(el!.classList.contains("pu-popover--open"), false);
+    open.set(true);
+    flush();
+    assert.equal(el!.classList.contains("pu-popover--open"), true);
+  });
+
+  it("Menu renders items when opened", async () => {
+    const { flush } = await import("@power-ui/core");
+    mount(root, () =>
+      Menu({
+        trigger: "Actions",
+        items: [
+          { id: "a", label: "Alpha" },
+          { id: "b", label: "Beta" },
+        ],
+      }),
+    );
+    const trigger = root.querySelector(".pu-popover__trigger");
+    assert.ok(trigger);
+    (trigger as HTMLElement).click();
+    flush();
+    assert.match(root.textContent ?? "", /Alpha/);
+    assert.match(root.textContent ?? "", /Beta/);
   });
 });

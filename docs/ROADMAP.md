@@ -30,6 +30,7 @@ Public docs hub: [`docs/README.md`](./README.md)
 | **ui++** | Dialog, Tabs, Progress, Skeleton, Avatar |
 | **lab-ux** | Lab recipe switch fix + visual polish |
 | **ui+++** | Tooltip, Toaster |
+| **ui++++** | Popover, Menu |
 
 ---
 
@@ -38,7 +39,7 @@ Public docs hub: [`docs/README.md`](./README.md)
 | # | Milestone | Notes |
 |---|---|---|
 | lab+ | Lab polish | syntax highlighting, more recipes |
-| ui++++ | More primitives as demos demand | Menu, Popover, … |
+| ui+++++ | More primitives as demos demand | Command palette, combobox, … |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
 | 7 | Color / enter-exit motion | Motion polish |

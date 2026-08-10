@@ -17,6 +17,7 @@
     "esbuild-wasm": "0.25.12"
   },
   "devDependencies": {
+    "playwright": "^1.62.1",
     "vite": "^6.2.2"
   }
 }

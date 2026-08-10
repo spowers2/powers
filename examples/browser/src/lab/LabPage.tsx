@@ -112,7 +112,14 @@ export function LabPage(): HTMLElement {
   editor.spellcheck = false;
   editor.setAttribute("aria-label", "Power Lab code editor");
   editor.value = source;
-  editorPane.append(codeLabel, editor);
+  const meta = document.createElement("div");
+  meta.className = "lab-editor-meta";
+  const lineCount = () => source.split("\n").length;
+  const updateMeta = () => {
+    meta.textContent = `${lineCount()} lines · ${source.length} chars`;
+  };
+  updateMeta();
+  editorPane.append(codeLabel, editor, meta);
 
   const previewPane = document.createElement("div");
   previewPane.className = "lab-preview-pane";
@@ -194,6 +201,7 @@ export function LabPage(): HTMLElement {
       /* ignore */
     }
     editor.scrollTop = 0;
+    updateMeta();
   }
 
   function paintTeach(r: Recipe) {
@@ -368,6 +376,7 @@ export function LabPage(): HTMLElement {
 
   editor.oninput = () => {
     source = editor.value;
+    updateMeta();
     scheduleAutoRun();
   };
 
