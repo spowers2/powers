@@ -16,7 +16,21 @@ import {
   Stack,
   Text,
 } from "@power-ui/ui";
+import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import "./docs.css";
+
+const DOC_SECTIONS = [
+  "start",
+  "rules",
+  "first-app",
+  "packages",
+  "api-core",
+  "api-dom",
+  "api-ui",
+  "api-animate",
+  "api-router",
+  "next",
+] as const;
 
 type ApiRow = { name: string; sig: string; note: string };
 
@@ -68,6 +82,20 @@ export function DocsPage(props: { router: Router }) {
   const { router } = props;
   const go = (path: string) => () => router.navigate(path);
 
+  const sectionNav = createSectionNav(DOC_SECTIONS);
+  sectionNav.bindScrollSpy();
+  queueMicrotask(() => sectionNav.initFromHash());
+
+  const tocBtn = (id: string, label: string) => (
+    <button
+      type="button"
+      class={tocActiveClass(sectionNav.activeId, id)}
+      onClick={() => sectionNav.scrollTo(id)}
+    >
+      {label}
+    </button>
+  );
+
   return (
     <Container size="lg">
       <Stack gap={8}>
@@ -89,17 +117,17 @@ export function DocsPage(props: { router: Router }) {
           </Stack>
         </Stack>
 
-        <nav class="docs-toc" aria-label="On this page">
-          <a href="#start">Start</a>
-          <a href="#rules">Rules</a>
-          <a href="#first-app">First app</a>
-          <a href="#packages">Packages</a>
-          <a href="#api-core">core</a>
-          <a href="#api-dom">dom</a>
-          <a href="#api-ui">ui</a>
-          <a href="#api-animate">animate</a>
-          <a href="#api-router">router</a>
-          <a href="#next">What next</a>
+        <nav class="docs-toc page-toc" aria-label="On this page">
+          {tocBtn("start", "Start")}
+          {tocBtn("rules", "Rules")}
+          {tocBtn("first-app", "First app")}
+          {tocBtn("packages", "Packages")}
+          {tocBtn("api-core", "core")}
+          {tocBtn("api-dom", "dom")}
+          {tocBtn("api-ui", "ui")}
+          {tocBtn("api-animate", "animate")}
+          {tocBtn("api-router", "router")}
+          {tocBtn("next", "What next")}
         </nav>
 
         <Section id="start" title="1. Install & import">

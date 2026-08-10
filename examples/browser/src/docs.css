@@ -13,21 +13,34 @@
   backdrop-filter: blur(10px);
 }
 
-.docs-toc a {
+.docs-toc button {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  font: inherit;
   font-size: var(--pu-text-xs);
   font-weight: var(--pu-font-semibold);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--pu-color-text-muted);
-  text-decoration: none;
   padding: 0.35rem 0.65rem;
   border-radius: var(--pu-radius-full);
-  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    color var(--pu-duration) var(--pu-ease),
+    background var(--pu-duration) var(--pu-ease),
+    border-color var(--pu-duration) var(--pu-ease);
 }
 
-.docs-toc a:hover {
+.docs-toc button:hover {
   color: var(--pu-color-accent);
   background: color-mix(in srgb, var(--pu-color-accent) 8%, transparent);
+}
+
+.docs-toc button.is-active {
+  color: var(--pu-color-accent);
+  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--pu-color-accent) 22%, transparent);
 }
 
 .docs-section {

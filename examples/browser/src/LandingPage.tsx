@@ -13,32 +13,14 @@ import {
   Stack,
   Text,
 } from "@power-ui/ui";
+import {
+  createSectionNav,
+  scrollToSection,
+  tocActiveClass,
+} from "./scrollNav.js";
 import "./landing.css";
 
 const SECTION_IDS = ["features", "learn", "compare"] as const;
-
-function prefersReducedMotion(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-  );
-}
-
-/** Smooth-scroll to a section; accounts for sticky chrome. */
-function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.scrollIntoView({
-    behavior: prefersReducedMotion() ? "auto" : "smooth",
-    block: "start",
-  });
-  // Keep URL shareable without fighting the history router path
-  if (id === "top") {
-    history.replaceState(null, "", location.pathname + location.search);
-  } else {
-    history.replaceState(null, "", `${location.pathname}${location.search}#${id}`);
-  }
-}
 
 const NAMES = ["Ada Lovelace", "Grace Hopper", "Katherine Johnson"] as const;
 
@@ -62,8 +44,10 @@ export function LandingPage(props: { router: Router }) {
     return "neutral" as const;
   });
 
-  const activeSection = signal<string>("top");
   const showBackTop = signal(false);
+  const sectionNav = createSectionNav(SECTION_IDS);
+  sectionNav.bindScrollSpy();
+  queueMicrotask(() => sectionNav.initFromHash());
 
   const cycleOwner = () => {
     const i = NAMES.indexOf(owner() as (typeof NAMES)[number]);
@@ -78,38 +62,19 @@ export function LandingPage(props: { router: Router }) {
 
   const go = (path: string) => () => router.navigate(path);
 
-  // Active section + back-to-top visibility
+  // Floating back-to-top visibility
   effect(() => {
     const onScroll = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       showBackTop.set(y > 420);
-
-      let current: string = "top";
-      for (const id of SECTION_IDS) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top;
-        // Section is active once its top crosses under sticky chrome
-        if (top <= 120) current = id;
-      }
-      activeSection.set(current);
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   });
 
-  // Honor deep-link hash on first paint
-  queueMicrotask(() => {
-    const hash = location.hash.replace(/^#/, "");
-    if (hash && (SECTION_IDS as readonly string[]).includes(hash)) {
-      scrollToSection(hash);
-    }
-  });
-
-  const anchorClass = (id: string) => () =>
-    activeSection() === id ? "is-active" : "";
+  const anchorClass = (id: string) =>
+    tocActiveClass(sectionNav.activeId, id);
 
   return (
     <div class="lp lp-full">
@@ -123,21 +88,21 @@ export function LandingPage(props: { router: Router }) {
               <button
                 type="button"
                 class={anchorClass("features")}
-                onClick={() => scrollToSection("features")}
+                onClick={() => sectionNav.scrollTo("features")}
               >
                 Features
               </button>
               <button
                 type="button"
                 class={anchorClass("learn")}
-                onClick={() => scrollToSection("learn")}
+                onClick={() => sectionNav.scrollTo("learn")}
               >
                 Learn
               </button>
               <button
                 type="button"
                 class={anchorClass("compare")}
-                onClick={() => scrollToSection("compare")}
+                onClick={() => sectionNav.scrollTo("compare")}
               >
                 Why
               </button>
@@ -145,7 +110,7 @@ export function LandingPage(props: { router: Router }) {
               <button
                 type="button"
                 class="lp-anchors-top"
-                onClick={() => scrollToSection("top")}
+                onClick={() => sectionNav.scrollTo("top")}
               >
                 ↑ Top
               </button>

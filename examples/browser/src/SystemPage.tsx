@@ -34,6 +34,19 @@ import {
   type DensityController,
   type ThemeController,
 } from "@power-ui/ui";
+import { createSectionNav, tocActiveClass } from "./scrollNav.js";
+
+const SYS_SECTIONS = [
+  "sys-controls",
+  "sys-type",
+  "sys-forms",
+  "sys-feedback",
+  "sys-overlay",
+  "sys-keys",
+  "sys-color",
+  "sys-space",
+  "sys-code",
+] as const;
 
 function Swatch(props: { name: string; css: string }) {
   const el = document.createElement("div");
@@ -81,6 +94,20 @@ export function SystemPage(props: {
     return v.includes("@") ? "" : "Invalid email";
   };
 
+  const sectionNav = createSectionNav(SYS_SECTIONS);
+  sectionNav.bindScrollSpy();
+  queueMicrotask(() => sectionNav.initFromHash());
+
+  const tocBtn = (id: string, label: string) => (
+    <button
+      type="button"
+      class={tocActiveClass(sectionNav.activeId, id)}
+      onClick={() => sectionNav.scrollTo(id)}
+    >
+      {label}
+    </button>
+  );
+
   return (
     <Container size="lg">
       <Stack gap={6}>
@@ -100,16 +127,16 @@ export function SystemPage(props: {
           </Text>
         </Stack>
 
-        <nav class="sys-toc" aria-label="On this page">
-          <a href="#sys-controls">Controls</a>
-          <a href="#sys-type">Type</a>
-          <a href="#sys-forms">Forms</a>
-          <a href="#sys-feedback">Feedback</a>
-          <a href="#sys-overlay">Overlay</a>
-          <a href="#sys-keys">Keys</a>
-          <a href="#sys-color">Color</a>
-          <a href="#sys-space">Space</a>
-          <a href="#sys-code">Code</a>
+        <nav class="sys-toc page-toc" aria-label="On this page">
+          {tocBtn("sys-controls", "Controls")}
+          {tocBtn("sys-type", "Type")}
+          {tocBtn("sys-forms", "Forms")}
+          {tocBtn("sys-feedback", "Feedback")}
+          {tocBtn("sys-overlay", "Overlay")}
+          {tocBtn("sys-keys", "Keys")}
+          {tocBtn("sys-color", "Color")}
+          {tocBtn("sys-space", "Space")}
+          {tocBtn("sys-code", "Code")}
         </nav>
 
         <section id="sys-controls">
