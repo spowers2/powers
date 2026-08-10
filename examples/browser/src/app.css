@@ -1,49 +1,105 @@
-/* App chrome (non-landing routes) */
+/* —— Unified site chrome —— */
 
-.app-chrome-nav {
+.site-nav {
   position: sticky;
   top: 0;
-  z-index: 30;
-  backdrop-filter: blur(14px);
-  background: color-mix(in srgb, var(--pu-color-bg) 80%, transparent);
-  border-bottom: 1px solid var(--pu-color-border);
+  z-index: 50;
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  background: color-mix(in srgb, var(--pu-color-bg) 78%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--pu-color-border) 85%, transparent);
 }
 
-.app-chrome-inner {
+.site-nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--pu-space-4);
-  min-height: 3.5rem;
+  min-height: 4rem;
 }
 
-.app-chrome-brand {
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-weight: var(--pu-font-bold);
   letter-spacing: -0.03em;
   text-decoration: none;
   color: var(--pu-color-text);
+  font-size: 1rem;
 }
 
-.app-chrome-inner nav {
-  display: flex;
-  gap: var(--pu-space-4);
-  flex-wrap: wrap;
+.site-mark {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    var(--pu-brand-400),
+    var(--pu-brand-600) 55%,
+    #a78bfa
+  );
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #fff 20%, transparent),
+    0 8px 24px var(--pu-color-glow);
+  flex-shrink: 0;
 }
 
-.app-chrome-inner nav a {
+.site-nav-links {
+  display: none;
+  align-items: center;
+  gap: var(--pu-space-5);
+}
+
+@media (min-width: 768px) {
+  .site-nav-links {
+    display: flex;
+  }
+}
+
+.site-nav-links a {
   color: var(--pu-color-text-muted);
   text-decoration: none;
   font-size: var(--pu-text-sm);
   font-weight: var(--pu-font-medium);
+  transition: color var(--pu-duration) var(--pu-ease);
 }
 
-.app-chrome-inner nav a:hover,
-.app-chrome-inner nav a.active {
+.site-nav-links a:hover,
+.site-nav-links a.active {
   color: var(--pu-color-accent);
 }
 
-.app-chrome-main {
+.site-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--pu-space-2);
+  flex-shrink: 0;
+}
+
+/* Page body under sticky nav */
+.site-main {
+  min-height: calc(100vh - 4rem);
+}
+
+.site-main--padded {
   padding: var(--pu-space-8) 0 var(--pu-space-12);
+}
+
+/* Mobile: show compact link row under brand if needed */
+@media (max-width: 767px) {
+  .site-nav-inner {
+    flex-wrap: wrap;
+    padding-block: var(--pu-space-2);
+  }
+  .site-nav-links {
+    display: flex;
+    order: 3;
+    width: 100%;
+    gap: var(--pu-space-3);
+    padding-bottom: var(--pu-space-1);
+    overflow-x: auto;
+  }
 }
 
 .demo-ball {
@@ -80,5 +136,32 @@
 
 .todo-list li.done span {
   text-decoration: line-through;
+  color: var(--pu-color-text-muted);
+}
+
+/* System page swatches */
+.token-swatch {
+  height: 2.5rem;
+  border-radius: var(--pu-radius-md);
+  border: 1px solid var(--pu-color-border);
+}
+
+.token-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--pu-space-3);
+  align-items: center;
+  padding: var(--pu-space-2) 0;
+  border-bottom: 1px solid var(--pu-color-border);
+  font-size: var(--pu-text-sm);
+}
+
+.token-row:last-child {
+  border-bottom: 0;
+}
+
+.token-name {
+  font-family: var(--pu-font-mono);
+  font-size: 0.78rem;
   color: var(--pu-color-text-muted);
 }

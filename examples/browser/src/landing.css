@@ -30,76 +30,35 @@
   opacity: 0.55;
 }
 
-/* Top nav */
-.lp-nav {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  backdrop-filter: blur(16px) saturate(1.2);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  background: color-mix(in srgb, var(--pu-color-bg) 72%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--pu-color-border) 80%, transparent);
+/* Secondary on-page anchors under global site nav */
+.lp-anchors {
+  border-bottom: 1px solid color-mix(in srgb, var(--pu-color-border) 70%, transparent);
+  background: color-mix(in srgb, var(--pu-color-bg) 55%, transparent);
 }
 
-.lp-nav-inner {
+.lp-anchors-inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--pu-space-4);
-  min-height: 4rem;
+  padding: 0.55rem 0;
 }
 
-.lp-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-weight: var(--pu-font-bold);
-  letter-spacing: -0.03em;
-  text-decoration: none;
-  color: var(--pu-color-text);
-}
-
-.lp-mark {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, var(--pu-brand-400), var(--pu-brand-600) 55%, #a78bfa);
-  box-shadow: 0 0 0 1px color-mix(in srgb, #fff 20%, transparent), 0 8px 24px var(--pu-color-glow);
-}
-
-.lp-nav-links {
-  display: none;
-  align-items: center;
-  gap: var(--pu-space-5);
-}
-
-@media (min-width: 768px) {
-  .lp-nav-links { display: flex; }
-}
-
-.lp-nav-links a {
+.lp-anchors-inner a {
   color: var(--pu-color-text-muted);
   text-decoration: none;
-  font-size: var(--pu-text-sm);
-  font-weight: var(--pu-font-medium);
-  transition: color var(--pu-duration) var(--pu-ease);
+  font-size: var(--pu-text-xs);
+  font-weight: var(--pu-font-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.lp-nav-links a:hover,
-.lp-nav-links a.active {
-  color: var(--pu-color-text);
-}
-
-.lp-nav-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--pu-space-2);
+.lp-anchors-inner a:hover {
+  color: var(--pu-color-accent);
 }
 
 /* Hero */
 .lp-hero {
-  padding: clamp(3rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+  padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem);
 }
 
 .lp-hero-grid {

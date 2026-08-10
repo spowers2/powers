@@ -22,6 +22,9 @@
 | 0–4c | Core → animate → dom → router → ssr string → UI foundation → landing | see history |
 | **4d** | **Forms + density** | Field, Label, Textarea, Select, Switch, Checkbox · `createDensity` |
 | **5a** | **SSR islands foundation** | `island`, `hydrateIslands`, `islandPlaceholder` |
+| **5b** | **SSR islands example** | `examples/ssr-islands` |
+| **4e** | **Design system explorer route** | `/system` in browser demo |
+| **nav** | **Unified site navigation** | Same header on all routes |
 
 ---
 
@@ -29,8 +32,8 @@
 
 | # | Milestone | Notes |
 |---|---|---|
-| 5b | SSR islands hardening | Streaming, registry codegen, examples |
-| 4e | Design system docs site | Living token/primitive explorer |
+| 5c | SSR islands hardening | Streaming, registry codegen |
+| 4f | Deeper DS docs / Story-like pages | Expand `/system` |
 | 6 | **GSAP adapter** (parked until needed) | Optional peer; cinematic timelines |
 | 7 | Color / multi-value animate, enter-exit / FLIP | Motion polish |
 | 8 | Hardening | For/`ul` semantics, a11y recipes, prop typing |

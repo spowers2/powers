@@ -1,25 +1,17 @@
 /**
  * Marketing landing — modern, token-driven, live demos.
+ * Navigation is provided by the shared SiteNav in AppShell.
  */
 import { signal } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
 import { bindStyle } from "@power-ui/dom";
 import type { Router } from "@power-ui/router";
 import { Link } from "@power-ui/router";
-import {
-  Badge,
-  Button,
-  Container,
-  Stack,
-  type ThemeController,
-} from "@power-ui/ui";
+import { Badge, Button, Container, Stack } from "@power-ui/ui";
 import "./landing.css";
 
-export function LandingPage(props: {
-  router: Router;
-  theme: ThemeController;
-}) {
-  const { router, theme } = props;
+export function LandingPage(props: { router: Router }) {
+  const { router } = props;
 
   // Live hero demo
   const count = signal(0);
@@ -38,34 +30,18 @@ export function LandingPage(props: {
     <div class="lp lp-full">
       <div class="lp-mesh" aria-hidden="true" />
 
-      <header class="lp-nav">
-        <Container size="xl">
-          <div class="lp-nav-inner">
-            <a class="lp-brand" href="#top" onClick={(e: Event) => e.preventDefault()}>
-              <span class="lp-mark" aria-hidden="true" />
-              Power UI
-            </a>
-            <nav class="lp-nav-links" aria-label="Landing">
+      <main id="top">
+        {/* In-page anchors (secondary) */}
+        <div class="lp-anchors">
+          <Container size="xl">
+            <nav class="lp-anchors-inner" aria-label="On this page">
               <a href="#features">Features</a>
               <a href="#learn">Learn</a>
               <a href="#compare">Why</a>
-              <Link router={router} to="/playground">
-                Playground
-              </Link>
             </nav>
-            <div class="lp-nav-actions">
-              <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
-                {() => (theme.mode() === "dark" ? "Light" : "Dark")}
-              </Button>
-              <Button size="sm" onClick={go("/playground")}>
-                Get started
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </header>
+          </Container>
+        </div>
 
-      <main id="top">
         {/* HERO */}
         <section class="lp-hero">
           <Container size="xl">

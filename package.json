@@ -19,6 +19,7 @@
     "example:kitchen-sink": "pnpm --filter @power-ui/example-kitchen-sink start",
     "example:animate": "pnpm --filter @power-ui/example-animate-demo start",
     "example:browser": "pnpm --filter @power-ui/example-browser dev",
+    "example:ssr-islands": "pnpm --filter @power-ui/example-ssr-islands start",
     "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo"
   },
   "devDependencies": {

@@ -51,17 +51,19 @@ export function Link(props: LinkProps & { router: Router }): HTMLAnchorElement {
     } as Props,
   ) as HTMLAnchorElement;
 
-  // Reactive href + active class
+  // Reactive href + active class (preserves any static class from props)
   effect(() => {
     const dest = getTo();
     a.setAttribute("href", dest);
     const current = router.path();
     const active = exact
       ? current === dest
-      : current === dest || (dest !== "/" && current.startsWith(dest + "/"));
+      : current === dest ||
+        (dest !== "/" && current.startsWith(`${dest}/`));
     if (activeClass) {
       a.classList.toggle(activeClass, active);
     }
+    // Always reflect active for aria; CSS can target [aria-current="page"]
     if (active) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });

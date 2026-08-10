@@ -67,6 +67,25 @@ importers:
         specifier: ^4.19.3
         version: 4.23.11
 
+  examples/ssr-islands:
+    dependencies:
+      '@power-ui/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@power-ui/dom':
+        specifier: workspace:*
+        version: link:../../packages/dom
+      '@power-ui/ssr':
+        specifier: workspace:*
+        version: link:../../packages/ssr
+      happy-dom:
+        specifier: ^17.4.4
+        version: 17.6.3
+    devDependencies:
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
+
   packages/animate:
     dependencies:
       '@power-ui/core':

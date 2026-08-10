@@ -1,5 +1,5 @@
 /**
- * Power UI site — marketing landing + app demos
+ * Power UI site — shared nav + landing + demos + design system
  */
 import { signal, computed } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
@@ -24,6 +24,8 @@ import {
 import "@power-ui/ui/theme.css";
 import "./app.css";
 import { LandingPage } from "./LandingPage.js";
+import { SiteNav } from "./SiteNav.js";
+import { SystemPage } from "./SystemPage.js";
 
 type Todo = { id: number; title: string; done: boolean };
 
@@ -43,7 +45,6 @@ function PlaygroundPage() {
   const x = signal(0);
   const name = signal("Ada");
 
-  // Forms demo state
   const email = signal("");
   const role = signal("dev");
   const bio = signal("");
@@ -244,7 +245,7 @@ function TodosPage() {
   const todos = signal<Todo[]>([
     { id: nextId++, title: "Learn signals", done: true },
     { id: nextId++, title: "Ship a landing page", done: true },
-    { id: nextId++, title: "Expand the design system", done: false },
+    { id: nextId++, title: "Consistent site nav", done: true },
   ]);
   const draft = signal("");
   const remaining = computed(() => todos().filter((t) => !t.done).length);
@@ -327,10 +328,14 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: () => LandingPage({ router, theme }),
+      component: () => LandingPage({ router }),
     },
     { path: "/playground", component: () => PlaygroundPage() },
     { path: "/todos", component: () => TodosPage() },
+    {
+      path: "/system",
+      component: () => SystemPage({ theme, density }),
+    },
   ],
   notFound: () => (
     <Container size="md">
@@ -348,39 +353,16 @@ const router = createRouter({
 });
 
 function AppShell() {
-  // Landing is full-bleed; app routes get chrome
   const isLanding = () => router.path() === "/";
 
   return (
     <div>
-      <Show when={() => !isLanding()}>
-        {() => (
-          <header class="app-chrome-nav">
-            <Container size="xl">
-              <div class="app-chrome-inner">
-                <Link router={router} to="/" class="app-chrome-brand">
-                  Power UI
-                </Link>
-                <nav>
-                  <Link router={router} to="/" exact activeClass="active">
-                    Home
-                  </Link>
-                  <Link router={router} to="/playground" activeClass="active">
-                    Playground
-                  </Link>
-                  <Link router={router} to="/todos" activeClass="active">
-                    Todos
-                  </Link>
-                </nav>
-                <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
-                  {() => (theme.mode() === "dark" ? "Light" : "Dark")}
-                </Button>
-              </div>
-            </Container>
-          </header>
-        )}
-      </Show>
-      <div class={() => (isLanding() ? "" : "app-chrome-main")}>
+      {SiteNav({ router, theme })}
+      <div
+        class={() =>
+          isLanding() ? "site-main" : "site-main site-main--padded"
+        }
+      >
         {router.outlet()}
       </div>
     </div>
