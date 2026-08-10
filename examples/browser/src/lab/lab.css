@@ -528,28 +528,35 @@
   position: relative;
   z-index: 1;
   resize: none;
-  background: transparent;
-  color: transparent;
-  caret-color: color-mix(in srgb, var(--pu-brand-300) 85%, #fff);
+  /* Always transparent so the highlight layer shows through (light + dark). */
+  background: transparent !important;
+  color: transparent !important;
+  caret-color: #c5d4e8;
   outline: none;
-  /* Keep selection visible on dark editor */
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent !important;
 }
 
 .lab-editor::selection {
-  background: color-mix(in srgb, var(--pu-brand-400) 40%, transparent);
+  background: color-mix(in srgb, var(--pu-brand-300) 45%, transparent);
 }
 
-/* Highlight token colors (deep blue + lime theme) */
-.hl-k { color: #8aa4c0; } /* keywords */
-.hl-b { color: #7ac936; } /* builtins / API */
-.hl-t { color: #9ec0e0; } /* types / components / tags */
-.hl-s { color: #c4a46a; } /* strings */
-.hl-c { color: #6a7585; font-style: italic; } /* comments */
-.hl-n { color: #69be28; } /* numbers */
+/* Highlight token colors — tuned for dark editor surface in both themes */
+.lab-highlight {
+  color: #d7dee8;
+}
+.hl-k { color: #9eb6d0; } /* keywords */
+.hl-b { color: #7dcf3a; } /* builtins / API */
+.hl-t { color: #a8c8e8; } /* types / components / tags */
+.hl-s { color: #d4b06e; } /* strings */
+.hl-c { color: #7a8696; font-style: italic; } /* comments */
+.hl-n { color: #7dcf3a; } /* numbers */
 
 [data-pu-theme="dark"] .lab-editor-wrap {
   background: #06090e;
+}
+
+[data-pu-theme="dark"] .lab-highlight {
+  color: #dce4ee;
 }
 
 .lab-editor-meta {
@@ -563,9 +570,8 @@
   background: color-mix(in srgb, #0a1018 92%, var(--pu-color-surface));
 }
 
-[data-pu-theme="dark"] .lab-editor {
-  background: #06090e;
-  color: #d0d8e4;
+[data-pu-theme="dark"] .lab-editor-meta {
+  background: color-mix(in srgb, #06090e 94%, var(--pu-color-surface));
 }
 
 .lab-preview {
