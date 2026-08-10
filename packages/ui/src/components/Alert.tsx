@@ -33,12 +33,12 @@ const styles = `
   color: var(--pu-color-text);
 }
 .pu-alert--success {
-  background: color-mix(in srgb, #30a46c 12%, var(--pu-color-surface));
-  border-color: color-mix(in srgb, #30a46c 40%, var(--pu-color-border));
+  background: color-mix(in srgb, var(--pu-sage-500) 12%, var(--pu-color-surface));
+  border-color: color-mix(in srgb, var(--pu-sage-500) 40%, var(--pu-color-border));
 }
 .pu-alert--warning {
-  background: color-mix(in srgb, #f5a524 14%, var(--pu-color-surface));
-  border-color: color-mix(in srgb, #f5a524 45%, var(--pu-color-border));
+  background: color-mix(in srgb, var(--pu-brand-400) 14%, var(--pu-color-surface));
+  border-color: color-mix(in srgb, var(--pu-brand-400) 45%, var(--pu-color-border));
 }
 .pu-alert--danger {
   background: color-mix(in srgb, var(--pu-color-danger) 12%, var(--pu-color-surface));

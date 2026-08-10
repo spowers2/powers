@@ -32,16 +32,17 @@ const styles = `
   border-color: color-mix(in srgb, var(--pu-color-accent) 28%, transparent);
 }
 .pu-badge--success {
-  background: color-mix(in srgb, #30a46c 16%, transparent);
-  color: #30a46c;
-  border-color: color-mix(in srgb, #30a46c 28%, transparent);
+  background: color-mix(in srgb, var(--pu-sage-500) 16%, transparent);
+  color: var(--pu-sage-600);
+  border-color: color-mix(in srgb, var(--pu-sage-500) 28%, transparent);
 }
 .pu-badge--warning {
-  background: color-mix(in srgb, #f5a524 16%, transparent);
-  color: #c07800;
-  border-color: color-mix(in srgb, #f5a524 28%, transparent);
+  background: color-mix(in srgb, var(--pu-brand-400) 18%, transparent);
+  color: var(--pu-brand-700);
+  border-color: color-mix(in srgb, var(--pu-brand-400) 30%, transparent);
 }
-[data-pu-theme="dark"] .pu-badge--warning { color: #f5a524; }
+[data-pu-theme="dark"] .pu-badge--success { color: var(--pu-sage-400); }
+[data-pu-theme="dark"] .pu-badge--warning { color: var(--pu-brand-300); }
 `;
 
 let injected = false;

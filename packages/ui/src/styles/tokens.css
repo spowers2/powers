@@ -1,38 +1,43 @@
 /**
- * Power UI design tokens
- * ----------------------
- * Edit these variables to re-theme the entire system.
- * Semantic tokens (surface, text, accent…) map to brand scales.
+ * Power UI design tokens — Earth / clean modern
+ * ---------------------------------------------
+ * Warm stone neutrals + clay accent. Very clean, not rustic.
+ * Edit this file to rebrand the entire product.
  *
  * Naming: --pu-<category>-<name>
  */
 
 :root {
-  /* ---- Brand scale (edit freely) ---- */
-  --pu-brand-50: #eef5ff;
-  --pu-brand-100: #d6e7ff;
-  --pu-brand-200: #a8cbff;
-  --pu-brand-300: #75abff;
-  --pu-brand-400: #4d90ff;
-  --pu-brand-500: #2b74f5;
-  --pu-brand-600: #1a5ad1;
-  --pu-brand-700: #1446a3;
-  --pu-brand-800: #12357a;
-  --pu-brand-900: #0f2a5c;
+  /* ---- Brand scale (clay / terracotta, refined) ---- */
+  --pu-brand-50: #faf6f1;
+  --pu-brand-100: #f0e6d9;
+  --pu-brand-200: #e0cbb3;
+  --pu-brand-300: #c9a882;
+  --pu-brand-400: #b08968;
+  --pu-brand-500: #9a7049;
+  --pu-brand-600: #7d5a3a;
+  --pu-brand-700: #64472f;
+  --pu-brand-800: #4f3928;
+  --pu-brand-900: #3d2d21;
 
-  /* ---- Neutrals ---- */
-  --pu-gray-0: #ffffff;
-  --pu-gray-50: #f6f8fb;
-  --pu-gray-100: #eef1f6;
-  --pu-gray-200: #dde3ec;
-  --pu-gray-300: #c5cedc;
-  --pu-gray-400: #96a3b8;
-  --pu-gray-500: #6b7a92;
-  --pu-gray-600: #4d5b73;
-  --pu-gray-700: #364256;
-  --pu-gray-800: #232d3f;
-  --pu-gray-900: #141b28;
-  --pu-gray-950: #0b1018;
+  /* ---- Neutrals (warm stone — not blue-gray) ---- */
+  --pu-gray-0: #fffcf8;
+  --pu-gray-50: #f7f4ef;
+  --pu-gray-100: #efeae3;
+  --pu-gray-200: #e0d9cf;
+  --pu-gray-300: #c9c0b4;
+  --pu-gray-400: #a69c90;
+  --pu-gray-500: #7d746a;
+  --pu-gray-600: #5c554e;
+  --pu-gray-700: #433e39;
+  --pu-gray-800: #2f2b28;
+  --pu-gray-900: #1f1c1a;
+  --pu-gray-950: #141210;
+
+  /* ---- Sage (secondary accent / glows) ---- */
+  --pu-sage-400: #8a9a7b;
+  --pu-sage-500: #6f7f61;
+  --pu-sage-600: #58664c;
 
   /* ---- Semantic (light default) ---- */
   --pu-color-bg: var(--pu-gray-50);
@@ -43,13 +48,13 @@
   --pu-color-text-muted: var(--pu-gray-500);
   --pu-color-accent: var(--pu-brand-500);
   --pu-color-accent-hover: var(--pu-brand-600);
-  --pu-color-accent-fg: #ffffff;
-  --pu-color-danger: #e5484d;
-  --pu-color-danger-fg: #ffffff;
+  --pu-color-accent-fg: #fffcf8;
+  --pu-color-danger: #b54a3f;
+  --pu-color-danger-fg: #fffcf8;
   --pu-color-focus: var(--pu-brand-400);
-  /* Marketing / landing accents */
-  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 45%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, #a78bfa 35%, transparent);
+  /* Soft marketing glows — clay + sage, no neon */
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 40%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-400) 32%, transparent);
 
   /* ---- Space (4px grid) ---- */
   --pu-space-0: 0;
@@ -63,14 +68,14 @@
   --pu-space-10: 2.5rem;
   --pu-space-12: 3rem;
 
-  /* ---- Radius ---- */
+  /* ---- Radius (clean, slightly soft) ---- */
   --pu-radius-sm: 6px;
   --pu-radius-md: 10px;
-  --pu-radius-lg: 14px;
+  --pu-radius-lg: 16px;
   --pu-radius-full: 9999px;
 
   /* ---- Typography ---- */
-  --pu-font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --pu-font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
   --pu-font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
   --pu-text-xs: 0.75rem;
   --pu-text-sm: 0.875rem;
@@ -78,15 +83,15 @@
   --pu-text-lg: 1.125rem;
   --pu-text-xl: 1.35rem;
   --pu-text-2xl: 1.75rem;
-  --pu-leading: 1.5;
+  --pu-leading: 1.55;
   --pu-font-medium: 500;
   --pu-font-semibold: 600;
   --pu-font-bold: 700;
 
-  /* ---- Shadow / elevation ---- */
-  --pu-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --pu-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
-  --pu-shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.12);
+  /* ---- Shadow (warm, soft — not cold slate) ---- */
+  --pu-shadow-sm: 0 1px 2px rgba(61, 45, 33, 0.05);
+  --pu-shadow-md: 0 10px 28px rgba(61, 45, 33, 0.07);
+  --pu-shadow-lg: 0 20px 50px rgba(61, 45, 33, 0.1);
 
   /* ---- Motion ---- */
   --pu-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -102,7 +107,7 @@
   --pu-label-size: var(--pu-text-sm);
 }
 
-/* Compact density: set data-pu-density="compact" on <html> or a root */
+/* Compact density */
 [data-pu-density="compact"] {
   --pu-control-h-sm: 1.75rem;
   --pu-control-h-md: 2rem;
@@ -117,10 +122,10 @@
 }
 
 [data-pu-density="comfortable"] {
-  /* explicit alias of defaults — useful when toggling back */
+  /* alias of defaults */
 }
 
-/* Dark theme: set data-pu-theme="dark" on <html> or a root */
+/* Dark theme — espresso stone, not blue-black */
 [data-pu-theme="dark"] {
   --pu-color-bg: var(--pu-gray-950);
   --pu-color-surface: var(--pu-gray-900);
@@ -128,11 +133,14 @@
   --pu-color-border: var(--pu-gray-700);
   --pu-color-text: var(--pu-gray-50);
   --pu-color-text-muted: var(--pu-gray-400);
-  --pu-color-accent: var(--pu-brand-400);
-  --pu-color-accent-hover: var(--pu-brand-300);
+  --pu-color-accent: var(--pu-brand-300);
+  --pu-color-accent-hover: var(--pu-brand-200);
   --pu-color-accent-fg: var(--pu-gray-950);
   --pu-color-focus: var(--pu-brand-300);
-  --pu-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --pu-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --pu-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+  --pu-color-danger: #d4786c;
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 28%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-400) 22%, transparent);
+  --pu-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --pu-shadow-md: 0 10px 28px rgba(0, 0, 0, 0.4);
+  --pu-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
 }

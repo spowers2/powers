@@ -170,14 +170,14 @@
   font-family: var(--pu-font-mono);
   font-size: 0.82rem;
   line-height: 1.55;
-  background: #0b1018;
-  color: #e8eef8;
+  background: var(--pu-gray-900);
+  color: var(--pu-gray-100);
   tab-size: 2;
   outline: none;
 }
 
 [data-pu-theme="light"] .lab-editor {
-  background: #0f1724;
+  background: #1a1613;
 }
 
 .lab-preview {
@@ -224,7 +224,7 @@
 }
 
 .lab-status.is-ok {
-  color: #30a46c;
+  color: var(--pu-sage-500);
 }
 
 .lab-status.is-err {

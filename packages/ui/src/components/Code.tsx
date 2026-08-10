@@ -26,21 +26,21 @@ const styles = `
   margin: 0;
   padding: var(--pu-space-4) var(--pu-space-5);
   border-radius: var(--pu-radius-lg);
-  background: var(--pu-gray-950);
-  color: #e8eef8;
-  border: 1px solid color-mix(in srgb, #fff 8%, transparent);
+  background: var(--pu-gray-900);
+  color: var(--pu-gray-100);
+  border: 1px solid color-mix(in srgb, var(--pu-brand-200) 12%, transparent);
   overflow-x: auto;
   line-height: 1.65;
   white-space: pre;
   box-shadow: var(--pu-shadow-md);
 }
 [data-pu-theme="dark"] .pu-code--block {
-  background: #070b12;
+  background: #0c0a09;
 }
-.pu-code--block .pu-k { color: #7aa2ff; }
-.pu-code--block .pu-s { color: #7ddea8; }
-.pu-code--block .pu-c { color: #6b7a92; }
-.pu-code--block .pu-p { color: #c4b5fd; }
+.pu-code--block .pu-k { color: var(--pu-brand-300); }
+.pu-code--block .pu-s { color: var(--pu-sage-400); }
+.pu-code--block .pu-c { color: var(--pu-gray-400); }
+.pu-code--block .pu-p { color: #c4a882; }
 `;
 
 let injected = false;

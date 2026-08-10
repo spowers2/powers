@@ -34,14 +34,14 @@
   height: 1.75rem;
   border-radius: 8px;
   background: linear-gradient(
-    135deg,
-    var(--pu-brand-400),
+    145deg,
+    var(--pu-brand-300),
     var(--pu-brand-600) 55%,
-    #a78bfa
+    var(--pu-sage-600)
   );
   box-shadow:
-    0 0 0 1px color-mix(in srgb, #fff 20%, transparent),
-    0 8px 24px var(--pu-color-glow);
+    0 0 0 1px color-mix(in srgb, var(--pu-gray-0) 35%, transparent),
+    0 8px 22px var(--pu-color-glow);
   flex-shrink: 0;
 }
 
@@ -107,9 +107,10 @@
   height: 48px;
   border-radius: var(--pu-radius-full);
   background: linear-gradient(
-    135deg,
-    var(--pu-color-accent),
-    color-mix(in srgb, var(--pu-color-accent) 40%, #b388ff)
+    145deg,
+    var(--pu-brand-400),
+    var(--pu-sage-500) 70%,
+    var(--pu-brand-600)
   );
   will-change: transform;
 }
