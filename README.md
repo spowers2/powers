@@ -142,7 +142,8 @@ power-ui/
 | **0** | Manifesto, monorepo | ✅ |
 | **1** | Core signals / effects | ✅ v0.1 |
 | **1.1** | `store`, `resource`, `onError`, stress tests, size budget | ✅ v0.1.1 |
-| **2** | DOM runtime + bindings → then compiler sugar | Next |
+| **1.2** | Signal-native animation (`@power-ui/animate`) + optional GSAP later | Next — see [`docs/ANIMATION.md`](./docs/ANIMATION.md) |
+| **2** | DOM runtime + bindings → then compiler sugar | **Parked — resume right after animation** ([`docs/NEXT.md`](./docs/NEXT.md)) |
 | **3** | SSR + selective hydration | Planned |
 | **4** | App kit (router, actions) | Planned |
 | **5** | Design system + docs site | Planned |
