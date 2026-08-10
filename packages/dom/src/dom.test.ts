@@ -38,6 +38,26 @@ describe("@power-ui/dom", () => {
     assert.equal(root.textContent, "");
   });
 
+  it("h() invokes function components (classic JSX)", async () => {
+    const count = signal(0);
+    function App() {
+      return h("button", {
+        type: "button",
+        onClick: () => count.update((n) => n + 1),
+        text: () => `n=${count()}`,
+      });
+    }
+    // Simulates esbuild classic transform: mount(() => h(App, null))
+    const stop = mount(root, () => h(App, null));
+    const btn = root.querySelector("button") as HTMLButtonElement;
+    assert.ok(btn);
+    assert.equal(btn.textContent, "n=0");
+    btn.click();
+    await tick();
+    assert.equal(btn.textContent, "n=1");
+    stop();
+  });
+
   it("bindText updates on signal change", async () => {
     const name = signal("Ada");
     const el = h("span");

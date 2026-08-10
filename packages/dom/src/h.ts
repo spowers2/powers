@@ -1,14 +1,20 @@
 import { bindAttr, bindClass, bindProp, bindStyle, bindText } from "./bind.js";
 import { on } from "./on.js";
+import { createProps } from "./props.js";
 
 export type Child =
   | Node
+  | DocumentFragment
   | string
   | number
   | boolean
   | null
   | undefined
   | (() => string | number | boolean | null | undefined);
+
+export type FunctionComponent<P = Record<string, unknown>> = (
+  props: P,
+) => Node | DocumentFragment | null | undefined;
 
 export type Props = {
   /** Static or reactive text content (sets textContent). */
@@ -20,6 +26,7 @@ export type Props = {
     | (() => Record<string, string | number | null | undefined> | null | undefined);
   /** ref callback with the created element */
   ref?: (el: HTMLElement) => void;
+  children?: unknown;
   [key: string]: unknown;
 };
 
@@ -33,20 +40,10 @@ const RESERVED = new Set([
 ]);
 
 /**
- * Create an element with optional reactive props and children.
+ * Create an element — or invoke a function component.
  *
- * Event props: `onClick`, `onInput`, … → `click`, `input`, …
- * Reactive props: pass a function `() => value` for attr/text/class/style.
- *
- * @example
- * ```ts
- * const btn = h("button", {
- *   type: "button",
- *   class: () => (active() ? "on" : "off"),
- *   onClick: () => count.update(n => n + 1),
- *   text: () => `Count: ${count()}`,
- * });
- * ```
+ * Classic JSX (`jsxFactory: "h"`) compiles `<App />` to `h(App, props)`.
+ * Automatic runtime uses `jsx()` which also supports function types.
  */
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -60,11 +57,38 @@ export function h(
   ...children: Child[]
 ): HTMLElement;
 
+export function h<P extends Record<string, unknown>>(
+  tag: FunctionComponent<P>,
+  props?: (P & Props) | null,
+  ...children: Child[]
+): Node | DocumentFragment;
+
 export function h(
-  tag: string,
+  tag: string | FunctionComponent,
   props?: Props | null,
   ...children: Child[]
-): HTMLElement {
+): Node | DocumentFragment {
+  // Function component (classic JSX: h(App, props, ...children))
+  if (typeof tag === "function") {
+    const raw: Record<string, unknown> = { ...(props ?? {}) };
+    if (children.length === 1) {
+      raw.children = children[0];
+    } else if (children.length > 1) {
+      raw.children = children;
+    }
+    const result = tag(createProps(raw) as never);
+    if (result == null) {
+      return document.createComment("power-ui");
+    }
+    return result;
+  }
+
+  if (typeof tag !== "string" || tag === "") {
+    throw new Error(
+      `[power-ui/dom] h() expected a tag name string or component function, got: ${typeof tag}`,
+    );
+  }
+
   const el = document.createElement(tag);
 
   if (props) {
@@ -73,6 +97,16 @@ export function h(
 
   for (const child of children) {
     appendChild(el, child);
+  }
+
+  // Also support props.children (automatic runtime path sometimes)
+  if (props?.children != null && children.length === 0) {
+    const c = props.children;
+    if (Array.isArray(c)) {
+      for (const item of c) appendChild(el, item as Child);
+    } else {
+      appendChild(el, c as Child);
+    }
   }
 
   return el;
@@ -104,7 +138,6 @@ function applyProps(el: HTMLElement, props: Props): void {
     }
 
     if (typeof value === "function") {
-      // Reactive attribute by default; known props use bindProp.
       if (isDomProp(key)) {
         bindProp(el, key, value as () => unknown);
       } else {
@@ -191,7 +224,6 @@ function isDomProp(name: string): boolean {
 }
 
 function toAttrName(key: string): string {
-  // className already handled; aria* / data* stay as-is via React-like? keep lowercase dataset:
   if (key.startsWith("aria")) {
     return key.replace(/([A-Z])/g, "-$1").toLowerCase();
   }

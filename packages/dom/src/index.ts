@@ -11,7 +11,7 @@ export { mount } from "./mount.js";
 export type { MountResult } from "./mount.js";
 
 export { h, text } from "./h.js";
-export type { Child, Props } from "./h.js";
+export type { Child, Props, FunctionComponent } from "./h.js";
 
 export { Fragment, normalizeChildren, appendChild } from "./fragment.js";
 
