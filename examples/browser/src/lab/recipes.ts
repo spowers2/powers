@@ -208,6 +208,56 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "tokens",
+    title: "Tokens & utilities",
+    blurb: "One look system — no separate CSS framework required",
+    tip: "Power UI styles live with the runtime: tokens (contracts), primitives (Button/Card), and optional BEM-ish utilities (pu-gap-3). Edit tokens.css to rebrand. Tailwind is optional, not required.",
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import { Button, createTheme } from "@power-ui/ui";
+import "@power-ui/ui/theme.css"; // tokens + base + utilities
+
+const theme = createTheme("dark");
+theme.bind();
+
+const likes = signal(0);
+
+export function App() {
+  return (
+    <div class="pu-p-6">
+      <div class="pu-panel pu-max-w-md pu-mx-auto">
+        <div class="pu-flex pu-flex--col pu-gap-4">
+          <div>
+            <div class="pu-font-bold" style={{ fontSize: "1.25rem" }}>
+              Integrated styling
+            </div>
+            <p class="pu-text-muted pu-text-sm pu-m-0 pu-mt-2">
+              Utilities like <code>pu-gap-4</code> map to design tokens.
+              Primitives use the same tokens. One system.
+            </p>
+          </div>
+          <div class="pu-flex pu-flex--row pu-items-center pu-gap-3 pu-flex--wrap">
+            <Button onClick={() => likes.update((n) => n + 1)}>
+              {() => \`Likes: \${likes()}\`}
+            </Button>
+            <Button variant="ghost" onClick={() => theme.toggle()}>
+              Toggle theme
+            </Button>
+          </div>
+          <div class="pu-surface-2 pu-rounded-md pu-p-3 pu-text-sm pu-text-muted">
+            Prefer <code>Button</code> / <code>Stack</code> when you can.
+            Utilities are for one-off layout — not a second framework.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "challenge",
     title: "Challenge: double counter",
     blurb: "Practice — make total = a + b",

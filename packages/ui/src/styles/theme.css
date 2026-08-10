@@ -1,3 +1,14 @@
-/* Convenience bundle: tokens + base */
+/**
+ * Default Power UI style entry (batteries included).
+ *
+ * Layers:
+ *   1. tokens   — design contracts
+ *   2. base     — document defaults
+ *   3. utilities — optional BEM-ish layout helpers (token-mapped)
+ *
+ * Component styles (pu-btn, etc.) are injected by primitives when used.
+ * For a minimal CSS footprint: import only tokens.css + base.css.
+ */
 @import "./tokens.css";
 @import "./base.css";
+@import "./utilities.css";

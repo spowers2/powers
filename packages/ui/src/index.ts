@@ -1,11 +1,13 @@
 /**
- * @power-ui/ui — design system
+ * @power-ui/ui — integrated design system (styling + components)
  *
- * 1. Import styles once:  import "@power-ui/ui/theme.css"
- * 2. Theme / density:     createTheme().bind(); createDensity().bind();
- * 3. Primitives:          Button, Field, Input, …
+ * Layers: tokens → primitives → optional utilities (see docs/STYLING.md)
  *
- * Edit look & feel in: packages/ui/src/styles/tokens.css
+ * 1. import "@power-ui/ui/theme.css"   // tokens + base + utilities
+ * 2. createTheme().bind(); createDensity().bind();
+ * 3. Use Button, Field, Stack… (prefer primitives over raw utilities)
+ *
+ * Edit brand in: packages/ui/src/styles/tokens.css
  */
 
 export { createTheme } from "./theme.js";

@@ -1,0 +1,134 @@
+/**
+ * Power UI layout utilities (optional Layer 3)
+ * --------------------------------------------
+ * BEM-flavored, token-mapped only. Not a Tailwind clone.
+ *
+ * Naming:
+ *   pu-<block>
+ *   pu-<block>--<modifier>
+ *   pu-gap-<n>   → var(--pu-space-n)
+ *
+ * Prefer primitives (Button, Stack, …) when you can.
+ * Use utilities for one-off layout without inventing CSS files.
+ */
+
+/* ---- Display / flex ---- */
+.pu-flex { display: flex; }
+.pu-inline-flex { display: inline-flex; }
+.pu-grid { display: grid; }
+.pu-block { display: block; }
+.pu-hidden { display: none !important; }
+
+.pu-flex--row { flex-direction: row; }
+.pu-flex--col { flex-direction: column; }
+.pu-flex--wrap { flex-wrap: wrap; }
+.pu-flex--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pu-items-start { align-items: flex-start; }
+.pu-items-center { align-items: center; }
+.pu-items-end { align-items: flex-end; }
+.pu-items-stretch { align-items: stretch; }
+
+.pu-justify-start { justify-content: flex-start; }
+.pu-justify-center { justify-content: center; }
+.pu-justify-end { justify-content: flex-end; }
+.pu-justify-between { justify-content: space-between; }
+
+.pu-flex-1 { flex: 1 1 0%; min-width: 0; }
+.pu-flex-none { flex: none; }
+
+/* ---- Gap (token scale) ---- */
+.pu-gap-0 { gap: var(--pu-space-0); }
+.pu-gap-1 { gap: var(--pu-space-1); }
+.pu-gap-2 { gap: var(--pu-space-2); }
+.pu-gap-3 { gap: var(--pu-space-3); }
+.pu-gap-4 { gap: var(--pu-space-4); }
+.pu-gap-5 { gap: var(--pu-space-5); }
+.pu-gap-6 { gap: var(--pu-space-6); }
+.pu-gap-8 { gap: var(--pu-space-8); }
+
+/* ---- Padding / margin (token scale, common axes) ---- */
+.pu-p-0 { padding: var(--pu-space-0); }
+.pu-p-2 { padding: var(--pu-space-2); }
+.pu-p-3 { padding: var(--pu-space-3); }
+.pu-p-4 { padding: var(--pu-space-4); }
+.pu-p-5 { padding: var(--pu-space-5); }
+.pu-p-6 { padding: var(--pu-space-6); }
+.pu-p-8 { padding: var(--pu-space-8); }
+
+.pu-px-3 { padding-inline: var(--pu-space-3); }
+.pu-px-4 { padding-inline: var(--pu-space-4); }
+.pu-px-6 { padding-inline: var(--pu-space-6); }
+.pu-py-2 { padding-block: var(--pu-space-2); }
+.pu-py-3 { padding-block: var(--pu-space-3); }
+.pu-py-4 { padding-block: var(--pu-space-4); }
+.pu-py-6 { padding-block: var(--pu-space-6); }
+.pu-py-8 { padding-block: var(--pu-space-8); }
+
+.pu-m-0 { margin: 0; }
+.pu-mt-2 { margin-top: var(--pu-space-2); }
+.pu-mt-3 { margin-top: var(--pu-space-3); }
+.pu-mt-4 { margin-top: var(--pu-space-4); }
+.pu-mt-6 { margin-top: var(--pu-space-6); }
+.pu-mb-2 { margin-bottom: var(--pu-space-2); }
+.pu-mb-3 { margin-bottom: var(--pu-space-3); }
+.pu-mb-4 { margin-bottom: var(--pu-space-4); }
+.pu-mb-6 { margin-bottom: var(--pu-space-6); }
+
+/* ---- Width ---- */
+.pu-w-full { width: 100%; }
+.pu-min-w-0 { min-width: 0; }
+.pu-max-w-prose { max-width: 40rem; }
+.pu-max-w-md { max-width: 28rem; }
+.pu-max-w-lg { max-width: 48rem; }
+.pu-mx-auto { margin-inline: auto; }
+
+/* ---- Text helpers ---- */
+.pu-text-muted { color: var(--pu-color-text-muted); }
+.pu-text-accent { color: var(--pu-color-accent); }
+.pu-text-center { text-align: center; }
+.pu-text-sm { font-size: var(--pu-text-sm); }
+.pu-text-xs { font-size: var(--pu-text-xs); }
+.pu-font-medium { font-weight: var(--pu-font-medium); }
+.pu-font-semibold { font-weight: var(--pu-font-semibold); }
+.pu-font-bold { font-weight: var(--pu-font-bold); }
+.pu-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Surfaces ---- */
+.pu-surface {
+  background: var(--pu-color-surface);
+  color: var(--pu-color-text);
+}
+.pu-surface-2 {
+  background: var(--pu-color-surface-2);
+  color: var(--pu-color-text);
+}
+.pu-border {
+  border: 1px solid var(--pu-color-border);
+}
+.pu-border-t {
+  border-top: 1px solid var(--pu-color-border);
+}
+.pu-rounded-sm { border-radius: var(--pu-radius-sm); }
+.pu-rounded-md { border-radius: var(--pu-radius-md); }
+.pu-rounded-lg { border-radius: var(--pu-radius-lg); }
+.pu-rounded-full { border-radius: var(--pu-radius-full); }
+.pu-shadow-sm { box-shadow: var(--pu-shadow-sm); }
+.pu-shadow-md { box-shadow: var(--pu-shadow-md); }
+
+/* ---- Simple panel (utility composition target) ---- */
+.pu-panel {
+  background: var(--pu-color-surface);
+  border: 1px solid var(--pu-color-border);
+  border-radius: var(--pu-radius-lg);
+  padding: var(--pu-space-5);
+  box-shadow: var(--pu-shadow-sm);
+}

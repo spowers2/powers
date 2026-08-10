@@ -20,7 +20,7 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 | `@power-ui/dom` | mount, h, JSX, reactive props, Show, For |
 | `@power-ui/router` | createRouter, Link, navigate |
 | `@power-ui/ssr` | `renderToString` + **islands** hydrate API |
-| `@power-ui/ui` | **design system** — tokens, theme, density, forms + layout primitives |
+| `@power-ui/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
 
 ---
 
@@ -84,7 +84,9 @@ signal → computed → effect → store → resource
 |---|---|
 | [`LEARN.md`](./docs/LEARN.md) | 10-minute mental model |
 | [`ROADMAP.md`](./docs/ROADMAP.md) | **Ordered plan** (source of truth) |
+| [`STYLING.md`](./docs/STYLING.md) | **Integrated styling** (tokens · primitives · utilities) |
 | [`DESIGN_SYSTEM.md`](./docs/DESIGN_SYSTEM.md) | Tokens + primitives |
+| [`POWER_LAB.md`](./docs/POWER_LAB.md) | Learn-by-coding playground |
 | [`DOM.md`](./docs/DOM.md) | DOM + JSX + props |
 | [`ROUTER.md`](./docs/ROUTER.md) | Routing |
 | [`ANIMATION.md`](./docs/ANIMATION.md) | Motion (+ parked GSAP) |

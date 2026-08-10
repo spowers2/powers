@@ -32,7 +32,7 @@ Interactive learning playground for Power UI — **our own**, not a CodePen clon
 
 ## Recipes
 
-Hello · Computed · Spring motion · Keyed lists · Design system · Challenge
+Hello · Computed · Spring motion · Keyed lists · Design system · **Tokens & utilities** · Challenge
 
 ## Try it
 

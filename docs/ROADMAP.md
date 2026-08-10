@@ -10,8 +10,9 @@
 1. Tiny learning curve, deep power  
 2. Fine-grained reactivity first (no VDOM default)  
 3. Explicit ownership & dispose  
-4. Easy to theme / adapt (design tokens)  
-5. GSAP is optional power-user path — not the default motion engine  
+4. **Integrated styling** — tokens + primitives + thin utilities (not “React + Tailwind” as default)  
+5. Easy to retheme via one token file  
+6. GSAP is optional power-user path — not the default motion engine  
 
 ---
 
@@ -19,12 +20,10 @@
 
 | # | Milestone |
 |---|---|
-| … | Core → animate → dom → props → router → SSR string → UI → landing → forms → density |
-| **5a–b** | Islands foundation + CLI example |
-| **nav** | Unified site navigation |
-| **4e–f** | `/system` design explorer (expanded sections) |
-| **5c** | Islands hardening: `defineIslands`, `listIslandsInHtml`, hydrate options |
-| **lab** | **Power Lab** — in-app learning playground (`/lab`) |
+| … | Core → animate → dom → props → router → SSR → UI → landing → forms → density → Lab |
+| **style** | **Styling architecture** — `docs/STYLING.md` + `utilities.css` (BEM-ish, token-mapped) |
+| **lab** | Power Lab (`/lab`) |
+| **5c** | Islands: `defineIslands`, hydrate options |
 
 ---
 
@@ -32,11 +31,12 @@
 
 | # | Milestone | Notes |
 |---|---|---|
-| lab+ | Lab polish | syntax highlight, more recipes, tests |
+| style+ | Grow primitives + utilities carefully | No full Tailwind clone |
+| lab+ | Lab polish | highlighting, more recipes |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked until needed) | Optional peer; cinematic timelines |
 | 7 | Color / multi-value animate, enter-exit / FLIP | Motion polish |
-| 8 | Hardening | For/`ul` semantics, a11y recipes, prop typing |
+| 8 | Hardening | For/`ul` semantics, a11y recipes |
 
 ---
 
@@ -60,7 +60,7 @@ When apps need ScrollTrigger-class / SVG morph / timeline studio work:
 @power-ui/dom      mount, h, JSX, props, Show, For
 @power-ui/router   createRouter, Link, navigate
 @power-ui/ssr      renderToString + defineIslands / hydrate
-@power-ui/ui       tokens, theme, density, forms, layout primitives
+@power-ui/ui       tokens + base + utilities + primitives (default look)
 ```
 
-See `docs/DESIGN_SYSTEM.md` · `docs/SSR.md`
+See `docs/STYLING.md` · `docs/DESIGN_SYSTEM.md` · `docs/SSR.md` · `docs/POWER_LAB.md`
