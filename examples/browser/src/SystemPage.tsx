@@ -17,6 +17,7 @@ import {
   Field,
   Grid,
   Input,
+  Kbd,
   Menu,
   Popover,
   Progress,
@@ -105,6 +106,7 @@ export function SystemPage(props: {
           <a href="#sys-forms">Forms</a>
           <a href="#sys-feedback">Feedback</a>
           <a href="#sys-overlay">Overlay</a>
+          <a href="#sys-keys">Keys</a>
           <a href="#sys-color">Color</a>
           <a href="#sys-space">Space</a>
           <a href="#sys-code">Code</a>
@@ -511,6 +513,33 @@ export function SystemPage(props: {
               </Stack>
             </Card>
           </Grid>
+        </section>
+
+        <section id="sys-keys">
+          <Card>
+            <Stack gap={3}>
+              <Text weight="semibold">Keyboard</Text>
+              <Text muted size="sm">
+                Kbd for shortcuts in docs and toolbars.
+              </Text>
+              <Stack direction="row" gap={2} align="center" wrap>
+                <Kbd>⌘</Kbd>
+                <Text size="sm">+</Text>
+                <Kbd>Enter</Kbd>
+                <Text muted size="sm">
+                  run Lab
+                </Text>
+                <Kbd>Esc</Kbd>
+                <Text muted size="sm">
+                  dismiss dialog / menu
+                </Text>
+                <Kbd>Tab</Kbd>
+                <Text muted size="sm">
+                  indent in Lab
+                </Text>
+              </Stack>
+            </Stack>
+          </Card>
         </section>
 
         <section id="sys-color">
