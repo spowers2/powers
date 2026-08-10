@@ -165,3 +165,42 @@
   font-size: 0.78rem;
   color: var(--pu-color-text-muted);
 }
+
+.space-bar {
+  height: 0.65rem;
+  min-width: 4px;
+  border-radius: 4px;
+  background: var(--pu-color-accent);
+  opacity: 0.85;
+}
+
+.sys-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pu-space-3);
+  padding: var(--pu-space-3) 0;
+  border-bottom: 1px solid var(--pu-color-border);
+  position: sticky;
+  top: 4rem;
+  z-index: 20;
+  background: color-mix(in srgb, var(--pu-color-bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.sys-toc a {
+  font-size: var(--pu-text-xs);
+  font-weight: var(--pu-font-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--pu-color-text-muted);
+}
+
+.sys-toc a:hover {
+  color: var(--pu-color-accent);
+}
+
+.sys-toc + section,
+section[id^="sys-"] {
+  scroll-margin-top: 7.5rem;
+}

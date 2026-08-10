@@ -129,5 +129,13 @@ export {
   hydrateIsland,
   hydrateIslands,
   islandPlaceholder,
+  ISLAND_ATTR,
 } from "./islands.js";
-export type { IslandFactory, IslandRegistry } from "./islands.js";
+export type {
+  IslandFactory,
+  IslandRegistry,
+  HydrateIslandsOptions,
+} from "./islands.js";
+
+export { defineIslands, listIslandsInHtml } from "./registry.js";
+export type { IslandRegistryApi } from "./registry.js";

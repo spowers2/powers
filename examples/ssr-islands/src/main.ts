@@ -1,7 +1,8 @@
 /**
- * SSR islands demo (Node / happy-dom):
- * 1) render shell + island HTML
- * 2) hydrate the island on a fresh document
+ * SSR islands demo:
+ * 1) render shell + islands to HTML
+ * 2) discover islands in the string
+ * 3) hydrate via defineIslands registry
  */
 import { signal, flush } from "@power-ui/core";
 import { h, bindText } from "@power-ui/dom";
@@ -9,7 +10,8 @@ import {
   renderToString,
   htmlDocument,
   island,
-  hydrateIslands,
+  defineIslands,
+  listIslandsInHtml,
 } from "@power-ui/ssr";
 import { Window } from "happy-dom";
 
@@ -23,19 +25,33 @@ function Counter() {
   return btn;
 }
 
+function Clock() {
+  const ticks = signal(0);
+  const el = h("p");
+  bindText(el, () => `Island clock ticks: ${ticks()}`);
+  // one tick for the demo
+  ticks.set(1);
+  return el;
+}
+
 // —— Server render ——
 const body = await renderToString(() => {
   const main = document.createElement("main");
   main.appendChild(h("h1", { text: "Static marketing shell" }));
-  main.appendChild(h("p", { text: "Only the island below is interactive." }));
+  main.appendChild(
+    h("p", { text: "Two islands hydrate independently below." }),
+  );
   main.appendChild(island("counter", () => Counter()));
+  main.appendChild(island("clock", () => Clock()));
   return main;
 });
 
 const page = htmlDocument(body, { title: "Islands demo" });
 console.log("=== SSR HTML ===\n");
 console.log(page);
-console.log("\n=== Hydrate on client document ===\n");
+
+const found = listIslandsInHtml(body);
+console.log("\nIslands in HTML:", found);
 
 // —— Client hydrate simulation ——
 const window = new Window({ url: "https://localhost/" });
@@ -49,9 +65,15 @@ g.Element = window.Element;
 
 window.document.body.innerHTML = body;
 
-const dispose = hydrateIslands({
+const islands = defineIslands({
   counter: () => Counter(),
+  clock: () => Clock(),
 });
+
+console.log("\nMissing in registry:", islands.missingInRegistry(window.document));
+console.log("Registered but unused:", islands.missingInDom(window.document));
+
+const dispose = islands.hydrate(window.document);
 
 await Promise.resolve();
 flush();
@@ -59,7 +81,12 @@ flush();
 const btn = window.document.querySelector(
   "[data-pu-island=counter] button",
 ) as HTMLButtonElement | null;
-console.log("After hydrate:", btn?.textContent);
+console.log("\nAfter hydrate counter:", btn?.textContent);
+console.log(
+  "After hydrate clock:",
+  window.document.querySelector("[data-pu-island=clock]")?.textContent,
+);
+
 btn?.click();
 await Promise.resolve();
 await Promise.resolve();

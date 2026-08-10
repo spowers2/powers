@@ -4,7 +4,7 @@ import { mount, type MountResult } from "@power-ui/dom";
 export type IslandFactory = () => MountResult;
 export type IslandRegistry = Record<string, IslandFactory>;
 
-const ISLAND_ATTR = "data-pu-island";
+export const ISLAND_ATTR = "data-pu-island";
 
 /**
  * Mark a host element as a client island (sets `data-pu-island`).
@@ -43,6 +43,21 @@ export function island(name: string, app: IslandFactory): HTMLElement {
   return host;
 }
 
+export interface HydrateIslandsOptions {
+  /** Document or subtree to search (default: document) */
+  root?: ParentNode;
+  /**
+   * Called when a `data-pu-island` has no factory.
+   * Default: console.warn
+   */
+  onMissing?: (name: string, el: HTMLElement) => void;
+  /**
+   * If true, leave server HTML when no factory is registered.
+   * Default: true
+   */
+  preserveOnMissing?: boolean;
+}
+
 /**
  * Hydrate all `[data-pu-island]` nodes under `root` using a name → factory map.
  * Clears server HTML inside each island and mounts the client app.
@@ -50,8 +65,21 @@ export function island(name: string, app: IslandFactory): HTMLElement {
  */
 export function hydrateIslands(
   registry: IslandRegistry,
-  root: ParentNode = document,
+  rootOrOptions: ParentNode | HydrateIslandsOptions = document,
 ): Dispose {
+  const options: HydrateIslandsOptions =
+    rootOrOptions && typeof rootOrOptions === "object" && "nodeType" in rootOrOptions
+      ? { root: rootOrOptions as ParentNode }
+      : (rootOrOptions as HydrateIslandsOptions);
+
+  const root = options.root ?? document;
+  const preserveOnMissing = options.preserveOnMissing !== false;
+  const onMissing =
+    options.onMissing ??
+    ((name: string) => {
+      console.warn(`[power-ui/ssr] No island registered for "${name}"`);
+    });
+
   const disposers: Dispose[] = [];
   const nodes = root.querySelectorAll?.(`[${ISLAND_ATTR}]`) ?? [];
 
@@ -61,7 +89,8 @@ export function hydrateIslands(
     if (!name) return;
     const factory = registry[name];
     if (!factory) {
-      console.warn(`[power-ui/ssr] No island registered for "${name}"`);
+      onMissing(name, el);
+      if (!preserveOnMissing) el.textContent = "";
       return;
     }
     // Replace server markup with live app
@@ -82,7 +111,7 @@ export function hydrateIsland(
   factory: IslandFactory,
   root: ParentNode = document,
 ): Dispose {
-  return hydrateIslands({ [name]: factory }, root);
+  return hydrateIslands({ [name]: factory }, { root });
 }
 
 /**

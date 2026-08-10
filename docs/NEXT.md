@@ -4,12 +4,13 @@
 
 ## Just completed
 
-- [x] Unified site navigation (Home / Playground / Todos / System)  
-- [x] `/system` design-system explorer  
-- [x] `examples/ssr-islands` CLI demo  
+- [x] Unified nav + expanded `/system` explorer  
+- [x] SSR islands hardening: `defineIslands`, `listIslandsInHtml`, hydrate options  
+- [x] Islands example updated for multi-island registry  
 
 ## Immediate next
 
-1. SSR islands hardening (streaming, codegen)  
-2. Expand `/system` docs  
-3. **GSAP adapter** when cinematic motion is needed (parked, not dropped)  
+1. Streaming SSR (if/when needed)  
+2. **GSAP adapter** when cinematic motion is needed (parked, not dropped)  
+3. Motion polish (color tweens, enter/exit)  
+4. A11y / list hardening  
