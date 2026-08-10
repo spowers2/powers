@@ -4,13 +4,13 @@
 
 ## Just completed
 
-- [x] `@power-ui/router` — createRouter, Link, memory/history/hash  
-- [x] `@power-ui/ssr` — `renderToString` + `htmlDocument` foundation  
-- [x] `@power-ui/ui` — tokens, theme, Button / Input / Stack / Text / Card  
+- [x] Router · SSR foundation · UI foundation  
+- [x] Design system expansion: Badge, Container, Grid, Code  
+- [x] Modern marketing landing page at `/`  
 
 ## Immediate next
 
-1. **Design system expansion** — more primitives, forms, density, Story-like docs  
+1. More design-system primitives (forms, density) + docs site  
 2. SSR islands / selective hydration  
 3. **GSAP adapter** when cinematic motion is needed (still parked, not dropped)  
 

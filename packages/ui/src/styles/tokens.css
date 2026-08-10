@@ -47,6 +47,9 @@
   --pu-color-danger: #e5484d;
   --pu-color-danger-fg: #ffffff;
   --pu-color-focus: var(--pu-brand-400);
+  /* Marketing / landing accents */
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 45%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, #a78bfa 35%, transparent);
 
   /* ---- Space (4px grid) ---- */
   --pu-space-0: 0;

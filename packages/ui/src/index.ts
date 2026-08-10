@@ -28,3 +28,15 @@ export type { TextProps } from "./components/Text.js";
 
 export { Card } from "./components/Card.js";
 export type { CardProps } from "./components/Card.js";
+
+export { Badge } from "./components/Badge.js";
+export type { BadgeProps } from "./components/Badge.js";
+
+export { Container } from "./components/Container.js";
+export type { ContainerProps } from "./components/Container.js";
+
+export { Grid } from "./components/Grid.js";
+export type { GridProps } from "./components/Grid.js";
+
+export { Code } from "./components/Code.js";
+export type { CodeProps } from "./components/Code.js";

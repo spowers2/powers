@@ -29,6 +29,8 @@
 | 3a | **Router** | `@power-ui/router` |
 | 3b | **SSR foundation** (`renderToString`) | `@power-ui/ssr` |
 | 4a | **Design system foundation** | `@power-ui/ui` (tokens + primitives) |
+| 4b | **Design system expansion + marketing landing** | Badge, Container, Grid, Code · modern landing `/` |
+| 4c | App demos under design system | Playground + Todos routes |
 
 ---
 
@@ -36,7 +38,7 @@
 
 | # | Milestone | Notes |
 |---|---|---|
-| 4b | Design system expansion | More primitives, docs site, density, forms |
+| 4d | Design system expansion continued | Forms, density, more primitives, docs site |
 | 5 | SSR islands / resumability | Beyond string HTML — selective hydrate |
 | 6 | **GSAP adapter** (parked until needed) | Optional peer; cinematic timelines |
 | 7 | Color / multi-value animate, enter-exit / FLIP | Motion polish |
@@ -70,7 +72,8 @@ When apps need ScrollTrigger-class / SVG morph / timeline studio work:
 @power-ui/dom      mount, h, JSX, props, Show, For
 @power-ui/router   createRouter, Link, navigate
 @power-ui/ssr      renderToString (happy-dom)
-@power-ui/ui       tokens.css + Button, Input, Stack, Text, Card, theme
+@power-ui/ui       tokens + theme + Button, Input, Stack, Text, Card,
+                   Badge, Container, Grid, Code
 ```
 
 ---

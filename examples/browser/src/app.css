@@ -1,44 +1,49 @@
-.app-shell {
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: var(--pu-space-6) var(--pu-space-4) var(--pu-space-12);
-}
+/* App chrome (non-landing routes) */
 
-.app-header {
-  margin-bottom: var(--pu-space-8);
-  padding-bottom: var(--pu-space-4);
+.app-chrome-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--pu-color-bg) 80%, transparent);
   border-bottom: 1px solid var(--pu-color-border);
 }
 
-.app-nav {
+.app-chrome-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pu-space-4);
+  min-height: 3.5rem;
+}
+
+.app-chrome-brand {
+  font-weight: var(--pu-font-bold);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--pu-color-text);
+}
+
+.app-chrome-inner nav {
   display: flex;
   gap: var(--pu-space-4);
   flex-wrap: wrap;
 }
 
-.app-nav a {
+.app-chrome-inner nav a {
   color: var(--pu-color-text-muted);
   text-decoration: none;
-  font-weight: var(--pu-font-medium);
   font-size: var(--pu-text-sm);
+  font-weight: var(--pu-font-medium);
 }
 
-.app-nav a:hover {
-  color: var(--pu-color-text);
-}
-
-.app-nav a.active {
+.app-chrome-inner nav a:hover,
+.app-chrome-inner nav a.active {
   color: var(--pu-color-accent);
 }
 
-.app-main {
-  min-height: 50vh;
-}
-
-.app-footer {
-  margin-top: var(--pu-space-10);
-  padding-top: var(--pu-space-4);
-  border-top: 1px solid var(--pu-color-border);
+.app-chrome-main {
+  padding: var(--pu-space-8) 0 var(--pu-space-12);
 }
 
 .demo-ball {
@@ -69,19 +74,11 @@
   gap: var(--pu-space-3);
   padding: var(--pu-space-3) var(--pu-space-4);
   border-radius: var(--pu-radius-md);
-  background: var(--pu-color-surface-2);
+  background: var(--pu-color-surface);
   border: 1px solid var(--pu-color-border);
 }
 
 .todo-list li.done span {
   text-decoration: line-through;
   color: var(--pu-color-text-muted);
-}
-
-code {
-  font-family: var(--pu-font-mono);
-  font-size: 0.85em;
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  background: var(--pu-color-surface-2);
 }

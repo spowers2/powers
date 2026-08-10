@@ -46,6 +46,10 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Stack` | flex layout + gap scale |
 | `Text` | type ramp + muted |
 | `Card` | surface panel |
+| `Badge` | status / accent chips |
+| `Container` | max-width page shell |
+| `Grid` | responsive columns |
+| `Code` | inline + block code |
 | `createTheme` | light/dark controller |
 
 ## Rules for new primitives
