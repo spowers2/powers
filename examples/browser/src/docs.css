@@ -1,0 +1,120 @@
+/* In-app docs page */
+
+.docs-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--pu-color-border);
+  position: sticky;
+  top: 4rem;
+  z-index: 20;
+  background: color-mix(in srgb, var(--pu-color-bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.docs-toc a {
+  font-size: var(--pu-text-xs);
+  font-weight: var(--pu-font-semibold);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--pu-color-text-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--pu-radius-full);
+  border: 1px solid transparent;
+}
+
+.docs-toc a:hover {
+  color: var(--pu-color-accent);
+  background: color-mix(in srgb, var(--pu-color-accent) 8%, transparent);
+}
+
+.docs-section {
+  scroll-margin-top: 7rem;
+}
+
+.docs-h2 {
+  margin-bottom: var(--pu-space-3) !important;
+}
+
+.docs-pre {
+  margin: var(--pu-space-3) 0;
+  padding: var(--pu-space-4);
+  border-radius: var(--pu-radius-lg);
+  background: var(--pu-gray-900);
+  color: var(--pu-gray-100);
+  border: 1px solid color-mix(in srgb, var(--pu-brand-500) 20%, transparent);
+  font-family: var(--pu-font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre;
+  box-shadow: var(--pu-shadow-md);
+}
+
+[data-pu-theme="dark"] .docs-pre {
+  background: #080c14;
+}
+
+.docs-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--pu-color-border);
+  border-radius: var(--pu-radius-lg);
+  background: var(--pu-color-surface);
+  box-shadow: var(--pu-shadow-sm);
+}
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--pu-text-sm);
+}
+
+.docs-table th,
+.docs-table td {
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--pu-color-border);
+  vertical-align: top;
+}
+
+.docs-table th {
+  font-size: var(--pu-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pu-color-text-muted);
+  background: var(--pu-color-surface-2);
+}
+
+.docs-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.docs-table code {
+  font-family: var(--pu-font-mono);
+  font-size: 0.78rem;
+  color: var(--pu-color-accent);
+}
+
+.docs-sig {
+  color: var(--pu-color-text) !important;
+  font-size: 0.75rem !important;
+  word-break: break-word;
+}
+
+.docs-steps {
+  margin: 0 0 var(--pu-space-4);
+  padding-left: 1.25rem;
+  color: var(--pu-color-text);
+  line-height: 1.55;
+  font-size: var(--pu-text-sm);
+}
+
+.docs-steps li {
+  margin-bottom: 0.5rem;
+}
+
+.docs-steps .pu-kbd {
+  margin: 0 0.15rem;
+}

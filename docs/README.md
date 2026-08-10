@@ -8,14 +8,23 @@ Private repo today; these docs are written so they can ship as-is when the proje
 
 ## Start here
 
-| Goal | Doc |
+| Goal | Doc / route |
 |---|---|
+| **How to use + API (in the demo)** | **http://localhost:5173/docs** |
+| API cheat sheet (markdown) | [API.md](./API.md) |
 | Learn the runtime in ~10 minutes | [LEARN.md](./LEARN.md) |
 | Styling: tokens, components, utilities | [STYLING.md](./STYLING.md) |
 | Design system primitives reference | [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
 | Interactive coding playground | [POWER_LAB.md](./POWER_LAB.md) + demo `/lab` |
 | Public release checklist | [RELEASE.md](./RELEASE.md) |
 | Ordered product plan | [ROADMAP.md](./ROADMAP.md) |
+
+**Recommended path for a new developer**
+
+1. Demo **`/docs`** — install, three rules, first app, API tables  
+2. Demo **`/lab`** — recipes with Goal / Learn / How / Try this  
+3. Demo **`/system`** — every component live  
+4. Markdown deep-dives as needed (LEARN, DOM, ROUTER, …)
 
 ---
 
@@ -68,10 +77,10 @@ mount(document.getElementById("app")!, () => (
 ```bash
 pnpm install
 pnpm example:browser   # http://localhost:5173
-# /lab     — Power Lab
+# /docs    — how to use + API reference (start here)
+# /lab     — interactive recipes
 # /system  — design system explorer
-# /system — design system (primitives + tokens)
-# /lab — interactive recipes (edit code live)
+# /todos   — small app demo
 ```
 
 ---

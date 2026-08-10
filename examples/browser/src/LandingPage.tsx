@@ -173,11 +173,14 @@ export function LandingPage(props: { router: Router }) {
                   bolted onto another framework.
                 </p>
                 <div class="lp-cta-row">
-                  <Button size="lg" onClick={go("/lab")}>
-                    Open Power Lab
+                  <Button size="lg" onClick={go("/docs")}>
+                    How to use + API
+                  </Button>
+                  <Button size="lg" variant="soft" onClick={go("/lab")}>
+                    Practice in Lab
                   </Button>
                   <Button size="lg" variant="ghost" onClick={go("/system")}>
-                    Design system
+                    Components
                   </Button>
                 </div>
                 <div class="lp-meta">
@@ -453,11 +456,11 @@ mount(document.getElementById("app")!, () => (
                 </p>
               </div>
               <Stack direction="row" gap={2} wrap>
-                <Button size="lg" onClick={go("/lab")}>
-                  Open Power Lab
+                <Button size="lg" onClick={go("/docs")}>
+                  How to use + API
                 </Button>
-                <Button size="lg" variant="soft" onClick={go("/system")}>
-                  Design system
+                <Button size="lg" variant="soft" onClick={go("/lab")}>
+                  Practice in Lab
                 </Button>
               </Stack>
             </div>
@@ -470,6 +473,9 @@ mount(document.getElementById("app")!, () => (
           <div class="lp-footer-inner">
             <span>Power UI — MIT · private foundations</span>
             <Stack direction="row" gap={4}>
+              <button type="button" class="lp-footer-link" onClick={go("/docs")}>
+                Docs
+              </button>
               <button type="button" class="lp-footer-link" onClick={go("/lab")}>
                 Lab
               </button>

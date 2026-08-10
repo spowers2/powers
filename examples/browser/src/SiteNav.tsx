@@ -1,5 +1,5 @@
 /**
- * Single site navigation — Home, Lab, System, Todos.
+ * Single site navigation — Docs first for new developers.
  */
 import type { Router } from "@power-ui/router";
 import { Link } from "@power-ui/router";
@@ -24,6 +24,9 @@ export function SiteNav(props: {
             <Link router={router} to="/" exact activeClass="active">
               Home
             </Link>
+            <Link router={router} to="/docs" activeClass="active">
+              Docs
+            </Link>
             <Link router={router} to="/lab" activeClass="active">
               Lab
             </Link>
@@ -38,6 +41,9 @@ export function SiteNav(props: {
           <div class="site-nav-actions">
             <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
               {() => (theme.mode() === "dark" ? "Light" : "Dark")}
+            </Button>
+            <Button size="sm" variant="soft" onClick={() => router.navigate("/docs")}>
+              How to use
             </Button>
             <Button size="sm" onClick={() => router.navigate("/lab")}>
               Open Lab

@@ -26,6 +26,7 @@
 - [x] Lab syntax highlight (lightweight overlay) + Menu/Popover recipe  
 - [x] Primitive: Kbd  
 - [x] Public release checklist (`docs/RELEASE.md`)  
+- [x] In-app **Docs** route (`/docs`) + `docs/API.md` cheat sheet  
 
 ## Immediate next
 

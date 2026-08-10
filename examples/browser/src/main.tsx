@@ -24,6 +24,7 @@ import {
 import "@power-ui/ui/theme.css";
 import "./app.css";
 import { LandingPage } from "./LandingPage.js";
+import { DocsPage } from "./DocsPage.js";
 import { SiteNav } from "./SiteNav.js";
 import { SystemPage } from "./SystemPage.js";
 import { LabPage } from "./lab/LabPage.js";
@@ -365,6 +366,7 @@ const router = createRouter({
       path: "/",
       component: () => LandingPage({ router }),
     },
+    { path: "/docs", component: () => DocsPage({ router }) },
     { path: "/lab", component: () => LabPage() },
     // Playground folded into System — keep redirect so old links work
     {

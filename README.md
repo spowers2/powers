@@ -7,7 +7,10 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
 > Private while foundations harden.
 
-**New here?** Start at the **[docs hub](./docs/README.md)** · quick path: [`LEARN.md`](./docs/LEARN.md) · styling: [`STYLING.md`](./docs/STYLING.md)
+**New here?**
+
+1. Run the demo → open **`/docs`** (how to use + **API reference**)  
+2. Repo hub: **[docs/README.md](./docs/README.md)** · API: [`docs/API.md`](./docs/API.md) · learn: [`LEARN.md`](./docs/LEARN.md)
 
 ---
 
