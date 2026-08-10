@@ -34,13 +34,21 @@ export function LabPage(): HTMLElement {
 
   const head = document.createElement("div");
   head.className = "lab-sidebar-head";
+
+  const brand = document.createElement("div");
+  brand.className = "lab-sidebar-brand";
+  const mark = document.createElement("span");
+  mark.className = "lab-sidebar-mark";
+  mark.setAttribute("aria-hidden", "true");
   const h2 = document.createElement("h2");
   h2.textContent = "Power Lab";
+  brand.append(mark, h2);
+
   const blurb = document.createElement("p");
   blurb.className = "lab-sidebar-blurb";
   blurb.textContent =
-    "Click a recipe — the Code panel switches to that sample, then the preview re-runs.";
-  head.append(h2, blurb);
+    "Pick a recipe to load sample code. Edit freely — the live preview re-runs as you type.";
+  head.append(brand, blurb);
 
   const badge = document.createElement("div");
   badge.className = "lab-count-badge";
@@ -61,6 +69,9 @@ export function LabPage(): HTMLElement {
   titleEl.className = "lab-toolbar-title";
   titleEl.textContent = current.title;
 
+  const actions = document.createElement("div");
+  actions.className = "lab-toolbar-actions";
+
   const autoLabel = document.createElement("label");
   autoLabel.className = "lab-auto";
   const autoInput = document.createElement("input");
@@ -70,12 +81,13 @@ export function LabPage(): HTMLElement {
 
   const runBtn = makeBtn("Run", "lab-btn lab-btn--primary");
   const resetBtn = makeBtn("Reset", "lab-btn");
-  const shareBtn = makeBtn("Copy share link", "lab-btn lab-btn--soft");
+  const shareBtn = makeBtn("Share", "lab-btn lab-btn--soft");
   const statusEl = document.createElement("span");
   statusEl.className = "lab-status";
   statusEl.textContent = "Ready — pick a recipe or edit the code";
 
-  toolbar.append(titleEl, autoLabel, runBtn, resetBtn, shareBtn, statusEl);
+  actions.append(autoLabel, runBtn, resetBtn, shareBtn, statusEl);
+  toolbar.append(titleEl, actions);
 
   const tip = document.createElement("p");
   tip.className = "lab-tip";
@@ -92,7 +104,12 @@ export function LabPage(): HTMLElement {
   editorPane.className = "lab-editor-pane";
   const codeLabel = document.createElement("div");
   codeLabel.className = "lab-pane-label";
-  codeLabel.textContent = `Code · ${current.title}`;
+  const codeLabelText = document.createElement("span");
+  codeLabelText.textContent = `Code · ${current.title}`;
+  const codeHint = document.createElement("span");
+  codeHint.className = "lab-pane-hint";
+  codeHint.textContent = "Tab · ⌘↵";
+  codeLabel.append(codeLabelText, codeHint);
   const editor = document.createElement("textarea");
   editor.className = "lab-editor";
   editor.spellcheck = false;
@@ -104,7 +121,12 @@ export function LabPage(): HTMLElement {
   previewPane.className = "lab-preview-pane";
   const previewLabel = document.createElement("div");
   previewLabel.className = "lab-pane-label";
-  previewLabel.textContent = "Live preview";
+  const previewLabelText = document.createElement("span");
+  previewLabelText.textContent = "Live preview";
+  const previewHint = document.createElement("span");
+  previewHint.className = "lab-pane-hint";
+  previewHint.textContent = "sandboxed";
+  previewLabel.append(previewLabelText, previewHint);
   const iframe = document.createElement("iframe");
   iframe.className = "lab-preview";
   iframe.title = "Power Lab preview";
@@ -116,11 +138,17 @@ export function LabPage(): HTMLElement {
 
   workspace.append(editorPane, previewPane);
 
+  const consoleWrap = document.createElement("div");
+  consoleWrap.className = "lab-console-wrap";
+  const consoleHead = document.createElement("div");
+  consoleHead.className = "lab-console-head";
+  consoleHead.innerHTML = "<span>Console</span><span>stdout · errors</span>";
   const consoleEl = document.createElement("div");
   consoleEl.className = "lab-console";
   consoleEl.setAttribute("aria-label", "Lab console");
+  consoleWrap.append(consoleHead, consoleEl);
 
-  main.append(toolbar, tip, workspace, consoleEl);
+  main.append(toolbar, tip, workspace, consoleWrap);
   sidebar.append(head, badge, recipeList);
   root.append(sidebar, main);
 
@@ -130,6 +158,7 @@ export function LabPage(): HTMLElement {
     msg: string,
   ) {
     statusEl.textContent = msg;
+    statusEl.title = msg;
     statusEl.className =
       "lab-status" +
       (kind === "ok" ? " is-ok" : "") +
@@ -173,19 +202,14 @@ export function LabPage(): HTMLElement {
   function applyChrome(r: Recipe) {
     titleEl.textContent = r.title;
     tipBody.textContent = r.tip;
-    codeLabel.textContent = `Code · ${r.title}`;
+    codeLabelText.textContent = `Code · ${r.title}`;
     syncSidebar();
     editorPane.classList.remove("lab-editor-pane--flash");
-    // restart CSS animation
     void editorPane.offsetWidth;
     editorPane.classList.add("lab-editor-pane--flash");
   }
 
   async function run() {
-    if (running) {
-      // A run is in flight — cancel it by bumping the token; the in-flight
-      // call will exit, then we start a new one below.
-    }
     const token = ++runToken;
     running = true;
     setStatus("running", "Compiling…");
@@ -197,7 +221,6 @@ export function LabPage(): HTMLElement {
         source,
         (log) => {
           if (token !== runToken) return;
-          // Append one line without rebuilding entire console each log
           const p = document.createElement("p");
           p.className = "lab-console-line";
           if (log.level === "error") p.classList.add("is-error");
@@ -235,7 +258,6 @@ export function LabPage(): HTMLElement {
   }
 
   function loadRecipe(r: Recipe) {
-    // Cancel anything in flight
     runToken += 1;
     running = false;
     if (debounceTimer) {
@@ -251,8 +273,8 @@ export function LabPage(): HTMLElement {
     void run();
   }
 
-  // —— Recipe buttons (direct onclick — most reliable) ——
-  for (const r of recipes) {
+  // —— Recipe buttons ——
+  recipes.forEach((r, i) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "lab-recipe" + (r.id === current.id ? " is-active" : "");
@@ -261,19 +283,25 @@ export function LabPage(): HTMLElement {
     btn.setAttribute("aria-label", `Load recipe: ${r.title}`);
     if (r.id === current.id) btn.setAttribute("aria-current", "true");
 
+    const idx = document.createElement("span");
+    idx.className = "lab-recipe__idx";
+    idx.textContent = String(i + 1).padStart(2, "0");
+
+    const body = document.createElement("div");
+    body.className = "lab-recipe__body";
     const strong = document.createElement("strong");
     strong.textContent = r.title;
     const span = document.createElement("span");
     span.textContent = r.blurb;
-    btn.append(strong, span);
+    body.append(strong, span);
 
+    btn.append(idx, body);
     btn.onclick = (ev) => {
       ev.preventDefault();
       loadRecipe(r);
     };
-
     recipeList.appendChild(btn);
-  }
+  });
 
   // —— Controls ——
   autoInput.onchange = () => {
@@ -323,7 +351,6 @@ export function LabPage(): HTMLElement {
     }
   };
 
-  // First preview after paint (not during construction)
   requestAnimationFrame(() => {
     void run();
   });

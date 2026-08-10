@@ -7,6 +7,7 @@ import { Button } from "./components/Button.js";
 import { Dialog } from "./components/Dialog.js";
 import { Tabs } from "./components/Tabs.js";
 import { Progress } from "./components/Progress.js";
+import { createToaster, Toaster } from "./components/Toast.js";
 import { createTheme } from "./theme.js";
 import { cx } from "./utils.js";
 
@@ -106,5 +107,17 @@ describe("@power-ui/ui", () => {
     value.set(80);
     flush();
     assert.equal(bar!.getAttribute("aria-valuenow"), "80");
+  });
+
+  it("createToaster pushes items into Toaster", async () => {
+    const { flush } = await import("@power-ui/core");
+    const toaster = createToaster();
+    mount(root, () => Toaster({ toaster }));
+    assert.equal(root.querySelectorAll(".pu-toast").length, 0);
+    toaster.push({ title: "Hello", tone: "success", duration: 0 });
+    flush();
+    const toasts = root.querySelectorAll(".pu-toast");
+    assert.equal(toasts.length, 1);
+    assert.match(toasts[0]!.textContent ?? "", /Hello/);
   });
 });

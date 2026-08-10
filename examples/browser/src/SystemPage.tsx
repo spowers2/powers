@@ -11,6 +11,7 @@ import {
   Checkbox,
   Code,
   Container,
+  createToaster,
   Dialog,
   Divider,
   Field,
@@ -25,6 +26,8 @@ import {
   Tabs,
   Text,
   Textarea,
+  Toaster,
+  Tooltip,
   type DensityController,
   type ThemeController,
 } from "@power-ui/ui";
@@ -66,6 +69,7 @@ export function SystemPage(props: {
   const email = signal("");
   const dialogOpen = signal(false);
   const progress = signal(42);
+  const toaster = createToaster();
   const emailError = () => {
     const v = email().trim();
     if (!v) return "";
@@ -377,6 +381,73 @@ export function SystemPage(props: {
                     </Stack>
                   </Stack>
                 </Dialog>
+              </Stack>
+            </Card>
+            <Card variant="glass">
+              <Stack gap={3}>
+                <Text weight="semibold">Tooltip</Text>
+                <Text muted size="sm">
+                  Hover or focus — quiet, token-styled bubble.
+                </Text>
+                <Stack direction="row" gap={3} wrap>
+                  <Tooltip content="Primary action">
+                    <Button size="sm">Hover me</Button>
+                  </Tooltip>
+                  <Tooltip content="Soft secondary action" side="bottom">
+                    <Button size="sm" variant="soft">
+                      Bottom tip
+                    </Button>
+                  </Tooltip>
+                </Stack>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={3}>
+                <Text weight="semibold">Toast</Text>
+                <Text muted size="sm">
+                  createToaster() + Toaster — ephemeral status messages.
+                </Text>
+                <Stack direction="row" gap={2} wrap>
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      toaster.push({
+                        title: "Saved",
+                        description: "Changes are in.",
+                        tone: "success",
+                      })
+                    }
+                  >
+                    Success toast
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="soft"
+                    onClick={() =>
+                      toaster.push({
+                        title: "Heads up",
+                        description: "Something needs attention.",
+                        tone: "info",
+                      })
+                    }
+                  >
+                    Info toast
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="danger"
+                    onClick={() =>
+                      toaster.push({
+                        title: "Failed",
+                        description: "Could not complete that action.",
+                        tone: "danger",
+                      })
+                    }
+                  >
+                    Error toast
+                  </Button>
+                </Stack>
+                <Toaster toaster={toaster} />
               </Stack>
             </Card>
           </Grid>

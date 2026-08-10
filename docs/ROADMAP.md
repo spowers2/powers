@@ -28,6 +28,8 @@ Public docs hub: [`docs/README.md`](./README.md)
 | **ui+** | Alert, Divider, Spinner + utility expansion |
 | **modern** | Glass/elevation tokens, multi-shadow, Card variants, bento utilities |
 | **ui++** | Dialog, Tabs, Progress, Skeleton, Avatar |
+| **lab-ux** | Lab recipe switch fix + visual polish |
+| **ui+++** | Tooltip, Toaster |
 
 ---
 
@@ -35,8 +37,8 @@ Public docs hub: [`docs/README.md`](./README.md)
 
 | # | Milestone | Notes |
 |---|---|---|
-| lab+ | Lab polish | highlighting, more recipes |
-| ui+++ | More primitives as demos demand | Tooltip, Toast, Menu, … |
+| lab+ | Lab polish | syntax highlighting, more recipes |
+| ui++++ | More primitives as demos demand | Menu, Popover, … |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
 | 7 | Color / enter-exit motion | Motion polish |

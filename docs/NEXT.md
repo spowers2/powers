@@ -18,10 +18,12 @@
 - [x] Landing: smooth section scroll + sticky anchors + back-to-top  
 - [x] Lab: recipe switching updates editor / tip / preview (race-safe)  
 - [x] Lab vs System clarified; Playground folded into System  
+- [x] Lab visual polish (IDE chrome, numbered recipes, glass toolbar)  
+- [x] Primitives: Tooltip, Toaster / createToaster  
 
 ## Immediate next
 
-1. Lab polish (highlighting, more recipes)  
-2. More primitives when demos demand (Tooltip, Toast, Menu, …)  
+1. Lab polish (syntax highlighting, more recipes)  
+2. More primitives when demos demand (Menu, Popover, …)  
 3. **GSAP adapter** when cinematic motion is needed (parked)  
 4. Public release checklist (npm, site)  

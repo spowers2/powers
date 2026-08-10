@@ -70,6 +70,8 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Progress` | 0–100 bar |
 | `Skeleton` | shimmer loading placeholders |
 | `Avatar` | initials / image |
+| `Tooltip` | hover/focus tip |
+| `Toaster` / `createToaster` | ephemeral toast stack |
 | `Label` / `Field` | accessible form layout + hint/error |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |
