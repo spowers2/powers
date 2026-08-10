@@ -71,12 +71,12 @@ export function SystemPage(props: {
           </Text>
           <Text muted>
             Living reference for Power UI primitives. Edit{" "}
-            <Code>packages/ui/src/styles/tokens.css</Code> to retheme.
+            <Code>packages/ui/src/styles/tokens.css</Code> to retheme. To learn
+            by coding, open <strong>Lab</strong> in the top nav.
           </Text>
         </Stack>
 
         <nav class="sys-toc" aria-label="On this page">
-          <a href="#lab-link" id="lab-link" data-lab="1">Power Lab</a>
           <a href="#sys-controls">Controls</a>
           <a href="#sys-type">Type</a>
           <a href="#sys-forms">Forms</a>
