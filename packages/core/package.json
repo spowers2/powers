@@ -1,7 +1,7 @@
 {
   "name": "@power-ui/core",
-  "version": "0.1.0",
-  "description": "Fine-grained reactivity primitives for Power UI — signals, computed, effects, ownership.",
+  "version": "0.1.1",
+  "description": "Fine-grained reactivity primitives for Power UI — signals, computed, effects, store, resource, ownership.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -21,10 +21,12 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "node --import tsx --test src/signal.test.ts",
-    "bench": "node --import tsx scripts/bench.ts"
+    "test": "node --import tsx --test src/*.test.ts",
+    "bench": "node --import tsx scripts/bench.ts",
+    "size": "node --import tsx scripts/size.ts"
   },
   "devDependencies": {
+    "esbuild": "^0.25.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }

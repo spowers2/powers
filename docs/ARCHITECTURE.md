@@ -34,10 +34,30 @@ Later phases will map component instances and islands onto owners.
 
 Default: `Object.is`. Override per signal/computed via `{ equals }` for structural comparisons.
 
+## Store (shallow)
+
+`store({ a, b })` creates one signal per top-level key.  
+`app.a` is a full `Signal`. `app()` snapshots all keys (tracks all).  
+`app.set({ a, b })` batches writes. Nested objects are opaque values — replace the nest or nest another `store()`.
+
+## Resource
+
+`resource(source, fetcher)` runs under an effect that tracks `source` + an internal refetch tick.  
+In-flight promises are version-tokenized so stale settles no-op after dispose or newer requests.  
+Source `null | undefined | false` skips the fetch (“wait until ready”).
+
+## Errors
+
+Effects wrap `fn` and cleanups in `try/catch`.  
+Resolution order: local `effect(..., { onError })` → owner `onError` handlers (walk parents) → console.
+
+## Size budget
+
+`pnpm size` bundles `@power-ui/core` with esbuild (minify) and fails if gzip exceeds 8 KB.
+
 ## What is intentionally missing
 
-- Component / JSX runtime
-- Stores with nested proxies
-- Async `resource()` helpers (Phase 1.x)
+- Component / JSX runtime (Phase 2)
+- Deep proxy stores (prefer nested shallow stores)
 - History / time-travel options
 - Cross-boundary ownership enforcement (compile-time later)
