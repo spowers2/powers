@@ -40,7 +40,7 @@ const styles = `
 .pu-code--block .pu-k { color: var(--pu-brand-300); }
 .pu-code--block .pu-s { color: var(--pu-sage-400); }
 .pu-code--block .pu-c { color: var(--pu-gray-400); }
-.pu-code--block .pu-p { color: #7dd3fc; }
+.pu-code--block .pu-p { color: #8aa4c0; }
 `;
 
 let injected = false;

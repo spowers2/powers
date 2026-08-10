@@ -37,12 +37,12 @@ const styles = `
   border-color: color-mix(in srgb, var(--pu-sage-500) 28%, transparent);
 }
 .pu-badge--warning {
-  background: color-mix(in srgb, #f59e0b 16%, transparent);
-  color: #b45309;
-  border-color: color-mix(in srgb, #f59e0b 28%, transparent);
+  background: color-mix(in srgb, #a67c3d 14%, transparent);
+  color: #7a5a28;
+  border-color: color-mix(in srgb, #a67c3d 28%, transparent);
 }
 [data-pu-theme="dark"] .pu-badge--success { color: var(--pu-sage-400); }
-[data-pu-theme="dark"] .pu-badge--warning { color: #fbbf24; }
+[data-pu-theme="dark"] .pu-badge--warning { color: #c4a46a; }
 `;
 
 let injected = false;
