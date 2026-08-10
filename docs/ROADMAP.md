@@ -24,6 +24,7 @@
 | **nav** | Unified site navigation |
 | **4e–f** | `/system` design explorer (expanded sections) |
 | **5c** | Islands hardening: `defineIslands`, `listIslandsInHtml`, hydrate options |
+| **lab** | **Power Lab** — in-app learning playground (`/lab`) |
 
 ---
 
@@ -31,6 +32,7 @@
 
 | # | Milestone | Notes |
 |---|---|---|
+| lab+ | Lab polish | syntax highlight, more recipes, tests |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked until needed) | Optional peer; cinematic timelines |
 | 7 | Color / multi-value animate, enter-exit / FLIP | Motion polish |

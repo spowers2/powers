@@ -62,11 +62,11 @@ export function LandingPage(props: { router: Router }) {
                   token file.
                 </p>
                 <div class="lp-cta-row">
-                  <Button size="lg" onClick={go("/playground")}>
-                    Open playground
+                  <Button size="lg" onClick={go("/lab")}>
+                    Open Power Lab
                   </Button>
-                  <Button size="lg" variant="ghost" onClick={go("/todos")}>
-                    See todos demo
+                  <Button size="lg" variant="ghost" onClick={go("/playground")}>
+                    Component playground
                   </Button>
                 </div>
                 <div class="lp-meta">

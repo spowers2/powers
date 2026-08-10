@@ -24,6 +24,9 @@ export function SiteNav(props: {
             <Link router={router} to="/" exact activeClass="active">
               Home
             </Link>
+            <Link router={router} to="/lab" activeClass="active">
+              Lab
+            </Link>
             <Link router={router} to="/playground" activeClass="active">
               Playground
             </Link>
@@ -39,11 +42,8 @@ export function SiteNav(props: {
             <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
               {() => (theme.mode() === "dark" ? "Light" : "Dark")}
             </Button>
-            <Button
-              size="sm"
-              onClick={() => router.navigate("/playground")}
-            >
-              Get started
+            <Button size="sm" onClick={() => router.navigate("/lab")}>
+              Open Lab
             </Button>
           </div>
         </div>

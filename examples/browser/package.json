@@ -13,7 +13,8 @@
     "@power-ui/core": "workspace:*",
     "@power-ui/dom": "workspace:*",
     "@power-ui/router": "workspace:*",
-    "@power-ui/ui": "workspace:*"
+    "@power-ui/ui": "workspace:*",
+    "esbuild-wasm": "0.25.12"
   },
   "devDependencies": {
     "vite": "^6.2.2"

@@ -42,6 +42,9 @@ importers:
       '@power-ui/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      esbuild-wasm:
+        specifier: 0.25.12
+        version: 0.25.12
     devDependencies:
       vite:
         specifier: ^6.2.2
@@ -638,6 +641,11 @@ packages:
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
+  esbuild-wasm@0.25.12:
+    resolution: {integrity: sha512-rZqkjL3Y6FwLpSHzLnaEy8Ps6veCNo1kZa9EOfJvmWtBq5dJH4iVjfmOO6Mlkv9B0tt9WFPFmb/VxlgJOnueNg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   esbuild@0.25.12:
     resolution: {integrity: sha512-bbPBYYrtZbkt6Os6FiTLCTFxvq4tt3JKall1vRwshA3fdVztsLAatFaZobhkBC8/BrPetoa0oksYoKXoG4ryJg==}
     engines: {node: '>=18'}
@@ -990,6 +998,8 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.9': {}
+
+  esbuild-wasm@0.25.12: {}
 
   esbuild@0.25.12:
     optionalDependencies:

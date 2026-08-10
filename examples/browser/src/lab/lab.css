@@ -1,0 +1,232 @@
+/* Power Lab — learning playground */
+
+.lab {
+  --lab-panel: var(--pu-color-surface);
+  --lab-border: var(--pu-color-border);
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) 1fr;
+  gap: 0;
+  min-height: calc(100vh - 4rem);
+  border-top: 1px solid var(--lab-border);
+  background: var(--pu-color-bg);
+}
+
+@media (max-width: 900px) {
+  .lab {
+    grid-template-columns: 1fr;
+  }
+  .lab-sidebar {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--lab-border);
+    max-height: 200px;
+    overflow: auto;
+  }
+}
+
+.lab-sidebar {
+  border-right: 1px solid var(--lab-border);
+  background: var(--lab-panel);
+  padding: var(--pu-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pu-space-3);
+}
+
+.lab-sidebar h2 {
+  margin: 0;
+  font-size: var(--pu-text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pu-color-text-muted);
+  font-weight: 700;
+}
+
+.lab-recipe {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: var(--pu-radius-md);
+  padding: 0.65rem 0.75rem;
+  cursor: pointer;
+  color: var(--pu-color-text);
+  font: inherit;
+  transition:
+    background var(--pu-duration) var(--pu-ease),
+    border-color var(--pu-duration) var(--pu-ease);
+}
+
+.lab-recipe:hover {
+  background: var(--pu-color-surface-2);
+}
+
+.lab-recipe.is-active {
+  border-color: color-mix(in srgb, var(--pu-color-accent) 40%, var(--lab-border));
+  background: color-mix(in srgb, var(--pu-color-accent) 10%, transparent);
+}
+
+.lab-recipe strong {
+  display: block;
+  font-size: var(--pu-text-sm);
+  margin-bottom: 0.15rem;
+}
+
+.lab-recipe span {
+  display: block;
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text-muted);
+  line-height: 1.35;
+}
+
+.lab-main {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.lab-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pu-space-2);
+  padding: 0.65rem var(--pu-space-4);
+  border-bottom: 1px solid var(--lab-border);
+  background: color-mix(in srgb, var(--lab-panel) 92%, transparent);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 4rem;
+  z-index: 15;
+}
+
+.lab-toolbar-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+  font-size: 0.95rem;
+}
+
+.lab-tip {
+  margin: 0;
+  padding: 0.65rem var(--pu-space-4);
+  font-size: var(--pu-text-sm);
+  color: var(--pu-color-text-muted);
+  background: color-mix(in srgb, var(--pu-color-accent) 8%, var(--pu-color-bg));
+  border-bottom: 1px solid var(--lab-border);
+  line-height: 1.45;
+}
+
+.lab-tip strong {
+  color: var(--pu-color-accent);
+  font-weight: 700;
+}
+
+.lab-workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+  flex: 1;
+}
+
+@media (max-width: 1100px) {
+  .lab-workspace {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(240px, 40vh) minmax(240px, 1fr);
+  }
+}
+
+.lab-editor-pane,
+.lab-preview-pane {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--lab-border);
+}
+
+.lab-preview-pane {
+  border-right: 0;
+}
+
+.lab-pane-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pu-color-text-muted);
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--lab-border);
+  background: var(--pu-color-surface-2);
+}
+
+.lab-editor {
+  flex: 1;
+  width: 100%;
+  min-height: 280px;
+  border: 0;
+  resize: none;
+  padding: 1rem 1.1rem;
+  font-family: var(--pu-font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  background: #0b1018;
+  color: #e8eef8;
+  tab-size: 2;
+  outline: none;
+}
+
+[data-pu-theme="light"] .lab-editor {
+  background: #0f1724;
+}
+
+.lab-preview {
+  flex: 1;
+  width: 100%;
+  min-height: 280px;
+  border: 0;
+  background: var(--pu-color-bg);
+}
+
+.lab-console {
+  max-height: 140px;
+  overflow: auto;
+  border-top: 1px solid var(--lab-border);
+  background: var(--lab-panel);
+  font-family: var(--pu-font-mono);
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.lab-console:empty::before {
+  content: "Console — logs and errors appear here. ⌘/Ctrl+Enter to run.";
+  color: var(--pu-color-text-muted);
+}
+
+.lab-console-line {
+  margin: 0.15rem 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.lab-console-line.is-error {
+  color: var(--pu-color-danger);
+}
+
+.lab-console-line.is-warn {
+  color: #c07800;
+}
+
+.lab-status {
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text-muted);
+  margin-left: var(--pu-space-2);
+}
+
+.lab-status.is-ok {
+  color: #30a46c;
+}
+
+.lab-status.is-err {
+  color: var(--pu-color-danger);
+}

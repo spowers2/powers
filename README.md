@@ -31,6 +31,7 @@ cd ~/Documents/power-ui
 pnpm install
 pnpm test
 pnpm example:browser   # http://localhost:5173
+# Power Lab (learn by coding): http://localhost:5173/lab
 ```
 
 ### Design system + router (sketch)

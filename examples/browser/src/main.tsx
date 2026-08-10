@@ -26,6 +26,7 @@ import "./app.css";
 import { LandingPage } from "./LandingPage.js";
 import { SiteNav } from "./SiteNav.js";
 import { SystemPage } from "./SystemPage.js";
+import { LabPage } from "./lab/LabPage.js";
 
 type Todo = { id: number; title: string; done: boolean };
 
@@ -330,6 +331,7 @@ const router = createRouter({
       path: "/",
       component: () => LandingPage({ router }),
     },
+    { path: "/lab", component: () => LabPage() },
     { path: "/playground", component: () => PlaygroundPage() },
     { path: "/todos", component: () => TodosPage() },
     {
@@ -354,14 +356,16 @@ const router = createRouter({
 
 function AppShell() {
   const isLanding = () => router.path() === "/";
+  const isLab = () => router.path() === "/lab";
 
   return (
     <div>
       {SiteNav({ router, theme })}
       <div
-        class={() =>
-          isLanding() ? "site-main" : "site-main site-main--padded"
-        }
+        class={() => {
+          if (isLanding() || isLab()) return "site-main";
+          return "site-main site-main--padded";
+        }}
       >
         {router.outlet()}
       </div>
