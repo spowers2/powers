@@ -75,14 +75,14 @@ export const Avatar = component((raw: AvatarProps) => {
           typeof props.class === "function" ? props.class() : props.class,
         )
       }
-      title={props.name}
+      title={() => props.name ?? ""}
       role="img"
-      aria-label={props.alt ?? props.name ?? "Avatar"}
+      aria-label={() => props.alt ?? props.name ?? "Avatar"}
     >
       {props.src ? (
         <img src={props.src} alt={props.alt ?? props.name ?? ""} />
       ) : (
-        initials(props.name)
+        () => initials(props.name)
       )}
     </span>
   );

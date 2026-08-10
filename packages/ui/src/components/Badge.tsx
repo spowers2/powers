@@ -1,8 +1,10 @@
 import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
 
+export type BadgeTone = "neutral" | "accent" | "success" | "warning";
+
 export type BadgeProps = {
-  tone?: "neutral" | "accent" | "success" | "warning";
+  tone?: BadgeTone | (() => BadgeTone);
   class?: string | (() => string);
   children?: unknown;
 };

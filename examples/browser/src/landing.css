@@ -230,7 +230,7 @@
   font-weight: var(--pu-font-semibold);
 }
 
-/* Hero live card */
+/* Hero live product card */
 .lp-stage {
   position: relative;
   border-radius: calc(var(--pu-radius-lg) + 4px);
@@ -273,40 +273,61 @@
 .lp-stage-bar i:nth-child(2) { background: #febc2e; }
 .lp-stage-bar i:nth-child(3) { background: #28c840; }
 
-.lp-live-count {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-  margin: var(--pu-space-2) 0 var(--pu-space-4);
+.lp-stage-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: var(--pu-space-4);
 }
 
-.lp-orb {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  margin: var(--pu-space-3) 0 var(--pu-space-4);
-  background: linear-gradient(
-    145deg,
-    var(--pu-brand-500),
-    var(--pu-brand-700) 40%,
-    var(--pu-sage-600) 100%
-  );
-  box-shadow: 0 12px 36px var(--pu-color-glow);
-  will-change: transform;
+.lp-project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pu-space-4);
+}
+
+.lp-project-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.lp-project-status {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.lp-project-progress {
+  padding: var(--pu-space-3);
+  border-radius: var(--pu-radius-md);
+  background: var(--pu-color-surface-sunken);
+  border: 1px solid var(--pu-color-border);
+}
+
+.lp-stage-caption {
+  margin: 0;
+  font-size: var(--pu-text-xs);
+  line-height: 1.45;
+  color: var(--pu-color-text-muted);
+}
+
+.lp-stage-caption strong {
+  color: var(--pu-color-text);
+  font-weight: var(--pu-font-semibold);
 }
 
 .lp-code-mini {
   margin-top: var(--pu-space-4);
   font-family: var(--pu-font-mono);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   line-height: 1.55;
   color: var(--pu-color-text-muted);
   padding: var(--pu-space-3);
   border-radius: var(--pu-radius-md);
   background: color-mix(in srgb, var(--pu-color-bg) 80%, transparent);
   border: 1px solid var(--pu-color-border);
+  overflow-x: auto;
 }
 
 .lp-code-mini .k { color: var(--pu-color-accent); }

@@ -2,11 +2,17 @@
  * Marketing landing — modern, token-driven, live demos.
  * Navigation is provided by the shared SiteNav in AppShell.
  */
-import { signal, effect } from "@power-ui/core";
-import { animate, spring } from "@power-ui/animate";
-import { bindStyle } from "@power-ui/dom";
+import { signal, computed, effect } from "@power-ui/core";
 import type { Router } from "@power-ui/router";
-import { Badge, Button, Container, Stack } from "@power-ui/ui";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Container,
+  Progress,
+  Stack,
+  Text,
+} from "@power-ui/ui";
 import "./landing.css";
 
 const SECTION_IDS = ["features", "learn", "compare"] as const;
@@ -34,20 +40,40 @@ function scrollToSection(id: string) {
   }
 }
 
+const NAMES = ["Ada Lovelace", "Grace Hopper", "Katherine Johnson"] as const;
+
 export function LandingPage(props: { router: Router }) {
   const { router } = props;
 
-  // Live hero demo
-  const count = signal(0);
-  const x = signal(0);
+  // Hero = a tiny product surface (not a counter toy)
+  // Independent signals: only UI that *reads* a signal re-runs when it changes.
+  const owner = signal<string>(NAMES[0]!);
+  const progress = signal(42);
+  const status = computed(() => {
+    const p = progress();
+    if (p >= 100) return "Shipped";
+    if (p >= 60) return "In review";
+    return "Building";
+  });
+  const statusTone = computed(() => {
+    const p = progress();
+    if (p >= 100) return "success" as const;
+    if (p >= 60) return "accent" as const;
+    return "neutral" as const;
+  });
+
   const activeSection = signal<string>("top");
   const showBackTop = signal(false);
-  const orb = (<div class="lp-orb" />) as HTMLElement;
-  bindStyle(orb, () => ({ transform: `translateX(${x()}px)` }));
 
-  const bump = (d: number) => {
-    count.update((n) => Math.max(0, n + d));
-    animate(x, d > 0 ? 72 : 0, spring({ stiffness: 260, damping: 18 }));
+  const cycleOwner = () => {
+    const i = NAMES.indexOf(owner() as (typeof NAMES)[number]);
+    owner.set(NAMES[(i + 1) % NAMES.length]!);
+  };
+
+  const nudge = () => progress.set(Math.min(100, progress() + 18));
+  const reset = () => {
+    progress.set(42);
+    owner.set(NAMES[0]!);
   };
 
   const go = (path: string) => () => router.navigate(path);
@@ -141,10 +167,10 @@ export function LandingPage(props: { router: Router }) {
                   <span class="lp-title-gradient">updates only what changed</span>
                 </h1>
                 <p class="lp-lede">
-                  Power UI is a signal-first library with a tiny learning curve:
-                  five ideas for state, explicit DOM bindings, springs for motion,
-                  a real router, and a design system you retheme by editing one
-                  token file.
+                  One library for reactivity and UI chrome: fine-grained signals,
+                  JSX that updates only what changed, a real router, and a design
+                  system you retheme from a single token file — not a counter demo
+                  bolted onto another framework.
                 </p>
                 <div class="lp-cta-row">
                   <Button size="lg" onClick={go("/lab")}>
@@ -167,40 +193,70 @@ export function LandingPage(props: { router: Router }) {
                 </div>
               </div>
 
-              <div class="lp-stage" aria-label="Live demo">
+              <div class="lp-stage" aria-label="Live product demo">
                 <div class="lp-stage-inner">
                   <div class="lp-stage-bar" aria-hidden="true">
                     <i />
                     <i />
                     <i />
                   </div>
-                  <Badge tone="success">Live signal</Badge>
-                  <div class="lp-live-count">{() => String(count())}</div>
-                  {orb}
-                  <Stack direction="row" gap={2} wrap>
-                    <Button size="sm" variant="soft" onClick={() => bump(-1)}>
-                      −1
-                    </Button>
-                    <Button size="sm" onClick={() => bump(1)}>
-                      +1
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => {
-                        count.set(0);
-                        animate(x, 0, { duration: 220, ease: "easeOut" });
-                      }}
-                    >
-                      Reset
-                    </Button>
-                  </Stack>
+
+                  <div class="lp-stage-head">
+                    <Badge tone="accent">Live · design system</Badge>
+                    <Text muted size="xs">
+                      Same primitives as production
+                    </Text>
+                  </div>
+
+                  <div class="lp-project">
+                    <Stack direction="row" gap={3} align="center">
+                      <Avatar name={owner} size="md" />
+                      <div class="lp-project-meta">
+                        <Text weight="semibold" size="sm">
+                          Release checklist
+                        </Text>
+                        <Text muted size="xs">
+                          Owner: {() => owner()}
+                        </Text>
+                      </div>
+                      <Badge tone={statusTone} class="lp-project-status">
+                        {() => status()}
+                      </Badge>
+                    </Stack>
+
+                    <div class="lp-project-progress">
+                      <Progress value={progress} label="Ship readiness" />
+                    </div>
+
+                    <Stack direction="row" gap={2} wrap>
+                      <Button size="sm" onClick={nudge}>
+                        Advance
+                      </Button>
+                      <Button size="sm" variant="soft" onClick={cycleOwner}>
+                        Switch owner
+                      </Button>
+                      <Button size="sm" variant="ghost" onClick={reset}>
+                        Reset
+                      </Button>
+                    </Stack>
+
+                    <p class="lp-stage-caption">
+                      <strong>Fine-grained:</strong> Advance only re-runs Progress
+                      + Badge. Switch owner only re-runs Avatar + name — the rest
+                      stays put.
+                    </p>
+                  </div>
+
                   <div class="lp-code-mini">
-                    <span class="k">const</span> n = <span class="k">signal</span>(0);
+                    <span class="k">const</span> progress ={" "}
+                    <span class="k">signal</span>(42);
                     {"\n"}
-                    <span class="k">animate</span>(x, 72, <span class="k">spring</span>());
+                    <span class="k">const</span> status ={" "}
+                    <span class="k">computed</span>(() =&gt; …);
                     {"\n"}
-                    {"// only bindings that read n / x update"}
+                    <span class="s">&lt;Progress value=&#123;progress&#125; /&gt;</span>
+                    {"\n"}
+                    <span class="s">&lt;Badge&gt;&#123;() =&gt; status()&#125;&lt;/Badge&gt;</span>
                   </div>
                 </div>
               </div>
