@@ -1,7 +1,7 @@
 {
   "name": "@power-ui/dom",
-  "version": "0.1.0",
-  "description": "Thin DOM bindings for Power UI — explicit, fine-grained, tiny learning curve.",
+  "version": "0.2.0",
+  "description": "Thin DOM bindings + JSX for Power UI — explicit, fine-grained, tiny learning curve.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -10,6 +10,16 @@
       "types": "./src/index.ts",
       "import": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./jsx-runtime": {
+      "types": "./src/jsx-runtime.ts",
+      "import": "./src/jsx-runtime.ts",
+      "default": "./src/jsx-runtime.ts"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./src/jsx-runtime.ts",
+      "import": "./src/jsx-runtime.ts",
+      "default": "./src/jsx-runtime.ts"
     }
   },
   "main": "./src/index.ts",

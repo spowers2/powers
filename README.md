@@ -4,7 +4,7 @@
 
 Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 
-> Status: **Phase 2** — core + **`@power-ui/animate`** + thin **`@power-ui/dom`**. Compiler not required. Private while foundations harden.
+> Status: **Phase 2.x** — core + animate + **`@power-ui/dom` with JSX**. Private while foundations harden.
 
 **New here?** Read [`docs/LEARN.md`](./docs/LEARN.md) — small surface, real apps.
 
@@ -43,30 +43,36 @@ pnpm example:browser
 pnpm size
 ```
 
-### Hello browser UI
+### Hello browser UI (JSX)
 
-```ts
+```tsx
 import { signal } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
-import { mount, h, bindStyle } from "@power-ui/dom";
+import { mount, component, bindStyle } from "@power-ui/dom";
 
-mount(document.getElementById("app")!, () => {
+const App = component(() => {
   const count = signal(0);
   const x = signal(0);
-  const ball = h("div", { class: "ball" });
+  const ball = <div class="ball" /> as HTMLElement;
   bindStyle(ball, () => ({ transform: `translateX(${x()}px)` }));
 
-  return h("div", null,
-    h("button", {
-      onClick: () => {
-        count.update((n) => n + 1);
-        animate(x, 100, spring());
-      },
-      text: () => `Count: ${count()}`,
-    }),
-    ball,
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => {
+          count.update((n) => n + 1);
+          animate(x, 100, spring());
+        }}
+      >
+        {() => `Count: ${count()}`}
+      </button>
+      {ball}
+    </div>
   );
 });
+
+mount(document.getElementById("app")!, () => <App />);
 ```
 
 ---
@@ -87,7 +93,7 @@ mount(document.getElementById("app")!, () => {
 | `flush()` | Run pending effects now (tests/demos) |
 | `animate(signal, to, opts?)` | Tween or spring a number signal (`@power-ui/animate`) |
 | `spring(opts?)` | Spring config for `animate` |
-| `mount` / `h` / `bind*` / `show` / `list` | Thin DOM bindings (`@power-ui/dom`) |
+| `mount` / JSX / `component` / `Show` / `For` | DOM + JSX (`@power-ui/dom`) |
 
 Docs: [`LEARN`](./docs/LEARN.md) · [`DOM`](./docs/DOM.md) · [`ANIMATION`](./docs/ANIMATION.md) · [`NEXT`](./docs/NEXT.md) (includes parked GSAP adapter)
 
@@ -151,8 +157,8 @@ power-ui/
 | **1** | Core signals / effects | ✅ v0.1 |
 | **1.1** | `store`, `resource`, `onError`, stress tests, size budget | ✅ v0.1.1 |
 | **1.2** | Signal-native animation (`@power-ui/animate`) | ✅ v0.1.0 |
-| **2** | Thin DOM bindings (`@power-ui/dom`) + browser demo | ✅ v0.1.0 |
-| **2.x** | Compiler sugar (emit bindings) | Planned |
+| **2** | Thin DOM bindings (`@power-ui/dom`) + browser demo | ✅ |
+| **2.x** | JSX runtime + `component` / `Show` / `For` | ✅ v0.2.0 |
 | **—** | **GSAP adapter** + richer motion | **Parked** — see [`docs/NEXT.md`](./docs/NEXT.md) |
 | **3** | SSR + selective hydration | Planned |
 | **4** | App kit (router, actions) | Planned |

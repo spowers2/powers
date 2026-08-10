@@ -2,12 +2,10 @@
 
 Last updated: 2026-08-09
 
-## Completed: Phase 2 thin DOM (v0.1)
+## Completed recently
 
-- [x] `@power-ui/dom` — `mount`, `h`, `text`, `bind*`, `on`, `show`, `list`
-- [x] Tests (happy-dom)
-- [x] Browser example (`examples/browser` + Vite)
-- [x] Docs: `docs/DOM.md`
+- [x] Phase 2.0 — `@power-ui/dom` thin bindings + browser demo  
+- [x] Phase 2.x — JSX runtime (`jsx-runtime`), `component`, `Show`, `For`  
 
 ---
 
@@ -15,25 +13,24 @@ Last updated: 2026-08-09
 
 ### GSAP adapter + richer motion
 
-**Do not drop this.** After DOM/compiler feel solid (or when a user needs cinematic timelines):
+**Do not drop this.** After components/JSX feel solid in real apps, or when cinematic timelines are needed:
 
 1. Optional `@power-ui/animate/gsap` (or `@power-ui/gsap`) peer adapter  
 2. Sync GSAP tweens → signals (or target DOM for marketing pages only)  
 3. Color / multi-value interpolation in `@power-ui/animate`  
-4. Enter/exit + FLIP-style helpers on top of `show` / `list`
+4. Enter/exit + FLIP-style helpers on top of `Show` / `For`  
 
 See [`docs/ANIMATION.md`](./ANIMATION.md).
 
 ---
 
-## Sensible next engineering milestones
+## Sensible next milestones
 
-1. **Phase 2.x** — tiny JSX or template compiler that *only* emits existing `h` / `bind*` calls  
-2. **Components** — lightweight `component(setup)` / ownership helpers  
-3. **SSR / islands** (Phase 3)  
-4. **GSAP adapter** (when pro motion demand is real)  
-
-Prefer: dogfood the browser demo, fix binding gaps, then compiler.
+1. Reactive props helpers (`mergeProps` / props as store) for reusable components  
+2. Small router package  
+3. SSR / islands (Phase 3)  
+4. **GSAP adapter** when pro motion demand is real  
+5. Hardening: better `For` without wrapper-in-`ul` edge cases, a11y recipes  
 
 ---
 
@@ -43,4 +40,5 @@ Prefer: dogfood the browser demo, fix binding gaps, then compiler.
 - [x] Phase 1 — `@power-ui/core`  
 - [x] Phase 1.1 — store, resource, onError, stress tests, size  
 - [x] Phase 1.2 — `@power-ui/animate`  
-- [x] Phase 2.0 — `@power-ui/dom` thin bindings + browser demo  
+- [x] Phase 2.0 — `@power-ui/dom`  
+- [x] Phase 2.x — JSX + `component` / `Show` / `For`  

@@ -4,7 +4,7 @@
  * Thin, explicit DOM bindings over @power-ui/core.
  *
  * Learn order:
- *   mount → h / text → bind* / on → show → list
+ *   mount → h / text / JSX → bind* / on → show / Show → list / For → component
  */
 
 export { mount } from "./mount.js";
@@ -12,6 +12,8 @@ export type { MountResult } from "./mount.js";
 
 export { h, text } from "./h.js";
 export type { Child, Props } from "./h.js";
+
+export { Fragment, normalizeChildren, appendChild } from "./fragment.js";
 
 export {
   bindText,
@@ -26,3 +28,6 @@ export { show } from "./show.js";
 export { list } from "./list.js";
 export type { ListOptions } from "./list.js";
 export { insert, remove } from "./insert.js";
+
+export { component, Show, For } from "./component.js";
+export type { Component, ComponentProps } from "./component.js";

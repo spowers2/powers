@@ -143,29 +143,33 @@ Honors `prefers-reduced-motion` by default (snaps to the end).
 
 ---
 
-## 7. DOM — bind signals to the page
+## 7. DOM / JSX — bind signals to the page
 
-```ts
-import { mount, h } from "@power-ui/dom";
+```tsx
+import { mount, component } from "@power-ui/dom";
 
-mount(document.getElementById("app")!, () => {
+const Counter = component(() => {
   const count = signal(0);
-  return h("button", {
-    onClick: () => count.update((n) => n + 1),
-    text: () => `Count: ${count()}`,
-  });
+  return (
+    <button type="button" onClick={() => count.update((n) => n + 1)}>
+      {() => `Count: ${count()}`}
+    </button>
+  );
 });
+
+mount(document.getElementById("app")!, () => <Counter />);
 ```
 
-Also: `bindText`, `bindAttr`, `show`, `list` — see [`docs/DOM.md`](./DOM.md).
+**Remember:** `{() => count()}` updates; `{count()}` does not.
+
+Also: `Show`, `For`, `bindStyle`, … — see [`docs/DOM.md`](./DOM.md).
 
 ---
 
 ## What you do *not* need yet
 
-- JSX / templates (compiler comes after bindings are solid)
 - Routers, SSR, design system (later)
 - **GSAP adapter** (parked — optional pro path; see [`docs/NEXT.md`](./NEXT.md))
-- Proxies, decorators, or special file extensions
+- Proxies or special file extensions
 
-Master core + animate + these DOM bindings and you can build real UIs.
+Master core + animate + JSX and you can build real UIs.

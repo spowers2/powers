@@ -1,29 +1,50 @@
-# `@power-ui/dom` — Phase 2 thin DOM
+# `@power-ui/dom` — Phase 2 DOM + JSX
 
-**Status:** v0.1.0 — explicit bindings, no compiler yet.
+**Status:** v0.2.0 — explicit bindings **and** automatic JSX runtime.
 
 ## Learn order
 
 ```
-mount → h / text → bind* / on → show → list
+mount → h / JSX → component → Show / For → bind* when you need escape hatches
 ```
 
 Same reactivity you already know (`signal`, `effect`). The DOM layer only **subscribes** and **writes nodes**.
 
-## Quick example
+## Quick example (JSX)
+
+```tsx
+import { signal } from "@power-ui/core";
+import { mount, component } from "@power-ui/dom";
+
+const Counter = component(() => {
+  const count = signal(0);
+  return (
+    <button type="button" onClick={() => count.update((n) => n + 1)}>
+      {() => `Count: ${count()}`}
+    </button>
+  );
+});
+
+mount(document.getElementById("app")!, () => <Counter />);
+```
+
+**Reactive rule:** pass a **function** for anything that should update — children, `class`, `style`, etc.  
+`{count()}` runs once; `{() => count()}` stays live.
+
+### Vite / TS config
 
 ```ts
-import { signal } from "@power-ui/core";
-import { mount, h } from "@power-ui/dom";
+// vite.config.ts
+esbuild: {
+  jsx: "automatic",
+  jsxImportSource: "@power-ui/dom",
+}
+```
 
-mount(document.getElementById("app")!, () => {
-  const count = signal(0);
-  return h("button", {
-    type: "button",
-    onClick: () => count.update((n) => n + 1),
-    text: () => `Count: ${count()}`,
-  });
-});
+```json
+// tsconfig
+"jsx": "react-jsx",
+"jsxImportSource": "@power-ui/dom"
 ```
 
 ## API
@@ -31,52 +52,40 @@ mount(document.getElementById("app")!, () => {
 | API | Role |
 |---|---|
 | `mount(parent, app)` | Create root, append nodes, return dispose |
-| `h(tag, props?, ...children)` | Create element; functions in props are reactive |
-| `text(value \| fn)` | Text node (static or reactive) |
-| `bindText` / `bindAttr` / `bindProp` / `bindClass` / `bindStyle` | Explicit bindings |
-| `on(el, type, handler)` | Event listener + dispose |
-| `show(parent, when, factory)` | Conditional mount (dispose when hidden) |
-| `list(parent, items, render, { key })` | Keyed list reconciliation |
-| `insert` / `remove` | Low-level node helpers |
+| `h` / JSX | Create elements; functions in props/children are reactive |
+| `component(setup)` | Function component helper (types + name) |
+| `Show` / `For` | JSX control flow (conditional + keyed list) |
+| `Fragment` | JSX fragments |
+| `text` / `bind*` / `on` | Explicit bindings |
+| `show` / `list` | Imperative control flow (same engines as Show/For) |
 
-### `h` props conventions
+### Props conventions
 
-- `text: () => …` → reactive textContent  
-- `class` / `className` → string or `() => string | Record<string, boolean>`  
-- `style: () => ({ opacity: "1" })` → reactive inline styles  
+- `{() => count()}` → reactive text child  
+- `class={() => …}` / `style={() => ({ … })}` → reactive  
 - `onClick`, `onInput`, … → event listeners  
-- Other functions → reactive attributes (or DOM props for `value` / `checked` / …)
+- `ref={(el) => …}` → element callback  
 
 ## Motion
 
-Animate **signals**, bind the result:
-
 ```ts
 import { animate, spring } from "@power-ui/animate";
+import { bindStyle } from "@power-ui/dom";
 
 const x = signal(0);
 bindStyle(el, () => ({ transform: `translateX(${x()}px)` }));
 animate(x, 100, spring());
 ```
 
-## Not in v0.1
+## Not yet
 
-- JSX / templates (Phase 2.x compiler)  
-- Components as first-class (`defineComponent`)  
+- Full template compiler / SFC files  
 - SSR / hydration  
-- Built-in FLIP / enter-exit helpers  
-
-## Parked (do not forget)
-
-See [`docs/NEXT.md`](./NEXT.md):
-
-- **GSAP adapter** (optional pro motion path)  
-- Color interpolation, richer animate targets  
-- Compiler that *emits* these bindings  
+- Built-in FLIP / enter-exit  
+- **GSAP adapter** (parked — [`docs/NEXT.md`](./NEXT.md))  
 
 ## Browser demo
 
 ```bash
 pnpm example:browser
-# → vite dev server
 ```
