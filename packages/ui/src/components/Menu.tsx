@@ -27,13 +27,15 @@ const styles = `
   flex-direction: column;
   gap: 2px;
   min-width: 10.5rem;
-  margin: calc(var(--pu-space-1) * -1);
+  margin: 0;
+  padding: 0;
 }
 .pu-menu__item {
   appearance: none;
   border: 0;
   background: transparent;
   text-align: left;
+  width: 100%;
   font: inherit;
   font-size: var(--pu-text-sm);
   font-weight: var(--pu-font-medium);
@@ -44,8 +46,10 @@ const styles = `
   cursor: pointer;
   transition: background var(--pu-duration-fast) var(--pu-ease);
 }
-.pu-menu__item:hover:not(:disabled) {
+.pu-menu__item:hover:not(:disabled),
+.pu-menu__item:focus-visible:not(:disabled) {
   background: var(--pu-color-surface-2);
+  outline: none;
 }
 .pu-menu__item:disabled {
   opacity: 0.45;
@@ -54,23 +58,24 @@ const styles = `
 .pu-menu__item--danger {
   color: var(--pu-color-danger);
 }
-.pu-menu__item--danger:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--pu-color-danger) 10%, transparent);
+.pu-menu__item--danger:hover:not(:disabled),
+.pu-menu__item--danger:focus-visible:not(:disabled) {
+  background: color-mix(in srgb, var(--pu-color-danger) 12%, transparent);
 }
 `;
 
-let injected = false;
-function ensureStyles() {
-  if (injected || typeof document === "undefined") return;
-  injected = true;
-  const el = document.createElement("style");
+function ensureStyles(doc: Document = document) {
+  if (typeof doc === "undefined") return;
+  if (doc.querySelector('style[data-pu-ui="menu"]')) return;
+  const el = doc.createElement("style");
   el.setAttribute("data-pu-ui", "menu");
   el.textContent = styles;
-  document.head.appendChild(el);
+  doc.head.appendChild(el);
 }
 
 /**
  * Action menu built on Popover. Uncontrolled open state by default.
+ * Escape / outside click handled by Popover (iframe-safe).
  */
 export const Menu = component((raw: MenuProps) => {
   ensureStyles();
@@ -85,36 +90,47 @@ export const Menu = component((raw: MenuProps) => {
   };
 
   return (
-    <Popover
-      open={open}
-      onOpenChange={(v) => open.set(v)}
-      align={props.align}
-      trigger={props.trigger}
+    <div
+      class={() =>
+        cx(
+          "pu-menu-root",
+          typeof props.class === "function" ? props.class() : props.class,
+        )
+      }
+      ref={(el) => ensureStyles(el.ownerDocument)}
     >
-      <div class="pu-menu" role="menu">
-        <For each={getItems}>
-          {(item) => (
-            <button
-              type="button"
-              role="menuitem"
-              class={() =>
-                cx(
-                  "pu-menu__item",
-                  item().danger && "pu-menu__item--danger",
-                )
-              }
-              disabled={() => !!item().disabled}
-              onClick={() => {
-                if (item().disabled) return;
-                props.onSelect?.(item().id);
-                open.set(false);
-              }}
-            >
-              {() => item().label}
-            </button>
-          )}
-        </For>
-      </div>
-    </Popover>
+      <Popover
+        open={open}
+        onOpenChange={(v) => open.set(v)}
+        align={props.align}
+        trigger={props.trigger}
+      >
+        <div class="pu-menu" role="menu">
+          <For each={getItems}>
+            {(item) => (
+              <button
+                type="button"
+                role="menuitem"
+                class={() =>
+                  cx(
+                    "pu-menu__item",
+                    item().danger && "pu-menu__item--danger",
+                  )
+                }
+                disabled={() => !!item().disabled}
+                onClick={(e: MouseEvent) => {
+                  e.stopPropagation();
+                  if (item().disabled) return;
+                  props.onSelect?.(item().id);
+                  open.set(false);
+                }}
+              >
+                {() => item().label}
+              </button>
+            )}
+          </For>
+        </div>
+      </Popover>
+    </div>
   );
 });

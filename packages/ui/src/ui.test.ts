@@ -23,6 +23,9 @@ function installDom() {
   g.Text = window.Text;
   g.Element = window.Element;
   g.SVGElement = window.SVGElement;
+  g.KeyboardEvent = window.KeyboardEvent;
+  g.MouseEvent = window.MouseEvent;
+  g.Event = window.Event;
   return window.document as unknown as Document;
 }
 
@@ -142,6 +145,32 @@ describe("@power-ui/ui", () => {
     assert.equal(el!.classList.contains("pu-popover--open"), true);
   });
 
+  it("Popover closes on Escape", async () => {
+    const { flush } = await import("@power-ui/core");
+    const open = signal(true);
+    mount(root, () =>
+      Popover({
+        open,
+        onOpenChange: (v) => open.set(v),
+        trigger: "Open",
+        children: "Panel body",
+      }),
+    );
+    flush();
+    assert.equal(open(), true);
+    // Listeners attach on next macrotask (after refs)
+    await new Promise((r) => setTimeout(r, 10));
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    flush();
+    assert.equal(open(), false);
+  });
+
   it("Menu renders items when opened", async () => {
     const { flush } = await import("@power-ui/core");
     mount(root, () =>
@@ -159,5 +188,29 @@ describe("@power-ui/ui", () => {
     flush();
     assert.match(root.textContent ?? "", /Alpha/);
     assert.match(root.textContent ?? "", /Beta/);
+  });
+
+  it("Menu closes on Escape", async () => {
+    const { flush } = await import("@power-ui/core");
+    mount(root, () =>
+      Menu({
+        trigger: "Actions",
+        items: [{ id: "a", label: "Alpha" }],
+      }),
+    );
+    const trigger = root.querySelector(".pu-popover__trigger") as HTMLElement;
+    trigger.click();
+    flush();
+    await new Promise((r) => setTimeout(r, 10));
+    assert.ok(root.querySelector(".pu-popover--open"));
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    flush();
+    assert.equal(root.querySelector(".pu-popover--open"), null);
   });
 });

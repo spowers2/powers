@@ -3,7 +3,7 @@ import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
 
 export type DialogProps = {
-  /** Controlled open state (boolean or accessor) */
+  /** Controlled open state (boolean, signal, or accessor) */
   open: boolean | (() => boolean);
   onClose?: () => void;
   title?: string;
@@ -48,6 +48,7 @@ const styles = `
   max-height: min(88vh, 720px);
   overflow: auto;
   background: var(--pu-color-surface-elevated);
+  color: var(--pu-color-text);
   border: 1px solid var(--pu-color-border);
   border-radius: var(--pu-radius-xl);
   box-shadow: var(--pu-shadow-float);
@@ -74,6 +75,7 @@ const styles = `
   font-weight: var(--pu-font-bold);
   letter-spacing: var(--pu-tracking-tight);
   line-height: var(--pu-leading-tight);
+  color: var(--pu-color-text);
 }
 .pu-dialog__desc {
   margin: var(--pu-space-2) 0 0;
@@ -106,22 +108,33 @@ const styles = `
 .pu-dialog__body {
   font-size: var(--pu-text-sm);
   line-height: 1.55;
+  color: var(--pu-color-text);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-dialog-root,
+  .pu-dialog-panel { transition: none; }
 }
 `;
 
 let injected = false;
-function ensureStyles() {
-  if (injected || typeof document === "undefined") return;
-  injected = true;
-  const el = document.createElement("style");
+function ensureStyles(doc: Document = document) {
+  if (typeof doc === "undefined") return;
+  if (doc.querySelector('style[data-pu-ui="dialog"]')) return;
+  const el = doc.createElement("style");
   el.setAttribute("data-pu-ui", "dialog");
   el.textContent = styles;
-  document.head.appendChild(el);
+  doc.head.appendChild(el);
+  if (doc === document) injected = true;
+}
+
+function readOpen(open: unknown): boolean {
+  if (typeof open === "function") return !!(open as () => boolean)();
+  return !!open;
 }
 
 /**
- * Modal dialog with glass scrim. Control via `open` + `onClose`.
- * Escape and backdrop click call `onClose`.
+ * Modal dialog with scrim. Control via `open` + `onClose`.
+ * Escape and backdrop click call `onClose` (ownerDocument-aware for iframes).
  */
 export const Dialog = component((raw: DialogProps) => {
   ensureStyles();
@@ -129,21 +142,47 @@ export const Dialog = component((raw: DialogProps) => {
     DialogProps & { size: "sm" | "md" | "lg" }
   >;
 
-  const isOpen = () =>
-    typeof props.open === "function" ? !!(props.open as () => boolean)() : !!props.open;
+  const isOpen = () => readOpen(props.open);
+  let rootEl: HTMLElement | null = null;
 
-  // Escape key + body scroll lock while open
   effect(() => {
     if (!isOpen()) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") props.onClose?.();
+
+    let disposed = false;
+    const cleanups: Array<() => void> = [];
+
+    const attach = () => {
+      if (disposed) return;
+      const root = rootEl;
+      const doc = root?.ownerDocument ?? document;
+      const win = doc.defaultView ?? window;
+      ensureStyles(doc);
+
+      const body = doc.body;
+      const prev = body.style.overflow;
+      body.style.overflow = "hidden";
+      cleanups.push(() => {
+        body.style.overflow = prev;
+      });
+
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          e.stopPropagation();
+          props.onClose?.();
+        }
+      };
+      win.addEventListener("keydown", onKey, true);
+      cleanups.push(() => win.removeEventListener("keydown", onKey, true));
     };
-    window.addEventListener("keydown", onKey);
+
+    // Defer so ref is set when open starts true on first paint
+    const timer = window.setTimeout(attach, 0);
+    cleanups.push(() => window.clearTimeout(timer));
+
     return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
+      disposed = true;
+      for (const c of cleanups) c();
     };
   });
 
@@ -157,6 +196,10 @@ export const Dialog = component((raw: DialogProps) => {
         )
       }
       aria-hidden={() => (!isOpen() ? "true" : "false")}
+      ref={(el) => {
+        rootEl = el;
+        ensureStyles(el.ownerDocument);
+      }}
     >
       <div
         class="pu-dialog-backdrop"
@@ -168,6 +211,7 @@ export const Dialog = component((raw: DialogProps) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby={props.title ? "pu-dialog-title" : undefined}
+        onClick={(e: MouseEvent) => e.stopPropagation()}
       >
         {(props.title || props.onClose) && (
           <div class="pu-dialog__head">
