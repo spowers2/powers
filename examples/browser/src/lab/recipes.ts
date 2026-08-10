@@ -102,27 +102,26 @@ mount(document.getElementById("root")!, () => <App />);
     tip: "animate() tweens a number signal. Bind it to style once — only that binding updates.",
     code: `import { signal } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
-import { mount, bindStyle } from "@power-ui/dom";
+import { mount } from "@power-ui/dom";
 import { Button, Card, Stack, Text } from "@power-ui/ui";
 
 const x = signal(0);
 
 export function App() {
+  // Size + motion in one style binding (numbers auto-get px)
   const ball = (
     <div
-      class="demo-ball"
-      style={{
+      style={() => ({
         width: 48,
         height: 48,
         borderRadius: 999,
         background:
           "linear-gradient(145deg, var(--pu-brand-500), var(--pu-sage-600))",
         boxShadow: "var(--pu-shadow-md)",
-      }}
+        transform: \`translateX(\${x()}px)\`,
+      })}
     />
-  ) as HTMLElement;
-
-  bindStyle(ball, () => ({ transform: \`translateX(\${x()}px)\` }));
+  );
 
   return (
     <Card>

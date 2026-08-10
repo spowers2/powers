@@ -97,11 +97,74 @@ export function bindStyle(
 
     for (const key of nextKeys) {
       const value = styles[key];
-      setStyleProp(el, key, value == null ? "" : String(value));
+      if (value == null) {
+        setStyleProp(el, key, "");
+      } else if (typeof value === "number") {
+        setStyleProp(el, key, toCssValue(key.includes("-")
+          ? key.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
+          : key, value));
+      } else {
+        setStyleProp(el, key, String(value));
+      }
     }
 
     prevKeys = nextKeys;
   });
+}
+
+/** CSS props that accept unitless numbers (like React). Everything else gets `px`. */
+const UNITLESS = new Set([
+  "animationIterationCount",
+  "aspectRatio",
+  "borderImageOutset",
+  "borderImageSlice",
+  "borderImageWidth",
+  "boxFlex",
+  "boxFlexGroup",
+  "boxOrdinalGroup",
+  "columnCount",
+  "columns",
+  "flex",
+  "flexGrow",
+  "flexPositive",
+  "flexShrink",
+  "flexNegative",
+  "flexOrder",
+  "gridArea",
+  "gridRow",
+  "gridRowEnd",
+  "gridRowSpan",
+  "gridRowStart",
+  "gridColumn",
+  "gridColumnEnd",
+  "gridColumnSpan",
+  "gridColumnStart",
+  "fontWeight",
+  "lineClamp",
+  "lineHeight",
+  "opacity",
+  "order",
+  "orphans",
+  "tabSize",
+  "widows",
+  "zIndex",
+  "zoom",
+  "fillOpacity",
+  "floodOpacity",
+  "stopOpacity",
+  "strokeDasharray",
+  "strokeDashoffset",
+  "strokeMiterlimit",
+  "strokeOpacity",
+  "strokeWidth",
+]);
+
+function toCssValue(key: string, value: string | number): string {
+  if (typeof value === "number") {
+    if (value === 0 || UNITLESS.has(key)) return String(value);
+    return `${value}px`;
+  }
+  return value;
 }
 
 function setStyleProp(
@@ -117,5 +180,11 @@ function setStyleProp(
   const camel = key.includes("-")
     ? key.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
     : key;
-  (el.style as unknown as Record<string, string>)[camel] = value;
+  // value may already be stringified; re-apply unit rule when it's a bare number
+  const asNum = Number(value);
+  const final =
+    value !== "" && Number.isFinite(asNum) && String(asNum) === value.trim()
+      ? toCssValue(camel, asNum)
+      : value;
+  (el.style as unknown as Record<string, string>)[camel] = final;
 }
