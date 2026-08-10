@@ -1,16 +1,22 @@
 /**
- * @power-ui/ssr — Phase 3 foundation
+ * @power-ui/ssr
  *
- * Renders a Power UI app to an HTML string using happy-dom.
- * Not full islands/resumability yet — a clear, usable first step.
+ * - `renderToString` — full tree → HTML (happy-dom)
+ * - `htmlDocument` — wrap body in a document shell
+ * - Islands — `island` / `markIsland` / `hydrateIslands` for selective client interactivity
  *
- * @example
+ * @example SSR + island
  * ```ts
- * import { renderToString } from "@power-ui/ssr";
- * import { h } from "@power-ui/dom";
+ * // server
+ * const body = await renderToString(() =>
+ *   h("main", null,
+ *     h("h1", { text: "Static" }),
+ *     island("counter", () => Counter()),
+ *   )
+ * );
  *
- * const html = await renderToString(() => h("h1", { text: "Hello" }));
- * // "<h1>Hello</h1>"
+ * // client
+ * hydrateIslands({ counter: () => Counter() });
  * ```
  */
 import { Window } from "happy-dom";
@@ -83,14 +89,20 @@ export async function renderToString(
 /**
  * Wrap app HTML in a minimal document shell for full-page SSR responses.
  */
-export function htmlDocument(body: string, options?: {
-  title?: string;
-  head?: string;
-}): string {
+export function htmlDocument(
+  body: string,
+  options?: {
+    title?: string;
+    head?: string;
+    /** Extra attributes on <html>, e.g. data-pu-theme */
+    htmlAttrs?: string;
+  },
+): string {
   const title = options?.title ?? "Power UI";
   const head = options?.head ?? "";
+  const htmlAttrs = options?.htmlAttrs ? ` ${options.htmlAttrs}` : "";
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en"${htmlAttrs}>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -110,3 +122,12 @@ function escapeHtml(s: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
+
+export {
+  island,
+  markIsland,
+  hydrateIsland,
+  hydrateIslands,
+  islandPlaceholder,
+} from "./islands.js";
+export type { IslandFactory, IslandRegistry } from "./islands.js";

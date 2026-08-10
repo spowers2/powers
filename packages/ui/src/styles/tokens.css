@@ -93,11 +93,31 @@
   --pu-duration-fast: 120ms;
   --pu-duration: 200ms;
 
-  /* ---- Control sizes ---- */
+  /* ---- Control sizes (comfortable density default) ---- */
   --pu-control-h-sm: 2rem;
   --pu-control-h-md: 2.5rem;
   --pu-control-h-lg: 3rem;
   --pu-control-px: 0.9rem;
+  --pu-field-gap: var(--pu-space-2);
+  --pu-label-size: var(--pu-text-sm);
+}
+
+/* Compact density: set data-pu-density="compact" on <html> or a root */
+[data-pu-density="compact"] {
+  --pu-control-h-sm: 1.75rem;
+  --pu-control-h-md: 2rem;
+  --pu-control-h-lg: 2.35rem;
+  --pu-control-px: 0.7rem;
+  --pu-field-gap: var(--pu-space-1);
+  --pu-label-size: var(--pu-text-xs);
+  --pu-space-3: 0.5rem;
+  --pu-space-4: 0.75rem;
+  --pu-space-5: 1rem;
+  --pu-space-6: 1.15rem;
+}
+
+[data-pu-density="comfortable"] {
+  /* explicit alias of defaults — useful when toggling back */
 }
 
 /* Dark theme: set data-pu-theme="dark" on <html> or a root */

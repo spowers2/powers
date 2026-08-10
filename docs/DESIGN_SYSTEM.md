@@ -34,6 +34,15 @@ function App() {
 | Semantic colors | `--pu-color-bg`, `-surface`, `-text`, `-accent`, … |
 | Space / radius / type | `--pu-space-*`, `--pu-radius-*`, `--pu-text-*` |
 | Dark mode | `[data-pu-theme="dark"] { … }` overrides |
+| Density | `[data-pu-density="compact"]` control heights + gaps |
+
+```ts
+const theme = createTheme("light");
+theme.bind();
+const density = createDensity("comfortable");
+density.bind();
+density.toggle(); // compact ↔ comfortable
+```
 
 Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand steps, so one token file restyles the app.
 
@@ -50,7 +59,11 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Container` | max-width page shell |
 | `Grid` | responsive columns |
 | `Code` | inline + block code |
-| `createTheme` | light/dark controller |
+| `Label` / `Field` | accessible form layout + hint/error |
+| `Textarea` / `Select` | multi-line + dropdown |
+| `Switch` / `Checkbox` | boolean controls |
+| `createTheme` | light/dark (`data-pu-theme`) |
+| `createDensity` | comfortable / compact (`data-pu-density`) |
 
 ## Rules for new primitives
 

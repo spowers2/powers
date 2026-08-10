@@ -174,6 +174,7 @@ const DOM_PROPS = new Set([
   "checked",
   "selected",
   "disabled",
+  "hidden",
   "readOnly",
   "multiple",
   "muted",

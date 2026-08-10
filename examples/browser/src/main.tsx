@@ -8,11 +8,18 @@ import { createRouter, Link } from "@power-ui/router";
 import {
   Button,
   Input,
+  Textarea,
+  Select,
+  Field,
+  Switch,
+  Checkbox,
   Stack,
   Text,
   Card,
   Container,
+  Badge,
   createTheme,
+  createDensity,
 } from "@power-ui/ui";
 import "@power-ui/ui/theme.css";
 import "./app.css";
@@ -28,10 +35,27 @@ const theme = createTheme(
 );
 theme.bind();
 
+const density = createDensity("comfortable");
+density.bind();
+
 function PlaygroundPage() {
   const count = signal(0);
   const x = signal(0);
   const name = signal("Ada");
+
+  // Forms demo state
+  const email = signal("");
+  const role = signal("dev");
+  const bio = signal("");
+  const newsletter = signal(true);
+  const terms = signal(false);
+  const submitted = signal("");
+
+  const emailError = () => {
+    const v = email().trim();
+    if (!v) return "";
+    return v.includes("@") ? "" : "Enter a valid email";
+  };
 
   const bump = (delta: number) => {
     count.update((n) => n + delta);
@@ -44,9 +68,12 @@ function PlaygroundPage() {
   return (
     <Container size="md">
       <Stack gap={5}>
-        <Text as="h2" size="xl">
-          Playground
-        </Text>
+        <Stack direction="row" justify="between" align="center" wrap>
+          <Text as="h2" size="xl">
+            Playground
+          </Text>
+          <Badge tone="accent">forms · density · tokens</Badge>
+        </Stack>
 
         <Card>
           <Stack gap={3}>
@@ -76,6 +103,121 @@ function PlaygroundPage() {
         <Card>
           <Stack gap={3}>
             <Text as="h3" size="sm" muted weight="semibold">
+              Forms
+            </Text>
+            <Field
+              label="Email"
+              htmlFor="pg-email"
+              required
+              hint="We never share your email."
+              error={emailError}
+            >
+              <Input
+                id="pg-email"
+                type="email"
+                placeholder="you@company.com"
+                value={email}
+                onInput={(e) =>
+                  email.set((e.target as HTMLInputElement).value)
+                }
+                aria-invalid={() => !!emailError()}
+              />
+            </Field>
+            <Field label="Role" htmlFor="pg-role">
+              <Select
+                id="pg-role"
+                value={role}
+                options={[
+                  { value: "dev", label: "Developer" },
+                  { value: "design", label: "Designer" },
+                  { value: "pm", label: "Product" },
+                ]}
+                onChange={(e) =>
+                  role.set((e.target as HTMLSelectElement).value)
+                }
+              />
+            </Field>
+            <Field label="Bio" htmlFor="pg-bio" hint="Optional">
+              <Textarea
+                id="pg-bio"
+                rows={3}
+                placeholder="Short intro…"
+                value={bio}
+                onInput={(e) =>
+                  bio.set((e.target as HTMLTextAreaElement).value)
+                }
+              />
+            </Field>
+            <Switch
+              label="Email me product updates"
+              checked={newsletter}
+              onChange={(v) => newsletter.set(v)}
+            />
+            <Checkbox
+              label="I agree to the terms"
+              checked={terms}
+              onChange={(v) => terms.set(v)}
+            />
+            <Stack direction="row" gap={2} wrap>
+              <Button
+                onClick={() => {
+                  if (!terms()) {
+                    submitted.set("Please accept the terms.");
+                    return;
+                  }
+                  if (emailError() || !email().trim()) {
+                    submitted.set("Fix the email field.");
+                    return;
+                  }
+                  submitted.set(
+                    `Saved ${email()} · ${role()} · news=${newsletter()}`,
+                  );
+                }}
+              >
+                Submit
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  email.set("");
+                  bio.set("");
+                  role.set("dev");
+                  newsletter.set(true);
+                  terms.set(false);
+                  submitted.set("");
+                }}
+              >
+                Clear
+              </Button>
+            </Stack>
+            <Text muted size="sm">
+              {() => submitted() || " "}
+            </Text>
+          </Stack>
+        </Card>
+
+        <Card>
+          <Stack gap={3}>
+            <Text as="h3" size="sm" muted weight="semibold">
+              Theme & density
+            </Text>
+            <Text muted>
+              Theme: {() => theme.mode()} · Density: {() => density.density()}
+            </Text>
+            <Stack direction="row" gap={2} wrap>
+              <Button variant="soft" onClick={() => theme.toggle()}>
+                Toggle theme
+              </Button>
+              <Button variant="ghost" onClick={() => density.toggle()}>
+                Toggle density
+              </Button>
+            </Stack>
+          </Stack>
+        </Card>
+
+        <Card>
+          <Stack gap={3}>
+            <Text as="h3" size="sm" muted weight="semibold">
               Reactive props
             </Text>
             <Text>{() => `Hello, ${name()}`}</Text>
@@ -90,18 +232,6 @@ function PlaygroundPage() {
                 Katherine
               </Button>
             </Stack>
-          </Stack>
-        </Card>
-
-        <Card>
-          <Stack gap={3}>
-            <Text as="h3" size="sm" muted weight="semibold">
-              Theme
-            </Text>
-            <Text muted>Mode: {() => theme.mode()}</Text>
-            <Button variant="soft" onClick={() => theme.toggle()}>
-              Toggle light / dark
-            </Button>
           </Stack>
         </Card>
       </Stack>

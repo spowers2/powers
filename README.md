@@ -19,8 +19,8 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 | `@power-ui/animate` | tween / spring on signals |
 | `@power-ui/dom` | mount, h, JSX, reactive props, Show, For |
 | `@power-ui/router` | createRouter, Link, navigate |
-| `@power-ui/ssr` | `renderToString` (happy-dom foundation) |
-| `@power-ui/ui` | **design system** — tokens, theme, Button, Input, Stack, Text, Card |
+| `@power-ui/ssr` | `renderToString` + **islands** hydrate API |
+| `@power-ui/ui` | **design system** — tokens, theme, density, forms + layout primitives |
 
 ---
 
