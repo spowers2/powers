@@ -2,7 +2,11 @@ import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import { Window } from "happy-dom";
 import { mount } from "@power-ui/dom";
+import { signal } from "@power-ui/core";
 import { Button } from "./components/Button.js";
+import { Dialog } from "./components/Dialog.js";
+import { Tabs } from "./components/Tabs.js";
+import { Progress } from "./components/Progress.js";
 import { createTheme } from "./theme.js";
 import { cx } from "./utils.js";
 
@@ -57,5 +61,50 @@ describe("@power-ui/ui", () => {
       document.documentElement.getAttribute("data-pu-theme"),
       "dark",
     );
+  });
+
+  it("Dialog toggles open class", async () => {
+    const { flush } = await import("@power-ui/core");
+    const open = signal(false);
+    mount(root, () =>
+      Dialog({ open, onClose: () => open.set(false), title: "Hi", children: "Body" }),
+    );
+    const rootEl = root.querySelector(".pu-dialog-root");
+    assert.ok(rootEl);
+    assert.equal(rootEl!.classList.contains("pu-dialog-root--open"), false);
+    open.set(true);
+    flush();
+    assert.equal(rootEl!.classList.contains("pu-dialog-root--open"), true);
+  });
+
+  it("Tabs switches panels", async () => {
+    const { flush } = await import("@power-ui/core");
+    mount(root, () =>
+      Tabs({
+        defaultValue: "a",
+        items: [
+          { id: "a", label: "A", content: "Panel A" },
+          { id: "b", label: "B", content: "Panel B" },
+        ],
+      }),
+    );
+    assert.match(root.textContent ?? "", /Panel A/);
+    const tabs = root.querySelectorAll('[role="tab"]');
+    assert.equal(tabs.length, 2);
+    (tabs[1] as HTMLButtonElement).click();
+    flush();
+    assert.match(root.textContent ?? "", /Panel B/);
+  });
+
+  it("Progress sets aria-valuenow", async () => {
+    const { flush } = await import("@power-ui/core");
+    const value = signal(25);
+    mount(root, () => Progress({ value, label: "Load" }));
+    const bar = root.querySelector('[role="progressbar"]');
+    assert.ok(bar);
+    assert.equal(bar!.getAttribute("aria-valuenow"), "25");
+    value.set(80);
+    flush();
+    assert.equal(bar!.getAttribute("aria-valuenow"), "80");
   });
 });

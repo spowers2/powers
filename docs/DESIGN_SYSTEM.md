@@ -57,7 +57,7 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Input` | text field |
 | `Stack` | flex layout + gap scale |
 | `Text` | type ramp + muted |
-| `Card` | surface panel |
+| `Card` | surface panel · `default` / `glass` / `elevated` / `soft` |
 | `Badge` | status / accent chips |
 | `Container` | max-width page shell |
 | `Grid` | responsive columns |
@@ -65,6 +65,11 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Alert` | info / success / warning / danger messages |
 | `Divider` | section rule (± label) |
 | `Spinner` | loading indicator (a11y + reduced motion) |
+| `Dialog` | modal + glass scrim · Escape / backdrop |
+| `Tabs` | segmented pill track |
+| `Progress` | 0–100 bar |
+| `Skeleton` | shimmer loading placeholders |
+| `Avatar` | initials / image |
 | `Label` / `Field` | accessible form layout + hint/error |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |

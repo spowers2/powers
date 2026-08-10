@@ -111,6 +111,14 @@
   background: var(--pu-color-surface-2);
   color: var(--pu-color-text);
 }
+.pu-surface-elevated {
+  background: var(--pu-color-surface-elevated);
+  color: var(--pu-color-text);
+}
+.pu-surface-sunken {
+  background: var(--pu-color-surface-sunken);
+  color: var(--pu-color-text);
+}
 .pu-border {
   border: 1px solid var(--pu-color-border);
 }
@@ -120,9 +128,19 @@
 .pu-rounded-sm { border-radius: var(--pu-radius-sm); }
 .pu-rounded-md { border-radius: var(--pu-radius-md); }
 .pu-rounded-lg { border-radius: var(--pu-radius-lg); }
+.pu-rounded-xl { border-radius: var(--pu-radius-xl); }
 .pu-rounded-full { border-radius: var(--pu-radius-full); }
 .pu-shadow-sm { box-shadow: var(--pu-shadow-sm); }
 .pu-shadow-md { box-shadow: var(--pu-shadow-md); }
+.pu-shadow-lg { box-shadow: var(--pu-shadow-lg); }
+
+/* Glass surface utility (frosted layer) */
+.pu-glass {
+  background: var(--pu-glass-bg);
+  border: 1px solid var(--pu-glass-border);
+  backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.15);
+  -webkit-backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.15);
+}
 
 /* ---- Simple panel (utility composition target) ---- */
 .pu-panel {
@@ -131,6 +149,51 @@
   border-radius: var(--pu-radius-lg);
   padding: var(--pu-space-5);
   box-shadow: var(--pu-shadow-sm);
+}
+.pu-panel--glass {
+  background: var(--pu-glass-bg);
+  border-color: var(--pu-glass-border);
+  backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.15);
+  -webkit-backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.15);
+  box-shadow: var(--pu-shadow-md);
+}
+.pu-panel--elevated {
+  box-shadow: var(--pu-shadow-md);
+  border-color: color-mix(in srgb, var(--pu-color-border) 70%, transparent);
+}
+
+/* Bento grid — modular product layouts (Apple-style compartments) */
+.pu-bento {
+  display: grid;
+  gap: var(--pu-space-4);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .pu-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pu-bento--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pu-bento__span-2 {
+    grid-column: span 2;
+  }
+  .pu-bento__span-row-2 {
+    grid-row: span 2;
+  }
+}
+@media (min-width: 1024px) {
+  .pu-bento {
+    gap: var(--pu-space-5);
+  }
+}
+
+/* Display type helpers */
+.pu-display {
+  font-size: var(--pu-text-3xl);
+  font-weight: var(--pu-font-bold);
+  letter-spacing: var(--pu-tracking-display);
+  line-height: var(--pu-leading-tight);
 }
 
 /* ---- Position / overflow ---- */

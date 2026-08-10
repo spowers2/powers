@@ -22,14 +22,22 @@ const styles = `
   border: 1px solid var(--pu-color-border);
   background: var(--pu-color-surface);
   color: var(--pu-color-text);
-  transition: border-color var(--pu-duration) var(--pu-ease), box-shadow var(--pu-duration) var(--pu-ease);
+  box-shadow: var(--pu-shadow-xs);
+  transition:
+    border-color var(--pu-duration) var(--pu-ease),
+    box-shadow var(--pu-duration) var(--pu-ease),
+    background var(--pu-duration) var(--pu-ease);
 }
 .pu-input::placeholder { color: var(--pu-color-text-muted); }
-.pu-input:hover:not(:disabled) { border-color: color-mix(in srgb, var(--pu-color-border) 60%, var(--pu-color-text-muted)); }
+.pu-input:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--pu-color-border) 50%, var(--pu-color-text-muted));
+}
 .pu-input:focus {
   outline: none;
-  border-color: var(--pu-color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-accent) 25%, transparent);
+  border-color: color-mix(in srgb, var(--pu-color-accent) 55%, var(--pu-color-border));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--pu-color-accent) 16%, transparent),
+    var(--pu-shadow-xs);
 }
 .pu-input:disabled { opacity: 0.55; cursor: not-allowed; }
 `;

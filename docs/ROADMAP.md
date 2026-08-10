@@ -26,6 +26,8 @@ Public docs hub: [`docs/README.md`](./README.md)
 | … | Core → animate → dom → router → SSR/islands → UI → Lab → styling architecture |
 | **docs** | Public docs hub (`docs/README.md`), launch-ready CONTRIBUTING |
 | **ui+** | Alert, Divider, Spinner + utility expansion |
+| **modern** | Glass/elevation tokens, multi-shadow, Card variants, bento utilities |
+| **ui++** | Dialog, Tabs, Progress, Skeleton, Avatar |
 
 ---
 
@@ -33,8 +35,8 @@ Public docs hub: [`docs/README.md`](./README.md)
 
 | # | Milestone | Notes |
 |---|---|---|
-| ui++ | More primitives as needed | Dialog, Tabs — only when demos demand |
 | lab+ | Lab polish | highlighting, more recipes |
+| ui+++ | More primitives as demos demand | Tooltip, Toast, Menu, … |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
 | 7 | Color / enter-exit motion | Motion polish |

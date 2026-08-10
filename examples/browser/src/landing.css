@@ -272,11 +272,14 @@
 
 .lp-tile {
   position: relative;
-  border-radius: var(--pu-radius-lg);
-  border: 1px solid var(--pu-color-border);
-  background: color-mix(in srgb, var(--pu-color-surface) 88%, transparent);
+  border-radius: var(--pu-radius-xl);
+  border: 1px solid var(--pu-glass-border);
+  background: var(--pu-glass-bg);
+  backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.1);
+  -webkit-backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.1);
   padding: var(--pu-space-5);
   overflow: hidden;
+  box-shadow: var(--pu-shadow-sm);
   transition:
     border-color var(--pu-duration) var(--pu-ease),
     transform var(--pu-duration) var(--pu-ease),
@@ -284,8 +287,8 @@
 }
 
 .lp-tile:hover {
-  border-color: color-mix(in srgb, var(--pu-color-accent) 35%, var(--pu-color-border));
-  box-shadow: var(--pu-shadow-md);
+  border-color: color-mix(in srgb, var(--pu-color-accent) 28%, var(--pu-color-border));
+  box-shadow: var(--pu-shadow-lg);
   transform: translateY(-2px);
 }
 

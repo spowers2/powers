@@ -72,3 +72,18 @@ export type { DividerProps } from "./components/Divider.js";
 
 export { Spinner } from "./components/Spinner.js";
 export type { SpinnerProps, SpinnerSize } from "./components/Spinner.js";
+
+export { Dialog } from "./components/Dialog.js";
+export type { DialogProps } from "./components/Dialog.js";
+
+export { Tabs } from "./components/Tabs.js";
+export type { TabsProps, TabItem } from "./components/Tabs.js";
+
+export { Progress } from "./components/Progress.js";
+export type { ProgressProps } from "./components/Progress.js";
+
+export { Skeleton } from "./components/Skeleton.js";
+export type { SkeletonProps } from "./components/Skeleton.js";
+
+export { Avatar } from "./components/Avatar.js";
+export type { AvatarProps, AvatarSize } from "./components/Avatar.js";

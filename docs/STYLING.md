@@ -4,6 +4,7 @@
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
 **Default palette:** **deep ink navy + forest pine** on quiet graphite neutrals (low-chroma, no neon / electric brights).  
+**Surface language:** layered elevation, soft multi-shadows, optional glass (`--pu-glass-*`), generous radius, tight display type — current product-UI grammar without neon chrome.  
 Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
 
 ---
@@ -78,6 +79,14 @@ This is the Bootstrap *component* story — complete controls that match — wit
 |---|---|
 | Token-mapped scales (`pu-gap-3`) | Arbitrary `mt-[13px]` soup |
 | BEM-ish names (`pu-flex--row`) | Competing with full Tailwind |
+| Glass / bento helpers (`pu-glass`, `pu-bento`) | One-off frosted CSS per page |
+
+```html
+<div class="pu-bento pu-bento--3">
+  <div class="pu-panel pu-panel--glass pu-bento__span-2">…</div>
+  <div class="pu-panel pu-panel--elevated">…</div>
+</div>
+```
 | One-off layout | Replacing Button/Field |
 
 ---

@@ -313,6 +313,90 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "overlays",
+    title: "Dialog, Tabs & Progress",
+    blurb: "Modern overlay + chrome primitives",
+    tip: "Dialog is controlled with open + onClose. Tabs use a pill track. Progress reads a 0–100 signal. Card variant glass/elevated for layered product UI.",
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Avatar,
+  Button,
+  Card,
+  Dialog,
+  Progress,
+  Skeleton,
+  Stack,
+  Tabs,
+  Text,
+} from "@power-ui/ui";
+import "@power-ui/ui/theme.css";
+
+const open = signal(false);
+const pct = signal(36);
+
+export function App() {
+  return (
+    <div class="pu-p-6">
+      <Card variant="glass" class="pu-max-w-md pu-mx-auto">
+        <Stack gap={4}>
+          <Stack direction="row" gap={3} align="center">
+            <Avatar name="Power UI" />
+            <div>
+              <Text weight="semibold">Overlays</Text>
+              <Text muted size="sm">
+                Deep blue/green · layered glass
+              </Text>
+            </div>
+          </Stack>
+          <Tabs
+            defaultValue="a"
+            items={[
+              {
+                id: "a",
+                label: "Live",
+                content: (
+                  <Stack gap={3}>
+                    <Progress value={pct} label="Sync" />
+                    <Button
+                      size="sm"
+                      variant="soft"
+                      onClick={() => pct.set(Math.min(100, pct() + 16))}
+                    >
+                      Nudge progress
+                    </Button>
+                  </Stack>
+                ),
+              },
+              {
+                id: "b",
+                label: "Loading",
+                content: <Skeleton lines={3} />,
+              },
+            ]}
+          />
+          <Button onClick={() => open.set(true)}>Open dialog</Button>
+          <Dialog
+            open={open}
+            onClose={() => open.set(false)}
+            title="Confirm"
+            description="Escape or backdrop closes this."
+          >
+            <Stack gap={3}>
+              <Text size="sm">Looks like a modern product modal.</Text>
+              <Button onClick={() => open.set(false)}>Done</Button>
+            </Stack>
+          </Dialog>
+        </Stack>
+      </Card>
+    </div>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "challenge",
     title: "Challenge: double counter",
     blurb: "Practice — make total = a + b",

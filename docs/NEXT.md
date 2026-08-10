@@ -9,10 +9,13 @@
 - [x] LEARN / STYLING cross-links for public readers  
 - [x] Primitives: Alert, Divider, Spinner  
 - [x] Utilities expansion + Lab recipe “Alerts & loading”  
+- [x] Modern surfaces: glass, elevation, multi-shadow, bento utilities  
+- [x] Primitives: Dialog, Tabs, Progress, Skeleton, Avatar  
+- [x] Lab recipe “Dialog, Tabs & Progress”  
 
 ## Immediate next
 
-1. More primitives only when demos demand (Dialog, Tabs, …)  
-2. Lab polish (highlighting, more recipes)  
+1. Lab polish (highlighting, more recipes)  
+2. More primitives when demos demand (Tooltip, Toast, Menu, …)  
 3. **GSAP adapter** when cinematic motion is needed (parked)  
 4. Public release checklist (npm, site)  

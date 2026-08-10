@@ -17,8 +17,8 @@ const styles = `
 .pu-text--sm { font-size: var(--pu-text-sm); }
 .pu-text--md { font-size: var(--pu-text-md); }
 .pu-text--lg { font-size: var(--pu-text-lg); }
-.pu-text--xl { font-size: var(--pu-text-xl); font-weight: var(--pu-font-semibold); letter-spacing: -0.01em; }
-.pu-text--2xl { font-size: var(--pu-text-2xl); font-weight: var(--pu-font-bold); letter-spacing: -0.02em; }
+.pu-text--xl { font-size: var(--pu-text-xl); font-weight: var(--pu-font-semibold); letter-spacing: var(--pu-tracking-tight); line-height: var(--pu-leading-tight); }
+.pu-text--2xl { font-size: var(--pu-text-2xl); font-weight: var(--pu-font-bold); letter-spacing: var(--pu-tracking-display); line-height: var(--pu-leading-tight); }
 .pu-text--medium { font-weight: var(--pu-font-medium); }
 .pu-text--semibold { font-weight: var(--pu-font-semibold); }
 .pu-text--bold { font-weight: var(--pu-font-bold); }

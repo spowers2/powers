@@ -4,20 +4,25 @@
 import { signal } from "@power-ui/core";
 import {
   Alert,
+  Avatar,
   Badge,
   Button,
   Card,
   Checkbox,
   Code,
   Container,
+  Dialog,
   Divider,
   Field,
   Grid,
   Input,
+  Progress,
   Select,
+  Skeleton,
   Spinner,
   Stack,
   Switch,
+  Tabs,
   Text,
   Textarea,
   type DensityController,
@@ -59,6 +64,8 @@ export function SystemPage(props: {
   const check = signal(false);
   const note = signal("");
   const email = signal("");
+  const dialogOpen = signal(false);
+  const progress = signal(42);
   const emailError = () => {
     const v = email().trim();
     if (!v) return "";
@@ -73,7 +80,8 @@ export function SystemPage(props: {
             Design system
           </Text>
           <Text muted>
-            Living reference for Power UI primitives. Edit{" "}
+            Living reference for Power UI primitives — modern layered surfaces,
+            glass, and deep blue/green tokens. Edit{" "}
             <Code>packages/ui/src/styles/tokens.css</Code> to retheme. To learn
             by coding, open <strong>Lab</strong> in the top nav.
           </Text>
@@ -84,6 +92,7 @@ export function SystemPage(props: {
           <a href="#sys-type">Type</a>
           <a href="#sys-forms">Forms</a>
           <a href="#sys-feedback">Feedback</a>
+          <a href="#sys-overlay">Overlay</a>
           <a href="#sys-color">Color</a>
           <a href="#sys-space">Space</a>
           <a href="#sys-code">Code</a>
@@ -121,14 +130,17 @@ export function SystemPage(props: {
               </Stack>
             </Card>
 
-            <Card>
+            <Card variant="glass">
               <Stack gap={3}>
-                <Text weight="semibold">Badges</Text>
-                <Stack direction="row" gap={2} wrap>
+                <Text weight="semibold">Badges & avatars</Text>
+                <Stack direction="row" gap={2} wrap align="center">
                   <Badge>Neutral</Badge>
                   <Badge tone="accent">Accent</Badge>
                   <Badge tone="success">Success</Badge>
                   <Badge tone="warning">Warning</Badge>
+                  <Avatar name="Ada Lovelace" size="sm" />
+                  <Avatar name="Power UI" size="md" />
+                  <Avatar name="SP" size="lg" />
                 </Stack>
               </Stack>
             </Card>
@@ -259,8 +271,111 @@ export function SystemPage(props: {
                   Spinners respect reduced motion.
                 </Text>
               </Stack>
+              <Progress value={progress} label="Upload" />
+              <Stack direction="row" gap={2}>
+                <Button
+                  size="sm"
+                  variant="soft"
+                  onClick={() =>
+                    progress.set(Math.min(100, progress() + 12))
+                  }
+                >
+                  +12%
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => progress.set(0)}>
+                  Reset
+                </Button>
+              </Stack>
+              <Stack gap={2}>
+                <Text size="sm" weight="semibold">
+                  Skeleton
+                </Text>
+                <Skeleton lines={3} />
+                <Stack direction="row" gap={3} align="center">
+                  <Skeleton variant="circle" width="2.5rem" height="2.5rem" />
+                  <Skeleton variant="rect" height="3rem" />
+                </Stack>
+              </Stack>
             </Stack>
           </Card>
+        </section>
+
+        <section id="sys-overlay">
+          <Grid cols={2} gap={4}>
+            <Card variant="elevated">
+              <Stack gap={3}>
+                <Text weight="semibold">Tabs</Text>
+                <Text muted size="sm">
+                  Segmented pill track — modern product chrome.
+                </Text>
+                <Tabs
+                  defaultValue="overview"
+                  items={[
+                    {
+                      id: "overview",
+                      label: "Overview",
+                      content: (
+                        <Text muted size="sm">
+                          Fine-grained updates. No VDOM by default.
+                        </Text>
+                      ),
+                    },
+                    {
+                      id: "tokens",
+                      label: "Tokens",
+                      content: (
+                        <Text muted size="sm">
+                          One file rethemes brand, surfaces, and elevation.
+                        </Text>
+                      ),
+                    },
+                    {
+                      id: "motion",
+                      label: "Motion",
+                      content: (
+                        <Text muted size="sm">
+                          Springs and tweens on signals — GSAP optional later.
+                        </Text>
+                      ),
+                    },
+                  ]}
+                />
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={3}>
+                <Text weight="semibold">Dialog</Text>
+                <Text muted size="sm">
+                  Glass scrim, float shadow, Escape + backdrop dismiss.
+                </Text>
+                <Button onClick={() => dialogOpen.set(true)}>Open dialog</Button>
+                <Dialog
+                  open={dialogOpen}
+                  onClose={() => dialogOpen.set(false)}
+                  title="Modern dialog"
+                  description="Layered surfaces with deep ink blue accents."
+                >
+                  <Stack gap={3}>
+                    <Text size="sm">
+                      Use Dialog for confirmations and focused flows. It locks
+                      body scroll while open.
+                    </Text>
+                    <Stack direction="row" gap={2} justify="end">
+                      <Button
+                        variant="ghost"
+                        onClick={() => dialogOpen.set(false)}
+                      >
+                        Cancel
+                      </Button>
+                      <Button onClick={() => dialogOpen.set(false)}>
+                        Confirm
+                      </Button>
+                    </Stack>
+                  </Stack>
+                </Dialog>
+              </Stack>
+            </Card>
+          </Grid>
         </section>
 
         <section id="sys-color">
