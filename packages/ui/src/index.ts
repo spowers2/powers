@@ -107,3 +107,9 @@ export type { MenuProps, MenuItem } from "./components/Menu.js";
 
 export { Kbd } from "./components/Kbd.js";
 export type { KbdProps } from "./components/Kbd.js";
+
+export { Combobox } from "./components/Combobox.js";
+export type { ComboboxProps, ComboboxOption } from "./components/Combobox.js";
+
+export { Command } from "./components/Command.js";
+export type { CommandProps, CommandItem } from "./components/Command.js";

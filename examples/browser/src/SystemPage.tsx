@@ -10,6 +10,8 @@ import {
   Card,
   Checkbox,
   Code,
+  Combobox,
+  Command,
   Container,
   createToaster,
   Dialog,
@@ -42,6 +44,7 @@ const SYS_SECTIONS = [
   "sys-forms",
   "sys-feedback",
   "sys-overlay",
+  "sys-power",
   "sys-keys",
   "sys-color",
   "sys-space",
@@ -88,6 +91,9 @@ export function SystemPage(props: {
   const toaster = createToaster();
   const popoverOpen = signal(false);
   const menuPick = signal("—");
+  const city = signal("sf");
+  const cmdOpen = signal(false);
+  const cmdLast = signal("—");
   const emailError = () => {
     const v = email().trim();
     if (!v) return "";
@@ -133,6 +139,7 @@ export function SystemPage(props: {
           {tocBtn("sys-forms", "Forms")}
           {tocBtn("sys-feedback", "Feedback")}
           {tocBtn("sys-overlay", "Overlay")}
+          {tocBtn("sys-power", "Power")}
           {tocBtn("sys-keys", "Keys")}
           {tocBtn("sys-color", "Color")}
           {tocBtn("sys-space", "Space")}
@@ -537,6 +544,69 @@ export function SystemPage(props: {
                     Last pick: {() => menuPick()}
                   </Text>
                 </Stack>
+              </Stack>
+            </Card>
+          </Grid>
+        </section>
+
+        <section id="sys-power">
+          <Grid cols={2} gap={4}>
+            <Card variant="elevated">
+              <Stack gap={3}>
+                <Text weight="semibold">Combobox</Text>
+                <Text muted size="sm">
+                  Type to filter options — Enter or click to select.
+                </Text>
+                <Field label="City">
+                  <Combobox
+                    value={city}
+                    onChange={(v) => city.set(v)}
+                    placeholder="Search cities…"
+                    options={[
+                      { value: "sf", label: "San Francisco" },
+                      { value: "nyc", label: "New York" },
+                      { value: "ldn", label: "London" },
+                      { value: "tyo", label: "Tokyo" },
+                      { value: "ber", label: "Berlin" },
+                    ]}
+                  />
+                </Field>
+                <Text muted size="sm">
+                  Value: {() => city()}
+                </Text>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={3}>
+                <Text weight="semibold">Command palette</Text>
+                <Text muted size="sm">
+                  ⌘K-style actions — search, arrow keys, Enter to run.
+                </Text>
+                <Button onClick={() => cmdOpen.set(true)}>
+                  Open command palette
+                </Button>
+                <Text muted size="sm">
+                  Last command: {() => cmdLast()}
+                </Text>
+                <Command
+                  open={cmdOpen}
+                  onOpenChange={(v) => cmdOpen.set(v)}
+                  items={[
+                    { id: "docs", label: "Open Docs", hint: "g d" },
+                    { id: "lab", label: "Open Lab", hint: "g l" },
+                    { id: "theme", label: "Toggle theme", hint: "t" },
+                    {
+                      id: "ship",
+                      label: "Ship release",
+                      hint: "⌘↵",
+                      disabled: true,
+                    },
+                  ]}
+                  onSelect={(id) => {
+                    cmdLast.set(id);
+                    if (id === "theme") theme.toggle();
+                  }}
+                />
               </Stack>
             </Card>
           </Grid>

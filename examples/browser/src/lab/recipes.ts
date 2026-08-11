@@ -586,6 +586,174 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "async",
+    title: "Async resource",
+    blurb: "Loading · error · data",
+    goal: "Fetch fake user data with resource() and show loading / error / result.",
+    learn: [
+      "resource(fetcher) loads async data into a reactive value",
+      "user.loading() and user.error() drive UI without extra flags",
+      "user.refetch() re-runs the fetcher — UI stays simple",
+    ],
+    how: [
+      "resource simulates a network delay then returns a name",
+      "Show branches on loading / error / ready",
+      "Retry calls refetch()",
+    ],
+    tryThis: [
+      "Click Load / Retry and watch Spinner → name",
+      "Change the delay from 800 to 200",
+      "Make the fetcher throw sometimes to see the error Alert",
+    ],
+    code: `import { resource } from "@power-ui/core";
+import { mount, Show } from "@power-ui/dom";
+import {
+  Alert,
+  Button,
+  Card,
+  Spinner,
+  Stack,
+  Text,
+} from "@power-ui/ui";
+
+// Fake API — replace with fetch("/api/…") in a real app
+const user = resource(async () => {
+  await new Promise((r) => setTimeout(r, 800));
+  if (Math.random() < 0.15) throw new Error("Network glitch");
+  return { name: "Ada Lovelace", role: "Engineer" };
+});
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">Async user</Text>
+        <Text muted size="sm">
+          resource() handles pending / ready / error without spaghetti.
+        </Text>
+        <Show when={() => user.loading()}>
+          {() => (
+            <Stack direction="row" gap={2} align="center">
+              <Spinner label="Loading user" />
+              <Text muted size="sm">Fetching…</Text>
+            </Stack>
+          )}
+        </Show>
+        <Show when={() => !!user.error() && !user.loading()}>
+          {() => (
+            <Alert tone="danger" title="Failed">
+              {() => String(user.error())}
+            </Alert>
+          )}
+        </Show>
+        <Show when={() => !!user() && !user.loading()}>
+          {() => (
+            <Stack gap={1}>
+              <Text weight="semibold">{() => user()!.name}</Text>
+              <Text muted size="sm">{() => user()!.role}</Text>
+            </Stack>
+          )}
+        </Show>
+        <Button variant="soft" onClick={() => user.refetch()}>
+          Retry / refetch
+        </Button>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "form",
+    title: "Form validation",
+    blurb: "Field errors from signals",
+    goal: "Validate email live and only enable Save when the form is valid.",
+    learn: [
+      "Keep form state in signals",
+      "error={emailError} on Field stays reactive",
+      "Disable the submit Button until validation passes",
+    ],
+    how: [
+      "email and agreed are signals",
+      "emailError returns a string when invalid",
+      "Save checks validity then writes a status message",
+    ],
+    tryThis: [
+      "Type a bad email — see the red Field error",
+      "Fix email + check the box — Save enables",
+      "Add a required name Field the same way",
+    ],
+    code: `import { signal, computed } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Button,
+  Card,
+  Checkbox,
+  Field,
+  Input,
+  Stack,
+  Text,
+} from "@power-ui/ui";
+
+const email = signal("");
+const agreed = signal(false);
+const status = signal("");
+
+const emailError = () => {
+  const v = email().trim();
+  if (!v) return "";
+  return v.includes("@") ? "" : "Enter a valid email";
+};
+
+const canSave = computed(
+  () => !!email().trim() && !emailError() && agreed(),
+);
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">Signup</Text>
+        <Field
+          label="Email"
+          required
+          error={emailError}
+          hint="We'll never share it."
+        >
+          <Input
+            type="email"
+            placeholder="you@company.com"
+            value={email}
+            onInput={(e) =>
+              email.set((e.target as HTMLInputElement).value)
+            }
+          />
+        </Field>
+        <Checkbox
+          label="I agree to the terms"
+          checked={agreed}
+          onChange={(v) => agreed.set(v)}
+        />
+        <Button
+          disabled={() => !canSave()}
+          onClick={() =>
+            status.set(\`Saved \${email()} · thanks!\`)
+          }
+        >
+          Save
+        </Button>
+        <Text muted size="sm">{() => status() || " "}</Text>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "menu",
     title: "Menu & Popover",
     blurb: "Actions menu + floating panel",

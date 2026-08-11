@@ -10,6 +10,8 @@ import { Progress } from "./components/Progress.js";
 import { createToaster, Toaster } from "./components/Toast.js";
 import { Menu } from "./components/Menu.js";
 import { Popover } from "./components/Popover.js";
+import { Combobox } from "./components/Combobox.js";
+import { Command } from "./components/Command.js";
 import { createTheme } from "./theme.js";
 import { cx } from "./utils.js";
 
@@ -212,5 +214,43 @@ describe("@power-ui/ui", () => {
     );
     flush();
     assert.equal(root.querySelector(".pu-popover--open"), null);
+  });
+
+  it("Combobox filters options", async () => {
+    const { flush } = await import("@power-ui/core");
+    const value = signal("");
+    mount(root, () =>
+      Combobox({
+        value,
+        onChange: (v) => value.set(v),
+        options: [
+          { value: "a", label: "Alpha" },
+          { value: "b", label: "Beta" },
+        ],
+      }),
+    );
+    const input = root.querySelector(".pu-combobox__input") as HTMLInputElement;
+    assert.ok(input);
+    input.focus();
+    input.value = "Be";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    flush();
+    assert.match(root.textContent ?? "", /Beta/);
+  });
+
+  it("Command opens and lists items", async () => {
+    const { flush } = await import("@power-ui/core");
+    const open = signal(true);
+    mount(root, () =>
+      Command({
+        open,
+        onOpenChange: (v) => open.set(v),
+        items: [{ id: "go", label: "Go somewhere" }],
+      }),
+    );
+    flush();
+    await new Promise((r) => setTimeout(r, 10));
+    assert.ok(root.querySelector(".pu-command-root--open"));
+    assert.match(root.textContent ?? "", /Go somewhere/);
   });
 });

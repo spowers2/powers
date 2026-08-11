@@ -27,10 +27,13 @@
 - [x] Primitive: Kbd  
 - [x] Public release checklist (`docs/RELEASE.md`)  
 - [x] In-app **Docs** route (`/docs`) + `docs/API.md` cheat sheet  
+- [x] Combobox + Command palette  
+- [x] Lab: Async resource + Form validation recipes  
+- [x] Docs: Common patterns section  
 
 ## Immediate next
 
-1. More primitives when demos demand (Command, Combobox, …)  
-2. Motion polish (enter/exit)  
+1. Motion polish (enter/exit on Show / overlays)  
+2. A11y hardening (focus trap, roving tabindex on menus)  
 3. **GSAP adapter** when cinematic motion is needed (parked)  
 4. Execute RELEASE.md for first public npm cut  

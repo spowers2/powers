@@ -57,7 +57,8 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 | Type | `Text` · `Code` · `Kbd` |
 | Forms | `Button` · `Input` · `Textarea` · `Select` · `Field` · `Label` · `Switch` · `Checkbox` |
 | Feedback | `Alert` · `Spinner` · `Progress` · `Skeleton` · `Badge` · `Avatar` |
-| Overlays | `Dialog` · `Tabs` · `Tooltip` · `Popover` · `Menu` · `Toaster` / `createToaster` |
+| Overlays | `Dialog` · `Tabs` · `Tooltip` · `Popover` · `Menu` · `Toaster` / `createToaster` · `Command` |
+| Forms+ | `Combobox` (searchable select) |
 | Surfaces | `Card` (variants: default / glass / elevated / soft) |
 
 **Retheme:** edit `packages/ui/src/styles/tokens.css` (`--pu-brand-*` blues, `--pu-sage-*` green `#69BE28`).

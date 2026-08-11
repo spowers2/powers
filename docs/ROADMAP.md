@@ -34,6 +34,8 @@ Public docs hub: [`docs/README.md`](./README.md)
 | **lab+** | Syntax highlight + Menu recipe + teaching panel |
 | **ui+++++** | Kbd |
 | **pub-doc** | `docs/RELEASE.md` checklist |
+| **ui++++++** | Combobox + Command |
+| **patterns** | Lab async/form recipes + Docs patterns |
 
 ---
 
@@ -41,11 +43,10 @@ Public docs hub: [`docs/README.md`](./README.md)
 
 | # | Milestone | Notes |
 |---|---|---|
-| ui++++++ | More primitives as demos demand | Command, Combobox, … |
+| 7 | Color / enter-exit motion | Motion polish on Show / overlays |
+| 8 | Hardening | Focus trap, menu keyboard, For/`ul` semantics |
 | 5d | Streaming SSR (optional) | Progressive HTML if needed |
 | 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
-| 7 | Color / enter-exit motion | Motion polish |
-| 8 | Hardening | For/`ul` semantics, a11y recipes |
 | pub | Execute release checklist | npm publish, website, LICENSE already MIT |
 
 ---

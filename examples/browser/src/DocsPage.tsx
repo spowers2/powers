@@ -24,6 +24,7 @@ const DOC_SECTIONS = [
   "rules",
   "first-app",
   "packages",
+  "patterns",
   "api-core",
   "api-dom",
   "api-ui",
@@ -122,6 +123,7 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("rules", "Rules")}
           {tocBtn("first-app", "First app")}
           {tocBtn("packages", "Packages")}
+          {tocBtn("patterns", "Patterns")}
           {tocBtn("api-core", "core")}
           {tocBtn("api-dom", "dom")}
           {tocBtn("api-ui", "ui")}
@@ -269,6 +271,55 @@ mount(document.getElementById("app")!, () => (
           </div>
         </Section>
 
+        <Section id="patterns" title="5. Common patterns (real apps)">
+          <Text muted size="sm">
+            These map 1:1 to Lab recipes — open Lab and run them after reading.
+          </Text>
+          <Grid cols={1} gap={3}>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Async data</Text>
+                <pre class="docs-pre">{`const user = resource(async () => {
+  const res = await fetch("/api/me");
+  return res.json();
+});
+// user() · user.loading() · user.error() · user.refetch()`}</pre>
+                <Text size="sm" muted>
+                  Lab recipe: <strong>Async resource</strong>
+                </Text>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Form validation</Text>
+                <pre class="docs-pre">{`const email = signal("");
+const emailError = () =>
+  email().includes("@") ? "" : "Invalid email";
+
+&lt;Field label="Email" error={emailError}&gt;
+  &lt;Input value={email} onInput={…} /&gt;
+&lt;/Field&gt;`}</pre>
+                <Text size="sm" muted>
+                  Lab recipe: <strong>Form validation</strong>
+                </Text>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Command palette</Text>
+                <pre class="docs-pre">{`const open = signal(false);
+&lt;Command open={open} onOpenChange={open.set}
+  items={[{ id: "docs", label: "Open Docs" }]}
+  onSelect={(id) => …}
+/&gt;`}</pre>
+                <Text size="sm" muted>
+                  System → <strong>Power</strong> section
+                </Text>
+              </Stack>
+            </Card>
+          </Grid>
+        </Section>
+
         <Divider label="API reference" />
 
         <Section id="api-core" title="@power-ui/core">
@@ -410,8 +461,13 @@ mount(document.getElementById("app")!, () => (
               },
               {
                 name: "Overlays",
-                sig: "Dialog · Tabs · Tooltip · Popover · Menu · Toaster",
+                sig: "Dialog · Tabs · Tooltip · Popover · Menu · Toaster · Command",
                 note: "createToaster() for toasts.",
+              },
+              {
+                name: "Combobox",
+                sig: "<Combobox options={…} value={…} onChange={…} />",
+                note: "Searchable select.",
               },
               {
                 name: "Retheme",
@@ -477,15 +533,16 @@ mount(document.getElementById("app")!, () => (
           />
         </Section>
 
-        <Section id="next" title="5. Recommended path for new devs">
+        <Section id="next" title="6. Recommended path for new devs">
           <ol class="docs-steps">
             <li>
-              <strong>This page</strong> — rules + first app + API tables
+              <strong>This page</strong> — rules + first app + patterns + API
             </li>
             <li>
-              <strong>Lab</strong> — recipes 01→10 with Goal / Try this (
+              <strong>Lab</strong> — recipes with Goal / Try this (
               <Kbd>⌘</Kbd>
-              <Kbd>↵</Kbd> to run)
+              <Kbd>↵</Kbd> to run). Don’t skip <strong>Async</strong> +{" "}
+              <strong>Form</strong>.
             </li>
             <li>
               <strong>System</strong> — click every primitive, toggle theme /

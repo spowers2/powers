@@ -75,6 +75,8 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Popover` | anchored panel (open + onOpenChange) |
 | `Menu` | action list built on Popover |
 | `Kbd` | keyboard key chip for shortcuts |
+| `Combobox` | searchable select (type to filter) |
+| `Command` | command palette (⌘K-style) |
 | `Label` / `Field` | accessible form layout + hint/error |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |

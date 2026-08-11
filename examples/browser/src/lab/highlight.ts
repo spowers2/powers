@@ -17,7 +17,7 @@ const BUILTINS =
   /\b(signal|computed|effect|mount|animate|spring|Show|For|component|createTheme|createDensity|createToaster|bindStyle)\b/g;
 
 const COMPONENTS =
-  /\b(Button|Card|Stack|Text|Input|Field|Badge|Alert|Dialog|Tabs|Progress|Avatar|Spinner|Switch|Checkbox|Menu|Popover|Tooltip|Skeleton|Divider|Code|Container|Grid|Select|Textarea|Label|Toaster|Kbd)\b/g;
+  /\b(Button|Card|Stack|Text|Input|Field|Badge|Alert|Dialog|Tabs|Progress|Avatar|Spinner|Switch|Checkbox|Menu|Popover|Tooltip|Skeleton|Divider|Code|Container|Grid|Select|Textarea|Label|Toaster|Kbd|Combobox|Command)\b/g;
 
 /**
  * Return HTML with span.hl-* tokens. Plain text is escaped first, then

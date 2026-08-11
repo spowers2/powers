@@ -30,6 +30,8 @@ import {
   Popover,
   Menu,
   Kbd,
+  Combobox,
+  Command,
 } from "@power-ui/ui";
 
 let warmed = false;
@@ -132,6 +134,18 @@ export function warmUiStyles(): void {
       }),
     );
     append(Kbd({ children: "⌘" }));
+    append(
+      Combobox({
+        options: [{ value: "a", label: "A" }],
+        value: "a",
+      }),
+    );
+    append(
+      Command({
+        open: false,
+        items: [{ id: "x", label: "X" }],
+      }),
+    );
   } catch {
     // Warm is best-effort — missing a sheet is non-fatal
   } finally {
