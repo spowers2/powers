@@ -78,10 +78,10 @@ Never force advanced APIs into Hello World.
    Chip/Pagination/Toggle/Accordion/Slider/Steps/Link/Breadcrumb/NumberInput,  
    Dialog/Drawer close, Menu/List hover slide  
 
-### Sprint E — Ship
+### Sprint E — Ship ✅ (prep complete; npm publish optional)
 1. ~~`create-power-ux` / Vite template~~ (`pnpm create-app`, `templates/power-ux-vite`)  
-2. Execute `RELEASE.md`  
-3. Public positioning: *fine-grained UI kit with a design system built in*  
+2. ~~Execute `RELEASE.md` product + quality gates~~ (`pnpm run check` green; publish sequence still open)  
+3. ~~Public positioning~~ — *fine-grained UI kit with a design system built in* (README)  
 4. ~~Dev warnings~~ (theme missing, double `outlet()`, snapshot `value` on Input)  
 5. ~~Brand playground + export CSS~~ on System `#sys-play`  
 6. ~~Day 1/2/30 path~~ (`docs/LEARN_PATH.md`)

@@ -1,18 +1,18 @@
 # Power UX
 
-**The reactive UI system that’s powerful under the hood and tiny to learn.**
+**Fine-grained UI kit with a design system built in.**
 
-Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
+Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos you can ship from. Not “React + a CSS framework”; one coherent stack.
 
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
-> Private while foundations harden.
+> Private monorepo while foundations harden (not on public npm yet).
 
-**New here? (private monorepo — not public npm yet)**
+**New here?**
 
-1. **designlab206 demo:** `pnpm example:starter` → http://localhost:5180  
-2. **Hearth restaurant:** `pnpm example:restaurant` → http://localhost:5181  
-3. **Docs / Lab / System:** `pnpm example:browser` → `/docs` `/lab` `/system` (nav links to demos)  
-4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [docs/README.md](./docs/README.md)
+1. **Docs / Lab / System:** `pnpm example:browser` → http://localhost:5173 (`/docs` · `/lab` · `/system`)  
+2. **designlab206:** `pnpm example:starter` → http://localhost:5180  
+3. **Hearth restaurant:** `pnpm example:restaurant` → http://localhost:5181  
+4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [docs/README.md](./docs/README.md) · [docs/RELEASE.md](./docs/RELEASE.md)
 
 ---
 
@@ -32,13 +32,13 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 ## Quick start
 
 ```bash
-cd ~/Documents/power-ux
+cd path/to/power-ux   # monorepo root
 pnpm install
-pnpm ci                  # typecheck · test · size budgets
-pnpm example:starter     # http://localhost:5180  — designlab206 (freelance workspace)
-pnpm example:restaurant  # http://localhost:5181  — Hearth (restaurant + Unsplash photos)
-pnpm example:browser     # http://localhost:5173  — docs · lab · system
-# Minimal Vite app:           pnpm create-app my-ui
+pnpm run check        # typecheck · test · size budgets (use "run" — pnpm has its own "ci")
+pnpm example:browser  # http://localhost:5173  — docs · lab · system
+pnpm example:starter  # http://localhost:5180  — designlab206
+pnpm example:restaurant  # http://localhost:5181  — Hearth
+# Minimal Vite app:           pnpm create-app my-app
 # Full product starter:       pnpm new-app my-feature
 ```
 

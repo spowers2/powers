@@ -6,7 +6,7 @@ Written for **public contributors** as well as maintainers. The repo may be priv
 
 ```bash
 pnpm install
-pnpm ci                # typecheck · test · size budgets (what CI runs)
+pnpm run check         # typecheck · test · size budgets (what CI runs)
 pnpm build
 pnpm example:browser   # http://localhost:5173
 ```

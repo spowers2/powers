@@ -103,7 +103,7 @@
   - Size budgets: core · dom · animate · router · ui full + form-kit (`pnpm size`)  
   - CI: `.github/workflows/ci.yml` → typecheck · test · size  
   - `docs/STABLE.md` · `docs/GOLDEN_PATH.md` · `docs/SIZE.md`  
-  - Root `pnpm ci`  
+  - Root `pnpm run check`  
 
 ### Just done
 

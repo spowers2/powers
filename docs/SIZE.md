@@ -4,7 +4,7 @@ Power UX stays light by **failing CI** when packages grow past fixed gzip ceilin
 
 ```bash
 pnpm size   # all package size scripts
-pnpm ci     # typecheck + test + size
+pnpm run check     # typecheck + test + size
 ```
 
 ## Budgets

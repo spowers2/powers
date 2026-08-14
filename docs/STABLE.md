@@ -117,7 +117,7 @@ Apps that never install `gsap` never pay for it.
 
 ```bash
 pnpm size   # fails if any budget exceeded
-pnpm ci     # typecheck + test + size
+pnpm run check     # typecheck + test + size
 ```
 
 ---
