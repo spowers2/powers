@@ -34,3 +34,7 @@ yarn-error.log*
 .cache/
 tmp/
 temp/
+
+# Project-local tooling (gh CLI, etc.)
+.tools/
+
