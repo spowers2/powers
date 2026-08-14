@@ -44,7 +44,7 @@
 
 - [x] TOC pin + bottom-of-page last section  
 - [x] Roving tabindex: Menu · Tabs · List  
-- [x] Unit tests + Playwright smoke (`pnpm --filter @power-ux/example-browser smoke`)  
+- [x] Unit tests + Playwright smoke (`pnpm --filter @powers/example-browser smoke`)  
 - [x] Focus-visible polish on primary controls  
 
 ## Sprint B (authoring) — done
@@ -108,7 +108,7 @@
 ### Just done
 
 - [x] Dogfood demos + golden-path links in Docs  
-- [x] Optional **GSAP adapter** (`@power-ux/animate/gsap`)  
+- [x] Optional **GSAP adapter** (`@powers/animate/gsap`)  
 - [x] Lab recipe **GSAP adapter** (`/lab?recipe=gsap`)  
 - [x] Review pass: Dialog unique title ids · Select fallback · Combobox overlay · GSAP harden · smoke  
 - [x] **Tighten batch:** Field auto `htmlFor`/aria · Combobox + Tooltip **body portal** · overlay `isInside` · designlab206/Hearth **More** nav · Playwright GSAP **x advances** assert  

@@ -5,7 +5,7 @@ import {
   untrack,
   type Dispose,
   type Signal,
-} from "@power-ux/core";
+} from "@powers/core";
 import {
   createBrowserHistory,
   createHashHistory,
@@ -145,7 +145,7 @@ export function createRouter(options: RouterOptions): Router {
       if (env !== "production") {
         // eslint-disable-next-line no-console
         console.warn(
-          "[Power UX] router.outlet() was called more than once. " +
+          "[Powers] router.outlet() was called more than once. " +
             "Call it once per app and reuse the node (e.g. const outlet = router.outlet()). " +
             "Two outlets fight over the same route effects.",
         );

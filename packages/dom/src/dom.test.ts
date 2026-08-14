@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { signal, flush } from "@power-ux/core";
+import { signal, flush } from "@powers/core";
 import { installDom } from "./test-setup.js";
 import {
   mount,
@@ -22,7 +22,7 @@ async function tick(): Promise<void> {
   flush();
 }
 
-describe("@power-ux/dom", () => {
+describe("@powers/dom", () => {
   let document: Document;
   let root: HTMLElement;
 

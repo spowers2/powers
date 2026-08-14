@@ -9,7 +9,7 @@ Private monorepo today. Same path will map to `npm create` later.
 ## 1. Install & run a demo (2 min)
 
 ```bash
-cd power-ux   # monorepo root
+cd powers   # monorepo root
 pnpm install
 pnpm example:browser   # http://localhost:5173  → /docs · /lab · /system
 pnpm example:starter   # http://localhost:5180  → designlab206 product demo
@@ -29,7 +29,7 @@ Runtime contracts (why forms stay mounted): [`FOUNDATION.md`](./FOUNDATION.md).
 
 ---
 
-## 3. Vite + Power UX sketch (5 min)
+## 3. Vite + Powers sketch (5 min)
 
 `tsconfig` (relevant bits):
 
@@ -37,7 +37,7 @@ Runtime contracts (why forms stay mounted): [`FOUNDATION.md`](./FOUNDATION.md).
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@power-ux/dom"
+    "jsxImportSource": "@powers/dom"
   }
 }
 ```
@@ -50,7 +50,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@power-ux/dom",
+    jsxImportSource: "@powers/dom",
   },
 });
 ```
@@ -58,9 +58,9 @@ export default defineConfig({
 `main.tsx`:
 
 ```tsx
-import "@power-ux/ui/theme.css";
-import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
+import "@powers/ui/theme.css";
+import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
 import {
   Button,
   Card,
@@ -72,7 +72,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ux/ui";
+} from "@powers/ui";
 
 createTheme(
   matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
@@ -86,7 +86,7 @@ mount(document.getElementById("root")!, () => (
   <Card>
     <Stack gap={4}>
       <Text as="h1" size="xl">
-        Hello Power UX
+        Hello Powers
       </Text>
       <Field label="Email" required error={emailError}>
         <Input
@@ -128,7 +128,7 @@ Reload the app — Button, focus rings, and accents follow tokens.
 ## 5. Add a route (3 min)
 
 ```tsx
-import { createRouter, Link } from "@power-ux/router";
+import { createRouter, Link } from "@powers/router";
 
 const router = createRouter({
   routes: [

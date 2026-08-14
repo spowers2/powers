@@ -1,4 +1,4 @@
-import { Badge, Text } from "@power-ux/ui";
+import { Badge, Text } from "@powers/ui";
 import type {
   MenuCategory,
   OrderStatus,

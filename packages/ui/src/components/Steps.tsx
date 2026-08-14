@@ -1,4 +1,4 @@
-import { For, component, type ComponentProps } from "@power-ux/dom";
+import { For, component, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

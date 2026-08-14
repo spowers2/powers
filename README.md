@@ -1,11 +1,13 @@
-# Power UX
+# Powers
 
 **Fine-grained UI kit with a design system built in.**
 
 Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos you can ship from. Not “React + a CSS framework”; one coherent stack.
 
+> Named for **Powers** — the kit behind the name.  
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
-> Private monorepo while foundations harden (not on public npm yet).
+> Private monorepo while foundations harden (not on public npm yet).  
+> npm scope: `@powers/*`
 
 **New here?**
 
@@ -20,19 +22,19 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 
 | Package | Role |
 |---|---|
-| `@power-ux/core` | signals, computed, effect, store, resource, ownership |
-| `@power-ux/animate` | tween / spring on signals |
-| `@power-ux/dom` | mount, h, JSX, reactive props, Show, For |
-| `@power-ux/router` | createRouter, Link, navigate |
-| `@power-ux/ssr` | `renderToString` + **islands** hydrate API |
-| `@power-ux/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
+| `@powers/core` | signals, computed, effect, store, resource, ownership |
+| `@powers/animate` | tween / spring on signals |
+| `@powers/dom` | mount, h, JSX, reactive props, Show, For |
+| `@powers/router` | createRouter, Link, navigate |
+| `@powers/ssr` | `renderToString` + **islands** hydrate API |
+| `@powers/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
 
 ---
 
 ## Quick start
 
 ```bash
-cd path/to/power-ux   # monorepo root
+cd path/to/powers   # monorepo root
 pnpm install
 pnpm run check        # typecheck · test · size budgets (use "run" — pnpm has its own "ci")
 pnpm example:browser  # http://localhost:5173  — docs · lab · system
@@ -47,10 +49,10 @@ pnpm example:restaurant  # http://localhost:5181  — Hearth
 ### Design system + router (sketch)
 
 ```tsx
-import "@power-ux/ui/theme.css";
-import { mount } from "@power-ux/dom";
-import { createRouter, Link } from "@power-ux/router";
-import { Button, Card, Stack, Text, createTheme } from "@power-ux/ui";
+import "@powers/ui/theme.css";
+import { mount } from "@powers/dom";
+import { createRouter, Link } from "@powers/router";
+import { Button, Card, Stack, Text, createTheme } from "@powers/ui";
 
 const theme = createTheme("light");
 theme.bind();

@@ -1,5 +1,5 @@
-import { effect } from "@power-ux/core";
-import { h, type Props } from "@power-ux/dom";
+import { effect } from "@powers/core";
+import { h, type Props } from "@powers/dom";
 import type { Router } from "./router.js";
 
 export interface LinkProps extends Props {

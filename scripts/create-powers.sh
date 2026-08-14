@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Scaffold a minimal Power UX + Vite app from templates/power-ux-vite.
+# Scaffold a minimal Powers + Vite app from templates/powers-vite.
 #
 # Usage (from monorepo root):
-#   bash scripts/create-power-ux.sh my-app
-#   bash scripts/create-power-ux.sh ../outside/dashboard
+#   bash scripts/create-powers.sh my-app
+#   bash scripts/create-powers.sh ../outside/dashboard
 #   pnpm create-app my-app
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SRC="$ROOT/templates/power-ux-vite"
+SRC="$ROOT/templates/powers-vite"
 NAME="${1:-}"
 
 if [[ -z "$NAME" ]]; then
@@ -43,7 +43,7 @@ if [[ -f "$DEST/package.json" ]] && command -v node >/dev/null 2>&1; then
     const fs = require('fs');
     const p = process.argv[1];
     const j = JSON.parse(fs.readFileSync(p, 'utf8'));
-    j.name = '@power-ux/' + process.argv[2];
+    j.name = '@powers/' + process.argv[2];
     fs.writeFileSync(p, JSON.stringify(j, null, 2) + '\n');
   " "$DEST/package.json" "$BASE"
 fi
@@ -53,7 +53,7 @@ echo ""
 echo "Next:"
 if [[ "$DEST" == "$ROOT/examples/"* ]]; then
   echo "  cd $ROOT && pnpm install"
-  echo "  pnpm --filter @power-ux/$BASE dev"
+  echo "  pnpm --filter @powers/$BASE dev"
   echo "  # or: cd $DEST && pnpm dev"
 else
   echo "  # Wire package.json deps to this monorepo (workspace/file:) or npm,"

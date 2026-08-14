@@ -4,8 +4,8 @@
  * Snippets are **Lab-runnable**: import + App + mount (same shape as recipes).
  * Lab strips imports and injects the live API — bare JSX fragments will not run.
  */
-import { signal } from "@power-ux/core";
-import { Button, Stack, Text } from "@power-ux/ui";
+import { signal } from "@powers/core";
+import { Button, Stack, Text } from "@powers/ui";
 import { encodeShare } from "./lab/runner.js";
 
 export async function copyText(text: string): Promise<boolean> {
@@ -54,8 +54,8 @@ mount(document.getElementById("root")!, () => <App />);
 /** Canonical snippets for System demos — paste into Lab or an app. */
 export const SNIPPETS = {
   button: labProgram(
-    `import { mount } from "@power-ux/dom";
-import { Button, Stack } from "@power-ux/ui";`,
+    `import { mount } from "@powers/dom";
+import { Button, Stack } from "@powers/ui";`,
     `<Stack direction="row" gap={2} wrap>
       <Button>Solid</Button>
       <Button variant="soft">Soft</Button>
@@ -64,8 +64,8 @@ import { Button, Stack } from "@power-ux/ui";`,
   ),
 
   field: labProgram(
-    `import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
+    `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
 import {
   Field,
   Input,
@@ -74,7 +74,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ux/ui";`,
+} from "@powers/ui";`,
     `<Stack gap={3}>
       <Text weight="semibold">Email field</Text>
       <Field label="Email" htmlFor="email" error={error} required>
@@ -91,9 +91,9 @@ const error = () =>
   ),
 
   dialog: labProgram(
-    `import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
-import { Button, Dialog, Stack, Text } from "@power-ux/ui";`,
+    `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, Dialog, Stack, Text } from "@powers/ui";`,
     `<Stack gap={3}>
       <Button onClick={() => open.set(true)}>Open dialog</Button>
       <Dialog open={open} onClose={() => open.set(false)} title="Confirm">
@@ -107,8 +107,8 @@ import { Button, Dialog, Stack, Text } from "@power-ux/ui";`,
   ),
 
   tabs: labProgram(
-    `import { mount } from "@power-ux/dom";
-import { Tabs, Text } from "@power-ux/ui";`,
+    `import { mount } from "@powers/dom";
+import { Tabs, Text } from "@powers/ui";`,
     `<Tabs
       defaultValue="a"
       items={[
@@ -119,9 +119,9 @@ import { Tabs, Text } from "@power-ux/ui";`,
   ),
 
   menu: labProgram(
-    `import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
-import { Menu, Button, Stack, Text } from "@power-ux/ui";`,
+    `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Menu, Button, Stack, Text } from "@powers/ui";`,
     `<Stack gap={3}>
       <Menu
         trigger={<Button size="sm">Actions</Button>}
@@ -137,14 +137,14 @@ import { Menu, Button, Stack, Text } from "@power-ux/ui";`,
   ),
 
   accordion: labProgram(
-    `import { mount } from "@power-ux/dom";
-import { Accordion, Card } from "@power-ux/ui";`,
+    `import { mount } from "@powers/dom";
+import { Accordion, Card } from "@powers/ui";`,
     `<Card>
       <Accordion
         single
         defaultValue={["a"]}
         items={[
-          { id: "a", title: "What is Power UX?", content: "Fine-grained UI kit." },
+          { id: "a", title: "What is Powers?", content: "Fine-grained UI kit." },
           { id: "b", title: "How do I retheme?", content: "Edit tokens.css." },
         ]}
       />
@@ -152,9 +152,9 @@ import { Accordion, Card } from "@power-ux/ui";`,
   ),
 
   drawer: labProgram(
-    `import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
-import { Button, Drawer, Stack, Text } from "@power-ux/ui";`,
+    `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, Drawer, Stack, Text } from "@powers/ui";`,
     `<Stack gap={3}>
       <Button onClick={() => open.set(true)}>Open drawer</Button>
       <Drawer open={open} onClose={() => open.set(false)} title="Filters">
@@ -165,9 +165,9 @@ import { Button, Drawer, Stack, Text } from "@power-ux/ui";`,
   ),
 
   combobox: labProgram(
-    `import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
-import { Combobox, Field, Stack, Text } from "@power-ux/ui";`,
+    `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Combobox, Field, Stack, Text } from "@powers/ui";`,
     `<Stack gap={3}>
       <Field label="City">
         <Combobox
@@ -190,8 +190,8 @@ const cities = signal([
   ),
 
   table: labProgram(
-    `import { mount } from "@power-ux/dom";
-import { Table } from "@power-ux/ui";`,
+    `import { mount } from "@powers/dom";
+import { Table } from "@powers/ui";`,
     `<Table
       dense
       columns={[
@@ -206,8 +206,8 @@ import { Table } from "@power-ux/ui";`,
   ),
 
   stat: labProgram(
-    `import { mount } from "@power-ux/dom";
-import { Grid, Stat } from "@power-ux/ui";`,
+    `import { mount } from "@powers/dom";
+import { Grid, Stat } from "@powers/ui";`,
     `<Grid cols={3} gap={4}>
       <Stat label="Users" value="12.4k" delta="+8%" tone="positive" />
       <Stat label="Errors" value="0.1%" delta="-0.02%" tone="positive" />
@@ -216,8 +216,8 @@ import { Grid, Stat } from "@power-ux/ui";`,
   ),
 
   toast: labProgram(
-    `import { mount } from "@power-ux/dom";
-import { Button, createToaster, Toaster, Stack } from "@power-ux/ui";`,
+    `import { mount } from "@powers/dom";
+import { Button, createToaster, Toaster, Stack } from "@powers/ui";`,
     `<Stack gap={3}>
       <Button
         onClick={() =>

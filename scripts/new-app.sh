@@ -39,7 +39,7 @@ if [[ -f "$DEST/package.json" ]]; then
       const fs = require('fs');
       const p = process.argv[1];
       const j = JSON.parse(fs.readFileSync(p, 'utf8'));
-      j.name = '@power-ux/' + process.argv[2];
+      j.name = '@powers/' + process.argv[2];
       fs.writeFileSync(p, JSON.stringify(j, null, 2) + '\n');
     " "$DEST/package.json" "$BASE"
   fi
@@ -49,7 +49,7 @@ echo "Created $DEST"
 echo "Next:"
 echo "  cd $ROOT && pnpm install"
 if [[ "$DEST" == "$ROOT/examples/"* ]]; then
-  echo "  pnpm --filter @power-ux/$BASE dev"
+  echo "  pnpm --filter @powers/$BASE dev"
 else
   echo "  # Point package.json deps at file: or workspace, then pnpm install && pnpm dev"
 fi

@@ -1,4 +1,4 @@
-import { effect, type Dispose } from "@power-ux/core";
+import { effect, type Dispose } from "@powers/core";
 
 /** Reactive text content of an Element or Text node. */
 export function bindText(

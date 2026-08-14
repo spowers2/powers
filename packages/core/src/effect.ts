@@ -74,12 +74,12 @@ export function effect(fn: EffectFn, options?: EffectOptions): Dispose {
       } catch (handlerError) {
         // Fall through to owner handlers with the handler error.
         if (reportError(handlerError, owner)) return;
-        console.error("[power-ux] effect onError handler threw:", handlerError);
+        console.error("[powers] effect onError handler threw:", handlerError);
         return;
       }
     }
     if (reportError(err, owner)) return;
-    console.error("[power-ux] Unhandled effect error:", err);
+    console.error("[powers] Unhandled effect error:", err);
   }
 
   node.run = run;

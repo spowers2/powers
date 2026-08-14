@@ -1,5 +1,5 @@
-import { signal } from "@power-ux/core";
-import { For, component, mergeProps, type ComponentProps } from "@power-ux/dom";
+import { signal } from "@powers/core";
+import { For, component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

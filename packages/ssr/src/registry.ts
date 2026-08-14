@@ -1,4 +1,4 @@
-import type { Dispose } from "@power-ux/core";
+import type { Dispose } from "@powers/core";
 import type { IslandFactory, IslandRegistry } from "./islands.js";
 import { hydrateIslands, ISLAND_ATTR } from "./islands.js";
 
@@ -70,7 +70,7 @@ export function defineIslands(
     const unknown = missingInRegistry(root);
     if (unknown.length) {
       console.warn(
-        `[power-ux/ssr] DOM islands with no registry entry: ${unknown.join(", ")}`,
+        `[powers/ssr] DOM islands with no registry entry: ${unknown.join(", ")}`,
       );
     }
     return hydrateIslands(entries, root);

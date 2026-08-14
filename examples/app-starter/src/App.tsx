@@ -9,8 +9,8 @@ import {
   type DensityController,
   type ThemeController,
   type ToastController,
-} from "@power-ux/ui";
-import { createRouter, Link } from "@power-ux/router";
+} from "@powers/ui";
+import { createRouter, Link } from "@powers/router";
 import { DashboardPage } from "./pages/Dashboard.js";
 import { ClientsPage } from "./pages/Clients.js";
 import { ProjectsPage } from "./pages/Projects.js";

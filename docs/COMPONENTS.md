@@ -1,15 +1,15 @@
 # Creating & customizing components
 
-Power UX is designed so **new primitives are cheap** and **brand overrides don’t require forking**.
+Powers is designed so **new primitives are cheap** and **brand overrides don’t require forking**.
 
 ---
 
 ## 30-second recipe
 
 ```tsx
-import { component, type ComponentProps } from "@power-ux/dom";
-import { cx } from "@power-ux/ui";
-import { createStyleSheet } from "@power-ux/ui";
+import { component, type ComponentProps } from "@powers/dom";
+import { cx } from "@powers/ui";
+import { createStyleSheet } from "@powers/ui";
 
 const ensure = createStyleSheet(
   "my-widget",
@@ -76,7 +76,7 @@ Edit `packages/ui/src/styles/tokens.css`:
 ### 2. Local CSS variables
 
 ```tsx
-import { styleVars, Card } from "@power-ux/ui";
+import { styleVars, Card } from "@powers/ui";
 
 <Card style={styleVars({ "pu-color-accent": "#69BE28" })}>
   Scoped accent for this branch of the tree
@@ -128,10 +128,10 @@ Listen for Escape / backdrop on the **ownerDocument** (works inside Lab iframes)
 | Feedback | `Alert` `Spinner` `Progress` `Skeleton` `Empty` `Stat` `Toaster` |
 | Structure | `Tabs` `Accordion` `Breadcrumb` `Pagination` `Steps` `Timeline` `List` `Table` |
 | Overlays | `Dialog` `Drawer` `Tooltip` `Popover` `Menu` `Command` |
-| Motion | `Transition` (+ `@power-ux/animate` springs) |
+| Motion | `Transition` (+ `@powers/animate` springs) |
 | Authoring | `createStyleSheet` `styleVars` `trapFocus` `cx` |
 
-React ships **no** UI kit. Bootstrap covers forms/nav/overlay well — Power UX adds **product primitives** (Stat, Timeline, Steps, Empty, Command, Combobox, ToggleGroup, Table, List, Chip, NumberInput, AspectRatio, ScrollArea, Collapse, Transition) on a fine-grained reactive core.
+React ships **no** UI kit. Bootstrap covers forms/nav/overlay well — Powers adds **product primitives** (Stat, Timeline, Steps, Empty, Command, Combobox, ToggleGroup, Table, List, Chip, NumberInput, AspectRatio, ScrollArea, Collapse, Transition) on a fine-grained reactive core.
 
 ---
 

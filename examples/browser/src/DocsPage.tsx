@@ -2,7 +2,7 @@
  * In-app docs: how to start + API reference.
  * Markdown lives in /docs for repo readers; this is what demo visitors actually see.
  */
-import type { Router } from "@power-ux/router";
+import type { Router } from "@powers/router";
 import {
   Alert,
   Badge,
@@ -15,7 +15,7 @@ import {
   Kbd,
   Stack,
   Text,
-} from "@power-ux/ui";
+} from "@powers/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import "./docs.css";
 
@@ -104,7 +104,7 @@ export function DocsPage(props: { router: Router }) {
         <Stack gap={3}>
           <Badge tone="accent">Guide + API</Badge>
           <Text as="h1" size="2xl">
-            How to use Power UX
+            How to use Powers
           </Text>
           <Text muted>
             This page is the developer entry point: install, three rules, a
@@ -224,16 +224,16 @@ pnpm ci                  # typecheck · test · size budgets`}</pre>
             <Code>docs/GOLDEN_PATH.md</Code> (forms that type correctly +
             theme).
           </Text>
-          <pre class="docs-pre">{`pnpm add @power-ux/core @power-ux/dom @power-ux/ui
+          <pre class="docs-pre">{`pnpm add @powers/core @powers/dom @powers/ui
 
 # optional
-pnpm add @power-ux/animate @power-ux/router
+pnpm add @powers/animate @powers/router
 # pro motion (optional peer)
-pnpm add gsap   # then: import from "@power-ux/animate/gsap"`}</pre>
+pnpm add gsap   # then: import from "@powers/animate/gsap"`}</pre>
           <Text size="sm" muted>
             Always import the theme once at the app root:
           </Text>
-          <pre class="docs-pre">{`import "@power-ux/ui/theme.css";`}</pre>
+          <pre class="docs-pre">{`import "@powers/ui/theme.css";`}</pre>
         </Section>
 
         <Section id="rules" title="2. Three rules (memorize these)">
@@ -273,13 +273,13 @@ pnpm add gsap   # then: import from "@power-ux/animate/gsap"`}</pre>
         <Section id="first-app" title="3. First app (copy-paste)">
           <Text muted size="sm">
             Vite / TS: set{" "}
-            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@power-ux/dom"`}</Code>{" "}
+            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@powers/dom"`}</Code>{" "}
             in <Code>tsconfig</Code>.
           </Text>
-          <pre class="docs-pre">{`import "@power-ux/ui/theme.css";
-import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
-import { Button, Card, Stack, Text, createTheme } from "@power-ux/ui";
+          <pre class="docs-pre">{`import "@powers/ui/theme.css";
+import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, Card, Stack, Text, createTheme } from "@powers/ui";
 
 createTheme("light").bind();
 
@@ -318,42 +318,42 @@ mount(document.getElementById("app")!, () => (
               <tbody>
                 <tr>
                   <td>
-                    <code>@power-ux/core</code>
+                    <code>@powers/core</code>
                   </td>
                   <td>State & reactivity</td>
                   <td>Always (signals)</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ux/dom</code>
+                    <code>@powers/dom</code>
                   </td>
                   <td>Mount, JSX, Show/For</td>
                   <td>Always (UI tree)</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ux/ui</code>
+                    <code>@powers/ui</code>
                   </td>
                   <td>Theme + components</td>
                   <td>Almost always</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ux/animate</code>
+                    <code>@powers/animate</code>
                   </td>
                   <td>Tween / spring on signals</td>
                   <td>Motion needed</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ux/router</code>
+                    <code>@powers/router</code>
                   </td>
                   <td>SPA routes + Link</td>
                   <td>Multi-page app</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ux/ssr</code>
+                    <code>@powers/ssr</code>
                   </td>
                   <td>String render + islands</td>
                   <td>SSR / marketing HTML</td>
@@ -436,7 +436,7 @@ const emailError = () =>
 animate(x, 100, spring());
 
 // optional: pnpm add gsap
-import { gsapAnimate } from "@power-ux/animate/gsap";
+import { gsapAnimate } from "@powers/animate/gsap";
 gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
                 <Text size="sm" muted>
                   Lab:{" "}
@@ -455,7 +455,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
 
         <Divider label="API reference" />
 
-        <Section id="api-core" title="@power-ux/core">
+        <Section id="api-core" title="@powers/core">
           <Text muted size="sm">
             Fine-grained graph. No DOM.
           </Text>
@@ -510,7 +510,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           />
         </Section>
 
-        <Section id="api-dom" title="@power-ux/dom">
+        <Section id="api-dom" title="@powers/dom">
           <Text muted size="sm">
             Mount and bind the graph to the DOM / JSX.
           </Text>
@@ -523,7 +523,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               },
               {
                 name: "h / JSX",
-                sig: 'jsxImportSource: "@power-ux/dom"',
+                sig: 'jsxImportSource: "@powers/dom"',
                 note: "Automatic JSX runtime.",
               },
               {
@@ -555,7 +555,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           />
         </Section>
 
-        <Section id="api-ui" title="@power-ux/ui">
+        <Section id="api-ui" title="@powers/ui">
           <Text muted size="sm">
             Design system: tokens + primitives. Import{" "}
             <Code>theme.css</Code> once.
@@ -629,7 +629,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           </Text>
         </Section>
 
-        <Section id="api-animate" title="@power-ux/animate">
+        <Section id="api-animate" title="@powers/animate">
           <ApiTable
             rows={[
               {
@@ -649,14 +649,14 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               },
               {
                 name: "gsapAnimate",
-                sig: 'import { gsapAnimate } from "@power-ux/animate/gsap"',
+                sig: 'import { gsapAnimate } from "@powers/animate/gsap"',
                 note: "Optional peer gsap. Duration in ms.",
               },
             ]}
           />
         </Section>
 
-        <Section id="api-router" title="@power-ux/router">
+        <Section id="api-router" title="@powers/router">
           <ApiTable
             rows={[
               {

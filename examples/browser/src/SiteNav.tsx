@@ -2,9 +2,9 @@
  * Single site navigation — Docs first for new developers.
  * Progressive disclosure keeps primary links on one row.
  */
-import type { Router } from "@power-ux/router";
-import { Link } from "@power-ux/router";
-import { Button, Container, type ThemeController } from "@power-ux/ui";
+import type { Router } from "@powers/router";
+import { Link } from "@powers/router";
+import { Button, Container, type ThemeController } from "@powers/ui";
 
 export function SiteNav(props: {
   router: Router;
@@ -18,7 +18,7 @@ export function SiteNav(props: {
         <div class="site-nav-inner">
           <Link router={router} to="/" class="site-brand" exact>
             <span class="site-mark" aria-hidden="true" />
-            <span class="site-brand-label">Power UX</span>
+            <span class="site-brand-label">Powers</span>
           </Link>
 
           <nav class="site-nav-links" aria-label="Primary">

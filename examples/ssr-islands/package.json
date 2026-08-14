@@ -1,5 +1,5 @@
 {
-  "name": "@power-ux/example-ssr-islands",
+  "name": "@powers/example-ssr-islands",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,9 +7,9 @@
     "start": "node --import tsx src/main.ts"
   },
   "dependencies": {
-    "@power-ux/core": "workspace:*",
-    "@power-ux/dom": "workspace:*",
-    "@power-ux/ssr": "workspace:*",
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*",
+    "@powers/ssr": "workspace:*",
     "happy-dom": "^17.4.4"
   },
   "devDependencies": {

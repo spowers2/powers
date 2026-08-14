@@ -18,11 +18,11 @@
  * ```
  */
 
-import { signal, type Signal } from "@power-ux/core";
+import { signal, type Signal } from "@powers/core";
 
 export type FieldError = string | undefined | null | false;
 
-/** Anything that behaves like a writable signal (Power UX signal). */
+/** Anything that behaves like a writable signal (Powers signal). */
 export type Bindable<T> = {
   (): T;
   set: (value: T) => void;
@@ -134,7 +134,7 @@ export function eventChecked(e: Event): boolean {
  * Props to spread onto `Input` / `Textarea` for two-way signal binding.
  *
  * Prefer the control’s `bind={signal}` prop when available.
- * Named `bindInput` (not `bindText`) so it doesn’t clash with `@power-ux/dom`’s
+ * Named `bindInput` (not `bindText`) so it doesn’t clash with `@powers/dom`’s
  * DOM `bindText` helper.
  */
 export function bindInput(sig: Bindable<string>): {

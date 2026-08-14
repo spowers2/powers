@@ -1,4 +1,4 @@
-import type { Dispose } from "@power-ux/core";
+import type { Dispose } from "@powers/core";
 
 /**
  * Attach a DOM event listener. Returns a dispose that removes it.

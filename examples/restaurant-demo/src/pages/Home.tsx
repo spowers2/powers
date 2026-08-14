@@ -6,8 +6,8 @@ import {
   Stat,
   Text,
   type ToastController,
-} from "@power-ux/ui";
-import type { Router } from "@power-ux/router";
+} from "@powers/ui";
+import type { Router } from "@powers/router";
 import {
   profile,
   tonightReservations,

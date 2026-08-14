@@ -1,5 +1,5 @@
 /**
- * @power-ux/router
+ * @powers/router
  *
  * Learn in 2 minutes:
  *   createRouter({ routes }) → router.outlet() + router.navigate() + <Link />

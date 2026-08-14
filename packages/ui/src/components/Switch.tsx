@@ -1,5 +1,5 @@
-import { type Signal } from "@power-ux/core";
-import { component, mergeProps, type ComponentProps } from "@power-ux/dom";
+import { type Signal } from "@powers/core";
+import { component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 import { readBool, type MaybeReactive } from "../reactive.js";
 import type { Bindable } from "../form.js";

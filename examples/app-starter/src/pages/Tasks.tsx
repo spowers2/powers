@@ -1,4 +1,4 @@
-import { signal, computed } from "@power-ux/core";
+import { signal, computed } from "@powers/core";
 import {
   Button,
   Card,
@@ -14,8 +14,8 @@ import {
   required,
   type ToastController,
   asSelectBind,
-} from "@power-ux/ui";
-import type { Router } from "@power-ux/router";
+} from "@powers/ui";
+import type { Router } from "@powers/router";
 import { PageHeader } from "../components/uiBits.js";
 import {
   tasks,

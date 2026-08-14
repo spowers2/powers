@@ -1,11 +1,11 @@
 # Forms & validation
 
-Power UX keeps forms **boring and readable**: signals for state, `Field` for layout/errors, pure helpers for rules.
+Powers keeps forms **boring and readable**: signals for state, `Field` for layout/errors, pure helpers for rules.
 
 ## Preferred pattern (bind)
 
 ```tsx
-import { signal } from "@power-ux/core";
+import { signal } from "@powers/core";
 import {
   Field,
   Input,
@@ -13,7 +13,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ux/ui";
+} from "@powers/ui";
 
 const email = signal("");
 const emailError = () =>
@@ -30,7 +30,7 @@ const emailError = () =>
 ### createField (touched + error)
 
 ```tsx
-import { createField, required, emailFormat, firstError } from "@power-ux/ui";
+import { createField, required, emailFormat, firstError } from "@powers/ui";
 
 const email = createField({
   validate: (v) => firstError(required(v), emailFormat(v)),
@@ -68,7 +68,7 @@ const ok = signal(true);
 Still supported when you need custom handlers:
 
 ```tsx
-import { bindInput, eventValue } from "@power-ux/ui";
+import { bindInput, eventValue } from "@powers/ui";
 
 <Input
   {...bindInput(email)}
@@ -88,7 +88,7 @@ Controls accept `MaybeReactive<T>` (`T | (() => T)` / signals). Internally they 
 Runtime contracts (why the page must not remount while typing): [`FOUNDATION.md`](./FOUNDATION.md).  
 Usability overview: [`USABILITY.md`](./USABILITY.md).
 
-## Helpers (`@power-ux/ui`)
+## Helpers (`@powers/ui`)
 
 | Helper | Role |
 |---|---|

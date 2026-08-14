@@ -282,9 +282,9 @@ export function LabPage(): HTMLElement {
         .map((l) => (l ? " ".repeat(n) + l : l))
         .join("\n");
 
-    const program = `import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
-import { Button, Card, Stack, Text } from "@power-ux/ui";
+    const program = `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, Card, Stack, Text } from "@powers/ui";
 
 ${setup ? setup + "\n\n" : ""}export function App() {
   return (

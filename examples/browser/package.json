@@ -1,5 +1,5 @@
 {
-  "name": "@power-ux/example-browser",
+  "name": "@powers/example-browser",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,11 +11,11 @@
     "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
-    "@power-ux/animate": "workspace:*",
-    "@power-ux/core": "workspace:*",
-    "@power-ux/dom": "workspace:*",
-    "@power-ux/router": "workspace:*",
-    "@power-ux/ui": "workspace:*",
+    "@powers/animate": "workspace:*",
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*",
+    "@powers/router": "workspace:*",
+    "@powers/ui": "workspace:*",
     "esbuild-wasm": "0.25.12",
     "gsap": "^3.12.7"
   },

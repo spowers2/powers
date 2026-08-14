@@ -79,14 +79,14 @@ export function h(
     }
     const result = tag(createProps(raw) as never);
     if (result == null) {
-      return document.createComment("power-ux");
+      return document.createComment("powers");
     }
     return result;
   }
 
   if (typeof tag !== "string" || tag === "") {
     throw new Error(
-      `[power-ux/dom] h() expected a tag name string or component function, got: ${typeof tag}`,
+      `[powers/dom] h() expected a tag name string or component function, got: ${typeof tag}`,
     );
   }
 

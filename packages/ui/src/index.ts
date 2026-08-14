@@ -1,9 +1,9 @@
 /**
- * @power-ux/ui — integrated design system (styling + components)
+ * @powers/ui — integrated design system (styling + components)
  *
  * Layers: tokens → primitives → optional utilities (see docs/STYLING.md)
  *
- * 1. import "@power-ux/ui/theme.css"   // tokens + base + utilities
+ * 1. import "@powers/ui/theme.css"   // tokens + base + utilities
  * 2. createTheme().bind(); createDensity().bind();
  * 3. Use Button, Field, Stack… (prefer primitives over raw utilities)
  * 4. Forms: <Input bind={signal} /> + Field error={…} — see docs/USABILITY.md

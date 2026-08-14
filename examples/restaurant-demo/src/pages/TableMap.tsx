@@ -1,4 +1,4 @@
-import { signal, type Signal } from "@power-ux/core";
+import { signal, type Signal } from "@powers/core";
 import {
   Button,
   Card,
@@ -9,8 +9,8 @@ import {
   Stack,
   Text,
   type ToastController,
-} from "@power-ux/ui";
-import type { Router } from "@power-ux/router";
+} from "@powers/ui";
+import type { Router } from "@powers/router";
 import { PageHeader } from "../components/uiBits.js";
 import {
   tables,

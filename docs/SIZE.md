@@ -1,6 +1,6 @@
 # Bundle size budgets
 
-Power UX stays light by **failing CI** when packages grow past fixed gzip ceilings.
+Powers stays light by **failing CI** when packages grow past fixed gzip ceilings.
 
 ```bash
 pnpm size   # all package size scripts
@@ -11,12 +11,12 @@ pnpm run check     # typecheck + test + size
 
 | Package | How measured | gzip ceiling | ~current |
 |---|---|---|---|
-| `@power-ux/core` | full minify bundle | **8 KB** | ~2.1 KB |
-| `@power-ux/dom` | minify, `core` external | **6 KB** | ~3.3 KB |
-| `@power-ux/animate` | minify, `core` external | **5 KB** | ~1.6 KB |
-| `@power-ux/router` | minify, `core`+`dom` external | **4 KB** | ~1.9 KB |
-| `@power-ux/ui` full | minify public index, core+dom external | **32 KB** | ~25 KB |
-| `@power-ux/ui` form-kit | Button/Input/Field/Stack/theme/helpers | **12 KB** | measured on `pnpm size` |
+| `@powers/core` | full minify bundle | **8 KB** | ~2.1 KB |
+| `@powers/dom` | minify, `core` external | **6 KB** | ~3.3 KB |
+| `@powers/animate` | minify, `core` external | **5 KB** | ~1.6 KB |
+| `@powers/router` | minify, `core`+`dom` external | **4 KB** | ~1.9 KB |
+| `@powers/ui` full | minify public index, core+dom external | **32 KB** | ~25 KB |
+| `@powers/ui` form-kit | Button/Input/Field/Stack/theme/helpers | **12 KB** | measured on `pnpm size` |
 
 Artifacts land in each package’s `dist-size/` (`*.min.js`, `size.json`).
 

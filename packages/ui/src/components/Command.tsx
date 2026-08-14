@@ -1,5 +1,5 @@
-import { signal, effect } from "@power-ux/core";
-import { For, Show, component, mergeProps, type ComponentProps } from "@power-ux/dom";
+import { signal, effect } from "@powers/core";
+import { For, Show, component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 import { attachOverlay } from "../overlay.js";
 import { readBool, readStr, type MaybeReactive } from "../reactive.js";

@@ -1,4 +1,4 @@
-# Power UX — ordered plan
+# Powers — ordered plan
 
 **Last updated:** 2026-08-10  
 **Source of truth for sequence.** Keep this file current when priorities change.
@@ -64,9 +64,9 @@ Parked: streaming SSR — only when needed.
 
 ### GSAP adapter + pro motion ✅
 
-- `@power-ux/animate/gsap` — optional peer `gsap`  
+- `@powers/animate/gsap` — optional peer `gsap`  
 - `gsapAnimate` / `gsapFromTo` / `createGsapBridge` → number signals  
-- Default `@power-ux/animate` unchanged (no GSAP required)  
+- Default `@powers/animate` unchanged (no GSAP required)  
 - See [`ANIMATION.md`](./ANIMATION.md)
 
 ---
@@ -74,12 +74,12 @@ Parked: streaming SSR — only when needed.
 ## Package map
 
 ```
-@power-ux/core      signals, store, resource, ownership
-@power-ux/animate  tween / spring on signals
-@power-ux/dom      mount, h, JSX, props, Show, For
-@power-ux/router   createRouter, Link, navigate
-@power-ux/ssr      renderToString + defineIslands / hydrate
-@power-ux/ui       tokens + base + utilities + primitives
+@powers/core      signals, store, resource, ownership
+@powers/animate  tween / spring on signals
+@powers/dom      mount, h, JSX, props, Show, For
+@powers/router   createRouter, Link, navigate
+@powers/ssr      renderToString + defineIslands / hydrate
+@powers/ui       tokens + base + utilities + primitives
 ```
 
 See `docs/STYLING.md` · `docs/DESIGN_SYSTEM.md` · `docs/POWER_LAB.md`

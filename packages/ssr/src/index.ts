@@ -1,5 +1,5 @@
 /**
- * @power-ux/ssr
+ * @powers/ssr
  *
  * - `renderToString` — full tree → HTML (happy-dom)
  * - `htmlDocument` — wrap body in a document shell
@@ -20,8 +20,8 @@
  * ```
  */
 import { Window } from "happy-dom";
-import { mount, type MountResult } from "@power-ux/dom";
-import { flush } from "@power-ux/core";
+import { mount, type MountResult } from "@powers/dom";
+import { flush } from "@powers/core";
 
 export interface RenderToStringOptions {
   /** Wait for microtasks / flush reactive updates before serializing. Default true. */
@@ -98,7 +98,7 @@ export function htmlDocument(
     htmlAttrs?: string;
   },
 ): string {
-  const title = options?.title ?? "Power UX";
+  const title = options?.title ?? "Powers";
   const head = options?.head ?? "";
   const htmlAttrs = options?.htmlAttrs ? ` ${options.htmlAttrs}` : "";
   return `<!DOCTYPE html>

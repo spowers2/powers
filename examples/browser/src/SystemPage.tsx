@@ -1,7 +1,7 @@
 /**
  * Living design-system explorer — sections for tokens, type, forms, layout.
  */
-import { signal } from "@power-ux/core";
+import { signal } from "@powers/core";
 import {
   Accordion,
   Alert,
@@ -49,7 +49,7 @@ import {
   Tooltip,
   type DensityController,
   type ThemeController,
-} from "@power-ux/ui";
+} from "@powers/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import { DemoHead, SNIPPETS } from "./sysDemo.js";
 
@@ -156,7 +156,7 @@ export function SystemPage(props: {
   };
 
   const exportBrandCss = () => {
-    const css = `/* Power UX brand export — paste after theme.css */
+    const css = `/* Powers brand export — paste after theme.css */
 :root {
   --pu-color-accent: ${accentPick()};
   --pu-color-accent-hover: color-mix(in srgb, ${accentPick()} 88%, #000);
@@ -190,7 +190,7 @@ export function SystemPage(props: {
             Design system
           </Text>
           <Text muted>
-            Living reference for Power UX primitives — modern layered surfaces,
+            Living reference for Powers primitives — modern layered surfaces,
             glass, and deep blue/green tokens. Edit{" "}
             <Code>packages/ui/src/styles/tokens.css</Code> to retheme.
           </Text>
@@ -357,7 +357,7 @@ export function SystemPage(props: {
                   <Badge tone="success">Success</Badge>
                   <Badge tone="warning">Warning</Badge>
                   <Avatar name="Ada Lovelace" size="sm" />
-                  <Avatar name="Power UX" size="md" />
+                  <Avatar name="Powers" size="md" />
                   <Avatar name="SP" size="lg" />
                 </Stack>
               </Stack>
@@ -871,7 +871,7 @@ export function SystemPage(props: {
                   items={[
                     {
                       id: "a",
-                      title: "What is Power UX?",
+                      title: "What is Powers?",
                       content:
                         "A fine-grained reactive UI kit with an integrated design system.",
                     },
@@ -1111,8 +1111,8 @@ export function SystemPage(props: {
                 Inline <Code>createTheme()</Code> and blocks:
               </Text>
               <Code block>
-{`import { Button, createTheme, createDensity } from "@power-ux/ui";
-import "@power-ux/ui/theme.css";
+{`import { Button, createTheme, createDensity } from "@powers/ui";
+import "@powers/ui/theme.css";
 
 const theme = createTheme("dark");
 theme.bind();
@@ -1130,7 +1130,7 @@ density.bind();`}
             <Text muted size="sm">
               core · animate · dom · router · ssr · ui — tree-shake and compose.
               Default motion is signal tweens; GSAP is optional via{" "}
-              <code>@power-ux/animate/gsap</code>.
+              <code>@powers/animate/gsap</code>.
             </Text>
           </Stack>
         </Card>

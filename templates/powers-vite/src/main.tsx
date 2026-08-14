@@ -1,5 +1,5 @@
-import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
+import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
 import {
   Button,
   Card,
@@ -13,8 +13,8 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ux/ui";
-import "@power-ux/ui/theme.css";
+} from "@powers/ui";
+import "@powers/ui/theme.css";
 import "./app.css";
 
 installDevWarnings();
@@ -42,7 +42,7 @@ function App() {
         <Stack gap={4}>
           <Stack gap={1}>
             <Text as="h1" size="xl">
-              Power UX starter
+              Powers starter
             </Text>
             <Text muted size="sm">
               Edit <code>src/main.tsx</code> — forms use{" "}

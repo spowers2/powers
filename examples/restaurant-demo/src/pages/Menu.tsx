@@ -1,4 +1,4 @@
-import { signal } from "@power-ux/core";
+import { signal } from "@powers/core";
 import {
   Button,
   Card,
@@ -16,7 +16,7 @@ import {
   required,
   type ToastController,
   asSelectBind,
-} from "@power-ux/ui";
+} from "@powers/ui";
 import { PageHeader } from "../components/uiBits.js";
 import { PHOTOS } from "../data/images.js";
 import {

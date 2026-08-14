@@ -1,4 +1,4 @@
-import { signal } from "@power-ux/core";
+import { signal } from "@powers/core";
 import {
   Button,
   Card,
@@ -15,7 +15,7 @@ import {
   required,
   type ToastController,
   asSelectBind,
-} from "@power-ux/ui";
+} from "@powers/ui";
 import { PageHeader } from "../components/uiBits.js";
 import {
   clients,
@@ -87,7 +87,7 @@ function initialStatus(): string {
 
 export function InvoicesPage(props: {
   toaster: ToastController;
-  router?: import("@power-ux/router").Router;
+  router?: import("@powers/router").Router;
 }) {
   const { toaster } = props;
   const filter = signal("");

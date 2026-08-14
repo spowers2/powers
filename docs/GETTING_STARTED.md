@@ -14,7 +14,7 @@ You are **not** on public npm yet. Develop against workspace packages.
 ## 1. Install once
 
 ```bash
-cd power-ux
+cd powers
 pnpm install
 ```
 
@@ -57,7 +57,7 @@ Source: `examples/restaurant-demo/`.
 ```bash
 pnpm create-app hello-ui
 pnpm install
-pnpm --filter @power-ux/hello-ui dev
+pnpm --filter @powers/hello-ui dev
 # → http://localhost:5190  (form + theme + bind)
 ```
 
@@ -66,7 +66,7 @@ pnpm --filter @power-ux/hello-ui dev
 ```bash
 pnpm new-app billing-ui
 pnpm install
-pnpm --filter @power-ux/billing-ui dev
+pnpm --filter @powers/billing-ui dev
 ```
 
 Or copy outside the repo (still private — keep `workspace:*` or `file:` deps until publish):
@@ -85,8 +85,8 @@ Or copy outside the repo (still private — keep `workspace:*` or `file:` deps u
 ## 4. App shape (reference)
 
 ```tsx
-import { signal } from "@power-ux/core";
-import { mount } from "@power-ux/dom";
+import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
 import {
   createTheme,
   Button,
@@ -95,8 +95,8 @@ import {
   Text,
   Field,
   Input,
-} from "@power-ux/ui";
-import "@power-ux/ui/theme.css";
+} from "@powers/ui";
+import "@powers/ui/theme.css";
 
 const theme = createTheme("light");
 theme.bind();
@@ -124,14 +124,14 @@ mount(document.getElementById("root")!, () => (
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@power-ux/dom"
+    "jsxImportSource": "@powers/dom"
   }
 }
 ```
 
 ```ts
 // vite.config.ts
-esbuild: { jsx: "automatic", jsxImportSource: "@power-ux/dom" }
+esbuild: { jsx: "automatic", jsxImportSource: "@powers/dom" }
 ```
 
 ## 5. Forms & motion

@@ -14,13 +14,13 @@ import {
   createRoot,
   onError,
   flush,
-} from "@power-ux/core";
+} from "@powers/core";
 
 function delay(ms: number, value: string): Promise<string> {
   return new Promise((resolve) => setTimeout(() => resolve(value), ms));
 }
 
-console.log("\n=== Power UX kitchen sink ===\n");
+console.log("\n=== Powers kitchen sink ===\n");
 
 createRoot((dispose) => {
   onError((err) => {
@@ -48,7 +48,7 @@ createRoot((dispose) => {
 
   // 3) resource — async without useEffect spaghetti
   console.log("\n--- 3. resource ---");
-  const query = signal("power-ux");
+  const query = signal("powers");
   const search = resource(
     () => query(),
     async (q, { refetching }) => {

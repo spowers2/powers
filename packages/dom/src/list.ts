@@ -4,7 +4,7 @@ import {
   signal,
   type Dispose,
   type Signal,
-} from "@power-ux/core";
+} from "@powers/core";
 import { remove } from "./insert.js";
 
 export interface ListOptions<T> {

@@ -1,4 +1,4 @@
-import { component, type ComponentProps } from "@power-ux/dom";
+import { component, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 
 export type KbdProps = {

@@ -1,6 +1,6 @@
-# Styling in Power UX
+# Styling in Powers
 
-**Product stance:** Power UX is the **runtime and the look**.  
+**Product stance:** Powers is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
 **Default palette — “Seahawk hologram”:** College Navy `#002244`, Action Green `#69BE28`, Wolf Grey, soft holographic cyan edges, restrained brass metal.  
@@ -31,8 +31,8 @@ Retheme entirely by editing `packages/ui/src/styles/tokens.css` (product demos o
 **Rule:** primitives never hard-code hex; they only use `--pu-*`.
 
 ```ts
-import "@power-ux/ui/theme.css"; // tokens + base + utilities
-import { createTheme, createDensity } from "@power-ux/ui";
+import "@powers/ui/theme.css"; // tokens + base + utilities
+import { createTheme, createDensity } from "@powers/ui";
 
 createTheme("dark").bind();
 createDensity("comfortable").bind();
@@ -41,16 +41,16 @@ createDensity("comfortable").bind();
 Minimal CSS (no utilities):
 
 ```ts
-import "@power-ux/ui/tokens.css";
-import "@power-ux/ui/base.css";
+import "@powers/ui/tokens.css";
+import "@powers/ui/base.css";
 ```
 
 ### 2. Primitives (default way to build UI)
 
-Use `@power-ux/ui` components. They own structure, a11y patterns, and `pu-*` classes:
+Use `@powers/ui` components. They own structure, a11y patterns, and `pu-*` classes:
 
 ```tsx
-import { Button, Stack, Card, Field, Input } from "@power-ux/ui";
+import { Button, Stack, Card, Field, Input } from "@powers/ui";
 
 <Card>
   <Stack gap={3}>
@@ -67,7 +67,7 @@ This is the Bootstrap *component* story — complete controls that match — wit
 ### 3. Utilities (optional, BEM-flavored)
 
 **File:** `packages/ui/src/styles/utilities.css`  
-**Import:** included in `theme.css`, or `@power-ux/ui/utilities.css`
+**Import:** included in `theme.css`, or `@powers/ui/utilities.css`
 
 ```html
 <div class="pu-flex pu-flex--row pu-items-center pu-gap-3 pu-p-4">
@@ -95,7 +95,7 @@ This is the Bootstrap *component* story — complete controls that match — wit
 
 That split is historical: React solved components; CSS came from elsewhere.
 
-For Power UX it would mean:
+For Powers it would mean:
 
 - Two docs / two mental models  
 - Token drift (Tailwind config vs `--pu-*`)  

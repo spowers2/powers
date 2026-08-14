@@ -1,4 +1,4 @@
-import type { Signal } from "@power-ux/core";
+import type { Signal } from "@powers/core";
 
 /** Easing function: progress 0..1 → eased 0..1. */
 export type EasingFn = (t: number) => number;

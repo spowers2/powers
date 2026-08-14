@@ -1,7 +1,7 @@
 {
-  "name": "@power-ux/router",
+  "name": "@powers/router",
   "version": "0.1.0",
-  "description": "Tiny signal-based router for Power UX — easy to learn, easy to own.",
+  "description": "Tiny signal-based router for Powers — easy to learn, easy to own.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -22,8 +22,8 @@
     "size": "node --import tsx scripts/size.ts"
   },
   "dependencies": {
-    "@power-ux/core": "workspace:*",
-    "@power-ux/dom": "workspace:*"
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.25.1",

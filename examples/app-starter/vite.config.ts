@@ -7,14 +7,14 @@ export default defineConfig({
   },
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@power-ux/dom",
+    jsxImportSource: "@powers/dom",
   },
   optimizeDeps: {
     exclude: [
-      "@power-ux/core",
-      "@power-ux/dom",
-      "@power-ux/router",
-      "@power-ux/ui",
+      "@powers/core",
+      "@powers/dom",
+      "@powers/router",
+      "@powers/ui",
     ],
   },
 });

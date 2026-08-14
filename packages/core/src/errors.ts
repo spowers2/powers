@@ -58,7 +58,7 @@ export function reportError(error: unknown, owner: Owner | null): boolean {
           handler(error);
         } catch (handlerError) {
           // Handler bugs should not recurse forever.
-          console.error("[power-ux] onError handler threw:", handlerError);
+          console.error("[powers] onError handler threw:", handlerError);
         }
       }
       return true;
@@ -70,7 +70,7 @@ export function reportError(error: unknown, owner: Owner | null): boolean {
     try {
       globalHandler(error);
     } catch (handlerError) {
-      console.error("[power-ux] onError handler threw:", handlerError);
+      console.error("[powers] onError handler threw:", handlerError);
     }
     return true;
   }

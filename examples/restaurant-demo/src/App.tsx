@@ -9,8 +9,8 @@ import {
   type DensityController,
   type ThemeController,
   type ToastController,
-} from "@power-ux/ui";
-import { createRouter, Link } from "@power-ux/router";
+} from "@powers/ui";
+import { createRouter, Link } from "@powers/router";
 import { HomePage } from "./pages/Home.js";
 import { MenuPage } from "./pages/Menu.js";
 import { ReservationsPage } from "./pages/Reservations.js";

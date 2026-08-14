@@ -1,5 +1,5 @@
 /**
- * Lightweight development warnings for common Power UX mistakes.
+ * Lightweight development warnings for common Powers mistakes.
  * No-ops when `NODE_ENV === "production"` or when disabled.
  *
  * Call `installDevWarnings()` once from your app bootstrap (demos do this).
@@ -32,7 +32,7 @@ export function devWarnOnce(key: string, message: string): void {
   if (set.has(key)) return;
   set.add(key);
   // eslint-disable-next-line no-console
-  console.warn(`[Power UX] ${message}`);
+  console.warn(`[Powers] ${message}`);
 }
 
 /**
@@ -48,7 +48,7 @@ export function warnIfThemeMissing(doc: Document = document): void {
       if (!accent) {
         devWarnOnce(
           "theme-css",
-          'Missing design tokens. Import once at the app root: import "@power-ux/ui/theme.css"; then createTheme().bind().',
+          'Missing design tokens. Import once at the app root: import "@powers/ui/theme.css"; then createTheme().bind().',
         );
       }
     } catch {
@@ -73,7 +73,7 @@ export function warnPossibleSnapshotValue(
   );
 }
 
-/** Enable/disable all Power UX dev warnings. */
+/** Enable/disable all Powers dev warnings. */
 export function setDevWarnings(enabled: boolean): void {
   g.__POWER_UI_DEV__ = enabled;
 }

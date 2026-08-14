@@ -1,5 +1,5 @@
 {
-  "name": "power-ux-app",
+  "name": "powers-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@power-ux/core": "workspace:*",
-    "@power-ux/dom": "workspace:*",
-    "@power-ux/ui": "workspace:*"
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*",
+    "@powers/ui": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.2",

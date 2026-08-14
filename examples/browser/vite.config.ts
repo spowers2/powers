@@ -7,15 +7,15 @@ export default defineConfig({
   },
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@power-ux/dom",
+    jsxImportSource: "@powers/dom",
   },
   optimizeDeps: {
     exclude: [
-      "@power-ux/core",
-      "@power-ux/dom",
-      "@power-ux/animate",
-      "@power-ux/router",
-      "@power-ux/ui",
+      "@powers/core",
+      "@powers/dom",
+      "@powers/animate",
+      "@powers/router",
+      "@powers/ui",
     ],
     include: ["esbuild-wasm", "gsap"],
   },

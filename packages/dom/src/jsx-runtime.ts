@@ -1,9 +1,9 @@
 /**
- * Automatic JSX runtime for Power UX.
+ * Automatic JSX runtime for Powers.
  *
  * Vite / TypeScript:
  *   jsx: "react-jsx"
- *   jsxImportSource: "@power-ux/dom"
+ *   jsxImportSource: "@powers/dom"
  *
  * Function components receive **reactive props** via `createProps`
  * (unless they already wrapped themselves with `component()`).
@@ -19,7 +19,7 @@ export type FunctionComponent<P = Record<string, unknown>> = (
 ) => Node | DocumentFragment | null | undefined;
 
 /** Marker set on components that already apply createProps. */
-export const REACTIVE_PROPS = Symbol.for("power-ux.reactiveProps");
+export const REACTIVE_PROPS = Symbol.for("powers.reactiveProps");
 
 export function jsx(
   type: string | FunctionComponent<Record<string, unknown>>,
@@ -59,7 +59,7 @@ function create(
     const reactive = createProps(p as Record<string, unknown>);
     const result = type(reactive as Record<string, unknown>);
     if (result == null) {
-      return document.createComment("power-ux");
+      return document.createComment("powers");
     }
     return result;
   }

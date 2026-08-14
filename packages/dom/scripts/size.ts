@@ -16,7 +16,7 @@ const result = await build({
   platform: "browser",
   write: false,
   treeShaking: true,
-  external: ["@power-ux/core"],
+  external: ["@powers/core"],
 });
 
 const code = result.outputFiles[0]?.text ?? "";
@@ -29,8 +29,8 @@ writeFileSync(
   join(outdir, "size.json"),
   JSON.stringify(
     {
-      package: "@power-ux/dom",
-      external: ["@power-ux/core"],
+      package: "@powers/dom",
+      external: ["@powers/core"],
       rawBytes: raw,
       gzipBytes: gzip,
       rawKb: +(raw / 1024).toFixed(2),
@@ -42,7 +42,7 @@ writeFileSync(
   ),
 );
 
-console.log("\n@power-ux/dom size baseline (core external)");
+console.log("\n@powers/dom size baseline (core external)");
 console.log(`  minified : ${raw} bytes (${(raw / 1024).toFixed(2)} KB)`);
 console.log(`  gzip     : ${gzip} bytes (${(gzip / 1024).toFixed(2)} KB)`);
 
