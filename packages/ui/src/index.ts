@@ -19,6 +19,9 @@ export type { ThemeMode, ThemeController } from "./theme.js";
 export { createDensity } from "./density.js";
 export type { Density, DensityController } from "./density.js";
 
+export { createPalette } from "./palette.js";
+export type { PaletteId, PaletteController } from "./palette.js";
+
 export { cx, puId } from "./utils.js";
 
 export { createStyleSheet, styleVars } from "./styles.js";

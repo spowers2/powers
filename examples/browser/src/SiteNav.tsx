@@ -4,13 +4,19 @@
  */
 import type { Router } from "@powers/router";
 import { Link } from "@powers/router";
-import { Button, Container, type ThemeController } from "@powers/ui";
+import {
+  Button,
+  Container,
+  type ThemeController,
+  type PaletteController,
+} from "@powers/ui";
 
 export function SiteNav(props: {
   router: Router;
   theme: ThemeController;
+  palette: PaletteController;
 }) {
-  const { router, theme } = props;
+  const { router, theme, palette } = props;
 
   return (
     <header class="site-nav">
@@ -56,6 +62,16 @@ export function SiteNav(props: {
           </nav>
 
           <div class="site-nav-actions">
+            <Button
+              size="sm"
+              variant="ghost"
+              title="Toggle palette: Dual electric ↔ Instrument (current default look)"
+              onClick={() => palette.toggle()}
+            >
+              {() =>
+                palette.id() === "dual" ? "Instrument" : "Dual electric"
+              }
+            </Button>
             <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
               {() => (theme.mode() === "dark" ? "Light" : "Dark")}
             </Button>

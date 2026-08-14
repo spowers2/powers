@@ -21,6 +21,7 @@ import {
   Badge,
   createTheme,
   createDensity,
+  createPalette,
   installDevWarnings,
 } from "@powers/ui";
 import "@powers/ui/theme.css";
@@ -43,6 +44,10 @@ theme.bind();
 
 const density = createDensity("comfortable");
 density.bind();
+
+/** Dual electric first visit; nav “Instrument” restores prior look (persisted). */
+const palette = createPalette("dual");
+palette.bind();
 
 function PlaygroundPage() {
   const count = signal(0);
@@ -305,7 +310,7 @@ function AppShell() {
 
   return (
     <div class="site-root">
-      {SiteNav({ router, theme })}
+      {SiteNav({ router, theme, palette })}
       <div class={mainClass}>{router.outlet()}</div>
     </div>
   );
