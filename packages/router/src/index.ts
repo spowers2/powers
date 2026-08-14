@@ -5,7 +5,7 @@
  *   createRouter({ routes }) → router.outlet() + router.navigate() + <Link />
  */
 
-export { createRouter, buildPath } from "./router.js";
+export { createRouter, buildPath, parseSearch } from "./router.js";
 export type {
   Router,
   RouterOptions,

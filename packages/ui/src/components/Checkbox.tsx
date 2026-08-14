@@ -1,12 +1,17 @@
+import { type Signal } from "@power-ui/core";
 import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
+import { readBool, type MaybeReactive } from "../reactive.js";
+import type { Bindable } from "../form.js";
 
 export type CheckboxProps = {
-  checked?: boolean | (() => boolean);
-  disabled?: boolean | (() => boolean);
+  checked?: MaybeReactive<boolean>;
+  /** Two-way bind a boolean signal. */
+  bind?: Bindable<boolean> | Signal<boolean>;
+  disabled?: MaybeReactive<boolean>;
   onChange?: (checked: boolean) => void;
   label?: string;
-  class?: string | (() => string);
+  class?: MaybeReactive<string>;
   id?: string;
 };
 
@@ -32,20 +37,31 @@ const styles = `
   background: var(--pu-color-surface);
   display: grid;
   place-items: center;
-  transition: background var(--pu-duration) var(--pu-ease), border-color var(--pu-duration) var(--pu-ease);
+  transition:
+    background var(--pu-duration) var(--pu-ease-out),
+    border-color var(--pu-duration) var(--pu-ease-out),
+    transform var(--pu-duration-fast) var(--pu-ease-spring);
   flex-shrink: 0;
 }
 .pu-checkbox[data-checked="true"] .pu-checkbox__box {
   background: var(--pu-color-accent);
   border-color: var(--pu-color-accent);
+  transform: scale(1.05);
 }
 .pu-checkbox__box svg {
   width: 0.7rem;
   height: 0.7rem;
   opacity: 0;
   color: var(--pu-color-accent-fg);
+  transform: scale(0.5);
+  transition:
+    opacity var(--pu-duration-fast) var(--pu-ease-out),
+    transform var(--pu-duration) var(--pu-ease-spring);
 }
-.pu-checkbox[data-checked="true"] .pu-checkbox__box svg { opacity: 1; }
+.pu-checkbox[data-checked="true"] .pu-checkbox__box svg {
+  opacity: 1;
+  transform: scale(1);
+}
 .pu-checkbox__input {
   position: absolute;
   opacity: 0;
@@ -68,11 +84,13 @@ export const Checkbox = component((raw: CheckboxProps) => {
   ensureStyles();
   const props = mergeProps({}, raw) as ComponentProps<CheckboxProps>;
   const id = props.id ?? `pu-check-${Math.random().toString(36).slice(2, 9)}`;
+  const bound = raw.bind;
 
   const isChecked = () =>
-    !!(typeof props.checked === "function" ? props.checked() : props.checked);
-  const isDisabled = () =>
-    !!(typeof props.disabled === "function" ? props.disabled() : props.disabled);
+    bound
+      ? readBool(bound as MaybeReactive<boolean>)
+      : readBool(props.checked as MaybeReactive<boolean>);
+  const isDisabled = () => readBool(props.disabled as MaybeReactive<boolean>);
 
   const box = document.createElement("span");
   box.className = "pu-checkbox__box";
@@ -99,7 +117,9 @@ export const Checkbox = component((raw: CheckboxProps) => {
         disabled={isDisabled}
         onChange={(e: Event) => {
           if (isDisabled()) return;
-          props.onChange?.((e.target as HTMLInputElement).checked);
+          const next = (e.target as HTMLInputElement).checked;
+          if (bound) bound.set(next);
+          props.onChange?.(next);
         }}
       />
       {box}

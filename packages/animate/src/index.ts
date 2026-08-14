@@ -6,6 +6,10 @@
  *
  * Optional spring feel:
  *   animate(mySignal, 100, spring())
+ *
+ * Optional GSAP (peer dependency):
+ *   import { gsapAnimate } from "@power-ui/animate/gsap"
+ *   — or createGsapBridge(gsap) from this package without importing gsap here
  */
 
 export { animate, spring } from "./animate.js";
@@ -20,6 +24,12 @@ export {
   driver,
 } from "./driver.js";
 export { resolveEase, easeNames } from "./easings.js";
+export { createGsapBridge } from "./gsap-bridge.js";
+export type {
+  GsapLike,
+  GsapAnimateOptions,
+  GsapBridge,
+} from "./gsap-bridge.js";
 
 export type {
   AnimateOptions,

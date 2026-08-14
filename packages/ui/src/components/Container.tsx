@@ -11,15 +11,20 @@ const styles = `
 .pu-container {
   width: 100%;
   margin-inline: auto;
-  padding-inline: var(--pu-space-4);
+  /* Prefer site-level gutters when demos define them (unified chrome) */
+  padding-inline: var(--site-gutter, var(--pu-space-4));
+  box-sizing: border-box;
 }
 @media (min-width: 640px) {
-  .pu-container { padding-inline: var(--pu-space-6); }
+  .pu-container {
+    padding-inline: var(--site-gutter, var(--pu-space-6));
+  }
 }
 .pu-container--sm { max-width: 40rem; }
 .pu-container--md { max-width: 48rem; }
 .pu-container--lg { max-width: 64rem; }
-.pu-container--xl { max-width: 80rem; }
+/* Default “app shell” width — match site nav + main content */
+.pu-container--xl { max-width: var(--site-max, 80rem); }
 `;
 
 let injected = false;

@@ -1,16 +1,18 @@
 import { effect } from "@power-ui/core";
 import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
-import { cx } from "../utils.js";
+import { cx, puId } from "../utils.js";
+import { attachOverlay } from "../overlay.js";
+import { readBool, type MaybeReactive } from "../reactive.js";
 
 export type DialogProps = {
   /** Controlled open state (boolean, signal, or accessor) */
-  open: boolean | (() => boolean);
+  open: MaybeReactive<boolean>;
   onClose?: () => void;
   title?: string;
   description?: string;
   /** Panel size */
   size?: "sm" | "md" | "lg";
-  class?: string | (() => string);
+  class?: MaybeReactive<string>;
   children?: unknown;
 };
 
@@ -27,8 +29,8 @@ const styles = `
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity var(--pu-duration) var(--pu-ease-out),
-    visibility var(--pu-duration) var(--pu-ease-out);
+    opacity var(--pu-duration-slow) var(--pu-ease-out),
+    visibility var(--pu-duration-slow) var(--pu-ease-out);
 }
 .pu-dialog-root--open {
   pointer-events: auto;
@@ -53,8 +55,8 @@ const styles = `
   border-radius: var(--pu-radius-xl);
   box-shadow: var(--pu-shadow-float);
   padding: var(--pu-space-6);
-  transform: translateY(8px) scale(0.98);
-  transition: transform var(--pu-duration-slow) var(--pu-ease-out);
+  transform: translateY(12px) scale(0.96);
+  transition: transform var(--pu-duration-slow) var(--pu-ease-spring);
 }
 .pu-dialog-root--open .pu-dialog-panel {
   transform: translateY(0) scale(1);
@@ -116,7 +118,6 @@ const styles = `
 }
 `;
 
-let injected = false;
 function ensureStyles(doc: Document = document) {
   if (typeof doc === "undefined") return;
   if (doc.querySelector('style[data-pu-ui="dialog"]')) return;
@@ -124,17 +125,11 @@ function ensureStyles(doc: Document = document) {
   el.setAttribute("data-pu-ui", "dialog");
   el.textContent = styles;
   doc.head.appendChild(el);
-  if (doc === document) injected = true;
-}
-
-function readOpen(open: unknown): boolean {
-  if (typeof open === "function") return !!(open as () => boolean)();
-  return !!open;
 }
 
 /**
  * Modal dialog with scrim. Control via `open` + `onClose`.
- * Escape and backdrop click call `onClose` (ownerDocument-aware for iframes).
+ * Escape, scroll lock, and focus trap via shared `attachOverlay`.
  */
 export const Dialog = component((raw: DialogProps) => {
   ensureStyles();
@@ -142,48 +137,23 @@ export const Dialog = component((raw: DialogProps) => {
     DialogProps & { size: "sm" | "md" | "lg" }
   >;
 
-  const isOpen = () => readOpen(props.open);
+  const isOpen = () => readBool(props.open as MaybeReactive<boolean>);
+  const titleId = puId("pu-dialog-title");
   let rootEl: HTMLElement | null = null;
+  let panelEl: HTMLElement | null = null;
 
   effect(() => {
     if (!isOpen()) return;
-
-    let disposed = false;
-    const cleanups: Array<() => void> = [];
-
-    const attach = () => {
-      if (disposed) return;
-      const root = rootEl;
-      const doc = root?.ownerDocument ?? document;
-      const win = doc.defaultView ?? window;
-      ensureStyles(doc);
-
-      const body = doc.body;
-      const prev = body.style.overflow;
-      body.style.overflow = "hidden";
-      cleanups.push(() => {
-        body.style.overflow = prev;
-      });
-
-      const onKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          e.preventDefault();
-          e.stopPropagation();
-          props.onClose?.();
-        }
-      };
-      win.addEventListener("keydown", onKey, true);
-      cleanups.push(() => win.removeEventListener("keydown", onKey, true));
-    };
-
-    // Defer so ref is set when open starts true on first paint
-    const timer = window.setTimeout(attach, 0);
-    cleanups.push(() => window.clearTimeout(timer));
-
-    return () => {
-      disposed = true;
-      for (const c of cleanups) c();
-    };
+    return attachOverlay({
+      getRoot: () => rootEl,
+      getFocusRoot: () => panelEl,
+      onClose: () => props.onClose?.(),
+      scrollLock: true,
+      escape: true,
+      onAttach: ({ doc }) => {
+        ensureStyles(doc);
+      },
+    });
   });
 
   return (
@@ -192,7 +162,9 @@ export const Dialog = component((raw: DialogProps) => {
         cx(
           "pu-dialog-root",
           isOpen() && "pu-dialog-root--open",
-          typeof props.class === "function" ? props.class() : props.class,
+          typeof props.class === "function"
+            ? (props.class as () => string)()
+            : props.class,
         )
       }
       aria-hidden={() => (!isOpen() ? "true" : "false")}
@@ -210,14 +182,17 @@ export const Dialog = component((raw: DialogProps) => {
         class={() => cx("pu-dialog-panel", `pu-dialog-panel--${props.size}`)}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={props.title ? "pu-dialog-title" : undefined}
+        aria-labelledby={props.title ? titleId : undefined}
         onClick={(e: MouseEvent) => e.stopPropagation()}
+        ref={(el) => {
+          panelEl = el;
+        }}
       >
         {(props.title || props.onClose) && (
           <div class="pu-dialog__head">
             <div>
               {props.title ? (
-                <h2 class="pu-dialog__title" id="pu-dialog-title">
+                <h2 class="pu-dialog__title" id={titleId}>
                   {props.title}
                 </h2>
               ) : null}

@@ -1,5 +1,6 @@
 import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
+import { readBool, type MaybeReactive } from "../reactive.js";
 
 export type ButtonVariant = "solid" | "soft" | "ghost" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -8,8 +9,8 @@ export type ButtonProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   type?: "button" | "submit" | "reset";
-  disabled?: boolean | (() => boolean);
-  class?: string | (() => string);
+  disabled?: MaybeReactive<boolean>;
+  class?: MaybeReactive<string>;
   onClick?: (e: MouseEvent) => void;
   children?: unknown;
   /** Accessible label when children are not text */
@@ -25,48 +26,69 @@ const styles = `
   border: 1px solid transparent;
   border-radius: var(--pu-radius-md);
   font-weight: var(--pu-font-semibold);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   cursor: pointer;
   transition:
-    background var(--pu-duration) var(--pu-ease),
-    border-color var(--pu-duration) var(--pu-ease),
-    color var(--pu-duration) var(--pu-ease),
-    box-shadow var(--pu-duration) var(--pu-ease),
-    transform var(--pu-duration-fast) var(--pu-ease);
+    background var(--pu-duration) var(--pu-ease-out),
+    border-color var(--pu-duration) var(--pu-ease-out),
+    color var(--pu-duration) var(--pu-ease-out),
+    box-shadow var(--pu-duration) var(--pu-ease-out),
+    transform var(--pu-duration-fast) var(--pu-ease-out),
+    filter var(--pu-duration-fast) var(--pu-ease);
   user-select: none;
 }
-.pu-btn:active:not(:disabled) { transform: translateY(1px); }
-.pu-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.pu-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.pu-btn:active:not(:disabled) { transform: translateY(1px) scale(0.99); }
+.pu-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.pu-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-btn { transition: background var(--pu-duration-fast) linear, border-color var(--pu-duration-fast) linear; }
+  .pu-btn:hover:not(:disabled),
+  .pu-btn:active:not(:disabled) { transform: none; }
+}
 
 .pu-btn--sm { height: var(--pu-control-h-sm); padding: 0 var(--pu-space-3); font-size: var(--pu-text-sm); }
 .pu-btn--md { height: var(--pu-control-h-md); padding: 0 var(--pu-control-px); font-size: var(--pu-text-sm); }
 .pu-btn--lg { height: var(--pu-control-h-lg); padding: 0 var(--pu-space-5); font-size: var(--pu-text-md); }
 
 .pu-btn--solid {
-  background: var(--pu-color-accent);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--pu-color-accent) 92%, #fff) 0%,
+    var(--pu-color-accent) 48%,
+    color-mix(in srgb, var(--pu-color-accent) 88%, #000) 100%
+  );
   color: var(--pu-color-accent-fg);
+  border-color: color-mix(in srgb, var(--pu-brass-500) 35%, var(--pu-color-accent));
   box-shadow:
-    var(--pu-shadow-xs),
-    inset 0 1px 0 color-mix(in srgb, #fff 12%, transparent);
+    var(--pu-shadow-sm),
+    inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent);
 }
 .pu-btn--solid:hover:not(:disabled) {
   background: var(--pu-color-accent-hover);
-  box-shadow: var(--pu-shadow-sm);
+  box-shadow: var(--pu-shadow-md);
 }
 
 .pu-btn--soft {
-  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
-  color: var(--pu-color-accent);
-  border-color: color-mix(in srgb, var(--pu-color-accent) 14%, transparent);
+  background: color-mix(in srgb, var(--pu-color-signal, var(--pu-sage-500)) 12%, var(--pu-color-surface));
+  color: color-mix(in srgb, var(--pu-color-accent) 70%, var(--pu-sage-700));
+  border-color: color-mix(in srgb, var(--pu-sage-500) 22%, var(--pu-color-border));
+  box-shadow: none;
 }
 .pu-btn--soft:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--pu-color-accent) 20%, transparent);
+  background: color-mix(in srgb, var(--pu-sage-500) 18%, var(--pu-color-surface));
 }
 
 .pu-btn--ghost {
   background: transparent;
   color: var(--pu-color-text);
   border-color: var(--pu-color-border);
+  box-shadow: none;
 }
 .pu-btn--ghost:hover:not(:disabled) {
   background: var(--pu-color-surface-2);
@@ -76,9 +98,9 @@ const styles = `
 .pu-btn--danger {
   background: var(--pu-color-danger);
   color: var(--pu-color-danger-fg);
-  box-shadow: var(--pu-shadow-xs);
+  box-shadow: var(--pu-shadow-sm);
 }
-.pu-btn--danger:hover:not(:disabled) { filter: brightness(1.06); }
+.pu-btn--danger:hover:not(:disabled) { filter: brightness(1.05); }
 `;
 
 let injected = false;
@@ -101,6 +123,10 @@ export const Button = component((raw: ButtonProps) => {
     raw,
   ) as ComponentProps<Required<Pick<ButtonProps, "variant" | "size" | "type">> & ButtonProps>;
 
+  // Live accessor — createProps unwraps signals/() => on each read
+  const getDisabled = () =>
+    readBool(props.disabled as MaybeReactive<boolean>);
+
   return (
     <button
       type={props.type}
@@ -112,11 +138,7 @@ export const Button = component((raw: ButtonProps) => {
           typeof props.class === "function" ? props.class() : props.class,
         )
       }
-      disabled={
-        typeof props.disabled === "function"
-          ? props.disabled()
-          : props.disabled
-      }
+      disabled={getDisabled}
       onClick={props.onClick}
       aria-label={props["aria-label"]}
     >

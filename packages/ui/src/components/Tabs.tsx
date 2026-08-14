@@ -1,6 +1,11 @@
-import { signal } from "@power-ui/core";
+import { signal, effect } from "@power-ui/core";
 import { For, component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
+import {
+  applyRovingTabIndex,
+  handleRovingKeydown,
+  listRovingItems,
+} from "../rovingFocus.js";
 
 export type TabItem = {
   id: string;
@@ -18,6 +23,8 @@ export type TabsProps = {
   onChange?: (id: string) => void;
   class?: string | (() => string);
 };
+
+const TAB_SEL = '[role="tab"]:not([disabled])';
 
 const styles = `
 .pu-tabs {
@@ -52,18 +59,28 @@ const styles = `
   cursor: pointer;
   white-space: nowrap;
   transition:
-    background var(--pu-duration) var(--pu-ease),
-    color var(--pu-duration) var(--pu-ease),
-    box-shadow var(--pu-duration) var(--pu-ease);
+    background var(--pu-duration) var(--pu-ease-out),
+    color var(--pu-duration) var(--pu-ease-out),
+    box-shadow var(--pu-duration) var(--pu-ease-out),
+    transform var(--pu-duration-fast) var(--pu-ease);
 }
 .pu-tabs__tab:hover:not(:disabled):not(.pu-tabs__tab--active) {
   color: var(--pu-color-text);
   background: color-mix(in srgb, var(--pu-color-surface) 60%, transparent);
 }
+.pu-tabs__tab:active:not(:disabled) {
+  transform: scale(0.97);
+}
 .pu-tabs__tab--active {
   background: var(--pu-color-surface);
   color: var(--pu-color-text);
   box-shadow: var(--pu-shadow-sm);
+}
+.pu-tabs__tab:focus-visible {
+  outline: none;
+  box-shadow:
+    var(--pu-shadow-sm),
+    0 0 0 2px color-mix(in srgb, var(--pu-color-focus) 50%, transparent);
 }
 .pu-tabs__tab:disabled {
   opacity: 0.45;
@@ -71,6 +88,15 @@ const styles = `
 }
 .pu-tabs__panel {
   min-width: 0;
+  animation: pu-tabs-panel-in var(--pu-duration) var(--pu-ease-out);
+}
+@keyframes pu-tabs-panel-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-tabs__panel { animation: none; }
+  .pu-tabs__tab { transition: none; }
 }
 `;
 
@@ -85,17 +111,23 @@ function ensureStyles() {
 }
 
 /**
- * Segmented tabs (modern pill track). Controlled via `value` or uncontrolled `defaultValue`.
+ * Segmented tabs with WAI-ARIA keyboard:
+ * ArrowLeft/Right · Home/End move focus and activate · Tab exits to panel.
  */
 export const Tabs = component((raw: TabsProps) => {
   ensureStyles();
   const props = mergeProps({}, raw) as ComponentProps<TabsProps>;
+  let listEl: HTMLElement | null = null;
+
   const getItems = (): TabItem[] => {
     const i = props.items;
     return typeof i === "function" ? (i as () => TabItem[])() : (i ?? []);
   };
-  const firstId = () => getItems()[0]?.id ?? "";
-  const internal = signal(props.defaultValue ?? firstId());
+  const firstEnabledId = () => {
+    const items = getItems();
+    return items.find((t) => !t.disabled)?.id ?? items[0]?.id ?? "";
+  };
+  const internal = signal(props.defaultValue ?? firstEnabledId());
 
   const active = () => {
     if (props.value !== undefined) {
@@ -107,9 +139,30 @@ export const Tabs = component((raw: TabsProps) => {
   };
 
   const select = (id: string) => {
+    const item = getItems().find((t) => t.id === id);
+    if (!item || item.disabled) return;
     if (props.value === undefined) internal.set(id);
     props.onChange?.(id);
   };
+
+  const tabIdOf = (el: HTMLElement) =>
+    el.getAttribute("data-tab-id") ||
+    el.id.replace(/^pu-tab-/, "") ||
+    "";
+
+  const syncTabIndex = () => {
+    if (!listEl) return;
+    const items = listRovingItems(listEl, TAB_SEL);
+    const idx = items.findIndex((el) => tabIdOf(el) === active());
+    applyRovingTabIndex(items, idx >= 0 ? idx : 0);
+  };
+
+  effect(() => {
+    active(); // track
+    // Defer so For has painted buttons
+    const t = window.setTimeout(syncTabIndex, 0);
+    return () => window.clearTimeout(t);
+  });
 
   return (
     <div
@@ -120,13 +173,37 @@ export const Tabs = component((raw: TabsProps) => {
         )
       }
     >
-      <div class="pu-tabs__list" role="tablist">
+      <div
+        class="pu-tabs__list"
+        role="tablist"
+        aria-orientation="horizontal"
+        ref={(el) => {
+          listEl = el;
+        }}
+        onKeyDown={(e: KeyboardEvent) => {
+          if (!listEl) return;
+          handleRovingKeydown(e, listEl, TAB_SEL, {
+            orientation: "horizontal",
+            loop: true,
+            onMove: (el) => {
+              const id = tabIdOf(el);
+              if (id) select(id);
+            },
+            onActivate: (el) => {
+              const id = tabIdOf(el);
+              if (id) select(id);
+            },
+          });
+        }}
+      >
         <For each={getItems}>
           {(item) => (
             <button
               type="button"
               role="tab"
+              tabindex={-1}
               id={() => `pu-tab-${item().id}`}
+              data-tab-id={() => item().id}
               aria-selected={() => active() === item().id}
               aria-controls={() => `pu-tabpanel-${item().id}`}
               disabled={() => !!item().disabled}
@@ -137,6 +214,15 @@ export const Tabs = component((raw: TabsProps) => {
                 )
               }
               onClick={() => select(item().id)}
+              onFocus={() => {
+                // Keep roving index aligned when user tabs into the list
+                if (!listEl) return;
+                const items = listRovingItems(listEl, TAB_SEL);
+                const idx = items.findIndex(
+                  (el) => el.getAttribute("data-tab-id") === item().id,
+                );
+                if (idx >= 0) applyRovingTabIndex(items, idx);
+              }}
             >
               {() => item().label}
             </button>
@@ -148,6 +234,7 @@ export const Tabs = component((raw: TabsProps) => {
         role="tabpanel"
         id={() => `pu-tabpanel-${active()}`}
         aria-labelledby={() => `pu-tab-${active()}`}
+        tabindex={0}
       >
         {() => {
           const cur = getItems().find((i) => i.id === active());

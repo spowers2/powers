@@ -1,6 +1,8 @@
 import { signal, effect } from "@power-ui/core";
 import { For, Show, component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
+import { attachOverlay } from "../overlay.js";
+import { readBool, type MaybeReactive } from "../reactive.js";
 
 export type CommandItem = {
   id: string;
@@ -11,12 +13,12 @@ export type CommandItem = {
 };
 
 export type CommandProps = {
-  open: boolean | (() => boolean);
+  open: MaybeReactive<boolean>;
   onOpenChange?: (open: boolean) => void;
   items: CommandItem[] | (() => CommandItem[]);
   placeholder?: string;
   onSelect?: (id: string) => void;
-  class?: string | (() => string);
+  class?: MaybeReactive<string>;
 };
 
 const styles = `
@@ -140,14 +142,9 @@ function ensureStyles(doc: Document = document) {
   doc.head.appendChild(el);
 }
 
-function readOpen(open: unknown): boolean {
-  if (typeof open === "function") return !!(open as () => boolean)();
-  return !!open;
-}
-
 /**
  * Command palette (⌘K style): search + run an action.
- * Control with `open` + `onOpenChange`. Esc / backdrop close.
+ * Control with `open` + `onOpenChange`. Esc / backdrop close via `attachOverlay`.
  */
 export const Command = component((raw: CommandProps) => {
   ensureStyles();
@@ -156,10 +153,11 @@ export const Command = component((raw: CommandProps) => {
     raw,
   ) as ComponentProps<CommandProps & { placeholder: string }>;
 
-  const isOpen = () => readOpen(props.open);
+  const isOpen = () => readBool(props.open as MaybeReactive<boolean>);
   const query = signal("");
   const active = signal(0);
   let rootEl: HTMLElement | null = null;
+  let panelEl: HTMLElement | null = null;
   let inputEl: HTMLInputElement | null = null;
 
   const getItems = (): CommandItem[] => {
@@ -185,45 +183,19 @@ export const Command = component((raw: CommandProps) => {
       active.set(0);
       return;
     }
-
-    let disposed = false;
-    const cleanups: Array<() => void> = [];
-
-    const attach = () => {
-      if (disposed) return;
-      const root = rootEl;
-      const doc = root?.ownerDocument ?? document;
-      const win = doc.defaultView ?? window;
-      ensureStyles(doc);
-
-      const body = doc.body;
-      const prev = body.style.overflow;
-      body.style.overflow = "hidden";
-      cleanups.push(() => {
-        body.style.overflow = prev;
-      });
-
-      const onKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          e.preventDefault();
-          e.stopPropagation();
-          props.onOpenChange?.(false);
-        }
-      };
-      win.addEventListener("keydown", onKey, true);
-      cleanups.push(() => win.removeEventListener("keydown", onKey, true));
-
-      // Focus search
-      win.setTimeout(() => inputEl?.focus(), 0);
-    };
-
-    const timer = window.setTimeout(attach, 0);
-    cleanups.push(() => window.clearTimeout(timer));
-
-    return () => {
-      disposed = true;
-      for (const c of cleanups) c();
-    };
+    return attachOverlay({
+      getRoot: () => rootEl,
+      getFocusRoot: () => panelEl,
+      onClose: () => props.onOpenChange?.(false),
+      scrollLock: true,
+      escape: true,
+      onAttach: ({ doc, win }) => {
+        ensureStyles(doc);
+        // Prefer search field after trap places first focus
+        const t = win.setTimeout(() => inputEl?.focus(), 0);
+        return () => win.clearTimeout(t);
+      },
+    });
   });
 
   const run = (item: CommandItem) => {
@@ -258,6 +230,9 @@ export const Command = component((raw: CommandProps) => {
         aria-modal="true"
         aria-label="Command palette"
         onClick={(e: MouseEvent) => e.stopPropagation()}
+        ref={(el) => {
+          panelEl = el;
+        }}
       >
         <input
           class="pu-command__input"

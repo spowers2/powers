@@ -44,7 +44,12 @@ export function bindProp<T>(
   get: () => T,
 ): Dispose {
   return effect(() => {
-    (el as unknown as Record<string, unknown>)[name] = get();
+    const next = get();
+    const rec = el as unknown as Record<string, unknown>;
+    // Skip no-ops — assigning input.value every keystroke resets the caret
+    if (rec[name] !== next) {
+      rec[name] = next;
+    }
   });
 }
 

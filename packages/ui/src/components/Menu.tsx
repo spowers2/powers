@@ -1,7 +1,13 @@
-import { signal } from "@power-ui/core";
+import { signal, effect } from "@power-ui/core";
 import { For, component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
 import { Popover } from "./Popover.js";
+import {
+  focusRovingItem,
+  handleRovingKeydown,
+  initRovingFocus,
+  listRovingItems,
+} from "../rovingFocus.js";
 
 export type MenuItem = {
   id: string;
@@ -20,6 +26,8 @@ export type MenuProps = {
   align?: "start" | "center" | "end";
   class?: string | (() => string);
 };
+
+const ITEM_SEL = '[role="menuitem"]:not([disabled])';
 
 const styles = `
 .pu-menu {
@@ -44,12 +52,19 @@ const styles = `
   padding: 0.5rem 0.65rem;
   border-radius: var(--pu-radius-sm);
   cursor: pointer;
-  transition: background var(--pu-duration-fast) var(--pu-ease);
+  transition:
+    background var(--pu-duration-fast) var(--pu-ease-out),
+    transform var(--pu-duration-fast) var(--pu-ease-out),
+    color var(--pu-duration-fast) var(--pu-ease-out);
 }
 .pu-menu__item:hover:not(:disabled),
 .pu-menu__item:focus-visible:not(:disabled) {
   background: var(--pu-color-surface-2);
+  transform: translateX(2px);
   outline: none;
+}
+.pu-menu__item:focus-visible:not(:disabled) {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--pu-color-focus) 45%, transparent);
 }
 .pu-menu__item:disabled {
   opacity: 0.45;
@@ -74,8 +89,8 @@ function ensureStyles(doc: Document = document) {
 }
 
 /**
- * Action menu built on Popover. Uncontrolled open state by default.
- * Escape / outside click handled by Popover (iframe-safe).
+ * Action menu built on Popover.
+ * Arrow / Home / End roving focus · Enter / Space select · Esc closes (Popover).
  */
 export const Menu = component((raw: MenuProps) => {
   ensureStyles();
@@ -84,10 +99,31 @@ export const Menu = component((raw: MenuProps) => {
   >;
 
   const open = signal(false);
+  let menuEl: HTMLElement | null = null;
+
   const getItems = (): MenuItem[] => {
     const i = props.items;
     return typeof i === "function" ? (i as () => MenuItem[])() : (i ?? []);
   };
+
+  const pick = (id: string) => {
+    const item = getItems().find((x) => x.id === id);
+    if (!item || item.disabled) return;
+    props.onSelect?.(id);
+    open.set(false);
+  };
+
+  // Focus first enabled item when menu opens
+  effect(() => {
+    if (!open()) return;
+    const t = window.setTimeout(() => {
+      if (!menuEl) return;
+      initRovingFocus(menuEl, ITEM_SEL, 0);
+      const items = listRovingItems(menuEl, ITEM_SEL);
+      focusRovingItem(items, 0);
+    }, 0);
+    return () => window.clearTimeout(t);
+  });
 
   return (
     <div
@@ -105,12 +141,31 @@ export const Menu = component((raw: MenuProps) => {
         align={props.align}
         trigger={props.trigger}
       >
-        <div class="pu-menu" role="menu">
+        <div
+          class="pu-menu"
+          role="menu"
+          ref={(el) => {
+            menuEl = el;
+          }}
+          onKeyDown={(e: KeyboardEvent) => {
+            if (!menuEl) return;
+            handleRovingKeydown(e, menuEl, ITEM_SEL, {
+              orientation: "vertical",
+              loop: true,
+              onActivate: (el) => {
+                const id = el.dataset.menuId;
+                if (id) pick(id);
+              },
+            });
+          }}
+        >
           <For each={getItems}>
             {(item) => (
               <button
                 type="button"
                 role="menuitem"
+                tabindex={-1}
+                data-menu-id={() => item().id}
                 class={() =>
                   cx(
                     "pu-menu__item",
@@ -121,8 +176,7 @@ export const Menu = component((raw: MenuProps) => {
                 onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   if (item().disabled) return;
-                  props.onSelect?.(item().id);
-                  open.set(false);
+                  pick(item().id);
                 }}
               >
                 {() => item().label}

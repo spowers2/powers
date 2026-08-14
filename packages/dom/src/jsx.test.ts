@@ -35,6 +35,28 @@ describe("jsx-runtime", () => {
     assert.equal(el.textContent, "n=1");
   });
 
+  it("reactive children can return DOM nodes (not [object HTML…])", async () => {
+    const showNode = signal(true);
+    const p = document.createElement("p");
+    p.textContent = "live panel";
+
+    const el = jsx("div", {
+      children: () => (showNode() ? p : "fallback"),
+    }) as HTMLElement;
+    root.appendChild(el);
+    assert.equal(el.querySelector("p")?.textContent, "live panel");
+    assert.equal(el.textContent?.includes("[object"), false);
+
+    showNode.set(false);
+    await tick();
+    assert.equal(el.textContent, "fallback");
+    assert.equal(el.querySelector("p"), null);
+
+    showNode.set(true);
+    await tick();
+    assert.equal(el.querySelector("p")?.textContent, "live panel");
+  });
+
   it("supports function components", () => {
     const Hello = (props: { name: string }) =>
       jsx("p", { children: `Hello ${props.name}` });

@@ -182,10 +182,15 @@ export function disposeOwner(owner: Owner): void {
 /**
  * Create a reactive root. All signals/effects created inside are owned by
  * this root and disposed when the returned dispose function is called.
+ *
+ * Clears the active *tracking* node while `fn` runs so parent effects (e.g.
+ * a router outlet) do not accidentally subscribe to signals read during
+ * component setup — that would remount the whole page on first keystroke.
  */
 export function createRoot<T>(fn: (dispose: Dispose) => T): T {
   const owner = createOwner(activeOwner);
   const prevOwner = setActiveOwner(owner);
+  const prevNode = setActiveNode(null);
 
   const dispose: Dispose = () => {
     disposeOwner(owner);
@@ -195,6 +200,7 @@ export function createRoot<T>(fn: (dispose: Dispose) => T): T {
     return fn(dispose);
   } finally {
     setActiveOwner(prevOwner);
+    setActiveNode(prevNode);
   }
 }
 

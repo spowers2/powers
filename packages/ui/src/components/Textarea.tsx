@@ -1,16 +1,22 @@
+import { effect, type Signal } from "@power-ui/core";
 import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
 import { cx } from "../utils.js";
+import { readBool, readStr, type MaybeReactive } from "../reactive.js";
+import type { Bindable } from "../form.js";
 
 export type TextareaProps = {
-  value?: string | (() => string);
+  value?: MaybeReactive<string>;
+  /** Two-way bind a string signal — preferred over value + onInput. */
+  bind?: Bindable<string> | Signal<string>;
   placeholder?: string;
   rows?: number;
-  disabled?: boolean | (() => boolean);
-  class?: string | (() => string);
+  disabled?: MaybeReactive<boolean>;
+  class?: MaybeReactive<string>;
   onInput?: (e: Event) => void;
+  onBlur?: (e: FocusEvent) => void;
   id?: string;
   "aria-label"?: string;
-  "aria-invalid"?: boolean | (() => boolean);
+  "aria-invalid"?: MaybeReactive<boolean>;
 };
 
 const styles = `
@@ -36,6 +42,9 @@ const styles = `
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-accent) 25%, transparent);
 }
 .pu-textarea:disabled { opacity: 0.55; cursor: not-allowed; }
+.pu-textarea[aria-invalid="true"] {
+  border-color: var(--pu-color-danger);
+}
 `;
 
 let injected = false;
@@ -48,32 +57,71 @@ function ensureStyles() {
   document.head.appendChild(el);
 }
 
+/** Multiline text. Prefer `<Textarea bind={notes} />`. */
 export const Textarea = component((raw: TextareaProps) => {
   ensureStyles();
   const props = mergeProps({ rows: 4 }, raw) as ComponentProps<
     TextareaProps & { rows: number }
   >;
+
+  const bound = raw.bind;
+  const controlled = raw.value !== undefined || bound !== undefined;
+  let el: HTMLTextAreaElement | null = null;
+  const readValue = () =>
+    bound
+      ? readStr(bound as MaybeReactive<string>)
+      : readStr(props.value as MaybeReactive<string>);
+  const initial = controlled ? readValue() : "";
+
+  if (controlled) {
+    effect(() => {
+      const next = readValue();
+      const node = el;
+      if (!node) return;
+      if (node.ownerDocument.activeElement === node) return;
+      if (node.value !== next) node.value = next;
+    });
+  }
+
   return (
     <textarea
       id={props.id}
       class={() =>
         cx(
           "pu-textarea",
-          typeof props.class === "function" ? props.class() : props.class,
+          readStr(props.class as MaybeReactive<string>) || undefined,
         )
       }
       rows={props.rows}
       placeholder={props.placeholder}
-      disabled={
-        typeof props.disabled === "function" ? props.disabled() : props.disabled
-      }
-      value={typeof props.value === "function" ? props.value() : props.value}
-      onInput={props.onInput}
+      disabled={() => readBool(props.disabled as MaybeReactive<boolean>)}
+      defaultValue={controlled ? initial : undefined}
+      onInput={(e: Event) => {
+        if (bound) {
+          const t = (e.currentTarget ?? e.target) as HTMLTextAreaElement | null;
+          if (t && "value" in t) bound.set(t.value);
+        }
+        props.onInput?.(e);
+      }}
+      onBlur={(e: FocusEvent) => {
+        if (controlled && el) {
+          const next = readValue();
+          if (el.value !== next) el.value = next;
+        }
+        props.onBlur?.(e);
+      }}
+      ref={(node) => {
+        el = node as HTMLTextAreaElement;
+        if (controlled && el && el.ownerDocument.activeElement !== el) {
+          const next = readValue();
+          if (el.value !== next) el.value = next;
+        }
+      }}
       aria-label={props["aria-label"]}
-      aria-invalid={
-        typeof props["aria-invalid"] === "function"
-          ? props["aria-invalid"]()
-          : props["aria-invalid"]
+      aria-invalid={() =>
+        readBool(props["aria-invalid"] as MaybeReactive<boolean>)
+          ? true
+          : undefined
       }
     />
   );
