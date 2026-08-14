@@ -29,9 +29,9 @@ const styles = `
   border-color: var(--pu-color-border);
 }
 .pu-badge--accent {
-  background: color-mix(in srgb, var(--pu-color-accent) 16%, transparent);
-  color: var(--pu-color-accent);
-  border-color: color-mix(in srgb, var(--pu-color-accent) 28%, transparent);
+  background: var(--pu-color-soft-bg);
+  color: var(--pu-color-soft-fg);
+  border-color: var(--pu-color-soft-border);
 }
 .pu-badge--success {
   background: color-mix(in srgb, var(--pu-sage-500) 14%, transparent);

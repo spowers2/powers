@@ -75,13 +75,13 @@ const styles = `
 }
 
 .pu-btn--soft {
-  background: color-mix(in srgb, var(--pu-color-signal, var(--pu-sage-500)) 12%, var(--pu-color-surface));
-  color: color-mix(in srgb, var(--pu-color-accent) 70%, var(--pu-sage-700));
-  border-color: color-mix(in srgb, var(--pu-sage-500) 22%, var(--pu-color-border));
+  background: var(--pu-color-soft-bg);
+  color: var(--pu-color-soft-fg);
+  border-color: var(--pu-color-soft-border);
   box-shadow: none;
 }
 .pu-btn--soft:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--pu-sage-500) 18%, var(--pu-color-surface));
+  background: var(--pu-color-soft-bg-hover);
 }
 
 .pu-btn--ghost {

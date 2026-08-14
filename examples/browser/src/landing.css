@@ -290,6 +290,29 @@ html[data-pu-theme="dark"] .lp-title-gradient {
   background-clip: text;
 }
 
+/* Dual light: cyan-forward headline accent */
+html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-title-gradient {
+  background: linear-gradient(
+    115deg,
+    #0a1e38 0%,
+    #0891b2 42%,
+    #06b6d4 72%,
+    #22d3ee 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-label {
+  color: #0e7490;
+  letter-spacing: 0.08em;
+}
+
+html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links a:hover,
+html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links button:hover {
+  color: #0891b2;
+}
+
 .lp-lede {
   margin: 0 0 1.5rem;
   max-width: 32rem;

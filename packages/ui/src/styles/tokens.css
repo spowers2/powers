@@ -72,6 +72,11 @@
   --pu-color-focus: var(--pu-holo-cyan);
   --pu-color-selection: color-mix(in srgb, var(--pu-holo-cyan) 18%, transparent);
   --pu-color-success: var(--pu-sage-600);
+  /* Soft / secondary actions (buttons, chips, active chrome) */
+  --pu-color-soft-bg: color-mix(in srgb, var(--pu-color-signal) 12%, var(--pu-color-surface));
+  --pu-color-soft-bg-hover: color-mix(in srgb, var(--pu-color-signal) 18%, var(--pu-color-surface));
+  --pu-color-soft-fg: color-mix(in srgb, var(--pu-color-accent) 70%, var(--pu-sage-700));
+  --pu-color-soft-border: color-mix(in srgb, var(--pu-color-signal) 22%, var(--pu-color-border));
 
   /* Thin glass — almost flat, slight frost */
   --pu-glass-bg: color-mix(in srgb, var(--pu-color-surface) 86%, transparent);
@@ -268,43 +273,49 @@ html[data-pu-palette="dual"] {
   --pu-sage-500: #69be28;
   --pu-sage-600: #4f9a1c;
 
-  --pu-color-bg: #f7f9fc;
+  --pu-color-bg: #f4f8fc;
   --pu-color-surface: #ffffff;
-  --pu-color-surface-2: #f0f4fa;
+  --pu-color-surface-2: #e8f4f8;
   --pu-color-surface-elevated: #ffffff;
-  --pu-color-surface-sunken: #e8eef6;
-  --pu-color-border: color-mix(in srgb, #c8d4e4 82%, #06b6d4);
-  --pu-color-border-strong: color-mix(in srgb, #06b6d4 36%, #94a3b8);
+  --pu-color-surface-sunken: #dceef4;
+  --pu-color-border: color-mix(in srgb, #b8d4e0 55%, #06b6d4);
+  --pu-color-border-strong: color-mix(in srgb, #06b6d4 48%, #64748b);
   --pu-color-text: #0a1e38;
-  --pu-color-text-muted: #5a6780;
+  --pu-color-text-muted: #4a5d72;
   --pu-color-accent: #0a1e38;
   --pu-color-accent-hover: #06152a;
   --pu-color-accent-fg: #ffffff;
   --pu-color-signal: #69be28;
   --pu-color-success: #4f9a1c;
   --pu-color-focus: #06b6d4;
-  --pu-color-selection: color-mix(in srgb, #06b6d4 24%, transparent);
+  --pu-color-selection: color-mix(in srgb, #06b6d4 32%, transparent);
 
-  --pu-glass-bg: color-mix(in srgb, #ffffff 90%, transparent);
-  --pu-glass-border: color-mix(in srgb, #06b6d4 20%, #d0dae8);
+  /* Soft actions = cyan wash (readable dual electric) */
+  --pu-color-soft-bg: color-mix(in srgb, #06b6d4 18%, #ffffff);
+  --pu-color-soft-bg-hover: color-mix(in srgb, #06b6d4 28%, #ffffff);
+  --pu-color-soft-fg: #0e7490;
+  --pu-color-soft-border: color-mix(in srgb, #06b6d4 42%, #cbd5e1);
+
+  --pu-glass-bg: color-mix(in srgb, #ffffff 88%, #cffafe);
+  --pu-glass-border: color-mix(in srgb, #06b6d4 28%, #d0dae8);
   --pu-glass-blur: 16px;
-  --pu-color-glow: color-mix(in srgb, #2f78c4 14%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, #06b6d4 14%, transparent);
-  --pu-color-glow-holo: color-mix(in srgb, #06b6d4 16%, transparent);
+  --pu-color-glow: color-mix(in srgb, #06b6d4 18%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, #22d3ee 16%, transparent);
+  --pu-color-glow-holo: color-mix(in srgb, #06b6d4 20%, transparent);
 
-  --pu-shadow-xs: 0 1px 1px rgba(10, 30, 56, 0.03);
+  --pu-shadow-xs: 0 1px 1px rgba(6, 182, 212, 0.06);
   --pu-shadow-sm:
     0 1px 2px rgba(10, 30, 56, 0.03),
-    0 2px 8px rgba(6, 182, 212, 0.05);
+    0 2px 10px rgba(6, 182, 212, 0.1);
   --pu-shadow-md:
     0 2px 4px rgba(10, 30, 56, 0.03),
-    0 10px 28px rgba(6, 182, 212, 0.07);
+    0 12px 32px rgba(6, 182, 212, 0.12);
   --pu-shadow-lg:
     0 4px 8px rgba(10, 30, 56, 0.04),
-    0 18px 44px rgba(6, 182, 212, 0.08);
+    0 20px 48px rgba(6, 182, 212, 0.14);
   --pu-shadow-float:
-    0 0 0 1px color-mix(in srgb, #06b6d4 22%, var(--pu-color-border)),
-    0 0 32px color-mix(in srgb, #06b6d4 12%, transparent),
+    0 0 0 1px color-mix(in srgb, #06b6d4 32%, transparent),
+    0 0 40px color-mix(in srgb, #06b6d4 16%, transparent),
     0 16px 44px rgba(10, 30, 56, 0.1);
 }
 
@@ -327,6 +338,11 @@ html[data-pu-palette="dual"][data-pu-theme="dark"] {
   --pu-color-focus: #22d3ee;
   --pu-color-selection: color-mix(in srgb, #22d3ee 26%, transparent);
   --pu-color-danger: #fb7185;
+
+  --pu-color-soft-bg: color-mix(in srgb, #22d3ee 16%, #0a101c);
+  --pu-color-soft-bg-hover: color-mix(in srgb, #22d3ee 24%, #0a101c);
+  --pu-color-soft-fg: #67e8f9;
+  --pu-color-soft-border: color-mix(in srgb, #22d3ee 35%, transparent);
 
   --pu-glass-bg: color-mix(in srgb, #0a101c 80%, transparent);
   --pu-glass-border: color-mix(in srgb, #22d3ee 18%, transparent);
