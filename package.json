@@ -14,12 +14,17 @@
     "test:core": "pnpm --filter @power-ui/core test",
     "typecheck": "pnpm -r --filter=./packages/* run typecheck",
     "bench": "pnpm --filter @power-ui/core bench",
-    "size": "pnpm --filter @power-ui/core size && pnpm --filter @power-ui/animate size && pnpm --filter @power-ui/dom size",
+    "size": "pnpm --filter @power-ui/core size && pnpm --filter @power-ui/animate size && pnpm --filter @power-ui/dom size && pnpm --filter @power-ui/router size && pnpm --filter @power-ui/ui size",
+    "ci": "pnpm typecheck && pnpm test && pnpm size",
     "example:counter": "pnpm --filter @power-ui/example-counter start",
     "example:kitchen-sink": "pnpm --filter @power-ui/example-kitchen-sink start",
     "example:animate": "pnpm --filter @power-ui/example-animate-demo start",
     "example:browser": "pnpm --filter @power-ui/example-browser dev",
+    "example:starter": "pnpm --filter @power-ui/app-starter dev",
+    "example:restaurant": "pnpm --filter @power-ui/restaurant-demo dev",
     "example:ssr-islands": "pnpm --filter @power-ui/example-ssr-islands start",
+    "new-app": "bash scripts/new-app.sh",
+    "create-app": "bash scripts/create-power-ui.sh",
     "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo"
   },
   "devDependencies": {

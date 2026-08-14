@@ -3,52 +3,77 @@
  */
 import { signal } from "@power-ui/core";
 import {
+  Accordion,
   Alert,
   Avatar,
   Badge,
+  Breadcrumb,
   Button,
   Card,
   Checkbox,
+  Chip,
   Code,
   Combobox,
-  Command,
   Container,
   createToaster,
   Dialog,
   Divider,
+  Drawer,
+  Empty,
   Field,
   Grid,
   Input,
   Kbd,
+  List,
   Menu,
+  NumberInput,
+  Pagination,
   Popover,
   Progress,
+  RadioGroup,
   Select,
   Skeleton,
+  Slider,
   Spinner,
   Stack,
+  Stat,
+  Steps,
   Switch,
+  Table,
   Tabs,
   Text,
   Textarea,
+  Timeline,
+  ToggleGroup,
   Toaster,
   Tooltip,
   type DensityController,
   type ThemeController,
 } from "@power-ui/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
+import { DemoHead, SNIPPETS } from "./sysDemo.js";
 
 const SYS_SECTIONS = [
+  "sys-play",
   "sys-controls",
   "sys-type",
   "sys-forms",
   "sys-feedback",
   "sys-overlay",
   "sys-power",
+  "sys-layout",
   "sys-keys",
   "sys-color",
   "sys-space",
   "sys-code",
+] as const;
+
+const ACCENT_PRESETS = [
+  { id: "navy", label: "College Navy", value: "#002244" },
+  { id: "action", label: "Action Green", value: "#69be28" },
+  { id: "holo", label: "Holo Cyan", value: "#3ecfcf" },
+  { id: "brass", label: "Brass", value: "#b8956a" },
+  { id: "ember", label: "Hearth Ember", value: "#c45c26" },
 ] as const;
 
 function Swatch(props: { name: string; css: string }) {
@@ -92,12 +117,47 @@ export function SystemPage(props: {
   const popoverOpen = signal(false);
   const menuPick = signal("—");
   const city = signal("sf");
-  const cmdOpen = signal(false);
-  const cmdLast = signal("—");
+  const drawerOpen = signal(false);
+  const radioPlan = signal("pro");
+  const sliderVal = signal(48);
+  const qty = signal(2);
+  const page = signal(1);
+  const view = signal("list");
+  const listPick = signal("alpha");
+  const step = signal(1);
+  const emailTouched = signal(false);
   const emailError = () => {
+    if (!emailTouched()) return "";
     const v = email().trim();
     if (!v) return "";
     return v.includes("@") ? "" : "Invalid email";
+  };
+  const accentPick = signal<string>(ACCENT_PRESETS[0]!.value);
+  const radiusPick = signal("0.75rem");
+  const exported = signal("");
+
+  const applyBrand = () => {
+    const root = document.documentElement;
+    root.style.setProperty("--pu-color-accent", accentPick());
+    root.style.setProperty(
+      "--pu-color-accent-hover",
+      `color-mix(in srgb, ${accentPick()} 88%, #000)`,
+    );
+    root.style.setProperty("--pu-radius-md", radiusPick());
+    root.style.setProperty("--pu-radius-lg", `calc(${radiusPick()} + 0.25rem)`);
+  };
+
+  const exportBrandCss = () => {
+    const css = `/* Power UI brand export — paste after theme.css */
+:root {
+  --pu-color-accent: ${accentPick()};
+  --pu-color-accent-hover: color-mix(in srgb, ${accentPick()} 88%, #000);
+  --pu-radius-md: ${radiusPick()};
+  --pu-radius-lg: calc(${radiusPick()} + 0.25rem);
+}
+`;
+    exported.set(css);
+    void navigator.clipboard?.writeText(css);
   };
 
   const sectionNav = createSectionNav(SYS_SECTIONS);
@@ -115,7 +175,7 @@ export function SystemPage(props: {
   );
 
   return (
-    <Container size="lg">
+    <Container size="xl">
       <Stack gap={6}>
         <Stack gap={2}>
           <Text as="h1" size="2xl">
@@ -128,23 +188,125 @@ export function SystemPage(props: {
           </Text>
           <Text muted size="sm">
             <strong>Lab</strong> is for editing live code recipes.{" "}
-            <strong>System</strong> is this static component catalog. Use Lab to
-            learn the runtime; use System to browse the design kit.
+            <strong>System</strong> is this static component catalog. Use{" "}
+            <strong>Copy JSX</strong> (full App+mount program) or{" "}
+            <strong>Open Lab</strong> to load it. Prefer Open Lab over bare paste.
           </Text>
         </Stack>
 
         <nav class="sys-toc page-toc" aria-label="On this page">
+          {tocBtn("sys-play", "Playground")}
           {tocBtn("sys-controls", "Controls")}
           {tocBtn("sys-type", "Type")}
           {tocBtn("sys-forms", "Forms")}
           {tocBtn("sys-feedback", "Feedback")}
           {tocBtn("sys-overlay", "Overlay")}
           {tocBtn("sys-power", "Power")}
+          {tocBtn("sys-layout", "Layout")}
           {tocBtn("sys-keys", "Keys")}
           {tocBtn("sys-color", "Color")}
           {tocBtn("sys-space", "Space")}
           {tocBtn("sys-code", "Code")}
         </nav>
+
+        <section id="sys-play">
+          <Card>
+            <Stack gap={4}>
+              <Stack gap={1}>
+                <Text weight="semibold" size="lg">
+                  Brand playground
+                </Text>
+                <Text muted size="sm">
+                  For designers: tweak accent + radius live, then export CSS.
+                  Density and light/dark use the controls below / site nav.
+                </Text>
+              </Stack>
+              <Stack gap={2}>
+                <Text size="sm" weight="semibold">
+                  Accent
+                </Text>
+                <Stack direction="row" gap={2} wrap>
+                  {ACCENT_PRESETS.map((p) =>
+                    Button({
+                      size: "sm",
+                      variant: "soft",
+                      children: p.label,
+                      onClick: () => {
+                        accentPick.set(p.value);
+                        applyBrand();
+                      },
+                    }),
+                  )}
+                </Stack>
+              </Stack>
+              <Stack gap={2}>
+                <Text size="sm" weight="semibold">
+                  Radius
+                </Text>
+                <Stack direction="row" gap={2} wrap>
+                  {(
+                    [
+                      ["Sharp", "0.35rem"],
+                      ["Default", "0.75rem"],
+                      ["Soft", "1.1rem"],
+                    ] as const
+                  ).map(([label, val]) =>
+                    Button({
+                      size: "sm",
+                      variant: "ghost",
+                      children: label,
+                      onClick: () => {
+                        radiusPick.set(val);
+                        applyBrand();
+                      },
+                    }),
+                  )}
+                </Stack>
+              </Stack>
+              <Stack direction="row" gap={2} wrap>
+                <Button size="sm" onClick={applyBrand}>
+                  Apply to page
+                </Button>
+                <Button size="sm" variant="soft" onClick={exportBrandCss}>
+                  Copy brand CSS
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => theme.toggle()}
+                >
+                  {() =>
+                    theme.mode() === "dark" ? "Light mode" : "Dark mode"
+                  }
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => density.toggle()}
+                >
+                  Toggle density
+                </Button>
+              </Stack>
+              <Stack direction="row" gap={2} wrap align="center">
+                <Button>Primary sample</Button>
+                <Button variant="soft">Soft</Button>
+                <Badge tone="accent">Accent badge</Badge>
+                <Text size="sm" muted>
+                  Live preview uses current tokens
+                </Text>
+              </Stack>
+              {() => {
+                const css = exported();
+                if (!css) return null;
+                return (
+                  <pre class="sys-export-pre" style={{ fontSize: "0.75rem" }}>
+                    {css}
+                  </pre>
+                );
+              }}
+            </Stack>
+          </Card>
+        </section>
 
         <section id="sys-controls">
           <Grid cols={2} gap={4}>
@@ -225,7 +387,11 @@ export function SystemPage(props: {
         <section id="sys-forms">
           <Card>
             <Stack gap={4}>
-              <Text weight="semibold">Buttons</Text>
+              <DemoHead
+                title="Buttons"
+                snippet={SNIPPETS.button}
+                lab="ui"
+              />
               <Stack direction="row" gap={2} wrap>
                 <Button size="sm">Solid sm</Button>
                 <Button>Solid md</Button>
@@ -236,7 +402,12 @@ export function SystemPage(props: {
                 <Button disabled>Disabled</Button>
               </Stack>
 
-              <Text weight="semibold">Fields</Text>
+              <DemoHead
+                title="Fields"
+                snippet={SNIPPETS.field}
+                lab="form"
+                hint="Label + control + hint/error — prefer Field over raw inputs."
+              />
               <Grid cols={2} gap={4}>
                 <Field
                   label="Email"
@@ -249,10 +420,8 @@ export function SystemPage(props: {
                     id="sys-email"
                     type="email"
                     placeholder="you@company.com"
-                    value={email}
-                    onInput={(e) =>
-                      email.set((e.target as HTMLInputElement).value)
-                    }
+                    bind={email}
+                    onBlur={() => emailTouched.set(true)}
                     aria-invalid={() => !!emailError()}
                   />
                 </Field>
@@ -272,10 +441,7 @@ export function SystemPage(props: {
                 <Textarea
                   id="sys-notes"
                   rows={3}
-                  value={note}
-                  onInput={(e) =>
-                    note.set((e.target as HTMLTextAreaElement).value)
-                  }
+                  bind={note}
                 />
               </Field>
               <Stack direction="row" gap={4} wrap>
@@ -289,6 +455,59 @@ export function SystemPage(props: {
                   checked={check}
                   onChange={(v) => check.set(v)}
                 />
+              </Stack>
+              <Divider label="more controls" />
+              <Grid cols={2} gap={4}>
+                <Stack gap={2}>
+                  <Text size="sm" weight="semibold">
+                    Radio group
+                  </Text>
+                  <RadioGroup
+                    value={radioPlan}
+                    onChange={(v) => radioPlan.set(v)}
+                    options={[
+                      { value: "free", label: "Free" },
+                      { value: "pro", label: "Pro" },
+                      { value: "team", label: "Team" },
+                    ]}
+                  />
+                </Stack>
+                <Stack gap={3}>
+                  <Slider
+                    label="Volume"
+                    value={sliderVal}
+                    onChange={(v) => sliderVal.set(v)}
+                  />
+                  <Stack direction="row" gap={3} align="center">
+                    <Text size="sm" weight="semibold">
+                      Quantity
+                    </Text>
+                    <NumberInput
+                      value={qty}
+                      min={0}
+                      max={99}
+                      onChange={(v) => qty.set(v)}
+                      aria-label="Quantity"
+                    />
+                  </Stack>
+                  <ToggleGroup
+                    value={view}
+                    onChange={(v) => view.set(v as string)}
+                    options={[
+                      { value: "list", label: "List" },
+                      { value: "grid", label: "Grid" },
+                      { value: "map", label: "Map" },
+                    ]}
+                  />
+                </Stack>
+              </Grid>
+              <Stack direction="row" gap={2} wrap>
+                <Chip>Neutral</Chip>
+                <Chip tone="accent">Accent</Chip>
+                <Chip tone="success">Success</Chip>
+                <Chip tone="danger" onRemove={() => {}}>
+                  Removable
+                </Chip>
               </Stack>
             </Stack>
           </Card>
@@ -352,10 +571,12 @@ export function SystemPage(props: {
           <Grid cols={2} gap={4}>
             <Card variant="elevated">
               <Stack gap={3}>
-                <Text weight="semibold">Tabs</Text>
-                <Text muted size="sm">
-                  Segmented pill track — modern product chrome.
-                </Text>
+                <DemoHead
+                  title="Tabs"
+                  snippet={SNIPPETS.tabs}
+                  lab="overlays"
+                  hint="Arrow keys move focus and activate (roving tabindex)."
+                />
                 <Tabs
                   defaultValue="overview"
                   items={[
@@ -382,7 +603,7 @@ export function SystemPage(props: {
                       label: "Motion",
                       content: (
                         <Text muted size="sm">
-                          Springs and tweens on signals — GSAP optional later.
+                          Springs and tweens on signals — optional animate/gsap.
                         </Text>
                       ),
                     },
@@ -392,10 +613,12 @@ export function SystemPage(props: {
             </Card>
             <Card>
               <Stack gap={3}>
-                <Text weight="semibold">Dialog</Text>
-                <Text muted size="sm">
-                  Glass scrim, float shadow, Escape + backdrop dismiss.
-                </Text>
+                <DemoHead
+                  title="Dialog"
+                  snippet={SNIPPETS.dialog}
+                  lab="overlays"
+                  hint="Glass scrim · Escape · backdrop · focus trap."
+                />
                 <Button onClick={() => dialogOpen.set(true)}>Open dialog</Button>
                 <Dialog
                   open={dialogOpen}
@@ -443,10 +666,11 @@ export function SystemPage(props: {
             </Card>
             <Card>
               <Stack gap={3}>
-                <Text weight="semibold">Toast</Text>
-                <Text muted size="sm">
-                  createToaster() + Toaster — ephemeral status messages.
-                </Text>
+                <DemoHead
+                  title="Toast"
+                  snippet={SNIPPETS.toast}
+                  hint="createToaster() + Toaster — ephemeral status."
+                />
                 <Stack direction="row" gap={2} wrap>
                   <Button
                     size="sm"
@@ -525,10 +749,12 @@ export function SystemPage(props: {
             </Card>
             <Card>
               <Stack gap={3}>
-                <Text weight="semibold">Menu</Text>
-                <Text muted size="sm">
-                  Action list on Popover — select closes the menu.
-                </Text>
+                <DemoHead
+                  title="Menu"
+                  snippet={SNIPPETS.menu}
+                  lab="menu"
+                  hint="↑/↓ · Enter · Esc — roving focus on open."
+                />
                 <Stack direction="row" gap={3} align="center" wrap>
                   <Menu
                     trigger={<Button size="sm">Actions</Button>}
@@ -553,10 +779,11 @@ export function SystemPage(props: {
           <Grid cols={2} gap={4}>
             <Card variant="elevated">
               <Stack gap={3}>
-                <Text weight="semibold">Combobox</Text>
-                <Text muted size="sm">
-                  Type to filter options — Enter or click to select.
-                </Text>
+                <DemoHead
+                  title="Combobox"
+                  snippet={SNIPPETS.combobox}
+                  hint="Type to filter — flips above near viewport bottom."
+                />
                 <Field label="City">
                   <Combobox
                     value={city}
@@ -578,38 +805,201 @@ export function SystemPage(props: {
             </Card>
             <Card>
               <Stack gap={3}>
-                <Text weight="semibold">Command palette</Text>
-                <Text muted size="sm">
-                  ⌘K-style actions — search, arrow keys, Enter to run.
-                </Text>
-                <Button onClick={() => cmdOpen.set(true)}>
-                  Open command palette
+                <DemoHead
+                  title="Drawer"
+                  snippet={SNIPPETS.drawer}
+                  lab="kit"
+                  hint="Offcanvas — Esc, backdrop, focus trap."
+                />
+                <Button variant="soft" onClick={() => drawerOpen.set(true)}>
+                  Open drawer
                 </Button>
-                <Text muted size="sm">
-                  Last command: {() => cmdLast()}
-                </Text>
-                <Command
-                  open={cmdOpen}
-                  onOpenChange={(v) => cmdOpen.set(v)}
+                <Drawer
+                  open={drawerOpen}
+                  onClose={() => drawerOpen.set(false)}
+                  title="Filters"
+                  side="right"
+                >
+                  <Stack gap={3}>
+                    <Text size="sm" muted>
+                      Slide-over for settings, filters, and secondary flows.
+                    </Text>
+                    <Button onClick={() => drawerOpen.set(false)}>Done</Button>
+                  </Stack>
+                </Drawer>
+              </Stack>
+            </Card>
+            <Card variant="glass">
+              <Stack gap={3}>
+                <DemoHead
+                  title="Accordion"
+                  snippet={SNIPPETS.accordion}
+                  lab="kit"
+                />
+                <Accordion
+                  single
+                  defaultValue={["a"]}
                   items={[
-                    { id: "docs", label: "Open Docs", hint: "g d" },
-                    { id: "lab", label: "Open Lab", hint: "g l" },
-                    { id: "theme", label: "Toggle theme", hint: "t" },
                     {
-                      id: "ship",
-                      label: "Ship release",
-                      hint: "⌘↵",
-                      disabled: true,
+                      id: "a",
+                      title: "What is Power UI?",
+                      content:
+                        "A fine-grained reactive UI kit with an integrated design system.",
+                    },
+                    {
+                      id: "b",
+                      title: "How do I retheme?",
+                      content:
+                        "Edit packages/ui/src/styles/tokens.css — one file drives brand + surfaces.",
+                    },
+                    {
+                      id: "c",
+                      title: "Create a component?",
+                      content:
+                        "createStyleSheet + component() — see docs/COMPONENTS.md.",
                     },
                   ]}
-                  onSelect={(id) => {
-                    cmdLast.set(id);
-                    if (id === "theme") theme.toggle();
-                  }}
                 />
               </Stack>
             </Card>
           </Grid>
+        </section>
+
+        <section id="sys-layout">
+          <Stack gap={4}>
+            <Card>
+              <Stack gap={3}>
+                <DemoHead
+                  title="Stat"
+                  snippet={SNIPPETS.stat}
+                  lab="kit"
+                  hint="KPI cards for dashboards."
+                />
+                <Grid cols={3} gap={4}>
+                  <Stat label="Active users" value="12.4k" delta="+8.2%" tone="positive" hint="7d" />
+                  <Stat label="Error rate" value="0.12%" delta="-0.03%" tone="positive" />
+                  <Stat label="Latency p95" value="142ms" delta="+12ms" tone="negative" hint="api" />
+                </Grid>
+              </Stack>
+            </Card>
+            <Grid cols={2} gap={4}>
+              <Card>
+                <Stack gap={3}>
+                  <Text weight="semibold">Breadcrumb · Pagination</Text>
+                  <Breadcrumb
+                    items={[
+                      { id: "home", label: "Home" },
+                      { id: "sys", label: "System" },
+                      { id: "layout", label: "Layout" },
+                    ]}
+                  />
+                  <Pagination
+                    page={page}
+                    pageCount={8}
+                    onChange={(p) => page.set(p)}
+                  />
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={3}>
+                  <Text weight="semibold">List</Text>
+                  <List
+                    value={listPick}
+                    onSelect={(id) => listPick.set(id)}
+                    items={[
+                      {
+                        id: "alpha",
+                        label: "Alpha project",
+                        description: "Design system work",
+                        meta: "3d",
+                      },
+                      {
+                        id: "beta",
+                        label: "Beta launch",
+                        description: "Public npm cut",
+                        meta: "1w",
+                      },
+                      {
+                        id: "gamma",
+                        label: "Gamma archive",
+                        description: "Legacy notes",
+                        meta: "—",
+                        disabled: true,
+                      },
+                    ]}
+                  />
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={3}>
+                  <Text weight="semibold">Steps</Text>
+                  <Steps
+                    current={step}
+                    onStepClick={(i) => step.set(i)}
+                    steps={[
+                      { id: "s1", label: "Account", description: "Email + password" },
+                      { id: "s2", label: "Profile", description: "Name and avatar" },
+                      { id: "s3", label: "Done", description: "You’re set" },
+                    ]}
+                  />
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={3}>
+                  <Text weight="semibold">Timeline</Text>
+                  <Timeline
+                    items={[
+                      {
+                        id: "t1",
+                        title: "Shipped Accordion + Drawer",
+                        description: "Focus trap and createStyleSheet authoring.",
+                        time: "Today",
+                        tone: "accent",
+                      },
+                      {
+                        id: "t2",
+                        title: "Combobox + Command",
+                        time: "Earlier",
+                        tone: "success",
+                      },
+                      {
+                        id: "t3",
+                        title: "Token refresh",
+                        description: "Sage green #69BE28",
+                        time: "Yesterday",
+                      },
+                    ]}
+                  />
+                </Stack>
+              </Card>
+            </Grid>
+            <Card>
+              <Stack gap={3}>
+                <DemoHead title="Table" snippet={SNIPPETS.table} lab="kit" />
+                <Table
+                  dense
+                  rowKey="id"
+                  columns={[
+                    { key: "name", header: "Name" },
+                    { key: "role", header: "Role" },
+                    { key: "status", header: "Status", align: "right" },
+                  ]}
+                  rows={[
+                    { id: "1", name: "Ada", role: "Engineer", status: "Active" },
+                    { id: "2", name: "Grace", role: "Design", status: "Away" },
+                    { id: "3", name: "Lin", role: "PM", status: "Active" },
+                  ]}
+                />
+              </Stack>
+            </Card>
+            <Empty
+              icon="✦"
+              title="Nothing here yet"
+              description="Empty states keep product UI calm when lists and tables have no rows."
+            >
+              <Button size="sm">Create item</Button>
+            </Empty>
+          </Stack>
         </section>
 
         <section id="sys-keys">
@@ -710,8 +1100,8 @@ density.bind();`}
             <Text weight="semibold">Package map</Text>
             <Text muted size="sm">
               core · animate · dom · router · ssr · ui — tree-shake and compose.
-              GSAP remains an optional future adapter, not the default motion
-              path.
+              Default motion is signal tweens; GSAP is optional via{" "}
+              <code>@power-ui/animate/gsap</code>.
             </Text>
           </Stack>
         </Card>

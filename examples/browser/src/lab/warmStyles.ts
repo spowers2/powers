@@ -3,35 +3,55 @@
  * so Lab can clone those sheets into the preview iframe.
  */
 import {
+  Accordion,
   Alert,
   Avatar,
   Badge,
+  Breadcrumb,
   Button,
   Card,
   Checkbox,
+  Chip,
   Code,
   Container,
   Dialog,
   Divider,
+  Drawer,
+  Empty,
   Field,
   Grid,
   Input,
+  Kbd,
   Label,
+  List,
+  Menu,
+  NumberInput,
+  Pagination,
+  Popover,
   Progress,
+  RadioGroup,
+  ScrollArea,
   Select,
   Skeleton,
+  Slider,
   Spinner,
   Stack,
+  Stat,
+  Steps,
   Switch,
+  Table,
   Tabs,
   Text,
   Textarea,
+  Timeline,
+  ToggleGroup,
   Tooltip,
-  Popover,
-  Menu,
-  Kbd,
   Combobox,
   Command,
+  Transition,
+  Collapse,
+  AspectRatio,
+  Link,
 } from "@power-ui/ui";
 
 let warmed = false;
@@ -146,6 +166,68 @@ export function warmUiStyles(): void {
         items: [{ id: "x", label: "X" }],
       }),
     );
+    append(
+      Accordion({
+        items: [{ id: "a", title: "A", content: "b" }],
+      }),
+    );
+    append(
+      Drawer({
+        open: false,
+        title: "D",
+        children: "x",
+      }),
+    );
+    append(
+      Breadcrumb({
+        items: [{ id: "h", label: "Home" }],
+      }),
+    );
+    append(Pagination({ page: 1, pageCount: 3 }));
+    append(
+      RadioGroup({
+        options: [{ value: "a", label: "A" }],
+        value: "a",
+      }),
+    );
+    append(Slider({ value: 40 }));
+    append(NumberInput({ value: 1 }));
+    append(
+      ToggleGroup({
+        options: [{ value: "a", label: "A" }],
+        value: "a",
+      }),
+    );
+    append(
+      List({
+        items: [{ id: "a", label: "A" }],
+      }),
+    );
+    append(
+      Table({
+        columns: [{ key: "n", header: "N" }],
+        rows: [{ n: "1" }],
+      }),
+    );
+    append(Empty({ title: "E" }));
+    append(Stat({ label: "S", value: "1" }));
+    append(
+      Steps({
+        current: 0,
+        steps: [{ id: "s", label: "S" }],
+      }),
+    );
+    append(
+      Timeline({
+        items: [{ id: "t", title: "T" }],
+      }),
+    );
+    append(Chip({ children: "c" }));
+    append(ScrollArea({ maxHeight: "2rem", children: "s" }));
+    append(Collapse({ open: false, children: "c" }));
+    append(Transition({ show: false, children: "t" }));
+    append(AspectRatio({ children: "a" }));
+    append(Link({ href: "#", children: "L" }));
   } catch {
     // Warm is best-effort — missing a sheet is non-fatal
   } finally {

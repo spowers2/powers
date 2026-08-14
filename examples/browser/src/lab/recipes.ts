@@ -100,18 +100,22 @@ export function App() {
           <Input
             type="number"
             value={() => String(price())}
-            onInput={(e) =>
-              price.set(Number((e.target as HTMLInputElement).value) || 0)
-            }
+            onInput={(e) => {
+              const t = e.currentTarget ?? e.target;
+              const v = t && "value" in (t as object) ? Number((t as HTMLInputElement).value) : 0;
+              price.set(Number.isFinite(v) ? v : 0);
+            }}
           />
         </Field>
         <Field label="Qty">
           <Input
             type="number"
             value={() => String(qty())}
-            onInput={(e) =>
-              qty.set(Number((e.target as HTMLInputElement).value) || 0)
-            }
+            onInput={(e) => {
+              const t = e.currentTarget ?? e.target;
+              const v = t && "value" in (t as object) ? Number((t as HTMLInputElement).value) : 0;
+              qty.set(Number.isFinite(v) ? v : 0);
+            }}
           />
         </Field>
         <Text weight="semibold" size="lg">
@@ -193,6 +197,109 @@ export function App() {
             variant="ghost"
             onClick={() => animate(x, 0, { duration: 250, ease: "easeOut" })}
           >
+            Back
+          </Button>
+        </Stack>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "gsap",
+    title: "GSAP adapter",
+    blurb: "Optional pro eases on signals",
+    goal: "Drive the same ball with gsapAnimate — still a Power UI signal.",
+    learn: [
+      "Default motion is animate() — no GSAP required",
+      "Optional peer: import from @power-ui/animate/gsap (Lab injects it)",
+      "Duration is in milliseconds (same unit as animate), converted for GSAP",
+      "One active animation per signal — GSAP and native animate interrupt each other",
+    ],
+    how: [
+      "x is still a number signal bound to transform",
+      "gsapAnimate(x, 160, { ease: \"power3.out\" }) uses GSAP under the hood",
+      "cancel(x) stops whichever engine last touched the signal",
+    ],
+    tryThis: [
+      "Click “GSAP →” — smoother power ease than default CSS-ish tween",
+      "Try ease: \"elastic.out(1, 0.4)\" for a bouncy overshoot",
+      "Hit Back mid-flight — cancel + new tween should feel interruptible",
+      "Compare with the Spring motion recipe (no GSAP)",
+    ],
+    code: `import { signal } from "@power-ui/core";
+import { cancel } from "@power-ui/animate";
+// Optional peer path (Lab also injects gsapAnimate):
+import { gsapAnimate } from "@power-ui/animate/gsap";
+import { mount } from "@power-ui/dom";
+import { Button, Card, Stack, Text, Badge } from "@power-ui/ui";
+
+const x = signal(0);
+const label = signal("idle");
+
+export function App() {
+  const go = () => {
+    label.set("gsap…");
+    gsapAnimate(x, 160, {
+      duration: 700,
+      ease: "power3.out",
+      onComplete: () => label.set("done"),
+    });
+  };
+
+  const back = () => {
+    cancel(x);
+    label.set("back…");
+    gsapAnimate(x, 0, {
+      duration: 350,
+      ease: "power2.inOut",
+      onComplete: () => label.set("idle"),
+    });
+  };
+
+  const elastic = () => {
+    label.set("elastic…");
+    gsapAnimate(x, 140, {
+      duration: 900,
+      ease: "elastic.out(1, 0.45)",
+      onComplete: () => label.set("done"),
+    });
+  };
+
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Stack direction="row" gap={2} align="center" wrap>
+          <Text as="h2" size="xl">GSAP on a signal</Text>
+          <Badge tone="accent">{() => label()}</Badge>
+        </Stack>
+        <Text muted size="sm">
+          Install peer <code>gsap</code> in real apps. Default{" "}
+          <code>animate()</code> stays zero-dependency.
+        </Text>
+        <div
+          style={() => ({
+            width: 48,
+            height: 48,
+            borderRadius: 999,
+            background:
+              "linear-gradient(145deg, var(--pu-sage-500), var(--pu-brand-600))",
+            boxShadow: "var(--pu-shadow-md)",
+            transform: \`translateX(\${x()}px)\`,
+          })}
+        />
+        <Text size="sm" muted>
+          x = {() => Math.round(x())}px
+        </Text>
+        <Stack direction="row" gap={2} wrap>
+          <Button onClick={go}>GSAP →</Button>
+          <Button variant="soft" onClick={elastic}>
+            Elastic
+          </Button>
+          <Button variant="ghost" onClick={back}>
             Back
           </Button>
         </Stack>
@@ -668,22 +775,22 @@ mount(document.getElementById("root")!, () => <App />);
   {
     id: "form",
     title: "Form validation",
-    blurb: "Field errors from signals",
-    goal: "Validate email live and only enable Save when the form is valid.",
+    blurb: "bind + Field errors",
+    goal: "Validate with bind={signal} and only enable Save when the form is valid.",
     learn: [
-      "Keep form state in signals",
-      "error={emailError} on Field stays reactive",
-      "Disable the submit Button until validation passes",
+      "Prefer bind={signal} — no onInput casts",
+      "Field error={…} stays reactive while you type",
+      "Disable submit until validation passes",
     ],
     how: [
-      "email and agreed are signals",
-      "emailError returns a string when invalid",
-      "Save checks validity then writes a status message",
+      "name / email / agreed are signals wired with bind",
+      "emailError / nameError return messages after first submit",
+      "Save touches validation then writes status",
     ],
     tryThis: [
-      "Type a bad email — see the red Field error",
+      "Type a bad email — see the red Field error after Save",
       "Fix email + check the box — Save enables",
-      "Add a required name Field the same way",
+      "Add a phone Field with bind the same way",
     ],
     code: `import { signal, computed } from "@power-ui/core";
 import { mount } from "@power-ui/dom";
@@ -695,20 +802,35 @@ import {
   Input,
   Stack,
   Text,
+  required,
+  emailFormat,
+  firstError,
+  minLength,
 } from "@power-ui/ui";
 
 const email = signal("");
+const name = signal("");
 const agreed = signal(false);
 const status = signal("");
+const submitted = signal(false);
 
 const emailError = () => {
-  const v = email().trim();
-  if (!v) return "";
-  return v.includes("@") ? "" : "Enter a valid email";
+  if (!submitted() && !email()) return "";
+  return firstError(
+    required(email(), "Email is required"),
+    emailFormat(email()),
+  );
+};
+const nameError = () => {
+  if (!submitted() && !name()) return "";
+  return firstError(
+    required(name(), "Name is required"),
+    minLength(name(), 2),
+  );
 };
 
 const canSave = computed(
-  () => !!email().trim() && !emailError() && agreed(),
+  () => !emailError() && !nameError() && agreed() && !!email() && !!name(),
 );
 
 export function App() {
@@ -716,35 +838,334 @@ export function App() {
     <Card>
       <Stack gap={4}>
         <Text as="h2" size="xl">Signup</Text>
+        <Field label="Name" required error={nameError}>
+          <Input bind={name} placeholder="Ada" />
+        </Field>
         <Field
           label="Email"
           required
           error={emailError}
           hint="We'll never share it."
         >
-          <Input
-            type="email"
-            placeholder="you@company.com"
-            value={email}
-            onInput={(e) =>
-              email.set((e.target as HTMLInputElement).value)
-            }
-          />
+          <Input bind={email} type="email" placeholder="you@company.com" />
         </Field>
-        <Checkbox
-          label="I agree to the terms"
-          checked={agreed}
-          onChange={(v) => agreed.set(v)}
-        />
+        <Checkbox label="I agree to the terms" bind={agreed} />
         <Button
           disabled={() => !canSave()}
-          onClick={() =>
-            status.set(\`Saved \${email()} · thanks!\`)
-          }
+          onClick={() => {
+            submitted.set(true);
+            if (!canSave()) {
+              status.set("Fix the fields above");
+              return;
+            }
+            status.set(\`Saved \${name()} · \${email()}\`);
+          }}
         >
           Save
         </Button>
         <Text muted size="sm">{() => status() || " "}</Text>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "create-field",
+    title: "createField pattern",
+    blurb: "Touched + error in one handle",
+    goal: "Build a profile form with createField and Select bind.",
+    learn: [
+      "createField({ validate }) owns value, touch, and error()",
+      "bind={field.value} + onBlur={field.touch}",
+      "asSelectBind for typed status unions",
+    ],
+    how: [
+      "name / email are createField handles",
+      "role is a string signal on Select bind",
+      "Submit calls touch() on each field then checks error()",
+    ],
+    tryThis: [
+      "Blur an empty name — error appears",
+      "Pick a role and save — status shows the payload",
+      "Change validate on email to require a .com address",
+    ],
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Button,
+  Card,
+  Field,
+  Input,
+  Select,
+  Stack,
+  Text,
+  createField,
+  required,
+  emailFormat,
+  firstError,
+} from "@power-ui/ui";
+
+const name = createField({
+  validate: (v) => required(v, "Name required"),
+});
+const email = createField({
+  validate: (v) => firstError(required(v), emailFormat(v)),
+});
+const role = signal("dev");
+const status = signal("");
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">Profile</Text>
+        <Field label="Name" required error={name.error}>
+          <Input bind={name.value} onBlur={name.touch} placeholder="Ada" />
+        </Field>
+        <Field label="Email" required error={email.error}>
+          <Input
+            bind={email.value}
+            type="email"
+            onBlur={email.touch}
+            placeholder="ada@example.com"
+          />
+        </Field>
+        <Field label="Role">
+          <Select
+            bind={role}
+            options={[
+              { value: "dev", label: "Developer" },
+              { value: "design", label: "Designer" },
+              { value: "pm", label: "Product" },
+            ]}
+          />
+        </Field>
+        <Button
+          onClick={() => {
+            name.touch();
+            email.touch();
+            if (name.error() || email.error()) {
+              status.set("Fix the fields above");
+              return;
+            }
+            status.set(\`\${name.get()} · \${email.get()} · \${role()}\`);
+          }}
+        >
+          Save profile
+        </Button>
+        <Text muted size="sm">{() => status() || " "}</Text>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "settings",
+    title: "Cookbook: Settings page",
+    blurb: "Theme-ready profile form",
+    goal: "Build a settings screen with createField, Select, and Switch.",
+    learn: [
+      "createField owns value + touch + error for each input",
+      "bind={field.value} is the preferred control wiring",
+      "Stack + Card + Field = a polished settings layout with almost no CSS",
+    ],
+    how: [
+      "name / email are createField handles",
+      "notify is a boolean signal on Switch bind",
+      "Save touches fields, validates, then sets a status line",
+    ],
+    tryThis: [
+      "Leave name empty and Save — see Field errors",
+      "Toggle notifications and save a valid profile",
+      "Add a timezone Select the same way as role",
+    ],
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Button,
+  Card,
+  Field,
+  Input,
+  Select,
+  Stack,
+  Switch,
+  Text,
+  createField,
+  required,
+  emailFormat,
+  firstError,
+} from "@power-ui/ui";
+
+const name = createField({
+  initial: "Sam Rivera",
+  validate: (v) => required(v, "Name required"),
+});
+const email = createField({
+  initial: "sam@designlab206.com",
+  validate: (v) => firstError(required(v), emailFormat(v)),
+});
+const role = signal("owner");
+const notify = signal(true);
+const status = signal("");
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Stack gap={1}>
+          <Text as="h2" size="xl">Settings</Text>
+          <Text muted size="sm">Profile + preferences — cookbook pattern</Text>
+        </Stack>
+        <Field label="Display name" required error={name.error}>
+          <Input bind={name.value} onBlur={name.touch} />
+        </Field>
+        <Field label="Email" required error={email.error}>
+          <Input bind={email.value} type="email" onBlur={email.touch} />
+        </Field>
+        <Field label="Role">
+          <Select
+            bind={role}
+            options={[
+              { value: "owner", label: "Owner" },
+              { value: "admin", label: "Admin" },
+              { value: "member", label: "Member" },
+            ]}
+          />
+        </Field>
+        <Switch bind={notify} label="Email product updates" />
+        <Stack direction="row" gap={2}>
+          <Button
+            onClick={() => {
+              name.touch();
+              email.touch();
+              if (name.error() || email.error()) {
+                status.set("Fix the fields above");
+                return;
+              }
+              status.set(
+                \`Saved \${name.get()} · \${email.get()} · \${role()} · notify=\${notify()}\`,
+              );
+            }}
+          >
+            Save
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              name.reset("Sam Rivera");
+              email.reset("sam@designlab206.com");
+              role.set("owner");
+              notify.set(true);
+              status.set("");
+            }}
+          >
+            Reset
+          </Button>
+        </Stack>
+        <Text muted size="sm">{() => status() || " "}</Text>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "admin-list",
+    title: "Cookbook: Admin list",
+    blurb: "Search + Table + Empty",
+    goal: "Filter a table of rows and show Empty when nothing matches.",
+    learn: [
+      "Keep filter in a signal; derive visible rows with computed",
+      "Table + Empty is the default admin list pattern",
+      "bind={filter} on the search Input — no casts",
+    ],
+    how: [
+      "rows is static seed data; filter is live state",
+      "visible recomputes when filter changes",
+      "Empty appears when visible().length === 0",
+    ],
+    tryThis: [
+      "Type “north” — only Northline should remain",
+      "Clear the search — full table returns",
+      "Add a status column to columns + rows",
+    ],
+    code: `import { signal, computed } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Button,
+  Card,
+  Empty,
+  Field,
+  Input,
+  Stack,
+  Table,
+  Text,
+} from "@power-ui/ui";
+
+const rows = [
+  { id: "1", company: "Northline Health", contact: "Avery", status: "active" },
+  { id: "2", company: "Field & Co.", contact: "Jordan", status: "active" },
+  { id: "3", company: "Orbit Payments", contact: "Riley", status: "lead" },
+];
+
+const filter = signal("");
+const visible = computed(() => {
+  const q = filter().trim().toLowerCase();
+  if (!q) return rows;
+  return rows.filter(
+    (r) =>
+      r.company.toLowerCase().includes(q) ||
+      r.contact.toLowerCase().includes(q) ||
+      r.status.toLowerCase().includes(q),
+  );
+});
+
+const columns = [
+  { key: "company", header: "Company" },
+  { key: "contact", header: "Contact" },
+  { key: "status", header: "Status" },
+];
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Stack direction="row" gap={2} justify="between" align="center" wrap>
+          <Text as="h2" size="xl">Clients</Text>
+          <Button size="sm" variant="soft">Add client</Button>
+        </Stack>
+        <Field label="Search">
+          <Input bind={filter} placeholder="Company, contact, status…" />
+        </Field>
+        {() => {
+          const list = visible();
+          if (list.length === 0) {
+            return (
+              <Empty
+                icon="◎"
+                title="No matches"
+                description="Try another search."
+              />
+            );
+          }
+          return (
+            <Table
+              columns={columns}
+              rows={list}
+            />
+          );
+        }}
+        <Text muted size="sm">
+          {() => \`\${visible().length} row(s)\`}
+        </Text>
       </Stack>
     </Card>
   );
@@ -881,6 +1302,158 @@ export function App() {
         </Stack>
       </Stack>
     </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "motion",
+    title: "Motion presets",
+    blurb: "Fade + collapse transitions",
+    goal: "Toggle content with named Transition presets (pu-fade / pu-collapse).",
+    learn: [
+      "Transition name matches a CSS preset (pu-fade, pu-collapse)",
+      "show={signal} drives enter/exit without manual DOM timing",
+      "MOTION_PRESETS documents the built-in language",
+    ],
+    how: [
+      "open is a signal; Transition re-runs classes when it flips",
+      "pu-fade for soft panels; pu-collapse for height",
+      "Reduced motion is honored in the preset CSS",
+    ],
+    tryThis: [
+      "Toggle Fade and Collapse",
+      "Change name to \"pu-collapse\" on the fade panel",
+      "Wrap a Card in Transition for a soft mount",
+    ],
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Button,
+  Card,
+  Stack,
+  Text,
+  Transition,
+  MOTION_PRESETS,
+} from "@power-ui/ui";
+
+const fade = signal(true);
+const collapse = signal(true);
+
+export function App() {
+  return (
+    <Stack gap={4}>
+      <Card>
+        <Stack gap={3}>
+          <Text weight="semibold">Presets</Text>
+          <Text muted size="sm">
+            {() => MOTION_PRESETS.map((p) => p.name).join(" · ")}
+          </Text>
+          <Stack direction="row" gap={2}>
+            <Button size="sm" onClick={() => fade.update((v) => !v)}>
+              Toggle fade
+            </Button>
+            <Button size="sm" variant="soft" onClick={() => collapse.update((v) => !v)}>
+              Toggle collapse
+            </Button>
+          </Stack>
+        </Stack>
+      </Card>
+      <Transition name="pu-fade" show={fade}>
+        <Card variant="soft">
+          <Text size="sm">Fade panel — soft enter/exit</Text>
+        </Card>
+      </Transition>
+      <Transition name="pu-collapse" show={collapse} duration={360}>
+        <Card>
+          <Text size="sm">Collapse panel — height animate</Text>
+        </Card>
+      </Transition>
+    </Stack>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "kit",
+    title: "Layout kit",
+    blurb: "Accordion, Stat, Table, Drawer",
+    goal: "Compose product surfaces from the expanded component kit.",
+    learn: [
+      "Power UI ships more structure primitives than Bootstrap (Stat, Timeline, Steps, Empty…)",
+      "createStyleSheet makes new components a few lines of CSS + JSX",
+      "Drawer / Dialog / Command trap focus and restore it on close",
+    ],
+    how: [
+      "Stat is a KPI card; Accordion is multi/single expand",
+      "Table takes columns + rows; Drawer slides from the side",
+      "All use the same --pu-* tokens as Button and Card",
+    ],
+    tryThis: [
+      "Open the drawer and press Esc — it should close and restore focus",
+      "Add a third accordion item",
+      "Change Stat tone to negative and tweak the delta string",
+    ],
+    code: `import { signal } from "@power-ui/core";
+import { mount } from "@power-ui/dom";
+import {
+  Accordion,
+  Button,
+  Card,
+  Drawer,
+  Grid,
+  Stack,
+  Stat,
+  Table,
+  Text,
+} from "@power-ui/ui";
+
+const open = signal(false);
+
+export function App() {
+  return (
+    <Stack gap={4}>
+      <Grid cols={2} gap={3}>
+        <Stat label="Signups" value="842" delta="+12%" tone="positive" />
+        <Stat label="Churn" value="1.4%" delta="+0.2%" tone="negative" />
+      </Grid>
+      <Card>
+        <Stack gap={3}>
+          <Text weight="semibold">FAQ</Text>
+          <Accordion
+            single
+            defaultValue={["a"]}
+            items={[
+              { id: "a", title: "Signals?", content: "Read with count(), write with .set" },
+              { id: "b", title: "Retheme?", content: "Edit tokens.css once." },
+            ]}
+          />
+          <Button variant="soft" onClick={() => open.set(true)}>
+            Open drawer
+          </Button>
+        </Stack>
+      </Card>
+      <Table
+        dense
+        columns={[
+          { key: "name", header: "Name" },
+          { key: "role", header: "Role" },
+        ]}
+        rows={[
+          { name: "Ada", role: "Eng" },
+          { name: "Grace", role: "Design" },
+        ]}
+      />
+      <Drawer open={open} onClose={() => open.set(false)} title="Details">
+        <Text size="sm" muted>
+          Focus is trapped here while open.
+        </Text>
+      </Drawer>
+    </Stack>
   );
 }
 

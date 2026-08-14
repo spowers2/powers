@@ -7,7 +7,7 @@
   padding: 0.65rem 0;
   border-bottom: 1px solid var(--pu-color-border);
   position: sticky;
-  top: 4rem;
+  top: var(--site-nav-h, 3.75rem);
   z-index: 20;
   background: color-mix(in srgb, var(--pu-color-bg) 92%, transparent);
   backdrop-filter: blur(10px);
@@ -41,14 +41,30 @@
   color: var(--pu-color-accent);
   background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
   border-color: color-mix(in srgb, var(--pu-color-accent) 22%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
 }
 
 .docs-section {
-  scroll-margin-top: 7rem;
+  scroll-margin-top: 7.5rem;
+}
+
+/* Last docs section needs height so “What next” can stay active at bottom */
+.docs-section:last-of-type {
+  min-height: min(45vh, 22rem);
+  padding-bottom: 2.5rem;
 }
 
 .docs-h2 {
   margin-bottom: var(--pu-space-3) !important;
+}
+
+.docs-inline-link {
+  color: var(--pu-color-accent);
+  font-weight: var(--pu-font-semibold);
+  text-decoration: none;
+}
+.docs-inline-link:hover {
+  text-decoration: underline;
 }
 
 .docs-pre {
@@ -130,4 +146,27 @@
 
 .docs-steps .pu-kbd {
   margin: 0 0.15rem;
+}
+
+.docs-demo-link {
+  display: inline-flex;
+  align-items: center;
+  height: var(--pu-control-h-md, 2.25rem);
+  padding: 0 0.9rem;
+  border-radius: var(--pu-radius-md);
+  border: 1px solid var(--pu-color-border);
+  background: var(--pu-color-surface);
+  color: var(--pu-color-text);
+  font-size: var(--pu-text-sm);
+  font-weight: var(--pu-font-semibold);
+  text-decoration: none;
+  transition:
+    background var(--pu-duration) var(--pu-ease),
+    border-color var(--pu-duration) var(--pu-ease);
+}
+
+.docs-demo-link:hover {
+  background: var(--pu-color-surface-2);
+  border-color: color-mix(in srgb, var(--pu-color-accent) 35%, var(--pu-color-border));
+  color: var(--pu-color-accent);
 }

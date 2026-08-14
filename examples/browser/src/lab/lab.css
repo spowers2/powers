@@ -1,4 +1,5 @@
-/* Power Lab — modern product IDE chrome */
+/* Power Lab — modern product IDE chrome
+ * Width/gutters come from .site-main--lab (matches nav Container xl). */
 
 .lab {
   --lab-panel: var(--pu-color-surface);
@@ -7,11 +8,19 @@
   display: grid;
   grid-template-columns: var(--lab-rail) 1fr;
   gap: 0;
-  min-height: calc(100vh - 4rem);
-  border-top: 1px solid var(--lab-border);
+  /* Outer gutters + max width from .site-main--lab (matches nav xl) */
+  width: 100%;
+  border: 1px solid var(--lab-border);
+  border-radius: var(--pu-radius-lg);
+  overflow: hidden;
   background:
     radial-gradient(700px 360px at 0% 0%, var(--pu-color-glow), transparent 55%),
     var(--pu-color-bg);
+  margin-block: var(--site-main-pad-y, 1.75rem) var(--site-main-pad-bottom, 3rem);
+  min-height: calc(
+    100vh - var(--site-nav-h, 3.75rem) - var(--site-main-pad-y, 1.75rem) -
+      var(--site-main-pad-bottom, 3rem)
+  );
 }
 
 @media (max-width: 960px) {
@@ -630,4 +639,62 @@
 }
 .lab-console-line.is-warn {
   color: #a67c3d;
+}
+
+/* Preview stage + error overlay (Sprint B) */
+.lab-preview-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.lab-preview-stage .lab-preview {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 12rem;
+  border: 0;
+}
+.lab-error-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.35rem;
+  background: color-mix(in srgb, var(--pu-color-surface) 92%, var(--pu-color-danger));
+  border-top: 1px solid color-mix(in srgb, var(--pu-color-danger) 35%, var(--pu-color-border));
+  backdrop-filter: blur(8px);
+}
+.lab-error-overlay[hidden] {
+  display: none !important;
+}
+.lab-error-overlay__title {
+  font-size: var(--pu-text-sm);
+  font-weight: var(--pu-font-bold);
+  color: var(--pu-color-danger);
+  letter-spacing: -0.02em;
+}
+.lab-error-overlay__msg {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--pu-radius-md);
+  background: color-mix(in srgb, var(--pu-color-bg) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pu-color-danger) 28%, var(--pu-color-border));
+  font-family: var(--pu-font-mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--pu-color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 40%;
+  overflow: auto;
+}
+.lab-error-overlay__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }

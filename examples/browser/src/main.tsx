@@ -1,9 +1,9 @@
 /**
  * Power UI site — shared nav + landing + demos + design system
  */
-import { signal, computed } from "@power-ui/core";
+import { signal } from "@power-ui/core";
 import { animate, spring } from "@power-ui/animate";
-import { mount, Show, For, bindStyle } from "@power-ui/dom";
+import { mount, bindStyle } from "@power-ui/dom";
 import { createRouter, Link } from "@power-ui/router";
 import {
   Button,
@@ -20,6 +20,7 @@ import {
   Badge,
   createTheme,
   createDensity,
+  installDevWarnings,
 } from "@power-ui/ui";
 import "@power-ui/ui/theme.css";
 import "./app.css";
@@ -29,7 +30,7 @@ import { SiteNav } from "./SiteNav.js";
 import { SystemPage } from "./SystemPage.js";
 import { LabPage } from "./lab/LabPage.js";
 
-type Todo = { id: number; title: string; done: boolean };
+installDevWarnings();
 
 const theme = createTheme(
   typeof window !== "undefined" &&
@@ -69,7 +70,7 @@ function PlaygroundPage() {
   bindStyle(ball, () => ({ transform: `translateX(${x()}px)` }));
 
   return (
-    <Container size="md">
+    <Container size="xl">
       <Stack gap={5}>
         <Stack direction="row" justify="between" align="center" wrap>
           <Text as="h2" size="xl">
@@ -119,25 +120,19 @@ function PlaygroundPage() {
                 id="pg-email"
                 type="email"
                 placeholder="you@company.com"
-                value={email}
-                onInput={(e) =>
-                  email.set((e.target as HTMLInputElement).value)
-                }
+                bind={email}
                 aria-invalid={() => !!emailError()}
               />
             </Field>
             <Field label="Role" htmlFor="pg-role">
               <Select
                 id="pg-role"
-                value={role}
+                bind={role}
                 options={[
                   { value: "dev", label: "Developer" },
                   { value: "design", label: "Designer" },
                   { value: "pm", label: "Product" },
                 ]}
-                onChange={(e) =>
-                  role.set((e.target as HTMLSelectElement).value)
-                }
               />
             </Field>
             <Field label="Bio" htmlFor="pg-bio" hint="Optional">
@@ -145,22 +140,14 @@ function PlaygroundPage() {
                 id="pg-bio"
                 rows={3}
                 placeholder="Short intro…"
-                value={bio}
-                onInput={(e) =>
-                  bio.set((e.target as HTMLTextAreaElement).value)
-                }
+                bind={bio}
               />
             </Field>
             <Switch
               label="Email me product updates"
-              checked={newsletter}
-              onChange={(v) => newsletter.set(v)}
+              bind={newsletter}
             />
-            <Checkbox
-              label="I agree to the terms"
-              checked={terms}
-              onChange={(v) => terms.set(v)}
-            />
+            <Checkbox label="I agree to the terms" bind={terms} />
             <Stack direction="row" gap={2} wrap>
               <Button
                 onClick={() => {
@@ -242,124 +229,6 @@ function PlaygroundPage() {
   );
 }
 
-function TodosPage() {
-  let nextId = 1;
-  const todos = signal<Todo[]>([
-    { id: nextId++, title: "Learn signals", done: true },
-    { id: nextId++, title: "Ship a landing page", done: true },
-    { id: nextId++, title: "Consistent site nav", done: true },
-  ]);
-  const draft = signal("");
-  const remaining = computed(() => todos().filter((t) => !t.done).length);
-  let inputEl: HTMLInputElement | undefined;
-
-  const add = () => {
-    const title = draft().trim();
-    if (!title) return;
-    todos.update((list) => [...list, { id: nextId++, title, done: false }]);
-    draft.set("");
-    if (inputEl) inputEl.value = "";
-  };
-
-  return (
-    <Container size="md">
-      <Stack gap={5}>
-        <Stack gap={2}>
-          <Text as="h1" size="2xl">
-            Todos
-          </Text>
-          <Text muted>
-            A small app built only with design-system primitives — no custom
-            form chrome.
-          </Text>
-        </Stack>
-
-        <Card variant="elevated">
-          <Stack gap={4}>
-            <Stack direction="row" gap={2} align="center">
-              <Input
-                placeholder="Add a todo…"
-                ref={(el) => {
-                  inputEl = el;
-                }}
-                onInput={(e) =>
-                  draft.set((e.target as HTMLInputElement).value)
-                }
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") add();
-                }}
-              />
-              <Button onClick={add}>Add</Button>
-            </Stack>
-            <Stack direction="row" justify="between" align="center">
-              <Text muted size="sm">
-                {() => `${remaining()} remaining`}
-              </Text>
-              <Badge tone="accent">
-                {() => `${todos().length} total`}
-              </Badge>
-            </Stack>
-          </Stack>
-        </Card>
-
-        <Stack gap={2}>
-          <For each={() => todos()}>
-            {(item) => (
-              <Card
-                class={() => (item().done ? "todo-card todo-card--done" : "todo-card")}
-              >
-                <Stack direction="row" justify="between" align="center" gap={3}>
-                  <Text
-                    class={() => (item().done ? "todo-title-done" : undefined)}
-                  >
-                    {() => item().title}
-                  </Text>
-                  <Stack direction="row" gap={2}>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => {
-                        const id = item().id;
-                        todos.update((all) =>
-                          all.map((t) =>
-                            t.id === id ? { ...t, done: !t.done } : t,
-                          ),
-                        );
-                      }}
-                    >
-                      {() => (item().done ? "Undo" : "Done")}
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="danger"
-                      onClick={() => {
-                        const id = item().id;
-                        todos.update((all) =>
-                          all.filter((t) => t.id !== id),
-                        );
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </Stack>
-                </Stack>
-              </Card>
-            )}
-          </For>
-        </Stack>
-
-        <Show when={() => todos().length === 0}>
-          {() => (
-            <Card variant="soft">
-              <Text muted>No todos — add one above.</Text>
-            </Card>
-          )}
-        </Show>
-      </Stack>
-    </Container>
-  );
-}
-
 const router = createRouter({
   routes: [
     {
@@ -374,20 +243,19 @@ const router = createRouter({
       component: () => {
         queueMicrotask(() => router.navigate("/system", { replace: true }));
         return (
-          <Container size="md">
+          <Container size="xl">
             <Text muted>Redirecting to Design system…</Text>
           </Container>
         );
       },
     },
-    { path: "/todos", component: () => TodosPage() },
     {
       path: "/system",
       component: () => SystemPage({ theme, density }),
     },
   ],
   notFound: () => (
-    <Container size="md">
+    <Container size="xl">
       <Stack gap={3}>
         <Text as="h2" size="xl">
           404
@@ -402,20 +270,18 @@ const router = createRouter({
 });
 
 function AppShell() {
-  const isLanding = () => router.path() === "/";
-  const isLab = () => router.path() === "/lab";
+  /** Shared shell gutters: landing flush sections, lab on site grid, rest padded content. */
+  const mainClass = () => {
+    const p = router.path();
+    if (p === "/") return "site-main site-main--flush";
+    if (p === "/lab") return "site-main site-main--lab";
+    return "site-main";
+  };
 
   return (
-    <div>
+    <div class="site-root">
       {SiteNav({ router, theme })}
-      <div
-        class={() => {
-          if (isLanding() || isLab()) return "site-main";
-          return "site-main site-main--padded";
-        }}
-      >
-        {router.outlet()}
-      </div>
+      <div class={mainClass}>{router.outlet()}</div>
     </div>
   );
 }

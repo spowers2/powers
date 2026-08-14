@@ -17,7 +17,7 @@ export default defineConfig({
       "@power-ui/router",
       "@power-ui/ui",
     ],
-    include: ["esbuild-wasm"],
+    include: ["esbuild-wasm", "gsap"],
   },
   assetsInclude: ["**/*.wasm"],
 });
