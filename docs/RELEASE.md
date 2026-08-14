@@ -2,7 +2,7 @@
 
 Use this before the first public npm publish / website launch.
 
-**Repo today:** private monorepo (GitHub remote may still be named `power-ui`; product name is **Powers**) · MIT license present.
+**Repo today:** private monorepo (GitHub remote may still be named `power-ui`; product name is **Powers**) · **Apache-2.0** license + trademark policy.
 
 ---
 
@@ -42,17 +42,22 @@ Use this before the first public npm publish / website launch.
 - [x] [`docs/README.md`](./README.md) is the entry  
 - [x] LEARN · STYLING · DESIGN_SYSTEM · POWER_LAB · ROADMAP present  
 - [x] CONTRIBUTING present  
-- [x] LICENSE (MIT) at repo root  
+- [x] LICENSE (Apache-2.0) + NOTICE at repo root  
+- [x] LICENSING.md · TRADEMARKS.md · DCO in CONTRIBUTING  
 
 ## Publish sequence (still open — first public cut)
 
 1. [ ] Set coordinated versions (`0.1.0` or keep current package versions and tag)
 2. [ ] Build packages that emit `dist` if required for publish
-3. [ ] `npm publish --access public` per package (or changesets)
+3. [ ] `npm publish --access public` per package (or changesets) — packages are **Apache-2.0**
 4. [ ] Tag `v0.1.0` (or matching)
 5. [ ] Optional: GitHub Pages / marketing site from `examples/browser` build
 6. [ ] Optional: rename GitHub repo `power-ui` → `powers` + update remote
-7. [ ] Announce with link to Lab + LEARN  
+7. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
+8. [ ] **Make repo public** only when you are ready (does not equal npm publish)
+9. [ ] Announce with link to Lab + LEARN  
+
+**Do not** change the core license to a closed/source-available model at launch without a deliberate product decision — see [LICENSING.md](./LICENSING.md).  
 
 ## Explicitly later
 

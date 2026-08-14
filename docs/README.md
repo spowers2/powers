@@ -29,6 +29,7 @@ Private repo today; these docs are written so they can ship as-is when the proje
 | Public release checklist | [RELEASE.md](./RELEASE.md) |
 | Ordered product plan | [ROADMAP.md](./ROADMAP.md) |
 | DX strategy (how we win) | [DX_STRATEGY.md](./DX_STRATEGY.md) |
+| **License & commercial model** | [LICENSING.md](./LICENSING.md) · [TRADEMARKS.md](./TRADEMARKS.md) |
 
 **Recommended path for a new developer**
 

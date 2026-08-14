@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Tiny signal-based router for Powers — easy to learn, easy to own.",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -14,7 +14,10 @@
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -30,5 +33,6 @@
     "happy-dom": "^17.4.4",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
-  }
+  },
+  "author": "Scott Powers"
 }

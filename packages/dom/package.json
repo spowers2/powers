@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Thin DOM bindings + JSX + reactive props for Powers.",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -42,5 +42,6 @@
     "happy-dom": "^17.4.4",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
-  }
+  },
+  "author": "Scott Powers"
 }

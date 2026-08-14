@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "description": "Fine-grained reactive UI system — ownership-first, near-zero runtime, AI-readable.",
+  "license": "Apache-2.0",
+  "author": "Scott Powers",
   "type": "module",
   "packageManager": "pnpm@9.15.0",
   "engines": {

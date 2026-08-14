@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "SSR foundation for Powers — render apps to HTML strings (happy-dom).",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -14,7 +14,10 @@
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -28,5 +31,6 @@
   "devDependencies": {
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
-  }
+  },
+  "author": "Scott Powers"
 }

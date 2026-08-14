@@ -14,5 +14,6 @@
   },
   "devDependencies": {
     "tsx": "^4.19.3"
-  }
+  },
+  "license": "Apache-2.0"
 }

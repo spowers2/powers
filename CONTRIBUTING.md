@@ -2,6 +2,21 @@
 
 Written for **public contributors** as well as maintainers. The repo may be private today; this guide is launch-ready.
 
+## License & DCO
+
+- Code is licensed under **[Apache License 2.0](./LICENSE)**.  
+- By contributing, you agree your work is under the same license.  
+- **Developer Certificate of Origin (DCO):** every commit must be signed off:
+
+```bash
+git commit -s -m "feat(ui): …"
+```
+
+That adds `Signed-off-by: Your Name <you@example.com>` (use the email tied to your GitHub account).
+
+Licensing strategy & commercial notes: [`docs/LICENSING.md`](./docs/LICENSING.md).  
+Trademark: [`docs/TRADEMARKS.md`](./docs/TRADEMARKS.md).
+
 ## Setup
 
 ```bash
@@ -55,7 +70,7 @@ Do **not** add a full Tailwind clone. Do **not** require an external CSS framewo
 
 ## Commits
 
-Present-tense, scoped messages:
+Present-tense, scoped messages, **with DCO** (`git commit -s`):
 
 - `feat(ui): add Alert primitive`
 - `fix(dom): support function components in h()`

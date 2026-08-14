@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Fine-grained reactivity primitives for Powers — signals, computed, effects, store, resource, ownership.",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -29,5 +29,6 @@
     "esbuild": "^0.25.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
-  }
+  },
+  "author": "Scott Powers"
 }

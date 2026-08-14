@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Signal-native animation for Powers — tweens, springs, interruptible, a11y-aware.",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -45,5 +45,6 @@
     "gsap": "^3.12.7",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
-  }
+  },
+  "author": "Scott Powers"
 }
