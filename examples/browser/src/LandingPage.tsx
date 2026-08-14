@@ -125,16 +125,16 @@ export function LandingPage(props: { router: Router }) {
               <div>
                 <div class="lp-kicker">
                   <span class="lp-kicker-dot" aria-hidden="true" />
-                  <Badge tone="accent">Navy · Action green · Fine-grained</Badge>
+                  <Badge tone="accent">Powers · signals + design system</Badge>
                 </div>
                 <h1 class="lp-title">
                   The runtime that{" "}
                   <span class="lp-title-gradient">updates only what changed</span>
                 </h1>
                 <p class="lp-lede">
-                  Deep navy authority, action-green signal, clean holographic
-                  edges. Signals, JSX, and tokens in one system — retheme a whole
-                  product without a framework pile-up.
+                  Fine-grained UI kit with a design system built in. Signals,
+                  JSX, and tokens in one stack — retheme a product without a
+                  framework pile-up.
                 </p>
                 <div class="lp-cta-row">
                   <Button size="lg" onClick={go("/docs")}>
