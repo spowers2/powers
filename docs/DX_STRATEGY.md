@@ -71,10 +71,12 @@ Never force advanced APIs into Hello World.
 2. ~~Table + Empty “admin list” recipe~~  
 3. ~~Combobox/Command polish~~ (`loading`, `emptyText`, `loadingText`, async options pattern)
 
-### Sprint D — Motion language
+### Sprint D — Motion language ✅
 1. ~~Export named transition presets~~  
 2. ~~Document when to use CSS Transition vs `@power-ux/animate`~~ (`MOTION.md`)  
-3. Micro-interaction audit of remaining controls — still open  
+3. ~~Micro-interaction audit~~ — focus-visible rings + reduced-motion on form controls,  
+   Chip/Pagination/Toggle/Accordion/Slider/Steps/Link/Breadcrumb/NumberInput,  
+   Dialog/Drawer close, Menu/List hover slide  
 
 ### Sprint E — Ship
 1. ~~`create-power-ux` / Vite template~~ (`pnpm create-app`, `templates/power-ux-vite`)  

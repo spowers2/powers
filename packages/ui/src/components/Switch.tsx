@@ -56,13 +56,20 @@ const styles = `
   transform: translateX(1.1rem);
 }
 @media (prefers-reduced-motion: reduce) {
-  .pu-switch__thumb { transition: none; }
+  .pu-switch__thumb,
+  .pu-switch__track { transition: none; }
 }
 .pu-switch__input {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
+}
+.pu-switch__input:focus-visible + .pu-switch__track {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
 }
 `;
 

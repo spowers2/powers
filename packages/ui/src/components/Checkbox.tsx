@@ -68,6 +68,17 @@ const styles = `
   width: 0;
   height: 0;
 }
+.pu-checkbox__input:focus-visible + .pu-checkbox__box {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-checkbox__box,
+  .pu-checkbox__box svg { transition: none; }
+  .pu-checkbox[data-checked="true"] .pu-checkbox__box { transform: none; }
+}
 `;
 
 let injected = false;

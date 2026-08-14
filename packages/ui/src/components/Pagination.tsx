@@ -35,6 +35,12 @@ const ensure = createStyleSheet(
 .pu-pagination__btn:hover:not(:disabled) {
   background: var(--pu-color-surface-2);
 }
+.pu-pagination__btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 .pu-pagination__btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -43,6 +49,13 @@ const ensure = createStyleSheet(
   background: var(--pu-color-accent);
   color: var(--pu-color-accent-fg);
   border-color: transparent;
+}
+.pu-pagination__btn {
+  transition:
+    background var(--pu-duration-fast) var(--pu-ease),
+    color var(--pu-duration-fast) var(--pu-ease),
+    border-color var(--pu-duration-fast) var(--pu-ease),
+    box-shadow var(--pu-duration-fast) var(--pu-ease);
 }
 .pu-pagination__meta {
   font-size: var(--pu-text-xs);

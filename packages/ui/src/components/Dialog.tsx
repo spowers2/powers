@@ -107,6 +107,13 @@ const styles = `
   background: var(--pu-color-surface-2);
   color: var(--pu-color-text);
 }
+.pu-dialog__close:focus-visible {
+  outline: none;
+  color: var(--pu-color-text);
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface-elevated),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 .pu-dialog__body {
   font-size: var(--pu-text-sm);
   line-height: 1.55;

@@ -25,6 +25,13 @@ const ensure = createStyleSheet(
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+.pu-link:focus-visible {
+  outline: none;
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 .pu-link--muted {
   color: var(--pu-color-text-muted);
   font-weight: var(--pu-font-normal);

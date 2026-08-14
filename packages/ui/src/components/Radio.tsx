@@ -82,6 +82,16 @@ const ensure = createStyleSheet(
   width: 0;
   height: 0;
 }
+.pu-radio__input:focus-visible + .pu-radio__dot {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-radio__dot,
+  .pu-radio__dot::after { transition: none; }
+}
 `,
 );
 

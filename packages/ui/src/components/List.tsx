@@ -77,6 +77,10 @@ const ensure = createStyleSheet(
   opacity: 0.45;
   cursor: not-allowed;
 }
+@media (prefers-reduced-motion: reduce) {
+  .pu-list__item { transition: none; }
+  .pu-list__item:hover:not(:disabled) { transform: none; }
+}
 .pu-list__main {
   display: flex;
   flex-direction: column;

@@ -58,14 +58,30 @@ const ensure = createStyleSheet(
   background: color-mix(in srgb, var(--pu-color-surface) 70%, transparent);
 }
 .pu-toggle:active:not(:disabled) { transform: scale(0.96); }
+.pu-toggle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface-sunken),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+  z-index: 1;
+}
 .pu-toggle.is-on {
   background: var(--pu-color-surface);
   color: var(--pu-color-text);
   box-shadow: var(--pu-shadow-xs);
 }
+.pu-toggle.is-on:focus-visible {
+  box-shadow:
+    var(--pu-shadow-xs),
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 .pu-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) {
-  .pu-toggle { transition: background var(--pu-duration-fast) linear, color var(--pu-duration-fast) linear; }
+  .pu-toggle {
+    transition: background var(--pu-duration-fast) linear, color var(--pu-duration-fast) linear;
+  }
+  .pu-toggle:active:not(:disabled) { transform: none; }
 }
 `,
 );

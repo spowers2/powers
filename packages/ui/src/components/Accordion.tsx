@@ -59,6 +59,12 @@ const ensure = createStyleSheet(
 .pu-accordion__trigger:hover:not(:disabled) {
   background: var(--pu-color-surface-2);
 }
+.pu-accordion__trigger:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 2px color-mix(in srgb, var(--pu-color-focus) 45%, transparent);
+  background: var(--pu-color-surface-2);
+}
 .pu-accordion__trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 .pu-accordion__chevron {
   color: var(--pu-color-text-muted);

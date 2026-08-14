@@ -50,6 +50,12 @@ const ensure = createStyleSheet(
 .pu-number__btn:hover:not(:disabled) {
   background: color-mix(in srgb, var(--pu-color-accent) 12%, var(--pu-color-surface-2));
 }
+.pu-number__btn:focus-visible {
+  outline: none;
+  z-index: 1;
+  box-shadow:
+    inset 0 0 0 2px color-mix(in srgb, var(--pu-color-focus) 45%, transparent);
+}
 .pu-number__btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .pu-number__input {
   appearance: textfield;

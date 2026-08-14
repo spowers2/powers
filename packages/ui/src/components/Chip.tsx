@@ -29,8 +29,19 @@ const ensure = createStyleSheet(
   border: 1px solid transparent;
   white-space: nowrap;
 }
-.pu-chip--clickable { cursor: pointer; }
+.pu-chip--clickable {
+  cursor: pointer;
+  transition:
+    filter var(--pu-duration-fast) var(--pu-ease),
+    box-shadow var(--pu-duration-fast) var(--pu-ease);
+}
 .pu-chip--clickable:hover { filter: brightness(0.97); }
+.pu-chip--clickable:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 .pu-chip--neutral {
   background: var(--pu-color-surface-2);
   color: var(--pu-color-text);
@@ -66,6 +77,14 @@ const ensure = createStyleSheet(
   display: inline-flex;
 }
 .pu-chip__x:hover { opacity: 1; }
+.pu-chip__x:focus-visible {
+  outline: none;
+  opacity: 1;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 `,
 );
 

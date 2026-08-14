@@ -106,6 +106,13 @@ const ensure = createStyleSheet(
   text-align: left;
   cursor: pointer;
   color: inherit;
+  border-radius: var(--pu-radius-sm);
+}
+.pu-steps__btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
 }
 .pu-steps__btn:disabled { cursor: default; }
 `,

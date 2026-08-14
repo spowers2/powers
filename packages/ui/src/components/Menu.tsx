@@ -77,6 +77,11 @@ const styles = `
 .pu-menu__item--danger:focus-visible:not(:disabled) {
   background: color-mix(in srgb, var(--pu-color-danger) 12%, transparent);
 }
+@media (prefers-reduced-motion: reduce) {
+  .pu-menu__item { transition: none; }
+  .pu-menu__item:hover:not(:disabled),
+  .pu-menu__item:focus-visible:not(:disabled) { transform: none; }
+}
 `;
 
 function ensureStyles(doc: Document = document) {

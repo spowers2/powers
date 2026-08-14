@@ -43,6 +43,13 @@ const ensure = createStyleSheet(
   text-decoration: none;
 }
 .pu-breadcrumb__link:hover { text-decoration: underline; }
+.pu-breadcrumb__link:focus-visible {
+  outline: none;
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+}
 .pu-breadcrumb__current {
   color: var(--pu-color-text);
   font-weight: var(--pu-font-medium);

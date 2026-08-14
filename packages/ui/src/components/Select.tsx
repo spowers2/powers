@@ -42,8 +42,8 @@ const styles = `
 }
 .pu-select:focus {
   outline: none;
-  border-color: var(--pu-color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-accent) 25%, transparent);
+  border-color: color-mix(in srgb, var(--pu-color-focus) 55%, var(--pu-color-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-focus) 18%, transparent);
 }
 .pu-select:disabled { opacity: 0.55; cursor: not-allowed; }
 `;

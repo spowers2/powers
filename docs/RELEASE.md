@@ -60,4 +60,4 @@ Use this before the first public npm publish / website launch.
 
 ---
 
-**Last updated:** with Menu/Popover/Kbd + Lab highlight pass.
+**Last updated:** Power UX rename · Combobox/Command loading · micro-interaction audit.
