@@ -86,20 +86,14 @@
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.4;
+  opacity: 0.22;
   background:
     linear-gradient(
       125deg,
-      transparent 40%,
-      color-mix(in srgb, var(--pu-holo-cyan) 6%, transparent) 50%,
-      transparent 60%
+      transparent 42%,
+      color-mix(in srgb, var(--pu-holo-cyan) 5%, transparent) 50%,
+      transparent 58%
     );
-  animation: lp-holo-sweep 12s ease-in-out infinite alternate;
-}
-
-@keyframes lp-holo-sweep {
-  from { transform: translateX(-4%); opacity: 0.25; }
-  to { transform: translateX(4%); opacity: 0.55; }
 }
 
 .lp-mesh::after {
@@ -107,11 +101,17 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(color-mix(in srgb, var(--pu-brand-500) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--pu-brand-500) 4%, transparent) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 15%, transparent 72%);
-  opacity: 0.5;
+    linear-gradient(color-mix(in srgb, var(--pu-brand-500) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--pu-brand-500) 3%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, #000 12%, transparent 70%);
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-mesh::before {
+    opacity: 0.12;
+  }
 }
 
 /* Sticky on-page anchors under global site nav */
@@ -271,8 +271,8 @@
   background: linear-gradient(
     115deg,
     var(--pu-brand-500) 0%,
-    var(--pu-brand-400) 42%,
-    var(--pu-sage-500) 100%
+    var(--pu-brand-400) 55%,
+    var(--pu-holo-cyan) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -282,9 +282,9 @@
 html[data-pu-theme="dark"] .lp-title-gradient {
   background: linear-gradient(
     115deg,
-    var(--pu-sage-300) 0%,
-    var(--pu-sage-500) 50%,
-    var(--pu-brand-300) 100%
+    #e6edf7 0%,
+    var(--pu-holo-cyan) 55%,
+    var(--pu-sage-400) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;

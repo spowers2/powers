@@ -99,7 +99,6 @@ export function LandingPage(props: { router: Router }) {
   const dense = signal(false);
 
   const slide = signal(0);
-  const paused = signal(false);
 
   const showBackTop = signal(false);
   const sectionNav = createSectionNav(SECTION_IDS);
@@ -126,19 +125,6 @@ export function LandingPage(props: { router: Router }) {
 
   const activeSlide = (): ShowcaseId =>
     SHOWCASE_SLIDES[slide()]?.id ?? "release";
-
-  // Auto-advance showcase (paused on hover/focus; off if reduced motion)
-  effect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) return;
-
-    const tick = () => {
-      if (!paused()) setSlide(slide() + 1);
-    };
-    const id = window.setInterval(tick, 5600);
-    return () => window.clearInterval(id);
-  });
 
   effect(() => {
     const onScroll = () => {
@@ -253,12 +239,7 @@ export function LandingPage(props: { router: Router }) {
               </div>
 
               {/* Live product showcase (not a marketing banner) */}
-              <div
-                class="lp-stage"
-                aria-label="Live product showcase"
-                onMouseEnter={() => paused.set(true)}
-                onMouseLeave={() => paused.set(false)}
-              >
+              <div class="lp-stage" aria-label="Live product showcase">
                 <div class="lp-stage-inner">
                   <div class="lp-stage-bar" aria-hidden="true">
                     <i />
