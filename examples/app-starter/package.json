@@ -1,5 +1,5 @@
 {
-  "name": "@power-ui/app-starter",
+  "name": "@power-ux/app-starter",
   "version": "0.0.0",
   "private": true,
   "description": "designlab206 — real-world freelance workspace example (clients, projects, tasks, invoices, time).",
@@ -11,10 +11,10 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*",
-    "@power-ui/dom": "workspace:*",
-    "@power-ui/router": "workspace:*",
-    "@power-ui/ui": "workspace:*"
+    "@power-ux/core": "workspace:*",
+    "@power-ux/dom": "workspace:*",
+    "@power-ux/router": "workspace:*",
+    "@power-ux/ui": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.2",

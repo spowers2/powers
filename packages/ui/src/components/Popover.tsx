@@ -1,5 +1,5 @@
-import { effect } from "@power-ui/core";
-import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { effect } from "@power-ux/core";
+import { component, mergeProps, type ComponentProps } from "@power-ux/dom";
 import { cx } from "../utils.js";
 import { attachOverlay } from "../overlay.js";
 import { readBool, type MaybeReactive } from "../reactive.js";

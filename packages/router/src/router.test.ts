@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { flush, signal, effect } from "@power-ui/core";
+import { flush, signal, effect } from "@power-ux/core";
 import { Window } from "happy-dom";
 import { matchPath, normalizePath } from "./match.js";
 import { createRouter, buildPath } from "./router.js";

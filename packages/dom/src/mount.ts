@@ -1,4 +1,4 @@
-import { createRoot, type Dispose } from "@power-ui/core";
+import { createRoot, type Dispose } from "@power-ux/core";
 import { remove } from "./insert.js";
 
 export type MountResult = Node | Node[] | null | undefined | void;

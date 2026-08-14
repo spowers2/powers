@@ -1,9 +1,9 @@
 # Power Lab
 
-Interactive learning playground for Power UI — **our own**, not a CodePen clone.
+Interactive learning playground for Power UX — **our own**, not a CodePen clone.
 
 **Route:** `/lab` in the browser demo  
-**Goal:** learn by editing real Power UI code with an instant preview.
+**Goal:** learn by editing real Power UX code with an instant preview.
 
 ## Why it’s different
 

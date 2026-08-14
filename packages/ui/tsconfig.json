@@ -6,7 +6,7 @@
     "composite": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "jsxImportSource": "@power-ui/dom"
+    "jsxImportSource": "@power-ux/dom"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "dist"]

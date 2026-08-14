@@ -1,4 +1,4 @@
-import { signal, type Signal } from "@power-ui/core";
+import { signal, type Signal } from "@power-ux/core";
 import { normalizePath } from "./match.js";
 
 export type HistoryMode = "history" | "hash" | "memory";

@@ -1,4 +1,4 @@
-# Power UI Vite template
+# Power UX Vite template
 
 Minimal app: theme, form with `createField` + `bind`, dark mode toggle.
 
@@ -6,7 +6,7 @@ Minimal app: theme, form with `createField` + `bind`, dark mode toggle.
 
 ```bash
 # at repo root
-bash scripts/create-power-ui.sh my-app
+bash scripts/create-power-ux.sh my-app
 # or
 pnpm create-app my-app
 

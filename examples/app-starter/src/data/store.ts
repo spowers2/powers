@@ -1,4 +1,4 @@
-import { signal, computed, effect } from "@power-ui/core";
+import { signal, computed, effect } from "@power-ux/core";
 import type {
   Client,
   Project,

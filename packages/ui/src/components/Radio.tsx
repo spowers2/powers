@@ -1,4 +1,4 @@
-import { For, component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { For, component, mergeProps, type ComponentProps } from "@power-ux/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

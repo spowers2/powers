@@ -1,5 +1,5 @@
-import { signal, effect } from "@power-ui/core";
-import { For, component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { signal, effect } from "@power-ux/core";
+import { For, component, mergeProps, type ComponentProps } from "@power-ux/dom";
 import { cx } from "../utils.js";
 import { Popover } from "./Popover.js";
 import {

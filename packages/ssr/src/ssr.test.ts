@@ -1,10 +1,10 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { signal } from "@power-ui/core";
-import { h, bindText } from "@power-ui/dom";
+import { signal } from "@power-ux/core";
+import { h, bindText } from "@power-ux/dom";
 import { renderToString, htmlDocument } from "./index.js";
 
-describe("@power-ui/ssr", () => {
+describe("@power-ux/ssr", () => {
   it("renders static elements to HTML", async () => {
     const html = await renderToString(() =>
       h("h1", { text: "Hello SSR" }),

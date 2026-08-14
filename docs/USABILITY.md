@@ -1,4 +1,4 @@
-# Power UI usability guide
+# Power UX usability guide
 
 Short mental model + preferred patterns. Prefer this over inventing one-offs.
 
@@ -25,7 +25,7 @@ Short mental model + preferred patterns. Prefer this over inventing one-offs.
 ## 2. Forms (preferred path)
 
 ```tsx
-import { signal } from "@power-ui/core";
+import { signal } from "@power-ux/core";
 import {
   Field,
   Input,
@@ -35,7 +35,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 // A) Simple bind
 const notes = signal("");
@@ -89,7 +89,7 @@ const notify = signal(true);
 ### Spread helpers (when you need extra handlers)
 
 ```tsx
-import { bindInput, bindSelect, eventValue } from "@power-ui/ui";
+import { bindInput, bindSelect, eventValue } from "@power-ux/ui";
 
 <Input {...bindInput(email)} onBlur={…} />
 // or keep bind + onInput side effects:
@@ -101,7 +101,7 @@ import { bindInput, bindSelect, eventValue } from "@power-ui/ui";
 ## 3. Lists & conditionals
 
 ```tsx
-import { Show, For } from "@power-ui/dom";
+import { Show, For } from "@power-ux/dom";
 
 <Show when={() => items().length > 0} fallback={<Empty title="Nothing yet" />}>
   {() => (
@@ -136,8 +136,8 @@ router.searchParams().get("status");
 ## 5. Theme & layout
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { createTheme, createDensity, Stack, Card, Text } from "@power-ui/ui";
+import "@power-ux/ui/theme.css";
+import { createTheme, createDensity, Stack, Card, Text } from "@power-ux/ui";
 
 const theme = createTheme("light");
 theme.bind();

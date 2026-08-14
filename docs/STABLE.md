@@ -19,7 +19,7 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@power-ui/core` — Stable
+## `@power-ux/core` — Stable
 
 | Export | Notes |
 |---|---|
@@ -35,12 +35,12 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@power-ui/dom` — Stable
+## `@power-ux/dom` — Stable
 
 | Export | Notes |
 |---|---|
 | `mount` | App bootstrap |
-| JSX runtime (`jsxImportSource: "@power-ui/dom"`) | |
+| JSX runtime (`jsxImportSource: "@power-ux/dom"`) | |
 | `component` · `Show` · `For` | Components + control flow |
 | `h` · `text` · `Fragment` | |
 | `mergeProps` · `createProps` · `splitProps` | Reactive props |
@@ -51,7 +51,7 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@power-ui/router` — Stable
+## `@power-ux/router` — Stable
 
 | Export | Notes |
 |---|---|
@@ -64,18 +64,18 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@power-ui/animate` — Solid
+## `@power-ux/animate` — Solid
 
 | Export | Notes |
 |---|---|
 | `animate` · `spring` · `cancel` | Signal-driven motion (default) |
-| `@power-ui/animate/gsap` | **Experimental / optional peer** — `gsapAnimate`, `createGsapBridge` |
+| `@power-ux/animate/gsap` | **Experimental / optional peer** — `gsapAnimate`, `createGsapBridge` |
 
 Apps that never install `gsap` never pay for it.
 
 ---
 
-## `@power-ui/ui` — Mixed
+## `@power-ux/ui` — Mixed
 
 ### Stable (app authoring)
 
@@ -94,11 +94,11 @@ Apps that never install `gsap` never pay for it.
 - `packages/ui/src/size-entries/*`
 - `__overlayStackSize` · `__resetOverlayStack` (test-only)
 
-**CSS:** import `@power-ui/ui/theme.css` once. Tokens live in `tokens.css` — retheme there, not with one-off component CSS when possible.
+**CSS:** import `@power-ux/ui/theme.css` once. Tokens live in `tokens.css` — retheme there, not with one-off component CSS when possible.
 
 ---
 
-## `@power-ui/ssr` — Solid / document limits
+## `@power-ux/ssr` — Solid / document limits
 
 `renderToString` + islands. Treat as advanced; see [`SSR.md`](./SSR.md).
 

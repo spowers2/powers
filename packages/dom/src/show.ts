@@ -2,7 +2,7 @@ import {
   createRoot,
   effect,
   type Dispose,
-} from "@power-ui/core";
+} from "@power-ux/core";
 import { remove } from "./insert.js";
 
 /**

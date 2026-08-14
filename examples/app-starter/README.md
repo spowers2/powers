@@ -1,4 +1,4 @@
-# designlab206 — real-world Power UI example
+# designlab206 — real-world Power UX example
 
 A **local-first freelance / small-studio workspace**: clients, projects, tasks, invoices, pipeline value, and settings.
 
@@ -31,14 +31,14 @@ Open **http://localhost:5180**
 - **Domain model** with realistic seed data (health client, e‑com, fintech lead)
 - **One persisted store** (`localStorage`) — survives refresh
 - **Workflows**: create/edit drawers, delete confirms, toasts, overdue highlighting
-- **No Lab/System chrome** — just an app built with `@power-ui/*`
+- **No Lab/System chrome** — just an app built with `@power-ux/*`
 
 ## Stack
 
-- `@power-ui/core` — signals, computed, effect  
-- `@power-ui/dom` — JSX  
-- `@power-ui/router` — routes  
-- `@power-ui/ui` — design system  
+- `@power-ux/core` — signals, computed, effect  
+- `@power-ux/dom` — JSX  
+- `@power-ux/router` — routes  
+- `@power-ux/ui` — design system  
 
 ## Reset data
 

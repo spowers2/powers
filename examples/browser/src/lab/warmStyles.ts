@@ -52,7 +52,7 @@ import {
   Collapse,
   AspectRatio,
   Link,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 let warmed = false;
 

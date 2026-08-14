@@ -1,15 +1,15 @@
-# Design system (`@power-ui/ui`)
+# Design system (`@power-ux/ui`)
 
 **Goal:** adaptable, editable, clear, easy to use — without locking you into one brand.
 
-**Architecture:** Power UI owns styling as a **product pillar** (not an afterthought next to Tailwind).  
+**Architecture:** Power UX owns styling as a **product pillar** (not an afterthought next to Tailwind).  
 Full model: [`STYLING.md`](./STYLING.md) — tokens · primitives · optional utilities.
 
 ## 60-second start
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { Button, Stack, Text, Card, createTheme } from "@power-ui/ui";
+import "@power-ux/ui/theme.css";
+import { Button, Stack, Text, Card, createTheme } from "@power-ux/ui";
 
 const theme = createTheme("light");
 theme.bind(); // sets data-pu-theme on <html>

@@ -9,11 +9,11 @@
 
 1. **Read** signals with `count()` · **write** with `.set` / `.update`  
 2. Live JSX: `{() => count()}` not `{count()}`  
-3. Prefer `@power-ui/ui` primitives; retheme via `tokens.css`
+3. Prefer `@power-ux/ui` primitives; retheme via `tokens.css`
 
 ---
 
-## `@power-ui/core`
+## `@power-ux/core`
 
 | API | Usage |
 |---|---|
@@ -29,12 +29,12 @@
 
 ---
 
-## `@power-ui/dom`
+## `@power-ux/dom`
 
 | API | Usage |
 |---|---|
 | `mount(el, () => tree)` | bootstrap app |
-| JSX | `"jsxImportSource": "@power-ui/dom"` |
+| JSX | `"jsxImportSource": "@power-ux/dom"` |
 | `component(setup)` | reactive props component |
 | `Show` | conditional mount |
 | `For` | keyed list; `item()` live |
@@ -43,11 +43,11 @@
 
 ---
 
-## `@power-ui/ui`
+## `@power-ux/ui`
 
 ```ts
-import "@power-ui/ui/theme.css";
-import { createTheme, createDensity, Button, … } from "@power-ui/ui";
+import "@power-ux/ui/theme.css";
+import { createTheme, createDensity, Button, … } from "@power-ux/ui";
 ```
 
 | Area | Exports |
@@ -72,7 +72,7 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 
 ---
 
-## `@power-ui/animate`
+## `@power-ux/animate`
 
 | API | Usage |
 |---|---|
@@ -80,7 +80,7 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 | `spring(opts?)` | spring options for `animate` |
 | `cancel(signal)` | stop animation |
 
-### Optional: `@power-ui/animate/gsap` (peer: `gsap`)
+### Optional: `@power-ux/animate/gsap` (peer: `gsap`)
 
 | API | Usage |
 |---|---|
@@ -90,7 +90,7 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 
 ---
 
-## `@power-ui/router`
+## `@power-ux/router`
 
 | API | Usage |
 |---|---|
@@ -101,7 +101,7 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 
 ---
 
-## `@power-ui/ssr`
+## `@power-ux/ssr`
 
 | API | Usage |
 |---|---|

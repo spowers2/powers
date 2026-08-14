@@ -1,4 +1,4 @@
-import type { Signal } from "@power-ui/core";
+import type { Signal } from "@power-ux/core";
 
 /**
  * Reactive component props.
@@ -22,7 +22,7 @@ export type ReactiveProps<P extends object> = {
 
 const reactivePropsSet = new WeakSet<object>();
 
-/** True if value looks like a Power UI signal. */
+/** True if value looks like a Power UX signal. */
 export function isSignal(value: unknown): value is Signal<unknown> {
   return (
     typeof value === "function" &&

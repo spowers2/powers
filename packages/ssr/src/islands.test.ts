@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { signal, flush } from "@power-ui/core";
-import { h, bindText } from "@power-ui/dom";
+import { signal, flush } from "@power-ux/core";
+import { h, bindText } from "@power-ux/dom";
 import { renderToString } from "./index.js";
 import {
   island,

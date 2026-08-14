@@ -1,5 +1,5 @@
 /**
- * Bundle-size gate for @power-ui/router (core + dom external).
+ * Bundle-size gate for @power-ux/router (core + dom external).
  */
 import { build } from "esbuild";
 import { gzipSync } from "node:zlib";
@@ -19,7 +19,7 @@ const result = await build({
   platform: "browser",
   write: false,
   treeShaking: true,
-  external: ["@power-ui/core", "@power-ui/dom"],
+  external: ["@power-ux/core", "@power-ux/dom"],
 });
 
 const code = result.outputFiles[0]?.text ?? "";
@@ -32,8 +32,8 @@ writeFileSync(
   join(outdir, "size.json"),
   JSON.stringify(
     {
-      package: "@power-ui/router",
-      external: ["@power-ui/core", "@power-ui/dom"],
+      package: "@power-ux/router",
+      external: ["@power-ux/core", "@power-ux/dom"],
       rawBytes: raw,
       gzipBytes: gzip,
       rawKb: +(raw / 1024).toFixed(2),
@@ -45,7 +45,7 @@ writeFileSync(
   ),
 );
 
-console.log("\n@power-ui/router size baseline (core + dom external)");
+console.log("\n@power-ux/router size baseline (core + dom external)");
 console.log(`  minified : ${raw} bytes (${(raw / 1024).toFixed(2)} KB)`);
 console.log(`  gzip     : ${gzip} bytes (${(gzip / 1024).toFixed(2)} KB)`);
 

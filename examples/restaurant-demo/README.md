@@ -1,4 +1,4 @@
-# Hearth — restaurant demo (Power UI)
+# Hearth — restaurant demo (Power UX)
 
 A **local-first neighborhood restaurant** product example: guest-facing floor, menu with photos, reservations, and a service/kitchen board.
 
@@ -28,7 +28,7 @@ Open **http://localhost:5181**
 
 ## Stack
 
-- `@power-ui/core` · `@power-ui/dom` · `@power-ui/router` · `@power-ui/ui`
+- `@power-ux/core` · `@power-ux/dom` · `@power-ux/router` · `@power-ux/ui`
 
 ## Note
 

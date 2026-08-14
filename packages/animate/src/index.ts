@@ -1,5 +1,5 @@
 /**
- * @power-ui/animate
+ * @power-ux/animate
  *
  * Signal-native motion. Learn it in one line:
  *   animate(mySignal, 100, { duration: 300 })
@@ -8,7 +8,7 @@
  *   animate(mySignal, 100, spring())
  *
  * Optional GSAP (peer dependency):
- *   import { gsapAnimate } from "@power-ui/animate/gsap"
+ *   import { gsapAnimate } from "@power-ux/animate/gsap"
  *   — or createGsapBridge(gsap) from this package without importing gsap here
  */
 

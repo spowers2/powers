@@ -1,10 +1,10 @@
 /**
  * designlab206 — “Studio dusk”
  * Cool slate + electric indigo. Soft elevation (product/studio), not voltage paper.
- * Overrides @power-ui/ui tokens for this app only.
+ * Overrides @power-ux/ui tokens for this app only.
  */
 
-/* Shared shell grid (matches Power UI site + Container xl) */
+/* Shared shell grid (matches Power UX site + Container xl) */
 :root {
   --site-max: 80rem;
   --site-gutter: 1rem;

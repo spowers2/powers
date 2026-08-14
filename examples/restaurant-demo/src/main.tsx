@@ -1,6 +1,6 @@
-import { mount } from "@power-ui/dom";
-import { installDevWarnings } from "@power-ui/ui";
-import "@power-ui/ui/theme.css";
+import { mount } from "@power-ux/dom";
+import { installDevWarnings } from "@power-ux/ui";
+import "@power-ux/ui/theme.css";
 import "./styles.css";
 import { bootstrapTheme, createApp } from "./App.js";
 

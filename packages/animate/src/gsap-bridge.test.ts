@@ -1,6 +1,6 @@
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { signal } from "@power-ui/core";
+import { signal } from "@power-ux/core";
 import { createGsapBridge, type GsapLike } from "./gsap-bridge.js";
 import { setReducedMotionOverride } from "./reduced-motion.js";
 import { cancel } from "./registry.js";

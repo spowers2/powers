@@ -1,4 +1,4 @@
-import { signal } from "@power-ui/core";
+import { signal } from "@power-ux/core";
 import {
   Button,
   Card,
@@ -15,7 +15,7 @@ import {
   firstError,
   required,
   type ToastController,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 import { PageHeader } from "../components/uiBits.js";
 import {
   timeEntries,
@@ -54,7 +54,7 @@ function initialBillableFilter(): string {
 
 export function TimePage(props: {
   toaster: ToastController;
-  router?: import("@power-ui/router").Router;
+  router?: import("@power-ux/router").Router;
 }) {
   const { toaster } = props;
   const filter = signal("");

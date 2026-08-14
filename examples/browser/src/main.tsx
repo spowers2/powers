@@ -1,10 +1,10 @@
 /**
- * Power UI site — shared nav + landing + demos + design system
+ * Power UX site — shared nav + landing + demos + design system
  */
-import { signal } from "@power-ui/core";
-import { animate, spring } from "@power-ui/animate";
-import { mount, bindStyle } from "@power-ui/dom";
-import { createRouter, Link } from "@power-ui/router";
+import { signal } from "@power-ux/core";
+import { animate, spring } from "@power-ux/animate";
+import { mount, bindStyle } from "@power-ux/dom";
+import { createRouter, Link } from "@power-ux/router";
 import {
   Button,
   Input,
@@ -21,8 +21,8 @@ import {
   createTheme,
   createDensity,
   installDevWarnings,
-} from "@power-ui/ui";
-import "@power-ui/ui/theme.css";
+} from "@power-ux/ui";
+import "@power-ux/ui/theme.css";
 import "./app.css";
 import { LandingPage } from "./LandingPage.js";
 import { DocsPage } from "./DocsPage.js";

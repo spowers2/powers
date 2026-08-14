@@ -1,7 +1,7 @@
 {
-  "name": "@power-ui/core",
+  "name": "@power-ux/core",
   "version": "0.1.1",
-  "description": "Fine-grained reactivity primitives for Power UI — signals, computed, effects, store, resource, ownership.",
+  "description": "Fine-grained reactivity primitives for Power UX — signals, computed, effects, store, resource, ownership.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,

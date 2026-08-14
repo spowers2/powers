@@ -1,8 +1,8 @@
 /**
- * GSAP ↔ Power UI signal bridge (no hard dependency on `gsap`).
- * Use `createGsapBridge(gsap)` or the default export from `@power-ui/animate/gsap`.
+ * GSAP ↔ Power UX signal bridge (no hard dependency on `gsap`).
+ * Use `createGsapBridge(gsap)` or the default export from `@power-ux/animate/gsap`.
  */
-import type { Signal } from "@power-ui/core";
+import type { Signal } from "@power-ux/core";
 import { createPlayback } from "./playback.js";
 import { clearActive, getActive, setActive } from "./registry.js";
 import { prefersReducedMotion } from "./reduced-motion.js";
@@ -71,12 +71,12 @@ export type GsapBridge = {
 };
 
 /**
- * Bind a GSAP instance (or mock) to Power UI signals.
+ * Bind a GSAP instance (or mock) to Power UX signals.
  *
  * @example
  * ```ts
  * import gsap from "gsap";
- * import { createGsapBridge } from "@power-ui/animate/gsap";
+ * import { createGsapBridge } from "@power-ux/animate/gsap";
  *
  * const { gsapAnimate } = createGsapBridge(gsap);
  * gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });

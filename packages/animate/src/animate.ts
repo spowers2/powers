@@ -1,4 +1,4 @@
-import type { Signal } from "@power-ui/core";
+import type { Signal } from "@power-ux/core";
 import { driver } from "./driver.js";
 import { resolveEase } from "./easings.js";
 import { createPlayback } from "./playback.js";

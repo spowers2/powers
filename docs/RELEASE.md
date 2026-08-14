@@ -2,7 +2,7 @@
 
 Use this before the first public npm publish / website launch.
 
-**Repo today:** private `spowers2/power-ui` · MIT license already present.
+**Repo today:** private `spowers2/power-ux` · MIT license already present.
 
 ---
 
@@ -19,12 +19,12 @@ Use this before the first public npm publish / website launch.
 
 | Package | Ready? | Notes |
 |---|---|---|
-| `@power-ui/core` | [ ] | signals, computed, effect, store, resource |
-| `@power-ui/dom` | [ ] | mount, JSX, Show, For, props |
-| `@power-ui/animate` | [ ] | tween / spring (GSAP **not** required) |
-| `@power-ui/router` | [ ] | history / hash / memory |
-| `@power-ui/ssr` | [ ] | string render + islands (document limits) |
-| `@power-ui/ui` | [ ] | tokens + primitives |
+| `@power-ux/core` | [ ] | signals, computed, effect, store, resource |
+| `@power-ux/dom` | [ ] | mount, JSX, Show, For, props |
+| `@power-ux/animate` | [ ] | tween / spring (GSAP **not** required) |
+| `@power-ux/router` | [ ] | history / hash / memory |
+| `@power-ux/ssr` | [ ] | string render + islands (document limits) |
+| `@power-ux/ui` | [ ] | tokens + primitives |
 
 ## Quality gates
 
@@ -53,7 +53,7 @@ Use this before the first public npm publish / website launch.
 
 ## Explicitly later
 
-- GSAP optional adapter — shipped as `@power-ui/animate/gsap` (peer)  
+- GSAP optional adapter — shipped as `@power-ux/animate/gsap` (peer)  
 - Streaming SSR  
 - Full a11y audit / ARIA cookbook  
 - Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  

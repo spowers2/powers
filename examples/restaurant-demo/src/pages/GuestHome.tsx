@@ -5,8 +5,8 @@ import {
   Stack,
   Text,
   type ToastController,
-} from "@power-ui/ui";
-import type { Router } from "@power-ui/router";
+} from "@power-ux/ui";
+import type { Router } from "@power-ux/router";
 import { PHOTOS, PHOTO_CREDIT } from "../data/images.js";
 import {
   profile,

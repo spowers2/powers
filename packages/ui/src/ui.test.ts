@@ -1,8 +1,8 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import { Window } from "happy-dom";
-import { mount } from "@power-ui/dom";
-import { signal } from "@power-ui/core";
+import { mount } from "@power-ux/dom";
+import { signal } from "@power-ux/core";
 import { Button } from "./components/Button.js";
 import { Input } from "./components/Input.js";
 import { Textarea } from "./components/Textarea.js";
@@ -59,7 +59,7 @@ function installDom() {
   return window.document as unknown as Document;
 }
 
-describe("@power-ui/ui", () => {
+describe("@power-ux/ui", () => {
   let document: Document;
   let root: HTMLElement;
 
@@ -101,7 +101,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Input is controlled by a signal (typing works)", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const email = signal("");
     mount(root, () =>
       Input({
@@ -136,7 +136,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Input bind={signal} two-way without manual onInput", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const name = signal("Sam");
     mount(root, () => Input({ bind: name }));
     const input = root.querySelector("input") as HTMLInputElement;
@@ -183,7 +183,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Select tracks value + reactive options without remount", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const value = signal("a");
     const opts = signal([
       { value: "a", label: "Alpha" },
@@ -223,7 +223,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Button disabled tracks accessor", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const locked = signal(true);
     mount(root, () =>
       Button({
@@ -242,7 +242,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Field auto-wires label htmlFor to control id", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const email = signal("");
     mount(root, () =>
       Field({
@@ -264,7 +264,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Field shows live validation error without role=alert", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const email = signal("");
     const err = () =>
       email() && !email().includes("@") ? "Invalid email" : "";
@@ -297,7 +297,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Textarea is controlled by a signal", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const note = signal("hi");
     mount(root, () =>
       Textarea({
@@ -315,7 +315,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("createTheme sets data attribute", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const theme = createTheme("light");
     theme.bind(document.documentElement);
     assert.equal(
@@ -333,7 +333,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Dialog toggles open class", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const open = signal(false);
     mount(root, () =>
       Dialog({ open, onClose: () => open.set(false), title: "Hi", children: "Body" }),
@@ -347,7 +347,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Tabs switches panels", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     mount(root, () =>
       Tabs({
         defaultValue: "a",
@@ -366,7 +366,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Tabs mounts node content without [object HTML…]", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const panel = document.createElement("p");
     panel.className = "live-panel";
     panel.textContent = "Node body";
@@ -383,7 +383,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Progress sets aria-valuenow", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const value = signal(25);
     mount(root, () => Progress({ value, label: "Load" }));
     const bar = root.querySelector('[role="progressbar"]');
@@ -395,7 +395,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("createToaster pushes items into Toaster", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const toaster = createToaster();
     mount(root, () => Toaster({ toaster }));
     assert.equal(root.querySelectorAll(".pu-toast").length, 0);
@@ -407,7 +407,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Popover toggles open class", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const open = signal(false);
     mount(root, () =>
       Popover({
@@ -426,7 +426,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Popover closes on Escape", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const open = signal(true);
     mount(root, () =>
       Popover({
@@ -452,7 +452,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Menu renders items when opened", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     mount(root, () =>
       Menu({
         trigger: "Actions",
@@ -471,7 +471,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Menu closes on Escape", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     mount(root, () =>
       Menu({
         trigger: "Actions",
@@ -495,7 +495,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Combobox filters options", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const value = signal("");
     mount(root, () =>
       Combobox({
@@ -517,7 +517,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Command opens and lists items", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const open = signal(true);
     mount(root, () =>
       Command({
@@ -548,7 +548,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Accordion toggles open item", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     mount(root, () =>
       Accordion({
         single: true,
@@ -575,7 +575,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Drawer opens with open class", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const open = signal(false);
     mount(root, () =>
       Drawer({ open, onClose: () => open.set(false), title: "Side", children: "In" }),
@@ -589,7 +589,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Pagination invokes onChange", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const page = signal(1);
     mount(root, () =>
       Pagination({
@@ -613,7 +613,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("RadioGroup selects option", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const value = signal("a");
     mount(root, () =>
       RadioGroup({
@@ -674,7 +674,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Tabs ArrowRight activates next tab", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     mount(root, () =>
       Tabs({
         defaultValue: "a",
@@ -708,7 +708,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Menu ArrowDown + Enter selects item", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     let picked = "";
     mount(root, () =>
       Menu({
@@ -751,7 +751,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("List ArrowDown + Enter selects", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const value = signal("a");
     mount(root, () =>
       List({
@@ -789,7 +789,7 @@ describe("@power-ui/ui", () => {
   });
 
   it("Dialog open traps focus class + panel", async () => {
-    const { flush } = await import("@power-ui/core");
+    const { flush } = await import("@power-ux/core");
     const open = signal(true);
     mount(root, () =>
       Dialog({

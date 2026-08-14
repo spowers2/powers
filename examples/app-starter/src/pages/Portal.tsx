@@ -1,4 +1,4 @@
-import { signal } from "@power-ui/core";
+import { signal } from "@power-ux/core";
 import {
   Button,
   Card,
@@ -8,8 +8,8 @@ import {
   Stack,
   Text,
   type ToastController,
-} from "@power-ui/ui";
-import type { Router } from "@power-ui/router";
+} from "@power-ux/ui";
+import type { Router } from "@power-ux/router";
 import {
   clients,
   clientById,

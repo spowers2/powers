@@ -1,6 +1,6 @@
 # Foundation contracts
 
-**Purpose:** Keep Power UI clean, powerful, and light by freezing *how* the runtime behaves — not by adding more primitives.
+**Purpose:** Keep Power UX clean, powerful, and light by freezing *how* the runtime behaves — not by adding more primitives.
 
 These contracts were extracted from real app bugs (designlab206 forms remounting, Select options, controlled inputs). Tests in `packages/*/src/*.test.ts` encode them. Do not break them for convenience.
 
@@ -52,7 +52,7 @@ effect(() => {
 | **Disabled / aria-invalid track** | Accessors and signals must update the control without remounting the page. |
 | **Select options are reactive** | `options={...}` may be a list, accessor, or signal; rebuild options inside an effect. |
 
-Shared helpers: `@power-ui/ui` → `readProp` / `MaybeReactive` in `reactive.ts`.
+Shared helpers: `@power-ux/ui` → `readProp` / `MaybeReactive` in `reactive.ts`.
 
 ---
 

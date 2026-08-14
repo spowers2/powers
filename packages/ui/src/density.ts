@@ -1,4 +1,4 @@
-import { effect, signal, type Signal } from "@power-ui/core";
+import { effect, signal, type Signal } from "@power-ux/core";
 
 export type Density = "comfortable" | "compact";
 

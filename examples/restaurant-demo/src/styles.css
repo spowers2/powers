@@ -4,7 +4,7 @@
  * not voltage paper, not indigo studio.
  */
 
-/* Shared shell grid (matches Power UI site + Container xl) */
+/* Shared shell grid (matches Power UX site + Container xl) */
 :root {
   --site-max: 80rem;
   --site-gutter: 1rem;

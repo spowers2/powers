@@ -1,5 +1,5 @@
 {
-  "name": "@power-ui/restaurant-demo",
+  "name": "@power-ux/restaurant-demo",
   "version": "0.0.0",
   "private": true,
   "description": "Hearth — neighborhood restaurant demo (menu, reservations, service board, table map).",
@@ -11,10 +11,10 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*",
-    "@power-ui/dom": "workspace:*",
-    "@power-ui/router": "workspace:*",
-    "@power-ui/ui": "workspace:*"
+    "@power-ux/core": "workspace:*",
+    "@power-ux/dom": "workspace:*",
+    "@power-ux/router": "workspace:*",
+    "@power-ux/ui": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.2",

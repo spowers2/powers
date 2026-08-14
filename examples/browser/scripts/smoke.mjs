@@ -1,7 +1,7 @@
 /**
  * Sprint A smoke: demo trust checks against a running (or auto-started) Vite server.
  *
- *   pnpm --filter @power-ui/example-browser smoke
+ *   pnpm --filter @power-ux/example-browser smoke
  *
  * Env: SMOKE_URL=http://127.0.0.1:5173 (optional)
  */

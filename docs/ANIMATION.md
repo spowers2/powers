@@ -1,8 +1,8 @@
 # Animation strategy
 
-**Status: Phase 1.2 implemented** — `@power-ui/animate` v0.1.0
+**Status: Phase 1.2 implemented** — `@power-ux/animate` v0.1.0
 
-**Goal:** motion that feels world-class, with a **tiny learning curve**, native to Power UI’s signal model — without forcing every app to swallow a second mega-framework.
+**Goal:** motion that feels world-class, with a **tiny learning curve**, native to Power UX’s signal model — without forcing every app to swallow a second mega-framework.
 
 ---
 
@@ -23,8 +23,8 @@ signal → animate(signal, to, opts) → effect / future DOM reads the signal
 ```
 
 ```ts
-import { signal } from "@power-ui/core";
-import { animate, spring } from "@power-ui/animate";
+import { signal } from "@power-ux/core";
+import { animate, spring } from "@power-ux/animate";
 
 const x = signal(0);
 
@@ -74,7 +74,7 @@ Opt out per call: `{ respectReducedMotion: false }`.
 
 ## Optional GSAP adapter
 
-**Default path stays pure:** `import { animate } from "@power-ui/animate"` — no GSAP.
+**Default path stays pure:** `import { animate } from "@power-ux/animate"` — no GSAP.
 
 For pro motion (custom eases, timelines, ScrollTrigger, SVG):
 
@@ -83,8 +83,8 @@ pnpm add gsap
 ```
 
 ```ts
-import { signal } from "@power-ui/core";
-import { gsapAnimate, gsapFromTo, cancel } from "@power-ui/animate/gsap";
+import { signal } from "@power-ux/core";
+import { gsapAnimate, gsapFromTo, cancel } from "@power-ux/animate/gsap";
 // or inject: createGsapBridge(gsap)
 
 const x = signal(0);
@@ -110,7 +110,7 @@ await anim.finished;
 
 **Design rules**
 
-1. GSAP is an **optional peer** — not bundled into the default `@power-ui/animate` entry.  
+1. GSAP is an **optional peer** — not bundled into the default `@power-ux/animate` entry.  
 2. One active animation per signal; GSAP and native `animate()` share the registry (interrupt each other).  
 3. Reduced motion still snaps to end by default.  
 4. For pure DOM timelines (no signals), call GSAP directly on elements — no wrapper needed.
@@ -123,7 +123,7 @@ await anim.finished;
 
 - Timelines / ScrollTrigger / SVG morph (use GSAP + this adapter or DOM GSAP)  
 - Color / complex string interpolation  
-- DOM enter/exit helpers (use `@power-ui/ui` Transition / CSS)
+- DOM enter/exit helpers (use `@power-ux/ui` Transition / CSS)
 
 ---
 
@@ -133,9 +133,9 @@ await anim.finished;
 ✅ Core 1.1
 ✅ Animate foundation
 ✅ Phase 2 thin DOM
-✅ Optional GSAP adapter (`@power-ui/animate/gsap`)
+✅ Optional GSAP adapter (`@power-ux/animate/gsap`)
 ```
 
 ## Size
 
-Run `pnpm --filter @power-ui/animate size` — **default** entry only (GSAP not included).
+Run `pnpm --filter @power-ux/animate size` — **default** entry only (GSAP not included).

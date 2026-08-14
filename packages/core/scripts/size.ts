@@ -1,5 +1,5 @@
 /**
- * Bundle-size baseline for @power-ui/core.
+ * Bundle-size baseline for @power-ux/core.
  * Uses esbuild to produce a minified ESM bundle, then reports raw + gzip bytes.
  */
 import { build } from "esbuild";
@@ -33,7 +33,7 @@ writeFileSync(
   join(outdir, "size.json"),
   JSON.stringify(
     {
-      package: "@power-ui/core",
+      package: "@power-ux/core",
       rawBytes: raw,
       gzipBytes: gzip,
       rawKb: +(raw / 1024).toFixed(2),
@@ -45,7 +45,7 @@ writeFileSync(
   ),
 );
 
-console.log("\n@power-ui/core size baseline");
+console.log("\n@power-ux/core size baseline");
 console.log(`  minified : ${raw} bytes (${(raw / 1024).toFixed(2)} KB)`);
 console.log(`  gzip     : ${gzip} bytes (${(gzip / 1024).toFixed(2)} KB)`);
 console.log(`  written  : packages/core/dist-size/`);

@@ -8,7 +8,7 @@
  * - Last sections often never reach `top <= offset` (not enough page below).
  *   We treat “scrolled to document end” as activating the final section.
  */
-import { effect, signal, type Signal } from "@power-ui/core";
+import { effect, signal, type Signal } from "@power-ux/core";
 
 export function prefersReducedMotion(): boolean {
   return (

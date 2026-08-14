@@ -1,10 +1,10 @@
-# `@power-ui/router`
+# `@power-ux/router`
 
 ## Learn in 2 minutes
 
 ```tsx
-import { createRouter, Link } from "@power-ui/router";
-import { mount } from "@power-ui/dom";
+import { createRouter, Link } from "@power-ux/router";
+import { mount } from "@power-ux/dom";
 
 const router = createRouter({
   routes: [

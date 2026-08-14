@@ -1,4 +1,4 @@
-import { effect, type Dispose } from "@power-ui/core";
+import { effect, type Dispose } from "@power-ux/core";
 
 /**
  * Values a reactive JSX child function may return.

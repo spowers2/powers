@@ -1,4 +1,4 @@
-# Contributing to Power UI
+# Contributing to Power UX
 
 Written for **public contributors** as well as maintainers. The repo may be private today; this guide is launch-ready.
 

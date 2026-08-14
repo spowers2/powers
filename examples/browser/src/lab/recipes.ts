@@ -15,13 +15,13 @@ export interface Recipe {
 }
 
 /**
- * All recipes use the design system (@power-ui/ui).
+ * All recipes use the design system (@power-ux/ui).
  * Teaching copy is written for first-time learners — plain language, clear experiments.
  */
 export const recipes: Recipe[] = [
   {
     id: "hello",
-    title: "Hello Power UI",
+    title: "Hello Power UX",
     blurb: "Your first signal + button",
     goal: "Make a number go up when you click a button.",
     learn: [
@@ -40,9 +40,9 @@ export const recipes: Recipe[] = [
       "Change signal(0) to signal(10) and press Run (or wait for auto-run)",
       "Add a second Button that does count.update(n => n - 1)",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
-import { Button, Card, Stack, Text } from "@power-ui/ui";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
+import { Button, Card, Stack, Text } from "@power-ux/ui";
 
 const count = signal(0);
 
@@ -50,7 +50,7 @@ export function App() {
   return (
     <Card>
       <Stack gap={4}>
-        <Text as="h2" size="xl">Hello Power UI</Text>
+        <Text as="h2" size="xl">Hello Power UX</Text>
         <Text muted>Clicks: {() => count()}</Text>
         <Button onClick={() => count.update((n) => n + 1)}>
           Click me
@@ -83,9 +83,9 @@ mount(document.getElementById("root")!, () => <App />);
       "Click “+ Qty” / “+ Price” and watch total",
       "Change the formula to price() * qty() + 5 and re-run",
     ],
-    code: `import { signal, computed } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
-import { Button, Card, Field, Input, Stack, Text } from "@power-ui/ui";
+    code: `import { signal, computed } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
+import { Button, Card, Field, Input, Stack, Text } from "@power-ux/ui";
 
 const price = signal(42);
 const qty = signal(2);
@@ -158,10 +158,10 @@ mount(document.getElementById("root")!, () => <App />);
       "Change 140 to 220 and try Spring again",
       "Swap spring() for { duration: 600, ease: \"easeOut\" }",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { animate, spring } from "@power-ui/animate";
-import { mount } from "@power-ui/dom";
-import { Button, Card, Stack, Text } from "@power-ui/ui";
+    code: `import { signal } from "@power-ux/core";
+import { animate, spring } from "@power-ux/animate";
+import { mount } from "@power-ux/dom";
+import { Button, Card, Stack, Text } from "@power-ux/ui";
 
 const x = signal(0);
 
@@ -212,10 +212,10 @@ mount(document.getElementById("root")!, () => <App />);
     id: "gsap",
     title: "GSAP adapter",
     blurb: "Optional pro eases on signals",
-    goal: "Drive the same ball with gsapAnimate — still a Power UI signal.",
+    goal: "Drive the same ball with gsapAnimate — still a Power UX signal.",
     learn: [
       "Default motion is animate() — no GSAP required",
-      "Optional peer: import from @power-ui/animate/gsap (Lab injects it)",
+      "Optional peer: import from @power-ux/animate/gsap (Lab injects it)",
       "Duration is in milliseconds (same unit as animate), converted for GSAP",
       "One active animation per signal — GSAP and native animate interrupt each other",
     ],
@@ -230,12 +230,12 @@ mount(document.getElementById("root")!, () => <App />);
       "Hit Back mid-flight — cancel + new tween should feel interruptible",
       "Compare with the Spring motion recipe (no GSAP)",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { cancel } from "@power-ui/animate";
+    code: `import { signal } from "@power-ux/core";
+import { cancel } from "@power-ux/animate";
 // Optional peer path (Lab also injects gsapAnimate):
-import { gsapAnimate } from "@power-ui/animate/gsap";
-import { mount } from "@power-ui/dom";
-import { Button, Card, Stack, Text, Badge } from "@power-ui/ui";
+import { gsapAnimate } from "@power-ux/animate/gsap";
+import { mount } from "@power-ux/dom";
+import { Button, Card, Stack, Text, Badge } from "@power-ux/ui";
 
 const x = signal(0);
 const label = signal("idle");
@@ -331,9 +331,9 @@ mount(document.getElementById("root")!, () => <App />);
       "Remove a middle item — others should stay put",
       "Change the default titles in the signal array",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount, For } from "@power-ui/dom";
-import { Badge, Button, Card, Stack, Text } from "@power-ui/ui";
+    code: `import { signal } from "@power-ux/core";
+import { mount, For } from "@power-ux/dom";
+import { Badge, Button, Card, Stack, Text } from "@power-ux/ui";
 
 type Todo = { id: number; title: string };
 let next = 1;
@@ -393,7 +393,7 @@ mount(document.getElementById("root")!, () => <App />);
     id: "ui",
     title: "Design system",
     blurb: "Buttons, badges, switch — themed",
-    goal: "Build UI with Power UI components instead of raw HTML.",
+    goal: "Build UI with Power UX components instead of raw HTML.",
     learn: [
       "Button / Card / Stack / Text / Switch are design-system primitives",
       "They read CSS variables from tokens.css (brand, space, radius)",
@@ -409,8 +409,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change Button variant to \"danger\" on one button",
       "Wrap another Text with muted size=\"sm\"",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Badge,
   Button,
@@ -418,7 +418,7 @@ import {
   Stack,
   Switch,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const enabled = signal(true);
 
@@ -427,7 +427,7 @@ export function App() {
     <Card variant="elevated">
       <Stack gap={4}>
         <Stack direction="row" justify="between" align="center">
-          <Text as="h2" size="xl">Power UI kit</Text>
+          <Text as="h2" size="xl">Power UX kit</Text>
           <Badge tone="success">Tokens</Badge>
         </Stack>
         <Text muted>
@@ -474,8 +474,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change the timeout from 1200 to 400",
       "Add Alert tone=\"warning\" that always shows above the divider",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount, Show } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount, Show } from "@power-ux/dom";
 import {
   Alert,
   Button,
@@ -484,7 +484,7 @@ import {
   Spinner,
   Stack,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const busy = signal(false);
 const saved = signal(false);
@@ -495,7 +495,7 @@ export function App() {
       <Stack gap={4}>
         <Text as="h2" size="xl">Feedback</Text>
         <Alert tone="info" title="Heads up">
-          Power UI ships feedback components with the runtime.
+          Power UX ships feedback components with the runtime.
         </Alert>
         <Divider label="demo" />
         <Stack direction="row" gap={3} align="center">
@@ -550,15 +550,15 @@ mount(document.getElementById("root")!, () => <App />);
       "Click Likes a few times",
       "Change createTheme(\"dark\") to createTheme(\"light\")",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
   Stack,
   Text,
   createTheme,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const theme = createTheme("dark");
 theme.bind();
@@ -618,8 +618,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Switch to Loading tab — skeleton shimmer",
       "Nudge progress until 100%",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Avatar,
   Button,
@@ -630,7 +630,7 @@ import {
   Stack,
   Tabs,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const open = signal(false);
 const pct = signal(36);
@@ -640,7 +640,7 @@ export function App() {
     <Card variant="glass">
       <Stack gap={4}>
         <Stack direction="row" gap={3} align="center">
-          <Avatar name="Power UI" />
+          <Avatar name="Power UX" />
           <div>
             <Text weight="semibold">Overlays</Text>
             <Text muted size="sm">Ink blue + lime green · layered glass</Text>
@@ -712,8 +712,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change the delay from 800 to 200",
       "Make the fetcher throw sometimes to see the error Alert",
     ],
-    code: `import { resource } from "@power-ui/core";
-import { mount, Show } from "@power-ui/dom";
+    code: `import { resource } from "@power-ux/core";
+import { mount, Show } from "@power-ux/dom";
 import {
   Alert,
   Button,
@@ -721,7 +721,7 @@ import {
   Spinner,
   Stack,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 // Fake API — replace with fetch("/api/…") in a real app
 const user = resource(async () => {
@@ -792,8 +792,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Fix email + check the box — Save enables",
       "Add a phone Field with bind the same way",
     ],
-    code: `import { signal, computed } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal, computed } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
@@ -806,7 +806,7 @@ import {
   emailFormat,
   firstError,
   minLength,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const email = signal("");
 const name = signal("");
@@ -892,8 +892,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Pick a role and save — status shows the payload",
       "Change validate on email to require a .com address",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
@@ -906,7 +906,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const name = createField({
   validate: (v) => required(v, "Name required"),
@@ -985,8 +985,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Toggle notifications and save a valid profile",
       "Add a timezone Select the same way as role",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
@@ -1000,7 +1000,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const name = createField({
   initial: "Sam Rivera",
@@ -1097,8 +1097,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Clear the search — full table returns",
       "Add a status column to columns + rows",
     ],
-    code: `import { signal, computed } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal, computed } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
@@ -1108,7 +1108,7 @@ import {
   Stack,
   Table,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const rows = [
   { id: "1", company: "Northline Health", contact: "Avery", status: "active" },
@@ -1194,8 +1194,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Open the popover, then close with Escape or outside click",
       "Add a third menu item with danger: true",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
@@ -1204,7 +1204,7 @@ import {
   Popover,
   Stack,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const pick = signal("—");
 const open = signal(false);
@@ -1274,9 +1274,9 @@ mount(document.getElementById("root")!, () => <App />);
       "Add a Reset button that sets a and b back to 1 and 2",
       "Hard mode: show product (a * b) with a second computed",
     ],
-    code: `import { signal, computed } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
-import { Button, Card, Stack, Text } from "@power-ui/ui";
+    code: `import { signal, computed } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
+import { Button, Card, Stack, Text } from "@power-ux/ui";
 
 // Practice: total should always equal a + b
 const a = signal(1);
@@ -1328,8 +1328,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change name to \"pu-collapse\" on the fade panel",
       "Wrap a Card in Transition for a soft mount",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Button,
   Card,
@@ -1337,7 +1337,7 @@ import {
   Text,
   Transition,
   MOTION_PRESETS,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const fade = signal(true);
 const collapse = signal(true);
@@ -1384,7 +1384,7 @@ mount(document.getElementById("root")!, () => <App />);
     blurb: "Accordion, Stat, Table, Drawer",
     goal: "Compose product surfaces from the expanded component kit.",
     learn: [
-      "Power UI ships more structure primitives than Bootstrap (Stat, Timeline, Steps, Empty…)",
+      "Power UX ships more structure primitives than Bootstrap (Stat, Timeline, Steps, Empty…)",
       "createStyleSheet makes new components a few lines of CSS + JSX",
       "Drawer / Dialog / Command trap focus and restore it on close",
     ],
@@ -1398,8 +1398,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Add a third accordion item",
       "Change Stat tone to negative and tweak the delta string",
     ],
-    code: `import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+    code: `import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 import {
   Accordion,
   Button,
@@ -1410,7 +1410,7 @@ import {
   Stat,
   Table,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 
 const open = signal(false);
 

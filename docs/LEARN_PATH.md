@@ -21,7 +21,7 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 - `signal` / `.set` / `count()`
 - `{() => count()}` vs snapshot `{count()}`
 - `<Input bind={email} />` + `Field`
-- `import "@power-ui/ui/theme.css"` + `createTheme().bind()`
+- `import "@power-ux/ui/theme.css"` + `createTheme().bind()`
 
 **Do not** dig into ownership, SSR, or GSAP yet.
 
@@ -64,7 +64,7 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 **You should know**
 
 - `createStyleSheet` + token variables
-- When CSS `Transition` vs `@power-ui/animate`
+- When CSS `Transition` vs `@power-ux/animate`
 - `resource` for async data
 - Dev warnings: snapshot values, double outlet, missing theme
 

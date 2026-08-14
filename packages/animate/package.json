@@ -1,7 +1,7 @@
 {
-  "name": "@power-ui/animate",
+  "name": "@power-ux/animate",
   "version": "0.1.0",
-  "description": "Signal-native animation for Power UI — tweens, springs, interruptible, a11y-aware.",
+  "description": "Signal-native animation for Power UX — tweens, springs, interruptible, a11y-aware.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -30,7 +30,7 @@
     "size": "node --import tsx scripts/size.ts"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*"
+    "@power-ux/core": "workspace:*"
   },
   "peerDependencies": {
     "gsap": "^3.12.0"

@@ -1,4 +1,4 @@
-# Power UI
+# Power UX
 
 **The reactive UI system that’s powerful under the hood and tiny to learn.**
 
@@ -20,19 +20,19 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 
 | Package | Role |
 |---|---|
-| `@power-ui/core` | signals, computed, effect, store, resource, ownership |
-| `@power-ui/animate` | tween / spring on signals |
-| `@power-ui/dom` | mount, h, JSX, reactive props, Show, For |
-| `@power-ui/router` | createRouter, Link, navigate |
-| `@power-ui/ssr` | `renderToString` + **islands** hydrate API |
-| `@power-ui/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
+| `@power-ux/core` | signals, computed, effect, store, resource, ownership |
+| `@power-ux/animate` | tween / spring on signals |
+| `@power-ux/dom` | mount, h, JSX, reactive props, Show, For |
+| `@power-ux/router` | createRouter, Link, navigate |
+| `@power-ux/ssr` | `renderToString` + **islands** hydrate API |
+| `@power-ux/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
 
 ---
 
 ## Quick start
 
 ```bash
-cd ~/Documents/power-ui
+cd ~/Documents/power-ux
 pnpm install
 pnpm ci                  # typecheck · test · size budgets
 pnpm example:starter     # http://localhost:5180  — designlab206 (freelance workspace)
@@ -47,10 +47,10 @@ pnpm example:browser     # http://localhost:5173  — docs · lab · system
 ### Design system + router (sketch)
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { mount } from "@power-ui/dom";
-import { createRouter, Link } from "@power-ui/router";
-import { Button, Card, Stack, Text, createTheme } from "@power-ui/ui";
+import "@power-ux/ui/theme.css";
+import { mount } from "@power-ux/dom";
+import { createRouter, Link } from "@power-ux/router";
+import { Button, Card, Stack, Text, createTheme } from "@power-ux/ui";
 
 const theme = createTheme("light");
 theme.bind();

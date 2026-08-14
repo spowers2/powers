@@ -1,10 +1,10 @@
 /**
- * Optional GSAP adapter for Power UI.
+ * Optional GSAP adapter for Power UX.
  *
  * Install peer: `pnpm add gsap`
- * Import: `import { gsapAnimate } from "@power-ui/animate/gsap"`
+ * Import: `import { gsapAnimate } from "@power-ux/animate/gsap"`
  *
- * Default motion remains `@power-ui/animate` (no GSAP required).
+ * Default motion remains `@power-ux/animate` (no GSAP required).
  * Use this for timelines, custom eases, ScrollTrigger (via `vars`), etc.
  */
 import gsap from "gsap";

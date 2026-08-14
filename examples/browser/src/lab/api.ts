@@ -2,14 +2,14 @@
  * Runtime surface injected into the Lab preview iframe.
  * Keep this list learnable — mirrors public package exports users should know.
  */
-import * as core from "@power-ui/core";
-import * as animate from "@power-ui/animate";
-import { createGsapBridge } from "@power-ui/animate";
-import * as dom from "@power-ui/dom";
-import * as ui from "@power-ui/ui";
+import * as core from "@power-ux/core";
+import * as animate from "@power-ux/animate";
+import { createGsapBridge } from "@power-ux/animate";
+import * as dom from "@power-ux/dom";
+import * as ui from "@power-ux/ui";
 import gsap from "gsap";
 // Ensure design tokens exist in the iframe document when UI is used
-import "@power-ui/ui/theme.css";
+import "@power-ux/ui/theme.css";
 
 const gsapBridge = createGsapBridge(gsap);
 
@@ -19,7 +19,7 @@ export type PowerLabApi = typeof core &
   typeof ui & {
     /** Convenience alias */
     Fragment: typeof dom.Fragment;
-    /** Optional GSAP peer — same as `@power-ui/animate/gsap` */
+    /** Optional GSAP peer — same as `@power-ux/animate/gsap` */
     gsapAnimate: typeof gsapBridge.gsapAnimate;
     gsapFromTo: typeof gsapBridge.gsapFromTo;
   };

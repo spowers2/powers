@@ -1,7 +1,7 @@
 import esbuild from "esbuild-wasm";
 import wasmUrl from "esbuild-wasm/esbuild.wasm?url";
 // Full design system CSS for the Lab iframe (tokens + base + utilities)
-import themeCss from "@power-ui/ui/theme.css?inline";
+import themeCss from "@power-ux/ui/theme.css?inline";
 import { createLabApi, LAB_API_KEYS, type PowerLabApi } from "./api.js";
 import { injectDesignSystemInto } from "./warmStyles.js";
 
@@ -62,7 +62,7 @@ export async function compileLabCode(source: string): Promise<string> {
 
 /**
  * Compile + execute user code inside a sandboxed iframe.
- * Live Power UI modules are injected from the parent (same-origin srcdoc).
+ * Live Power UX modules are injected from the parent (same-origin srcdoc).
  *
  * `runId` + `getLatestRunId` cancel stale runs when the user switches recipes fast.
  */

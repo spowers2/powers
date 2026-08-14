@@ -2,8 +2,8 @@
  * Marketing landing — modern, token-driven, live demos.
  * Navigation is provided by the shared SiteNav in AppShell.
  */
-import { signal, computed, effect } from "@power-ui/core";
-import type { Router } from "@power-ui/router";
+import { signal, computed, effect } from "@power-ux/core";
+import type { Router } from "@power-ux/router";
 import {
   Avatar,
   Badge,
@@ -12,7 +12,7 @@ import {
   Progress,
   Stack,
   Text,
-} from "@power-ui/ui";
+} from "@power-ux/ui";
 import {
   createSectionNav,
   scrollToSection,
@@ -282,7 +282,7 @@ export function LandingPage(props: { router: Router }) {
             <div class="lp-section-head">
               <h2 class="lp-section-title">Real product demos</h2>
               <p class="lp-section-sub">
-                Full apps built with Power UI — not kitchen sinks. Run them
+                Full apps built with Power UX — not kitchen sinks. Run them
                 locally, then steal patterns into your own shell.
               </p>
             </div>
@@ -360,7 +360,7 @@ export function LandingPage(props: { router: Router }) {
                 <h3>Motion on values</h3>
                 <p>
                   Tweens and springs animate signals. Bind style once; optional{" "}
-                  <code>@power-ui/animate/gsap</code> when you need pro eases.
+                  <code>@power-ux/animate/gsap</code> when you need pro eases.
                 </p>
               </article>
 
@@ -387,7 +387,7 @@ export function LandingPage(props: { router: Router }) {
                 <div class="lp-tile-icon">📦</div>
                 <h3>Composable packages</h3>
                 <p>
-                  @power-ui/core · animate · dom · router · ssr · ui. Use only
+                  @power-ux/core · animate · dom · router · ssr · ui. Use only
                   what you need; SSR foundation ready for islands next.
                 </p>
               </article>
@@ -401,7 +401,7 @@ export function LandingPage(props: { router: Router }) {
             <div class="lp-section-head">
               <h2 class="lp-section-title">The whole core is five ideas</h2>
               <p class="lp-section-sub">
-                Master these and you already think in Power UI. Everything else
+                Master these and you already think in Power UX. Everything else
                 is projection: DOM, routes, tokens.
               </p>
             </div>
@@ -428,8 +428,8 @@ export function LandingPage(props: { router: Router }) {
               </div>
             </div>
             <pre class="lp-snippet">
-{`import { signal, computed } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+{`import { signal, computed } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
 
 const count = signal(0);
 const label = computed(() => \`Clicks: \${count()}\`);
@@ -462,7 +462,7 @@ mount(document.getElementById("app")!, () => (
                 <thead>
                   <tr>
                     <th>Concern</th>
-                    <th>Power UI</th>
+                    <th>Power UX</th>
                     <th>Typical alternative</th>
                   </tr>
                 </thead>
@@ -540,7 +540,7 @@ mount(document.getElementById("app")!, () => (
       <footer class="lp-footer">
         <Container size="xl">
           <div class="lp-footer-inner">
-            <span>Power UI — MIT · private foundations</span>
+            <span>Power UX — MIT · private foundations</span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
                 Docs
@@ -568,7 +568,7 @@ mount(document.getElementById("app")!, () => (
                 Hearth
               </a>
               <a
-                href="https://github.com/spowers2/power-ui"
+                href="https://github.com/spowers2/power-ux"
                 target="_blank"
                 rel="noreferrer"
               >

@@ -1,5 +1,5 @@
-import { effect } from "@power-ui/core";
-import { component, type ComponentProps } from "@power-ui/dom";
+import { effect } from "@power-ux/core";
+import { component, type ComponentProps } from "@power-ux/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

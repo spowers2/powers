@@ -1,6 +1,6 @@
 # Developer experience strategy — best UI kit on the market
 
-**Thesis:** Power UI wins if a developer goes from install → first polished screen faster than React+library soup, and never hits a “why is this broken?” wall.
+**Thesis:** Power UX wins if a developer goes from install → first polished screen faster than React+library soup, and never hits a “why is this broken?” wall.
 
 Components are necessary. **Trust, speed, and teaching** are the product.
 
@@ -57,7 +57,7 @@ Never force advanced APIs into Hello World.
 ### Sprint A — Trust the demo (now)
 1. ~~TOC/scroll-spy pin + end-of-page last section~~  
 2. ~~Keyboard roving on Menu / Tabs / List~~ (`rovingFocus.ts`)  
-3. ~~Smoke tests~~ — `pnpm --filter @power-ui/example-browser smoke` + unit tests  
+3. ~~Smoke tests~~ — `pnpm --filter @power-ux/example-browser smoke` + unit tests  
 4. Focus-visible rings on Button / Menu / Tabs / List
 
 ### Sprint B — Authoring loop ✅
@@ -73,11 +73,11 @@ Never force advanced APIs into Hello World.
 
 ### Sprint D — Motion language
 1. ~~Export named transition presets~~  
-2. ~~Document when to use CSS Transition vs `@power-ui/animate`~~ (`MOTION.md`)  
+2. ~~Document when to use CSS Transition vs `@power-ux/animate`~~ (`MOTION.md`)  
 3. Micro-interaction audit of all controls — still open  
 
 ### Sprint E — Ship
-1. ~~`create-power-ui` / Vite template~~ (`pnpm create-app`, `templates/power-ui-vite`)  
+1. ~~`create-power-ux` / Vite template~~ (`pnpm create-app`, `templates/power-ux-vite`)  
 2. Execute `RELEASE.md`  
 3. Public positioning: *fine-grained UI kit with a design system built in*  
 4. ~~Dev warnings~~ (theme missing, double `outlet()`, snapshot `value` on Input)  
@@ -98,7 +98,7 @@ Never force advanced APIs into Hello World.
 
 ## Competitive frame (honest)
 
-| | Bootstrap | React ecosystem | Power UI |
+| | Bootstrap | React ecosystem | Power UX |
 |---|---|---|---|
 | Components | Many | Infinite (fragmented) | Growing, coherent |
 | Runtime | CSS/JS widgets | VDOM + state lib + UI lib | Fine-grained signals |

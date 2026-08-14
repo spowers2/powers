@@ -1,5 +1,5 @@
-import { signal, type Signal } from "@power-ui/core";
-import { effect } from "@power-ui/core";
+import { signal, type Signal } from "@power-ux/core";
+import { effect } from "@power-ux/core";
 
 export type ThemeMode = "light" | "dark";
 

@@ -1,5 +1,5 @@
-import { createRoot, type Dispose } from "@power-ui/core";
-import { mount, type MountResult } from "@power-ui/dom";
+import { createRoot, type Dispose } from "@power-ux/core";
+import { mount, type MountResult } from "@power-ux/dom";
 
 export type IslandFactory = () => MountResult;
 export type IslandRegistry = Record<string, IslandFactory>;
@@ -77,7 +77,7 @@ export function hydrateIslands(
   const onMissing =
     options.onMissing ??
     ((name: string) => {
-      console.warn(`[power-ui/ssr] No island registered for "${name}"`);
+      console.warn(`[power-ux/ssr] No island registered for "${name}"`);
     });
 
   const disposers: Dispose[] = [];

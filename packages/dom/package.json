@@ -1,7 +1,7 @@
 {
-  "name": "@power-ui/dom",
+  "name": "@power-ux/dom",
   "version": "0.3.0",
-  "description": "Thin DOM bindings + JSX + reactive props for Power UI.",
+  "description": "Thin DOM bindings + JSX + reactive props for Power UX.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -35,7 +35,7 @@
     "size": "node --import tsx scripts/size.ts"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*"
+    "@power-ux/core": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.25.1",

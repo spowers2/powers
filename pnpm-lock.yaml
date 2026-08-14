@@ -14,10 +14,10 @@ importers:
 
   examples/animate-demo:
     dependencies:
-      '@power-ui/animate':
+      '@power-ux/animate':
         specifier: workspace:*
         version: link:../../packages/animate
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -27,16 +27,16 @@ importers:
 
   examples/app-starter:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@power-ui/router':
+      '@power-ux/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@power-ui/ui':
+      '@power-ux/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
@@ -49,19 +49,19 @@ importers:
 
   examples/browser:
     dependencies:
-      '@power-ui/animate':
+      '@power-ux/animate':
         specifier: workspace:*
         version: link:../../packages/animate
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@power-ui/router':
+      '@power-ux/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@power-ui/ui':
+      '@power-ux/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       esbuild-wasm:
@@ -86,7 +86,7 @@ importers:
 
   examples/counter:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -96,7 +96,7 @@ importers:
 
   examples/kitchen-sink:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -106,16 +106,16 @@ importers:
 
   examples/restaurant-demo:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@power-ui/router':
+      '@power-ux/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@power-ui/ui':
+      '@power-ux/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
@@ -128,13 +128,13 @@ importers:
 
   examples/ssr-islands:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@power-ui/ssr':
+      '@power-ux/ssr':
         specifier: workspace:*
         version: link:../../packages/ssr
       happy-dom:
@@ -147,7 +147,7 @@ importers:
 
   packages/animate:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -178,7 +178,7 @@ importers:
 
   packages/dom:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -197,10 +197,10 @@ importers:
 
   packages/router:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../dom
     devDependencies:
@@ -219,10 +219,10 @@ importers:
 
   packages/ssr:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../dom
       happy-dom:
@@ -238,10 +238,10 @@ importers:
 
   packages/ui:
     dependencies:
-      '@power-ui/core':
+      '@power-ux/core':
         specifier: workspace:*
         version: link:../core
-      '@power-ui/dom':
+      '@power-ux/dom':
         specifier: workspace:*
         version: link:../dom
     devDependencies:

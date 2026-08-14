@@ -1,4 +1,4 @@
-# Power UI documentation
+# Power UX documentation
 
 **For public users and contributors.** Start here and follow the path that matches your goal.
 
@@ -41,7 +41,7 @@ Private repo today; these docs are written so they can ship as-is when the proje
 **Scaffold a minimal app**
 
 ```bash
-pnpm create-app my-ui    # or: bash scripts/create-power-ui.sh my-ui
+pnpm create-app my-ui    # or: bash scripts/create-power-ux.sh my-ui
 ```
 
 ---
@@ -50,26 +50,26 @@ pnpm create-app my-ui    # or: bash scripts/create-power-ui.sh my-ui
 
 | Package | Doc |
 |---|---|
-| `@power-ui/core` | [LEARN.md](./LEARN.md) · [ARCHITECTURE.md](./ARCHITECTURE.md) · [FOUNDATION.md](./FOUNDATION.md) |
-| `@power-ui/dom` | [DOM.md](./DOM.md) |
-| `@power-ui/animate` | [ANIMATION.md](./ANIMATION.md) |
-| `@power-ui/router` | [ROUTER.md](./ROUTER.md) |
-| `@power-ui/ssr` | [SSR.md](./SSR.md) |
-| `@power-ui/ui` | [STYLING.md](./STYLING.md) · [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) · [COMPONENTS.md](./COMPONENTS.md) |
+| `@power-ux/core` | [LEARN.md](./LEARN.md) · [ARCHITECTURE.md](./ARCHITECTURE.md) · [FOUNDATION.md](./FOUNDATION.md) |
+| `@power-ux/dom` | [DOM.md](./DOM.md) |
+| `@power-ux/animate` | [ANIMATION.md](./ANIMATION.md) |
+| `@power-ux/router` | [ROUTER.md](./ROUTER.md) |
+| `@power-ux/ssr` | [SSR.md](./SSR.md) |
+| `@power-ux/ui` | [STYLING.md](./STYLING.md) · [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) · [COMPONENTS.md](./COMPONENTS.md) |
 
 ---
 
 ## Quick install (when published)
 
 ```bash
-pnpm add @power-ui/core @power-ui/dom @power-ui/ui
+pnpm add @power-ux/core @power-ux/dom @power-ux/ui
 ```
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
-import { Button, createTheme } from "@power-ui/ui";
+import "@power-ux/ui/theme.css";
+import { signal } from "@power-ux/core";
+import { mount } from "@power-ux/dom";
+import { Button, createTheme } from "@power-ux/ui";
 
 createTheme("light").bind();
 
@@ -109,7 +109,7 @@ signal → computed → effect → store → resource
        ↓
   mount / JSX / component
        ↓
-  @power-ui/ui  (tokens · primitives · utilities)
+  @power-ux/ui  (tokens · primitives · utilities)
 ```
 
 One library for **behavior and look**. External CSS frameworks are optional escape hatches, not required.

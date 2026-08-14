@@ -1,5 +1,5 @@
 /**
- * Micro-benchmarks for @power-ui/core.
+ * Micro-benchmarks for @power-ux/core.
  * Not a formal competitor suite yet — establishes a local baseline.
  */
 import { signal, computed, effect, batch, createRoot } from "../src/index.js";
@@ -19,7 +19,7 @@ function time(label: string, fn: () => void, iterations = 1): number {
 
 const N = 10_000;
 
-console.log("\n@power-ui/core micro-benchmarks\n");
+console.log("\n@power-ux/core micro-benchmarks\n");
 
 time("create 10k signals", () => {
   for (let i = 0; i < N; i++) signal(i);
