@@ -235,66 +235,77 @@ html[data-pu-palette="instrument"] {
 }
 
 html[data-pu-palette="dual"] {
-  --pu-brand-50: #f0f6fc;
-  --pu-brand-100: #dceaf8;
-  --pu-brand-200: #a8c8ea;
-  --pu-brand-300: #5b93d0;
-  --pu-brand-400: #2b6cb0;
-  --pu-brand-500: #0b1f3a;
-  --pu-brand-600: #071628;
-  --pu-brand-700: #050f1c;
+  /* Whiter canvas, clearer cyan — dual electric light (pushed) */
+  --pu-brand-50: #f4f9ff;
+  --pu-brand-100: #e3f0fc;
+  --pu-brand-200: #b6d4f5;
+  --pu-brand-300: #6ba3e0;
+  --pu-brand-400: #2f78c4;
+  --pu-brand-500: #0a1e38;
+  --pu-brand-600: #06152a;
+  --pu-brand-700: #040f1e;
   --pu-brand-800: #030a14;
-  --pu-brand-900: #02060c;
+  --pu-brand-900: #01060d;
 
-  --pu-gray-0: #fbfcfe;
-  --pu-gray-50: #f3f6fb;
-  --pu-gray-100: #e6ebf4;
-  --pu-gray-200: #cdd6e5;
-  --pu-gray-300: #a0acc0;
-  --pu-gray-400: #74819a;
-  --pu-gray-500: #556178;
-  --pu-gray-600: #3f4a5e;
-  --pu-gray-700: #2e3646;
-  --pu-gray-800: #1c222e;
-  --pu-gray-900: #10141c;
-  --pu-gray-950: #080a10;
+  --pu-gray-0: #ffffff;
+  --pu-gray-50: #f7f9fc;
+  --pu-gray-100: #eef2f8;
+  --pu-gray-200: #d8e0ec;
+  --pu-gray-300: #a8b4c8;
+  --pu-gray-400: #7a879e;
+  --pu-gray-500: #5a6780;
+  --pu-gray-600: #424d63;
+  --pu-gray-700: #303a4c;
+  --pu-gray-800: #1d2433;
+  --pu-gray-900: #111722;
+  --pu-gray-950: #080b12;
 
-  /* Electric cyan — second brand voice */
-  --pu-holo-cyan: #22d3ee;
-  --pu-holo-teal: #06b6d4;
-  --pu-holo-mix: color-mix(in srgb, var(--pu-holo-cyan) 55%, var(--pu-brand-300));
+  /* Electric cyan — stronger second brand voice */
+  --pu-holo-cyan: #06b6d4;
+  --pu-holo-teal: #0891b2;
+  --pu-holo-mix: color-mix(in srgb, var(--pu-holo-cyan) 60%, var(--pu-brand-300));
 
-  /* Green stays Seahawk but only as signal */
   --pu-sage-500: #69be28;
   --pu-sage-600: #4f9a1c;
 
-  --pu-color-bg: #f3f6fb;
-  --pu-color-surface: #fbfcfe;
-  --pu-color-surface-2: #eef2f8;
+  --pu-color-bg: #f7f9fc;
+  --pu-color-surface: #ffffff;
+  --pu-color-surface-2: #f0f4fa;
   --pu-color-surface-elevated: #ffffff;
-  --pu-color-surface-sunken: #e4eaf3;
-  --pu-color-border: color-mix(in srgb, #c5d0e0 90%, var(--pu-holo-cyan));
-  --pu-color-border-strong: color-mix(in srgb, var(--pu-holo-cyan) 28%, #94a3b8);
-  --pu-color-text: #0b1f3a;
-  --pu-color-text-muted: #556178;
-  --pu-color-accent: #0b1f3a;
-  --pu-color-accent-hover: #071628;
-  --pu-color-accent-fg: #f8fafc;
+  --pu-color-surface-sunken: #e8eef6;
+  --pu-color-border: color-mix(in srgb, #c8d4e4 82%, #06b6d4);
+  --pu-color-border-strong: color-mix(in srgb, #06b6d4 36%, #94a3b8);
+  --pu-color-text: #0a1e38;
+  --pu-color-text-muted: #5a6780;
+  --pu-color-accent: #0a1e38;
+  --pu-color-accent-hover: #06152a;
+  --pu-color-accent-fg: #ffffff;
   --pu-color-signal: #69be28;
   --pu-color-success: #4f9a1c;
-  --pu-color-focus: #22d3ee;
-  --pu-color-selection: color-mix(in srgb, #22d3ee 20%, transparent);
+  --pu-color-focus: #06b6d4;
+  --pu-color-selection: color-mix(in srgb, #06b6d4 24%, transparent);
 
-  --pu-glass-bg: color-mix(in srgb, #fbfcfe 88%, transparent);
-  --pu-glass-border: color-mix(in srgb, #22d3ee 14%, var(--pu-color-border));
-  --pu-color-glow: color-mix(in srgb, #2b6cb0 12%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, #22d3ee 10%, transparent);
-  --pu-color-glow-holo: color-mix(in srgb, #22d3ee 12%, transparent);
+  --pu-glass-bg: color-mix(in srgb, #ffffff 90%, transparent);
+  --pu-glass-border: color-mix(in srgb, #06b6d4 20%, #d0dae8);
+  --pu-glass-blur: 16px;
+  --pu-color-glow: color-mix(in srgb, #2f78c4 14%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, #06b6d4 14%, transparent);
+  --pu-color-glow-holo: color-mix(in srgb, #06b6d4 16%, transparent);
 
+  --pu-shadow-xs: 0 1px 1px rgba(10, 30, 56, 0.03);
+  --pu-shadow-sm:
+    0 1px 2px rgba(10, 30, 56, 0.03),
+    0 2px 8px rgba(6, 182, 212, 0.05);
+  --pu-shadow-md:
+    0 2px 4px rgba(10, 30, 56, 0.03),
+    0 10px 28px rgba(6, 182, 212, 0.07);
+  --pu-shadow-lg:
+    0 4px 8px rgba(10, 30, 56, 0.04),
+    0 18px 44px rgba(6, 182, 212, 0.08);
   --pu-shadow-float:
-    0 0 0 1px color-mix(in srgb, #22d3ee 16%, var(--pu-color-border)),
-    0 0 28px color-mix(in srgb, #22d3ee 8%, transparent),
-    0 14px 40px rgba(11, 31, 58, 0.1);
+    0 0 0 1px color-mix(in srgb, #06b6d4 22%, var(--pu-color-border)),
+    0 0 32px color-mix(in srgb, #06b6d4 12%, transparent),
+    0 16px 44px rgba(10, 30, 56, 0.1);
 }
 
 html[data-pu-palette="dual"][data-pu-theme="dark"] {
