@@ -23,7 +23,7 @@ import {
 } from "./scrollNav.js";
 import "./landing.css";
 
-const SECTION_IDS = ["features", "learn", "compare"] as const;
+const SECTION_IDS = ["demos", "features", "learn", "compare"] as const;
 
 const NAMES = ["Ada Lovelace", "Grace Hopper", "Katherine Johnson"] as const;
 
@@ -147,6 +147,13 @@ export function LandingPage(props: { router: Router }) {
         <div class="lp-anchors">
           <Container size="xl">
             <nav class="lp-anchors-inner" aria-label="On this page">
+              <button
+                type="button"
+                class={anchorClass("demos")}
+                onClick={() => sectionNav.scrollTo("demos")}
+              >
+                Demos
+              </button>
               <button
                 type="button"
                 class={anchorClass("features")}

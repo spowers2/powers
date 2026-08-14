@@ -34,6 +34,18 @@ export function scrollToSection(
     options?.behavior ?? (prefersReducedMotion() ? "auto" : "smooth");
   const offset = options?.offset ?? DEFAULT_SCROLL_OFFSET;
 
+  // Temporarily disable CSS scroll-behavior so it doesn't fight / double-ease
+  // with window.scrollTo({ behavior: "smooth" }).
+  const root = document.documentElement;
+  const prevCss = root.style.scrollBehavior;
+  if (behavior === "smooth") {
+    root.style.scrollBehavior = "auto";
+  }
+
+  const finish = () => {
+    root.style.scrollBehavior = prevCss;
+  };
+
   if (!id || id === "top") {
     window.scrollTo({ top: 0, behavior });
     try {
@@ -45,11 +57,19 @@ export function scrollToSection(
     } catch {
       /* happy-dom / file origins */
     }
+    if (behavior === "smooth") {
+      window.setTimeout(finish, prefersReducedMotion() ? 0 : 500);
+    } else {
+      finish();
+    }
     return;
   }
 
   const el = document.getElementById(id);
-  if (!el) return;
+  if (!el) {
+    finish();
+    return;
+  }
 
   // Manual offset is more reliable than scrollIntoView with nested sticky chrome
   const y =
@@ -68,6 +88,57 @@ export function scrollToSection(
   } catch {
     /* happy-dom / file origins */
   }
+  if (behavior === "smooth") {
+    window.setTimeout(finish, prefersReducedMotion() ? 0 : 500);
+  } else {
+    finish();
+  }
+}
+
+/**
+ * Intercept same-document `#hash` clicks (and path+#hash when already on path)
+ * so every in-page jump uses scrollToSection (offset + smooth).
+ */
+export function installSmoothHashLinks(options?: {
+  offset?: number;
+  /** When true, only handle pure `#id` links (default). */
+  hashOnly?: boolean;
+}): () => void {
+  if (typeof document === "undefined") return () => {};
+
+  const onClick = (e: MouseEvent) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+      return;
+    const t = e.target;
+    if (!(t instanceof Element)) return;
+    const a = t.closest("a[href]") as HTMLAnchorElement | null;
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || href.startsWith("http") || href.startsWith("mailto:")) return;
+
+    let hash = "";
+    if (href.startsWith("#")) {
+      hash = href.slice(1);
+    } else {
+      try {
+        const u = new URL(href, window.location.href);
+        if (u.origin !== window.location.origin) return;
+        if (u.pathname !== window.location.pathname) return;
+        hash = u.hash.replace(/^#/, "");
+      } catch {
+        return;
+      }
+    }
+    if (!hash) return;
+
+    e.preventDefault();
+    scrollToSection(hash === "top" ? "top" : hash, {
+      offset: options?.offset,
+    });
+  };
+
+  document.addEventListener("click", onClick);
+  return () => document.removeEventListener("click", onClick);
 }
 
 export type SectionNav = {

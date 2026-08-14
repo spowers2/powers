@@ -1,10 +1,11 @@
 /**
  * Powers site — shared nav + landing + demos + design system
  */
-import { signal } from "@powers/core";
+import { signal, effect } from "@powers/core";
 import { animate, spring } from "@powers/animate";
 import { mount, bindStyle } from "@powers/dom";
 import { createRouter, Link } from "@powers/router";
+import { installSmoothHashLinks, scrollToSection } from "./scrollNav.js";
 import {
   Button,
   Input,
@@ -277,6 +278,30 @@ function AppShell() {
     if (p === "/lab") return "site-main site-main--lab";
     return "site-main";
   };
+
+  // Global same-page #hash smooth scroll (TOC + inline links)
+  effect(() => installSmoothHashLinks());
+
+  // After client navigations to /path#hash, smooth-scroll once the page paints
+  effect(() => {
+    router.path();
+    router.search();
+    const hash =
+      typeof window !== "undefined"
+        ? window.location.hash.replace(/^#/, "")
+        : "";
+    if (!hash) return;
+    let cancelled = false;
+    const t = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        if (!cancelled) scrollToSection(hash);
+      });
+    });
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(t);
+    };
+  });
 
   return (
     <div class="site-root">
