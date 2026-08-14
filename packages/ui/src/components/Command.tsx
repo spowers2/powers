@@ -2,7 +2,7 @@ import { signal, effect } from "@power-ux/core";
 import { For, Show, component, mergeProps, type ComponentProps } from "@power-ux/dom";
 import { cx } from "../utils.js";
 import { attachOverlay } from "../overlay.js";
-import { readBool, type MaybeReactive } from "../reactive.js";
+import { readBool, readStr, type MaybeReactive } from "../reactive.js";
 
 export type CommandItem = {
   id: string;
@@ -17,6 +17,15 @@ export type CommandProps = {
   onOpenChange?: (open: boolean) => void;
   items: CommandItem[] | (() => CommandItem[]);
   placeholder?: string;
+  /**
+   * Async command sources: show a loading row while `items` is still settling.
+   * Use a reactive `items` function + toggle `loading` around the fetch.
+   */
+  loading?: MaybeReactive<boolean>;
+  /** Empty-state copy (default: “No commands match”) */
+  emptyText?: MaybeReactive<string>;
+  /** Loading-state copy (default: “Loading…”) */
+  loadingText?: MaybeReactive<string>;
   onSelect?: (id: string) => void;
   class?: MaybeReactive<string>;
 };
@@ -77,6 +86,9 @@ const styles = `
   outline: none;
 }
 .pu-command__input::placeholder { color: var(--pu-color-text-muted); }
+.pu-command__input:focus-visible {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--pu-color-focus) 35%, transparent);
+}
 .pu-command__list {
   overflow: auto;
   padding: 0.35rem;
@@ -104,6 +116,13 @@ const styles = `
 .pu-command__item.is-active:not(:disabled) {
   background: color-mix(in srgb, var(--pu-color-accent) 12%, var(--pu-color-surface-2));
 }
+.pu-command__item:focus-visible:not(:disabled) {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface-elevated),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+  background: color-mix(in srgb, var(--pu-color-accent) 12%, var(--pu-color-surface-2));
+}
 .pu-command__item:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -113,11 +132,31 @@ const styles = `
   color: var(--pu-color-text-muted);
   font-family: var(--pu-font-mono);
 }
-.pu-command__empty {
+.pu-command__status {
   padding: 1.25rem;
   text-align: center;
   color: var(--pu-color-text-muted);
   font-size: var(--pu-text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+.pu-command__status--loading::before {
+  content: "";
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--pu-color-accent) 30%, transparent);
+  border-top-color: var(--pu-color-accent);
+  animation: pu-command-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes pu-command-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-command__status--loading::before { animation: none; opacity: 0.7; }
 }
 .pu-command__footer {
   border-top: 1px solid var(--pu-color-border);
@@ -145,15 +184,28 @@ function ensureStyles(doc: Document = document) {
 /**
  * Command palette (⌘K style): search + run an action.
  * Control with `open` + `onOpenChange`. Esc / backdrop close via `attachOverlay`.
+ * For async sources: reactive `items` + `loading`.
  */
 export const Command = component((raw: CommandProps) => {
   ensureStyles();
   const props = mergeProps(
-    { placeholder: "Type a command…" },
+    {
+      placeholder: "Type a command…",
+      emptyText: "No commands match",
+      loadingText: "Loading…",
+    },
     raw,
-  ) as ComponentProps<CommandProps & { placeholder: string }>;
+  ) as ComponentProps<
+    CommandProps & {
+      placeholder: string;
+      emptyText: string;
+      loadingText: string;
+    }
+  >;
 
   const isOpen = () => readBool(props.open as MaybeReactive<boolean>);
+  const isLoading = () =>
+    readBool(props.loading as MaybeReactive<boolean> | undefined);
   const query = signal("");
   const active = signal(0);
   let rootEl: HTMLElement | null = null;
@@ -166,6 +218,7 @@ export const Command = component((raw: CommandProps) => {
   };
 
   const filtered = () => {
+    if (isLoading()) return [] as CommandItem[];
     const q = query().trim().toLowerCase();
     const list = getItems();
     if (!q) return list;
@@ -191,7 +244,6 @@ export const Command = component((raw: CommandProps) => {
       escape: true,
       onAttach: ({ doc, win }) => {
         ensureStyles(doc);
-        // Prefer search field after trap places first focus
         const t = win.setTimeout(() => inputEl?.focus(), 0);
         return () => win.clearTimeout(t);
       },
@@ -199,7 +251,7 @@ export const Command = component((raw: CommandProps) => {
   });
 
   const run = (item: CommandItem) => {
-    if (item.disabled) return;
+    if (item.disabled || isLoading()) return;
     props.onSelect?.(item.id);
     props.onOpenChange?.(false);
   };
@@ -210,6 +262,7 @@ export const Command = component((raw: CommandProps) => {
         cx(
           "pu-command-root",
           isOpen() && "pu-command-root--open",
+          isLoading() && "pu-command-root--loading",
           typeof props.class === "function" ? props.class() : props.class,
         )
       }
@@ -229,6 +282,7 @@ export const Command = component((raw: CommandProps) => {
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
+        aria-busy={() => (isLoading() ? "true" : "false")}
         onClick={(e: MouseEvent) => e.stopPropagation()}
         ref={(el) => {
           panelEl = el;
@@ -239,6 +293,7 @@ export const Command = component((raw: CommandProps) => {
           type="text"
           role="combobox"
           aria-expanded="true"
+          aria-busy={() => (isLoading() ? "true" : "false")}
           placeholder={props.placeholder}
           value={query}
           ref={(el) => {
@@ -249,6 +304,7 @@ export const Command = component((raw: CommandProps) => {
             active.set(0);
           }}
           onKeyDown={(e: KeyboardEvent) => {
+            if (isLoading()) return;
             const list = filtered();
             if (e.key === "ArrowDown") {
               e.preventDefault();
@@ -264,36 +320,54 @@ export const Command = component((raw: CommandProps) => {
           }}
         />
         <div class="pu-command__list" role="listbox">
-          <Show when={() => filtered().length === 0}>
+          <Show when={() => isLoading()}>
             {() => {
               const d = document.createElement("div");
-              d.className = "pu-command__empty";
-              d.textContent = "No commands match";
+              d.className = "pu-command__status pu-command__status--loading";
+              d.setAttribute("role", "status");
+              d.textContent =
+                readStr(props.loadingText as MaybeReactive<string>) ||
+                "Loading…";
               return d;
             }}
           </Show>
-          <For each={filtered}>
-            {(item, index) => (
-              <button
-                type="button"
-                role="option"
-                class={() =>
-                  cx(
-                    "pu-command__item",
-                    active() === index() && "is-active",
-                  )
-                }
-                disabled={() => !!item().disabled}
-                onClick={() => run(item())}
-                onMouseEnter={() => active.set(index())}
-              >
-                <span>{() => item().label}</span>
-                <span class="pu-command__hint">
-                  {() => item().hint ?? ""}
-                </span>
-              </button>
+          <Show when={() => !isLoading() && filtered().length === 0}>
+            {() => {
+              const d = document.createElement("div");
+              d.className = "pu-command__status";
+              d.setAttribute("role", "status");
+              d.textContent =
+                readStr(props.emptyText as MaybeReactive<string>) ||
+                "No commands match";
+              return d;
+            }}
+          </Show>
+          <Show when={() => !isLoading()}>
+            {() => (
+              <For each={filtered}>
+                {(item, index) => (
+                  <button
+                    type="button"
+                    role="option"
+                    class={() =>
+                      cx(
+                        "pu-command__item",
+                        active() === index() && "is-active",
+                      )
+                    }
+                    disabled={() => !!item().disabled}
+                    onClick={() => run(item())}
+                    onMouseEnter={() => active.set(index())}
+                  >
+                    <span>{() => item().label}</span>
+                    <span class="pu-command__hint">
+                      {() => item().hint ?? ""}
+                    </span>
+                  </button>
+                )}
+              </For>
             )}
-          </For>
+          </Show>
         </div>
         <div class="pu-command__footer">
           <span>↑↓ navigate</span>

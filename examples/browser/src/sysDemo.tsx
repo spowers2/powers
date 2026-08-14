@@ -173,15 +173,20 @@ import { Combobox, Field, Stack, Text } from "@power-ux/ui";`,
         <Combobox
           value={city}
           onChange={(v) => city.set(v)}
-          options={[
-            { value: "sf", label: "San Francisco" },
-            { value: "nyc", label: "New York" },
-          ]}
+          options={cities}
+          loading={loading}
+          emptyText="No cities match"
+          loadingText="Searching…"
         />
       </Field>
       <Text muted size="sm">Value: {() => city()}</Text>
     </Stack>`,
-    `const city = signal("sf");`,
+    `const city = signal("sf");
+const loading = signal(false);
+const cities = signal([
+  { value: "sf", label: "San Francisco" },
+  { value: "nyc", label: "New York" },
+]);`,
   ),
 
   table: labProgram(

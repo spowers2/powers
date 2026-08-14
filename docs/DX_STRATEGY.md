@@ -54,11 +54,11 @@ Never force advanced APIs into Hello World.
 
 ## Next steps (execution order)
 
-### Sprint A — Trust the demo (now)
+### Sprint A — Trust the demo ✅
 1. ~~TOC/scroll-spy pin + end-of-page last section~~  
 2. ~~Keyboard roving on Menu / Tabs / List~~ (`rovingFocus.ts`)  
 3. ~~Smoke tests~~ — `pnpm --filter @power-ux/example-browser smoke` + unit tests  
-4. Focus-visible rings on Button / Menu / Tabs / List
+4. ~~Focus-visible rings on Button / Menu / Tabs / List~~ (+ Combobox options / Command items)
 
 ### Sprint B — Authoring loop ✅
 1. ~~System: **Copy JSX** on key demos~~ (`sysDemo.tsx`)  
@@ -66,15 +66,15 @@ Never force advanced APIs into Hello World.
 3. ~~Error UX in Lab (overlay + Reset)~~  
 4. ~~Cookbook recipes~~ (`settings`, `admin-list`) + start paths on landing/docs  
 
-### Sprint C — Forms & data ✅ (base)
+### Sprint C — Forms & data ✅
 1. ~~Field validation helpers~~ (`bind`, `createField`, form helpers)  
 2. ~~Table + Empty “admin list” recipe~~  
-3. Combobox/Command polish (loading, empty, async) — still open  
+3. ~~Combobox/Command polish~~ (`loading`, `emptyText`, `loadingText`, async options pattern)
 
 ### Sprint D — Motion language
 1. ~~Export named transition presets~~  
 2. ~~Document when to use CSS Transition vs `@power-ux/animate`~~ (`MOTION.md`)  
-3. Micro-interaction audit of all controls — still open  
+3. Micro-interaction audit of remaining controls — still open  
 
 ### Sprint E — Ship
 1. ~~`create-power-ux` / Vite template~~ (`pnpm create-app`, `templates/power-ux-vite`)  

@@ -2,7 +2,7 @@ import { signal, effect } from "@power-ux/core";
 import { For, Show, component, mergeProps, type ComponentProps } from "@power-ux/dom";
 import { cx } from "../utils.js";
 import { attachOverlay } from "../overlay.js";
-import { readBool, readProp, type MaybeReactive } from "../reactive.js";
+import { readBool, readProp, readStr, type MaybeReactive } from "../reactive.js";
 
 export type ComboboxOption = {
   value: string;
@@ -15,6 +15,15 @@ export type ComboboxProps = {
   value?: MaybeReactive<string>;
   placeholder?: string;
   disabled?: MaybeReactive<boolean>;
+  /**
+   * Async / remote search: show a loading row instead of options or empty.
+   * Pair with a reactive `options` signal that fills when the request settles.
+   */
+  loading?: MaybeReactive<boolean>;
+  /** Empty-state copy when filter yields no options (default: “No matches”) */
+  emptyText?: MaybeReactive<string>;
+  /** Loading-state copy (default: “Loading…”) */
+  loadingText?: MaybeReactive<string>;
   /** Called with the selected option value */
   onChange?: (value: string) => void;
   /** Filter function — default: case-insensitive label includes query */
@@ -72,7 +81,6 @@ const styles = `
   transition:
     opacity var(--pu-duration) var(--pu-ease-out),
     transform var(--pu-duration) var(--pu-ease-out);
-  /* Portaled to body — open class lives on the list itself */
 }
 .pu-combobox__list.is-open {
   display: block;
@@ -104,6 +112,13 @@ const styles = `
 .pu-combobox__option.is-active:not(:disabled) {
   background: var(--pu-color-surface-2);
 }
+.pu-combobox__option:focus-visible:not(:disabled) {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface-elevated),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+  background: var(--pu-color-surface-2);
+}
 .pu-combobox__option:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -112,10 +127,29 @@ const styles = `
   color: var(--pu-color-accent);
   font-weight: var(--pu-font-semibold);
 }
-.pu-combobox__empty {
-  padding: 0.65rem;
+.pu-combobox__status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
   font-size: var(--pu-text-sm);
   color: var(--pu-color-text-muted);
+}
+.pu-combobox__status--loading::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--pu-color-accent) 30%, transparent);
+  border-top-color: var(--pu-color-accent);
+  animation: pu-combobox-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes pu-combobox-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-combobox__status--loading::before { animation: none; opacity: 0.7; }
 }
 `;
 
@@ -133,13 +167,24 @@ const defaultFilter = (opt: ComboboxOption, q: string) =>
 
 /**
  * Searchable select: type to filter, click or Enter to choose.
+ * For remote data: pass a reactive `options` list + `loading` while fetching.
  */
 export const Combobox = component((raw: ComboboxProps) => {
   ensureStyles();
   const props = mergeProps(
-    { placeholder: "Search…" },
+    {
+      placeholder: "Search…",
+      emptyText: "No matches",
+      loadingText: "Loading…",
+    },
     raw,
-  ) as ComponentProps<ComboboxProps & { placeholder: string }>;
+  ) as ComponentProps<
+    ComboboxProps & {
+      placeholder: string;
+      emptyText: string;
+      loadingText: string;
+    }
+  >;
 
   const open = signal(false);
   const query = signal("");
@@ -147,6 +192,9 @@ export const Combobox = component((raw: ComboboxProps) => {
   let rootEl: HTMLElement | null = null;
   let listEl: HTMLElement | null = null;
   let inputEl: HTMLInputElement | null = null;
+
+  const isLoading = () =>
+    readBool(props.loading as MaybeReactive<boolean> | undefined);
 
   const placeList = () => {
     if (!rootEl || !listEl || !inputEl || !open()) return;
@@ -185,6 +233,7 @@ export const Combobox = component((raw: ComboboxProps) => {
     readProp(props.value as MaybeReactive<string>) ?? "";
 
   const filtered = () => {
+    if (isLoading()) return [] as ComboboxOption[];
     const q = query().trim();
     const list = getOptions();
     const fn = props.filter ?? defaultFilter;
@@ -198,6 +247,12 @@ export const Combobox = component((raw: ComboboxProps) => {
     return hit?.label ?? "";
   };
 
+  const close = () => {
+    open.set(false);
+    query.set(selectedLabel());
+    listEl?.classList.remove("is-open");
+  };
+
   effect(() => {
     if (!open()) {
       query.set(selectedLabel());
@@ -205,15 +260,21 @@ export const Combobox = component((raw: ComboboxProps) => {
     }
   });
 
+  // Reposition when loading/options change while open
+  effect(() => {
+    if (!open()) return;
+    void filtered().length;
+    void isLoading();
+    const win = rootEl?.ownerDocument.defaultView ?? window;
+    const t = win.setTimeout(() => placeList(), 0);
+    return () => win.clearTimeout(t);
+  });
+
   effect(() => {
     if (!open()) return;
     return attachOverlay({
       getRoot: () => rootEl,
-      onClose: () => {
-        open.set(false);
-        query.set(selectedLabel());
-        listEl?.classList.remove("is-open");
-      },
+      onClose: close,
       escape: true,
       dismissOutside: true,
       isInside: (node) => {
@@ -222,7 +283,6 @@ export const Combobox = component((raw: ComboboxProps) => {
         return false;
       },
       onAttach: ({ doc, win }) => {
-        // Portal list to body so overflow:hidden parents (cards, drawers) cannot clip it
         if (listEl && listEl.parentNode !== doc.body) {
           doc.body.appendChild(listEl);
         }
@@ -241,14 +301,13 @@ export const Combobox = component((raw: ComboboxProps) => {
           doc.removeEventListener("scroll", onRepo, true);
           win.removeEventListener("scroll", onRepo, true);
           listEl?.classList.remove("is-open");
-          // Keep portaled for next open (still in body) — fine
         };
       },
     });
   });
 
   const pick = (opt: ComboboxOption) => {
-    if (opt.disabled) return;
+    if (opt.disabled || isLoading()) return;
     props.onChange?.(opt.value);
     query.set(opt.label);
     open.set(false);
@@ -260,6 +319,7 @@ export const Combobox = component((raw: ComboboxProps) => {
         cx(
           "pu-combobox",
           open() && "pu-combobox--open",
+          isLoading() && "pu-combobox--loading",
           typeof props.class === "function" ? props.class() : props.class,
         )
       }
@@ -274,6 +334,7 @@ export const Combobox = component((raw: ComboboxProps) => {
         id={props.id}
         aria-label={props["aria-label"]}
         aria-expanded={() => (open() ? "true" : "false")}
+        aria-busy={() => (isLoading() ? "true" : "false")}
         aria-autocomplete="list"
         role="combobox"
         placeholder={props.placeholder}
@@ -293,6 +354,14 @@ export const Combobox = component((raw: ComboboxProps) => {
           active.set(0);
         }}
         onKeyDown={(e: KeyboardEvent) => {
+          if (e.key === "Escape") {
+            if (open()) {
+              e.preventDefault();
+              close();
+            }
+            return;
+          }
+          if (isLoading()) return;
           const list = filtered();
           if (e.key === "ArrowDown") {
             e.preventDefault();
@@ -311,40 +380,58 @@ export const Combobox = component((raw: ComboboxProps) => {
       <ul
         class="pu-combobox__list"
         role="listbox"
+        aria-busy={() => (isLoading() ? "true" : "false")}
         ref={(el) => {
           listEl = el;
         }}
       >
-        <Show when={() => filtered().length === 0}>
+        <Show when={() => isLoading()}>
           {() => {
             const li = document.createElement("li");
-            li.className = "pu-combobox__empty";
-            li.textContent = "No matches";
+            li.className = "pu-combobox__status pu-combobox__status--loading";
+            li.setAttribute("role", "status");
+            li.textContent =
+              readStr(props.loadingText as MaybeReactive<string>) ||
+              "Loading…";
             return li;
           }}
         </Show>
-        <For each={filtered}>
-          {(opt, index) => (
-            <li role="presentation">
-              <button
-                type="button"
-                role="option"
-                class={() =>
-                  cx(
-                    "pu-combobox__option",
-                    getValue() === opt().value && "is-selected",
-                    active() === index() && "is-active",
-                  )
-                }
-                disabled={() => !!opt().disabled}
-                onClick={() => pick(opt())}
-                onMouseEnter={() => active.set(index())}
-              >
-                {() => opt().label}
-              </button>
-            </li>
+        <Show when={() => !isLoading() && filtered().length === 0}>
+          {() => {
+            const li = document.createElement("li");
+            li.className = "pu-combobox__status";
+            li.setAttribute("role", "status");
+            li.textContent =
+              readStr(props.emptyText as MaybeReactive<string>) || "No matches";
+            return li;
+          }}
+        </Show>
+        <Show when={() => !isLoading()}>
+          {() => (
+            <For each={filtered}>
+              {(opt, index) => (
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    class={() =>
+                      cx(
+                        "pu-combobox__option",
+                        getValue() === opt().value && "is-selected",
+                        active() === index() && "is-active",
+                      )
+                    }
+                    disabled={() => !!opt().disabled}
+                    onClick={() => pick(opt())}
+                    onMouseEnter={() => active.set(index())}
+                  >
+                    {() => opt().label}
+                  </button>
+                </li>
+              )}
+            </For>
           )}
-        </For>
+        </Show>
       </ul>
     </div>
   );

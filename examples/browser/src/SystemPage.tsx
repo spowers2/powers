@@ -117,6 +117,14 @@ export function SystemPage(props: {
   const popoverOpen = signal(false);
   const menuPick = signal("—");
   const city = signal("sf");
+  const cityLoading = signal(false);
+  const cityOptions = signal([
+    { value: "sf", label: "San Francisco" },
+    { value: "nyc", label: "New York" },
+    { value: "ldn", label: "London" },
+    { value: "tyo", label: "Tokyo" },
+    { value: "ber", label: "Berlin" },
+  ]);
   const drawerOpen = signal(false);
   const radioPlan = signal("pro");
   const sliderVal = signal(48);
@@ -782,25 +790,46 @@ export function SystemPage(props: {
                 <DemoHead
                   title="Combobox"
                   snippet={SNIPPETS.combobox}
-                  hint="Type to filter — flips above near viewport bottom."
+                  hint="Type to filter · loading / empty for async options · flips near viewport edge."
                 />
                 <Field label="City">
                   <Combobox
                     value={city}
                     onChange={(v) => city.set(v)}
                     placeholder="Search cities…"
-                    options={[
-                      { value: "sf", label: "San Francisco" },
-                      { value: "nyc", label: "New York" },
-                      { value: "ldn", label: "London" },
-                      { value: "tyo", label: "Tokyo" },
-                      { value: "ber", label: "Berlin" },
-                    ]}
+                    options={cityOptions}
+                    loading={cityLoading}
+                    emptyText="No cities match"
+                    loadingText="Searching cities…"
                   />
                 </Field>
-                <Text muted size="sm">
-                  Value: {() => city()}
-                </Text>
+                <Stack direction="row" gap={2} wrap>
+                  <Button
+                    size="sm"
+                    variant="soft"
+                    onClick={() => {
+                      cityLoading.set(true);
+                      cityOptions.set([]);
+                      window.setTimeout(() => {
+                        cityOptions.set([
+                          { value: "sf", label: "San Francisco" },
+                          { value: "nyc", label: "New York" },
+                          { value: "ldn", label: "London" },
+                          { value: "tyo", label: "Tokyo" },
+                          { value: "ber", label: "Berlin" },
+                          { value: "par", label: "Paris" },
+                        ]);
+                        cityLoading.set(false);
+                      }, 900);
+                    }}
+                  >
+                    Simulate async load
+                  </Button>
+                  <Text muted size="sm">
+                    Value: {() => city()}
+                    {() => (cityLoading() ? " · loading…" : "")}
+                  </Text>
+                </Stack>
               </Stack>
             </Card>
             <Card>

@@ -412,7 +412,9 @@ const emailError = () =>
                 <pre class="docs-pre">{`&lt;Combobox
   value={city}
   onChange={city.set}
-  options={[{ value: "sf", label: "San Francisco" }]}
+  options={cities}
+  loading={loading}
+  emptyText="No cities match"
 /&gt;`}</pre>
                 <Text size="sm" muted>
                   System →{" "}

@@ -516,6 +516,38 @@ describe("@power-ux/ui", () => {
     assert.match(root.textContent ?? "", /Beta/);
   });
 
+  it("Combobox shows loading and empty states", async () => {
+    const { flush } = await import("@power-ux/core");
+    const value = signal("");
+    const loading = signal(true);
+    const options = signal<{ value: string; label: string }[]>([]);
+    mount(root, () =>
+      Combobox({
+        value,
+        onChange: (v) => value.set(v),
+        options,
+        loading,
+        emptyText: "Nothing here",
+        loadingText: "Please wait",
+      }),
+    );
+    const input = root.querySelector(".pu-combobox__input") as HTMLInputElement;
+    input.focus();
+    flush();
+    await new Promise((r) => setTimeout(r, 20));
+    assert.match(document.body.textContent ?? "", /Please wait/);
+
+    loading.set(false);
+    flush();
+    await new Promise((r) => setTimeout(r, 20));
+    assert.match(document.body.textContent ?? "", /Nothing here/);
+
+    options.set([{ value: "z", label: "Zulu" }]);
+    flush();
+    await new Promise((r) => setTimeout(r, 20));
+    assert.match(document.body.textContent ?? "", /Zulu/);
+  });
+
   it("Command opens and lists items", async () => {
     const { flush } = await import("@power-ux/core");
     const open = signal(true);
@@ -530,6 +562,24 @@ describe("@power-ux/ui", () => {
     await new Promise((r) => setTimeout(r, 10));
     assert.ok(root.querySelector(".pu-command-root--open"));
     assert.match(root.textContent ?? "", /Go somewhere/);
+  });
+
+  it("Command shows loading state", async () => {
+    const { flush } = await import("@power-ux/core");
+    const open = signal(true);
+    const loading = signal(true);
+    mount(root, () =>
+      Command({
+        open,
+        onOpenChange: (v) => open.set(v),
+        items: [],
+        loading,
+        loadingText: "Fetching commands",
+      }),
+    );
+    flush();
+    await new Promise((r) => setTimeout(r, 10));
+    assert.match(root.textContent ?? "", /Fetching commands/);
   });
 
   it("createStyleSheet injects once", () => {
