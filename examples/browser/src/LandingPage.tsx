@@ -1,5 +1,5 @@
 /**
- * Marketing landing — modern, token-driven, live demos.
+ * Product landing — minimal hero + live showcase + clean feature grid.
  * Navigation is provided by the shared SiteNav in AppShell.
  */
 import { signal, computed, effect } from "@powers/core";
@@ -9,8 +9,11 @@ import {
   Badge,
   Button,
   Container,
+  Field,
+  Input,
   Progress,
   Stack,
+  Switch,
   Text,
 } from "@powers/ui";
 import {
@@ -24,11 +27,50 @@ const SECTION_IDS = ["features", "learn", "compare"] as const;
 
 const NAMES = ["Ada Lovelace", "Grace Hopper", "Katherine Johnson"] as const;
 
+const SHOWCASE_SLIDES = [
+  { id: "release", label: "Release" },
+  { id: "forms", label: "Forms" },
+  { id: "system", label: "System" },
+] as const;
+
+type ShowcaseId = (typeof SHOWCASE_SLIDES)[number]["id"];
+
+const FEATURES = [
+  {
+    title: "Fine-grained updates",
+    body: "Only the bindings that read a signal re-run — not a virtual tree.",
+    href: "/docs",
+  },
+  {
+    title: "Design tokens",
+    body: "One tokens file drives brand, type, space, and dark mode.",
+    href: "/system#sys-color",
+  },
+  {
+    title: "Forms that stay mounted",
+    body: "bind + Field validation without remounting the whole screen.",
+    href: "/lab?recipe=form",
+  },
+  {
+    title: "Router, one outlet",
+    body: "Explicit routes and a single outlet host — no double-render traps.",
+    href: "/docs",
+  },
+  {
+    title: "Lab + System",
+    body: "Learn by running recipes; explore every primitive live.",
+    href: "/lab",
+  },
+  {
+    title: "Tiny packages",
+    body: "core · dom · ui · router · animate · ssr — take only what you need.",
+    href: "/system",
+  },
+] as const;
+
 export function LandingPage(props: { router: Router }) {
   const { router } = props;
 
-  // Hero = a tiny product surface (not a counter toy)
-  // Independent signals: only UI that *reads* a signal re-runs when it changes.
   const owner = signal<string>(NAMES[0]!);
   const progress = signal(42);
   const status = computed(() => {
@@ -43,6 +85,21 @@ export function LandingPage(props: { router: Router }) {
     if (p >= 60) return "accent" as const;
     return "neutral" as const;
   });
+
+  const email = signal("you@studio.dev");
+  const emailTouched = signal(false);
+  const emailError = () => {
+    if (!emailTouched()) return "";
+    const v = email().trim();
+    if (!v) return "Email is required";
+    return v.includes("@") ? "" : "Enter a valid email";
+  };
+
+  const notify = signal(true);
+  const dense = signal(false);
+
+  const slide = signal(0);
+  const paused = signal(false);
 
   const showBackTop = signal(false);
   const sectionNav = createSectionNav(SECTION_IDS);
@@ -62,7 +119,27 @@ export function LandingPage(props: { router: Router }) {
 
   const go = (path: string) => () => router.navigate(path);
 
-  // Floating back-to-top visibility
+  const setSlide = (i: number) => {
+    const n = SHOWCASE_SLIDES.length;
+    slide.set(((i % n) + n) % n);
+  };
+
+  const activeSlide = (): ShowcaseId =>
+    SHOWCASE_SLIDES[slide()]?.id ?? "release";
+
+  // Auto-advance showcase (paused on hover/focus; off if reduced motion)
+  effect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) return;
+
+    const tick = () => {
+      if (!paused()) setSlide(slide() + 1);
+    };
+    const id = window.setInterval(tick, 5600);
+    return () => window.clearInterval(id);
+  });
+
   effect(() => {
     const onScroll = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
@@ -81,7 +158,6 @@ export function LandingPage(props: { router: Router }) {
       <div class="lp-mesh" aria-hidden="true" />
 
       <main id="top">
-        {/* Sticky in-page anchors */}
         <div class="lp-anchors">
           <Container size="xl">
             <nav class="lp-anchors-inner" aria-label="On this page">
@@ -118,7 +194,7 @@ export function LandingPage(props: { router: Router }) {
           </Container>
         </div>
 
-        {/* HERO — product-first, minimal */}
+        {/* HERO */}
         <section class="lp-hero">
           <Container size="xl">
             <div class="lp-hero-grid">
@@ -169,57 +245,196 @@ export function LandingPage(props: { router: Router }) {
                 </div>
 
                 <ul class="lp-feature-row" aria-label="Highlights">
-                  <li>No virtual DOM</li>
-                  <li>Tokens + primitives</li>
-                  <li>Tiny core</li>
+                  <li>Signals</li>
+                  <li>Components</li>
+                  <li>Tokens</li>
+                  <li>Lab</li>
                 </ul>
               </div>
 
-              <div class="lp-stage" aria-label="Live product demo">
+              {/* Live product showcase (not a marketing banner) */}
+              <div
+                class="lp-stage"
+                aria-label="Live product showcase"
+                onMouseEnter={() => paused.set(true)}
+                onMouseLeave={() => paused.set(false)}
+              >
                 <div class="lp-stage-inner">
                   <div class="lp-stage-bar" aria-hidden="true">
                     <i />
                     <i />
                     <i />
-                    <span>Release · live</span>
+                    <span>
+                      {() =>
+                        `${SHOWCASE_SLIDES[slide()]?.label ?? "Release"} · live`
+                      }
+                    </span>
                   </div>
 
-                  <div class="lp-project">
-                    <Stack direction="row" gap={3} align="center">
-                      <Avatar name={owner} size="md" />
-                      <div class="lp-project-meta">
-                        <Text weight="semibold" size="sm">
-                          Release checklist
-                        </Text>
-                        <Text muted size="xs">
-                          Owner: {() => owner()}
-                        </Text>
-                      </div>
-                      <Badge tone={statusTone} class="lp-project-status">
-                        {() => status()}
-                      </Badge>
-                    </Stack>
+                  <div
+                    class="lp-showcase-tabs"
+                    role="tablist"
+                    aria-label="Showcase slides"
+                  >
+                    {SHOWCASE_SLIDES.map((s, i) => (
+                      <button
+                        type="button"
+                        role="tab"
+                        class={() =>
+                          slide() === i
+                            ? "lp-showcase-tab is-active"
+                            : "lp-showcase-tab"
+                        }
+                        aria-selected={() => (slide() === i ? "true" : "false")}
+                        onClick={() => setSlide(i)}
+                      >
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
 
-                    <div class="lp-project-progress">
-                      <Progress value={progress} label="Ship readiness" />
+                  <div class="lp-showcase-panel" role="tabpanel">
+                    {/* Release */}
+                    <div
+                      class={() =>
+                        activeSlide() === "release"
+                          ? "lp-showcase-slide is-active"
+                          : "lp-showcase-slide"
+                      }
+                    >
+                      <div class="lp-project">
+                        <Stack direction="row" gap={3} align="center">
+                          <Avatar name={owner} size="md" />
+                          <div class="lp-project-meta">
+                            <Text weight="semibold" size="sm">
+                              Release checklist
+                            </Text>
+                            <Text muted size="xs">
+                              Owner: {() => owner()}
+                            </Text>
+                          </div>
+                          <Badge tone={statusTone} class="lp-project-status">
+                            {() => status()}
+                          </Badge>
+                        </Stack>
+                        <div class="lp-project-progress">
+                          <Progress value={progress} label="Ship readiness" />
+                        </div>
+                        <Stack direction="row" gap={2} wrap>
+                          <Button size="sm" onClick={nudge}>
+                            Advance
+                          </Button>
+                          <Button size="sm" variant="soft" onClick={cycleOwner}>
+                            Switch owner
+                          </Button>
+                          <Button size="sm" variant="ghost" onClick={reset}>
+                            Reset
+                          </Button>
+                        </Stack>
+                        <p class="lp-stage-caption">
+                          Advance only updates progress and status. Switch owner
+                          only updates the avatar and name.
+                        </p>
+                      </div>
                     </div>
 
-                    <Stack direction="row" gap={2} wrap>
-                      <Button size="sm" onClick={nudge}>
-                        Advance
-                      </Button>
-                      <Button size="sm" variant="soft" onClick={cycleOwner}>
-                        Switch owner
-                      </Button>
-                      <Button size="sm" variant="ghost" onClick={reset}>
-                        Reset
-                      </Button>
-                    </Stack>
+                    {/* Forms */}
+                    <div
+                      class={() =>
+                        activeSlide() === "forms"
+                          ? "lp-showcase-slide is-active"
+                          : "lp-showcase-slide"
+                      }
+                    >
+                      <div class="lp-project">
+                        <Text weight="semibold" size="sm">
+                          Account email
+                        </Text>
+                        <Field
+                          label="Work email"
+                          htmlFor="lp-email"
+                          error={emailError}
+                          hint="bind + live validation — field stays mounted."
+                        >
+                          <Input
+                            id="lp-email"
+                            type="email"
+                            bind={email}
+                            onBlur={() => emailTouched.set(true)}
+                            aria-invalid={() => !!emailError()}
+                          />
+                        </Field>
+                        <Stack direction="row" gap={2} wrap>
+                          <Button
+                            size="sm"
+                            onClick={() => {
+                              emailTouched.set(true);
+                              if (!emailError()) {
+                                /* demo only */
+                              }
+                            }}
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => {
+                              email.set("you@studio.dev");
+                              emailTouched.set(false);
+                            }}
+                          >
+                            Reset
+                          </Button>
+                        </Stack>
+                        <p class="lp-stage-caption">
+                          Try clearing the field or removing @ — the form does
+                          not remount.
+                        </p>
+                      </div>
+                    </div>
 
-                    <p class="lp-stage-caption">
-                      Only the pieces that read a signal re-render — the rest of
-                      the screen stays still.
-                    </p>
+                    {/* System */}
+                    <div
+                      class={() =>
+                        activeSlide() === "system"
+                          ? "lp-showcase-slide is-active"
+                          : "lp-showcase-slide"
+                      }
+                    >
+                      <div
+                        class={() =>
+                          dense()
+                            ? "lp-project lp-project--dense"
+                            : "lp-project"
+                        }
+                      >
+                        <Text weight="semibold" size="sm">
+                          Workspace prefs
+                        </Text>
+                        <Switch
+                          label="Product updates"
+                          bind={notify}
+                        />
+                        <Switch
+                          label="Compact density"
+                          bind={dense}
+                        />
+                        <Text muted size="xs">
+                          {() =>
+                            notify()
+                              ? "Notifications on"
+                              : "Notifications off"
+                          }
+                          {" · "}
+                          {() => (dense() ? "Dense UI" : "Comfortable UI")}
+                        </Text>
+                        <p class="lp-stage-caption">
+                          Design-system controls — same Switch and density
+                          patterns as production apps.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -242,7 +457,9 @@ export function LandingPage(props: { router: Router }) {
                   onClick={go("/system#sys-color")}
                 >
                   <strong>Design</strong>
-                  <span>Tokens, density, and patterns in the system explorer.</span>
+                  <span>
+                    Tokens, density, and patterns in the system explorer.
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -250,7 +467,9 @@ export function LandingPage(props: { router: Router }) {
                   onClick={go("/lab?recipe=settings")}
                 >
                   <strong>Cookbook</strong>
-                  <span>Settings, admin lists, and validation you can steal.</span>
+                  <span>
+                    Settings, admin lists, and validation you can steal.
+                  </span>
                 </button>
               </div>
             </div>
@@ -304,74 +523,30 @@ export function LandingPage(props: { router: Router }) {
           </Container>
         </section>
 
-        {/* FEATURES BENTO */}
+        {/* FEATURES — clean 6-up */}
         <section class="lp-section" id="features">
           <Container size="xl">
             <div class="lp-section-head">
-              <h2 class="lp-section-title">Built like a system, not a tangle of libraries</h2>
+              <h2 class="lp-section-title">
+                Everything you need, nothing you don’t
+              </h2>
               <p class="lp-section-sub">
-                One mental model from state to screen to motion to chrome —
-                packages stay small and tree-shakeable.
+                One mental model from state to screen — packages stay small and
+                tree-shakeable.
               </p>
             </div>
 
-            <div class="lp-bento">
-              <article class="lp-tile lp-bento-wide">
-                <div class="lp-tile-glow" aria-hidden="true" />
-                <div class="lp-tile-icon">⚡</div>
-                <h3>Fine-grained by default</h3>
-                <p>
-                  Signals, computed, and effects track exact dependencies. When
-                  data changes, only the bindings that read it re-run — not a
-                  virtual tree, not your whole page.
-                </p>
-              </article>
-
-              <article class="lp-tile lp-bento-tall">
-                <div class="lp-tile-icon">🎯</div>
-                <h3>Learn in an afternoon</h3>
-                <p>
-                  signal → computed → effect → store → resource. Then mount,
-                  JSX, props, router, tokens. No dual “hooks vs render” model.
-                </p>
-              </article>
-
-              <article class="lp-tile lp-bento-sm">
-                <div class="lp-tile-icon">🎞</div>
-                <h3>Motion on values</h3>
-                <p>
-                  Tweens and springs animate signals. Bind style once; optional{" "}
-                  <code>@powers/animate/gsap</code> when you need pro eases.
-                </p>
-              </article>
-
-              <article class="lp-tile lp-bento-sm">
-                <div class="lp-tile-icon">🧭</div>
-                <h3>Tiny router</h3>
-                <p>
-                  createRouter, Link, params, memory/history modes. Explicit and
-                  testable.
-                </p>
-              </article>
-
-              <article class="lp-tile lp-bento-mid">
-                <div class="lp-tile-icon">🎨</div>
-                <h3>Design system you actually edit</h3>
-                <p>
-                  One tokens.css drives brand, space, type, and dark mode.
-                  Primitives (Button, Input, Stack, Card…) only speak semantic
-                  variables — retheme without hunting components.
-                </p>
-              </article>
-
-              <article class="lp-tile lp-bento-mid">
-                <div class="lp-tile-icon">📦</div>
-                <h3>Composable packages</h3>
-                <p>
-                  @powers/core · animate · dom · router · ssr · ui. Use only
-                  what you need; SSR foundation ready for islands next.
-                </p>
-              </article>
+            <div class="lp-feat-grid">
+              {FEATURES.map((f) => (
+                <button
+                  type="button"
+                  class="lp-feat-card"
+                  onClick={go(f.href)}
+                >
+                  <strong>{f.title}</strong>
+                  <span>{f.body}</span>
+                </button>
+              ))}
             </div>
           </Container>
         </section>
@@ -382,8 +557,8 @@ export function LandingPage(props: { router: Router }) {
             <div class="lp-section-head">
               <h2 class="lp-section-title">The whole core is five ideas</h2>
               <p class="lp-section-sub">
-                Master these and you already think in Powers. Everything else
-                is projection: DOM, routes, tokens.
+                Master these and you already think in Powers. Everything else is
+                projection: DOM, routes, tokens.
               </p>
             </div>
             <div class="lp-steps">
@@ -432,7 +607,9 @@ mount(document.getElementById("app")!, () => (
         <section class="lp-section" id="compare">
           <Container size="xl">
             <div class="lp-section-head">
-              <h2 class="lp-section-title">Clear defaults. Escape hatches when you need them.</h2>
+              <h2 class="lp-section-title">
+                Clear defaults. Escape hatches when you need them.
+              </h2>
               <p class="lp-section-sub">
                 Opinionated where it reduces cognitive load — open where power
                 users require it.
@@ -472,7 +649,9 @@ mount(document.getElementById("app")!, () => (
                   </tr>
                   <tr>
                     <td>Pro motion</td>
-                    <td>Optional <code>animate/gsap</code> peer</td>
+                    <td>
+                      Optional <code>animate/gsap</code> peer
+                    </td>
                     <td class="lp-meh">Often bolted on</td>
                   </tr>
                 </tbody>
@@ -481,34 +660,20 @@ mount(document.getElementById("app")!, () => (
           </Container>
         </section>
 
-        {/* CTA */}
         <Container size="xl">
           <div class="lp-cta">
             <div class="lp-cta-inner">
               <div>
                 <h2>Ship something that feels inevitable</h2>
                 <p>
-                  Learn in the Lab, explore System (Copy JSX), or open a full
-                  product demo: designlab206 (:5180) or Hearth restaurant (:5181).
+                  Learn in the Lab, explore System, or open a full product demo:
+                  designlab206 (:5180) or Hearth (:5181).
                 </p>
               </div>
               <Stack direction="row" gap={2} wrap>
-                <a
-                  class="lp-demo-link lp-demo-link--primary"
-                  href="http://localhost:5180"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  designlab206 demo
-                </a>
-                <a
-                  class="lp-demo-link"
-                  href="http://localhost:5181"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Hearth demo
-                </a>
+                <Button size="lg" onClick={go("/docs")}>
+                  Get started
+                </Button>
                 <Button size="lg" variant="soft" onClick={go("/lab")}>
                   Practice in Lab
                 </Button>
@@ -521,7 +686,7 @@ mount(document.getElementById("app")!, () => (
       <footer class="lp-footer">
         <Container size="xl">
           <div class="lp-footer-inner">
-            <span>Powers — MIT · private foundations</span>
+            <span>Powers · Apache-2.0 · private until public</span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
                 Docs
@@ -529,7 +694,11 @@ mount(document.getElementById("app")!, () => (
               <button type="button" class="lp-footer-link" onClick={go("/lab")}>
                 Lab
               </button>
-              <button type="button" class="lp-footer-link" onClick={go("/system")}>
+              <button
+                type="button"
+                class="lp-footer-link"
+                onClick={go("/system")}
+              >
                 System
               </button>
               <a
@@ -549,7 +718,7 @@ mount(document.getElementById("app")!, () => (
                 Hearth
               </a>
               <a
-                href="https://github.com/spowers2/powers"
+                href="https://github.com/spowers2/power-ui"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -560,7 +729,6 @@ mount(document.getElementById("app")!, () => (
         </Container>
       </footer>
 
-      {/* Floating return control when deep in the page */}
       <button
         type="button"
         class={() => `lp-back-top${showBackTop() ? " is-visible" : ""}`}
