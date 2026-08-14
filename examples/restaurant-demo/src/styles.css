@@ -227,12 +227,86 @@ body::before {
   background: color-mix(in srgb, var(--pu-color-accent) 14%, transparent);
 }
 
+/* Guest chrome: warm, but always readable in light *and* dark (never force cream over light ink). */
 .app-header--guest {
-  background: color-mix(in srgb, var(--hearth-cream) 88%, transparent);
+  background: color-mix(in srgb, var(--hearth-cream) 94%, #fff);
+  border-bottom-color: color-mix(in srgb, var(--hearth-ember) 18%, var(--pu-color-border));
+  color: var(--hearth-ink);
+}
+
+.app-header--guest .app-brand {
+  color: var(--hearth-ink);
 }
 
 .app-header--guest .app-brand__sub {
-  color: color-mix(in srgb, var(--pu-color-accent) 70%, var(--pu-color-text-muted));
+  color: color-mix(in srgb, var(--hearth-ember-deep) 55%, var(--hearth-muted));
+}
+
+.app-header--guest .app-nav a {
+  color: color-mix(in srgb, var(--hearth-ink) 72%, var(--hearth-muted));
+}
+
+.app-header--guest .app-nav a:hover {
+  color: var(--hearth-ink);
+  background: color-mix(in srgb, var(--hearth-ember) 12%, #fff);
+}
+
+.app-header--guest .app-nav a.is-active {
+  color: var(--hearth-ember-deep);
+  background: color-mix(in srgb, var(--hearth-ember) 16%, #fff);
+}
+
+/* Ghost actions: solid ink on cream — default ghost can wash out */
+.app-header--guest .app-header-actions .pu-btn--ghost {
+  color: var(--hearth-ink);
+  border-color: color-mix(in srgb, var(--hearth-ink) 22%, transparent);
+  background: color-mix(in srgb, #fff 70%, transparent);
+}
+
+.app-header--guest .app-header-actions .pu-btn--ghost:hover:not(:disabled) {
+  color: var(--hearth-ink);
+  border-color: color-mix(in srgb, var(--hearth-ember) 40%, var(--hearth-ink));
+  background: color-mix(in srgb, var(--hearth-ember) 12%, #fff);
+}
+
+[data-pu-theme="dark"] .app-header--guest {
+  background: color-mix(in srgb, var(--pu-color-surface) 92%, var(--hearth-ember));
+  border-bottom-color: color-mix(in srgb, var(--hearth-ember) 28%, var(--pu-color-border));
+  color: var(--pu-color-text);
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-brand {
+  color: var(--pu-color-text);
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-brand__sub {
+  color: color-mix(in srgb, var(--pu-color-accent) 55%, var(--pu-color-text-muted));
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-nav a {
+  color: var(--pu-color-text-muted);
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-nav a:hover {
+  color: var(--pu-color-text);
+  background: var(--pu-color-surface-2);
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-nav a.is-active {
+  color: var(--pu-color-accent);
+  background: color-mix(in srgb, var(--pu-color-accent) 16%, transparent);
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-header-actions .pu-btn--ghost {
+  color: var(--pu-color-text);
+  border-color: var(--pu-color-border-strong);
+  background: color-mix(in srgb, var(--pu-color-surface-2) 80%, transparent);
+}
+
+[data-pu-theme="dark"] .app-header--guest .app-header-actions .pu-btn--ghost:hover:not(:disabled) {
+  color: var(--pu-color-text);
+  border-color: color-mix(in srgb, var(--pu-color-accent) 40%, var(--pu-color-border));
+  background: var(--pu-color-surface-2);
 }
 
 .guest-info-grid {
