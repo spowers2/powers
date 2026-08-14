@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--pu-color-bg);
+  color: var(--pu-color-text);
+  font-family: var(--pu-font-sans, system-ui, sans-serif);
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.app .pu-card {
+  width: min(100%, 26rem);
+}

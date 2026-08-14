@@ -209,6 +209,6 @@ See the docs hub: [`docs/README.md`](./README.md).
 
 - A separate CSS framework to look good  
 - Dependency arrays  
-- **GSAP** for everyday motion (optional adapter planned later)  
+- **GSAP** for everyday motion — default is signal tweens; optional `@power-ui/animate/gsap` when you need pro motion  
 
 Master signals + JSX + UI tokens/primitives and you can ship real apps.

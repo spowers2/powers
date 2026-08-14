@@ -3,9 +3,9 @@
 **Product stance:** Power UI is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
-**Default palette:** **deep ink navy** brand blues + **lime green `#69BE28`** (`--pu-sage-*`) on quiet graphite neutrals.  
-**Surface language:** layered elevation, soft multi-shadows, optional glass (`--pu-glass-*`), generous radius, tight display type.  
-Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
+**Default palette — “Seahawk hologram”:** College Navy `#002244`, Action Green `#69BE28`, Wolf Grey, soft holographic cyan edges, restrained brass metal.  
+**Surface language:** clean layered glass, soft multi-shadows, refined radius — steampunk *hints* without costume.  
+Retheme entirely by editing `packages/ui/src/styles/tokens.css` (product demos override tokens per app).
 
 ---
 

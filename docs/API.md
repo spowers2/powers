@@ -53,15 +53,22 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 | Area | Exports |
 |---|---|
 | Theme | `createTheme` · `createDensity` · `cx` |
-| Layout | `Stack` · `Grid` · `Container` · `Divider` |
-| Type | `Text` · `Code` · `Kbd` |
-| Forms | `Button` · `Input` · `Textarea` · `Select` · `Field` · `Label` · `Switch` · `Checkbox` |
-| Feedback | `Alert` · `Spinner` · `Progress` · `Skeleton` · `Badge` · `Avatar` |
-| Overlays | `Dialog` · `Tabs` · `Tooltip` · `Popover` · `Menu` · `Toaster` / `createToaster` · `Command` |
-| Forms+ | `Combobox` (searchable select) |
-| Surfaces | `Card` (variants: default / glass / elevated / soft) |
+| Authoring | `createStyleSheet` · `styleVars` · `trapFocus` · `attachOverlay` · `readProp` |
+| Forms | `required` · `emailFormat` · `minLength` · `maxLength` · `matches` · `firstError` · `validateForm` |
+| Motion | `Transition` · `MOTION_PRESETS` · `motionVars` |
+| Layout | `Stack` · `Grid` · `Container` · `Divider` · `AspectRatio` · `ScrollArea` · `Collapse` |
+| Type | `Text` · `Code` · `Kbd` · `Link` |
+| Forms | `Button` · `Input` · `Textarea` · `Select` · `Field` · `Label` · `Switch` · `Checkbox` · `RadioGroup` · `Slider` · `NumberInput` · `ToggleGroup` · `Combobox` |
+| Surfaces | `Card` · `Badge` · `Chip` · `Avatar` |
+| Feedback | `Alert` · `Spinner` · `Progress` · `Skeleton` · `Empty` · `Stat` · `Toaster` / `createToaster` |
+| Structure | `Tabs` · `Accordion` · `Breadcrumb` · `Pagination` · `Steps` · `Timeline` · `List` · `Table` |
+| Overlays | `Dialog` · `Drawer` · `Tooltip` · `Popover` · `Menu` · `Command` |
 
-**Retheme:** edit `packages/ui/src/styles/tokens.css` (`--pu-brand-*` blues, `--pu-sage-*` green `#69BE28`).
+**Stable surface / freeze notes:** [STABLE.md](./STABLE.md) · **First screen:** [GOLDEN_PATH.md](./GOLDEN_PATH.md)
+| Motion | `Transition` |
+
+**Retheme:** edit `packages/ui/src/styles/tokens.css` (`--pu-brand-*` blues, `--pu-sage-*` green `#69BE28`).  
+**Write a component:** [COMPONENTS.md](./COMPONENTS.md).
 
 ---
 
@@ -72,6 +79,14 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 | `animate(signal, to, opts)` | tween number signal |
 | `spring(opts?)` | spring options for `animate` |
 | `cancel(signal)` | stop animation |
+
+### Optional: `@power-ui/animate/gsap` (peer: `gsap`)
+
+| API | Usage |
+|---|---|
+| `gsapAnimate(signal, to, opts?)` | GSAP tween; duration in **ms** |
+| `gsapFromTo(signal, from, to, opts?)` | GSAP fromTo |
+| `createGsapBridge(gsap)` | inject GSAP / mock |
 
 ---
 

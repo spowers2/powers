@@ -55,9 +55,14 @@ Resolution order: local `effect(..., { onError })` → owner `onError` handlers 
 
 `pnpm size` bundles `@power-ui/core` with esbuild (minify) and fails if gzip exceeds 8 KB.
 
+## App-author contracts
+
+Runtime rules that must not regress (outlet isolation, forms, lists):
+
+→ **[`FOUNDATION.md`](./FOUNDATION.md)**
+
 ## What is intentionally missing
 
-- Component / JSX runtime (Phase 2)
 - Deep proxy stores (prefer nested shallow stores)
 - History / time-travel options
 - Cross-boundary ownership enforcement (compile-time later)

@@ -34,7 +34,9 @@ Interactive learning playground for Power UI — **our own**, not a CodePen clon
 
 Ordered curriculum with **Goal / Learn / How / Try this** on each card:
 
-Hello · Computed · Spring motion · Keyed lists · Design system · Alerts · Tokens · Overlays · **Menu & Popover** · Challenge
+Hello · Computed · Spring · GSAP · Lists · Design system · Form · **createField** · **Cookbook: settings** · **Cookbook: admin-list** · Menu · Motion · Challenge · …
+
+Deep-link examples: `/lab?recipe=form` · `/lab?recipe=settings` · `/lab?recipe=admin-list`
 
 ## Editor
 

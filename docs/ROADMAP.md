@@ -36,30 +36,38 @@ Public docs hub: [`docs/README.md`](./README.md)
 | **pub-doc** | `docs/RELEASE.md` checklist |
 | **ui++++++** | Combobox + Command |
 | **patterns** | Lab async/form recipes + Docs patterns |
+| **author** | `createStyleSheet` · `styleVars` · `trapFocus` · `docs/COMPONENTS.md` |
+| **motion** | Transition · Collapse · overlay enter CSS |
+| **kit+++** | Accordion, Drawer, Breadcrumb, Pagination, Radio, Slider, NumberInput, ToggleGroup, List, Table, Empty, Stat, Steps, Timeline, Chip, ScrollArea, AspectRatio, Link |
 
 ---
 
-## Now / next (in order)
+## Now / next (in order) — win on **developer experience**
 
-| # | Milestone | Notes |
+The moat is not “more components than X”. It is: **fastest path from zero → beautiful interactive UI** with fine-grained power underneath.
+
+| # | Milestone | Why it wins |
 |---|---|---|
-| 7 | Color / enter-exit motion | Motion polish on Show / overlays |
-| 8 | Hardening | Focus trap, menu keyboard, For/`ul` semantics |
-| 5d | Streaming SSR (optional) | Progressive HTML if needed |
-| 6 | **GSAP adapter** (parked) | Optional peer; cinematic timelines |
-| pub | Execute release checklist | npm publish, website, LICENSE already MIT |
+| A | **Trust the demo** ✅ | TOC pin, roving focus Menu/Tabs/List, smoke tests, focus rings |
+| B | **Authoring loop** ✅ | Copy JSX (Lab-runnable) · Open Lab with snippet · error overlay |
+| C | **Forms + motion** ✅ | form helpers · MOTION_PRESETS · recipes + docs |
+| D | **Private scaffold** ✅ | `examples/app-starter` · `pnpm example:starter` · `pnpm new-app` |
+| E | **Product depth** ✅ | designlab206 (time/invoices) · Hearth (tables) · demo links |
+| F | **Foundation hardening** ✅ | Week 1 contracts · Week 2 overlays · Week 3 size/CI/STABLE/golden path |
+| G | **Public later** | RELEASE.md + versioned packages when *you* decide |
+
+Parked: streaming SSR — only when needed.
 
 ---
 
-## Parked (do not forget)
+## Done (was parked)
 
-### GSAP adapter + pro motion
+### GSAP adapter + pro motion ✅
 
-When apps need ScrollTrigger-class / SVG morph / timeline studio work:
-
-1. `@power-ui/animate/gsap` (or `@power-ui/gsap`) as **optional** peer  
-2. Bridge GSAP ticks → signals **or** DOM-only marketing pages  
-3. Keep `@power-ui/animate` as the default learn path  
+- `@power-ui/animate/gsap` — optional peer `gsap`  
+- `gsapAnimate` / `gsapFromTo` / `createGsapBridge` → number signals  
+- Default `@power-ui/animate` unchanged (no GSAP required)  
+- See [`ANIMATION.md`](./ANIMATION.md)
 
 ---
 

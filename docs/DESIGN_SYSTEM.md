@@ -78,6 +78,14 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Combobox` | searchable select (type to filter) |
 | `Command` | command palette (⌘K-style) |
 | `Label` / `Field` | accessible form layout + hint/error |
+| `Accordion` | expand panels (single/multi) |
+| `Drawer` | offcanvas side panel + focus trap |
+| `Breadcrumb` · `Pagination` | nav chrome |
+| `RadioGroup` · `Slider` · `NumberInput` · `ToggleGroup` | richer form controls |
+| `List` · `Table` | data selection / grids |
+| `Empty` · `Stat` · `Steps` · `Timeline` | product / dashboard surfaces |
+| `Chip` · `Link` · `ScrollArea` · `AspectRatio` · `Collapse` · `Transition` | tags, media, motion |
+| Authoring | `createStyleSheet` · `styleVars` · `trapFocus` — see [COMPONENTS.md](./COMPONENTS.md) |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |
 | `createTheme` | light/dark (`data-pu-theme`) |

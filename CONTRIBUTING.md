@@ -6,13 +6,14 @@ Written for **public contributors** as well as maintainers. The repo may be priv
 
 ```bash
 pnpm install
-pnpm test
-pnpm typecheck
+pnpm ci                # typecheck · test · size budgets (what CI runs)
 pnpm build
 pnpm example:browser   # http://localhost:5173
 ```
 
 Requirements: **Node ≥ 20**, **pnpm ≥ 9**.
+
+Size ceilings: [`docs/SIZE.md`](./docs/SIZE.md). Runtime contracts: [`docs/FOUNDATION.md`](./docs/FOUNDATION.md).
 
 ## Docs first
 
@@ -38,7 +39,9 @@ Rules:
 - Export only through each package’s `src/index.ts` (or documented CSS exports).  
 - **UI components must use `--pu-*` tokens only** — no hard-coded brand hex in component files.  
 - Prefer new **primitives** over exploding **utilities**. Utilities stay token-mapped and BEM-ish.  
-- Every public runtime API should have a test under `src/*.test.ts`.
+- Every public runtime API should have a test under `src/*.test.ts`.  
+- Changing FOUNDATION contracts or size budgets needs tests/docs in the same PR.  
+- Prefer the [golden path](./docs/GOLDEN_PATH.md) over new starter apps when teaching.
 
 ## Styling architecture
 

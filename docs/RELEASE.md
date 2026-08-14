@@ -9,7 +9,7 @@ Use this before the first public npm publish / website launch.
 ## Product readiness
 
 - [ ] Core story is clear: **runtime + design system**, not “React alternative + Tailwind”
-- [ ] Demo site routes work: `/` · `/lab` · `/system` · `/todos`
+- [ ] Demo site routes work: `/` · `/docs` · `/lab` · `/system`
 - [ ] Lab recipes load, teach (goal / learn / how / try), and run with design-system CSS in the iframe
 - [ ] Design tokens retheme via `packages/ui/src/styles/tokens.css` only
 - [ ] Light + dark theme smoke-tested
@@ -28,11 +28,12 @@ Use this before the first public npm publish / website launch.
 
 ## Quality gates
 
-- [ ] `pnpm -r typecheck` (or package typechecks) clean  
-- [ ] `pnpm -r test` green  
+- [ ] `pnpm ci` green (**typecheck · test · size budgets**)  
+- [ ] `pnpm size` within ceilings in [`SIZE.md`](./SIZE.md)  
 - [ ] No accidental private secrets in the repo  
 - [ ] `package.json` names, versions, exports, `sideEffects` for CSS  
 - [ ] README install + 30-second example for public readers  
+- [ ] [`STABLE.md`](./STABLE.md) + [`GOLDEN_PATH.md`](./GOLDEN_PATH.md) still accurate  
 
 ## Docs (public hub)
 
@@ -52,7 +53,7 @@ Use this before the first public npm publish / website launch.
 
 ## Explicitly later
 
-- GSAP optional adapter (parked)  
+- GSAP optional adapter — shipped as `@power-ui/animate/gsap` (peer)  
 - Streaming SSR  
 - Full a11y audit / ARIA cookbook  
 - Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  

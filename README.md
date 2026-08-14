@@ -7,10 +7,12 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
 > Private while foundations harden.
 
-**New here?**
+**New here? (private monorepo — not public npm yet)**
 
-1. Run the demo → open **`/docs`** (how to use + **API reference**)  
-2. Repo hub: **[docs/README.md](./docs/README.md)** · API: [`docs/API.md`](./docs/API.md) · learn: [`LEARN.md`](./docs/LEARN.md)
+1. **designlab206 demo:** `pnpm example:starter` → http://localhost:5180  
+2. **Hearth restaurant:** `pnpm example:restaurant` → http://localhost:5181  
+3. **Docs / Lab / System:** `pnpm example:browser` → `/docs` `/lab` `/system` (nav links to demos)  
+4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [docs/README.md](./docs/README.md)
 
 ---
 
@@ -32,10 +34,15 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 ```bash
 cd ~/Documents/power-ui
 pnpm install
-pnpm test
-pnpm example:browser   # http://localhost:5173
-# Power Lab (learn by coding): http://localhost:5173/lab
+pnpm ci                  # typecheck · test · size budgets
+pnpm example:starter     # http://localhost:5180  — designlab206 (freelance workspace)
+pnpm example:restaurant  # http://localhost:5181  — Hearth (restaurant + Unsplash photos)
+pnpm example:browser     # http://localhost:5173  — docs · lab · system
+# Minimal Vite app:           pnpm create-app my-ui
+# Full product starter:       pnpm new-app my-feature
 ```
+
+**Library quality:** [docs/USABILITY.md](./docs/USABILITY.md) · [docs/FOUNDATION.md](./docs/FOUNDATION.md) · [docs/STABLE.md](./docs/STABLE.md) · [docs/GOLDEN_PATH.md](./docs/GOLDEN_PATH.md) · [docs/SIZE.md](./docs/SIZE.md)
 
 ### Design system + router (sketch)
 

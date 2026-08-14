@@ -102,7 +102,7 @@ animate(x, 100, spring());
 - Full template compiler / SFC files  
 - SSR / hydration  
 - Built-in FLIP / enter-exit  
-- **GSAP adapter** (parked — [`docs/NEXT.md`](./NEXT.md))  
+- **GSAP adapter** — shipped as `@power-ui/animate/gsap` (optional peer)  
 
 ## Browser demo
 
