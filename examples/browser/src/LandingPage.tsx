@@ -118,90 +118,61 @@ export function LandingPage(props: { router: Router }) {
           </Container>
         </div>
 
-        {/* HERO */}
+        {/* HERO — product-first, minimal */}
         <section class="lp-hero">
           <Container size="xl">
             <div class="lp-hero-grid">
-              <div>
-                <div class="lp-kicker">
-                  <span class="lp-kicker-dot" aria-hidden="true" />
-                  <Badge tone="accent">Powers · signals + design system</Badge>
-                </div>
+              <div class="lp-hero-copy">
+                <p class="lp-product-label">Powers</p>
                 <h1 class="lp-title">
-                  The runtime that{" "}
-                  <span class="lp-title-gradient">updates only what changed</span>
+                  Ship UI that only updates{" "}
+                  <span class="lp-title-gradient">what changed</span>
                 </h1>
                 <p class="lp-lede">
-                  Fine-grained UI kit with a design system built in. Signals,
-                  JSX, and tokens in one stack — retheme a product without a
-                  framework pile-up.
+                  A fine-grained runtime and design system in one kit. Signals,
+                  components, and tokens — so you build products, not glue.
                 </p>
+
                 <div class="lp-cta-row">
                   <Button size="lg" onClick={go("/docs")}>
-                    How to use + API
+                    Get started
                   </Button>
                   <Button size="lg" variant="soft" onClick={go("/lab")}>
-                    Practice in Lab
+                    Try Lab
                   </Button>
+                </div>
+
+                <div class="lp-product-links" aria-label="Product demos">
                   <a
-                    class="lp-demo-link lp-demo-link--primary"
                     href="http://localhost:5180"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Open designlab206 demo →
+                    designlab206
                   </a>
+                  <span class="lp-product-links__sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <a
+                    href="http://localhost:5181"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Hearth
+                  </a>
+                  <span class="lp-product-links__sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <button type="button" onClick={go("/system")}>
+                    Design system
+                  </button>
                 </div>
 
-                <div class="lp-paths" aria-label="Start here by role">
-                  <p class="lp-paths-title">Start here — pick your path</p>
-                  <div class="lp-paths-grid">
-                    <button
-                      type="button"
-                      class="lp-path-card"
-                      onClick={go("/docs#start")}
-                    >
-                      <strong>I’m an engineer</strong>
-                      <span>
-                        Docs → Lab hello → form recipe → copy a System card
-                      </span>
-                      <em>3 rules · bind forms · router once</em>
-                    </button>
-                    <button
-                      type="button"
-                      class="lp-path-card"
-                      onClick={go("/system#sys-color")}
-                    >
-                      <strong>I’m design / UX</strong>
-                      <span>
-                        Tokens playground → patterns → Open Lab from any card
-                      </span>
-                      <em>Brand in minutes · states · density</em>
-                    </button>
-                    <button
-                      type="button"
-                      class="lp-path-card"
-                      onClick={go("/lab?recipe=settings")}
-                    >
-                      <strong>Cookbook</strong>
-                      <span>
-                        Settings page · admin list · form validation recipes
-                      </span>
-                      <em>Ship a real screen in Lab</em>
-                    </button>
-                  </div>
-                </div>
-                <div class="lp-meta">
-                  <span>
-                    <strong>No VDOM</strong> by default
-                  </span>
-                  <span>
-                    <strong>No</strong> dependency arrays
-                  </span>
-                  <span>
-                    <strong>~2–3 KB</strong> core / package class
-                  </span>
-                </div>
+                <ul class="lp-feature-row" aria-label="Highlights">
+                  <li>No virtual DOM</li>
+                  <li>Tokens + primitives</li>
+                  <li>Tiny core</li>
+                </ul>
               </div>
 
               <div class="lp-stage" aria-label="Live product demo">
@@ -210,14 +181,7 @@ export function LandingPage(props: { router: Router }) {
                     <i />
                     <i />
                     <i />
-                    <span style={{ marginLeft: "0.5rem" }}>live · fine-grained</span>
-                  </div>
-
-                  <div class="lp-stage-head">
-                    <Badge tone="accent">Live surface</Badge>
-                    <Text muted size="xs">
-                      Same primitives as production
-                    </Text>
+                    <span>Release · live</span>
                   </div>
 
                   <div class="lp-project">
@@ -253,24 +217,41 @@ export function LandingPage(props: { router: Router }) {
                     </Stack>
 
                     <p class="lp-stage-caption">
-                      <strong>Fine-grained:</strong> Advance only re-runs Progress
-                      + Badge. Switch owner only re-runs Avatar + name — the rest
-                      stays put.
+                      Only the pieces that read a signal re-render — the rest of
+                      the screen stays still.
                     </p>
                   </div>
-
-                  <div class="lp-code-mini">
-                    <span class="k">const</span> progress ={" "}
-                    <span class="k">signal</span>(42);
-                    {"\n"}
-                    <span class="k">const</span> status ={" "}
-                    <span class="k">computed</span>(() =&gt; …);
-                    {"\n"}
-                    <span class="s">&lt;Progress value=&#123;progress&#125; /&gt;</span>
-                    {"\n"}
-                    <span class="s">&lt;Badge&gt;&#123;() =&gt; status()&#125;&lt;/Badge&gt;</span>
-                  </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="lp-paths" aria-label="Start here by role">
+              <p class="lp-paths-title">Start here</p>
+              <div class="lp-paths-grid">
+                <button
+                  type="button"
+                  class="lp-path-card"
+                  onClick={go("/docs#start")}
+                >
+                  <strong>Engineers</strong>
+                  <span>Docs, forms, and Lab recipes that match real apps.</span>
+                </button>
+                <button
+                  type="button"
+                  class="lp-path-card"
+                  onClick={go("/system#sys-color")}
+                >
+                  <strong>Design</strong>
+                  <span>Tokens, density, and patterns in the system explorer.</span>
+                </button>
+                <button
+                  type="button"
+                  class="lp-path-card"
+                  onClick={go("/lab?recipe=settings")}
+                >
+                  <strong>Cookbook</strong>
+                  <span>Settings, admin lists, and validation you can steal.</span>
+                </button>
               </div>
             </div>
           </Container>
