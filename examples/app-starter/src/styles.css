@@ -1,6 +1,6 @@
 /**
- * designlab206 — “Studio dusk”
- * Cool slate + electric indigo. Soft elevation (product/studio), not voltage paper.
+ * designlab206 — “Studio teal”
+ * Graphite + teal. Clean freelance workspace — not Teams purple / indigo.
  * Overrides @powers/ui tokens for this app only.
  */
 
@@ -13,15 +13,14 @@
   :root { --site-gutter: 1.5rem; }
 }
 
-
-
 :root {
-  --dl-indigo: #5b5cf0;
-  --dl-indigo-deep: #4344c8;
-  --dl-indigo-soft: #e8e9ff;
-  --dl-mist: #f4f5fb;
-  --dl-ink: #15182a;
-  --dl-muted: #6b7190;
+  --dl-teal: #0f766e;
+  --dl-teal-deep: #0d5c56;
+  --dl-teal-bright: #14b8a6;
+  --dl-teal-soft: #ccfbf1;
+  --dl-mist: #f3f7f6;
+  --dl-ink: #12201e;
+  --dl-muted: #5a6b68;
 
   --pu-font-sans: "Outfit", "Segoe UI", system-ui, sans-serif;
   --pu-font-display: "Outfit", "Segoe UI", system-ui, sans-serif;
@@ -29,23 +28,30 @@
 
   --pu-color-bg: var(--dl-mist);
   --pu-color-surface: #ffffff;
-  --pu-color-surface-2: #eef0f8;
+  --pu-color-surface-2: #e8f0ee;
   --pu-color-surface-elevated: #ffffff;
-  --pu-color-surface-sunken: #e8eaf4;
-  --pu-color-border: color-mix(in srgb, var(--dl-indigo) 12%, #d5d8e8);
-  --pu-color-border-strong: color-mix(in srgb, var(--dl-indigo) 28%, #b8bdd4);
+  --pu-color-surface-sunken: #dce8e5;
+  --pu-color-border: color-mix(in srgb, var(--dl-teal) 14%, #c5d4d0);
+  --pu-color-border-strong: color-mix(in srgb, var(--dl-teal) 32%, #9aafa9);
   --pu-color-text: var(--dl-ink);
   --pu-color-text-muted: var(--dl-muted);
-  --pu-color-accent: var(--dl-indigo);
-  --pu-color-accent-hover: var(--dl-indigo-deep);
+  --pu-color-accent: var(--dl-teal);
+  --pu-color-accent-hover: var(--dl-teal-deep);
   --pu-color-accent-fg: #ffffff;
-  --pu-color-focus: var(--dl-indigo);
-  --pu-color-danger: #e11d48;
+  --pu-color-focus: var(--dl-teal-bright);
+  --pu-color-danger: #dc2626;
   --pu-color-danger-fg: #fff;
-  --pu-color-selection: color-mix(in srgb, var(--dl-indigo) 22%, transparent);
+  --pu-color-selection: color-mix(in srgb, var(--dl-teal-bright) 22%, transparent);
+  --pu-color-success: #15803d;
+  --pu-color-signal: var(--dl-teal-bright);
 
-  --pu-glass-bg: color-mix(in srgb, #fff 78%, transparent);
-  --pu-glass-border: color-mix(in srgb, var(--dl-indigo) 10%, transparent);
+  --pu-color-soft-bg: color-mix(in srgb, var(--dl-teal) 12%, #ffffff);
+  --pu-color-soft-bg-hover: color-mix(in srgb, var(--dl-teal) 18%, #ffffff);
+  --pu-color-soft-fg: var(--dl-teal-deep);
+  --pu-color-soft-border: color-mix(in srgb, var(--dl-teal) 28%, #c5d4d0);
+
+  --pu-glass-bg: color-mix(in srgb, #fff 82%, transparent);
+  --pu-glass-border: color-mix(in srgb, var(--dl-teal) 12%, transparent);
   --pu-glass-blur: 16px;
 
   --pu-radius-sm: 8px;
@@ -53,53 +59,59 @@
   --pu-radius-lg: 16px;
   --pu-radius-xl: 22px;
 
-  --pu-shadow-xs: 0 1px 2px rgba(21, 24, 42, 0.04);
+  --pu-shadow-xs: 0 1px 2px rgba(18, 32, 30, 0.04);
   --pu-shadow-sm:
-    0 1px 2px rgba(21, 24, 42, 0.04),
-    0 4px 12px rgba(91, 92, 240, 0.06);
+    0 1px 2px rgba(18, 32, 30, 0.04),
+    0 4px 12px rgba(15, 118, 110, 0.07);
   --pu-shadow-md:
-    0 4px 8px rgba(21, 24, 42, 0.04),
-    0 12px 32px rgba(91, 92, 240, 0.1);
+    0 4px 8px rgba(18, 32, 30, 0.04),
+    0 12px 32px rgba(15, 118, 110, 0.1);
   --pu-shadow-lg:
-    0 8px 16px rgba(21, 24, 42, 0.05),
-    0 24px 48px rgba(91, 92, 240, 0.12);
+    0 8px 16px rgba(18, 32, 30, 0.05),
+    0 24px 48px rgba(15, 118, 110, 0.12);
   --pu-shadow-xl:
-    0 12px 24px rgba(21, 24, 42, 0.06),
-    0 32px 64px rgba(91, 92, 240, 0.14);
+    0 12px 24px rgba(18, 32, 30, 0.06),
+    0 32px 64px rgba(15, 118, 110, 0.14);
   --pu-shadow-float:
-    0 0 0 1px color-mix(in srgb, var(--dl-indigo) 12%, transparent),
-    0 16px 40px rgba(91, 92, 240, 0.14);
+    0 0 0 1px color-mix(in srgb, var(--dl-teal) 14%, transparent),
+    0 16px 40px rgba(15, 118, 110, 0.14);
 
-  --pu-color-glow: color-mix(in srgb, var(--dl-indigo) 14%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, #a78bfa 10%, transparent);
-  --pu-sage-500: var(--dl-indigo);
-  --pu-sage-400: #7c7df5;
-  --pu-sage-600: var(--dl-indigo-deep);
+  --pu-color-glow: color-mix(in srgb, var(--dl-teal) 14%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--dl-teal-bright) 12%, transparent);
+  --pu-sage-500: var(--dl-teal);
+  --pu-sage-400: var(--dl-teal-bright);
+  --pu-sage-600: var(--dl-teal-deep);
+  --pu-holo-cyan: var(--dl-teal-bright);
+  --pu-holo-teal: var(--dl-teal);
 }
 
 [data-pu-theme="dark"] {
-  --pu-color-bg: #0c0d16;
-  --pu-color-surface: #141625;
-  --pu-color-surface-2: #1c1e32;
-  --pu-color-surface-elevated: #22243a;
-  --pu-color-surface-sunken: #090a12;
+  --pu-color-bg: #0a1211;
+  --pu-color-surface: #121c1b;
+  --pu-color-surface-2: #1a2725;
+  --pu-color-surface-elevated: #223230;
+  --pu-color-surface-sunken: #070d0c;
   --pu-color-border: color-mix(in srgb, #fff 8%, transparent);
-  --pu-color-border-strong: color-mix(in srgb, var(--dl-indigo) 40%, transparent);
-  --pu-color-text: #eef0ff;
-  --pu-color-text-muted: #9aa0c0;
-  --pu-color-accent: #8b8cff;
-  --pu-color-accent-hover: #a5a6ff;
-  --pu-color-accent-fg: #0c0d16;
-  --pu-color-focus: #8b8cff;
-  --pu-color-selection: color-mix(in srgb, #8b8cff 28%, transparent);
-  --pu-glass-bg: color-mix(in srgb, #141625 80%, transparent);
-  --pu-glass-border: color-mix(in srgb, #fff 8%, transparent);
+  --pu-color-border-strong: color-mix(in srgb, var(--dl-teal-bright) 38%, transparent);
+  --pu-color-text: #e8f4f2;
+  --pu-color-text-muted: #93a8a4;
+  --pu-color-accent: #2dd4bf;
+  --pu-color-accent-hover: #5eead4;
+  --pu-color-accent-fg: #0a1211;
+  --pu-color-focus: #2dd4bf;
+  --pu-color-selection: color-mix(in srgb, #2dd4bf 28%, transparent);
+  --pu-color-soft-bg: color-mix(in srgb, #2dd4bf 14%, #121c1b);
+  --pu-color-soft-bg-hover: color-mix(in srgb, #2dd4bf 22%, #121c1b);
+  --pu-color-soft-fg: #5eead4;
+  --pu-color-soft-border: color-mix(in srgb, #2dd4bf 32%, transparent);
+  --pu-glass-bg: color-mix(in srgb, #121c1b 82%, transparent);
+  --pu-glass-border: color-mix(in srgb, #2dd4bf 14%, transparent);
   --pu-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
   --pu-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
   --pu-shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
   --pu-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
   --pu-shadow-float:
-    0 0 0 1px color-mix(in srgb, var(--dl-indigo) 35%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--dl-teal-bright) 30%, transparent),
     0 16px 48px rgba(0, 0, 0, 0.55);
 }
 
@@ -150,10 +162,10 @@ body::before {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 9px;
-  background: linear-gradient(145deg, var(--dl-indigo) 0%, #8b5cf6 100%);
+  background: linear-gradient(145deg, var(--dl-teal-bright) 0%, var(--dl-teal) 55%, var(--dl-teal-deep) 100%);
   box-shadow:
     0 0 0 1px color-mix(in srgb, #fff 30%, transparent) inset,
-    0 6px 16px color-mix(in srgb, var(--dl-indigo) 35%, transparent);
+    0 6px 16px color-mix(in srgb, var(--dl-teal) 35%, transparent);
   border: none;
   flex-shrink: 0;
 }
