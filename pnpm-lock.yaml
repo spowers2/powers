@@ -14,10 +14,10 @@ importers:
 
   examples/animate-demo:
     dependencies:
-      '@power-ui/animate':
+      '@powers/animate':
         specifier: workspace:*
         version: link:../../packages/animate
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -25,37 +25,68 @@ importers:
         specifier: ^4.19.3
         version: 4.23.11
 
-  examples/browser:
+  examples/app-starter:
     dependencies:
-      '@power-ui/animate':
-        specifier: workspace:*
-        version: link:../../packages/animate
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@power-ui/dom':
+      '@powers/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@power-ui/router':
+      '@powers/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@power-ui/ui':
+      '@powers/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+    devDependencies:
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+      vite:
+        specifier: ^6.2.2
+        version: 6.4.3(tsx@4.23.11)
+
+  examples/browser:
+    dependencies:
+      '@powers/animate':
+        specifier: workspace:*
+        version: link:../../packages/animate
+      '@powers/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@powers/dom':
+        specifier: workspace:*
+        version: link:../../packages/dom
+      '@powers/router':
+        specifier: workspace:*
+        version: link:../../packages/router
+      '@powers/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       esbuild-wasm:
         specifier: 0.25.12
         version: 0.25.12
+      gsap:
+        specifier: ^3.12.7
+        version: 3.15.0
     devDependencies:
+      happy-dom:
+        specifier: ^17.4.4
+        version: 17.6.3
       playwright:
         specifier: ^1.62.1
         version: 1.62.1
+      tsx:
+        specifier: ^4.19.3
+        version: 4.23.11
       vite:
         specifier: ^6.2.2
         version: 6.4.3(tsx@4.23.11)
 
   examples/counter:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -65,7 +96,7 @@ importers:
 
   examples/kitchen-sink:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -73,15 +104,37 @@ importers:
         specifier: ^4.19.3
         version: 4.23.11
 
-  examples/ssr-islands:
+  examples/restaurant-demo:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@power-ui/dom':
+      '@powers/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@power-ui/ssr':
+      '@powers/router':
+        specifier: workspace:*
+        version: link:../../packages/router
+      '@powers/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+    devDependencies:
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+      vite:
+        specifier: ^6.2.2
+        version: 6.4.3(tsx@4.23.11)
+
+  examples/ssr-islands:
+    dependencies:
+      '@powers/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@powers/dom':
+        specifier: workspace:*
+        version: link:../../packages/dom
+      '@powers/ssr':
         specifier: workspace:*
         version: link:../../packages/ssr
       happy-dom:
@@ -94,13 +147,16 @@ importers:
 
   packages/animate:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
       esbuild:
         specifier: ^0.25.1
         version: 0.25.12
+      gsap:
+        specifier: ^3.12.7
+        version: 3.15.0
       tsx:
         specifier: ^4.19.3
         version: 4.23.11
@@ -122,7 +178,7 @@ importers:
 
   packages/dom:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -141,13 +197,16 @@ importers:
 
   packages/router:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../core
-      '@power-ui/dom':
+      '@powers/dom':
         specifier: workspace:*
         version: link:../dom
     devDependencies:
+      esbuild:
+        specifier: ^0.25.1
+        version: 0.25.12
       happy-dom:
         specifier: ^17.4.4
         version: 17.6.3
@@ -160,10 +219,10 @@ importers:
 
   packages/ssr:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../core
-      '@power-ui/dom':
+      '@powers/dom':
         specifier: workspace:*
         version: link:../dom
       happy-dom:
@@ -179,13 +238,16 @@ importers:
 
   packages/ui:
     dependencies:
-      '@power-ui/core':
+      '@powers/core':
         specifier: workspace:*
         version: link:../core
-      '@power-ui/dom':
+      '@powers/dom':
         specifier: workspace:*
         version: link:../dom
     devDependencies:
+      esbuild:
+        specifier: ^0.25.1
+        version: 0.25.12
       happy-dom:
         specifier: ^17.4.4
         version: 17.6.3
@@ -678,6 +740,9 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  gsap@3.15.0:
+    resolution: {integrity: sha512-dMW4CWBTUK1AEEDeZc1g4xpPGIrSf9fJF960qbTZmN/QwZIWY5wgliS6JWl9/25fpTGJrMRtSjGtOmPnfjZB+A==}
+
   happy-dom@17.6.3:
     resolution: {integrity: sha512-UVIHeVhxmxedbWPCfgS55Jg2rDfwf2BCKeylcPSqazLz5w3Kri7Q4xdBJubsr/+VUzFLh0VjIvh13RaDA2/Xug==}
     engines: {node: '>=20.0.0'}
@@ -1086,6 +1151,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  gsap@3.15.0: {}
 
   happy-dom@17.6.3:
     dependencies:

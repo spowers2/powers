@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { signal, flush, effect } from "@power-ui/core";
+import { signal, flush, effect } from "@powers/core";
 import { installDom } from "./test-setup.js";
 import {
   mount,

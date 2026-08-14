@@ -2,8 +2,8 @@
  * Marketing landing — modern, token-driven, live demos.
  * Navigation is provided by the shared SiteNav in AppShell.
  */
-import { signal, computed, effect } from "@power-ui/core";
-import type { Router } from "@power-ui/router";
+import { signal, computed, effect } from "@powers/core";
+import type { Router } from "@powers/router";
 import {
   Avatar,
   Badge,
@@ -12,7 +12,7 @@ import {
   Progress,
   Stack,
   Text,
-} from "@power-ui/ui";
+} from "@powers/ui";
 import {
   createSectionNav,
   scrollToSection,
@@ -125,17 +125,16 @@ export function LandingPage(props: { router: Router }) {
               <div>
                 <div class="lp-kicker">
                   <span class="lp-kicker-dot" aria-hidden="true" />
-                  <Badge tone="accent">Fine-grained · JSX · Design tokens</Badge>
+                  <Badge tone="accent">Navy · Action green · Fine-grained</Badge>
                 </div>
                 <h1 class="lp-title">
-                  The UI runtime that{" "}
+                  The runtime that{" "}
                   <span class="lp-title-gradient">updates only what changed</span>
                 </h1>
                 <p class="lp-lede">
-                  One library for reactivity and UI chrome: fine-grained signals,
-                  JSX that updates only what changed, a real router, and a design
-                  system you retheme from a single token file — not a counter demo
-                  bolted onto another framework.
+                  Deep navy authority, action-green signal, clean holographic
+                  edges. Signals, JSX, and tokens in one system — retheme a whole
+                  product without a framework pile-up.
                 </p>
                 <div class="lp-cta-row">
                   <Button size="lg" onClick={go("/docs")}>
@@ -144,9 +143,53 @@ export function LandingPage(props: { router: Router }) {
                   <Button size="lg" variant="soft" onClick={go("/lab")}>
                     Practice in Lab
                   </Button>
-                  <Button size="lg" variant="ghost" onClick={go("/system")}>
-                    Components
-                  </Button>
+                  <a
+                    class="lp-demo-link lp-demo-link--primary"
+                    href="http://localhost:5180"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open designlab206 demo →
+                  </a>
+                </div>
+
+                <div class="lp-paths" aria-label="Start here by role">
+                  <p class="lp-paths-title">Start here — pick your path</p>
+                  <div class="lp-paths-grid">
+                    <button
+                      type="button"
+                      class="lp-path-card"
+                      onClick={go("/docs#start")}
+                    >
+                      <strong>I’m an engineer</strong>
+                      <span>
+                        Docs → Lab hello → form recipe → copy a System card
+                      </span>
+                      <em>3 rules · bind forms · router once</em>
+                    </button>
+                    <button
+                      type="button"
+                      class="lp-path-card"
+                      onClick={go("/system#sys-color")}
+                    >
+                      <strong>I’m design / UX</strong>
+                      <span>
+                        Tokens playground → patterns → Open Lab from any card
+                      </span>
+                      <em>Brand in minutes · states · density</em>
+                    </button>
+                    <button
+                      type="button"
+                      class="lp-path-card"
+                      onClick={go("/lab?recipe=settings")}
+                    >
+                      <strong>Cookbook</strong>
+                      <span>
+                        Settings page · admin list · form validation recipes
+                      </span>
+                      <em>Ship a real screen in Lab</em>
+                    </button>
+                  </div>
                 </div>
                 <div class="lp-meta">
                   <span>
@@ -167,10 +210,11 @@ export function LandingPage(props: { router: Router }) {
                     <i />
                     <i />
                     <i />
+                    <span style={{ marginLeft: "0.5rem" }}>live · fine-grained</span>
                   </div>
 
                   <div class="lp-stage-head">
-                    <Badge tone="accent">Live · design system</Badge>
+                    <Badge tone="accent">Live surface</Badge>
                     <Text muted size="xs">
                       Same primitives as production
                     </Text>
@@ -232,6 +276,53 @@ export function LandingPage(props: { router: Router }) {
           </Container>
         </section>
 
+        {/* DEMO APPS */}
+        <section class="lp-section" id="demos">
+          <Container size="xl">
+            <div class="lp-section-head">
+              <h2 class="lp-section-title">Real product demos</h2>
+              <p class="lp-section-sub">
+                Full apps built with Powers — not kitchen sinks. Run them
+                locally, then steal patterns into your own shell.
+              </p>
+            </div>
+            <div class="lp-demo-grid">
+              <a
+                class="lp-demo-card"
+                href="http://localhost:5180"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div class="lp-demo-card__kicker">:5180 · freelance</div>
+                <h3>designlab206</h3>
+                <p>
+                  Clients, projects, tasks, invoices, time log, and a
+                  billing-aware dashboard. Local-first workspace.
+                </p>
+                <span class="lp-demo-card__cta">
+                  Open demo → <code>pnpm example:starter</code>
+                </span>
+              </a>
+              <a
+                class="lp-demo-card lp-demo-card--hearth"
+                href="http://localhost:5181"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div class="lp-demo-card__kicker">:5181 · restaurant</div>
+                <h3>Hearth</h3>
+                <p>
+                  Menu with Unsplash photos, reservations, kitchen board, and a
+                  live table map. Neighborhood restaurant ops.
+                </p>
+                <span class="lp-demo-card__cta">
+                  Open demo → <code>pnpm example:restaurant</code>
+                </span>
+              </a>
+            </div>
+          </Container>
+        </section>
+
         {/* FEATURES BENTO */}
         <section class="lp-section" id="features">
           <Container size="xl">
@@ -268,8 +359,8 @@ export function LandingPage(props: { router: Router }) {
                 <div class="lp-tile-icon">🎞</div>
                 <h3>Motion on values</h3>
                 <p>
-                  Tweens and springs animate signals. Bind style once; GSAP stays
-                  an optional pro path later.
+                  Tweens and springs animate signals. Bind style once; optional{" "}
+                  <code>@powers/animate/gsap</code> when you need pro eases.
                 </p>
               </article>
 
@@ -296,7 +387,7 @@ export function LandingPage(props: { router: Router }) {
                 <div class="lp-tile-icon">📦</div>
                 <h3>Composable packages</h3>
                 <p>
-                  @power-ui/core · animate · dom · router · ssr · ui. Use only
+                  @powers/core · animate · dom · router · ssr · ui. Use only
                   what you need; SSR foundation ready for islands next.
                 </p>
               </article>
@@ -310,7 +401,7 @@ export function LandingPage(props: { router: Router }) {
             <div class="lp-section-head">
               <h2 class="lp-section-title">The whole core is five ideas</h2>
               <p class="lp-section-sub">
-                Master these and you already think in Power UI. Everything else
+                Master these and you already think in Powers. Everything else
                 is projection: DOM, routes, tokens.
               </p>
             </div>
@@ -337,8 +428,8 @@ export function LandingPage(props: { router: Router }) {
               </div>
             </div>
             <pre class="lp-snippet">
-{`import { signal, computed } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
+{`import { signal, computed } from "@powers/core";
+import { mount } from "@powers/dom";
 
 const count = signal(0);
 const label = computed(() => \`Clicks: \${count()}\`);
@@ -371,7 +462,7 @@ mount(document.getElementById("app")!, () => (
                 <thead>
                   <tr>
                     <th>Concern</th>
-                    <th>Power UI</th>
+                    <th>Powers</th>
                     <th>Typical alternative</th>
                   </tr>
                 </thead>
@@ -400,7 +491,7 @@ mount(document.getElementById("app")!, () => (
                   </tr>
                   <tr>
                     <td>Pro motion</td>
-                    <td>GSAP adapter planned (optional)</td>
+                    <td>Optional <code>animate/gsap</code> peer</td>
                     <td class="lp-meh">Often bolted on</td>
                   </tr>
                 </tbody>
@@ -416,14 +507,27 @@ mount(document.getElementById("app")!, () => (
               <div>
                 <h2>Ship something that feels inevitable</h2>
                 <p>
-                  Learn in the Lab (edit live recipes), explore the design system,
-                  then retheme everything from one tokens.css.
+                  Learn in the Lab, explore System (Copy JSX), or open a full
+                  product demo: designlab206 (:5180) or Hearth restaurant (:5181).
                 </p>
               </div>
               <Stack direction="row" gap={2} wrap>
-                <Button size="lg" onClick={go("/docs")}>
-                  How to use + API
-                </Button>
+                <a
+                  class="lp-demo-link lp-demo-link--primary"
+                  href="http://localhost:5180"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  designlab206 demo
+                </a>
+                <a
+                  class="lp-demo-link"
+                  href="http://localhost:5181"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Hearth demo
+                </a>
                 <Button size="lg" variant="soft" onClick={go("/lab")}>
                   Practice in Lab
                 </Button>
@@ -436,7 +540,7 @@ mount(document.getElementById("app")!, () => (
       <footer class="lp-footer">
         <Container size="xl">
           <div class="lp-footer-inner">
-            <span>Power UI — MIT · private foundations</span>
+            <span>Powers — MIT · private foundations</span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
                 Docs
@@ -447,11 +551,24 @@ mount(document.getElementById("app")!, () => (
               <button type="button" class="lp-footer-link" onClick={go("/system")}>
                 System
               </button>
-              <button type="button" class="lp-footer-link" onClick={go("/todos")}>
-                Todos
-              </button>
               <a
-                href="https://github.com/spowers2/power-ui"
+                class="lp-footer-link"
+                href="http://localhost:5180"
+                target="_blank"
+                rel="noreferrer"
+              >
+                designlab206
+              </a>
+              <a
+                class="lp-footer-link"
+                href="http://localhost:5181"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Hearth
+              </a>
+              <a
+                href="https://github.com/spowers2/powers"
                 target="_blank"
                 rel="noreferrer"
               >

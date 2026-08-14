@@ -1,14 +1,20 @@
-import { effect } from "@power-ui/core";
-import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { effect, type Signal } from "@powers/core";
+import { component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
+import { readBool, readProp, type MaybeReactive } from "../reactive.js";
+import type { Bindable } from "../form.js";
 
 export type SelectOption = { value: string; label: string; disabled?: boolean };
 
 export type SelectProps = {
-  value?: string | (() => string);
-  options: SelectOption[] | (() => SelectOption[]);
-  disabled?: boolean | (() => boolean);
-  class?: string | (() => string);
+  value?: MaybeReactive<string>;
+  /** Two-way bind a string signal — preferred over value + onChange. */
+  bind?: Bindable<string> | Signal<string>;
+  options: MaybeReactive<SelectOption[]>;
+  /** Shown as a disabled first option when value is empty (optional). */
+  placeholder?: string;
+  disabled?: MaybeReactive<boolean>;
+  class?: MaybeReactive<string>;
   onChange?: (e: Event) => void;
   id?: string;
   "aria-label"?: string;
@@ -36,8 +42,8 @@ const styles = `
 }
 .pu-select:focus {
   outline: none;
-  border-color: var(--pu-color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-accent) 25%, transparent);
+  border-color: color-mix(in srgb, var(--pu-color-focus) 55%, var(--pu-color-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-focus) 18%, transparent);
 }
 .pu-select:disabled { opacity: 0.55; cursor: not-allowed; }
 `;
@@ -52,38 +58,70 @@ function ensureStyles() {
   document.head.appendChild(el);
 }
 
+/** Native select. Prefer `<Select bind={status} options={…} />`. */
 export const Select = component((raw: SelectProps) => {
   ensureStyles();
   const props = mergeProps({}, raw) as ComponentProps<SelectProps>;
+  const bound = raw.bind;
 
   const selectEl = document.createElement("select");
   if (props.id) selectEl.id = props.id;
   if (props["aria-label"]) selectEl.setAttribute("aria-label", props["aria-label"]);
-  if (props.onChange) selectEl.addEventListener("change", props.onChange);
+
+  selectEl.addEventListener("change", (e) => {
+    if (bound) {
+      const t = (e.currentTarget ?? e.target) as HTMLSelectElement | null;
+      if (t && "value" in t) bound.set(t.value);
+    }
+    props.onChange?.(e);
+  });
 
   effect(() => {
-    selectEl.className = cx(
-      "pu-select",
-      typeof props.class === "function" ? props.class() : props.class,
-    );
-    selectEl.disabled = !!(
-      typeof props.disabled === "function" ? props.disabled() : props.disabled
-    );
+    // mergeProps unwraps accessors on read; readProp stays defensive.
+    selectEl.className = cx("pu-select", readProp(props.class as MaybeReactive<string>));
+    selectEl.disabled = readBool(props.disabled as MaybeReactive<boolean>);
 
-    const list =
-      typeof props.options === "function" ? props.options() : props.options;
-    const current =
-      typeof props.value === "function" ? props.value() : props.value;
+    const opts = readProp(props.options as MaybeReactive<SelectOption[]>) ?? [];
+    const current = bound
+      ? readProp(bound as MaybeReactive<string>)
+      : readProp(props.value as MaybeReactive<string>);
+    const prev = selectEl.value;
+    const placeholder = raw.placeholder;
 
     selectEl.innerHTML = "";
-    for (const opt of list ?? []) {
+    const values = new Set<string>();
+
+    if (placeholder) {
+      const ph = document.createElement("option");
+      ph.value = "";
+      ph.textContent = placeholder;
+      ph.disabled = true;
+      // Keep selectable only when nothing chosen yet so the label can show
+      ph.hidden = !!(current && current !== "");
+      selectEl.appendChild(ph);
+      values.add("");
+    }
+
+    for (const opt of opts) {
       const o = document.createElement("option");
       o.value = opt.value;
       o.textContent = opt.label;
       if (opt.disabled) o.disabled = true;
       selectEl.appendChild(o);
+      values.add(opt.value);
     }
-    if (current !== undefined) selectEl.value = current;
+
+    // Prefer controlled value when it exists in the list; else keep prev; else first option.
+    // Avoid browser “blank select” when options shrink (reactive project/client filters).
+    let next = "";
+    if (current !== undefined && values.has(current)) {
+      next = current;
+    } else if (prev && values.has(prev)) {
+      next = prev;
+    } else if (opts[0]) {
+      next = opts[0].value;
+    }
+    if (selectEl.value !== next) selectEl.value = next;
   });
 
   return selectEl;

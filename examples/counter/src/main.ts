@@ -10,7 +10,7 @@ import {
   batch,
   flush,
   createRoot,
-} from "@power-ui/core";
+} from "@powers/core";
 
 createRoot((dispose) => {
   const count = signal(0, { name: "count" });

@@ -1,6 +1,8 @@
-import { signal, effect } from "@power-ui/core";
-import { For, Show, component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { signal, effect } from "@powers/core";
+import { For, Show, component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
+import { attachOverlay } from "../overlay.js";
+import { readBool, readProp, readStr, type MaybeReactive } from "../reactive.js";
 
 export type ComboboxOption = {
   value: string;
@@ -9,15 +11,24 @@ export type ComboboxOption = {
 };
 
 export type ComboboxProps = {
-  options: ComboboxOption[] | (() => ComboboxOption[]);
-  value?: string | (() => string);
+  options: MaybeReactive<ComboboxOption[]>;
+  value?: MaybeReactive<string>;
   placeholder?: string;
-  disabled?: boolean | (() => boolean);
+  disabled?: MaybeReactive<boolean>;
+  /**
+   * Async / remote search: show a loading row instead of options or empty.
+   * Pair with a reactive `options` signal that fills when the request settles.
+   */
+  loading?: MaybeReactive<boolean>;
+  /** Empty-state copy when filter yields no options (default: “No matches”) */
+  emptyText?: MaybeReactive<string>;
+  /** Loading-state copy (default: “Loading…”) */
+  loadingText?: MaybeReactive<string>;
   /** Called with the selected option value */
   onChange?: (value: string) => void;
   /** Filter function — default: case-insensitive label includes query */
   filter?: (opt: ComboboxOption, query: string) => boolean;
-  class?: string | (() => string);
+  class?: MaybeReactive<string>;
   id?: string;
   "aria-label"?: string;
 };
@@ -52,10 +63,7 @@ const styles = `
 }
 .pu-combobox__input:disabled { opacity: 0.55; cursor: not-allowed; }
 .pu-combobox__list {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 4px);
+  position: fixed;
   z-index: var(--pu-z-overlay);
   margin: 0;
   padding: 0.25rem;
@@ -67,8 +75,25 @@ const styles = `
   border: 1px solid var(--pu-color-border);
   box-shadow: var(--pu-shadow-float);
   display: none;
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transform-origin: top center;
+  transition:
+    opacity var(--pu-duration) var(--pu-ease-out),
+    transform var(--pu-duration) var(--pu-ease-out);
 }
-.pu-combobox--open .pu-combobox__list { display: block; }
+.pu-combobox__list.is-open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.pu-combobox__list[data-side="top"] {
+  transform-origin: bottom center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-combobox__list { transition: none; transform: none; }
+  .pu-combobox__list.is-open { transform: none; }
+}
 .pu-combobox__option {
   display: block;
   width: 100%;
@@ -87,6 +112,13 @@ const styles = `
 .pu-combobox__option.is-active:not(:disabled) {
   background: var(--pu-color-surface-2);
 }
+.pu-combobox__option:focus-visible:not(:disabled) {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface-elevated),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
+  background: var(--pu-color-surface-2);
+}
 .pu-combobox__option:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -95,10 +127,29 @@ const styles = `
   color: var(--pu-color-accent);
   font-weight: var(--pu-font-semibold);
 }
-.pu-combobox__empty {
-  padding: 0.65rem;
+.pu-combobox__status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
   font-size: var(--pu-text-sm);
   color: var(--pu-color-text-muted);
+}
+.pu-combobox__status--loading::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--pu-color-accent) 30%, transparent);
+  border-top-color: var(--pu-color-accent);
+  animation: pu-combobox-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes pu-combobox-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-combobox__status--loading::before { animation: none; opacity: 0.7; }
 }
 `;
 
@@ -116,30 +167,73 @@ const defaultFilter = (opt: ComboboxOption, q: string) =>
 
 /**
  * Searchable select: type to filter, click or Enter to choose.
+ * For remote data: pass a reactive `options` list + `loading` while fetching.
  */
 export const Combobox = component((raw: ComboboxProps) => {
   ensureStyles();
   const props = mergeProps(
-    { placeholder: "Search…" },
+    {
+      placeholder: "Search…",
+      emptyText: "No matches",
+      loadingText: "Loading…",
+    },
     raw,
-  ) as ComponentProps<ComboboxProps & { placeholder: string }>;
+  ) as ComponentProps<
+    ComboboxProps & {
+      placeholder: string;
+      emptyText: string;
+      loadingText: string;
+    }
+  >;
 
   const open = signal(false);
   const query = signal("");
   const active = signal(0);
   let rootEl: HTMLElement | null = null;
+  let listEl: HTMLElement | null = null;
+  let inputEl: HTMLInputElement | null = null;
 
-  const getOptions = (): ComboboxOption[] => {
-    const o = props.options;
-    return typeof o === "function" ? (o as () => ComboboxOption[])() : (o ?? []);
+  const isLoading = () =>
+    readBool(props.loading as MaybeReactive<boolean> | undefined);
+
+  const placeList = () => {
+    if (!rootEl || !listEl || !inputEl || !open()) return;
+    const doc = rootEl.ownerDocument;
+    const win = doc.defaultView ?? window;
+    const gap = 4;
+    const pad = 8;
+    const rect = inputEl.getBoundingClientRect();
+    const vw = win.innerWidth;
+    const vh = win.innerHeight;
+    const width = rect.width;
+    listEl.style.width = `${Math.round(width)}px`;
+    listEl.style.maxHeight = "";
+    const naturalH = Math.min(listEl.scrollHeight || 224, 14 * 16);
+    const spaceBelow = vh - rect.bottom - gap - pad;
+    const spaceAbove = rect.top - gap - pad;
+    const placeAbove =
+      spaceBelow < Math.min(naturalH, 100) && spaceAbove > spaceBelow;
+    const available = Math.max(96, placeAbove ? spaceAbove : spaceBelow);
+    const maxH = Math.min(naturalH, available, 14 * 16);
+    listEl.style.maxHeight = `${Math.round(maxH)}px`;
+    const ph = Math.min(listEl.offsetHeight || maxH, maxH);
+    let top = placeAbove ? rect.top - gap - ph : rect.bottom + gap;
+    top = Math.min(Math.max(pad, top), Math.max(pad, vh - ph - pad));
+    let left = rect.left;
+    left = Math.min(Math.max(pad, left), Math.max(pad, vw - width - pad));
+    listEl.dataset.side = placeAbove ? "top" : "bottom";
+    listEl.style.top = `${Math.round(top)}px`;
+    listEl.style.left = `${Math.round(left)}px`;
   };
 
+  const getOptions = (): ComboboxOption[] =>
+    readProp(props.options as MaybeReactive<ComboboxOption[]>) ?? [];
+
   const getValue = () =>
-    typeof props.value === "function"
-      ? (props.value as () => string)()
-      : (props.value ?? "");
+    readProp(props.value as MaybeReactive<string>) ?? "";
 
   const filtered = () => {
+    if (isLoading()) return [] as ComboboxOption[];
     const q = query().trim();
     const list = getOptions();
     const fn = props.filter ?? defaultFilter;
@@ -153,46 +247,67 @@ export const Combobox = component((raw: ComboboxProps) => {
     return hit?.label ?? "";
   };
 
+  const close = () => {
+    open.set(false);
+    query.set(selectedLabel());
+    listEl?.classList.remove("is-open");
+  };
+
   effect(() => {
     if (!open()) {
       query.set(selectedLabel());
+      listEl?.classList.remove("is-open");
     }
+  });
+
+  // Reposition when loading/options change while open
+  effect(() => {
+    if (!open()) return;
+    void filtered().length;
+    void isLoading();
+    const win = rootEl?.ownerDocument.defaultView ?? window;
+    const t = win.setTimeout(() => placeList(), 0);
+    return () => win.clearTimeout(t);
   });
 
   effect(() => {
     if (!open()) return;
-    const root = rootEl;
-    if (!root) return;
-    const doc = root.ownerDocument;
-    const win = doc.defaultView ?? window;
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        open.set(false);
-        query.set(selectedLabel());
-      }
-    };
-    const onPtr = (e: Event) => {
-      const t = e.target as Node | null;
-      if (t && !root.contains(t)) {
-        open.set(false);
-        query.set(selectedLabel());
-      }
-    };
-    win.addEventListener("keydown", onKey, true);
-    const t = win.setTimeout(() => {
-      doc.addEventListener("pointerdown", onPtr, true);
-    }, 0);
-    return () => {
-      win.clearTimeout(t);
-      win.removeEventListener("keydown", onKey, true);
-      doc.removeEventListener("pointerdown", onPtr, true);
-    };
+    return attachOverlay({
+      getRoot: () => rootEl,
+      onClose: close,
+      escape: true,
+      dismissOutside: true,
+      isInside: (node) => {
+        if (rootEl?.contains(node)) return true;
+        if (listEl?.contains(node)) return true;
+        return false;
+      },
+      onAttach: ({ doc, win }) => {
+        if (listEl && listEl.parentNode !== doc.body) {
+          doc.body.appendChild(listEl);
+        }
+        listEl?.classList.add("is-open");
+        const onRepo = () => placeList();
+        const placeTimer = win.setTimeout(() => {
+          placeList();
+          win.setTimeout(placeList, 16);
+        }, 0);
+        win.addEventListener("resize", onRepo);
+        doc.addEventListener("scroll", onRepo, true);
+        win.addEventListener("scroll", onRepo, true);
+        return () => {
+          win.clearTimeout(placeTimer);
+          win.removeEventListener("resize", onRepo);
+          doc.removeEventListener("scroll", onRepo, true);
+          win.removeEventListener("scroll", onRepo, true);
+          listEl?.classList.remove("is-open");
+        };
+      },
+    });
   });
 
   const pick = (opt: ComboboxOption) => {
-    if (opt.disabled) return;
+    if (opt.disabled || isLoading()) return;
     props.onChange?.(opt.value);
     query.set(opt.label);
     open.set(false);
@@ -204,6 +319,7 @@ export const Combobox = component((raw: ComboboxProps) => {
         cx(
           "pu-combobox",
           open() && "pu-combobox--open",
+          isLoading() && "pu-combobox--loading",
           typeof props.class === "function" ? props.class() : props.class,
         )
       }
@@ -218,15 +334,15 @@ export const Combobox = component((raw: ComboboxProps) => {
         id={props.id}
         aria-label={props["aria-label"]}
         aria-expanded={() => (open() ? "true" : "false")}
+        aria-busy={() => (isLoading() ? "true" : "false")}
         aria-autocomplete="list"
         role="combobox"
         placeholder={props.placeholder}
-        disabled={
-          typeof props.disabled === "function"
-            ? props.disabled
-            : props.disabled
-        }
+        disabled={() => readBool(props.disabled as MaybeReactive<boolean>)}
         value={query}
+        ref={(el) => {
+          inputEl = el as HTMLInputElement;
+        }}
         onFocus={() => {
           open.set(true);
           active.set(0);
@@ -238,6 +354,14 @@ export const Combobox = component((raw: ComboboxProps) => {
           active.set(0);
         }}
         onKeyDown={(e: KeyboardEvent) => {
+          if (e.key === "Escape") {
+            if (open()) {
+              e.preventDefault();
+              close();
+            }
+            return;
+          }
+          if (isLoading()) return;
           const list = filtered();
           if (e.key === "ArrowDown") {
             e.preventDefault();
@@ -253,37 +377,61 @@ export const Combobox = component((raw: ComboboxProps) => {
           }
         }}
       />
-      <ul class="pu-combobox__list" role="listbox">
-        <Show when={() => filtered().length === 0}>
+      <ul
+        class="pu-combobox__list"
+        role="listbox"
+        aria-busy={() => (isLoading() ? "true" : "false")}
+        ref={(el) => {
+          listEl = el;
+        }}
+      >
+        <Show when={() => isLoading()}>
           {() => {
             const li = document.createElement("li");
-            li.className = "pu-combobox__empty";
-            li.textContent = "No matches";
+            li.className = "pu-combobox__status pu-combobox__status--loading";
+            li.setAttribute("role", "status");
+            li.textContent =
+              readStr(props.loadingText as MaybeReactive<string>) ||
+              "Loading…";
             return li;
           }}
         </Show>
-        <For each={filtered}>
-          {(opt, index) => (
-            <li role="presentation">
-              <button
-                type="button"
-                role="option"
-                class={() =>
-                  cx(
-                    "pu-combobox__option",
-                    getValue() === opt().value && "is-selected",
-                    active() === index() && "is-active",
-                  )
-                }
-                disabled={() => !!opt().disabled}
-                onClick={() => pick(opt())}
-                onMouseEnter={() => active.set(index())}
-              >
-                {() => opt().label}
-              </button>
-            </li>
+        <Show when={() => !isLoading() && filtered().length === 0}>
+          {() => {
+            const li = document.createElement("li");
+            li.className = "pu-combobox__status";
+            li.setAttribute("role", "status");
+            li.textContent =
+              readStr(props.emptyText as MaybeReactive<string>) || "No matches";
+            return li;
+          }}
+        </Show>
+        <Show when={() => !isLoading()}>
+          {() => (
+            <For each={filtered}>
+              {(opt, index) => (
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    class={() =>
+                      cx(
+                        "pu-combobox__option",
+                        getValue() === opt().value && "is-selected",
+                        active() === index() && "is-active",
+                      )
+                    }
+                    disabled={() => !!opt().disabled}
+                    onClick={() => pick(opt())}
+                    onMouseEnter={() => active.set(index())}
+                  >
+                    {() => opt().label}
+                  </button>
+                </li>
+              )}
+            </For>
           )}
-        </For>
+        </Show>
       </ul>
     </div>
   );

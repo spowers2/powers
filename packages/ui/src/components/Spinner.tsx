@@ -1,4 +1,4 @@
-import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 
 export type SpinnerSize = "sm" | "md" | "lg";

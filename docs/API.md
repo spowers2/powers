@@ -9,11 +9,11 @@
 
 1. **Read** signals with `count()` · **write** with `.set` / `.update`  
 2. Live JSX: `{() => count()}` not `{count()}`  
-3. Prefer `@power-ui/ui` primitives; retheme via `tokens.css`
+3. Prefer `@powers/ui` primitives; retheme via `tokens.css`
 
 ---
 
-## `@power-ui/core`
+## `@powers/core`
 
 | API | Usage |
 |---|---|
@@ -29,12 +29,12 @@
 
 ---
 
-## `@power-ui/dom`
+## `@powers/dom`
 
 | API | Usage |
 |---|---|
 | `mount(el, () => tree)` | bootstrap app |
-| JSX | `"jsxImportSource": "@power-ui/dom"` |
+| JSX | `"jsxImportSource": "@powers/dom"` |
 | `component(setup)` | reactive props component |
 | `Show` | conditional mount |
 | `For` | keyed list; `item()` live |
@@ -43,29 +43,36 @@
 
 ---
 
-## `@power-ui/ui`
+## `@powers/ui`
 
 ```ts
-import "@power-ui/ui/theme.css";
-import { createTheme, createDensity, Button, … } from "@power-ui/ui";
+import "@powers/ui/theme.css";
+import { createTheme, createDensity, Button, … } from "@powers/ui";
 ```
 
 | Area | Exports |
 |---|---|
 | Theme | `createTheme` · `createDensity` · `cx` |
-| Layout | `Stack` · `Grid` · `Container` · `Divider` |
-| Type | `Text` · `Code` · `Kbd` |
-| Forms | `Button` · `Input` · `Textarea` · `Select` · `Field` · `Label` · `Switch` · `Checkbox` |
-| Feedback | `Alert` · `Spinner` · `Progress` · `Skeleton` · `Badge` · `Avatar` |
-| Overlays | `Dialog` · `Tabs` · `Tooltip` · `Popover` · `Menu` · `Toaster` / `createToaster` · `Command` |
-| Forms+ | `Combobox` (searchable select) |
-| Surfaces | `Card` (variants: default / glass / elevated / soft) |
+| Authoring | `createStyleSheet` · `styleVars` · `trapFocus` · `attachOverlay` · `readProp` |
+| Forms | `required` · `emailFormat` · `minLength` · `maxLength` · `matches` · `firstError` · `validateForm` |
+| Motion | `Transition` · `MOTION_PRESETS` · `motionVars` |
+| Layout | `Stack` · `Grid` · `Container` · `Divider` · `AspectRatio` · `ScrollArea` · `Collapse` |
+| Type | `Text` · `Code` · `Kbd` · `Link` |
+| Forms | `Button` · `Input` · `Textarea` · `Select` · `Field` · `Label` · `Switch` · `Checkbox` · `RadioGroup` · `Slider` · `NumberInput` · `ToggleGroup` · `Combobox` |
+| Surfaces | `Card` · `Badge` · `Chip` · `Avatar` |
+| Feedback | `Alert` · `Spinner` · `Progress` · `Skeleton` · `Empty` · `Stat` · `Toaster` / `createToaster` |
+| Structure | `Tabs` · `Accordion` · `Breadcrumb` · `Pagination` · `Steps` · `Timeline` · `List` · `Table` |
+| Overlays | `Dialog` · `Drawer` · `Tooltip` · `Popover` · `Menu` · `Command` |
 
-**Retheme:** edit `packages/ui/src/styles/tokens.css` (`--pu-brand-*` blues, `--pu-sage-*` green `#69BE28`).
+**Stable surface / freeze notes:** [STABLE.md](./STABLE.md) · **First screen:** [GOLDEN_PATH.md](./GOLDEN_PATH.md)
+| Motion | `Transition` |
+
+**Retheme:** edit `packages/ui/src/styles/tokens.css` (`--pu-brand-*` blues, `--pu-sage-*` green `#69BE28`).  
+**Write a component:** [COMPONENTS.md](./COMPONENTS.md).
 
 ---
 
-## `@power-ui/animate`
+## `@powers/animate`
 
 | API | Usage |
 |---|---|
@@ -73,9 +80,17 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 | `spring(opts?)` | spring options for `animate` |
 | `cancel(signal)` | stop animation |
 
+### Optional: `@powers/animate/gsap` (peer: `gsap`)
+
+| API | Usage |
+|---|---|
+| `gsapAnimate(signal, to, opts?)` | GSAP tween; duration in **ms** |
+| `gsapFromTo(signal, from, to, opts?)` | GSAP fromTo |
+| `createGsapBridge(gsap)` | inject GSAP / mock |
+
 ---
 
-## `@power-ui/router`
+## `@powers/router`
 
 | API | Usage |
 |---|---|
@@ -86,7 +101,7 @@ import { createTheme, createDensity, Button, … } from "@power-ui/ui";
 
 ---
 
-## `@power-ui/ssr`
+## `@powers/ssr`
 
 | API | Usage |
 |---|---|

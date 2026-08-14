@@ -1,16 +1,16 @@
 /**
  * Animation foundation demo — no DOM, just signals over time.
  */
-import { signal, effect, flush } from "@power-ui/core";
+import { signal, effect, flush } from "@powers/core";
 import {
   animate,
   spring,
   createTestClock,
   installDriver,
   setReducedMotionOverride,
-} from "@power-ui/animate";
+} from "@powers/animate";
 
-console.log("\n=== Power UI animate demo ===\n");
+console.log("\n=== Powers animate demo ===\n");
 
 // Deterministic clock so the demo finishes in-process (no real rAF wait).
 const clock = createTestClock();

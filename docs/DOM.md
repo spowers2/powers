@@ -1,4 +1,4 @@
-# `@power-ui/dom` — Phase 2 DOM + JSX
+# `@powers/dom` — Phase 2 DOM + JSX
 
 **Status:** v0.3.0 — bindings, JSX, and **reactive component props**.
 
@@ -13,8 +13,8 @@ Same reactivity you already know (`signal`, `effect`). The DOM layer only **subs
 ## Quick example (JSX + props)
 
 ```tsx
-import { signal } from "@power-ui/core";
-import { mount, component, mergeProps } from "@power-ui/dom";
+import { signal } from "@powers/core";
+import { mount, component, mergeProps } from "@powers/dom";
 
 const Hello = component((props: { name: string; mood?: string }) => {
   const p = mergeProps({ mood: "🙂" }, props);
@@ -56,14 +56,14 @@ Setup in `component()` runs **once**. Props stay live via accessors — the chil
 // vite.config.ts
 esbuild: {
   jsx: "automatic",
-  jsxImportSource: "@power-ui/dom",
+  jsxImportSource: "@powers/dom",
 }
 ```
 
 ```json
 // tsconfig
 "jsx": "react-jsx",
-"jsxImportSource": "@power-ui/dom"
+"jsxImportSource": "@powers/dom"
 ```
 
 ## API
@@ -89,8 +89,8 @@ esbuild: {
 ## Motion
 
 ```ts
-import { animate, spring } from "@power-ui/animate";
-import { bindStyle } from "@power-ui/dom";
+import { animate, spring } from "@powers/animate";
+import { bindStyle } from "@powers/dom";
 
 const x = signal(0);
 bindStyle(el, () => ({ transform: `translateX(${x()}px)` }));
@@ -102,7 +102,7 @@ animate(x, 100, spring());
 - Full template compiler / SFC files  
 - SSR / hydration  
 - Built-in FLIP / enter-exit  
-- **GSAP adapter** (parked — [`docs/NEXT.md`](./NEXT.md))  
+- **GSAP adapter** — shipped as `@powers/animate/gsap` (optional peer)  
 
 ## Browser demo
 

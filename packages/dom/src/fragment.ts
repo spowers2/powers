@@ -1,5 +1,5 @@
 import type { Child } from "./h.js";
-import { text } from "./h.js";
+import { bindDynamic, type DynamicChild } from "./dynamic.js";
 
 /** Normalize JSX children into a flat list. */
 export function normalizeChildren(children: unknown): Child[] {
@@ -16,11 +16,11 @@ export function normalizeChildren(children: unknown): Child[] {
   return [children as Child];
 }
 
-/** Append a Child to a parent (static node or reactive text). */
+/** Append a Child to a parent (static node, reactive text, or reactive nodes). */
 export function appendChild(parent: ParentNode, child: Child): void {
   if (child == null || child === false || child === true) return;
   if (typeof child === "function") {
-    parent.appendChild(text(child));
+    bindDynamic(parent, child as () => DynamicChild);
     return;
   }
   if (typeof child === "string" || typeof child === "number") {

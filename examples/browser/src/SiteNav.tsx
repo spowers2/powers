@@ -1,9 +1,10 @@
 /**
  * Single site navigation — Docs first for new developers.
+ * Progressive disclosure keeps primary links on one row.
  */
-import type { Router } from "@power-ui/router";
-import { Link } from "@power-ui/router";
-import { Button, Container, type ThemeController } from "@power-ui/ui";
+import type { Router } from "@powers/router";
+import { Link } from "@powers/router";
+import { Button, Container, type ThemeController } from "@powers/ui";
 
 export function SiteNav(props: {
   router: Router;
@@ -17,7 +18,7 @@ export function SiteNav(props: {
         <div class="site-nav-inner">
           <Link router={router} to="/" class="site-brand" exact>
             <span class="site-mark" aria-hidden="true" />
-            Power UI
+            <span class="site-brand-label">Powers</span>
           </Link>
 
           <nav class="site-nav-links" aria-label="Primary">
@@ -33,19 +34,52 @@ export function SiteNav(props: {
             <Link router={router} to="/system" activeClass="active">
               System
             </Link>
-            <Link router={router} to="/todos" activeClass="active">
-              Todos
-            </Link>
+            <span class="site-nav-sep" aria-hidden="true" />
+            <a
+              class="site-nav-demo"
+              href="http://localhost:5180"
+              target="_blank"
+              rel="noreferrer"
+              title="designlab206 freelance workspace demo"
+            >
+              designlab206
+            </a>
+            <a
+              class="site-nav-demo"
+              href="http://localhost:5181"
+              target="_blank"
+              rel="noreferrer"
+              title="Hearth restaurant demo"
+            >
+              Hearth
+            </a>
           </nav>
 
           <div class="site-nav-actions">
             <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
               {() => (theme.mode() === "dark" ? "Light" : "Dark")}
             </Button>
-            <Button size="sm" variant="soft" onClick={() => router.navigate("/docs")}>
+            <a
+              class="site-nav-demo-btn"
+              href="http://localhost:5180"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Demos
+            </a>
+            <Button
+              size="sm"
+              variant="soft"
+              class="site-nav-cta"
+              onClick={() => router.navigate("/docs")}
+            >
               How to use
             </Button>
-            <Button size="sm" onClick={() => router.navigate("/lab")}>
+            <Button
+              size="sm"
+              class="site-nav-cta"
+              onClick={() => router.navigate("/lab")}
+            >
               Open Lab
             </Button>
           </div>

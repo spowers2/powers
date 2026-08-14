@@ -1,7 +1,7 @@
 {
-  "name": "@power-ui/ssr",
+  "name": "@powers/ssr",
   "version": "0.1.0",
-  "description": "SSR foundation for Power UI — render apps to HTML strings (happy-dom).",
+  "description": "SSR foundation for Powers — render apps to HTML strings (happy-dom).",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -21,8 +21,8 @@
     "test": "node --import tsx --test src/*.test.ts"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*",
-    "@power-ui/dom": "workspace:*",
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*",
     "happy-dom": "^17.4.4"
   },
   "devDependencies": {

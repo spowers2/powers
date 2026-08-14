@@ -1,10 +1,12 @@
-import { effect } from "@power-ui/core";
-import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { effect } from "@powers/core";
+import { component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
+import { attachOverlay } from "../overlay.js";
+import { readBool, type MaybeReactive } from "../reactive.js";
 
 export type PopoverProps = {
   /** Controlled open state (boolean, signal, or accessor) */
-  open: boolean | (() => boolean);
+  open: MaybeReactive<boolean>;
   onOpenChange?: (open: boolean) => void;
   /** Trigger content (usually a Button) */
   trigger: unknown;
@@ -12,7 +14,7 @@ export type PopoverProps = {
   children?: unknown;
   /** Preferred alignment under the trigger */
   align?: "start" | "center" | "end";
-  class?: string | (() => string);
+  class?: MaybeReactive<string>;
 };
 
 const styles = `
@@ -46,20 +48,26 @@ const styles = `
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(4px);
+  transform: translateY(6px) scale(0.98);
+  transform-origin: top center;
   transition:
-    opacity var(--pu-duration-fast) var(--pu-ease),
-    transform var(--pu-duration-fast) var(--pu-ease),
-    visibility var(--pu-duration-fast) var(--pu-ease);
+    opacity var(--pu-duration) var(--pu-ease-out),
+    transform var(--pu-duration) var(--pu-ease-out),
+    visibility var(--pu-duration) var(--pu-ease-out);
+}
+.pu-popover__panel[data-side="top"] {
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: bottom center;
 }
 .pu-popover--open .pu-popover__panel {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .pu-popover__panel { transition: none; }
+  .pu-popover__panel { transition: none; transform: none; }
+  .pu-popover--open .pu-popover__panel { transform: none; }
 }
 `;
 
@@ -72,15 +80,9 @@ function ensureStyles(doc: Document = document) {
   doc.head.appendChild(el);
 }
 
-function readOpen(open: unknown): boolean {
-  if (typeof open === "function") return !!(open as () => boolean)();
-  return !!open;
-}
-
 /**
  * Anchored floating panel. Control with `open` + `onOpenChange`.
- * Closes on Escape and outside pointer. Uses the element's ownerDocument
- * so Lab iframes work (not just the parent window).
+ * Escape + outside dismiss via shared `attachOverlay` (stacked with modals).
  */
 export const Popover = component((raw: PopoverProps) => {
   ensureStyles();
@@ -88,7 +90,7 @@ export const Popover = component((raw: PopoverProps) => {
     PopoverProps & { align: "start" | "center" | "end" }
   >;
 
-  const isOpen = () => readOpen(props.open);
+  const isOpen = () => readBool(props.open as MaybeReactive<boolean>);
 
   let rootEl: HTMLElement | null = null;
   let panelEl: HTMLElement | null = null;
@@ -98,18 +100,39 @@ export const Popover = component((raw: PopoverProps) => {
     if (!rootEl || !panelEl || !triggerEl || !isOpen()) return;
     const doc = rootEl.ownerDocument;
     const win = doc.defaultView ?? window;
-    const gap = 6;
+    const gap = 8;
+    const pad = 8;
     const rect = triggerEl.getBoundingClientRect();
-    // Measure after visible — if still zero-size, wait a frame
-    const pw = panelEl.offsetWidth || 192;
-    const ph = panelEl.offsetHeight || 80;
     const vw = win.innerWidth;
     const vh = win.innerHeight;
 
-    let top = rect.bottom + gap;
-    if (top + ph > vh - 8 && rect.top > ph + gap) {
-      top = rect.top - ph - gap;
+    panelEl.style.maxHeight = "";
+    const naturalH = panelEl.scrollHeight || panelEl.offsetHeight || 160;
+    const pw = Math.min(
+      panelEl.offsetWidth || 192,
+      Math.max(pad * 2, vw - pad * 2),
+    );
+
+    const spaceBelow = vh - rect.bottom - gap - pad;
+    const spaceAbove = rect.top - gap - pad;
+    const placeAbove =
+      spaceBelow < Math.min(naturalH, 120) && spaceAbove > spaceBelow;
+
+    const available = Math.max(96, placeAbove ? spaceAbove : spaceBelow);
+    const maxH = Math.min(naturalH, available, vh * 0.7);
+    panelEl.style.maxHeight = `${Math.round(maxH)}px`;
+
+    const ph = Math.min(panelEl.offsetHeight || maxH, maxH);
+
+    let top: number;
+    if (placeAbove) {
+      top = rect.top - gap - ph;
+      panelEl.dataset.side = "top";
+    } else {
+      top = rect.bottom + gap;
+      panelEl.dataset.side = "bottom";
     }
+    top = Math.min(Math.max(pad, top), Math.max(pad, vh - ph - pad));
 
     let left = rect.left;
     if (props.align === "center") {
@@ -117,83 +140,39 @@ export const Popover = component((raw: PopoverProps) => {
     } else if (props.align === "end") {
       left = rect.right - pw;
     }
-    left = Math.min(Math.max(8, left), Math.max(8, vw - pw - 8));
-    top = Math.max(8, top);
+    left = Math.min(Math.max(pad, left), Math.max(pad, vw - pw - pad));
 
     panelEl.style.top = `${Math.round(top)}px`;
     panelEl.style.left = `${Math.round(left)}px`;
+    panelEl.style.width = "max-content";
+    panelEl.style.minWidth = `${Math.min(pw, Math.max(rect.width, 10.5 * 16))}px`;
   };
 
-  // Dismiss + position while open.
-  // Defer attach so refs from this render are set (open may start true).
   effect(() => {
     if (!isOpen()) return;
-
-    let disposed = false;
-    const cleanups: Array<() => void> = [];
-
-    const attach = () => {
-      if (disposed) return;
-      const root = rootEl;
-      const doc = root?.ownerDocument ?? document;
-      const win = doc.defaultView ?? window;
-      ensureStyles(doc);
-
-      const onKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          e.preventDefault();
-          e.stopPropagation();
-          props.onOpenChange?.(false);
-        }
-      };
-
-      win.addEventListener("keydown", onKey, true);
-      cleanups.push(() => win.removeEventListener("keydown", onKey, true));
-
-      if (root) {
-        const onPointer = (e: Event) => {
-          const t = e.target as Node | null;
-          if (!t) return;
-          if (root.contains(t)) return;
-          props.onOpenChange?.(false);
-        };
-        // Skip the opening interaction
-        const timer = win.setTimeout(() => {
-          if (disposed) return;
-          doc.addEventListener("pointerdown", onPointer, true);
-        }, 0);
-        cleanups.push(() => {
-          win.clearTimeout(timer);
-          doc.removeEventListener("pointerdown", onPointer, true);
-        });
-
+    return attachOverlay({
+      getRoot: () => rootEl,
+      onClose: () => props.onOpenChange?.(false),
+      escape: true,
+      dismissOutside: true,
+      onAttach: ({ doc, win }) => {
+        ensureStyles(doc);
         const onReposition = () => placePanel();
-        // Prefer setTimeout over rAF — happy-dom / tests may never flush rAF
-        const placeTimer = win.setTimeout(() => placePanel(), 0);
-        cleanups.push(() => win.clearTimeout(placeTimer));
+        const placeTimer = win.setTimeout(() => {
+          placePanel();
+          win.setTimeout(placePanel, 16);
+        }, 0);
         win.addEventListener("resize", onReposition);
         doc.addEventListener("scroll", onReposition, true);
-        cleanups.push(() => {
+        win.addEventListener("scroll", onReposition, true);
+        return () => {
+          win.clearTimeout(placeTimer);
           win.removeEventListener("resize", onReposition);
           doc.removeEventListener("scroll", onReposition, true);
-        });
-      }
-    };
-
-    // Refs run during element creation; setup effects run before return.
-    // Always defer so rootEl/triggerEl/panelEl exist.
-    const win = typeof window !== "undefined" ? window : null;
-    const timer = win?.setTimeout(attach, 0);
-    if (timer != null) {
-      cleanups.push(() => win!.clearTimeout(timer));
-    } else {
-      attach();
-    }
-
-    return () => {
-      disposed = true;
-      for (const c of cleanups) c();
-    };
+          win.removeEventListener("scroll", onReposition, true);
+        };
+      },
+    });
   });
 
   return (
@@ -202,7 +181,9 @@ export const Popover = component((raw: PopoverProps) => {
         cx(
           "pu-popover",
           isOpen() && "pu-popover--open",
-          typeof props.class === "function" ? props.class() : props.class,
+          typeof props.class === "function"
+            ? (props.class as () => string)()
+            : props.class,
         )
       }
       ref={(el) => {

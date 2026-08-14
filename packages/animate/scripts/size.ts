@@ -1,5 +1,5 @@
 /**
- * Bundle-size baseline for @power-ui/animate (core is a dependency; treated external).
+ * Bundle-size baseline for @powers/animate (core is a dependency; treated external).
  */
 import { build } from "esbuild";
 import { gzipSync } from "node:zlib";
@@ -19,7 +19,7 @@ const result = await build({
   platform: "neutral",
   write: false,
   treeShaking: true,
-  external: ["@power-ui/core"],
+  external: ["@powers/core"],
 });
 
 const code = result.outputFiles[0]?.text ?? "";
@@ -32,8 +32,8 @@ writeFileSync(
   join(outdir, "size.json"),
   JSON.stringify(
     {
-      package: "@power-ui/animate",
-      external: ["@power-ui/core"],
+      package: "@powers/animate",
+      external: ["@powers/core"],
       rawBytes: raw,
       gzipBytes: gzip,
       rawKb: +(raw / 1024).toFixed(2),
@@ -45,7 +45,7 @@ writeFileSync(
   ),
 );
 
-console.log("\n@power-ui/animate size baseline (core external)");
+console.log("\n@powers/animate size baseline (core external)");
 console.log(`  minified : ${raw} bytes (${(raw / 1024).toFixed(2)} KB)`);
 console.log(`  gzip     : ${gzip} bytes (${(gzip / 1024).toFixed(2)} KB)`);
 console.log(`  written  : packages/animate/dist-size/`);

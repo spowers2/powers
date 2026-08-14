@@ -1,11 +1,11 @@
-# Styling in Power UI
+# Styling in Powers
 
-**Product stance:** Power UI is the **runtime and the look**.  
+**Product stance:** Powers is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
-**Default palette:** **deep ink navy** brand blues + **lime green `#69BE28`** (`--pu-sage-*`) on quiet graphite neutrals.  
-**Surface language:** layered elevation, soft multi-shadows, optional glass (`--pu-glass-*`), generous radius, tight display type.  
-Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
+**Default palette — “Seahawk hologram”:** College Navy `#002244`, Action Green `#69BE28`, Wolf Grey, soft holographic cyan edges, restrained brass metal.  
+**Surface language:** clean layered glass, soft multi-shadows, refined radius — steampunk *hints* without costume.  
+Retheme entirely by editing `packages/ui/src/styles/tokens.css` (product demos override tokens per app).
 
 ---
 
@@ -31,8 +31,8 @@ Retheme entirely by editing `packages/ui/src/styles/tokens.css`.
 **Rule:** primitives never hard-code hex; they only use `--pu-*`.
 
 ```ts
-import "@power-ui/ui/theme.css"; // tokens + base + utilities
-import { createTheme, createDensity } from "@power-ui/ui";
+import "@powers/ui/theme.css"; // tokens + base + utilities
+import { createTheme, createDensity } from "@powers/ui";
 
 createTheme("dark").bind();
 createDensity("comfortable").bind();
@@ -41,16 +41,16 @@ createDensity("comfortable").bind();
 Minimal CSS (no utilities):
 
 ```ts
-import "@power-ui/ui/tokens.css";
-import "@power-ui/ui/base.css";
+import "@powers/ui/tokens.css";
+import "@powers/ui/base.css";
 ```
 
 ### 2. Primitives (default way to build UI)
 
-Use `@power-ui/ui` components. They own structure, a11y patterns, and `pu-*` classes:
+Use `@powers/ui` components. They own structure, a11y patterns, and `pu-*` classes:
 
 ```tsx
-import { Button, Stack, Card, Field, Input } from "@power-ui/ui";
+import { Button, Stack, Card, Field, Input } from "@powers/ui";
 
 <Card>
   <Stack gap={3}>
@@ -67,7 +67,7 @@ This is the Bootstrap *component* story — complete controls that match — wit
 ### 3. Utilities (optional, BEM-flavored)
 
 **File:** `packages/ui/src/styles/utilities.css`  
-**Import:** included in `theme.css`, or `@power-ui/ui/utilities.css`
+**Import:** included in `theme.css`, or `@powers/ui/utilities.css`
 
 ```html
 <div class="pu-flex pu-flex--row pu-items-center pu-gap-3 pu-p-4">
@@ -95,7 +95,7 @@ This is the Bootstrap *component* story — complete controls that match — wit
 
 That split is historical: React solved components; CSS came from elsewhere.
 
-For Power UI it would mean:
+For Powers it would mean:
 
 - Two docs / two mental models  
 - Token drift (Tailwind config vs `--pu-*`)  

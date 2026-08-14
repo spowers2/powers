@@ -4,15 +4,15 @@
  * 2) discover islands in the string
  * 3) hydrate via defineIslands registry
  */
-import { signal, flush } from "@power-ui/core";
-import { h, bindText } from "@power-ui/dom";
+import { signal, flush } from "@powers/core";
+import { h, bindText } from "@powers/dom";
 import {
   renderToString,
   htmlDocument,
   island,
   defineIslands,
   listIslandsInHtml,
-} from "@power-ui/ssr";
+} from "@powers/ssr";
 import { Window } from "happy-dom";
 
 function Counter() {

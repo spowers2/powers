@@ -2,12 +2,16 @@
  * Runtime surface injected into the Lab preview iframe.
  * Keep this list learnable — mirrors public package exports users should know.
  */
-import * as core from "@power-ui/core";
-import * as animate from "@power-ui/animate";
-import * as dom from "@power-ui/dom";
-import * as ui from "@power-ui/ui";
+import * as core from "@powers/core";
+import * as animate from "@powers/animate";
+import { createGsapBridge } from "@powers/animate";
+import * as dom from "@powers/dom";
+import * as ui from "@powers/ui";
+import gsap from "gsap";
 // Ensure design tokens exist in the iframe document when UI is used
-import "@power-ui/ui/theme.css";
+import "@powers/ui/theme.css";
+
+const gsapBridge = createGsapBridge(gsap);
 
 export type PowerLabApi = typeof core &
   typeof animate &
@@ -15,15 +19,21 @@ export type PowerLabApi = typeof core &
   typeof ui & {
     /** Convenience alias */
     Fragment: typeof dom.Fragment;
+    /** Optional GSAP peer — same as `@powers/animate/gsap` */
+    gsapAnimate: typeof gsapBridge.gsapAnimate;
+    gsapFromTo: typeof gsapBridge.gsapFromTo;
   };
 
 export function createLabApi(): PowerLabApi {
+  // Spread ui before dom so form helpers never clobber DOM bindText/bindAttr.
   return {
     ...core,
     ...animate,
-    ...dom,
     ...ui,
+    ...dom,
     Fragment: dom.Fragment,
+    gsapAnimate: gsapBridge.gsapAnimate,
+    gsapFromTo: gsapBridge.gsapFromTo,
   };
 }
 
@@ -44,6 +54,9 @@ export const LAB_API_KEYS = [
   "animate",
   "spring",
   "cancel",
+  "createGsapBridge",
+  "gsapAnimate",
+  "gsapFromTo",
   // dom
   "mount",
   "h",
@@ -95,7 +108,49 @@ export const LAB_API_KEYS = [
   "Kbd",
   "Combobox",
   "Command",
+  "Accordion",
+  "Drawer",
+  "Breadcrumb",
+  "Pagination",
+  "RadioGroup",
+  "Slider",
+  "NumberInput",
+  "ToggleGroup",
+  "List",
+  "Table",
+  "Empty",
+  "Stat",
+  "Steps",
+  "Timeline",
+  "Chip",
+  "ScrollArea",
+  "Collapse",
+  "AspectRatio",
+  "Link",
+  "Transition",
   "createTheme",
   "createDensity",
   "cx",
+  "createStyleSheet",
+  "styleVars",
+  "trapFocus",
+  // form helpers
+  "firstError",
+  "required",
+  "minLength",
+  "maxLength",
+  "emailFormat",
+  "matches",
+  "validateForm",
+  "bindInput",
+  "bindString",
+  "bindSelect",
+  "bindChecked",
+  "asSelectBind",
+  "createField",
+  "eventValue",
+  "eventChecked",
+  // motion
+  "MOTION_PRESETS",
+  "motionVars",
 ] as const;

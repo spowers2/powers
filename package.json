@@ -1,5 +1,5 @@
 {
-  "name": "power-ui",
+  "name": "powers",
   "version": "0.0.0",
   "private": true,
   "description": "Fine-grained reactive UI system — ownership-first, near-zero runtime, AI-readable.",
@@ -11,16 +11,24 @@
   "scripts": {
     "build": "pnpm -r --filter=./packages/* run build",
     "test": "pnpm -r --filter=./packages/* run test",
-    "test:core": "pnpm --filter @power-ui/core test",
+    "test:core": "pnpm --filter @powers/core test",
     "typecheck": "pnpm -r --filter=./packages/* run typecheck",
-    "bench": "pnpm --filter @power-ui/core bench",
-    "size": "pnpm --filter @power-ui/core size && pnpm --filter @power-ui/animate size && pnpm --filter @power-ui/dom size",
-    "example:counter": "pnpm --filter @power-ui/example-counter start",
-    "example:kitchen-sink": "pnpm --filter @power-ui/example-kitchen-sink start",
-    "example:animate": "pnpm --filter @power-ui/example-animate-demo start",
-    "example:browser": "pnpm --filter @power-ui/example-browser dev",
-    "example:ssr-islands": "pnpm --filter @power-ui/example-ssr-islands start",
-    "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo"
+    "bench": "pnpm --filter @powers/core bench",
+    "size": "pnpm --filter @powers/core size && pnpm --filter @powers/animate size && pnpm --filter @powers/dom size && pnpm --filter @powers/router size && pnpm --filter @powers/ui size",
+    "check": "pnpm typecheck && pnpm test && pnpm size",
+    "ci": "pnpm run check",
+    "example:counter": "pnpm --filter @powers/example-counter start",
+    "example:kitchen-sink": "pnpm --filter @powers/example-kitchen-sink start",
+    "example:animate": "pnpm --filter @powers/example-animate-demo start",
+    "example:browser": "pnpm --filter @powers/example-browser dev",
+    "example:starter": "pnpm --filter @powers/app-starter dev",
+    "example:restaurant": "pnpm --filter @powers/restaurant-demo dev",
+    "example:ssr-islands": "pnpm --filter @powers/example-ssr-islands start",
+    "new-app": "bash scripts/new-app.sh",
+    "create-app": "bash scripts/create-powers.sh",
+    "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo",
+    "gh": ".tools/gh",
+    "pr:create": ".tools/gh pr create"
   },
   "devDependencies": {
     "typescript": "^5.8.2"

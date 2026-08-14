@@ -1,15 +1,15 @@
-# Design system (`@power-ui/ui`)
+# Design system (`@powers/ui`)
 
 **Goal:** adaptable, editable, clear, easy to use — without locking you into one brand.
 
-**Architecture:** Power UI owns styling as a **product pillar** (not an afterthought next to Tailwind).  
+**Architecture:** Powers owns styling as a **product pillar** (not an afterthought next to Tailwind).  
 Full model: [`STYLING.md`](./STYLING.md) — tokens · primitives · optional utilities.
 
 ## 60-second start
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { Button, Stack, Text, Card, createTheme } from "@power-ui/ui";
+import "@powers/ui/theme.css";
+import { Button, Stack, Text, Card, createTheme } from "@powers/ui";
 
 const theme = createTheme("light");
 theme.bind(); // sets data-pu-theme on <html>
@@ -78,6 +78,14 @@ Primitives **must** use semantic tokens (`--pu-color-accent`), not raw brand ste
 | `Combobox` | searchable select (type to filter) |
 | `Command` | command palette (⌘K-style) |
 | `Label` / `Field` | accessible form layout + hint/error |
+| `Accordion` | expand panels (single/multi) |
+| `Drawer` | offcanvas side panel + focus trap |
+| `Breadcrumb` · `Pagination` | nav chrome |
+| `RadioGroup` · `Slider` · `NumberInput` · `ToggleGroup` | richer form controls |
+| `List` · `Table` | data selection / grids |
+| `Empty` · `Stat` · `Steps` · `Timeline` | product / dashboard surfaces |
+| `Chip` · `Link` · `ScrollArea` · `AspectRatio` · `Collapse` · `Transition` | tags, media, motion |
+| Authoring | `createStyleSheet` · `styleVars` · `trapFocus` — see [COMPONENTS.md](./COMPONENTS.md) |
 | `Textarea` / `Select` | multi-line + dropdown |
 | `Switch` / `Checkbox` | boolean controls |
 | `createTheme` | light/dark (`data-pu-theme`) |

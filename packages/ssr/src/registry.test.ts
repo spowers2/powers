@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { Window } from "happy-dom";
-import { h } from "@power-ui/dom";
+import { h } from "@powers/dom";
 import { defineIslands, listIslandsInHtml } from "./registry.js";
 import { islandPlaceholder } from "./islands.js";
 

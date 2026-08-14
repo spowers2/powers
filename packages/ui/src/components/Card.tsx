@@ -1,4 +1,4 @@
-import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 
 export type CardVariant = "default" | "glass" | "elevated" | "soft";
@@ -29,13 +29,13 @@ const styles = `
 .pu-card--glass {
   background: var(--pu-glass-bg);
   border-color: var(--pu-glass-border);
-  backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.15);
-  -webkit-backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.15);
-  box-shadow: var(--pu-shadow-md);
+  backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--pu-glass-blur)) saturate(1.2);
+  box-shadow: var(--pu-shadow-float);
 }
 .pu-card--elevated {
   box-shadow: var(--pu-shadow-md);
-  border-color: color-mix(in srgb, var(--pu-color-border) 65%, transparent);
+  border-color: color-mix(in srgb, var(--pu-holo-cyan, transparent) 12%, var(--pu-color-border));
 }
 .pu-card--soft {
   background: var(--pu-color-surface-2);
@@ -47,7 +47,7 @@ const styles = `
 }
 .pu-card--interactive:hover {
   box-shadow: var(--pu-shadow-lg);
-  border-color: color-mix(in srgb, var(--pu-color-accent) 22%, var(--pu-color-border));
+  border-color: color-mix(in srgb, var(--pu-holo-cyan, var(--pu-color-accent)) 22%, var(--pu-color-border));
   transform: translateY(-1px);
 }
 `;

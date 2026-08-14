@@ -215,6 +215,75 @@ describe("createRoot", () => {
     await tick();
     assert.equal(runs, 2);
   });
+
+  it("does not let parent effects track signals read during root setup", async () => {
+    // Regression: router outlet effect was re-running (remounting the page)
+    // when form signals updated, because Input setup read value={email}
+    // while the outlet effect was still the active tracking node.
+    const email = signal("");
+    let parentRuns = 0;
+    let childReads = 0;
+
+    effect(() => {
+      parentRuns++;
+      createRoot(() => {
+        // Simulate component setup reading a signal (like props.value unwrap)
+        email();
+        childReads++;
+      });
+    });
+
+    assert.equal(parentRuns, 1);
+    assert.equal(childReads, 1);
+
+    email.set("a");
+    await tick();
+    // Parent must NOT re-run — only the root's own effects would.
+    assert.equal(parentRuns, 1);
+    assert.equal(childReads, 1);
+  });
+
+  it("effects created inside createRoot still track their sources", async () => {
+    const n = signal(0);
+    let runs = 0;
+    createRoot(() => {
+      effect(() => {
+        n();
+        runs++;
+      });
+    });
+    assert.equal(runs, 1);
+    n.set(1);
+    await tick();
+    assert.equal(runs, 2);
+  });
+
+  it("nested createRoot does not leak tracking to outer root's parent effect", async () => {
+    const a = signal(0);
+    const b = signal(0);
+    let outerRuns = 0;
+    let innerSetup = 0;
+
+    effect(() => {
+      outerRuns++;
+      createRoot(() => {
+        createRoot(() => {
+          a();
+          b();
+          innerSetup++;
+        });
+      });
+    });
+
+    assert.equal(outerRuns, 1);
+    assert.equal(innerSetup, 1);
+    a.set(1);
+    await tick();
+    b.set(1);
+    await tick();
+    assert.equal(outerRuns, 1);
+    assert.equal(innerSetup, 1);
+  });
 });
 
 describe("flush", () => {

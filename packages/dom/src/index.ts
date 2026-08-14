@@ -1,10 +1,13 @@
 /**
- * @power-ui/dom
+ * @powers/dom
  *
- * Thin, explicit DOM bindings over @power-ui/core.
+ * Thin, explicit DOM bindings over @powers/core.
  *
  * Learn order:
  *   mount → h / JSX → component → reactive props → Show / For
+ *
+ * Form controls in @powers/ui use `bind={signal}` for two-way state —
+ * `bind` is intentionally not unwrapped by createProps (see props.ts).
  */
 
 export { mount } from "./mount.js";
@@ -22,6 +25,9 @@ export {
   bindClass,
   bindStyle,
 } from "./bind.js";
+
+export { bindDynamic } from "./dynamic.js";
+export type { DynamicChild } from "./dynamic.js";
 
 export { on } from "./on.js";
 export { show } from "./show.js";
@@ -41,6 +47,7 @@ export {
   mergeProps,
   splitProps,
   unwrapProp,
+  getRawProp,
   isSignal,
   isReactiveProps,
 } from "./props.js";

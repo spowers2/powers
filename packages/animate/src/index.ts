@@ -1,11 +1,15 @@
 /**
- * @power-ui/animate
+ * @powers/animate
  *
  * Signal-native motion. Learn it in one line:
  *   animate(mySignal, 100, { duration: 300 })
  *
  * Optional spring feel:
  *   animate(mySignal, 100, spring())
+ *
+ * Optional GSAP (peer dependency):
+ *   import { gsapAnimate } from "@powers/animate/gsap"
+ *   — or createGsapBridge(gsap) from this package without importing gsap here
  */
 
 export { animate, spring } from "./animate.js";
@@ -20,6 +24,12 @@ export {
   driver,
 } from "./driver.js";
 export { resolveEase, easeNames } from "./easings.js";
+export { createGsapBridge } from "./gsap-bridge.js";
+export type {
+  GsapLike,
+  GsapAnimateOptions,
+  GsapBridge,
+} from "./gsap-bridge.js";
 
 export type {
   AnimateOptions,

@@ -1,12 +1,17 @@
-import { component, mergeProps, type ComponentProps } from "@power-ui/dom";
+import { type Signal } from "@powers/core";
+import { component, mergeProps, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
+import { readBool, type MaybeReactive } from "../reactive.js";
+import type { Bindable } from "../form.js";
 
 export type SwitchProps = {
-  checked?: boolean | (() => boolean);
-  disabled?: boolean | (() => boolean);
+  checked?: MaybeReactive<boolean>;
+  /** Two-way bind a boolean signal. */
+  bind?: Bindable<boolean> | Signal<boolean>;
+  disabled?: MaybeReactive<boolean>;
   onChange?: (checked: boolean) => void;
   label?: string;
-  class?: string | (() => string);
+  class?: MaybeReactive<string>;
   id?: string;
 };
 
@@ -30,7 +35,7 @@ const styles = `
   height: 1.4rem;
   border-radius: var(--pu-radius-full);
   background: var(--pu-color-border);
-  transition: background var(--pu-duration) var(--pu-ease);
+  transition: background var(--pu-duration) var(--pu-ease-out);
   flex-shrink: 0;
 }
 .pu-switch[data-checked="true"] .pu-switch__track {
@@ -45,16 +50,26 @@ const styles = `
   border-radius: 50%;
   background: #fff;
   box-shadow: var(--pu-shadow-sm);
-  transition: transform var(--pu-duration) var(--pu-ease);
+  transition: transform var(--pu-duration) var(--pu-ease-spring);
 }
 .pu-switch[data-checked="true"] .pu-switch__thumb {
   transform: translateX(1.1rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pu-switch__thumb,
+  .pu-switch__track { transition: none; }
 }
 .pu-switch__input {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
+}
+.pu-switch__input:focus-visible + .pu-switch__track {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--pu-color-surface),
+    0 0 0 4px color-mix(in srgb, var(--pu-color-focus) 55%, transparent);
 }
 `;
 
@@ -72,11 +87,13 @@ export const Switch = component((raw: SwitchProps) => {
   ensureStyles();
   const props = mergeProps({}, raw) as ComponentProps<SwitchProps>;
   const id = props.id ?? `pu-switch-${Math.random().toString(36).slice(2, 9)}`;
+  const bound = raw.bind;
 
   const isChecked = () =>
-    !!(typeof props.checked === "function" ? props.checked() : props.checked);
-  const isDisabled = () =>
-    !!(typeof props.disabled === "function" ? props.disabled() : props.disabled);
+    bound
+      ? readBool(bound as MaybeReactive<boolean>)
+      : readBool(props.checked as MaybeReactive<boolean>);
+  const isDisabled = () => readBool(props.disabled as MaybeReactive<boolean>);
 
   return (
     <label
@@ -98,7 +115,9 @@ export const Switch = component((raw: SwitchProps) => {
         disabled={isDisabled}
         onChange={(e: Event) => {
           if (isDisabled()) return;
-          props.onChange?.((e.target as HTMLInputElement).checked);
+          const next = (e.target as HTMLInputElement).checked;
+          if (bound) bound.set(next);
+          props.onChange?.(next);
         }}
       />
       <span class="pu-switch__track" aria-hidden="true">

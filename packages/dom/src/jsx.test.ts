@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { signal, flush } from "@power-ui/core";
+import { signal, flush } from "@powers/core";
 import { installDom } from "./test-setup.js";
 import { mount, component, Show, For } from "./index.js";
 import { jsx, jsxs, Fragment } from "./jsx-runtime.js";
@@ -33,6 +33,28 @@ describe("jsx-runtime", () => {
     el.click();
     await tick();
     assert.equal(el.textContent, "n=1");
+  });
+
+  it("reactive children can return DOM nodes (not [object HTML…])", async () => {
+    const showNode = signal(true);
+    const p = document.createElement("p");
+    p.textContent = "live panel";
+
+    const el = jsx("div", {
+      children: () => (showNode() ? p : "fallback"),
+    }) as HTMLElement;
+    root.appendChild(el);
+    assert.equal(el.querySelector("p")?.textContent, "live panel");
+    assert.equal(el.textContent?.includes("[object"), false);
+
+    showNode.set(false);
+    await tick();
+    assert.equal(el.textContent, "fallback");
+    assert.equal(el.querySelector("p"), null);
+
+    showNode.set(true);
+    await tick();
+    assert.equal(el.querySelector("p")?.textContent, "live panel");
   });
 
   it("supports function components", () => {

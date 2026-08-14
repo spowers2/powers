@@ -1,41 +1,40 @@
 /**
- * Power UI design tokens — Deep blue + lime green, modern surfaces
- * -----------------------------------------------------------------
- * Ink navy brand blues (unchanged) + vivid green base #69BE28.
- * Structure: layered glass, soft multi-shadow, generous radius.
+ * Powers design tokens — “Seahawk hologram”
+ * -------------------------------------------
+ * Deep college navy + action green (#69BE28) + wolf grey.
+ * Clean product UI with restrained steampunk metal and soft holographic edges.
  *
  * Edit this file to rebrand the entire product.
- * Naming: --pu-<category>-<name>
  */
 
 :root {
-  /* ---- Brand scale (deep ink / abyss navy) ---- */
-  --pu-brand-50: #eef1f4;
-  --pu-brand-100: #cfd7e0;
-  --pu-brand-200: #96a6b8;
-  --pu-brand-300: #5c738c;
-  --pu-brand-400: #3a536d;
-  --pu-brand-500: #243d56;
-  --pu-brand-600: #1b3045;
-  --pu-brand-700: #152636;
-  --pu-brand-800: #0f1c28;
-  --pu-brand-900: #0a141d;
+  /* ---- College navy scale ---- */
+  --pu-brand-50: #e8eef5;
+  --pu-brand-100: #c5d4e6;
+  --pu-brand-200: #8aabcc;
+  --pu-brand-300: #4d7aa8;
+  --pu-brand-400: #2a5a88;
+  --pu-brand-500: #002244; /* Seahawks College Navy */
+  --pu-brand-600: #001a36;
+  --pu-brand-700: #00142b;
+  --pu-brand-800: #000e1f;
+  --pu-brand-900: #000914;
 
-  /* ---- Neutrals (cool graphite) ---- */
-  --pu-gray-0: #fcfcfd;
-  --pu-gray-50: #f3f4f6;
-  --pu-gray-100: #e6e8ec;
-  --pu-gray-200: #d0d4dc;
-  --pu-gray-300: #a8afbb;
-  --pu-gray-400: #7c8594;
-  --pu-gray-500: #575f6c;
-  --pu-gray-600: #424955;
-  --pu-gray-700: #303640;
-  --pu-gray-800: #1f242c;
-  --pu-gray-900: #13171d;
-  --pu-gray-950: #0a0d11;
+  /* ---- Neutrals (wolf grey family) ---- */
+  --pu-gray-0: #fbfcfd;
+  --pu-gray-50: #f2f4f7;
+  --pu-gray-100: #e5e9ef;
+  --pu-gray-200: #cfd6e0;
+  --pu-gray-300: #a5acaf; /* Wolf Grey */
+  --pu-gray-400: #7e8794;
+  --pu-gray-500: #5c6674;
+  --pu-gray-600: #454e5c;
+  --pu-gray-700: #333b48;
+  --pu-gray-800: #222933;
+  --pu-gray-900: #141a22;
+  --pu-gray-950: #0a0e14;
 
-  /* ---- Green scale (base #69BE28) — secondary, success, accents ---- */
+  /* ---- Action green (Seahawks #69BE28) ---- */
   --pu-sage-300: #8fd44f;
   --pu-sage-400: #7ac936;
   --pu-sage-500: #69be28;
@@ -43,34 +42,51 @@
   --pu-sage-700: #3f7217;
   --pu-sage-800: #2e5411;
 
-  /* ---- Semantic surfaces (layered hierarchy) ---- */
+  /* ---- Steampunk brass (restrained metal) ---- */
+  --pu-brass-400: #d4b483;
+  --pu-brass-500: #b8956a;
+  --pu-brass-600: #8f7349;
+
+  /* ---- Hologram iridescence (cyan sheen over navy) ---- */
+  --pu-holo-cyan: #3ecfcf;
+  --pu-holo-teal: #2a9d9d;
+  --pu-holo-mix: color-mix(in srgb, var(--pu-holo-cyan) 45%, var(--pu-sage-400));
+
+  /* ---- Semantic surfaces ---- */
   --pu-color-bg: var(--pu-gray-50);
   --pu-color-surface: var(--pu-gray-0);
   --pu-color-surface-2: var(--pu-gray-100);
   --pu-color-surface-elevated: var(--pu-gray-0);
-  --pu-color-surface-sunken: color-mix(in srgb, var(--pu-gray-100) 70%, var(--pu-gray-50));
+  --pu-color-surface-sunken: color-mix(in srgb, var(--pu-gray-100) 75%, var(--pu-brand-500));
   --pu-color-border: color-mix(in srgb, var(--pu-gray-200) 88%, var(--pu-brand-500));
-  --pu-color-border-strong: var(--pu-gray-300);
-  --pu-color-text: var(--pu-gray-900);
+  --pu-color-border-strong: color-mix(in srgb, var(--pu-gray-300) 70%, var(--pu-brand-400));
+  --pu-color-text: var(--pu-brand-500);
   --pu-color-text-muted: var(--pu-gray-500);
+  /* Primary actions: navy (authority); green for live/success signal */
   --pu-color-accent: var(--pu-brand-500);
   --pu-color-accent-hover: var(--pu-brand-600);
-  --pu-color-accent-fg: #f4f5f7;
-  --pu-color-danger: #8a3838;
-  --pu-color-danger-fg: #f4f5f7;
-  --pu-color-focus: var(--pu-brand-400);
-  --pu-color-selection: color-mix(in srgb, var(--pu-brand-400) 22%, transparent);
+  --pu-color-accent-fg: #f4f7fb;
+  --pu-color-signal: var(--pu-sage-500);
+  --pu-color-danger: #a33d3d;
+  --pu-color-danger-fg: #fbfcfd;
+  --pu-color-focus: var(--pu-holo-cyan);
+  --pu-color-selection: color-mix(in srgb, var(--pu-sage-500) 22%, transparent);
+  --pu-color-success: var(--pu-sage-600);
 
-  /* Glass (subtle frosted layers — not neon frosted candy) */
-  --pu-glass-bg: color-mix(in srgb, var(--pu-color-surface) 72%, transparent);
-  --pu-glass-border: color-mix(in srgb, var(--pu-color-border) 70%, transparent);
-  --pu-glass-blur: 18px;
+  /* Clean glass with holographic edge hint */
+  --pu-glass-bg: color-mix(in srgb, var(--pu-color-surface) 78%, transparent);
+  --pu-glass-border: color-mix(
+    in srgb,
+    var(--pu-holo-cyan) 18%,
+    var(--pu-color-border)
+  );
+  --pu-glass-blur: 16px;
 
-  /* Soft glows — blue + lime, keep restrained */
-  --pu-color-glow: color-mix(in srgb, var(--pu-brand-500) 16%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 14%, transparent);
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-500) 12%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 12%, transparent);
+  --pu-color-glow-holo: color-mix(in srgb, var(--pu-holo-cyan) 14%, transparent);
 
-  /* ---- Space (4px grid) ---- */
+  /* ---- Space ---- */
   --pu-space-0: 0;
   --pu-space-1: 0.25rem;
   --pu-space-2: 0.5rem;
@@ -82,58 +98,60 @@
   --pu-space-10: 2.5rem;
   --pu-space-12: 3rem;
 
-  /* ---- Radius (generous modern geometry) ---- */
-  --pu-radius-sm: 8px;
-  --pu-radius-md: 12px;
-  --pu-radius-lg: 18px;
-  --pu-radius-xl: 24px;
+  /* ---- Radius (refined, not toy-sharp or soap) ---- */
+  --pu-radius-sm: 6px;
+  --pu-radius-md: 10px;
+  --pu-radius-lg: 14px;
+  --pu-radius-xl: 20px;
   --pu-radius-full: 9999px;
 
-  /* ---- Typography (optical tracking on display) ---- */
-  --pu-font-sans: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
-  --pu-font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  /* ---- Typography ---- */
+  --pu-font-sans: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --pu-font-display: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  --pu-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --pu-text-xs: 0.75rem;
   --pu-text-sm: 0.875rem;
   --pu-text-md: 1rem;
   --pu-text-lg: 1.125rem;
-  --pu-text-xl: 1.4rem;
-  --pu-text-2xl: 1.85rem;
-  --pu-text-3xl: 2.4rem;
+  --pu-text-xl: 1.375rem;
+  --pu-text-2xl: 1.75rem;
+  --pu-text-3xl: 2.35rem;
   --pu-leading: 1.55;
-  --pu-leading-tight: 1.2;
-  --pu-tracking-tight: -0.03em;
-  --pu-tracking-display: -0.045em;
+  --pu-leading-tight: 1.15;
+  --pu-tracking-tight: -0.025em;
+  --pu-tracking-display: -0.035em;
   --pu-font-medium: 500;
   --pu-font-semibold: 600;
   --pu-font-bold: 700;
 
-  /* ---- Shadow (multi-layer, soft product UI) ---- */
-  --pu-shadow-xs: 0 1px 1px rgba(10, 20, 29, 0.04);
+  /* ---- Soft product shadows (no hard comic offsets) ---- */
+  --pu-shadow-xs: 0 1px 1px rgba(0, 34, 68, 0.04);
   --pu-shadow-sm:
-    0 1px 2px rgba(10, 20, 29, 0.04),
-    0 1px 3px rgba(10, 20, 29, 0.03);
+    0 1px 2px rgba(0, 34, 68, 0.04),
+    0 2px 8px rgba(0, 34, 68, 0.05);
   --pu-shadow-md:
-    0 2px 4px rgba(10, 20, 29, 0.03),
-    0 8px 24px rgba(10, 20, 29, 0.06);
+    0 2px 4px rgba(0, 34, 68, 0.04),
+    0 10px 28px rgba(0, 34, 68, 0.08);
   --pu-shadow-lg:
-    0 4px 8px rgba(10, 20, 29, 0.03),
-    0 16px 40px rgba(10, 20, 29, 0.08);
+    0 4px 8px rgba(0, 34, 68, 0.04),
+    0 18px 44px rgba(0, 34, 68, 0.1);
   --pu-shadow-xl:
-    0 8px 16px rgba(10, 20, 29, 0.04),
-    0 28px 64px rgba(10, 20, 29, 0.1);
-  /* Floating panels / dialogs */
+    0 8px 16px rgba(0, 34, 68, 0.05),
+    0 28px 64px rgba(0, 34, 68, 0.12);
   --pu-shadow-float:
-    0 0 0 1px color-mix(in srgb, var(--pu-color-border) 80%, transparent),
-    0 12px 40px rgba(10, 20, 29, 0.12);
+    0 0 0 1px color-mix(in srgb, var(--pu-holo-cyan) 16%, var(--pu-color-border)),
+    0 0 24px color-mix(in srgb, var(--pu-holo-cyan) 8%, transparent),
+    0 16px 40px rgba(0, 34, 68, 0.12);
 
   /* ---- Motion ---- */
   --pu-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --pu-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --pu-duration-fast: 120ms;
-  --pu-duration: 200ms;
-  --pu-duration-slow: 320ms;
+  --pu-ease-spring: cubic-bezier(0.34, 1.25, 0.64, 1);
+  --pu-duration-fast: 130ms;
+  --pu-duration: 220ms;
+  --pu-duration-slow: 380ms;
 
-  /* ---- Control sizes ---- */
+  /* ---- Controls ---- */
   --pu-control-h-sm: 2rem;
   --pu-control-h-md: 2.5rem;
   --pu-control-h-lg: 3rem;
@@ -141,10 +159,9 @@
   --pu-field-gap: var(--pu-space-2);
   --pu-label-size: var(--pu-text-sm);
 
-  /* ---- Overlay / z ---- */
   --pu-z-overlay: 1000;
   --pu-z-toast: 1100;
-  --pu-overlay-scrim: color-mix(in srgb, var(--pu-gray-950) 45%, transparent);
+  --pu-overlay-scrim: color-mix(in srgb, var(--pu-brand-500) 48%, transparent);
 }
 
 [data-pu-density="compact"] {
@@ -163,42 +180,44 @@
 [data-pu-density="comfortable"] {
 }
 
-/* Dark — abyss ink + lime undertone */
+/* Dark — deep abyss navy + action green signal */
 [data-pu-theme="dark"] {
-  --pu-color-bg: var(--pu-gray-950);
-  --pu-color-surface: var(--pu-gray-900);
-  --pu-color-surface-2: var(--pu-gray-800);
-  --pu-color-surface-elevated: color-mix(in srgb, var(--pu-gray-800) 70%, var(--pu-gray-900));
-  --pu-color-surface-sunken: var(--pu-gray-950);
-  --pu-color-border: color-mix(in srgb, var(--pu-gray-700) 85%, var(--pu-brand-400));
-  --pu-color-border-strong: var(--pu-gray-600);
-  --pu-color-text: var(--pu-gray-50);
-  --pu-color-text-muted: var(--pu-gray-400);
-  --pu-color-accent: var(--pu-brand-300);
-  --pu-color-accent-hover: var(--pu-brand-200);
-  --pu-color-accent-fg: var(--pu-gray-950);
-  --pu-color-focus: var(--pu-brand-300);
-  --pu-color-danger: #b86868;
-  --pu-color-selection: color-mix(in srgb, var(--pu-brand-300) 28%, transparent);
-  --pu-glass-bg: color-mix(in srgb, var(--pu-gray-900) 68%, transparent);
-  --pu-glass-border: color-mix(in srgb, var(--pu-gray-700) 55%, transparent);
-  --pu-color-glow: color-mix(in srgb, var(--pu-brand-500) 14%, transparent);
-  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 10%, transparent);
-  --pu-overlay-scrim: color-mix(in srgb, #000 62%, transparent);
+  --pu-color-bg: #020810;
+  --pu-color-surface: #0a1522;
+  --pu-color-surface-2: #122033;
+  --pu-color-surface-elevated: #18283d;
+  --pu-color-surface-sunken: #01060c;
+  --pu-color-border: color-mix(in srgb, #a5acaf 14%, transparent);
+  --pu-color-border-strong: color-mix(in srgb, var(--pu-holo-cyan) 28%, var(--pu-gray-600));
+  --pu-color-text: #e8eef5;
+  --pu-color-text-muted: #8a96a8;
+  --pu-color-accent: var(--pu-sage-500);
+  --pu-color-accent-hover: var(--pu-sage-300);
+  --pu-color-accent-fg: #001a12;
+  --pu-color-focus: var(--pu-holo-cyan);
+  --pu-color-danger: #e07070;
+  --pu-color-selection: color-mix(in srgb, var(--pu-sage-500) 28%, transparent);
+  --pu-glass-bg: color-mix(in srgb, #0a1522 72%, transparent);
+  --pu-glass-border: color-mix(in srgb, var(--pu-holo-cyan) 22%, transparent);
+  --pu-color-glow: color-mix(in srgb, var(--pu-brand-400) 16%, transparent);
+  --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 12%, transparent);
+  --pu-color-glow-holo: color-mix(in srgb, var(--pu-holo-cyan) 16%, transparent);
+  --pu-overlay-scrim: color-mix(in srgb, #000 68%, transparent);
   --pu-shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.35);
   --pu-shadow-sm:
     0 1px 2px rgba(0, 0, 0, 0.35),
-    0 1px 3px rgba(0, 0, 0, 0.25);
+    0 2px 10px rgba(0, 0, 0, 0.28);
   --pu-shadow-md:
     0 2px 4px rgba(0, 0, 0, 0.3),
-    0 10px 28px rgba(0, 0, 0, 0.4);
+    0 12px 32px rgba(0, 0, 0, 0.42);
   --pu-shadow-lg:
     0 4px 8px rgba(0, 0, 0, 0.3),
-    0 18px 48px rgba(0, 0, 0, 0.5);
+    0 20px 48px rgba(0, 0, 0, 0.5);
   --pu-shadow-xl:
     0 8px 16px rgba(0, 0, 0, 0.35),
     0 28px 64px rgba(0, 0, 0, 0.55);
   --pu-shadow-float:
-    0 0 0 1px color-mix(in srgb, var(--pu-color-border) 70%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--pu-holo-cyan) 28%, transparent),
+    0 0 32px color-mix(in srgb, var(--pu-holo-cyan) 10%, transparent),
     0 16px 48px rgba(0, 0, 0, 0.55);
 }

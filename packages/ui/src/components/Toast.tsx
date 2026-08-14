@@ -1,5 +1,5 @@
-import { signal, type Signal } from "@power-ui/core";
-import { For, component, type ComponentProps } from "@power-ui/dom";
+import { signal, type Signal } from "@powers/core";
+import { For, component, type ComponentProps } from "@powers/dom";
 import { cx } from "../utils.js";
 
 export type ToastTone = "info" | "success" | "danger";

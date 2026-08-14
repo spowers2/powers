@@ -1,11 +1,11 @@
 /**
- * @power-ui/router
+ * @powers/router
  *
  * Learn in 2 minutes:
  *   createRouter({ routes }) → router.outlet() + router.navigate() + <Link />
  */
 
-export { createRouter, buildPath } from "./router.js";
+export { createRouter, buildPath, parseSearch } from "./router.js";
 export type {
   Router,
   RouterOptions,

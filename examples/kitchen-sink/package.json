@@ -1,5 +1,5 @@
 {
-  "name": "@power-ui/example-kitchen-sink",
+  "name": "@powers/example-kitchen-sink",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,7 @@
     "start": "node --import tsx src/main.ts"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*"
+    "@powers/core": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.19.3"

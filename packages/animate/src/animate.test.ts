@@ -1,6 +1,6 @@
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { signal } from "@power-ui/core";
+import { signal } from "@powers/core";
 import {
   animate,
   spring,
@@ -11,7 +11,7 @@ import {
   resolveEase,
 } from "./index.js";
 
-describe("@power-ui/animate", () => {
+describe("@powers/animate", () => {
   let restore: (() => void) | undefined;
   let clock: ReturnType<typeof createTestClock>;
 

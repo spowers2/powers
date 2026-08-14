@@ -1,10 +1,10 @@
-# `@power-ui/ssr`
+# `@powers/ssr`
 
 ## String SSR
 
 ```ts
-import { renderToString, htmlDocument } from "@power-ui/ssr";
-import { h } from "@power-ui/dom";
+import { renderToString, htmlDocument } from "@powers/ssr";
+import { h } from "@powers/dom";
 
 const body = await renderToString(() => h("h1", { text: "Hello" }));
 const page = htmlDocument(body, { title: "Hi" });
@@ -19,7 +19,7 @@ Static shell stays as HTML. Interactive regions remount on the client.
 ### Server
 
 ```ts
-import { renderToString, island } from "@power-ui/ssr";
+import { renderToString, island } from "@powers/ssr";
 
 const body = await renderToString(() => {
   const main = document.createElement("main");
@@ -32,7 +32,7 @@ const body = await renderToString(() => {
 Or string shell:
 
 ```ts
-import { islandPlaceholder, listIslandsInHtml } from "@power-ui/ssr";
+import { islandPlaceholder, listIslandsInHtml } from "@powers/ssr";
 
 const body = `
   <h1>Hello</h1>
@@ -44,7 +44,7 @@ listIslandsInHtml(body); // ["counter"]
 ### Client — registry API (recommended)
 
 ```ts
-import { defineIslands } from "@power-ui/ssr";
+import { defineIslands } from "@powers/ssr";
 
 const islands = defineIslands({
   counter: () => Counter(),
@@ -63,7 +63,7 @@ islands.missingInDom();       // factories with no matching DOM node
 Low-level:
 
 ```ts
-import { hydrateIslands } from "@power-ui/ssr";
+import { hydrateIslands } from "@powers/ssr";
 
 hydrateIslands(
   { counter: () => Counter() },

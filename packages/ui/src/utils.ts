@@ -15,3 +15,11 @@ export function cx(
   }
   return out.join(" ");
 }
+
+let uidSeq = 0;
+
+/** Stable-enough unique id for a11y wiring (dialog titles, field labels, …). */
+export function puId(prefix = "pu"): string {
+  uidSeq += 1;
+  return `${prefix}-${uidSeq.toString(36)}`;
+}

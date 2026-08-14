@@ -1,4 +1,4 @@
-# Power UI documentation
+# Powers documentation
 
 **For public users and contributors.** Start here and follow the path that matches your goal.
 
@@ -12,19 +12,37 @@ Private repo today; these docs are written so they can ship as-is when the proje
 |---|---|
 | **How to use + API (in the demo)** | **http://localhost:5173/docs** |
 | API cheat sheet (markdown) | [API.md](./API.md) |
+| **Create & customize components** | [COMPONENTS.md](./COMPONENTS.md) |
+| Getting started (private starter) | [GETTING_STARTED.md](./GETTING_STARTED.md) · `pnpm example:starter` |
+| **Golden path (~15 min first screen)** | [GOLDEN_PATH.md](./GOLDEN_PATH.md) |
+| Stable API freeze notes | [STABLE.md](./STABLE.md) |
+| Size budgets | [SIZE.md](./SIZE.md) · `pnpm size` |
+| Runtime contracts | [FOUNDATION.md](./FOUNDATION.md) |
+| Usability patterns (bind, router, lists) | [USABILITY.md](./USABILITY.md) |
+| Day 1 / 2 / 30 learning path | [LEARN_PATH.md](./LEARN_PATH.md) |
+| Forms & validation helpers | [FORMS.md](./FORMS.md) |
+| Motion language | [MOTION.md](./MOTION.md) |
 | Learn the runtime in ~10 minutes | [LEARN.md](./LEARN.md) |
 | Styling: tokens, components, utilities | [STYLING.md](./STYLING.md) |
 | Design system primitives reference | [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
 | Interactive coding playground | [POWER_LAB.md](./POWER_LAB.md) + demo `/lab` |
 | Public release checklist | [RELEASE.md](./RELEASE.md) |
 | Ordered product plan | [ROADMAP.md](./ROADMAP.md) |
+| DX strategy (how we win) | [DX_STRATEGY.md](./DX_STRATEGY.md) |
 
 **Recommended path for a new developer**
 
-1. Demo **`/docs`** — install, three rules, first app, API tables  
+1. Demo **`/docs`** — pick a path (eng / design / cookbook), three rules, API  
 2. Demo **`/lab`** — recipes with Goal / Learn / How / Try this  
-3. Demo **`/system`** — every component live  
-4. Markdown deep-dives as needed (LEARN, DOM, ROUTER, …)
+3. Demo **`/system`** — brand playground + every component live  
+4. Day 1 / 2 / 30: [LEARN_PATH.md](./LEARN_PATH.md)  
+5. Markdown deep-dives as needed (LEARN, DOM, ROUTER, …)
+
+**Scaffold a minimal app**
+
+```bash
+pnpm create-app my-ui    # or: bash scripts/create-powers.sh my-ui
+```
 
 ---
 
@@ -32,26 +50,26 @@ Private repo today; these docs are written so they can ship as-is when the proje
 
 | Package | Doc |
 |---|---|
-| `@power-ui/core` | [LEARN.md](./LEARN.md) · [ARCHITECTURE.md](./ARCHITECTURE.md) |
-| `@power-ui/dom` | [DOM.md](./DOM.md) |
-| `@power-ui/animate` | [ANIMATION.md](./ANIMATION.md) |
-| `@power-ui/router` | [ROUTER.md](./ROUTER.md) |
-| `@power-ui/ssr` | [SSR.md](./SSR.md) |
-| `@power-ui/ui` | [STYLING.md](./STYLING.md) · [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
+| `@powers/core` | [LEARN.md](./LEARN.md) · [ARCHITECTURE.md](./ARCHITECTURE.md) · [FOUNDATION.md](./FOUNDATION.md) |
+| `@powers/dom` | [DOM.md](./DOM.md) |
+| `@powers/animate` | [ANIMATION.md](./ANIMATION.md) |
+| `@powers/router` | [ROUTER.md](./ROUTER.md) |
+| `@powers/ssr` | [SSR.md](./SSR.md) |
+| `@powers/ui` | [STYLING.md](./STYLING.md) · [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) · [COMPONENTS.md](./COMPONENTS.md) |
 
 ---
 
 ## Quick install (when published)
 
 ```bash
-pnpm add @power-ui/core @power-ui/dom @power-ui/ui
+pnpm add @powers/core @powers/dom @powers/ui
 ```
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
-import { Button, createTheme } from "@power-ui/ui";
+import "@powers/ui/theme.css";
+import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, createTheme } from "@powers/ui";
 
 createTheme("light").bind();
 
@@ -80,7 +98,6 @@ pnpm example:browser   # http://localhost:5173
 # /docs    — how to use + API reference (start here)
 # /lab     — interactive recipes
 # /system  — design system explorer
-# /todos   — small app demo
 ```
 
 ---
@@ -92,7 +109,7 @@ signal → computed → effect → store → resource
        ↓
   mount / JSX / component
        ↓
-  @power-ui/ui  (tokens · primitives · utilities)
+  @powers/ui  (tokens · primitives · utilities)
 ```
 
 One library for **behavior and look**. External CSS frameworks are optional escape hatches, not required.

@@ -1,7 +1,7 @@
 {
-  "name": "@power-ui/router",
+  "name": "@powers/router",
   "version": "0.1.0",
-  "description": "Tiny signal-based router for Power UI — easy to learn, easy to own.",
+  "description": "Tiny signal-based router for Powers — easy to learn, easy to own.",
   "type": "module",
   "license": "MIT",
   "sideEffects": false,
@@ -18,13 +18,15 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "node --import tsx --test src/*.test.ts"
+    "test": "node --import tsx --test src/*.test.ts",
+    "size": "node --import tsx scripts/size.ts"
   },
   "dependencies": {
-    "@power-ui/core": "workspace:*",
-    "@power-ui/dom": "workspace:*"
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*"
   },
   "devDependencies": {
+    "esbuild": "^0.25.1",
     "happy-dom": "^17.4.4",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"

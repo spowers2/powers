@@ -14,13 +14,27 @@ import {
 import { highlightTsx } from "./highlight.js";
 import "./lab.css";
 
+function recipeFromUrl(): Recipe | undefined {
+  if (typeof location === "undefined") return undefined;
+  // /lab?recipe=ui  or  #recipe=ui
+  const q = new URLSearchParams(location.search).get("recipe");
+  if (q && recipeById(q)) return recipeById(q);
+  const m = location.hash.match(/(?:^|#|&)recipe=([\w-]+)/);
+  if (m?.[1] && recipeById(m[1])) return recipeById(m[1]);
+  return undefined;
+}
+
 export function LabPage(): HTMLElement {
   const initial =
     typeof location !== "undefined" ? decodeShare(location.hash) : null;
 
+  const fromQuery = recipeFromUrl();
+  // Share hash (Copy → Open Lab) wins over ?recipe= so System snippets load intact
   let current: Recipe =
-    (initial?.recipeId && recipeById(initial.recipeId)) || recipes[0]!;
-  let source = initial?.code ?? current.code;
+    (initial?.recipeId && recipeById(initial.recipeId)) ||
+    fromQuery ||
+    recipes[0]!;
+  let source = initial?.code ?? fromQuery?.code ?? current.code;
   let autoRun = true;
   let runToken = 0;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
@@ -82,12 +96,15 @@ export function LabPage(): HTMLElement {
 
   const runBtn = makeBtn("Run", "lab-btn lab-btn--primary");
   const resetBtn = makeBtn("Reset", "lab-btn");
+  const scaffoldBtn = makeBtn("Scaffold", "lab-btn");
+  scaffoldBtn.title =
+    "Wrap selection (or insert) a full App + mount program Lab can run";
   const shareBtn = makeBtn("Share", "lab-btn lab-btn--soft");
   const statusEl = document.createElement("span");
   statusEl.className = "lab-status";
   statusEl.textContent = "Ready — pick a recipe or edit the code";
 
-  actions.append(autoLabel, runBtn, resetBtn, shareBtn, statusEl);
+  actions.append(autoLabel, runBtn, resetBtn, scaffoldBtn, shareBtn, statusEl);
   toolbar.append(titleEl, actions);
 
   // Teaching panel (goal · learn · how · try this)
@@ -106,7 +123,7 @@ export function LabPage(): HTMLElement {
   codeLabelText.textContent = `Code · ${current.title}`;
   const codeHint = document.createElement("span");
   codeHint.className = "lab-pane-hint";
-  codeHint.textContent = "Tab · ⌘↵";
+  codeHint.textContent = "full App+mount · Tab · ⌘↵";
   codeLabel.append(codeLabelText, codeHint);
 
   // Syntax highlight: colored pre under a transparent textarea
@@ -152,6 +169,10 @@ export function LabPage(): HTMLElement {
   previewHint.className = "lab-pane-hint";
   previewHint.textContent = "sandboxed";
   previewLabel.append(previewLabelText, previewHint);
+
+  const previewStage = document.createElement("div");
+  previewStage.className = "lab-preview-stage";
+
   const iframe = document.createElement("iframe");
   iframe.className = "lab-preview";
   iframe.title = "Power Lab preview";
@@ -159,7 +180,125 @@ export function LabPage(): HTMLElement {
     "sandbox",
     "allow-scripts allow-same-origin allow-modals",
   );
-  previewPane.append(previewLabel, iframe);
+
+  // Full-panel error overlay (compile / runtime) — clearer than status alone
+  const errOverlay = document.createElement("div");
+  errOverlay.className = "lab-error-overlay";
+  errOverlay.hidden = true;
+  errOverlay.setAttribute("role", "alert");
+  const errTitle = document.createElement("strong");
+  errTitle.className = "lab-error-overlay__title";
+  errTitle.textContent = "Couldn’t run this code";
+  const errMsg = document.createElement("pre");
+  errMsg.className = "lab-error-overlay__msg";
+  const errActions = document.createElement("div");
+  errActions.className = "lab-error-overlay__actions";
+  const errReset = makeBtn("Reset recipe", "lab-btn lab-btn--primary");
+  const errDismiss = makeBtn("Dismiss", "lab-btn");
+  errActions.append(errReset, errDismiss);
+  errOverlay.append(errTitle, errMsg, errActions);
+
+  previewStage.append(iframe, errOverlay);
+  previewPane.append(previewLabel, previewStage);
+
+  function humanizeLabError(message: string): string {
+    const tips: string[] = [];
+    const src = source;
+    const looksTransform = /Transform failed|Expected "|Expected ';'|ERROR:/i.test(
+      message,
+    );
+    if (!/\bmount\s*\(/.test(src)) {
+      tips.push(
+        "Lab needs mount(document.getElementById(\"root\")!, () => <App />).",
+      );
+    }
+    if (!/\bfunction\s+App\b|\bconst\s+App\b/.test(src) && looksTransform) {
+      tips.push(
+        "Prefer export function App() { return (…JSX…); } — bare JSX fragments fail to parse.",
+      );
+    }
+    if (looksTransform && /open|show|value/.test(message)) {
+      tips.push(
+        "If you pasted from System: use Copy JSX (includes App+mount) or click Scaffold after pasting the middle.",
+      );
+    }
+    if (tips.length === 0) return message;
+    return `${message}\n\n——\n${tips.map((t) => `• ${t}`).join("\n")}`;
+  }
+
+  function showErrorOverlay(message: string) {
+    errMsg.textContent = humanizeLabError(message);
+    errOverlay.hidden = false;
+    previewStage.classList.add("has-error");
+  }
+  function hideErrorOverlay() {
+    errOverlay.hidden = true;
+    errMsg.textContent = "";
+    previewStage.classList.remove("has-error");
+  }
+
+  /** Wrap body JSX (or whole buffer) into a Lab-runnable program. */
+  function insertScaffold() {
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    const selected =
+      start !== end ? source.slice(start, end).trim() : source.trim();
+
+    // If already a full program, don't clobber
+    if (/\bmount\s*\(/.test(selected) && /\bfunction\s+App\b/.test(selected)) {
+      setStatus("ok", "Already looks like a full Lab program — press Run");
+      return;
+    }
+
+    // Extract a simple JSX root if user pasted a fragment
+    let body = selected;
+    // Strip imports — Lab injects the API
+    body = body
+      .replace(/^\s*import\s+[\s\S]*?;?\s*$/gm, "")
+      .trim();
+
+    // If they only had signals/setup + fragment, try to keep setup outside App
+    let setup = "";
+    const setupMatch = body.match(
+      /^((?:const|let|var|function)[\s\S]*?)(<[\s\S]*)$/,
+    );
+    if (setupMatch) {
+      setup = setupMatch[1]!.trim();
+      body = setupMatch[2]!.trim();
+    }
+
+    // Drop wrapping <>...</> if present
+    if (body.startsWith("<>") && body.endsWith("</>")) {
+      body = body.slice(2, -3).trim();
+    }
+
+    if (!body) {
+      body = `<Text>Hello from scaffold</Text>`;
+    }
+
+    const indent = (s: string, n: number) =>
+      s
+        .split("\n")
+        .map((l) => (l ? " ".repeat(n) + l : l))
+        .join("\n");
+
+    const program = `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, Card, Stack, Text } from "@powers/ui";
+
+${setup ? setup + "\n\n" : ""}export function App() {
+  return (
+${indent(body, 4)}
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`;
+    writeEditor(program);
+    hideErrorOverlay();
+    setStatus("ok", "Scaffold inserted — full App + mount. Running…");
+    void run();
+  }
 
   workspace.append(editorPane, previewPane);
 
@@ -303,15 +442,19 @@ export function LabPage(): HTMLElement {
       if (token !== runToken) return;
 
       if (result.ok) {
+        hideErrorOverlay();
         setStatus("ok", "Running · edit code or pick another recipe");
       } else if (result.error !== "Cancelled") {
-        setStatus("error", result.error ?? "Error — see console below");
+        const msg = result.error ?? "Error — see console below";
+        setStatus("error", msg);
+        showErrorOverlay(msg);
       }
     } catch (e) {
       if (token !== runToken) return;
       const msg = e instanceof Error ? e.message : String(e);
       setStatus("error", msg);
       paintConsole([{ level: "error", args: [msg] }]);
+      showErrorOverlay(msg);
     } finally {
       if (token === runToken) running = false;
     }
@@ -336,8 +479,18 @@ export function LabPage(): HTMLElement {
     current = r;
     writeEditor(r.code);
     applyChrome(r);
+    hideErrorOverlay();
     setStatus("ok", `Loaded “${r.title}” — code updated`);
     paintConsole([]);
+    // Recipe switch clears share payload so starter code wins over old #lab/…
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set("recipe", r.id);
+      url.hash = "";
+      history.replaceState(null, "", url.pathname + url.search);
+    } catch {
+      /* ignore */
+    }
     void run();
   }
 
@@ -383,9 +536,25 @@ export function LabPage(): HTMLElement {
 
   resetBtn.onclick = () => {
     writeEditor(current.code);
+    hideErrorOverlay();
+    setStatus("ok", `Reset “${current.title}” to recipe starter`);
+    void run();
+  };
+
+  scaffoldBtn.onclick = () => insertScaffold();
+
+  errReset.onclick = () => {
+    writeEditor(current.code);
+    hideErrorOverlay();
     setStatus("ok", `Reset “${current.title}”`);
     void run();
   };
+  errDismiss.onclick = () => hideErrorOverlay();
+
+  // Extra action on error overlay: scaffold current buffer
+  const errScaffold = makeBtn("Scaffold + run", "lab-btn lab-btn--soft");
+  errScaffold.onclick = () => insertScaffold();
+  errActions.append(errScaffold);
 
   shareBtn.onclick = () => {
     const hash = "lab/" + encodeShare(source, current.id);

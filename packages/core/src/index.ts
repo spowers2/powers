@@ -1,5 +1,5 @@
 /**
- * @power-ui/core
+ * @powers/core
  *
  * Fine-grained reactivity primitives.
  * No DOM. No framework. Just a correct reactive graph.

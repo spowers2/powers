@@ -1,4 +1,4 @@
-import type { Signal } from "@power-ui/core";
+import type { Signal } from "@powers/core";
 
 /**
  * Reactive component props.
@@ -22,7 +22,7 @@ export type ReactiveProps<P extends object> = {
 
 const reactivePropsSet = new WeakSet<object>();
 
-/** True if value looks like a Power UI signal. */
+/** True if value looks like a Powers signal. */
 export function isSignal(value: unknown): value is Signal<unknown> {
   return (
     typeof value === "function" &&
@@ -50,12 +50,24 @@ function isEventKey(key: string): boolean {
  * - Everything else → as-is
  */
 export function unwrapProp(key: string, value: unknown): unknown {
-  if (key === "children") return value;
+  // children + bind must stay as passed (bind is a signal ref for two-way forms)
+  if (key === "children" || key === "bind") return value;
   if (typeof value !== "function") return value;
   if (isEventKey(key)) return value;
   if (isSignal(value)) return value();
   if (value.length === 0) return (value as () => unknown)();
   return value;
+}
+
+const rawSourceMap = new WeakMap<object, object>();
+
+/**
+ * Peek at the raw prop bag value without unwrapping signals/accessors.
+ * Useful for dev warnings (e.g. detect snapshot `value={sig()}` vs `value={sig}`).
+ */
+export function getRawProp(props: object, key: string): unknown {
+  const src = rawSourceMap.get(props) ?? props;
+  return Reflect.get(src, key);
 }
 
 /**
@@ -98,6 +110,7 @@ export function createProps<P extends object>(raw: P): ReactiveProps<P> {
   });
 
   reactivePropsSet.add(proxy);
+  rawSourceMap.set(proxy, source);
   return proxy as ReactiveProps<P>;
 }
 

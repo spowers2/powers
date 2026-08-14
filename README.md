@@ -1,16 +1,20 @@
-# Power UI
+# Powers
 
-**The reactive UI system that’s powerful under the hood and tiny to learn.**
+**Fine-grained UI kit with a design system built in.**
 
-Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
+Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos you can ship from. Not “React + a CSS framework”; one coherent stack.
 
+> Named for **Powers** — the kit behind the name.  
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
-> Private while foundations harden.
+> Private monorepo while foundations harden (not on public npm yet).  
+> npm scope: `@powers/*`
 
 **New here?**
 
-1. Run the demo → open **`/docs`** (how to use + **API reference**)  
-2. Repo hub: **[docs/README.md](./docs/README.md)** · API: [`docs/API.md`](./docs/API.md) · learn: [`LEARN.md`](./docs/LEARN.md)
+1. **Docs / Lab / System:** `pnpm example:browser` → http://localhost:5173 (`/docs` · `/lab` · `/system`)  
+2. **designlab206:** `pnpm example:starter` → http://localhost:5180  
+3. **Hearth restaurant:** `pnpm example:restaurant` → http://localhost:5181  
+4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [docs/README.md](./docs/README.md) · [docs/RELEASE.md](./docs/RELEASE.md)
 
 ---
 
@@ -18,32 +22,37 @@ Fine-grained updates. Explicit ownership. No virtual DOM. No dependency arrays.
 
 | Package | Role |
 |---|---|
-| `@power-ui/core` | signals, computed, effect, store, resource, ownership |
-| `@power-ui/animate` | tween / spring on signals |
-| `@power-ui/dom` | mount, h, JSX, reactive props, Show, For |
-| `@power-ui/router` | createRouter, Link, navigate |
-| `@power-ui/ssr` | `renderToString` + **islands** hydrate API |
-| `@power-ui/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
+| `@powers/core` | signals, computed, effect, store, resource, ownership |
+| `@powers/animate` | tween / spring on signals |
+| `@powers/dom` | mount, h, JSX, reactive props, Show, For |
+| `@powers/router` | createRouter, Link, navigate |
+| `@powers/ssr` | `renderToString` + **islands** hydrate API |
+| `@powers/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
 
 ---
 
 ## Quick start
 
 ```bash
-cd ~/Documents/power-ui
+cd path/to/powers   # monorepo root
 pnpm install
-pnpm test
-pnpm example:browser   # http://localhost:5173
-# Power Lab (learn by coding): http://localhost:5173/lab
+pnpm run check        # typecheck · test · size budgets (use "run" — pnpm has its own "ci")
+pnpm example:browser  # http://localhost:5173  — docs · lab · system
+pnpm example:starter  # http://localhost:5180  — designlab206
+pnpm example:restaurant  # http://localhost:5181  — Hearth
+# Minimal Vite app:           pnpm create-app my-app
+# Full product starter:       pnpm new-app my-feature
 ```
+
+**Library quality:** [docs/USABILITY.md](./docs/USABILITY.md) · [docs/FOUNDATION.md](./docs/FOUNDATION.md) · [docs/STABLE.md](./docs/STABLE.md) · [docs/GOLDEN_PATH.md](./docs/GOLDEN_PATH.md) · [docs/SIZE.md](./docs/SIZE.md)
 
 ### Design system + router (sketch)
 
 ```tsx
-import "@power-ui/ui/theme.css";
-import { mount } from "@power-ui/dom";
-import { createRouter, Link } from "@power-ui/router";
-import { Button, Card, Stack, Text, createTheme } from "@power-ui/ui";
+import "@powers/ui/theme.css";
+import { mount } from "@powers/dom";
+import { createRouter, Link } from "@powers/router";
+import { Button, Card, Stack, Text, createTheme } from "@powers/ui";
 
 const theme = createTheme("light");
 theme.bind();

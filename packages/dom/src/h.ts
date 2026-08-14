@@ -1,4 +1,5 @@
 import { bindAttr, bindClass, bindProp, bindStyle, bindText } from "./bind.js";
+import { bindDynamic, type DynamicChild } from "./dynamic.js";
 import { on } from "./on.js";
 import { createProps } from "./props.js";
 
@@ -10,7 +11,7 @@ export type Child =
   | boolean
   | null
   | undefined
-  | (() => string | number | boolean | null | undefined);
+  | (() => DynamicChild);
 
 export type FunctionComponent<P = Record<string, unknown>> = (
   props: P,
@@ -78,14 +79,14 @@ export function h(
     }
     const result = tag(createProps(raw) as never);
     if (result == null) {
-      return document.createComment("power-ui");
+      return document.createComment("powers");
     }
     return result;
   }
 
   if (typeof tag !== "string" || tag === "") {
     throw new Error(
-      `[power-ui/dom] h() expected a tag name string or component function, got: ${typeof tag}`,
+      `[powers/dom] h() expected a tag name string or component function, got: ${typeof tag}`,
     );
   }
 
@@ -192,7 +193,8 @@ function applyProps(el: HTMLElement, props: Props): void {
 function appendChild(parent: ParentNode, child: Child): void {
   if (child == null || child === false || child === true) return;
   if (typeof child === "function") {
-    parent.appendChild(text(child));
+    // May return text *or* DOM nodes (Tabs/Accordion content, etc.)
+    bindDynamic(parent, child as () => DynamicChild);
     return;
   }
   if (typeof child === "string" || typeof child === "number") {

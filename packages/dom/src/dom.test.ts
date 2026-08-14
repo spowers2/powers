@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import { signal, flush } from "@power-ui/core";
+import { signal, flush } from "@powers/core";
 import { installDom } from "./test-setup.js";
 import {
   mount,
@@ -10,6 +10,7 @@ import {
   bindAttr,
   bindClass,
   bindStyle,
+  bindProp,
   on,
   show,
   list,
@@ -21,7 +22,7 @@ async function tick(): Promise<void> {
   flush();
 }
 
-describe("@power-ui/dom", () => {
+describe("@powers/dom", () => {
   let document: Document;
   let root: HTMLElement;
 
@@ -152,6 +153,10 @@ describe("@power-ui/dom", () => {
     assert.equal(ul.children.length, 2);
     assert.equal(ul.textContent, "ab");
 
+    // Capture node identity for key=1 before reorder
+    const nodeA = ul.children[0]!;
+    const nodeB = ul.children[1]!;
+
     items.set([
       { id: 2, title: "b2" },
       { id: 1, title: "a2" },
@@ -162,11 +167,32 @@ describe("@power-ui/dom", () => {
     assert.equal(ul.children[0]!.textContent, "b2");
     assert.equal(ul.children[1]!.textContent, "a2");
     assert.equal(ul.children[2]!.textContent, "c");
+    // Keyed rows must reuse DOM nodes (not remount)
+    assert.equal(ul.children[0], nodeB);
+    assert.equal(ul.children[1], nodeA);
 
     items.set([{ id: 3, title: "c" }]);
     await tick();
     assert.equal(ul.children.length, 1);
     assert.equal(ul.textContent, "c");
+  });
+
+  it("bindProp skips no-op writes (caret / focus safety)", async () => {
+    const value = signal("hi");
+    const input = document.createElement("input");
+    root.appendChild(input);
+    bindProp(input, "value", () => value());
+    await tick();
+    assert.equal(input.value, "hi");
+
+    // Same value: assignment skipped — still equal
+    value.set("hi");
+    await tick();
+    assert.equal(input.value, "hi");
+
+    value.set("yo");
+    await tick();
+    assert.equal(input.value, "yo");
   });
 
   it("text() helper is reactive", async () => {

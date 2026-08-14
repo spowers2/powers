@@ -1,0 +1,20 @@
+{
+  "name": "powers-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@powers/core": "workspace:*",
+    "@powers/dom": "workspace:*",
+    "@powers/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.0.0"
+  }
+}

@@ -1,8 +1,8 @@
 # Animation strategy
 
-**Status: Phase 1.2 implemented** — `@power-ui/animate` v0.1.0
+**Status: Phase 1.2 implemented** — `@powers/animate` v0.1.0
 
-**Goal:** motion that feels world-class, with a **tiny learning curve**, native to Power UI’s signal model — without forcing every app to swallow a second mega-framework.
+**Goal:** motion that feels world-class, with a **tiny learning curve**, native to Powers’s signal model — without forcing every app to swallow a second mega-framework.
 
 ---
 
@@ -23,8 +23,8 @@ signal → animate(signal, to, opts) → effect / future DOM reads the signal
 ```
 
 ```ts
-import { signal } from "@power-ui/core";
-import { animate, spring } from "@power-ui/animate";
+import { signal } from "@powers/core";
+import { animate, spring } from "@powers/animate";
 
 const x = signal(0);
 
@@ -72,12 +72,58 @@ Opt out per call: `{ respectReducedMotion: false }`.
 
 ---
 
-## Not in v0.1 (intentional)
+## Optional GSAP adapter
 
-- Timelines / ScrollTrigger / SVG morph (GSAP territory later)
-- Color / complex string interpolation
-- DOM enter/exit helpers (needs `@power-ui/dom`)
-- GSAP adapter package
+**Default path stays pure:** `import { animate } from "@powers/animate"` — no GSAP.
+
+For pro motion (custom eases, timelines, ScrollTrigger, SVG):
+
+```bash
+pnpm add gsap
+```
+
+```ts
+import { signal } from "@powers/core";
+import { gsapAnimate, gsapFromTo, cancel } from "@powers/animate/gsap";
+// or inject: createGsapBridge(gsap)
+
+const x = signal(0);
+
+// Duration is in **milliseconds** (same as animate()), converted for GSAP.
+const anim = gsapAnimate(x, 100, {
+  duration: 400,
+  ease: "power3.out",
+  // pass-through GSAP vars (repeat, yoyo, overwrite, …)
+  vars: { overwrite: "auto" },
+});
+
+await anim.finished;
+// anim.cancel() · anim.complete() · cancel(x)
+```
+
+| API | Role |
+|---|---|
+| `gsapAnimate(signal, to, opts?)` | GSAP-powered number tween |
+| `gsapFromTo(signal, from, to, opts?)` | Explicit from → to |
+| `createGsapBridge(gsap)` | Inject GSAP (or a mock) |
+| `cancel(signal)` | Same registry as native `animate()` |
+
+**Design rules**
+
+1. GSAP is an **optional peer** — not bundled into the default `@powers/animate` entry.  
+2. One active animation per signal; GSAP and native `animate()` share the registry (interrupt each other).  
+3. Reduced motion still snaps to end by default.  
+4. For pure DOM timelines (no signals), call GSAP directly on elements — no wrapper needed.
+
+**Lab:** `pnpm example:browser` → [http://localhost:5173/lab?recipe=gsap](http://localhost:5173/lab?recipe=gsap)
+
+---
+
+## Not in the default package (intentional)
+
+- Timelines / ScrollTrigger / SVG morph (use GSAP + this adapter or DOM GSAP)  
+- Color / complex string interpolation  
+- DOM enter/exit helpers (use `@powers/ui` Transition / CSS)
 
 ---
 
@@ -86,11 +132,10 @@ Opt out per call: `{ respectReducedMotion: false }`.
 ```
 ✅ Core 1.1
 ✅ Animate foundation
-✅ Phase 2 thin DOM (+ browser demo wires animate ↔ style)
-→  Compiler sugar / components
-→  Optional GSAP adapter   ← parked, return when it makes sense (docs/NEXT.md)
+✅ Phase 2 thin DOM
+✅ Optional GSAP adapter (`@powers/animate/gsap`)
 ```
 
 ## Size
 
-Run `pnpm --filter @power-ui/animate size` — combined animate+core stays under a modest gzip budget.
+Run `pnpm --filter @powers/animate size` — **default** entry only (GSAP not included).

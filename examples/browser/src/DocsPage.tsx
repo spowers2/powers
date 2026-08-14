@@ -2,7 +2,7 @@
  * In-app docs: how to start + API reference.
  * Markdown lives in /docs for repo readers; this is what demo visitors actually see.
  */
-import type { Router } from "@power-ui/router";
+import type { Router } from "@powers/router";
 import {
   Alert,
   Badge,
@@ -15,11 +15,12 @@ import {
   Kbd,
   Stack,
   Text,
-} from "@power-ui/ui";
+} from "@powers/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import "./docs.css";
 
 const DOC_SECTIONS = [
+  "paths",
   "start",
   "rules",
   "first-app",
@@ -98,12 +99,12 @@ export function DocsPage(props: { router: Router }) {
   );
 
   return (
-    <Container size="lg">
+    <Container size="xl">
       <Stack gap={8}>
         <Stack gap={3}>
           <Badge tone="accent">Guide + API</Badge>
           <Text as="h1" size="2xl">
-            How to use Power UI
+            How to use Powers
           </Text>
           <Text muted>
             This page is the developer entry point: install, three rules, a
@@ -115,10 +116,27 @@ export function DocsPage(props: { router: Router }) {
             <Button variant="soft" onClick={go("/system")}>
               Browse components
             </Button>
+            <a
+              class="docs-demo-link"
+              href="http://localhost:5180"
+              target="_blank"
+              rel="noreferrer"
+            >
+              designlab206 demo →
+            </a>
+            <a
+              class="docs-demo-link"
+              href="http://localhost:5181"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Hearth restaurant →
+            </a>
           </Stack>
         </Stack>
 
         <nav class="docs-toc page-toc" aria-label="On this page">
+          {tocBtn("paths", "Paths")}
           {tocBtn("start", "Start")}
           {tocBtn("rules", "Rules")}
           {tocBtn("first-app", "First app")}
@@ -132,19 +150,90 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("next", "What next")}
         </nav>
 
+        <Section id="paths" title="0. Pick a path">
+          <Grid cols={3} gap={3}>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Engineer</Text>
+                <Text size="sm" muted>
+                  1) Three rules below · 2){" "}
+                  <a class="docs-inline-link" href="/lab?recipe=hello">
+                    Lab hello
+                  </a>{" "}
+                  · 3){" "}
+                  <a class="docs-inline-link" href="/lab?recipe=form">
+                    form
+                  </a>{" "}
+                  · 4) System Copy JSX
+                </Text>
+                <Button size="sm" onClick={go("/lab?recipe=hello")}>
+                  Open Lab hello
+                </Button>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Design / UX</Text>
+                <Text size="sm" muted>
+                  Tokens playground · density · Open Lab from any System card.
+                  Retheme without learning signals.
+                </Text>
+                <Button size="sm" variant="soft" onClick={go("/system#sys-color")}>
+                  Open System tokens
+                </Button>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Cookbook</Text>
+                <Text size="sm" muted>
+                  Ship a screen: settings form, admin list, createField profile.
+                </Text>
+                <Stack direction="row" gap={2} wrap>
+                  <Button size="sm" variant="ghost" onClick={go("/lab?recipe=settings")}>
+                    Settings
+                  </Button>
+                  <Button size="sm" variant="ghost" onClick={go("/lab?recipe=admin-list")}>
+                    Admin list
+                  </Button>
+                </Stack>
+              </Stack>
+            </Card>
+          </Grid>
+          <Text size="sm" muted class="docs-mt">
+            Day 1 / Day 2 / Day 30 learning: monorepo{" "}
+            <Code>docs/LEARN_PATH.md</Code> · Motion language:{" "}
+            <Code>docs/MOTION.md</Code>
+          </Text>
+        </Section>
+
         <Section id="start" title="1. Install & import">
           <Alert tone="info" title="Local monorepo today">
             Packages are workspace-linked while the repo is private. After
             publish you’ll use the same names on npm.
           </Alert>
-          <pre class="docs-pre">{`pnpm add @power-ui/core @power-ui/dom @power-ui/ui
+          <Text size="sm" muted>
+            Product demos (run from monorepo root):
+          </Text>
+          <pre class="docs-pre">{`pnpm example:starter     # designlab206 workspace  → http://localhost:5180
+pnpm example:restaurant  # Hearth restaurant   → http://localhost:5181
+pnpm example:browser     # Docs / Lab / System  → http://localhost:5173
+pnpm ci                  # typecheck · test · size budgets`}</pre>
+          <Text size="sm" muted>
+            Full first-screen walkthrough: monorepo{" "}
+            <Code>docs/GOLDEN_PATH.md</Code> (forms that type correctly +
+            theme).
+          </Text>
+          <pre class="docs-pre">{`pnpm add @powers/core @powers/dom @powers/ui
 
 # optional
-pnpm add @power-ui/animate @power-ui/router`}</pre>
+pnpm add @powers/animate @powers/router
+# pro motion (optional peer)
+pnpm add gsap   # then: import from "@powers/animate/gsap"`}</pre>
           <Text size="sm" muted>
             Always import the theme once at the app root:
           </Text>
-          <pre class="docs-pre">{`import "@power-ui/ui/theme.css";`}</pre>
+          <pre class="docs-pre">{`import "@powers/ui/theme.css";`}</pre>
         </Section>
 
         <Section id="rules" title="2. Three rules (memorize these)">
@@ -184,13 +273,13 @@ pnpm add @power-ui/animate @power-ui/router`}</pre>
         <Section id="first-app" title="3. First app (copy-paste)">
           <Text muted size="sm">
             Vite / TS: set{" "}
-            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@power-ui/dom"`}</Code>{" "}
+            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@powers/dom"`}</Code>{" "}
             in <Code>tsconfig</Code>.
           </Text>
-          <pre class="docs-pre">{`import "@power-ui/ui/theme.css";
-import { signal } from "@power-ui/core";
-import { mount } from "@power-ui/dom";
-import { Button, Card, Stack, Text, createTheme } from "@power-ui/ui";
+          <pre class="docs-pre">{`import "@powers/ui/theme.css";
+import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Button, Card, Stack, Text, createTheme } from "@powers/ui";
 
 createTheme("light").bind();
 
@@ -208,8 +297,11 @@ mount(document.getElementById("app")!, () => (
   </Card>
 ));`}</pre>
           <Text size="sm">
-            Then open <strong>Lab</strong> and work through recipes 01→10 — each
-            has Goal / Learn / How / Try this.
+            Prefer the form-shaped path in{" "}
+            <Code>docs/GOLDEN_PATH.md</Code> (controlled{" "}
+            <Code>{"value={email}"}</Code>, not{" "}
+            <Code>{"value={email()}"}</Code>). Then open <strong>Lab</strong>{" "}
+            recipes 01→10 — each has Goal / Learn / How / Try this.
           </Text>
         </Section>
 
@@ -226,42 +318,42 @@ mount(document.getElementById("app")!, () => (
               <tbody>
                 <tr>
                   <td>
-                    <code>@power-ui/core</code>
+                    <code>@powers/core</code>
                   </td>
                   <td>State & reactivity</td>
                   <td>Always (signals)</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ui/dom</code>
+                    <code>@powers/dom</code>
                   </td>
                   <td>Mount, JSX, Show/For</td>
                   <td>Always (UI tree)</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ui/ui</code>
+                    <code>@powers/ui</code>
                   </td>
                   <td>Theme + components</td>
                   <td>Almost always</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ui/animate</code>
+                    <code>@powers/animate</code>
                   </td>
                   <td>Tween / spring on signals</td>
                   <td>Motion needed</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ui/router</code>
+                    <code>@powers/router</code>
                   </td>
                   <td>SPA routes + Link</td>
                   <td>Multi-page app</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@power-ui/ssr</code>
+                    <code>@powers/ssr</code>
                   </td>
                   <td>String render + islands</td>
                   <td>SSR / marketing HTML</td>
@@ -285,7 +377,10 @@ mount(document.getElementById("app")!, () => (
 });
 // user() · user.loading() · user.error() · user.refetch()`}</pre>
                 <Text size="sm" muted>
-                  Lab recipe: <strong>Async resource</strong>
+                  Lab:{" "}
+                  <a class="docs-inline-link" href="/lab?recipe=async">
+                    Async resource →
+                  </a>
                 </Text>
               </Stack>
             </Card>
@@ -297,23 +392,61 @@ const emailError = () =>
   email().includes("@") ? "" : "Invalid email";
 
 &lt;Field label="Email" error={emailError}&gt;
-  &lt;Input value={email} onInput={…} /&gt;
+  &lt;Input bind={email} /&gt;
 &lt;/Field&gt;`}</pre>
                 <Text size="sm" muted>
-                  Lab recipe: <strong>Form validation</strong>
+                  Lab:{" "}
+                  <a class="docs-inline-link" href="/lab?recipe=form">
+                    Form validation →
+                  </a>
+                  {" · "}
+                  <a class="docs-inline-link" href="/lab?recipe=create-field">
+                    createField →
+                  </a>
                 </Text>
               </Stack>
             </Card>
             <Card>
               <Stack gap={2}>
-                <Text weight="semibold">Command palette</Text>
-                <pre class="docs-pre">{`const open = signal(false);
-&lt;Command open={open} onOpenChange={open.set}
-  items={[{ id: "docs", label: "Open Docs" }]}
-  onSelect={(id) => …}
+                <Text weight="semibold">Combobox</Text>
+                <pre class="docs-pre">{`&lt;Combobox
+  value={city}
+  onChange={city.set}
+  options={cities}
+  loading={loading}
+  emptyText="No cities match"
 /&gt;`}</pre>
                 <Text size="sm" muted>
-                  System → <strong>Power</strong> section
+                  System →{" "}
+                  <a class="docs-inline-link" href="/system#sys-power">
+                    Power
+                  </a>
+                  {" · "}
+                  Lab:{" "}
+                  <a class="docs-inline-link" href="/lab?recipe=kit">
+                    Layout kit →
+                  </a>
+                </Text>
+              </Stack>
+            </Card>
+            <Card>
+              <Stack gap={2}>
+                <Text weight="semibold">Motion (native + optional GSAP)</Text>
+                <pre class="docs-pre">{`// default — no peer deps
+animate(x, 100, spring());
+
+// optional: pnpm add gsap
+import { gsapAnimate } from "@powers/animate/gsap";
+gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
+                <Text size="sm" muted>
+                  Lab:{" "}
+                  <a class="docs-inline-link" href="/lab?recipe=animate">
+                    Spring motion →
+                  </a>
+                  {" · "}
+                  <a class="docs-inline-link" href="/lab?recipe=gsap">
+                    GSAP adapter →
+                  </a>
                 </Text>
               </Stack>
             </Card>
@@ -322,7 +455,7 @@ const emailError = () =>
 
         <Divider label="API reference" />
 
-        <Section id="api-core" title="@power-ui/core">
+        <Section id="api-core" title="@powers/core">
           <Text muted size="sm">
             Fine-grained graph. No DOM.
           </Text>
@@ -377,7 +510,7 @@ const emailError = () =>
           />
         </Section>
 
-        <Section id="api-dom" title="@power-ui/dom">
+        <Section id="api-dom" title="@powers/dom">
           <Text muted size="sm">
             Mount and bind the graph to the DOM / JSX.
           </Text>
@@ -390,7 +523,7 @@ const emailError = () =>
               },
               {
                 name: "h / JSX",
-                sig: 'jsxImportSource: "@power-ui/dom"',
+                sig: 'jsxImportSource: "@powers/dom"',
                 note: "Automatic JSX runtime.",
               },
               {
@@ -422,7 +555,7 @@ const emailError = () =>
           />
         </Section>
 
-        <Section id="api-ui" title="@power-ui/ui">
+        <Section id="api-ui" title="@powers/ui">
           <Text muted size="sm">
             Design system: tokens + primitives. Import{" "}
             <Code>theme.css</Code> once.
@@ -440,34 +573,44 @@ const emailError = () =>
                 note: "data-pu-density compact/comfortable.",
               },
               {
+                name: "Authoring",
+                sig: "createStyleSheet · styleVars · trapFocus",
+                note: "Write components in minutes — see COMPONENTS.md.",
+              },
+              {
                 name: "Layout",
-                sig: "Stack · Grid · Container · Divider",
-                note: "Tokenized gap / width.",
+                sig: "Stack · Grid · Container · Divider · AspectRatio · ScrollArea · Collapse",
+                note: "Tokenized gap / width / media frames.",
               },
               {
                 name: "Typography",
-                sig: "Text · Code · Kbd",
+                sig: "Text · Code · Kbd · Link",
                 note: "Type ramp + mono chips.",
               },
               {
                 name: "Inputs",
-                sig: "Button · Input · Textarea · Select · Field · Label · Switch · Checkbox",
-                note: "Forms + actions.",
+                sig: "Button · Input · Textarea · Select · Field · Label · Switch · Checkbox · RadioGroup · Slider · NumberInput · ToggleGroup · Combobox",
+                note: "Forms + actions + pickers.",
               },
               {
                 name: "Surfaces",
-                sig: "Card · Badge · Avatar · Alert · Spinner · Progress · Skeleton",
-                note: "Status & feedback.",
+                sig: "Card · Badge · Chip · Avatar · Alert · Spinner · Progress · Skeleton · Empty · Stat",
+                note: "Status, KPIs, empty states.",
+              },
+              {
+                name: "Structure",
+                sig: "Tabs · Accordion · Breadcrumb · Pagination · Steps · Timeline · List · Table",
+                note: "More structure than Bootstrap.",
               },
               {
                 name: "Overlays",
-                sig: "Dialog · Tabs · Tooltip · Popover · Menu · Toaster · Command",
-                note: "createToaster() for toasts.",
+                sig: "Dialog · Drawer · Tooltip · Popover · Menu · Toaster",
+                note: "Focus trap + Esc; createToaster().",
               },
               {
-                name: "Combobox",
-                sig: "<Combobox options={…} value={…} onChange={…} />",
-                note: "Searchable select.",
+                name: "Motion",
+                sig: "Transition · Collapse",
+                note: "Enter/exit CSS; animate package for springs.",
               },
               {
                 name: "Retheme",
@@ -481,16 +624,18 @@ const emailError = () =>
             <Button size="sm" variant="soft" onClick={go("/system")}>
               Open System
             </Button>
+            {" · "}
+            Author new ones: <Code>docs/COMPONENTS.md</Code>
           </Text>
         </Section>
 
-        <Section id="api-animate" title="@power-ui/animate">
+        <Section id="api-animate" title="@powers/animate">
           <ApiTable
             rows={[
               {
                 name: "animate",
                 sig: "animate(signal, to, { duration, ease })",
-                note: "Tween a number signal.",
+                note: "Tween a number signal (default — no GSAP).",
               },
               {
                 name: "spring",
@@ -502,11 +647,16 @@ const emailError = () =>
                 sig: "cancel(signal)",
                 note: "Stop in-flight animation.",
               },
+              {
+                name: "gsapAnimate",
+                sig: 'import { gsapAnimate } from "@powers/animate/gsap"',
+                note: "Optional peer gsap. Duration in ms.",
+              },
             ]}
           />
         </Section>
 
-        <Section id="api-router" title="@power-ui/router">
+        <Section id="api-router" title="@powers/router">
           <ApiTable
             rows={[
               {
@@ -549,12 +699,13 @@ const emailError = () =>
               density
             </li>
             <li>
-              <strong>Todos</strong> — small multi-component app
+              <strong>Demos</strong> — designlab206 (:5180) + Hearth (:5181) for
+              real product patterns
             </li>
             <li>
-              Repo markdown (when reading the monorepo):{" "}
-              <Code>docs/LEARN.md</Code>, <Code>docs/API.md</Code>,{" "}
-              <Code>docs/STYLING.md</Code>
+              Repo markdown: <Code>docs/GOLDEN_PATH.md</Code>,{" "}
+              <Code>docs/LEARN.md</Code>, <Code>docs/FOUNDATION.md</Code>,{" "}
+              <Code>docs/STABLE.md</Code>
             </li>
           </ol>
           <Stack direction="row" gap={2} wrap>
@@ -562,9 +713,22 @@ const emailError = () =>
             <Button variant="soft" onClick={go("/system")}>
               Go to System
             </Button>
-            <Button variant="ghost" onClick={go("/todos")}>
-              Go to Todos
-            </Button>
+            <a
+              class="docs-demo-link"
+              href="http://localhost:5180"
+              target="_blank"
+              rel="noreferrer"
+            >
+              designlab206 →
+            </a>
+            <a
+              class="docs-demo-link"
+              href="http://localhost:5181"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Hearth →
+            </a>
           </Stack>
         </Section>
       </Stack>
