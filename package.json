@@ -28,6 +28,8 @@
     "example:ssr-islands": "pnpm --filter @powers/example-ssr-islands start",
     "new-app": "bash scripts/new-app.sh",
     "create-app": "bash scripts/create-powers.sh",
+    "design-kit:build": "pnpm --filter @powers/design-kit build",
+    "design-kit:check": "pnpm --filter @powers/design-kit check",
     "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo",
     "gh": ".tools/gh",
     "pr:create": ".tools/gh pr create"

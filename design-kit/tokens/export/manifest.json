@@ -1,0 +1,21 @@
+{
+  "name": "Powers design-kit",
+  "version": "0.1.0",
+  "phase": 1,
+  "themes": [
+    "instrument/light",
+    "instrument/dark",
+    "dual/light",
+    "dual/dark"
+  ],
+  "generatedAt": "2026-08-15T00:35:49.749Z",
+  "outputs": [
+    "tokens/export/tokens.studio.json",
+    "tokens/export/figma-variables.json",
+    "tokens/export/manifest.json"
+  ],
+  "next": [
+    "phase 2: design-kit/components/*.spec.json",
+    "phase 3: design-kit/plugin (reads figma-variables.json)"
+  ]
+}

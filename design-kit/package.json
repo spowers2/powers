@@ -1,0 +1,18 @@
+{
+  "name": "@powers/design-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Powers design kit — Figma tokens (phase 1), component specs (phase 2), plugin (phase 3).",
+  "type": "module",
+  "license": "BUSL-1.1",
+  "scripts": {
+    "build": "node --import tsx scripts/build-tokens.ts",
+    "build:tokens": "node --import tsx scripts/build-tokens.ts",
+    "check": "node --import tsx scripts/build-tokens.ts --check"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  },
+  "author": "Scott Powers"
+}

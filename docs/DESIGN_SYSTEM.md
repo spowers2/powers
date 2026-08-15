@@ -26,6 +26,11 @@ function App() {
 }
 ```
 
+## Figma / design kit
+
+Export for Tokens Studio (phase 1): [`design-kit/`](../design-kit/README.md)  
+`pnpm design-kit:build` → `design-kit/tokens/export/tokens.studio.json`
+
 ## How to retheme (primary edit surface)
 
 **File:** `packages/ui/src/styles/tokens.css`
