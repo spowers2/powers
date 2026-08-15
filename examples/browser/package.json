@@ -25,5 +25,5 @@
     "tsx": "^4.19.3",
     "vite": "^6.2.2"
   },
-  "license": "Apache-2.0"
+  "license": "BUSL-1.1"
 }

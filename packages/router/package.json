@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Tiny signal-based router for Powers — easy to learn, easy to own.",
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "BUSL-1.1",
   "sideEffects": false,
   "exports": {
     ".": {

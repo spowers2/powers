@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Powers design system — tokens, primitives, and token-mapped utilities (batteries included).",
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "BUSL-1.1",
   "sideEffects": [
     "./src/styles/tokens.css",
     "./src/styles/base.css",

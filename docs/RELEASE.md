@@ -2,7 +2,7 @@
 
 Use this before the first public npm publish / website launch.
 
-**Repo today:** private monorepo **https://github.com/spowers2/powers** · product **Powers** · **Apache-2.0** + trademark policy.
+**Repo today:** private monorepo **https://github.com/spowers2/powers** · product **Powers** · **BSL-1.1** (source-available) + commercial path + trademark policy.
 
 ---
 
@@ -42,22 +42,24 @@ Use this before the first public npm publish / website launch.
 - [x] [`docs/README.md`](./README.md) is the entry  
 - [x] LEARN · STYLING · DESIGN_SYSTEM · POWER_LAB · ROADMAP present  
 - [x] CONTRIBUTING present  
-- [x] LICENSE (Apache-2.0) + NOTICE at repo root  
+- [x] LICENSE (BSL-1.1) + LICENSE-COMMERCIAL.md + NOTICE at repo root  
 - [x] LICENSING.md · TRADEMARKS.md · DCO in CONTRIBUTING  
+- [x] All package.json `license` fields = `BUSL-1.1`  
 
 ## Publish sequence (still open — first public cut)
 
 1. [ ] Set coordinated versions (`0.1.0` or keep current package versions and tag)
 2. [ ] Build packages that emit `dist` if required for publish
-3. [ ] `npm publish --access public` per package (or changesets) — packages are **Apache-2.0**
+3. [ ] `npm publish --access public` per package (or changesets) — packages are **BUSL-1.1** (must match LICENSE)
 4. [ ] Tag `v0.1.0` (or matching)
 5. [ ] Optional: GitHub Pages / marketing site from `examples/browser` build
 6. [x] Rename GitHub repo → `powers` + update local remote  
 7. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 8. [ ] **Make repo public** only when you are ready (does not equal npm publish)
-9. [ ] Announce with link to Lab + LEARN  
+9. [ ] Announce with link to Lab + LEARN — say **source-available (BSL)**, not “open source”
+10. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro (see LICENSING.md)
 
-**Do not** change the core license to a closed/source-available model at launch without a deliberate product decision — see [LICENSING.md](./LICENSING.md).  
+Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). See [LICENSING.md](./LICENSING.md).
 
 ## Explicitly later
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Signal-native animation for Powers — tweens, springs, interruptible, a11y-aware.",
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "BUSL-1.1",
   "sideEffects": false,
   "exports": {
     ".": {

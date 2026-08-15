@@ -4,8 +4,8 @@ Written for **public contributors** as well as maintainers. The repo may be priv
 
 ## License & DCO
 
-- Code is licensed under **[Apache License 2.0](./LICENSE)**.  
-- By contributing, you agree your work is under the same license.  
+- Code is licensed under the **[Business Source License 1.1](./LICENSE)** (source-available; not OSI open source until the Change Date).  
+- By contributing, you agree your work is under the same license (BSL-1.1, then Change License on the Change Date).  
 - **Developer Certificate of Origin (DCO):** every commit must be signed off:
 
 ```bash

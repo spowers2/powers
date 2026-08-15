@@ -2,15 +2,15 @@
 
 **“Powers”**, the Powers wordmark, and associated logos are trademarks of **Scott Powers** (or a company you form later).
 
-## What Apache-2.0 does *not* grant
+## What the software license does *not* grant
 
-The open-source license covers **copyright** in the software. It does **not** grant trademark rights.
+BSL-1.1 (and later Apache-2.0 after the Change Date) covers **copyright** in the software. It does **not** grant trademark rights.
 
 ## Allowed (nominative / factual use)
 
 - “Built with Powers” or “Powers-compatible” when true  
 - Linking to the official repository or docs  
-- Forking the **code** under Apache-2.0 (use a **different project name**)
+- Forking or modifying the **code** under the project license (use a **different project name**; Competing Offering restrictions still apply under BSL)
 
 ## Not allowed without written permission
 

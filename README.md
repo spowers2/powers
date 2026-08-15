@@ -8,7 +8,7 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 > Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
 > Private monorepo while foundations harden (not on public npm yet).  
 > npm scope: `@powers/*`  
-> **License:** [Apache-2.0](./LICENSE) · [Licensing & commercial model](./docs/LICENSING.md) · [Trademarks](./docs/TRADEMARKS.md)
+> **License:** [Business Source License 1.1](./LICENSE) (source-available) · [Commercial](./LICENSE-COMMERCIAL.md) · [Licensing model](./docs/LICENSING.md) · [Trademarks](./docs/TRADEMARKS.md)
 
 **New here?**
 
@@ -131,6 +131,7 @@ Canonical detail: **[`docs/ROADMAP.md`](./docs/ROADMAP.md)**
 
 ## License
 
-**Apache License 2.0** © Scott Powers  
+**Business Source License 1.1** © Scott Powers  
 
-See [LICENSE](./LICENSE), [NOTICE](./NOTICE), [docs/LICENSING.md](./docs/LICENSING.md) (open core + commercial path), and [docs/TRADEMARKS.md](./docs/TRADEMARKS.md) (the **Powers** name).
+Source-available: free for building apps; not free to ship a competing UI kit.  
+See [LICENSE](./LICENSE), [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md), [NOTICE](./NOTICE), [docs/LICENSING.md](./docs/LICENSING.md), and [docs/TRADEMARKS.md](./docs/TRADEMARKS.md) (the **Powers** name).

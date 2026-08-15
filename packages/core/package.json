@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Fine-grained reactivity primitives for Powers — signals, computed, effects, store, resource, ownership.",
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "BUSL-1.1",
   "sideEffects": false,
   "exports": {
     ".": {

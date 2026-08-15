@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "SSR foundation for Powers — render apps to HTML strings (happy-dom).",
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "BUSL-1.1",
   "sideEffects": false,
   "exports": {
     ".": {

@@ -1,93 +1,80 @@
-# Licensing & commercial model
+# Licensing & making money (honest model)
 
-**Goal:** Powers stays **open and available** (true open source) so people can adopt, fork, and ship. You can still **build a business** around it without bait-and-switch on the core.
+## Hard truth
+
+| Wish | Reality |
+|---|---|
+| “Nobody steals my code” | If source is on the internet, people can **copy** it. Law limits *how they may use* it (license + enforcement), not whether eyes can see it. |
+| “Open source + nobody can use it free” | Contradiction. OSI open source (MIT/Apache) **allows** commercial use and forks. |
+| “A little cash” | Needs a **product or license** people pay for—not hope that free Apache code somehow pays you. |
+
+**Apache-2.0 (previous default)** = true open source. Legal free commercial use. Great for adoption; weak if your goal is to stop competitors cloning the kit.
 
 ---
 
-## What the code uses today
+## What Powers uses now
 
 | Item | Term |
 |---|---|
-| Core monorepo packages (`@powers/*`) | **[Apache License 2.0](../LICENSE)** |
-| Copyright | **Scott Powers** (and future contributors under DCO) |
-| Brand / name **“Powers”** | **Trademark reserved** — see [TRADEMARKS.md](./TRADEMARKS.md) |
+| Core monorepo (`@powers/*`) | **[Business Source License 1.1](../LICENSE)** (source-available) |
+| Commercial / competing uses | **[LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md)** |
+| Brand **“Powers”** | Trademark reserved — [TRADEMARKS.md](./TRADEMARKS.md) |
+| Contributions | DCO sign-off ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
 
-Apache-2.0 means others may use, modify, and redistribute (including commercially), with patent grant and attribution. That is intentional for a UI kit.
+### What BSL means for users
 
----
+**Allowed free:** build real apps and client work **with** Powers.  
+**Not allowed free:** ship a **Competing Offering** — a rebranded / forked **UI kit or design system** that replaces Powers as a product.  
+**After Change Date** (see LICENSE): that version becomes **Apache-2.0** (true open source).
 
-## Why not AGPL / BSL / “source available only”
-
-| Option | Why we avoided it for the core kit |
-|---|---|
-| **AGPL** | Viral network terms scare product teams; kills adoption for a component library. |
-| **BSL / SSPL / Elastic** | Not OSI “open source”; fine for some databases, wrong first impression for a UI stack. |
-| **MIT forever, no plan** | Fine legally, but you still need a **product** plan to profit. |
-
-You can always ship **additional** packages later under different terms (e.g. a commercial “Pro” kit). Already-released Apache-2.0 code stays Apache-2.0 for those versions.
+This is **not** OSI open source until the Change Date. Say “source available” in marketing, not “open source,” if you use BSL.
 
 ---
 
-## How to profit while staying open
+## How you make cash (practical)
 
-These models work with Apache-2.0 and match successful open UI/tooling businesses:
+Ranked for a UI kit:
 
-1. **Hosted product** — managed Lab, design tokens cloud, preview hosting  
-2. **Paid support / enterprise** — SLAs, private Slack, security review  
-3. **Powers Pro (optional package)** — extra components, themes, or Figma kit under a **commercial** license; core stays free  
-4. **Templates & training** — paid starters, workshops  
-5. **Dual-license only for new code** — e.g. a server/plugin under AGPL + paid commercial license (not the client UI core)
+1. **Commercial license** — companies that want to resell/host a competing kit, or need indemnity/support  
+2. **Powers Pro** — paid extras (components, themes, Figma, templates) under a proprietary license  
+3. **Support / consulting** — “I’ll help you ship on Powers”  
+4. **Hosted Lab / design tokens cloud** — later SaaS  
+5. **Do not rely on** “they can’t read the code” if the repo is public  
 
-**Do not plan on:** taking MIT/Apache core private after people build on it. That burns trust and is hard once contributors exist.
-
----
-
-## Contributions (DCO)
-
-All contributions require a **Developer Certificate of Origin** sign-off so copyright and license stay clear.
-
-In every commit message:
-
-```
-Signed-off-by: Your Name <you@example.com>
-```
-
-Or: `git commit -s …`
-
-See [CONTRIBUTING.md](../CONTRIBUTING.md).
-
-This preserves the option to dual-license **future** modules without murky ownership—not to relicense away Apache rights on past releases.
+Normal app developers stay free under BSL Additional Use Grant → adoption without giving away the *product category*.
 
 ---
 
-## Trademark (separate from copyright)
+## Going public checklist (protection-minded)
 
-Apache-2.0 does **not** give rights to the **Powers** name or logos.  
-Others may say “built with Powers” factually; they may **not** imply official endorsement or ship a confusingly named fork as “Powers”.
-
-Details: [TRADEMARKS.md](./TRADEMARKS.md).
-
----
-
-## Going public checklist (license-related)
-
-- [x] `LICENSE` = Apache-2.0  
-- [x] `NOTICE` present  
-- [x] Package `license` fields match  
-- [x] DCO in CONTRIBUTING  
-- [ ] When publishing npm: `"license": "Apache-2.0"` on every package  
-- [ ] Optional: GitHub “License: Apache-2.0” metadata (auto from LICENSE)  
-- [ ] Optional later: `powers-pro` package with separate commercial LICENSE  
+- [x] Relicense sole-owned code to **BSL-1.1** with clear Competing Offering grant  
+- [x] Commercial contact path documented  
+- [x] Trademark policy for the name  
+- [x] README / CONTRIBUTING / RELEASE / footer say **BSL / source-available**  
+- [x] package.json `license` fields = `BUSL-1.1`  
+- [ ] Repo still **private** until you flip visibility (do this last)  
+- [ ] Optional: paid Pro package structure  
+- [ ] Optional: simple LemonSqueezy / Gumroad license SKU  
+- [ ] **Do not** publish to npm until license + pricing story match
 
 ---
 
-## Summary for you
+## What “public” should mean for you
 
-| Want | Approach |
-|---|---|
-| Available like open source | **Apache-2.0** on `@powers/*` |
-| Profit later | Hosted + support + **Pro** add-ons + trademark |
-| Keep control of the brand | **Trademark “Powers”** |
-| Keep ownership clean | **DCO** on contributions |
+| Mode | Code visible? | Cash path | Steal risk |
+|---|---|---|---|
+| **Stay private** | No | Sell licenses / access | Lowest |
+| **Public BSL repo** | Yes | Competing-kit ban + Pro + support | Medium (copy possible; enforce license) |
+| **Public Apache** | Yes | Support / Pro only | High free clones are legal |
 
-Not legal advice—if you raise funding or sign enterprise deals, have a lawyer review trademark registration and any Pro EULA.
+Recommendation: **public BSL when ready**, keep **npm publish** until pricing exists, sell **Pro + commercial license** for cash.
+
+---
+
+## Contributions
+
+External PRs under BSL still need **DCO**. Prefer not taking large third-party code under Apache into a BSL tree without counsel.
+
+---
+
+*Not legal advice. For real revenue, have a lawyer review BSL parameters and any commercial EULA.*

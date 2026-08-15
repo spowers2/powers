@@ -674,7 +674,7 @@ mount(document.getElementById("app")!, () => (
       <footer class="lp-footer">
         <Container size="xl">
           <div class="lp-footer-inner">
-            <span>Powers · Apache-2.0 · private until public</span>
+            <span>Powers · BSL-1.1 · source-available</span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
                 Docs
