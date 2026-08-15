@@ -706,7 +706,7 @@ mount(document.getElementById("app")!, () => (
                 Hearth
               </a>
               <a
-                href="https://github.com/spowers2/power-ui"
+                href="https://github.com/spowers2/powers"
                 target="_blank"
                 rel="noreferrer"
               >

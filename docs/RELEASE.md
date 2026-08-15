@@ -2,7 +2,7 @@
 
 Use this before the first public npm publish / website launch.
 
-**Repo today:** private monorepo (GitHub remote may still be named `power-ui`; product name is **Powers**) · **Apache-2.0** license + trademark policy.
+**Repo today:** private monorepo **https://github.com/spowers2/powers** · product **Powers** · **Apache-2.0** + trademark policy.
 
 ---
 
@@ -52,7 +52,7 @@ Use this before the first public npm publish / website launch.
 3. [ ] `npm publish --access public` per package (or changesets) — packages are **Apache-2.0**
 4. [ ] Tag `v0.1.0` (or matching)
 5. [ ] Optional: GitHub Pages / marketing site from `examples/browser` build
-6. [ ] Optional: rename GitHub repo `power-ui` → `powers` + update remote
+6. [x] Rename GitHub repo → `powers` + update local remote  
 7. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 8. [ ] **Make repo public** only when you are ready (does not equal npm publish)
 9. [ ] Announce with link to Lab + LEARN  
