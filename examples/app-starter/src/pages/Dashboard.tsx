@@ -1,8 +1,11 @@
+import { signal, createQuery } from "@powers/core";
+import { Show, For } from "@powers/dom";
 import {
   Alert,
   Button,
   Card,
   Grid,
+  Spinner,
   Stack,
   Stat,
   Text,
@@ -13,12 +16,9 @@ import { PageHeader } from "../components/uiBits.js";
 import {
   clients,
   projects,
-  tasks,
-  invoices,
   openTaskCount,
   pipelineValue,
   dueSoonTasks,
-  activeProjects,
   outstandingInvoices,
   outstandingTotal,
   paidYtd,
@@ -26,7 +26,6 @@ import {
   unbilledHours,
   unbilledValue,
   formatHours,
-  clientById,
   projectById,
   invoiceTotal,
   effectiveInvoiceStatus,
@@ -35,6 +34,7 @@ import {
   isOverdue,
   profile,
 } from "../data/store.js";
+import { ART_TOPICS, searchArtworks } from "../data/artApi.js";
 
 export function DashboardPage(props: {
   router: Router;
@@ -42,6 +42,14 @@ export function DashboardPage(props: {
 }) {
   const { router } = props;
   const go = (to: string) => () => router.navigate(to);
+
+  /** Creative API: live museum search keyed by a signal — no React Query needed. */
+  const artTopic = signal<string>(ART_TOPICS[0]!.value);
+  const inspiration = createQuery({
+    name: "artic-inspiration",
+    queryKey: () => artTopic(),
+    queryFn: (key) => searchArtworks(key, 6),
+  });
 
   return (
     <Stack gap={6}>
@@ -169,6 +177,119 @@ export function DashboardPage(props: {
             <strong>Unbilled time</strong> = hours not yet on an invoice. Click
             any stat or row to jump into the right list with filters applied.
           </Text>
+        </Stack>
+      </Card>
+
+      {/* Creative API showcase — Art Institute of Chicago via createQuery */}
+      <Card>
+        <Stack gap={4}>
+          <Stack direction="row" gap={2} justify="between" align="start" wrap>
+            <Stack gap={1}>
+              <Text weight="semibold">Studio inspiration</Text>
+              <Text muted size="sm">
+                Live museum API via{" "}
+                <code class="inline-code">createQuery</code> — topic is a
+                signal; only this board reloads.
+              </Text>
+            </Stack>
+            <Button
+              size="sm"
+              variant="ghost"
+              disabled={() => inspiration.loading()}
+              onClick={() => inspiration.refetch()}
+            >
+              Refresh
+            </Button>
+          </Stack>
+
+          <div class="art-topics" role="tablist" aria-label="Inspiration topics">
+            {ART_TOPICS.map((t) => (
+              <button
+                type="button"
+                role="tab"
+                class={() =>
+                  artTopic() === t.value
+                    ? "art-topic is-active"
+                    : "art-topic"
+                }
+                aria-selected={() =>
+                  artTopic() === t.value ? "true" : "false"
+                }
+                onClick={() => artTopic.set(t.value)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          <Show when={() => inspiration.loading() && !inspiration.latest()}>
+            {() => (
+              <Stack direction="row" gap={2} align="center">
+                <Spinner label="Loading art" />
+                <Text muted size="sm">
+                  Fetching from Art Institute of Chicago…
+                </Text>
+              </Stack>
+            )}
+          </Show>
+
+          <Show when={() => !!inspiration.error() && !inspiration.loading()}>
+            {() => (
+              <Alert tone="danger" title="Couldn’t load inspiration">
+                <Stack gap={2}>
+                  <Text size="sm">
+                    {() => String(inspiration.error())}
+                  </Text>
+                  <Button size="sm" variant="soft" onClick={() => inspiration.refetch()}>
+                    Try again
+                  </Button>
+                </Stack>
+              </Alert>
+            )}
+          </Show>
+
+          <div
+            class={() =>
+              inspiration.loading() && inspiration.latest()
+                ? "art-grid is-refreshing"
+                : "art-grid"
+            }
+          >
+            <For each={() => inspiration.latest() ?? inspiration() ?? []}>
+              {(item) => (
+                <a
+                  class="art-card"
+                  href={() => item().pageUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div class="art-card__img">
+                    {() =>
+                      item().imageUrl ? (
+                        <img
+                          src={item().imageUrl!}
+                          alt=""
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="art-card__placeholder">No image</div>
+                      )
+                    }
+                  </div>
+                  <div class="art-card__body">
+                    <Text weight="semibold" size="sm">
+                      {() => item().title}
+                    </Text>
+                    <Text muted size="xs">
+                      {() =>
+                        [item().artist, item().date].filter(Boolean).join(" · ")
+                      }
+                    </Text>
+                  </div>
+                </a>
+              )}
+            </For>
+          </div>
         </Stack>
       </Card>
 

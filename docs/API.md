@@ -22,6 +22,7 @@
 | `effect(fn)` | side effects; optional cleanup return |
 | `store(fields)` | per-key signals + `set` batch |
 | `resource(source, fetcher)` | async loading / error / value |
+| `createQuery({ queryKey, queryFn })` | signal-keyed async query (ergonomic `resource`) |
 | `batch(fn)` / `flush()` | group updates / test flush |
 | `createRoot(fn)` | ownership + dispose |
 | `untrack(fn)` | read without tracking |

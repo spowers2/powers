@@ -5,7 +5,7 @@
  * No DOM. No framework. Just a correct reactive graph.
  *
  * Learning order (intentionally short):
- *   1. signal  2. computed  3. effect  4. store  5. resource
+ *   1. signal  2. computed  3. effect  4. store  5. resource / createQuery
  */
 
 export { signal, computed } from "./signal.js";
@@ -30,6 +30,8 @@ export type {
   ResourceFetcher,
   ResourceFetcherInfo,
 } from "./resource.js";
+export { createQuery } from "./query.js";
+export type { CreateQueryOptions, QueryKey } from "./query.js";
 export { onError } from "./errors.js";
 
 export type {

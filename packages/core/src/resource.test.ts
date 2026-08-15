@@ -166,3 +166,52 @@ describe("resource + effect", () => {
     assert.ok(seen.includes(5));
   });
 });
+
+describe("createQuery", () => {
+  it("fetches when queryKey is set and refetches on key change", async () => {
+    const { createQuery, signal } = await import("./index.js");
+    const q = signal("a");
+    let calls = 0;
+    const art = createQuery({
+      queryKey: () => q(),
+      queryFn: async (key) => {
+        calls++;
+        await delay(5);
+        return { key, n: calls };
+      },
+    });
+
+    assert.equal(art.loading(), true);
+    await delay(20);
+    assert.equal(art()?.key, "a");
+    assert.equal(calls, 1);
+
+    q.set("b");
+    flush();
+    await delay(20);
+    assert.equal(art()?.key, "b");
+    assert.equal(calls, 2);
+  });
+
+  it("stays idle when queryKey is false", async () => {
+    const { createQuery, signal } = await import("./index.js");
+    const on = signal(false);
+    let calls = 0;
+    const r = createQuery({
+      queryKey: () => (on() ? "x" : false),
+      queryFn: async () => {
+        calls++;
+        return 1;
+      },
+    });
+    await delay(15);
+    assert.equal(calls, 0);
+    assert.equal(r.loading(), false);
+
+    on.set(true);
+    flush();
+    await delay(15);
+    assert.equal(calls, 1);
+    assert.equal(r(), 1);
+  });
+});

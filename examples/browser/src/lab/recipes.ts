@@ -773,6 +773,97 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "query",
+    title: "createQuery + live API",
+    blurb: "Signal key · real fetch",
+    goal: "Drive a public API with createQuery — change the key, UI stays simple.",
+    learn: [
+      "createQuery({ queryKey, queryFn }) is resource() with a signal-friendly key",
+      "queryKey: () => topic() re-runs when the signal changes — no dependency arrays",
+      "loading / error / latest keep the board stable while refetching",
+    ],
+    how: [
+      "topic is a signal; chips write topic.set(...)",
+      "createQuery fetches advice from a public API for that key",
+      "Show branches on loading and error; text reads data()",
+    ],
+    tryThis: [
+      "Click different topics and watch only this card update",
+      "Hit Refresh — latest stays visible while loading",
+      "Swap the API URL for your own endpoint",
+    ],
+    code: `import { signal, createQuery } from "@powers/core";
+import { mount, Show } from "@powers/dom";
+import {
+  Alert,
+  Button,
+  Card,
+  Spinner,
+  Stack,
+  Text,
+} from "@powers/ui";
+
+const topic = signal("design");
+
+// Public demo API (no key). Replace with your backend.
+const tip = createQuery({
+  queryKey: () => topic(),
+  queryFn: async (key) => {
+    const res = await fetch(
+      "https://api.adviceslip.com/advice?" + encodeURIComponent(key),
+    );
+    if (!res.ok) throw new Error("Request failed");
+    const json = await res.json();
+    return { key, advice: json.slip?.advice ?? "No advice" };
+  },
+});
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">Live query</Text>
+        <Stack direction="row" gap={2} wrap>
+          {["design", "shipping", "clients"].map((t) => (
+            <Button
+              size="sm"
+              variant={() => (topic() === t ? "solid" : "soft")}
+              onClick={() => topic.set(t)}
+            >
+              {t}
+            </Button>
+          ))}
+        </Stack>
+        <Show when={() => tip.loading() && !tip.latest()}>
+          {() => (
+            <Stack direction="row" gap={2} align="center">
+              <Spinner />
+              <Text muted size="sm">Fetching…</Text>
+            </Stack>
+          )}
+        </Show>
+        <Show when={() => !!tip.error() && !tip.loading()}>
+          {() => (
+            <Alert tone="danger" title="Failed">
+              {() => String(tip.error())}
+            </Alert>
+          )}
+        </Show>
+        <Text>
+          {() => tip.latest()?.advice ?? tip()?.advice ?? "—"}
+        </Text>
+        <Button variant="soft" onClick={() => tip.refetch()}>
+          Refresh
+        </Button>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "form",
     title: "Form validation",
     blurb: "bind + Field errors",

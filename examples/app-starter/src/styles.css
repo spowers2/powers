@@ -783,3 +783,122 @@ body::before {
   border-color: var(--pu-color-accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
 }
+
+/* —— Studio inspiration (Artic API + createQuery) —— */
+.inline-code {
+  font-family: var(--pu-font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--pu-color-surface-2);
+  border: 1px solid var(--pu-color-border);
+}
+
+.art-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.art-topic {
+  appearance: none;
+  border: 1px solid var(--pu-color-border);
+  background: var(--pu-color-surface);
+  color: var(--pu-color-text-muted);
+  font: inherit;
+  font-size: var(--pu-text-xs);
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--pu-radius-full);
+  cursor: pointer;
+  transition:
+    color var(--pu-duration) var(--pu-ease),
+    background var(--pu-duration) var(--pu-ease),
+    border-color var(--pu-duration) var(--pu-ease);
+}
+
+.art-topic:hover {
+  color: var(--pu-color-text);
+  border-color: var(--pu-color-border-strong);
+}
+
+.art-topic.is-active {
+  color: var(--pu-color-accent-fg);
+  background: var(--pu-color-accent);
+  border-color: transparent;
+}
+
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  transition: opacity var(--pu-duration) var(--pu-ease);
+}
+
+@media (min-width: 720px) {
+  .art-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.art-grid.is-refreshing {
+  opacity: 0.55;
+}
+
+.art-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--pu-radius-lg);
+  border: 1px solid var(--pu-color-border);
+  background: var(--pu-color-surface);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--pu-shadow-xs);
+  transition:
+    transform var(--pu-duration) var(--pu-ease),
+    box-shadow var(--pu-duration) var(--pu-ease),
+    border-color var(--pu-duration) var(--pu-ease);
+}
+
+.art-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pu-shadow-md);
+  border-color: var(--pu-color-border-strong);
+}
+
+.art-card__img {
+  aspect-ratio: 4 / 3;
+  background: var(--pu-color-surface-sunken);
+  overflow: hidden;
+}
+
+.art-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.art-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text-muted);
+}
+
+.art-card__body {
+  padding: 0.65rem 0.75rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.art-card__body .pu-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
