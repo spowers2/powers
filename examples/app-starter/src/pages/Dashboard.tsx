@@ -34,7 +34,11 @@ import {
   isOverdue,
   profile,
 } from "../data/store.js";
-import { ART_TOPICS, searchArtworks } from "../data/artApi.js";
+import {
+  ART_TOPICS,
+  fallbackImageUrl,
+  searchArtworks,
+} from "../data/artApi.js";
 
 export function DashboardPage(props: {
   router: Router;
@@ -264,17 +268,16 @@ export function DashboardPage(props: {
                   rel="noreferrer"
                 >
                   <div class="art-card__img">
-                    {() =>
-                      item().imageUrl ? (
-                        <img
-                          src={item().imageUrl!}
-                          alt=""
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div class="art-card__placeholder">No image</div>
-                      )
-                    }
+                    <img
+                      src={() => item().imageUrl}
+                      alt=""
+                      loading="lazy"
+                      onError={(e: Event) => {
+                        const el = e.currentTarget as HTMLImageElement;
+                        const fb = fallbackImageUrl(item());
+                        if (el.src !== fb) el.src = fb;
+                      }}
+                    />
                   </div>
                   <div class="art-card__body">
                     <Text weight="semibold" size="sm">
