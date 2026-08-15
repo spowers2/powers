@@ -5,7 +5,7 @@ Design-side companion to `@powers/ui`.
 | Phase | Status | What |
 |---|---|---|
 | **1. Tokens** | **Ready** | Figma / Tokens Studio export of instrument + dual electric |
-| **2. Component specs** | Scaffold only | JSON specs for Button, Card, … |
+| **2. Component specs** | **Ready** | Full UI kit catalog + Figma build guide |
 | **3. Figma plugin** | Scaffold only | One-click Variables + components |
 
 ## Phase 1 — import tokens into Figma
@@ -57,12 +57,22 @@ Notes:
 
 Keep them in sync by hand for now (phase 1). A CSS→token extractor can come later.
 
-## Phase 2 & 3 (planned)
+## Phase 2 — build the Figma UI kit
 
-- Specs: [`components/`](./components/)  
-- Plugin: [`plugin/`](./plugin/)  
+1. Import tokens (phase 1) with Tokens Studio.  
+2. Follow **[`components/FIGMA_BUILD.md`](./components/FIGMA_BUILD.md)**.  
+3. Use the checklist: [`components/export/index.md`](./components/export/index.md).  
+4. Per-component detail: [`components/export/pages.md`](./components/export/pages.md).  
+5. Machine catalog: [`components/export/catalog.json`](./components/export/catalog.json).
 
-Same token **paths** (`color.accent`, `control.height.md`, …) will bind components and the plugin so nothing diverges.
+Edit specs in [`components/catalog.ts`](./components/catalog.ts), then `pnpm design-kit:build`.
+
+## Phase 3 (planned)
+
+- Plugin scaffold: [`plugin/`](./plugin/)  
+- Will consume `tokens/export/figma-variables.json` + `components/export/catalog.json`
+
+Same token **paths** (`color.accent`, `control.height.md`, …) bind tokens, specs, and the future plugin.
 
 ## License
 

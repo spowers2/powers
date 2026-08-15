@@ -1,44 +1,33 @@
-# Component specs (phase 2)
+# Component specs (phase 2) — **ready**
 
-Not built yet. This folder will hold machine-readable specs that:
+Machine-readable specs for the **full Powers Figma UI kit**, aligned with `@powers/ui`.
 
-1. Designers can follow to rebuild components in Figma by hand  
-2. The phase-3 plugin will use to generate component sets  
+## Quick start
 
-## Planned shape
-
-```
-components/
-  _schema.ts          # TypeScript types for a ComponentSpec
-  Button.spec.json
-  Input.spec.json
-  Card.spec.json
-  …
+```bash
+# from monorepo root
+pnpm design-kit:build
 ```
 
-Each spec will reference **token paths** from `tokens/source.ts`, e.g.:
-
-- `fill` → `color.accent`
-- `height` → `control.height.md`
-- `radius` → `radius.md`
-- variants: `solid` | `soft` | `ghost` | `danger`
-- sizes: `sm` | `md` | `lg`
-
-## Core set (first pass)
-
-| Component | Maps to |
+| File | Use |
 |---|---|
-| Button | `@powers/ui` Button |
-| Input | Input |
-| Textarea | Textarea |
-| Select | Select |
-| Checkbox | Checkbox |
-| Card | Card |
-| Badge | Badge |
-| Alert | Alert |
-| Tabs | Tabs |
-| Dialog | Dialog |
+| [`export/catalog.json`](./export/catalog.json) | Full specs (plugin + tooling) |
+| [`export/index.md`](./export/index.md) | Checklist of all components |
+| [`export/pages.md`](./export/pages.md) | Per-component Figma build notes |
+| [`FIGMA_BUILD.md`](./FIGMA_BUILD.md) | **How to construct the kit in Figma** |
+| [`catalog.ts`](./catalog.ts) | Source of truth (edit this) |
+| [`_schema.ts`](./_schema.ts) | TypeScript contract |
 
-## Status
+## Coverage
 
-Phase 1 tokens are ready. Specs come next.
+All major `@powers/ui` primitives across:
+
+foundations · actions · forms · data-display · feedback · overlays · navigation · layout
+
+## Editing
+
+1. Change or add a component in `catalog.ts`  
+2. `pnpm design-kit:build`  
+3. Rebuild / update the matching Figma component set  
+
+Token paths must exist in `../tokens/source.ts` (phase 1).

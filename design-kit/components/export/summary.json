@@ -1,0 +1,71 @@
+{
+  "version": "0.1.0",
+  "count": 49,
+  "byCategory": {
+    "foundations": [
+      "Text",
+      "Link",
+      "Kbd",
+      "Code",
+      "Divider"
+    ],
+    "actions": [
+      "Button",
+      "ToggleGroup"
+    ],
+    "forms": [
+      "Label",
+      "Input",
+      "Textarea",
+      "Select",
+      "NumberInput",
+      "Checkbox",
+      "Radio",
+      "Switch",
+      "Slider",
+      "Field",
+      "Combobox"
+    ],
+    "data-display": [
+      "Badge",
+      "Chip",
+      "Avatar",
+      "Card",
+      "Stat",
+      "Progress",
+      "Skeleton",
+      "Empty",
+      "Table",
+      "List",
+      "Timeline",
+      "Steps"
+    ],
+    "feedback": [
+      "Alert",
+      "Toast",
+      "Spinner",
+      "Tooltip"
+    ],
+    "overlays": [
+      "Dialog",
+      "Drawer",
+      "Menu",
+      "Popover",
+      "Command"
+    ],
+    "navigation": [
+      "Tabs",
+      "Breadcrumb",
+      "Pagination",
+      "Accordion"
+    ],
+    "layout": [
+      "Stack",
+      "Grid",
+      "Container",
+      "ScrollArea",
+      "AspectRatio",
+      "Collapse"
+    ]
+  }
+}

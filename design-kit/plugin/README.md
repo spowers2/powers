@@ -26,4 +26,4 @@ Will consume: `../tokens/export/figma-variables.json` + `../components/*.spec.js
 
 ## Status
 
-Waiting on phase 1 (done) + phase 2 specs.
+Phase 1 tokens + phase 2 catalog are ready. Plugin implementation is next.

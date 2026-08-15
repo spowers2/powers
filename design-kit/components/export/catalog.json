@@ -1,0 +1,2466 @@
+{
+  "version": "0.1.0",
+  "phase": 2,
+  "description": "Powers full UI kit component specs for Figma. Token paths match design-kit/tokens.",
+  "tokenSource": "design-kit/tokens/source.ts",
+  "categories": [
+    "foundations",
+    "actions",
+    "forms",
+    "data-display",
+    "feedback",
+    "overlays",
+    "navigation",
+    "layout"
+  ],
+  "components": [
+    {
+      "name": "Text",
+      "cssClass": "pu-text",
+      "category": "foundations",
+      "description": "Typography primitive. Prefer Text over raw HTML for token sizes.",
+      "layout": "none",
+      "buildOrder": 1,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "Weight",
+          "kind": "variant",
+          "options": [
+            "normal",
+            "medium",
+            "semibold",
+            "bold"
+          ],
+          "default": "normal"
+        },
+        {
+          "name": "Muted",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Body text"
+        }
+      ],
+      "tokens": {
+        "fill": "transparent",
+        "text": "color.text",
+        "fontFamily": "font.family.sans",
+        "fontSize": "font.size.md",
+        "lineHeight": "font.leading.default"
+      },
+      "sizes": [
+        {
+          "name": "xs",
+          "tokens": {
+            "fontSize": "font.size.xs"
+          }
+        },
+        {
+          "name": "sm",
+          "tokens": {
+            "fontSize": "font.size.sm"
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "fontSize": "font.size.md"
+          }
+        },
+        {
+          "name": "lg",
+          "tokens": {
+            "fontSize": "font.size.lg"
+          }
+        },
+        {
+          "name": "xl",
+          "tokens": {
+            "fontSize": "font.size.xl",
+            "fontWeight": "font.weight.semibold",
+            "letterSpacing": "font.tracking.tight",
+            "lineHeight": "font.leading.tight"
+          }
+        },
+        {
+          "name": "2xl",
+          "tokens": {
+            "fontSize": "font.size.2xl",
+            "fontWeight": "font.weight.bold",
+            "letterSpacing": "font.tracking.display",
+            "lineHeight": "font.leading.tight"
+          }
+        }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "tokens": {
+            "text": "color.text"
+          }
+        },
+        {
+          "name": "muted",
+          "tokens": {
+            "text": "color.text.muted"
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "sampleContent": "The quick brown fox",
+      "structure": [
+        {
+          "name": "Text",
+          "role": "text",
+          "tokens": {
+            "text": "color.text"
+          }
+        }
+      ],
+      "source": "Text.tsx",
+      "figmaPage": "01 Foundations"
+    },
+    {
+      "name": "Link",
+      "cssClass": "pu-link",
+      "category": "foundations",
+      "description": "Inline text link.",
+      "buildOrder": 2,
+      "properties": [
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Learn more"
+        }
+      ],
+      "tokens": {
+        "text": "color.accent",
+        "fontSize": "font.size.sm",
+        "fontWeight": "font.weight.semibold"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus"
+      ],
+      "sampleContent": "Learn more",
+      "notes": "Hover: underline or brightness; use accent color.",
+      "source": "Link.tsx",
+      "figmaPage": "01 Foundations",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Kbd",
+      "cssClass": "pu-kbd",
+      "category": "foundations",
+      "description": "Keyboard key affordance.",
+      "buildOrder": 3,
+      "properties": [
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "⌘K"
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface.2",
+        "text": "color.text.muted",
+        "border": "color.border",
+        "radius": "radius.sm",
+        "fontFamily": "font.family.mono",
+        "fontSize": "font.size.xs",
+        "paddingX": 6,
+        "paddingY": 2
+      },
+      "sampleContent": "⌘K",
+      "source": "Kbd.tsx",
+      "figmaPage": "01 Foundations",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Code",
+      "cssClass": "pu-code",
+      "category": "foundations",
+      "description": "Inline or block code.",
+      "buildOrder": 4,
+      "properties": [
+        {
+          "name": "Variant",
+          "kind": "variant",
+          "options": [
+            "inline",
+            "block"
+          ],
+          "default": "inline"
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "const x = 1"
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface.2",
+        "text": "color.text",
+        "border": "color.border",
+        "radius": "radius.sm",
+        "fontFamily": "font.family.mono",
+        "fontSize": "font.size.sm",
+        "paddingX": "space.2",
+        "paddingY": "space.1"
+      },
+      "variants": [
+        {
+          "name": "inline",
+          "tokens": {
+            "paddingY": "space.1"
+          }
+        },
+        {
+          "name": "block",
+          "tokens": {
+            "paddingX": "space.4",
+            "paddingY": "space.3",
+            "radius": "radius.md"
+          }
+        }
+      ],
+      "sampleContent": "pnpm example:browser",
+      "source": "Code.tsx",
+      "figmaPage": "01 Foundations",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Divider",
+      "cssClass": "pu-divider",
+      "category": "foundations",
+      "description": "Horizontal or vertical rule.",
+      "layout": "none",
+      "buildOrder": 5,
+      "properties": [
+        {
+          "name": "Orientation",
+          "kind": "variant",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        }
+      ],
+      "tokens": {
+        "stroke": "color.border",
+        "strokeWidth": 1
+      },
+      "states": [
+        "default"
+      ],
+      "notes": "Horizontal: full width, 1px. Vertical: full height of parent, 1px.",
+      "source": "Divider.tsx",
+      "figmaPage": "01 Foundations"
+    },
+    {
+      "name": "Button",
+      "cssClass": "pu-btn",
+      "category": "actions",
+      "description": "Primary action control. Token-driven color and size.",
+      "buildOrder": 10,
+      "properties": [
+        {
+          "name": "Variant",
+          "kind": "variant",
+          "options": [
+            "solid",
+            "soft",
+            "ghost",
+            "danger"
+          ],
+          "default": "solid"
+        },
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "Disabled",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Button"
+        }
+      ],
+      "tokens": {
+        "layout": "horizontal",
+        "align": "center",
+        "justify": "center",
+        "gap": "space.2",
+        "height": "control.height.md",
+        "paddingX": "control.paddingX",
+        "radius": "radius.md",
+        "fontSize": "font.size.sm",
+        "fontWeight": "font.weight.semibold",
+        "borderWidth": 1,
+        "fill": "color.accent",
+        "text": "color.accent.fg",
+        "border": "color.accent",
+        "shadow": "shadow.sm"
+      },
+      "variants": [
+        {
+          "name": "solid",
+          "tokens": {
+            "fill": "color.accent",
+            "text": "color.accent.fg",
+            "border": "color.accent",
+            "shadow": "shadow.sm"
+          },
+          "notes": "Slight vertical gradient OK; hover → color.accent.hover + shadow.md"
+        },
+        {
+          "name": "soft",
+          "tokens": {
+            "fill": "color.soft.bg",
+            "text": "color.soft.fg",
+            "border": "color.soft.border",
+            "shadow": "none"
+          },
+          "notes": "Hover → color.soft.bgHover"
+        },
+        {
+          "name": "ghost",
+          "tokens": {
+            "fill": "transparent",
+            "text": "color.text",
+            "border": "color.border",
+            "shadow": "none"
+          },
+          "notes": "Hover → fill color.surface.2, border color.border.strong"
+        },
+        {
+          "name": "danger",
+          "tokens": {
+            "fill": "color.danger",
+            "text": "color.danger.fg",
+            "border": "color.danger",
+            "shadow": "shadow.sm"
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "height": "control.height.sm",
+            "paddingX": "space.3",
+            "fontSize": "font.size.sm"
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "height": "control.height.md",
+            "paddingX": "control.paddingX",
+            "fontSize": "font.size.sm"
+          }
+        },
+        {
+          "name": "lg",
+          "tokens": {
+            "height": "control.height.lg",
+            "paddingX": "space.5",
+            "fontSize": "font.size.md"
+          }
+        }
+      ],
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "disabled",
+        "focus"
+      ],
+      "sampleContent": "Continue",
+      "structure": [
+        {
+          "name": "Button",
+          "role": "root",
+          "layout": "horizontal",
+          "tokens": {
+            "height": "control.height.md",
+            "paddingX": "control.paddingX",
+            "radius": "radius.md",
+            "gap": "space.2"
+          },
+          "children": [
+            {
+              "name": "Label",
+              "role": "text",
+              "tokens": {
+                "fontWeight": "font.weight.semibold"
+              }
+            }
+          ]
+        }
+      ],
+      "notes": "Focus ring: 2px surface + 2px focus (color.focus @ ~55%). Disabled opacity 0.5. Hover lift −1px Y.",
+      "source": "Button.tsx",
+      "figmaPage": "02 Actions",
+      "layout": "horizontal"
+    },
+    {
+      "name": "ToggleGroup",
+      "cssClass": "pu-toggle-group",
+      "category": "actions",
+      "description": "Segmented toggle buttons (single or multi).",
+      "buildOrder": 11,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface.sunken",
+        "border": "color.border",
+        "radius": "radius.md",
+        "gap": 2,
+        "padding": 3
+      },
+      "variants": [
+        {
+          "name": "item-idle",
+          "tokens": {
+            "fill": "transparent",
+            "text": "color.text.muted"
+          }
+        },
+        {
+          "name": "item-active",
+          "tokens": {
+            "fill": "color.surface",
+            "text": "color.text",
+            "shadow": "shadow.sm"
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "paddingX": 10,
+            "paddingY": 5,
+            "fontSize": "font.size.xs"
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "paddingX": 14,
+            "paddingY": 6,
+            "fontSize": "font.size.sm"
+          }
+        }
+      ],
+      "sampleContent": "Day · Week · Month",
+      "notes": "Build as component set: Track frame + Toggle items. Active item elevated surface.",
+      "source": "ToggleGroup.tsx",
+      "figmaPage": "02 Actions",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Label",
+      "cssClass": "pu-label",
+      "category": "forms",
+      "description": "Form field label.",
+      "buildOrder": 20,
+      "properties": [
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Email"
+        }
+      ],
+      "tokens": {
+        "text": "color.text",
+        "fontSize": "control.labelSize",
+        "fontWeight": "font.weight.medium"
+      },
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Email",
+      "source": "Label.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Input",
+      "cssClass": "pu-input",
+      "category": "forms",
+      "description": "Text input. Height matches control.md.",
+      "buildOrder": 21,
+      "properties": [
+        {
+          "name": "Placeholder",
+          "kind": "text",
+          "default": "you@example.com"
+        },
+        {
+          "name": "Disabled",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Invalid",
+          "kind": "boolean",
+          "default": false
+        }
+      ],
+      "tokens": {
+        "height": "control.height.md",
+        "paddingX": "control.paddingX",
+        "radius": "radius.md",
+        "fill": "color.surface",
+        "text": "color.text",
+        "border": "color.border",
+        "borderWidth": 1,
+        "shadow": "shadow.xs",
+        "fontSize": "font.size.sm",
+        "placeholder": "color.text.muted"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "invalid"
+      ],
+      "sampleContent": "",
+      "structure": [
+        {
+          "name": "Input",
+          "role": "input",
+          "layout": "horizontal",
+          "tokens": {
+            "height": "control.height.md",
+            "paddingX": "control.paddingX",
+            "radius": "radius.md",
+            "fill": "color.surface",
+            "border": "color.border"
+          },
+          "children": [
+            {
+              "name": "Value",
+              "role": "text"
+            }
+          ]
+        }
+      ],
+      "notes": "Focus: border mixes focus token; outer glow 3px focus@18%. Invalid: border color.danger.",
+      "source": "Input.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Textarea",
+      "cssClass": "pu-textarea",
+      "category": "forms",
+      "description": "Multi-line text. Same chrome as Input, min-height ~96px.",
+      "buildOrder": 22,
+      "properties": [
+        {
+          "name": "Placeholder",
+          "kind": "text",
+          "default": "Notes…"
+        },
+        {
+          "name": "Disabled",
+          "kind": "boolean",
+          "default": false
+        }
+      ],
+      "tokens": {
+        "minHeight": 96,
+        "paddingX": "control.paddingX",
+        "paddingY": "space.3",
+        "radius": "radius.md",
+        "fill": "color.surface",
+        "text": "color.text",
+        "border": "color.border",
+        "shadow": "shadow.xs",
+        "fontSize": "font.size.sm"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "invalid"
+      ],
+      "sampleContent": "Ship notes go here.",
+      "source": "Textarea.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Select",
+      "cssClass": "pu-select",
+      "category": "forms",
+      "description": "Native-styled select trigger (closed state in kit).",
+      "buildOrder": 23,
+      "properties": [
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Choose…"
+        },
+        {
+          "name": "Disabled",
+          "kind": "boolean",
+          "default": false
+        }
+      ],
+      "tokens": {
+        "height": "control.height.md",
+        "paddingX": "control.paddingX",
+        "radius": "radius.md",
+        "fill": "color.surface",
+        "text": "color.text",
+        "border": "color.border",
+        "shadow": "shadow.xs",
+        "fontSize": "font.size.sm"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "open"
+      ],
+      "sampleContent": "United States",
+      "notes": "Include chevron icon right. Open state can show Menu/list panel below.",
+      "source": "Select.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "NumberInput",
+      "cssClass": "pu-number-input",
+      "category": "forms",
+      "description": "Numeric field with optional steppers.",
+      "buildOrder": 24,
+      "tokens": {
+        "height": "control.height.md",
+        "radius": "radius.md",
+        "fill": "color.surface",
+        "border": "color.border",
+        "text": "color.text",
+        "fontFamily": "font.family.mono",
+        "fontSize": "font.size.sm"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "sampleContent": "42",
+      "source": "NumberInput.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Checkbox",
+      "cssClass": "pu-checkbox",
+      "category": "forms",
+      "description": "Checkbox + optional label.",
+      "buildOrder": 25,
+      "properties": [
+        {
+          "name": "Checked",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Disabled",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Accept terms"
+        }
+      ],
+      "tokens": {
+        "gap": "space.2",
+        "fontSize": "font.size.sm",
+        "text": "color.text",
+        "boxSize": 17.6,
+        "boxRadius": 5,
+        "boxBorder": "color.border",
+        "boxFill": "color.surface",
+        "checkedFill": "color.accent",
+        "checkColor": "color.accent.fg"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "checked"
+      ],
+      "structure": [
+        {
+          "name": "Checkbox",
+          "role": "root",
+          "layout": "horizontal",
+          "tokens": {
+            "gap": "space.2"
+          },
+          "children": [
+            {
+              "name": "Box",
+              "role": "input",
+              "tokens": {
+                "width": 18,
+                "height": 18,
+                "radius": 5,
+                "border": "color.border"
+              }
+            },
+            {
+              "name": "Label",
+              "role": "label"
+            }
+          ]
+        }
+      ],
+      "sampleContent": "Remember me",
+      "source": "Checkbox.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Radio",
+      "cssClass": "pu-radio",
+      "category": "forms",
+      "description": "Radio control + label. Group radios on the kit page.",
+      "buildOrder": 26,
+      "properties": [
+        {
+          "name": "Checked",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Option"
+        }
+      ],
+      "tokens": {
+        "gap": "space.2",
+        "fontSize": "font.size.sm",
+        "text": "color.text",
+        "outerSize": 18,
+        "outerBorder": "color.border",
+        "outerFill": "color.surface",
+        "dotFill": "color.accent"
+      },
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "checked"
+      ],
+      "sampleContent": "Option A",
+      "source": "Radio.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Switch",
+      "cssClass": "pu-switch",
+      "category": "forms",
+      "description": "Toggle switch. Track 40×22.4, thumb slides when checked.",
+      "buildOrder": 27,
+      "properties": [
+        {
+          "name": "Checked",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Disabled",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Notifications"
+        }
+      ],
+      "tokens": {
+        "gap": "space.2",
+        "fontSize": "font.size.sm",
+        "text": "color.text",
+        "trackWidth": 40,
+        "trackHeight": 22.4,
+        "trackRadius": "radius.full",
+        "trackFill": "color.border",
+        "trackFillChecked": "color.accent",
+        "thumbFill": "#ffffff",
+        "thumbShadow": "shadow.sm"
+      },
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "checked"
+      ],
+      "structure": [
+        {
+          "name": "Switch",
+          "role": "root",
+          "layout": "horizontal",
+          "children": [
+            {
+              "name": "Track",
+              "role": "track",
+              "children": [
+                {
+                  "name": "Thumb",
+                  "role": "thumb"
+                }
+              ]
+            },
+            {
+              "name": "Label",
+              "role": "label"
+            }
+          ]
+        }
+      ],
+      "sampleContent": "Enable alerts",
+      "source": "Switch.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Slider",
+      "cssClass": "pu-slider",
+      "category": "forms",
+      "description": "Range slider track + thumb.",
+      "buildOrder": 28,
+      "tokens": {
+        "trackHeight": 6,
+        "trackFill": "color.surface.sunken",
+        "trackActive": "color.accent",
+        "thumbSize": 16,
+        "thumbFill": "color.surface",
+        "thumbBorder": "color.accent",
+        "radius": "radius.full"
+      },
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "sampleContent": "50%",
+      "source": "Slider.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Field",
+      "cssClass": "pu-field",
+      "category": "forms",
+      "description": "Label + control + hint/error stack.",
+      "layout": "vertical",
+      "buildOrder": 29,
+      "properties": [
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Email"
+        },
+        {
+          "name": "Hint",
+          "kind": "text",
+          "default": "We’ll never share this."
+        },
+        {
+          "name": "Error",
+          "kind": "boolean",
+          "default": false
+        }
+      ],
+      "tokens": {
+        "gap": "control.fieldGap",
+        "labelSize": "control.labelSize",
+        "labelColor": "color.text",
+        "hintColor": "color.text.muted",
+        "errorColor": "color.danger",
+        "fontSize": "font.size.sm"
+      },
+      "structure": [
+        {
+          "name": "Field",
+          "role": "root",
+          "layout": "vertical",
+          "tokens": {
+            "gap": "control.fieldGap"
+          },
+          "children": [
+            {
+              "name": "Label",
+              "role": "label"
+            },
+            {
+              "name": "Control",
+              "role": "slot",
+              "notes": "Instance swap → Input / Select / …"
+            },
+            {
+              "name": "Hint",
+              "role": "meta"
+            }
+          ]
+        }
+      ],
+      "sampleContent": "Email field",
+      "notes": "Compose from Label + Input instances in Figma.",
+      "source": "Field.tsx",
+      "figmaPage": "03 Forms",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Combobox",
+      "cssClass": "pu-combobox",
+      "category": "forms",
+      "description": "Searchable select — trigger + list panel.",
+      "buildOrder": 30,
+      "tokens": {
+        "triggerHeight": "control.height.md",
+        "fill": "color.surface",
+        "border": "color.border",
+        "radius": "radius.md",
+        "panelShadow": "shadow.lg",
+        "panelFill": "color.surface.elevated"
+      },
+      "states": [
+        "default",
+        "open",
+        "focus",
+        "disabled"
+      ],
+      "sampleContent": "Search…",
+      "notes": "Build closed trigger + open overlay as variants or separate components.",
+      "source": "Combobox.tsx",
+      "figmaPage": "03 Forms",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Badge",
+      "cssClass": "pu-badge",
+      "category": "data-display",
+      "description": "Pill status badge.",
+      "buildOrder": 40,
+      "properties": [
+        {
+          "name": "Tone",
+          "kind": "variant",
+          "options": [
+            "neutral",
+            "accent",
+            "success",
+            "warning"
+          ],
+          "default": "neutral"
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Badge"
+        }
+      ],
+      "tokens": {
+        "paddingX": "0.65em",
+        "paddingY": "0.2em",
+        "radius": "radius.full",
+        "fontSize": "font.size.xs",
+        "fontWeight": "font.weight.semibold",
+        "gap": "space.1",
+        "borderWidth": 1
+      },
+      "variants": [
+        {
+          "name": "neutral",
+          "tokens": {
+            "fill": "color.surface.2",
+            "text": "color.text.muted",
+            "border": "color.border"
+          }
+        },
+        {
+          "name": "accent",
+          "tokens": {
+            "fill": "color.soft.bg",
+            "text": "color.soft.fg",
+            "border": "color.soft.border"
+          }
+        },
+        {
+          "name": "success",
+          "tokens": {
+            "fill": "rgba(105, 190, 40, 0.14)",
+            "text": "color.sage.700",
+            "border": "rgba(105, 190, 40, 0.32)"
+          }
+        },
+        {
+          "name": "warning",
+          "tokens": {
+            "fill": "rgba(166, 124, 61, 0.14)",
+            "text": "#7a5a28",
+            "border": "rgba(166, 124, 61, 0.28)"
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Live",
+      "source": "Badge.tsx",
+      "figmaPage": "04 Data display",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Chip",
+      "cssClass": "pu-chip",
+      "category": "data-display",
+      "description": "Filter/tag chip; optional remove ×.",
+      "buildOrder": 41,
+      "properties": [
+        {
+          "name": "Tone",
+          "kind": "variant",
+          "options": [
+            "neutral",
+            "accent",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "neutral"
+        },
+        {
+          "name": "Removable",
+          "kind": "boolean",
+          "default": false
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Tag"
+        }
+      ],
+      "tokens": {
+        "paddingX": 9,
+        "paddingY": 3,
+        "radius": "radius.full",
+        "fontSize": "font.size.xs",
+        "fontWeight": "font.weight.semibold",
+        "gap": 5
+      },
+      "variants": [
+        {
+          "name": "neutral",
+          "tokens": {
+            "fill": "color.surface.2",
+            "text": "color.text",
+            "border": "color.border"
+          }
+        },
+        {
+          "name": "accent",
+          "tokens": {
+            "fill": "rgba(10, 39, 68, 0.14)",
+            "text": "color.accent"
+          }
+        },
+        {
+          "name": "success",
+          "tokens": {
+            "fill": "rgba(105, 190, 40, 0.16)",
+            "text": "color.success"
+          }
+        },
+        {
+          "name": "warning",
+          "tokens": {
+            "fill": "rgba(212, 160, 23, 0.18)",
+            "text": "#b8860b"
+          }
+        },
+        {
+          "name": "danger",
+          "tokens": {
+            "fill": "rgba(180, 35, 24, 0.14)",
+            "text": "color.danger"
+          }
+        }
+      ],
+      "sampleContent": "Design system",
+      "source": "Chip.tsx",
+      "figmaPage": "04 Data display",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Avatar",
+      "cssClass": "pu-avatar",
+      "category": "data-display",
+      "description": "Initials or image circle.",
+      "buildOrder": 42,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "Initials",
+          "kind": "text",
+          "default": "SP"
+        }
+      ],
+      "tokens": {
+        "radius": "radius.full",
+        "text": "color.accent.fg",
+        "fillStart": "color.brand.500",
+        "fillEnd": "color.sage.600",
+        "border": "color.border",
+        "shadow": "shadow.xs",
+        "fontWeight": "font.weight.semibold"
+      },
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "width": 28,
+            "height": 28,
+            "fontSize": 10.4
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "width": 36,
+            "height": 36,
+            "fontSize": 12
+          }
+        },
+        {
+          "name": "lg",
+          "tokens": {
+            "width": 48,
+            "height": 48,
+            "fontSize": 14.4
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "sampleContent": "SP",
+      "source": "Avatar.tsx",
+      "figmaPage": "04 Data display",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Card",
+      "cssClass": "pu-card",
+      "category": "data-display",
+      "description": "Surface container. Default padded.",
+      "layout": "vertical",
+      "buildOrder": 43,
+      "properties": [
+        {
+          "name": "Variant",
+          "kind": "variant",
+          "options": [
+            "default",
+            "glass",
+            "elevated",
+            "soft"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "Padded",
+          "kind": "boolean",
+          "default": true
+        },
+        {
+          "name": "Interactive",
+          "kind": "boolean",
+          "default": false
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface",
+        "border": "color.border",
+        "radius": "radius.lg",
+        "shadow": "shadow.sm",
+        "padding": "space.5"
+      },
+      "variants": [
+        {
+          "name": "default",
+          "tokens": {
+            "fill": "color.surface",
+            "border": "color.border",
+            "shadow": "shadow.sm"
+          }
+        },
+        {
+          "name": "glass",
+          "tokens": {
+            "fill": "color.glass.bg",
+            "border": "color.glass.border",
+            "shadow": "shadow.lg"
+          },
+          "notes": "Backdrop blur ~14–16px in Figma effects if available"
+        },
+        {
+          "name": "elevated",
+          "tokens": {
+            "shadow": "shadow.md",
+            "border": "color.border"
+          }
+        },
+        {
+          "name": "soft",
+          "tokens": {
+            "fill": "color.surface.2",
+            "border": "transparent",
+            "shadow": "none"
+          }
+        }
+      ],
+      "states": [
+        "default",
+        "hover"
+      ],
+      "sampleContent": "Card title\nSupporting copy",
+      "structure": [
+        {
+          "name": "Card",
+          "role": "root",
+          "layout": "vertical",
+          "tokens": {
+            "padding": "space.5",
+            "gap": "space.3",
+            "radius": "radius.lg"
+          },
+          "children": [
+            {
+              "name": "Title",
+              "role": "text"
+            },
+            {
+              "name": "Body",
+              "role": "slot"
+            }
+          ]
+        }
+      ],
+      "notes": "Interactive hover: shadow.lg, border tint with focus cyan, −1px Y.",
+      "source": "Card.tsx",
+      "figmaPage": "04 Data display"
+    },
+    {
+      "name": "Stat",
+      "cssClass": "pu-stat",
+      "category": "data-display",
+      "description": "KPI label + value + optional delta.",
+      "layout": "vertical",
+      "buildOrder": 44,
+      "tokens": {
+        "gap": "space.1",
+        "labelColor": "color.text.muted",
+        "labelSize": "font.size.xs",
+        "valueSize": "font.size.2xl",
+        "valueWeight": "font.weight.bold",
+        "valueColor": "color.text"
+      },
+      "sampleContent": "Revenue\n$24.5k\n+12%",
+      "source": "Stat.tsx",
+      "figmaPage": "04 Data display",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Progress",
+      "cssClass": "pu-progress",
+      "category": "data-display",
+      "description": "Determinate progress bar.",
+      "layout": "vertical",
+      "buildOrder": 45,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Uploading"
+        }
+      ],
+      "tokens": {
+        "gap": "space.2",
+        "trackFill": "color.surface.sunken",
+        "trackBorder": "color.border",
+        "trackRadius": "radius.full",
+        "barStart": "color.brand.500",
+        "barEnd": "color.sage.400",
+        "metaSize": "font.size.xs",
+        "metaColor": "color.text.muted"
+      },
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "trackHeight": 6.4
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "trackHeight": 8.8
+          }
+        }
+      ],
+      "sampleContent": "Uploading · 64%",
+      "source": "Progress.tsx",
+      "figmaPage": "04 Data display",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "cssClass": "pu-skeleton",
+      "category": "data-display",
+      "description": "Loading placeholder shapes.",
+      "buildOrder": 46,
+      "properties": [
+        {
+          "name": "Variant",
+          "kind": "variant",
+          "options": [
+            "text",
+            "rect",
+            "circle"
+          ],
+          "default": "text"
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface.2",
+        "radius": "radius.md"
+      },
+      "variants": [
+        {
+          "name": "text",
+          "tokens": {
+            "height": 12,
+            "radius": "radius.sm",
+            "width": "80%"
+          }
+        },
+        {
+          "name": "rect",
+          "tokens": {
+            "height": 96,
+            "radius": "radius.md",
+            "width": "100%"
+          }
+        },
+        {
+          "name": "circle",
+          "tokens": {
+            "width": 40,
+            "height": 40,
+            "radius": "radius.full"
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "notes": "Optional subtle shimmer; keep static in kit if preferred.",
+      "source": "Skeleton.tsx",
+      "figmaPage": "04 Data display",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Empty",
+      "cssClass": "pu-empty",
+      "category": "data-display",
+      "description": "Empty state block: icon slot + title + body + action.",
+      "layout": "vertical",
+      "buildOrder": 47,
+      "tokens": {
+        "gap": "space.3",
+        "align": "center",
+        "titleSize": "font.size.lg",
+        "titleWeight": "font.weight.semibold",
+        "bodyColor": "color.text.muted",
+        "bodySize": "font.size.sm",
+        "padding": "space.8"
+      },
+      "sampleContent": "No results\nTry a different filter.",
+      "notes": "Compose with Text + Button instances.",
+      "source": "Empty.tsx",
+      "figmaPage": "04 Data display",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Table",
+      "cssClass": "pu-table",
+      "category": "data-display",
+      "description": "Data table chrome (header + rows).",
+      "buildOrder": 48,
+      "tokens": {
+        "fill": "color.surface",
+        "border": "color.border",
+        "radius": "radius.md",
+        "headerFill": "color.surface.2",
+        "headerText": "color.text.muted",
+        "cellText": "color.text",
+        "cellPaddingX": "space.3",
+        "cellPaddingY": "space.2",
+        "fontSize": "font.size.sm",
+        "rowBorder": "color.border"
+      },
+      "sampleContent": "Name · Status · Role",
+      "notes": "3-column sample is enough for the kit; full data tables stay in product.",
+      "source": "Table.tsx",
+      "figmaPage": "04 Data display",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "List",
+      "cssClass": "pu-list",
+      "category": "data-display",
+      "description": "Stacked list rows with optional leading media.",
+      "layout": "vertical",
+      "buildOrder": 49,
+      "tokens": {
+        "gap": 0,
+        "rowPaddingX": "space.3",
+        "rowPaddingY": "space.3",
+        "rowBorder": "color.border",
+        "fill": "color.surface",
+        "radius": "radius.md",
+        "text": "color.text",
+        "meta": "color.text.muted"
+      },
+      "sampleContent": "List item · secondary",
+      "source": "List.tsx",
+      "figmaPage": "04 Data display",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Timeline",
+      "cssClass": "pu-timeline",
+      "category": "data-display",
+      "description": "Vertical timeline with dots and connectors.",
+      "layout": "vertical",
+      "buildOrder": 50,
+      "tokens": {
+        "gap": "space.4",
+        "dotSize": 10,
+        "dotFill": "color.accent",
+        "line": "color.border",
+        "titleSize": "font.size.sm",
+        "metaSize": "font.size.xs",
+        "metaColor": "color.text.muted"
+      },
+      "sampleContent": "Shipped · 2h ago",
+      "source": "Timeline.tsx",
+      "figmaPage": "04 Data display",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Steps",
+      "cssClass": "pu-steps",
+      "category": "data-display",
+      "description": "Horizontal stepper.",
+      "buildOrder": 51,
+      "properties": [
+        {
+          "name": "State",
+          "kind": "variant",
+          "options": [
+            "complete",
+            "current",
+            "upcoming"
+          ],
+          "default": "current"
+        }
+      ],
+      "tokens": {
+        "gap": "space.2",
+        "circleSize": 28,
+        "circleFill": "color.surface",
+        "circleBorder": "color.border",
+        "circleFillCurrent": "color.accent",
+        "circleTextCurrent": "color.accent.fg",
+        "labelSize": "font.size.sm",
+        "connector": "color.border"
+      },
+      "sampleContent": "1 Account · 2 Plan · 3 Pay",
+      "source": "Steps.tsx",
+      "figmaPage": "04 Data display",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Alert",
+      "cssClass": "pu-alert",
+      "category": "feedback",
+      "description": "Inline status message with optional title.",
+      "layout": "vertical",
+      "buildOrder": 60,
+      "properties": [
+        {
+          "name": "Tone",
+          "kind": "variant",
+          "options": [
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "info"
+        },
+        {
+          "name": "Title",
+          "kind": "text",
+          "default": "Heads up"
+        },
+        {
+          "name": "Body",
+          "kind": "text",
+          "default": "Something needs your attention."
+        }
+      ],
+      "tokens": {
+        "gap": "space.1",
+        "paddingX": "space.4",
+        "paddingY": "space.3",
+        "radius": "radius.md",
+        "borderWidth": 1,
+        "fontSize": "font.size.sm",
+        "titleWeight": "font.weight.semibold"
+      },
+      "variants": [
+        {
+          "name": "info",
+          "tokens": {
+            "fill": "color.soft.bg",
+            "border": "color.soft.border",
+            "text": "color.text"
+          }
+        },
+        {
+          "name": "success",
+          "tokens": {
+            "fill": "rgba(105, 190, 40, 0.12)",
+            "border": "rgba(105, 190, 40, 0.4)",
+            "text": "color.text"
+          }
+        },
+        {
+          "name": "warning",
+          "tokens": {
+            "fill": "rgba(166, 124, 61, 0.10)",
+            "border": "rgba(166, 124, 61, 0.35)",
+            "text": "color.text"
+          }
+        },
+        {
+          "name": "danger",
+          "tokens": {
+            "fill": "rgba(180, 35, 24, 0.12)",
+            "border": "rgba(180, 35, 24, 0.4)",
+            "text": "color.text"
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Heads up\nCheck your connection.",
+      "source": "Alert.tsx",
+      "figmaPage": "05 Feedback"
+    },
+    {
+      "name": "Toast",
+      "cssClass": "pu-toast",
+      "category": "feedback",
+      "description": "Transient notification card (Toaster stack item).",
+      "buildOrder": 61,
+      "properties": [
+        {
+          "name": "Tone",
+          "kind": "variant",
+          "options": [
+            "info",
+            "success",
+            "danger"
+          ],
+          "default": "info"
+        },
+        {
+          "name": "Title",
+          "kind": "text",
+          "default": "Saved"
+        },
+        {
+          "name": "Description",
+          "kind": "text",
+          "default": "Your changes are live."
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface.elevated",
+        "border": "color.border",
+        "radius": "radius.md",
+        "shadow": "shadow.lg",
+        "padding": "space.3",
+        "gap": "space.2",
+        "titleSize": "font.size.sm",
+        "titleWeight": "font.weight.semibold",
+        "descSize": "font.size.xs",
+        "descColor": "color.text.muted",
+        "dotSize": 7
+      },
+      "variants": [
+        {
+          "name": "info",
+          "tokens": {
+            "dot": "color.accent"
+          }
+        },
+        {
+          "name": "success",
+          "tokens": {
+            "dot": "color.sage.500"
+          }
+        },
+        {
+          "name": "danger",
+          "tokens": {
+            "dot": "color.danger"
+          }
+        }
+      ],
+      "sampleContent": "Saved\nYour changes are live.",
+      "source": "Toast.tsx",
+      "figmaPage": "05 Feedback",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Spinner",
+      "cssClass": "pu-spinner",
+      "category": "feedback",
+      "description": "Loading indicator disk + optional label.",
+      "buildOrder": 62,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "Loading"
+        }
+      ],
+      "tokens": {
+        "gap": "space.2",
+        "color": "color.accent",
+        "fontSize": "font.size.sm"
+      },
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "disk": 16,
+            "borderWidth": 2
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "disk": 21.6,
+            "borderWidth": 2.5
+          }
+        },
+        {
+          "name": "lg",
+          "tokens": {
+            "disk": 28,
+            "borderWidth": 3
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Loading",
+      "notes": "In Figma use arc or ring; animate optional.",
+      "source": "Spinner.tsx",
+      "figmaPage": "05 Feedback",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Tooltip",
+      "cssClass": "pu-tooltip",
+      "category": "feedback",
+      "description": "Small floating label near a control.",
+      "buildOrder": 63,
+      "properties": [
+        {
+          "name": "Label",
+          "kind": "text",
+          "default": "More info"
+        }
+      ],
+      "tokens": {
+        "fill": "color.brand.800",
+        "text": "color.gray.0",
+        "radius": "radius.sm",
+        "paddingX": "space.2",
+        "paddingY": "space.1",
+        "fontSize": "font.size.xs",
+        "shadow": "shadow.md"
+      },
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Keyboard shortcut ⌘S",
+      "source": "Tooltip.tsx",
+      "figmaPage": "05 Feedback",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Dialog",
+      "cssClass": "pu-dialog",
+      "category": "overlays",
+      "description": "Modal: backdrop + panel (sm/md/lg).",
+      "layout": "vertical",
+      "buildOrder": 70,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "Title",
+          "kind": "text",
+          "default": "Confirm"
+        },
+        {
+          "name": "Description",
+          "kind": "text",
+          "default": "This action cannot be undone."
+        }
+      ],
+      "tokens": {
+        "backdrop": "color.overlay.scrim",
+        "panelFill": "color.surface.elevated",
+        "panelBorder": "color.border",
+        "panelRadius": "radius.xl",
+        "panelShadow": "shadow.lg",
+        "panelPadding": "space.6",
+        "titleSize": "font.size.xl",
+        "titleWeight": "font.weight.bold",
+        "descColor": "color.text.muted",
+        "descSize": "font.size.sm",
+        "zIndex": "z.overlay"
+      },
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "maxWidth": 352
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "maxWidth": 448
+          }
+        },
+        {
+          "name": "lg",
+          "tokens": {
+            "maxWidth": 576
+          }
+        }
+      ],
+      "states": [
+        "default",
+        "open"
+      ],
+      "structure": [
+        {
+          "name": "Dialog",
+          "role": "root",
+          "children": [
+            {
+              "name": "Backdrop",
+              "role": "backdrop"
+            },
+            {
+              "name": "Panel",
+              "role": "panel",
+              "layout": "vertical",
+              "children": [
+                {
+                  "name": "Head",
+                  "role": "meta",
+                  "layout": "horizontal",
+                  "children": [
+                    {
+                      "name": "Title",
+                      "role": "text"
+                    },
+                    {
+                      "name": "Close",
+                      "role": "close"
+                    }
+                  ]
+                },
+                {
+                  "name": "Body",
+                  "role": "slot"
+                },
+                {
+                  "name": "Footer",
+                  "role": "slot",
+                  "notes": "Button row"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sampleContent": "Confirm · Cancel / Confirm buttons",
+      "source": "Dialog.tsx",
+      "figmaPage": "06 Overlays"
+    },
+    {
+      "name": "Drawer",
+      "cssClass": "pu-drawer",
+      "category": "overlays",
+      "description": "Side panel overlay (typically right).",
+      "layout": "vertical",
+      "buildOrder": 71,
+      "tokens": {
+        "backdrop": "color.overlay.scrim",
+        "panelFill": "color.surface.elevated",
+        "panelBorder": "color.border",
+        "panelShadow": "shadow.lg",
+        "panelWidth": 360,
+        "padding": "space.5"
+      },
+      "states": [
+        "default",
+        "open"
+      ],
+      "sampleContent": "Filters drawer",
+      "source": "Drawer.tsx",
+      "figmaPage": "06 Overlays"
+    },
+    {
+      "name": "Menu",
+      "cssClass": "pu-menu",
+      "category": "overlays",
+      "description": "Dropdown menu list.",
+      "layout": "vertical",
+      "buildOrder": 72,
+      "tokens": {
+        "fill": "color.surface.elevated",
+        "border": "color.border",
+        "radius": "radius.md",
+        "shadow": "shadow.lg",
+        "padding": "space.1",
+        "itemPaddingX": "space.3",
+        "itemPaddingY": "space.2",
+        "itemRadius": "radius.sm",
+        "itemHover": "color.surface.2",
+        "fontSize": "font.size.sm",
+        "text": "color.text",
+        "dangerText": "color.danger"
+      },
+      "sampleContent": "Edit · Duplicate · Delete",
+      "source": "Menu.tsx",
+      "figmaPage": "06 Overlays",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Popover",
+      "cssClass": "pu-popover",
+      "category": "overlays",
+      "description": "Anchored floating panel.",
+      "layout": "vertical",
+      "buildOrder": 73,
+      "tokens": {
+        "fill": "color.surface.elevated",
+        "border": "color.border",
+        "radius": "radius.md",
+        "shadow": "shadow.lg",
+        "padding": "space.4",
+        "maxWidth": 320
+      },
+      "sampleContent": "Popover content",
+      "source": "Popover.tsx",
+      "figmaPage": "06 Overlays",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Command",
+      "cssClass": "pu-command",
+      "category": "overlays",
+      "description": "Command palette: search + grouped results.",
+      "layout": "vertical",
+      "buildOrder": 74,
+      "tokens": {
+        "fill": "color.surface.elevated",
+        "border": "color.border",
+        "radius": "radius.lg",
+        "shadow": "shadow.lg",
+        "width": 520,
+        "inputHeight": "control.height.md",
+        "itemHover": "color.surface.2",
+        "fontSize": "font.size.sm"
+      },
+      "sampleContent": "Type a command…",
+      "source": "Command.tsx",
+      "figmaPage": "06 Overlays",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Tabs",
+      "cssClass": "pu-tabs",
+      "category": "navigation",
+      "description": "Segmented tabs list + panel.",
+      "layout": "vertical",
+      "buildOrder": 80,
+      "properties": [
+        {
+          "name": "Active",
+          "kind": "variant",
+          "options": [
+            "tab-1",
+            "tab-2",
+            "tab-3"
+          ],
+          "default": "tab-1"
+        }
+      ],
+      "tokens": {
+        "gap": "space.4",
+        "listFill": "color.surface.sunken",
+        "listBorder": "color.border",
+        "listRadius": "radius.md",
+        "listPadding": 3,
+        "listGap": 2,
+        "tabPaddingX": 14.4,
+        "tabPaddingY": 7.2,
+        "tabRadius": 6,
+        "tabFontSize": "font.size.sm",
+        "tabWeight": "font.weight.semibold",
+        "tabIdle": "color.text.muted",
+        "tabActiveFill": "color.surface",
+        "tabActiveText": "color.text",
+        "tabActiveShadow": "shadow.sm"
+      },
+      "sampleContent": "Overview · Activity · Settings",
+      "structure": [
+        {
+          "name": "Tabs",
+          "role": "root",
+          "layout": "vertical",
+          "children": [
+            {
+              "name": "List",
+              "role": "root",
+              "layout": "horizontal",
+              "children": [
+                {
+                  "name": "Tab / Active",
+                  "role": "text"
+                },
+                {
+                  "name": "Tab / Idle",
+                  "role": "text"
+                }
+              ]
+            },
+            {
+              "name": "Panel",
+              "role": "slot"
+            }
+          ]
+        }
+      ],
+      "source": "Tabs.tsx",
+      "figmaPage": "07 Navigation",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Breadcrumb",
+      "cssClass": "pu-breadcrumb",
+      "category": "navigation",
+      "description": "Path crumbs with separators.",
+      "buildOrder": 81,
+      "tokens": {
+        "gap": "space.2",
+        "fontSize": "font.size.sm",
+        "text": "color.text.muted",
+        "textCurrent": "color.text",
+        "separator": "color.text.muted"
+      },
+      "sampleContent": "Home / Projects / Powers",
+      "source": "Breadcrumb.tsx",
+      "figmaPage": "07 Navigation",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Pagination",
+      "cssClass": "pu-pagination",
+      "category": "navigation",
+      "description": "Page controls using Button/ghost items.",
+      "buildOrder": 82,
+      "tokens": {
+        "gap": "space.1",
+        "itemHeight": "control.height.sm",
+        "itemMinWidth": "control.height.sm",
+        "radius": "radius.md",
+        "activeFill": "color.accent",
+        "activeText": "color.accent.fg",
+        "idleText": "color.text"
+      },
+      "sampleContent": "‹ 1 2 3 ›",
+      "notes": "Compose from Button sm ghost + solid for current page.",
+      "source": "Pagination.tsx",
+      "figmaPage": "07 Navigation",
+      "layout": "horizontal",
+      "states": [
+        "default",
+        "hover",
+        "disabled",
+        "focus"
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cssClass": "pu-accordion",
+      "category": "navigation",
+      "description": "Collapsible sections.",
+      "layout": "vertical",
+      "buildOrder": 83,
+      "properties": [
+        {
+          "name": "Open",
+          "kind": "boolean",
+          "default": true
+        }
+      ],
+      "tokens": {
+        "border": "color.border",
+        "radius": "radius.md",
+        "fill": "color.surface",
+        "triggerPadding": "space.4",
+        "triggerWeight": "font.weight.semibold",
+        "contentPadding": "space.4",
+        "contentColor": "color.text.muted",
+        "fontSize": "font.size.sm"
+      },
+      "states": [
+        "default",
+        "open"
+      ],
+      "sampleContent": "Section title · body",
+      "source": "Accordion.tsx",
+      "figmaPage": "07 Navigation"
+    },
+    {
+      "name": "Stack",
+      "cssClass": "pu-stack",
+      "category": "layout",
+      "description": "Flex stack. Document gap tokens as variants.",
+      "layout": "vertical",
+      "buildOrder": 90,
+      "properties": [
+        {
+          "name": "Direction",
+          "kind": "variant",
+          "options": [
+            "vertical",
+            "horizontal"
+          ],
+          "default": "vertical"
+        },
+        {
+          "name": "Gap",
+          "kind": "variant",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8"
+          ],
+          "default": "4"
+        }
+      ],
+      "tokens": {
+        "gap": "space.4",
+        "align": "stretch"
+      },
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Stack children",
+      "notes": "In Figma this is mostly auto-layout documentation, not a heavy component.",
+      "source": "Stack.tsx",
+      "figmaPage": "08 Layout"
+    },
+    {
+      "name": "Grid",
+      "cssClass": "pu-grid",
+      "category": "layout",
+      "description": "CSS grid wrapper — document columns + gap.",
+      "buildOrder": 91,
+      "properties": [
+        {
+          "name": "Columns",
+          "kind": "variant",
+          "options": [
+            "2",
+            "3",
+            "4"
+          ],
+          "default": "3"
+        }
+      ],
+      "tokens": {
+        "gap": "space.4"
+      },
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Grid cells",
+      "source": "Grid.tsx",
+      "figmaPage": "08 Layout",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Container",
+      "cssClass": "pu-container",
+      "category": "layout",
+      "description": "Max-width content shell.",
+      "layout": "vertical",
+      "buildOrder": 92,
+      "properties": [
+        {
+          "name": "Size",
+          "kind": "variant",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ],
+          "default": "lg"
+        }
+      ],
+      "tokens": {
+        "paddingX": "space.4",
+        "width": "100%"
+      },
+      "sizes": [
+        {
+          "name": "sm",
+          "tokens": {
+            "maxWidth": 640
+          }
+        },
+        {
+          "name": "md",
+          "tokens": {
+            "maxWidth": 768
+          }
+        },
+        {
+          "name": "lg",
+          "tokens": {
+            "maxWidth": 1024
+          }
+        },
+        {
+          "name": "xl",
+          "tokens": {
+            "maxWidth": 1280
+          }
+        }
+      ],
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Page container",
+      "source": "Container.tsx",
+      "figmaPage": "08 Layout"
+    },
+    {
+      "name": "ScrollArea",
+      "cssClass": "pu-scroll-area",
+      "category": "layout",
+      "description": "Scrollable region with border chrome.",
+      "buildOrder": 93,
+      "tokens": {
+        "fill": "color.surface",
+        "border": "color.border",
+        "radius": "radius.md",
+        "maxHeight": 240
+      },
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Long content…",
+      "source": "ScrollArea.tsx",
+      "figmaPage": "08 Layout",
+      "layout": "horizontal"
+    },
+    {
+      "name": "AspectRatio",
+      "cssClass": "pu-aspect-ratio",
+      "category": "layout",
+      "description": "Fixed aspect media frame.",
+      "buildOrder": 94,
+      "properties": [
+        {
+          "name": "Ratio",
+          "kind": "variant",
+          "options": [
+            "1:1",
+            "16:9",
+            "4:3"
+          ],
+          "default": "16:9"
+        }
+      ],
+      "tokens": {
+        "fill": "color.surface.2",
+        "radius": "radius.md",
+        "border": "color.border"
+      },
+      "states": [
+        "default"
+      ],
+      "sampleContent": "Media",
+      "source": "AspectRatio.tsx",
+      "figmaPage": "08 Layout",
+      "layout": "horizontal"
+    },
+    {
+      "name": "Collapse",
+      "cssClass": "pu-collapse",
+      "category": "layout",
+      "description": "Show/hide height animation region.",
+      "layout": "vertical",
+      "buildOrder": 95,
+      "properties": [
+        {
+          "name": "Open",
+          "kind": "boolean",
+          "default": true
+        }
+      ],
+      "tokens": {
+        "overflow": "hidden"
+      },
+      "states": [
+        "default",
+        "open"
+      ],
+      "sampleContent": "Collapsible body",
+      "source": "Collapse.tsx",
+      "figmaPage": "08 Layout"
+    }
+  ],
+  "generatedAt": "2026-08-15T00:42:28.923Z",
+  "count": 49
+}

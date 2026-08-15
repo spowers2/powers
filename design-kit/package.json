@@ -6,9 +6,10 @@
   "type": "module",
   "license": "BUSL-1.1",
   "scripts": {
-    "build": "node --import tsx scripts/build-tokens.ts",
+    "build": "pnpm build:tokens && pnpm build:components",
     "build:tokens": "node --import tsx scripts/build-tokens.ts",
-    "check": "node --import tsx scripts/build-tokens.ts --check"
+    "build:components": "node --import tsx scripts/build-components.ts",
+    "check": "node --import tsx scripts/build-tokens.ts --check && node --import tsx scripts/build-components.ts --check"
   },
   "devDependencies": {
     "tsx": "^4.19.3",
