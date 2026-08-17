@@ -138,6 +138,17 @@
     );
     return lines.join("\n");
   }
+  async function ensurePagesLoaded() {
+    if (typeof figma.loadAllPagesAsync === "function") {
+      await figma.loadAllPagesAsync();
+    } else {
+      for (const page of figma.root.children) {
+        if (page.type === "PAGE" && "loadAsync" in page) {
+          await page.loadAsync();
+        }
+      }
+    }
+  }
   function collectComponentNames(node, into) {
     if (node.type === "COMPONENT_SET") {
       into.add(node.name);
@@ -154,6 +165,7 @@
     }
   }
   async function auditCatalog() {
+    await ensurePagesLoaded();
     const found = /* @__PURE__ */ new Set();
     for (const page of figma.root.children) {
       collectComponentNames(page, found);
@@ -169,6 +181,7 @@
     return lines.join("\n");
   }
   async function createStubs() {
+    await ensurePagesLoaded();
     const found = /* @__PURE__ */ new Set();
     for (const page2 of figma.root.children) {
       collectComponentNames(page2, found);

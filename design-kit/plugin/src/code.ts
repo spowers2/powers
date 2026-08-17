@@ -192,6 +192,22 @@ async function syncVariables(): Promise<string> {
   return lines.join("\n");
 }
 
+/**
+ * documentAccess: "dynamic-page" requires an explicit load before reading page children.
+ * @see https://www.figma.com/plugin-docs/api/properties/figma-loadallpagesasync/
+ */
+async function ensurePagesLoaded() {
+  if (typeof figma.loadAllPagesAsync === "function") {
+    await figma.loadAllPagesAsync();
+  } else {
+    for (const page of figma.root.children) {
+      if (page.type === "PAGE" && "loadAsync" in page) {
+        await (page as PageNode & { loadAsync(): Promise<void> }).loadAsync();
+      }
+    }
+  }
+}
+
 function collectComponentNames(node: BaseNode, into: Set<string>) {
   if (node.type === "COMPONENT_SET") {
     into.add(node.name);
@@ -210,6 +226,7 @@ function collectComponentNames(node: BaseNode, into: Set<string>) {
 }
 
 async function auditCatalog(): Promise<string> {
+  await ensurePagesLoaded();
   const found = new Set<string>();
   for (const page of figma.root.children) {
     collectComponentNames(page, found);
@@ -229,6 +246,7 @@ async function auditCatalog(): Promise<string> {
 }
 
 async function createStubs(): Promise<string> {
+  await ensurePagesLoaded();
   const found = new Set<string>();
   for (const page of figma.root.children) {
     collectComponentNames(page, found);
