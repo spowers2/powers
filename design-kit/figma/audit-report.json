@@ -1,0 +1,190 @@
+{
+  "generatedAt": "2026-08-17T02:18:00.442Z",
+  "file": {
+    "name": "Powers UI Kit",
+    "key": "bdfYWkMm5oJqKBIrwWCsSd",
+    "lastModified": "2026-08-17T01:56:21Z",
+    "page": "Page 1",
+    "frame": "power-ui-comp"
+  },
+  "catalog": {
+    "expected": 49,
+    "matched": 49,
+    "missing": [],
+    "extra": [],
+    "matchedNames": [
+      "Accordion",
+      "Alert",
+      "AspectRatio",
+      "Avatar",
+      "Badge",
+      "Breadcrumb",
+      "Button",
+      "Card",
+      "Checkbox",
+      "Chip",
+      "Code",
+      "Collapse",
+      "Combobox",
+      "Command",
+      "Container",
+      "Dialog",
+      "Divider",
+      "Drawer",
+      "Empty",
+      "Field",
+      "Grid",
+      "Input",
+      "Kbd",
+      "Label",
+      "Link",
+      "List",
+      "Menu",
+      "NumberInput",
+      "Pagination",
+      "Popover",
+      "Progress",
+      "Radio",
+      "ScrollArea",
+      "Select",
+      "Skeleton",
+      "Slider",
+      "Spinner",
+      "Stack",
+      "Stat",
+      "Steps",
+      "Switch",
+      "Table",
+      "Tabs",
+      "Text",
+      "Textarea",
+      "Timeline",
+      "Toast",
+      "ToggleGroup",
+      "Tooltip"
+    ]
+  },
+  "figma": {
+    "componentSets": [
+      "Alert",
+      "AspectRatio",
+      "Avatar",
+      "Badge",
+      "Button",
+      "Card",
+      "Chip",
+      "Code",
+      "Container",
+      "Dialog",
+      "Divider",
+      "Grid",
+      "Progress",
+      "Skeleton",
+      "Spinner",
+      "Stack",
+      "Steps",
+      "Tabs",
+      "Text",
+      "Toast",
+      "ToggleGroup"
+    ],
+    "standaloneComponents": [
+      "Accordion",
+      "Breadcrumb",
+      "Checkbox",
+      "Collapse",
+      "Combobox",
+      "Command",
+      "Drawer",
+      "Empty",
+      "Field",
+      "Input",
+      "Kbd",
+      "Label",
+      "Link",
+      "List",
+      "Menu",
+      "NumberInput",
+      "Pagination",
+      "Popover",
+      "Radio",
+      "ScrollArea",
+      "Select",
+      "Slider",
+      "Stat",
+      "Switch",
+      "Table",
+      "Textarea",
+      "Timeline",
+      "Tooltip"
+    ],
+    "nodeCount": 648
+  },
+  "bindingSample": {
+    "Button": {
+      "nodes": 37,
+      "withBound": 36,
+      "rawSolidFills": 1,
+      "pct": 97.3
+    },
+    "Input": {
+      "nodes": 4,
+      "withBound": 4,
+      "rawSolidFills": 1,
+      "pct": 100
+    },
+    "Text": {
+      "nodes": 73,
+      "withBound": 24,
+      "rawSolidFills": 25,
+      "pct": 32.9
+    },
+    "Card": {
+      "nodes": 13,
+      "withBound": 12,
+      "rawSolidFills": 2,
+      "pct": 92.3
+    },
+    "Badge": {
+      "nodes": 9,
+      "withBound": 7,
+      "rawSolidFills": 4,
+      "pct": 77.8
+    },
+    "Alert": {
+      "nodes": 13,
+      "withBound": 12,
+      "rawSolidFills": 4,
+      "pct": 92.3
+    },
+    "Dialog": {
+      "nodes": 37,
+      "withBound": 24,
+      "rawSolidFills": 7,
+      "pct": 64.9
+    },
+    "Checkbox": {
+      "nodes": 6,
+      "withBound": 5,
+      "rawSolidFills": 1,
+      "pct": 83.3
+    },
+    "Switch": {
+      "nodes": 7,
+      "withBound": 4,
+      "rawSolidFills": 3,
+      "pct": 57.1
+    },
+    "Field": {
+      "nodes": 6,
+      "withBound": 6,
+      "rawSolidFills": 0,
+      "pct": 100
+    }
+  },
+  "variablesApi": "Figma API 403: Invalid scope(s): file_content:read. This endpoint requires the file_variables:read scope",
+  "health": {
+    "catalogComplete": true,
+    "bindingNotes": "pct = share of nodes with any boundVariables. rawSolidFills = solid fills without variable binding (approx)."
+  }
+}

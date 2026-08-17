@@ -9,6 +9,7 @@
     "build": "pnpm build:tokens && pnpm build:components",
     "build:tokens": "node --import tsx scripts/build-tokens.ts",
     "build:components": "node --import tsx scripts/build-components.ts",
+    "figma:audit": "node --import tsx scripts/figma-audit.ts",
     "check": "node --import tsx scripts/build-tokens.ts --check && node --import tsx scripts/build-components.ts --check"
   },
   "devDependencies": {
