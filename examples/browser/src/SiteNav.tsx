@@ -1,6 +1,5 @@
 /**
- * Single site navigation — Docs first for new developers.
- * Progressive disclosure keeps primary links on one row.
+ * Site navigation — kit pages center-left; product demos once; theme tools right.
  */
 import type { Router } from "@powers/router";
 import { Link } from "@powers/router";
@@ -29,7 +28,6 @@ export function SiteNav(props: {
             exact
             aria-label="Powers home"
             onClick={() => {
-              // Always land on the marketing home (clear query/hash) and scroll up.
               router.navigate("/");
               if (typeof window !== "undefined") {
                 window.scrollTo({ top: 0, behavior: "smooth" });
@@ -59,7 +57,7 @@ export function SiteNav(props: {
               href="http://localhost:5180"
               target="_blank"
               rel="noreferrer"
-              title="designlab206 freelance workspace demo"
+              title="Flagship product — freelance workspace"
             >
               designlab206
             </a>
@@ -68,49 +66,31 @@ export function SiteNav(props: {
               href="http://localhost:5181"
               target="_blank"
               rel="noreferrer"
-              title="Hearth restaurant demo"
+              title="Restaurant product demo"
             >
               Hearth
             </a>
           </nav>
 
-          <div class="site-nav-actions">
+          <div class="site-nav-actions" aria-label="Theme">
             <Button
               size="sm"
               variant="ghost"
-              title="Toggle palette: Dual electric ↔ Instrument (current default look)"
+              aria-label="Toggle color palette"
+              title="Palette: Dual electric ↔ Instrument"
               onClick={() => palette.toggle()}
             >
               {() =>
                 palette.id() === "dual" ? "Instrument" : "Dual electric"
               }
             </Button>
-            <Button size="sm" variant="ghost" onClick={() => theme.toggle()}>
-              {() => (theme.mode() === "dark" ? "Light" : "Dark")}
-            </Button>
-            <a
-              class="site-nav-demo-btn"
-              href="http://localhost:5180"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Demos
-            </a>
-            <a
-              class="site-nav-demo-btn site-nav-cta"
-              href="http://localhost:5180"
-              target="_blank"
-              rel="noreferrer"
-              title="Flagship product demo"
-            >
-              designlab206
-            </a>
             <Button
               size="sm"
-              class="site-nav-cta"
-              onClick={() => router.navigate("/lab?recipe=hello")}
+              variant="ghost"
+              aria-label="Toggle light or dark theme"
+              onClick={() => theme.toggle()}
             >
-              Lab
+              {() => (theme.mode() === "dark" ? "Light" : "Dark")}
             </Button>
           </div>
         </div>

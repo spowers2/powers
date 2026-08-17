@@ -180,7 +180,7 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
   flex-shrink: 0;
 }
 
-/* Product demos only when there is room — Demos button covers smaller widths */
+/* Product demos — one place only (center nav), show when width allows */
 .site-nav-demo {
   display: none;
   color: var(--pu-color-text-muted);
@@ -191,7 +191,7 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
   transition: color var(--pu-duration) var(--pu-ease);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .site-nav-sep {
     display: block;
   }
@@ -203,29 +203,8 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
 }
 
 .site-nav-demo:hover {
-  color: var(--pu-sage-600);
-}
-
-.site-nav-demo-btn {
-  display: inline-flex;
-  align-items: center;
-  height: var(--pu-control-h-sm, 2rem);
-  padding: 0 0.65rem;
-  border-radius: var(--pu-radius-md);
-  border: 1px solid var(--pu-color-border);
-  background: var(--pu-color-surface);
-  color: var(--pu-color-text);
-  font-size: var(--pu-text-sm);
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: var(--pu-shadow-xs);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.site-nav-demo-btn:hover {
-  border-color: color-mix(in srgb, var(--pu-sage-500) 35%, var(--pu-color-border));
-  background: var(--pu-color-surface-2);
+  color: var(--pu-color-accent);
+  background: color-mix(in srgb, var(--pu-color-accent) 8%, transparent);
 }
 
 .site-nav-actions {
@@ -240,17 +219,6 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
 .site-nav-actions button {
   white-space: nowrap;
   flex-shrink: 0;
-}
-
-/* Secondary CTAs need horizontal room */
-.site-nav-cta {
-  display: none !important;
-}
-
-@media (min-width: 1024px) {
-  .site-nav-cta {
-    display: inline-flex !important;
-  }
 }
 
 /* Mobile: scrollable primary row so Home/Docs/Lab/System still fit */
