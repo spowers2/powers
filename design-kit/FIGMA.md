@@ -49,3 +49,19 @@ Then Tokens Studio → load `tokens/export/tokens.studio.json` → **Styles & Va
 ## Snapshots (optional)
 
 Later: export Cover / Button matrix PNGs into `figma/snapshots/` for offline visual reference. Not required for the file key link to be valid.
+
+## Agent audit (step 6)
+
+**Last pull:** 2026-08-17 via Figma REST API (`file_content:read`).
+
+| Check | Result |
+|---|---|
+| File name | Powers UI Kit |
+| Structure | Single page `Page 1` → frame `power-ui-comp` |
+| Catalog coverage | **49 / 49** component names match `components/export/catalog.json` |
+| Button matrix | solid/soft/ghost/danger × sm/md/lg (12 variants) |
+| Text matrix | 24 variants (Size × Weight) |
+| Library components endpoint | 403 with current token (node walk still works) |
+| Variables endpoint | 403 — needs `file_variables:read` scope on the PAT |
+
+**Token tip:** regenerate with **file content: read** + **file variables: read** if you want Variable collections audited via API.
