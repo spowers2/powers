@@ -21,6 +21,15 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  design-kit/plugin:
+    devDependencies:
+      '@figma/plugin-typings':
+        specifier: ^1.109.0
+        version: 1.134.0
+      esbuild:
+        specifier: ^0.25.1
+        version: 0.25.12
+
   examples/animate-demo:
     dependencies:
       '@powers/animate':
@@ -581,6 +590,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@figma/plugin-typings@1.134.0':
+    resolution: {integrity: sha512-e0JSSt7lczdi748/NLVEb7rhf/PG1IZyzieMiQ1AsaPN+A+sqvyYlIfxjzodPKrcdc9Pw9ZVjcHsT36oU744IA==}
+
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     resolution: {integrity: sha512-oTXEIha4SsuXdTA4Iyskj0kpdx2yVXdhd75c2v3xGrHFfVMsbhTPZU/nMPL4sWKo4pBHm3aucLaqGlF696dTyQ==}
     engines: {node: ^22.20 || ^24.12 || >=25}
@@ -1010,6 +1022,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.2':
     optional: true
+
+  '@figma/plugin-typings@1.134.0': {}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: var(--figma-color-bg, #fff);
+        --text: var(--figma-color-text, #111);
+        --muted: var(--figma-color-text-secondary, #666);
+        --border: var(--figma-color-border, #ddd);
+        --btn: var(--figma-color-bg-brand, #0a1e38);
+        --btn-text: var(--figma-color-text-onbrand, #fff);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font: 12px/1.45 Inter, system-ui, sans-serif;
+        margin: 0;
+        padding: 12px;
+        color: var(--text);
+        background: var(--bg);
+      }
+      h1 {
+        font-size: 13px;
+        font-weight: 600;
+        margin: 0 0 4px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+      }
+      button {
+        display: block;
+        width: 100%;
+        margin: 0 0 8px;
+        padding: 8px 10px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--btn);
+        color: var(--btn-text);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: transparent;
+        color: var(--text);
+      }
+      pre {
+        margin: 12px 0 0;
+        padding: 8px;
+        max-height: 220px;
+        overflow: auto;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 11px;
+        background: rgba(127, 127, 127, 0.08);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Powers Design Kit</h1>
+    <p>
+      Sync tokens into Local Variables (works without Enterprise REST). Audit
+      catalog coverage. Stub any missing components.
+    </p>
+    <button id="sync">Sync Variables from design-kit</button>
+    <button id="audit" class="secondary">Audit catalog coverage</button>
+    <button id="stubs" class="secondary">Create stubs for missing</button>
+    <button id="close" class="secondary">Close</button>
+    <pre id="out">Ready.</pre>
+    <script>
+      const out = document.getElementById("out");
+      function send(type) {
+        out.textContent = "Working…";
+        parent.postMessage({ pluginMessage: { type } }, "*");
+      }
+      document.getElementById("sync").onclick = () => send("sync-variables");
+      document.getElementById("audit").onclick = () => send("audit");
+      document.getElementById("stubs").onclick = () => send("stubs");
+      document.getElementById("close").onclick = () => send("close");
+      onmessage = (e) => {
+        const msg = e.data.pluginMessage;
+        if (msg && msg.type === "result") out.textContent = msg.text;
+      };
+    </script>
+  </body>
+</html>

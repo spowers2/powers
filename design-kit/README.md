@@ -9,11 +9,14 @@ Design-side companion to `@powers/ui`.
 | **1. Tokens** | **Ready** | Figma / Tokens Studio export of instrument + dual electric |
 | **2. Component specs** | **Ready** | Full UI kit catalog + Figma build guide |
 | **3. Figma file** | **Linked + audited** | [FIGMA.md](./FIGMA.md) · [QUALITY.md](./QUALITY.md) |
-| **4. Figma plugin** | Scaffold only | One-click Variables + components |
+| **4. Figma plugin** | **Ready** | [plugin/](./plugin/) — sync Variables, audit, stubs |
+| **5. Library publish** | **Your click** | [PUBLISH_LIBRARY.md](./PUBLISH_LIBRARY.md) |
+| **6. Pro pack** | Scaffold | [pro/](./pro/) |
 
 ```bash
-pnpm design-kit:build         # tokens + component catalog
-pnpm design-kit:figma-audit   # live Figma ↔ catalog (needs .env.local)
+pnpm design-kit:build          # tokens + component catalog
+pnpm design-kit:figma-audit    # live Figma ↔ catalog (needs .env.local)
+pnpm design-kit:plugin:build   # embed data → plugin/dist
 ```
 
 ## Phase 1 — import tokens into Figma

@@ -67,13 +67,22 @@ Then Tokens Studio → load `tokens/export/tokens.studio.json` → **Styles & Va
 
 Later: export Cover / Button matrix PNGs into `figma/snapshots/` for offline visual reference. Not required for the file key link to be valid.
 
-## Agent audit
+## Agent audit + in-file plugin
 
 ```bash
-pnpm design-kit:figma-audit   # needs .env.local; writes figma/audit-report.json
+pnpm design-kit:figma-audit    # needs .env.local; writes figma/audit-report.json
+pnpm design-kit:plugin:build   # embed tokens/catalog → plugin/dist
 ```
 
-Quality priorities after catalog match: **[QUALITY.md](./QUALITY.md)**.
+**Figma plugin (phase 3):** import `plugin/manifest.json` via  
+Plugins → Development → Import plugin from manifest — see [plugin/README.md](./plugin/README.md).
+
+- Sync Variables (works without Enterprise REST)  
+- Audit catalog  
+- Stub missing components  
+
+Publish library: [PUBLISH_LIBRARY.md](./PUBLISH_LIBRARY.md).  
+Quality: [QUALITY.md](./QUALITY.md).
 
 | Check | Result |
 |---|---|

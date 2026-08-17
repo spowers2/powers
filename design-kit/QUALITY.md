@@ -75,11 +75,14 @@ On Professional / non-Enterprise:
 
 On Enterprise: enable variables read on the PAT → audit writes `figma/variables-export.json`.
 
-### 6. Later
+### 6. Tooling shipped
 
-- Phase 3 plugin (regen sets from catalog)  
-- Paid Design Kit SKU  
-- AI Lab (parked)  
+- Phase 3 plugin: `pnpm design-kit:plugin:build` → import `plugin/manifest.json` in Figma  
+- Publish guide: `PUBLISH_LIBRARY.md`  
+- Pro scaffold: `pro/`  
+- Patterns recipes: `components/export/patterns.md`  
+
+Still human in Figma: **Publish library**, product screens with instances.  
 
 ## Do not block on
 

@@ -31,6 +31,7 @@
     "design-kit:build": "pnpm --filter @powers/design-kit build",
     "design-kit:check": "pnpm --filter @powers/design-kit check",
     "design-kit:figma-audit": "pnpm --filter @powers/design-kit figma:audit",
+    "design-kit:plugin:build": "pnpm --filter @powers/figma-plugin build",
     "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo",
     "gh": ".tools/gh",
     "pr:create": ".tools/gh pr create"

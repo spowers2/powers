@@ -38,3 +38,7 @@ temp/
 # Project-local tooling (gh CLI, etc.)
 .tools/
 
+
+# Figma plugin build (importable without local rebuild)
+!design-kit/plugin/dist/
+!design-kit/plugin/dist/**

@@ -10,6 +10,7 @@
     "build:tokens": "node --import tsx scripts/build-tokens.ts",
     "build:components": "node --import tsx scripts/build-components.ts",
     "figma:audit": "node --import tsx scripts/figma-audit.ts",
+    "plugin:build": "pnpm --filter @powers/figma-plugin build",
     "check": "node --import tsx scripts/build-tokens.ts --check && node --import tsx scripts/build-components.ts --check"
   },
   "devDependencies": {
