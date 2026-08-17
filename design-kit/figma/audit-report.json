@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-17T02:18:00.442Z",
+  "generatedAt": "2026-08-17T02:26:31.091Z",
   "file": {
     "name": "Powers UI Kit",
     "key": "bdfYWkMm5oJqKBIrwWCsSd",
-    "lastModified": "2026-08-17T01:56:21Z",
-    "page": "Page 1",
+    "lastModified": "2026-08-17T02:26:27Z",
+    "page": "Components",
     "frame": "power-ui-comp"
   },
   "catalog": {
@@ -130,50 +130,50 @@
     "Input": {
       "nodes": 4,
       "withBound": 4,
-      "rawSolidFills": 1,
+      "rawSolidFills": 0,
       "pct": 100
     },
     "Text": {
       "nodes": 73,
-      "withBound": 24,
-      "rawSolidFills": 25,
-      "pct": 32.9
+      "withBound": 48,
+      "rawSolidFills": 1,
+      "pct": 65.8
     },
     "Card": {
       "nodes": 13,
-      "withBound": 12,
-      "rawSolidFills": 2,
-      "pct": 92.3
+      "withBound": 13,
+      "rawSolidFills": 0,
+      "pct": 100
     },
     "Badge": {
       "nodes": 9,
-      "withBound": 7,
-      "rawSolidFills": 4,
-      "pct": 77.8
+      "withBound": 8,
+      "rawSolidFills": 3,
+      "pct": 88.9
     },
     "Alert": {
       "nodes": 13,
-      "withBound": 12,
-      "rawSolidFills": 4,
-      "pct": 92.3
+      "withBound": 13,
+      "rawSolidFills": 3,
+      "pct": 100
     },
     "Dialog": {
       "nodes": 37,
-      "withBound": 24,
-      "rawSolidFills": 7,
-      "pct": 64.9
+      "withBound": 25,
+      "rawSolidFills": 3,
+      "pct": 67.6
     },
     "Checkbox": {
       "nodes": 6,
-      "withBound": 5,
-      "rawSolidFills": 1,
-      "pct": 83.3
+      "withBound": 6,
+      "rawSolidFills": 0,
+      "pct": 100
     },
     "Switch": {
       "nodes": 7,
-      "withBound": 4,
-      "rawSolidFills": 3,
-      "pct": 57.1
+      "withBound": 7,
+      "rawSolidFills": 0,
+      "pct": 100
     },
     "Field": {
       "nodes": 6,
