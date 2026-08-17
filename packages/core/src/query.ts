@@ -45,13 +45,14 @@ export function createQuery<T>(
     opts.initialValue = options.initialData;
   }
 
+  // Source is `string | false` so resource can idle; fetcher only runs when key is string.
   return resource(
-    () => {
+    (): string | false => {
       const k = options.queryKey();
-      if (k === false || k === null || k === undefined) return false as const;
+      if (k === false || k === null || k === undefined) return false;
       return String(k);
     },
-    (key) => options.queryFn(key),
+    (key) => options.queryFn(key as string),
     opts,
   );
 }
