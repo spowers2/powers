@@ -42,3 +42,9 @@ temp/
 # Figma plugin build (importable without local rebuild)
 !design-kit/plugin/dist/
 !design-kit/plugin/dist/**
+
+# design-kit
+design-kit/**/node_modules/
+design-kit/.DS_Store
+!design-kit/plugin/dist/
+!design-kit/plugin/dist/**
