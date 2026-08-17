@@ -144,22 +144,76 @@ export function SystemPage(props: {
   const radiusPick = signal("0.75rem");
   const exported = signal("");
 
+  /** Relative luminance 0–1 for #rgb / #rrggbb (sRGB). */
+  function hexLuminance(hex: string): number {
+    const h = hex.replace("#", "").trim();
+    const full =
+      h.length === 3
+        ? h
+            .split("")
+            .map((c) => c + c)
+            .join("")
+        : h;
+    if (full.length !== 6) return 0;
+    const n = parseInt(full, 16);
+    const toLin = (v: number) => {
+      const s = v / 255;
+      return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+    };
+    const r = toLin((n >> 16) & 255);
+    const g = toLin((n >> 8) & 255);
+    const b = toLin(n & 255);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
+  /** Solid button text: light on dark accents, dark on light accents. */
+  function accentForeground(hex: string): string {
+    return hexLuminance(hex) < 0.45 ? "#f7fafc" : "#0a1e38";
+  }
+
   const applyBrand = () => {
     const root = document.documentElement;
-    root.style.setProperty("--pu-color-accent", accentPick());
+    const accent = accentPick();
+    const fg = accentForeground(accent);
+    root.style.setProperty("--pu-color-accent", accent);
     root.style.setProperty(
       "--pu-color-accent-hover",
-      `color-mix(in srgb, ${accentPick()} 88%, #000)`,
+      `color-mix(in srgb, ${accent} 88%, #000)`,
+    );
+    root.style.setProperty("--pu-color-accent-fg", fg);
+    // Soft chrome tracks the new accent (readable on surface)
+    root.style.setProperty(
+      "--pu-color-soft-bg",
+      `color-mix(in srgb, ${accent} 14%, var(--pu-color-surface))`,
+    );
+    root.style.setProperty(
+      "--pu-color-soft-bg-hover",
+      `color-mix(in srgb, ${accent} 22%, var(--pu-color-surface))`,
+    );
+    root.style.setProperty(
+      "--pu-color-soft-fg",
+      `color-mix(in srgb, ${accent} 72%, var(--pu-color-text))`,
+    );
+    root.style.setProperty(
+      "--pu-color-soft-border",
+      `color-mix(in srgb, ${accent} 28%, var(--pu-color-border))`,
     );
     root.style.setProperty("--pu-radius-md", radiusPick());
     root.style.setProperty("--pu-radius-lg", `calc(${radiusPick()} + 0.25rem)`);
   };
 
   const exportBrandCss = () => {
+    const accent = accentPick();
+    const fg = accentForeground(accent);
     const css = `/* Powers brand export — paste after theme.css */
 :root {
-  --pu-color-accent: ${accentPick()};
-  --pu-color-accent-hover: color-mix(in srgb, ${accentPick()} 88%, #000);
+  --pu-color-accent: ${accent};
+  --pu-color-accent-hover: color-mix(in srgb, ${accent} 88%, #000);
+  --pu-color-accent-fg: ${fg};
+  --pu-color-soft-bg: color-mix(in srgb, ${accent} 14%, var(--pu-color-surface));
+  --pu-color-soft-bg-hover: color-mix(in srgb, ${accent} 22%, var(--pu-color-surface));
+  --pu-color-soft-fg: color-mix(in srgb, ${accent} 72%, var(--pu-color-text));
+  --pu-color-soft-border: color-mix(in srgb, ${accent} 28%, var(--pu-color-border));
   --pu-radius-md: ${radiusPick()};
   --pu-radius-lg: calc(${radiusPick()} + 0.25rem);
 }
