@@ -5,9 +5,12 @@ Phase 3 will automate Variables + components from the same JSON.
 
 ## Prerequisites
 
-1. **Tokens imported** (phase 1) via Tokens Studio from  
-   `design-kit/tokens/export/tokens.studio.json`  
-   Enable **`dual/light`** first (product default). Also keep **instrument** sets available.
+1. **Tokens in Figma Variables** (phase 1) — not just loaded in Tokens Studio:
+   - Load `design-kit/tokens/export/tokens.studio.json` into **Tokens Studio**.  
+   - **Theme is optional** (None is fine).  
+   - **Styles & Variables** → create **Variables**.  
+   - Confirm Figma **Local variables** (color, space, radius, …).  
+   - Details: [`../README.md`](../README.md) phase 1.
 2. Fonts installed: **DM Sans**, **IBM Plex Mono**
 3. Open the catalog:  
    - Human: [`export/index.md`](./export/index.md) + [`export/pages.md`](./export/pages.md)  

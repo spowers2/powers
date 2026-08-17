@@ -25,35 +25,44 @@ Writes:
 | [`tokens/export/figma-variables.json`](./tokens/export/figma-variables.json) | Future plugin + tooling |
 | [`tokens/export/manifest.json`](./tokens/export/manifest.json) | Version metadata |
 
-### Themes (token sets)
+### Import with Tokens Studio (recommended)
+
+Figma has **no built-in “Import tokens.”** Use the **Tokens Studio for Figma** plugin (tested with **v2.11.x**).
+
+1. Install [Tokens Studio for Figma](https://tokens.studio/) from Community plugins.  
+2. Open your Powers design file → **Run** Tokens Studio.  
+3. Load `tokens/export/tokens.studio.json` (Load / Import from file — wording varies).  
+4. You should see groups: **Color**, **Spacing**, **Border Radius**, **Font Size**, **Sizing**, etc.  
+5. **Theme is optional.** If the Theme dropdown says **None** or is missing, ignore it.  
+   - If you have multiple **sets** (`dual/light`, …), enable **`dual/light`**.  
+   - If everything is one set, leave it on.  
+6. Click **Styles & Variables** (bottom of the plugin) → create **Variables** (colors + numbers).  
+7. In Figma (outside the plugin): open **Local variables** — you should see `color/…`, `space/…`, `radius/…`.  
+8. Install **DM Sans** + **IBM Plex Mono** (or map fonts later).
+
+**Smoke test:** rectangle fill → Variables → `color/accent` or `color/surface`.
+
+Token sets in the JSON (when preserved as separate sets):
 
 | Set | CSS equivalent |
 |---|---|
 | `instrument/light` | `:root` default |
 | `instrument/dark` | `[data-pu-theme="dark"]` |
-| `dual/light` | `html[data-pu-palette="dual"]` |
+| `dual/light` | `html[data-pu-palette="dual"]` (product default) |
 | `dual/dark` | `html[data-pu-palette="dual"][data-pu-theme="dark"]` |
-
-### Import with Tokens Studio (recommended)
-
-1. Install [Tokens Studio for Figma](https://tokens.studio/) (community plugin).  
-2. Open your Powers design file.  
-3. Tokens Studio → **Load from file / URL** → choose `tokens/export/tokens.studio.json`.  
-4. Enable a theme set (start with **`dual/light`** — matches current product default).  
-5. **Export to Figma** → create Variables / styles as you prefer.  
-6. Install **DM Sans** + **IBM Plex Mono** on the machine (or swap fonts in Figma).
 
 Notes:
 
 - Spacing / radius / type sizes are **px** (16px root; matches CSS rem).  
 - CSS `color-mix(...)` is **pre-resolved** to hex/rgba in `tokens/source.ts`.  
-- When you change `packages/ui/src/styles/tokens.css`, update `tokens/source.ts` and rebuild.
+- When you change `packages/ui/src/styles/tokens.css`, update `tokens/source.ts` and rebuild.  
+- Free Tokens Studio is enough for Variables; “Get Pro” is not required for phase 1.
 
 ### Source of truth
 
 | Runtime (apps) | Design export |
 |---|---|
-| `packages/ui/src/styles/tokens.css` | `design-kit/tokens/source.ts` → `tokens/dist/*` |
+| `packages/ui/src/styles/tokens.css` | `design-kit/tokens/source.ts` → `tokens/export/*` |
 
 Keep them in sync by hand for now (phase 1). A CSS→token extractor can come later.
 
