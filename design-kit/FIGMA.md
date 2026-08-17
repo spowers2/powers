@@ -21,22 +21,36 @@ Organization in Figma uses **Folders** (not Projects). Put the file in a folder 
 | Component catalog / specs | `components/export/catalog.json` |
 | How to hand-build in Figma | `components/FIGMA_BUILD.md` |
 
-## Agent / API access (optional)
+## Agent / API access
 
-To let tooling **read** the file (structure, component names) via Figma REST API:
+Tooling: `pnpm design-kit:figma-audit` (catalog match, binding sample, **Variables dump**).
 
-1. Figma → Settings → Security → **Personal access tokens** → create a token with file read access.  
-2. In the monorepo root, copy [`.env.example`](../.env.example) → `.env.local` (gitignored).  
-3. Set:
+### PAT scopes (required for full tooling)
+
+Figma home → **avatar → Settings → Security → Personal access tokens → Generate**:
+
+| Scope | Why |
+|---|---|
+| **File content: Read** | Pages, components, node tree |
+| **File variables: Read** | Local Variable collections + names |
+
+Without **File variables: Read**, audits still work for components but Variables export stays blocked.
 
 ```bash
+# monorepo root
+cp .env.example .env.local   # if needed
+# edit .env.local:
 FIGMA_FILE_KEY=bdfYWkMm5oJqKBIrwWCsSd
-FIGMA_ACCESS_TOKEN=figd_…   # never commit
+FIGMA_ACCESS_TOKEN=figd_…    # never commit
 ```
 
-4. Ask the agent to use those env vars when comparing Figma ↔ catalog.
+```bash
+pnpm design-kit:figma-audit
+# → design-kit/figma/audit-report.json
+# → design-kit/figma/variables-export.json  (when variables scope OK)
+```
 
-**Do not commit** `FIGMA_ACCESS_TOKEN`. The file key may live in this doc; the token must not.
+**Do not commit** `FIGMA_ACCESS_TOKEN`.
 
 ## Refresh tokens into Figma
 

@@ -1,11 +1,22 @@
 {
-  "generatedAt": "2026-08-17T02:26:31.091Z",
+  "generatedAt": "2026-08-17T02:30:35.690Z",
   "file": {
     "name": "Powers UI Kit",
     "key": "bdfYWkMm5oJqKBIrwWCsSd",
     "lastModified": "2026-08-17T02:26:27Z",
+    "pages": [
+      {
+        "name": "Components",
+        "childCount": 1
+      },
+      {
+        "name": "99 Patterns",
+        "childCount": 3
+      }
+    ],
     "page": "Components",
-    "frame": "power-ui-comp"
+    "frame": "power-ui-comp",
+    "patternsPage": "99 Patterns"
   },
   "catalog": {
     "expected": 49,
@@ -182,9 +193,14 @@
       "pct": 100
     }
   },
-  "variablesApi": "Figma API 403: Invalid scope(s): file_content:read. This endpoint requires the file_variables:read scope",
+  "variables": {
+    "status": "missing_scope",
+    "message": "Invalid scope(s): file_content:read. This endpoint requires the file_variables:read scope"
+  },
   "health": {
     "catalogComplete": true,
+    "variablesReadable": false,
+    "patternsPagePresent": true,
     "bindingNotes": "pct = share of nodes with any boundVariables. rawSolidFills = solid fills without variable binding (approx)."
   }
 }

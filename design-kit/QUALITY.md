@@ -63,14 +63,14 @@ No new one-off frames. Gaps you hit = polish list.
 | Section TEXT labels inside one frame | Optional pages: Foundations, Actions, Forms, … |
 | Cover missing | Page **Cover**: name, date, dual/instrument note |
 
-### 5. Token scope (optional tooling)
+### 5. Variables API tooling (implemented)
 
-Regenerate PAT with:
+`pnpm design-kit:figma-audit` pulls Variables when the PAT includes **File variables: Read**, and writes:
 
-- File content **Read**  
-- File variables **Read**  
+- `figma/audit-report.json` — full report  
+- `figma/variables-export.json` — collection names, modes, variable names vs design-kit token paths  
 
-Then `pnpm design-kit:figma-audit` can list Variable collections too.
+If the audit prints **Variables API: MISSING SCOPE**, regenerate the PAT with both scopes and update `.env.local`.
 
 ### 6. Later
 
