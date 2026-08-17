@@ -23,7 +23,16 @@ export interface LinkProps extends Props {
  * ```
  */
 export function Link(props: LinkProps & { router: Router }): HTMLAnchorElement {
-  const { router, to, replace, activeClass, exact, children, ...rest } = props;
+  const {
+    router,
+    to,
+    replace,
+    activeClass,
+    exact,
+    children,
+    onClick: userOnClick,
+    ...rest
+  } = props;
 
   const getTo = () => (typeof to === "function" ? to() : to);
 
@@ -45,8 +54,7 @@ export function Link(props: LinkProps & { router: Router }): HTMLAnchorElement {
         }
         e.preventDefault();
         router.navigate(getTo(), { replace: !!replace });
-        const userClick = rest.onClick as ((ev: MouseEvent) => void) | undefined;
-        userClick?.(e);
+        (userOnClick as ((ev: MouseEvent) => void) | undefined)?.(e);
       },
     } as Props,
   ) as HTMLAnchorElement;

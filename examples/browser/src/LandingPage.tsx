@@ -194,12 +194,12 @@ export function LandingPage(props: { router: Router }) {
               <div class="lp-hero-copy">
                 <p class="lp-product-label">Powers</p>
                 <h1 class="lp-title">
-                  Ship UI that only updates{" "}
-                  <span class="lp-title-gradient">what changed</span>
+                  Build product UI,{" "}
+                  <span class="lp-title-gradient">not plumbing</span>
                 </h1>
                 <p class="lp-lede">
-                  A fine-grained runtime and design system in one kit. See it in
-                  real products first — then Lab, tokens, and the Figma library.
+                  Signals, components, and tokens in one kit. See real apps
+                  first — then Lab, the design system, and the Figma library.
                 </p>
 
                 <div class="lp-cta-row">

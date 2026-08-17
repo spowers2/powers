@@ -22,7 +22,20 @@ export function SiteNav(props: {
     <header class="site-nav">
       <Container size="xl">
         <div class="site-nav-inner">
-          <Link router={router} to="/" class="site-brand" exact>
+          <Link
+            router={router}
+            to="/"
+            class="site-brand"
+            exact
+            aria-label="Powers home"
+            onClick={() => {
+              // Always land on the marketing home (clear query/hash) and scroll up.
+              router.navigate("/");
+              if (typeof window !== "undefined") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
             <span class="site-mark" aria-hidden="true" />
             <span class="site-brand-label">Powers</span>
           </Link>

@@ -59,11 +59,19 @@ export function createBrowserHistory(): HistoryAdapter {
     location,
     matchPath: () => location().pathname,
     navigate(to, options) {
-      const url = to.startsWith("/") ? to : `/${to}`;
+      // Resolve against origin so path-only targets clear search + hash.
+      const url = new URL(to.startsWith("/") ? to : `/${to}`, window.location.origin);
+      const next = url.pathname + url.search + url.hash;
       if (options?.replace) {
-        window.history.replaceState(null, "", url);
+        window.history.replaceState(null, "", next);
+      } else if (
+        next !==
+        window.location.pathname + window.location.search + window.location.hash
+      ) {
+        window.history.pushState(null, "", next);
       } else {
-        window.history.pushState(null, "", url);
+        // Same full URL (e.g. brand click while already home) — still notify.
+        window.history.replaceState(null, "", next);
       }
       location.set(readBrowser());
     },
