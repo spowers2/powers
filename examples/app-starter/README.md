@@ -1,8 +1,10 @@
-# designlab206 — real-world Powers example
+# designlab206 — Powers flagship product demo
 
-A **local-first freelance / small-studio workspace**: clients, projects, tasks, invoices, pipeline value, and settings.
+**This is the primary “show product” surface** for Powers: a local-first freelance /
+small-studio workspace (clients, projects, tasks, invoices, time, portal).
 
-This is the product-shaped example under `examples/app-starter` — not a component kitchen sink.
+Not a kitchen sink. Design screens for this app should use the published Figma
+library **Powers UI Kit** (see monorepo `design-kit/FIGMA.md`).
 
 ## Run
 
@@ -13,6 +15,8 @@ pnpm example:starter
 ```
 
 Open **http://localhost:5180**
+
+Kit / Lab (learn the stack): **http://localhost:5173**
 
 | Route | Purpose |
 |---|---|

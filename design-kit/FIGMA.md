@@ -2,15 +2,35 @@
 
 Visual source of truth for the design kit. Machine specs stay in this repo (`tokens/export`, `components/export`); the Figma file is the canvas library.
 
+## Status (2026-08)
+
+| Piece | Status |
+|---|---|
+| Source file **Powers UI Kit** | Live (file key below) |
+| **Team / personal library** | **Published** — enable in Assets on product files |
+| Figma plugin **Powers Design Kit** | Community submit / update (id `1671016490810398688`) |
+| Code mirror | `@powers/ui` + this design-kit |
+
+## Design with the library (product workflow)
+
+1. **New product file** (e.g. `designlab206 screens`, `Hearth ops`) — not the kit source.  
+2. **Assets** → enable library **Powers UI Kit**.  
+3. Place **instances** only: `Button`, `Input`, `Field`, `Card`, `Text`, `Dialog`, …  
+4. Prefer **semantic Variables** (`color/accent`, `space/4`) over hard hex.  
+5. When tokens change in code: plugin **Sync Variables** on the kit file → **Publish library** update → product files pick it up.
+
+**Do not** detach components or copy kit frames into product files. Improve the kit source, then republish.
+
 ## File
 
 | | |
 |---|---|
 | **Name** | Powers UI Kit |
+| **Library name** | Powers UI Kit (as shown in Assets) |
 | **File key** | `bdfYWkMm5oJqKBIrwWCsSd` |
 | **Open** | [figma.com/design/bdfYWkMm5oJqKBIrwWCsSd](https://www.figma.com/design/bdfYWkMm5oJqKBIrwWCsSd) |
 
-Organization in Figma uses **Folders** (not Projects). Put the file in a folder such as `Powers` if you like; the **file key** is what tooling and agents need.
+Organization in Figma uses **Folders**. Keep the kit source under a **Powers** folder; product files can live beside it.
 
 ## What lives where
 

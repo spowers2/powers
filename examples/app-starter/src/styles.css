@@ -262,6 +262,16 @@ body::before {
   padding: 1.75rem 0 3rem;
 }
 
+.app-footer__link {
+  color: var(--pu-color-text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--pu-color-border) 80%, transparent);
+}
+.app-footer__link:hover {
+  color: var(--pu-color-accent);
+  border-bottom-color: var(--pu-color-accent);
+}
+
 .app-footer {
   display: flex;
   justify-content: space-between;

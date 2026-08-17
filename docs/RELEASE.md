@@ -55,7 +55,7 @@ Use this before the first public npm publish / website launch.
 - [x] Tokens export + 49-component catalog  
 - [x] Figma plugin id `1671016490810398688` (Community submit)  
 - [ ] Plugin **approved/live** on Community (watch review)  
-- [ ] Publish **Powers UI Kit** as a Figma library  
+- [x] Publish **Powers UI Kit** as a Figma library (use in product files)  
 - [ ] Optional: Pro SKU (`design-kit/pro/`)
 
 ## Publish sequence (still open — first public cut)

@@ -2,31 +2,32 @@
 
 You are **not** on public npm yet. Develop against workspace packages.
 
-## 10-minute path (recommended first)
+## Order of experience
+
+1. **Product first** — `pnpm example:starter` → http://localhost:5180 (**designlab206**)  
+2. **Design** — Figma library **Powers UI Kit** on product files ([FIGMA.md](../design-kit/FIGMA.md))  
+3. **Learn** — `pnpm example:browser` → Lab Start here (~10 min)
 
 ```bash
-cd powers   # monorepo root
+cd powers
 pnpm install
-pnpm example:browser   # http://localhost:5173
+pnpm example:starter    # flagship product
+pnpm example:browser    # kit · Lab · System
 ```
 
-1. Open **http://localhost:5173/lab**  
-2. In the sidebar **Start here**, run in order:  
-   - **Hello Powers** — signals + button  
-   - **Form validation** — `bind={signal}`  
-   - **Tokens & utilities** — theme toggle  
-3. Then browse **System** (Copy JSX) or **Docs**.
+Lab Start here: Hello → Form → Theme at `/lab?recipe=hello`.
 
-Rules that prevent most bugs: [USABILITY.md](./USABILITY.md) · full walkthrough: [GOLDEN_PATH.md](./GOLDEN_PATH.md).
+Rules: [USABILITY.md](./USABILITY.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md).
 
 ## Paths
 
 | Goal | Command / route |
 |---|---|
+| **designlab206** (flagship product) | `pnpm example:starter` → http://localhost:5180 |
+| **Hearth** (restaurant product) | `pnpm example:restaurant` → http://localhost:5181 |
 | **Lab (learn)** | `pnpm example:browser` → `/lab` (Start here) |
-| **designlab206** (freelance workspace) | `pnpm example:starter` → http://localhost:5180 |
-| **Hearth** (restaurant) | `pnpm example:restaurant` → http://localhost:5181 |
 | Design system + Docs | `pnpm example:browser` → `/docs` `/system` |
+| Figma library | Enable **Powers UI Kit** in Assets · [design-kit/FIGMA.md](../design-kit/FIGMA.md) |
 | New app from starter | `pnpm new-app my-feature` → `examples/my-feature` |
 | Minimal Vite scaffold | `pnpm create-app hello-ui` |
 

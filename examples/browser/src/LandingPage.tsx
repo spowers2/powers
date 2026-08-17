@@ -58,12 +58,12 @@ const FEATURES = [
   },
   {
     title: "Lab + System",
-    body: "Learn by running recipes; explore every primitive live.",
-    href: "/lab",
+    body: "Start here recipes + Copy JSX on every major control.",
+    href: "/lab?recipe=hello",
   },
   {
-    title: "Tiny packages",
-    body: "core · dom · ui · router · animate · ssr — take only what you need.",
+    title: "Figma library",
+    body: "Published Powers UI Kit — design product screens with instances.",
     href: "/system",
   },
 ] as const;
@@ -198,16 +198,25 @@ export function LandingPage(props: { router: Router }) {
                   <span class="lp-title-gradient">what changed</span>
                 </h1>
                 <p class="lp-lede">
-                  A fine-grained runtime and design system in one kit. Signals,
-                  components, and tokens — so you build products, not glue.
+                  A fine-grained runtime and design system in one kit. See it in
+                  real products first — then Lab, tokens, and the Figma library.
                 </p>
 
                 <div class="lp-cta-row">
-                  <Button size="lg" onClick={go("/docs")}>
-                    Get started
+                  <Button
+                    size="lg"
+                    onClick={() =>
+                      window.open("http://localhost:5180", "_blank", "noopener")
+                    }
+                  >
+                    Open designlab206
                   </Button>
-                  <Button size="lg" variant="soft" onClick={go("/lab")}>
-                    Try Lab
+                  <Button
+                    size="lg"
+                    variant="soft"
+                    onClick={go("/lab?recipe=hello")}
+                  >
+                    Lab · Start here
                   </Button>
                 </div>
 
@@ -232,15 +241,21 @@ export function LandingPage(props: { router: Router }) {
                   <span class="lp-product-links__sep" aria-hidden="true">
                     ·
                   </span>
+                  <button type="button" onClick={go("/docs")}>
+                    Docs
+                  </button>
+                  <span class="lp-product-links__sep" aria-hidden="true">
+                    ·
+                  </span>
                   <button type="button" onClick={go("/system")}>
-                    Design system
+                    System
                   </button>
                 </div>
 
                 <ul class="lp-feature-row" aria-label="Highlights">
+                  <li>Products</li>
+                  <li>Figma library</li>
                   <li>Signals</li>
-                  <li>Components</li>
-                  <li>Tokens</li>
                   <li>Lab</li>
                 </ul>
               </div>
@@ -429,15 +444,15 @@ export function LandingPage(props: { router: Router }) {
             </div>
 
             <div class="lp-paths" aria-label="Start here by role">
-              <p class="lp-paths-title">Start here</p>
+              <p class="lp-paths-title">Then dig in</p>
               <div class="lp-paths-grid">
                 <button
                   type="button"
                   class="lp-path-card"
-                  onClick={go("/docs#start")}
+                  onClick={go("/lab?recipe=hello")}
                 >
                   <strong>Engineers</strong>
-                  <span>Docs, forms, and Lab recipes that match real apps.</span>
+                  <span>Lab Start here · Docs · forms that stay mounted.</span>
                 </button>
                 <button
                   type="button"
@@ -446,7 +461,7 @@ export function LandingPage(props: { router: Router }) {
                 >
                   <strong>Design</strong>
                   <span>
-                    Tokens, density, and patterns in the system explorer.
+                    System explorer · published Figma library Powers UI Kit.
                   </span>
                 </button>
                 <button
@@ -464,14 +479,14 @@ export function LandingPage(props: { router: Router }) {
           </Container>
         </section>
 
-        {/* DEMO APPS */}
+        {/* DEMO APPS — flagship product story */}
         <section class="lp-section" id="demos">
           <Container size="xl">
             <div class="lp-section-head">
-              <h2 class="lp-section-title">Real product demos</h2>
+              <h2 class="lp-section-title">Products built with Powers</h2>
               <p class="lp-section-sub">
-                Full apps built with Powers — not kitchen sinks. Run them
-                locally, then steal patterns into your own shell.
+                Flagship demos — full apps, not kitchen sinks. This is the
+                product proof; Lab and System teach the kit underneath.
               </p>
             </div>
             <div class="lp-demo-grid">
@@ -481,14 +496,14 @@ export function LandingPage(props: { router: Router }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div class="lp-demo-card__kicker">:5180 · freelance</div>
+                <div class="lp-demo-card__kicker">Flagship · :5180</div>
                 <h3>designlab206</h3>
                 <p>
-                  Clients, projects, tasks, invoices, time log, and a
-                  billing-aware dashboard. Local-first workspace.
+                  Freelance studio workspace: clients, pipeline, invoices, time
+                  → draft bills, client portal. Local-first with real workflows.
                 </p>
                 <span class="lp-demo-card__cta">
-                  Open demo → <code>pnpm example:starter</code>
+                  Open product → <code>pnpm example:starter</code>
                 </span>
               </a>
               <a
@@ -497,14 +512,14 @@ export function LandingPage(props: { router: Router }) {
                 target="_blank"
                 rel="noreferrer"
               >
-                <div class="lp-demo-card__kicker">:5181 · restaurant</div>
+                <div class="lp-demo-card__kicker">Ops · :5181</div>
                 <h3>Hearth</h3>
                 <p>
-                  Menu with Unsplash photos, reservations, kitchen board, and a
-                  live table map. Neighborhood restaurant ops.
+                  Restaurant floor: menu, reservations, kitchen board, table
+                  map. Same kit, different product surface.
                 </p>
                 <span class="lp-demo-card__cta">
-                  Open demo → <code>pnpm example:restaurant</code>
+                  Open product → <code>pnpm example:restaurant</code>
                 </span>
               </a>
             </div>

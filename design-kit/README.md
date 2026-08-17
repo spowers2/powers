@@ -2,16 +2,24 @@
 
 Design-side companion to `@powers/ui`.
 
-**Live Figma file:** see **[FIGMA.md](./FIGMA.md)** (file key, link, API env).
+**Live Figma:** **[FIGMA.md](./FIGMA.md)** — file key, **published library** workflow, plugin.
 
 | Phase | Status | What |
 |---|---|---|
-| **1. Tokens** | **Ready** | Figma / Tokens Studio export of instrument + dual electric |
-| **2. Component specs** | **Ready** | Full UI kit catalog + Figma build guide |
+| **1. Tokens** | **Ready** | instrument + dual electric export |
+| **2. Component specs** | **Ready** | 49-component catalog |
 | **3. Figma file** | **Linked + audited** | [FIGMA.md](./FIGMA.md) · [QUALITY.md](./QUALITY.md) |
-| **4. Figma plugin** | **Ready** | [plugin/](./plugin/) — sync Variables, audit, stubs |
-| **5. Library publish** | **Your click** | [PUBLISH_LIBRARY.md](./PUBLISH_LIBRARY.md) |
+| **4. Figma plugin** | **Ready** | [plugin/](./plugin/) — Sync / Audit / Stubs |
+| **5. Library** | **Published** | Enable **Powers UI Kit** in product files · [PUBLISH_LIBRARY.md](./PUBLISH_LIBRARY.md) |
 | **6. Pro pack** | Scaffold | [pro/](./pro/) |
+
+### Product design loop
+
+```
+@powers/ui (code)  ↔  design-kit tokens  ↔  Figma library (instances)
+         ↑                                         ↓
+   demos: designlab206 · Hearth          product screen files
+```
 
 ```bash
 pnpm design-kit:build          # tokens + component catalog

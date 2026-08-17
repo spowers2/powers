@@ -216,11 +216,19 @@ export function createApp(opts: {
             {() =>
               isPortal()
                 ? "designlab206 · client portal (demo)"
-                : "designlab206 · local-first workspace"
+                : "designlab206 · built with Powers"
             }
           </span>
           <span>
-            {() => profile().email} · {() => theme.mode()}
+            {() => profile().email} · {() => theme.mode()} ·{" "}
+            <a
+              class="app-footer__link"
+              href="http://localhost:5173"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Powers kit
+            </a>
           </span>
         </footer>
         <Toaster toaster={toaster} />

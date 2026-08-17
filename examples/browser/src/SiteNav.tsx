@@ -83,20 +83,21 @@ export function SiteNav(props: {
             >
               Demos
             </a>
+            <a
+              class="site-nav-demo-btn site-nav-cta"
+              href="http://localhost:5180"
+              target="_blank"
+              rel="noreferrer"
+              title="Flagship product demo"
+            >
+              designlab206
+            </a>
             <Button
               size="sm"
-              variant="soft"
               class="site-nav-cta"
-              onClick={() => router.navigate("/docs")}
+              onClick={() => router.navigate("/lab?recipe=hello")}
             >
-              How to use
-            </Button>
-            <Button
-              size="sm"
-              class="site-nav-cta"
-              onClick={() => router.navigate("/lab")}
-            >
-              Open Lab
+              Lab
             </Button>
           </div>
         </div>

@@ -10,32 +10,32 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 > npm scope: `@powers/*`  
 > **License:** [Business Source License 1.1](./LICENSE) (source-available) · [Commercial](./LICENSE-COMMERCIAL.md) · [Licensing model](./docs/LICENSING.md) · [Trademarks](./docs/TRADEMARKS.md)
 
-**New here? (~10 minutes)**
+**New here?**
 
 ```bash
 pnpm install
-pnpm example:browser   # http://localhost:5173/lab
+pnpm example:starter     # flagship product → http://localhost:5180  designlab206
+pnpm example:browser     # kit + Lab → http://localhost:5173
 ```
 
-1. Lab → **Start here**: Hello → Form → Theme (`/lab?recipe=hello`)  
-2. **System** → Copy JSX on any control  
-3. Optional apps: designlab206 (`pnpm example:starter`) · Hearth (`pnpm example:restaurant`)  
-4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [USABILITY.md](./docs/USABILITY.md) · [GOLDEN_PATH.md](./docs/GOLDEN_PATH.md)
+| Order | What | Why |
+|---|---|---|
+| **1 · Product** | [designlab206](http://localhost:5180) · [Hearth](http://localhost:5181) | Real apps on Powers |
+| **2 · Design** | [Figma library **Powers UI Kit**](./design-kit/FIGMA.md) | Instances in product files |
+| **3 · Learn** | Lab [Start here](http://localhost:5173/lab?recipe=hello) · System · Docs | 10-minute path |
+
+Hub: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [USABILITY](./docs/USABILITY.md) · [GOLDEN_PATH](./docs/GOLDEN_PATH.md)
 
 ### Design kit & Figma
 
-Tokens, component catalog, and Community plugin live under **[`design-kit/`](./design-kit/README.md)**.
+**Library published** as **Powers UI Kit** — enable it in Assets on any product file.  
+Source file, plugin, tokens: **[`design-kit/`](./design-kit/README.md)** · [FIGMA.md](./design-kit/FIGMA.md)
 
 ```bash
-pnpm design-kit:build          # tokens + catalog export
-pnpm design-kit:plugin:build   # Figma plugin → design-kit/plugin/dist
-pnpm design-kit:figma-audit    # optional; needs .env.local + Figma PAT
+pnpm design-kit:build && pnpm design-kit:plugin:build
 ```
 
-Import the plugin in Figma via **`design-kit/plugin/manifest.json`** (Development).  
-Library publish checklist: [`design-kit/PUBLISH_LIBRARY.md`](./design-kit/PUBLISH_LIBRARY.md).
-
-> **npm:** `@powers/*` packages are **`private: true`** until a deliberate public cut. Do not `npm publish` yet. Exports currently point at TypeScript source for monorepo DX.
+> **npm:** `@powers/*` are **`private: true`** until a deliberate public cut.
 
 ---
 
