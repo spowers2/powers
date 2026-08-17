@@ -589,6 +589,7 @@ export function SystemPage(props: {
           <Grid cols={2} gap={4}>
             <Card variant="elevated">
               <Stack gap={3}>
+                <DemoHead title="Card" snippet={SNIPPETS.card} lab="ui" />
                 <DemoHead
                   title="Tabs"
                   snippet={SNIPPETS.tabs}
