@@ -1,22 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
   <defs>
-    <linearGradient id="bg" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="80" y1="40" x2="440" y2="480" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0a1e38"/>
       <stop offset="1" stop-color="#06152a"/>
     </linearGradient>
-    <linearGradient id="glow" x1="140" y1="120" x2="380" y2="400" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#06b6d4" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
-    </linearGradient>
   </defs>
-  <!-- App tile -->
   <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <rect width="512" height="512" rx="112" fill="url(#glow)"/>
-  <!-- Outer ring -->
-  <circle cx="256" cy="256" r="148" stroke="#06b6d4" stroke-opacity="0.35" stroke-width="10"/>
-  <circle cx="256" cy="256" r="118" stroke="#06b6d4" stroke-width="14"/>
-  <!-- Inner mark: P-like power mark -->
-  <path d="M214 168h78c42 0 72 26 72 66 0 36-24 60-60 66l52 84h-44l-48-78h-50v78h-40V168zm40 38v54h40c20 0 34-12 34-28s-14-26-34-26h-40z" fill="#e8eef8"/>
-  <!-- Accent pip -->
-  <circle cx="356" cy="168" r="18" fill="#69be28"/>
+  <!-- concentric rings -->
+  <circle cx="256" cy="256" r="150" stroke="#06b6d4" stroke-opacity="0.28" stroke-width="10" fill="none"/>
+  <circle cx="256" cy="256" r="118" stroke="#06b6d4" stroke-width="16" fill="none"/>
+  <!-- Clear letter P -->
+  <path fill="#e8eef8" d="M200 150h96c52 0 88 32 88 82s-36 82-88 82H244v98h-44V150zm44 40v84h52c28 0 48-16 48-42s-20-42-48-42h-52z"/>
+  <!-- signal pip -->
+  <circle cx="368" cy="156" r="20" fill="#69be28"/>
 </svg>
