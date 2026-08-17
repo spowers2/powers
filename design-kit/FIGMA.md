@@ -23,18 +23,21 @@ Organization in Figma uses **Folders** (not Projects). Put the file in a folder 
 
 ## Agent / API access
 
-Tooling: `pnpm design-kit:figma-audit` (catalog match, binding sample, **Variables dump**).
+Tooling: `pnpm design-kit:figma-audit` (catalog match, binding sample; Variables dump only on Enterprise).
 
-### PAT scopes (required for full tooling)
+### PAT scopes (what you’ll see in the UI)
 
-Figma home → **avatar → Settings → Security → Personal access tokens → Generate**:
+Figma home → **avatar → Settings → Security → Personal access tokens → Generate**.
 
-| Scope | Why |
+| UI label (typical) | Enough for |
 |---|---|
-| **File content: Read** | Pages, components, node tree |
-| **File variables: Read** | Local Variable collections + names |
+| **Read the contents of and render images from files** | Pages, components, bindings — **required** |
+| Read metadata of files | Optional |
+| Design systems → read components/styles | Optional (published libraries) |
 
-Without **File variables: Read**, audits still work for components but Variables export stays blocked.
+**You will not see “File variables: Read” unless the account is on Figma Enterprise.**  
+That API scope (`file_variables:read`) is [Enterprise-only](https://developers.figma.com/docs/rest-api/scopes/).  
+Without it, audits still cover **components + bindings**. Manage Variables in the Figma UI + Tokens Studio.
 
 ```bash
 # monorepo root
@@ -47,7 +50,7 @@ FIGMA_ACCESS_TOKEN=figd_…    # never commit
 ```bash
 pnpm design-kit:figma-audit
 # → design-kit/figma/audit-report.json
-# → design-kit/figma/variables-export.json  (when variables scope OK)
+# → variables-export.json only with Enterprise variables scope
 ```
 
 **Do not commit** `FIGMA_ACCESS_TOKEN`.
