@@ -2,11 +2,14 @@
 
 Design-side companion to `@powers/ui`.
 
+**Live Figma file:** see **[FIGMA.md](./FIGMA.md)** (file key, link, API env).
+
 | Phase | Status | What |
 |---|---|---|
 | **1. Tokens** | **Ready** | Figma / Tokens Studio export of instrument + dual electric |
 | **2. Component specs** | **Ready** | Full UI kit catalog + Figma build guide |
-| **3. Figma plugin** | Scaffold only | One-click Variables + components |
+| **3. Figma file** | **Linked** | [Powers UI Kit](./FIGMA.md) in Figma cloud |
+| **4. Figma plugin** | Scaffold only | One-click Variables + components |
 
 ## Phase 1 — import tokens into Figma
 
