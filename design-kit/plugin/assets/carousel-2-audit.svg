@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#0a101c"/>
+  <circle cx="200" cy="160" r="180" fill="#06b6d4" fill-opacity="0.08"/>
+  <circle cx="1400" cy="700" r="220" fill="#69be28" fill-opacity="0.06"/>
+
+  <text x="80" y="120" fill="#e8eef8" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="48" font-weight="700">2 · Audit catalog coverage</text>
+  <text x="80" y="180" fill="#8b9bb0" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="24">49 components · names must match @powers/ui</text>
+
+  <!-- grid of chips -->
+  <g font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">
+    <rect x="80" y="260" width="140" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="118" y="288" fill="#67e8f9">Button</text>
+    <rect x="240" y="260" width="120" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="272" y="288" fill="#67e8f9">Input</text>
+    <rect x="380" y="260" width="120" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="412" y="288" fill="#67e8f9">Card</text>
+    <rect x="520" y="260" width="130" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="552" y="288" fill="#67e8f9">Dialog</text>
+    <rect x="670" y="260" width="110" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="700" y="288" fill="#67e8f9">Tabs</text>
+    <rect x="800" y="260" width="130" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="832" y="288" fill="#67e8f9">Switch</text>
+    <rect x="80" y="324" width="120" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="108" y="352" fill="#67e8f9">Badge</text>
+    <rect x="220" y="324" width="120" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="252" y="352" fill="#67e8f9">Alert</text>
+    <rect x="360" y="324" width="140" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="390" y="352" fill="#67e8f9">Checkbox</text>
+    <rect x="520" y="324" width="100" height="44" rx="10" fill="#162033" stroke="#22d3ee" stroke-opacity="0.35"/><text x="548" y="352" fill="#67e8f9">Text</text>
+    <rect x="640" y="324" width="160" height="44" rx="10" fill="#162033" stroke="#334155"/><text x="680" y="352" fill="#8b9bb0">+ 39 more</text>
+  </g>
+
+  <rect x="80" y="440" width="900" height="360" rx="20" fill="#04080f" stroke="#1e293b"/>
+  <text x="120" y="510" fill="#e8eef8" font-family="IBM Plex Mono, monospace" font-size="28">Catalog components: 49</text>
+  <text x="120" y="570" fill="#e8eef8" font-family="IBM Plex Mono, monospace" font-size="28">Found in file: 49</text>
+  <text x="120" y="630" fill="#69be28" font-family="IBM Plex Mono, monospace" font-size="28">Missing: (none)</text>
+  <text x="120" y="700" fill="#8b9bb0" font-family="IBM Plex Mono, monospace" font-size="22">Extra (not in catalog): (none)</text>
+  <text x="120" y="760" fill="#67e8f9" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="22">Catch drift before you publish the library.</text>
+
+  <rect x="1040" y="260" width="480" height="540" rx="20" fill="#111a2a" stroke="#06b6d4" stroke-opacity="0.3"/>
+  <text x="1080" y="340" fill="#e8eef8" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="26" font-weight="700">Plugin</text>
+  <rect x="1080" y="380" width="400" height="56" rx="12" fill="transparent" stroke="#334155" stroke-width="2"/>
+  <text x="1160" y="416" fill="#e8eef8" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20">Sync Variables</text>
+  <rect x="1080" y="460" width="400" height="56" rx="12" fill="#06b6d4"/>
+  <text x="1160" y="496" fill="#04080f" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20" font-weight="700">Audit catalog coverage</text>
+  <rect x="1080" y="540" width="400" height="56" rx="12" fill="transparent" stroke="#334155" stroke-width="2"/>
+  <text x="1140" y="576" fill="#e8eef8" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20">Create stubs for missing</text>
+</svg>

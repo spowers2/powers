@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4f8fc"/>
+      <stop offset="1" stop-color="#e8f4f8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <text x="80" y="100" fill="#0a1e38" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="44" font-weight="700">3 · Full Powers UI kit in Figma</text>
+  <text x="80" y="150" fill="#4a5d72" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="22">Foundations · Actions · Forms · Feedback · Overlays · Layout</text>
+
+  <!-- pattern cards -->
+  <rect x="80" y="220" width="440" height="520" rx="20" fill="#fff" stroke="#8fc5d4"/>
+  <text x="112" y="280" fill="#0a1e38" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="26" font-weight="700">Sign in</text>
+  <rect x="112" y="320" width="376" height="48" rx="10" fill="#fff" stroke="#8fc5d4"/>
+  <text x="132" y="352" fill="#4a5d72" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18">Email</text>
+  <rect x="112" y="388" width="376" height="48" rx="10" fill="#fff" stroke="#8fc5d4"/>
+  <text x="132" y="420" fill="#4a5d72" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18">Password</text>
+  <rect x="112" y="460" width="376" height="52" rx="10" fill="#0a1e38"/>
+  <text x="240" y="494" fill="#fff" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20" font-weight="700">Continue</text>
+  <text x="112" y="560" fill="#0e7490" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">Forgot password?</text>
+  <text x="112" y="680" fill="#4a5d72" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="16">Instances only · 99 Patterns</text>
+
+  <rect x="560" y="220" width="440" height="520" rx="20" fill="#fff" stroke="#8fc5d4"/>
+  <text x="592" y="280" fill="#0a1e38" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="26" font-weight="700">Settings row</text>
+  <rect x="592" y="320" width="376" height="120" rx="14" fill="#f4f8fc" stroke="#d8e0ec"/>
+  <text x="620" y="370" fill="#0a1e38" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20" font-weight="600">Notifications</text>
+  <rect x="880" y="348" width="56" height="32" rx="16" fill="#06b6d4"/>
+  <circle cx="920" cy="364" r="12" fill="#fff"/>
+  <rect x="620" y="400" width="80" height="28" rx="14" fill="#d4f4fa" stroke="#7ec8d9"/>
+  <text x="636" y="420" fill="#0e7490" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Live</text>
+  <text x="592" y="500" fill="#4a5d72" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18">Card · Switch · Badge · Text</text>
+
+  <rect x="1040" y="220" width="480" height="520" rx="20" fill="#0a101c" stroke="#22d3ee" stroke-opacity="0.25"/>
+  <text x="1080" y="300" fill="#e8eef8" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="26" font-weight="700">Confirm dialog</text>
+  <text x="1080" y="360" fill="#8b9bb0" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20">This action cannot be undone.</text>
+  <rect x="1080" y="420" width="160" height="48" rx="10" fill="transparent" stroke="#475569"/>
+  <text x="1120" y="452" fill="#e8eef8" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">Cancel</text>
+  <rect x="1270" y="420" width="160" height="48" rx="10" fill="#b42318"/>
+  <text x="1310" y="452" fill="#fff" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">Delete</text>
+  <text x="1080" y="560" fill="#67e8f9" font-family="IBM Plex Mono, monospace" font-size="16">Dialog · Button ghost · danger</text>
+  <text x="1080" y="640" fill="#8b9bb0" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18">Publish as a team library and</text>
+  <text x="1080" y="680" fill="#8b9bb0" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="18">build product screens with instances.</text>
+</svg>

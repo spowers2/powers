@@ -2,6 +2,19 @@
 
 Runs **inside Figma**, so it can create/update **Local Variables** without Enterprise REST API.
 
+## Community listing assets
+
+| Asset | Path |
+|---|---|
+| **Icon** | [`assets/icon.png`](./assets/icon.png) (512×512) |
+| **Thumbnail / cover** | [`assets/thumbnail.png`](./assets/thumbnail.png) (1920×960) |
+| **Carousel 1** | [`assets/carousel-1-sync.png`](./assets/carousel-1-sync.png) |
+| **Carousel 2** | [`assets/carousel-2-audit.png`](./assets/carousel-2-audit.png) |
+| **Carousel 3** | [`assets/carousel-3-kit.png`](./assets/carousel-3-kit.png) |
+| **Playground file guide** | [`playground/README.md`](./playground/README.md) |
+
+See [`assets/ASSETS.md`](./assets/ASSETS.md).
+
 ## What it does
 
 | Action | Effect |
