@@ -87,7 +87,7 @@ const styles = `
 .pu-btn--ghost {
   background: transparent;
   color: var(--pu-color-text);
-  border-color: var(--pu-color-border);
+  border-color: var(--pu-color-control-border, var(--pu-color-border-strong));
   box-shadow: none;
 }
 .pu-btn--ghost:hover:not(:disabled) {

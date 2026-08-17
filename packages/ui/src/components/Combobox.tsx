@@ -44,7 +44,7 @@ const styles = `
   height: var(--pu-control-h-md);
   padding: 0 var(--pu-control-px);
   border-radius: var(--pu-radius-md);
-  border: 1px solid var(--pu-color-border);
+  border: 1px solid var(--pu-color-control-border, var(--pu-color-border));
   background: var(--pu-color-surface);
   color: var(--pu-color-text);
   box-shadow: var(--pu-shadow-xs);
@@ -72,7 +72,7 @@ const styles = `
   overflow: auto;
   border-radius: var(--pu-radius-lg);
   background: var(--pu-color-surface-elevated);
-  border: 1px solid var(--pu-color-border);
+  border: 1px solid var(--pu-color-control-border, var(--pu-color-border));
   box-shadow: var(--pu-shadow-float);
   display: none;
   opacity: 0;

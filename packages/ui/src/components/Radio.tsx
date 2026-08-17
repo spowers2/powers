@@ -48,7 +48,7 @@ const ensure = createStyleSheet(
   width: 1.1rem;
   height: 1.1rem;
   border-radius: 50%;
-  border: 1.5px solid var(--pu-color-border);
+  border: 1.5px solid var(--pu-color-control-border, var(--pu-color-border-strong));
   background: var(--pu-color-surface);
   display: grid;
   place-items: center;
@@ -56,6 +56,9 @@ const ensure = createStyleSheet(
   transition:
     border-color var(--pu-duration) var(--pu-ease),
     background var(--pu-duration) var(--pu-ease);
+}
+.pu-radio:hover:not([data-disabled="true"]) .pu-radio__dot {
+  border-color: var(--pu-color-border-strong);
 }
 .pu-radio[data-checked="true"] .pu-radio__dot {
   border-color: var(--pu-color-accent);

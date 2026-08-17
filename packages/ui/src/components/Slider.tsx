@@ -55,7 +55,7 @@ const ensure = createStyleSheet(
     var(--pu-color-surface-sunken) var(--pu-slider-pct, 0%),
     var(--pu-color-surface-sunken) 100%
   );
-  border: 1px solid var(--pu-color-border);
+  border: 1px solid var(--pu-color-control-border, var(--pu-color-border));
   outline: none;
   cursor: pointer;
 }

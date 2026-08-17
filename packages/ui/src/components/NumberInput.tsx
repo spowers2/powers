@@ -22,7 +22,7 @@ const ensure = createStyleSheet(
 .pu-number {
   display: inline-flex;
   align-items: stretch;
-  border: 1px solid var(--pu-color-border);
+  border: 1px solid var(--pu-color-control-border, var(--pu-color-border));
   border-radius: var(--pu-radius-md);
   background: var(--pu-color-surface);
   overflow: hidden;

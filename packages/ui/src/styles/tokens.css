@@ -58,10 +58,12 @@
   --pu-color-surface-2: var(--pu-gray-100);
   --pu-color-surface-elevated: var(--pu-gray-0);
   --pu-color-surface-sunken: color-mix(in srgb, var(--pu-gray-100) 88%, var(--pu-brand-500));
-  --pu-color-border: color-mix(in srgb, var(--pu-gray-200) 92%, var(--pu-brand-400));
-  --pu-color-border-strong: color-mix(in srgb, var(--pu-gray-300) 75%, var(--pu-brand-400));
+  --pu-color-border: color-mix(in srgb, var(--pu-gray-200) 88%, var(--pu-brand-400));
+  --pu-color-border-strong: color-mix(in srgb, var(--pu-gray-300) 70%, var(--pu-brand-400));
+  /* Form controls / checkbox / switch — always clearer than hairline borders */
+  --pu-color-control-border: color-mix(in srgb, var(--pu-gray-300) 82%, var(--pu-brand-400));
   --pu-color-text: var(--pu-brand-500);
-  --pu-color-text-muted: var(--pu-gray-500);
+  --pu-color-text-muted: #4a5568; /* ~gray-600 — AA on surface/bg */
   /* Primary actions: navy; green reserved for live/success signal */
   --pu-color-accent: var(--pu-brand-500);
   --pu-color-accent-hover: var(--pu-brand-600);
@@ -72,11 +74,13 @@
   --pu-color-focus: var(--pu-holo-cyan);
   --pu-color-selection: color-mix(in srgb, var(--pu-holo-cyan) 18%, transparent);
   --pu-color-success: var(--pu-sage-600);
+  --pu-color-warning: #a67c3d;
+  --pu-color-warning-fg: #5c4018;
   /* Soft / secondary actions (buttons, chips, active chrome) */
   --pu-color-soft-bg: color-mix(in srgb, var(--pu-color-signal) 12%, var(--pu-color-surface));
   --pu-color-soft-bg-hover: color-mix(in srgb, var(--pu-color-signal) 18%, var(--pu-color-surface));
-  --pu-color-soft-fg: color-mix(in srgb, var(--pu-color-accent) 70%, var(--pu-sage-700));
-  --pu-color-soft-border: color-mix(in srgb, var(--pu-color-signal) 22%, var(--pu-color-border));
+  --pu-color-soft-fg: #1f3d2e; /* dark green-navy — readable on soft wash */
+  --pu-color-soft-border: color-mix(in srgb, var(--pu-color-signal) 28%, var(--pu-color-border));
 
   /* Thin glass — almost flat, slight frost */
   --pu-glass-bg: color-mix(in srgb, var(--pu-color-surface) 86%, transparent);
@@ -192,20 +196,31 @@
   --pu-color-surface-2: #121b2c;
   --pu-color-surface-elevated: #172234;
   --pu-color-surface-sunken: #03060c;
-  --pu-color-border: color-mix(in srgb, #9aa8bc 12%, transparent);
-  --pu-color-border-strong: color-mix(in srgb, var(--pu-holo-cyan) 22%, var(--pu-gray-600));
-  --pu-color-text: #e6edf7;
-  --pu-color-text-muted: #8b97ab;
-  /* Primary stays cool navy-lifted, not neon green buttons */
-  --pu-color-accent: #3d7ab8;
-  --pu-color-accent-hover: #5a93cc;
-  --pu-color-accent-fg: #050a12;
-  --pu-color-signal: var(--pu-sage-500);
+  /* Borders must stay visible on navy surfaces (was ~12% — near-invisible) */
+  --pu-color-border: color-mix(in srgb, #9aa8bc 28%, transparent);
+  --pu-color-border-strong: color-mix(in srgb, var(--pu-holo-cyan) 36%, #6b7a90);
+  --pu-color-control-border: color-mix(in srgb, #b6c2d4 42%, transparent);
+  --pu-color-text: #e8eef8;
+  --pu-color-text-muted: #a8b4c8; /* brighter muted for AA on dark surfaces */
+  /* Primary CTA: medium blue + light label (never dark-on-dark) */
+  --pu-color-accent: #4a8fd4;
+  --pu-color-accent-hover: #6aa8e6;
+  --pu-color-accent-fg: #f7fafc;
+  --pu-color-signal: var(--pu-sage-400);
   --pu-color-focus: var(--pu-holo-cyan);
   --pu-color-danger: #f07178;
+  --pu-color-danger-fg: #1a0a0c;
+  --pu-color-success: var(--pu-sage-400);
+  --pu-color-warning: #e0b45c;
+  --pu-color-warning-fg: #1a1408;
   --pu-color-selection: color-mix(in srgb, var(--pu-holo-cyan) 22%, transparent);
+  /* Soft chrome — light text on tinted dark wash */
+  --pu-color-soft-bg: color-mix(in srgb, var(--pu-color-accent) 18%, var(--pu-color-surface));
+  --pu-color-soft-bg-hover: color-mix(in srgb, var(--pu-color-accent) 26%, var(--pu-color-surface));
+  --pu-color-soft-fg: #c5ddf5;
+  --pu-color-soft-border: color-mix(in srgb, var(--pu-color-accent) 40%, transparent);
   --pu-glass-bg: color-mix(in srgb, #0b1220 78%, transparent);
-  --pu-glass-border: color-mix(in srgb, var(--pu-holo-cyan) 14%, transparent);
+  --pu-glass-border: color-mix(in srgb, var(--pu-holo-cyan) 18%, transparent);
   --pu-color-glow: color-mix(in srgb, var(--pu-brand-300) 12%, transparent);
   --pu-color-glow-2: color-mix(in srgb, var(--pu-sage-500) 8%, transparent);
   --pu-color-glow-holo: color-mix(in srgb, var(--pu-holo-cyan) 10%, transparent);
@@ -278,23 +293,24 @@ html[data-pu-palette="dual"] {
   --pu-color-surface-2: #e8f4f8;
   --pu-color-surface-elevated: #ffffff;
   --pu-color-surface-sunken: #dceef4;
-  --pu-color-border: color-mix(in srgb, #b8d4e0 55%, #06b6d4);
-  --pu-color-border-strong: color-mix(in srgb, #06b6d4 48%, #64748b);
+  --pu-color-border: color-mix(in srgb, #a8c4d4 62%, #06b6d4);
+  --pu-color-border-strong: color-mix(in srgb, #06b6d4 52%, #475569);
+  --pu-color-control-border: color-mix(in srgb, #7a9eb0 55%, #0891b2);
   --pu-color-text: #0a1e38;
-  --pu-color-text-muted: #4a5d72;
+  --pu-color-text-muted: #3d4f63; /* darker muted for AA on white/surface-2 */
   --pu-color-accent: #0a1e38;
   --pu-color-accent-hover: #06152a;
   --pu-color-accent-fg: #ffffff;
   --pu-color-signal: #69be28;
-  --pu-color-success: #4f9a1c;
+  --pu-color-success: #3d7a16;
   --pu-color-focus: #06b6d4;
   --pu-color-selection: color-mix(in srgb, #06b6d4 32%, transparent);
 
   /* Soft actions = cyan wash (readable dual electric) */
-  --pu-color-soft-bg: color-mix(in srgb, #06b6d4 18%, #ffffff);
-  --pu-color-soft-bg-hover: color-mix(in srgb, #06b6d4 28%, #ffffff);
-  --pu-color-soft-fg: #0e7490;
-  --pu-color-soft-border: color-mix(in srgb, #06b6d4 42%, #cbd5e1);
+  --pu-color-soft-bg: color-mix(in srgb, #06b6d4 16%, #ffffff);
+  --pu-color-soft-bg-hover: color-mix(in srgb, #06b6d4 24%, #ffffff);
+  --pu-color-soft-fg: #0a5f73; /* darker teal for AA on soft cyan wash */
+  --pu-color-soft-border: color-mix(in srgb, #06b6d4 45%, #94a3b8);
 
   --pu-glass-bg: color-mix(in srgb, #ffffff 88%, #cffafe);
   --pu-glass-border: color-mix(in srgb, #06b6d4 28%, #d0dae8);
@@ -325,24 +341,28 @@ html[data-pu-palette="dual"][data-pu-theme="dark"] {
   --pu-color-surface-2: #111a2a;
   --pu-color-surface-elevated: #162033;
   --pu-color-surface-sunken: #02050a;
-  --pu-color-border: color-mix(in srgb, #94a3b8 11%, transparent);
-  --pu-color-border-strong: color-mix(in srgb, #22d3ee 32%, #475569);
-  --pu-color-text: #e8eef8;
-  --pu-color-text-muted: #8b9bb0;
-  /* Soft electric primary for dark CTAs */
+  --pu-color-border: color-mix(in srgb, #94a3b8 26%, transparent);
+  --pu-color-border-strong: color-mix(in srgb, #22d3ee 38%, #64748b);
+  --pu-color-control-border: color-mix(in srgb, #a5b4c8 40%, transparent);
+  --pu-color-text: #eef3fb;
+  --pu-color-text-muted: #a8b6c9;
+  /* Soft electric primary for dark CTAs — dark ink on bright cyan */
   --pu-color-accent: #38bdf8;
   --pu-color-accent-hover: #7dd3fc;
-  --pu-color-accent-fg: #04080f;
-  --pu-color-signal: #69be28;
-  --pu-color-success: #7ac936;
+  --pu-color-accent-fg: #041018;
+  --pu-color-signal: #8fd44f;
+  --pu-color-success: #8fd44f;
   --pu-color-focus: #22d3ee;
   --pu-color-selection: color-mix(in srgb, #22d3ee 26%, transparent);
   --pu-color-danger: #fb7185;
+  --pu-color-danger-fg: #1a080c;
+  --pu-color-warning: #f0c14d;
+  --pu-color-warning-fg: #1a1408;
 
-  --pu-color-soft-bg: color-mix(in srgb, #22d3ee 16%, #0a101c);
-  --pu-color-soft-bg-hover: color-mix(in srgb, #22d3ee 24%, #0a101c);
-  --pu-color-soft-fg: #67e8f9;
-  --pu-color-soft-border: color-mix(in srgb, #22d3ee 35%, transparent);
+  --pu-color-soft-bg: color-mix(in srgb, #22d3ee 18%, #0a101c);
+  --pu-color-soft-bg-hover: color-mix(in srgb, #22d3ee 26%, #0a101c);
+  --pu-color-soft-fg: #a5f3fc; /* bright cyan text on dark soft wash */
+  --pu-color-soft-border: color-mix(in srgb, #22d3ee 42%, transparent);
 
   --pu-glass-bg: color-mix(in srgb, #0a101c 80%, transparent);
   --pu-glass-border: color-mix(in srgb, #22d3ee 18%, transparent);

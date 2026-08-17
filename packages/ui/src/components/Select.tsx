@@ -26,7 +26,7 @@ const styles = `
   height: var(--pu-control-h-md);
   padding: 0 calc(var(--pu-control-px) + 1rem) 0 var(--pu-control-px);
   border-radius: var(--pu-radius-md);
-  border: 1px solid var(--pu-color-border);
+  border: 1px solid var(--pu-color-control-border, var(--pu-color-border));
   background-color: var(--pu-color-surface);
   color: var(--pu-color-text);
   appearance: none;

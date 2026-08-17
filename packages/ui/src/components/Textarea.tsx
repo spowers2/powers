@@ -25,7 +25,7 @@ const styles = `
   min-height: calc(var(--pu-control-h-md) * 2.2);
   padding: 0.65rem var(--pu-control-px);
   border-radius: var(--pu-radius-md);
-  border: 1px solid var(--pu-color-border);
+  border: 1px solid var(--pu-color-control-border, var(--pu-color-border));
   background: var(--pu-color-surface);
   color: var(--pu-color-text);
   resize: vertical;

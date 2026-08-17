@@ -33,7 +33,7 @@ const styles = `
   width: 1.1rem;
   height: 1.1rem;
   border-radius: 5px;
-  border: 1.5px solid var(--pu-color-border);
+  border: 1.5px solid var(--pu-color-control-border, var(--pu-color-border-strong));
   background: var(--pu-color-surface);
   display: grid;
   place-items: center;
@@ -42,6 +42,9 @@ const styles = `
     border-color var(--pu-duration) var(--pu-ease-out),
     transform var(--pu-duration-fast) var(--pu-ease-spring);
   flex-shrink: 0;
+}
+.pu-checkbox:hover:not([data-disabled="true"]) .pu-checkbox__box {
+  border-color: var(--pu-color-border-strong);
 }
 .pu-checkbox[data-checked="true"] .pu-checkbox__box {
   background: var(--pu-color-accent);

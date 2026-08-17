@@ -867,7 +867,7 @@
                 "muted"
               ],
               "type": "COLOR",
-              "value": "#5a6578"
+              "value": "#4a5568"
             },
             {
               "name": "color/accent",
@@ -952,6 +952,16 @@
               ],
               "type": "COLOR",
               "value": "rgba(46, 184, 201, 0.18)"
+            },
+            {
+              "name": "color/control/border",
+              "path": [
+                "color",
+                "control",
+                "border"
+              ],
+              "type": "COLOR",
+              "value": "#9aabc0"
             },
             {
               "name": "color/soft/bg",
@@ -1921,7 +1931,7 @@
                 "border"
               ],
               "type": "COLOR",
-              "value": "rgba(154, 168, 188, 0.12)"
+              "value": "rgba(154, 168, 188, 0.28)"
             },
             {
               "name": "color/border/strong",
@@ -1931,7 +1941,17 @@
                 "strong"
               ],
               "type": "COLOR",
-              "value": "#4a6a78"
+              "value": "#6b8a9c"
+            },
+            {
+              "name": "color/control/border",
+              "path": [
+                "color",
+                "control",
+                "border"
+              ],
+              "type": "COLOR",
+              "value": "rgba(182, 194, 212, 0.42)"
             },
             {
               "name": "color/text",
@@ -1940,7 +1960,7 @@
                 "text"
               ],
               "type": "COLOR",
-              "value": "#e6edf7"
+              "value": "#e8eef8"
             },
             {
               "name": "color/text/muted",
@@ -1950,7 +1970,7 @@
                 "muted"
               ],
               "type": "COLOR",
-              "value": "#8b97ab"
+              "value": "#a8b4c8"
             },
             {
               "name": "color/accent",
@@ -1959,7 +1979,7 @@
                 "accent"
               ],
               "type": "COLOR",
-              "value": "#3d7ab8"
+              "value": "#4a8fd4"
             },
             {
               "name": "color/accent/hover",
@@ -1969,7 +1989,7 @@
                 "hover"
               ],
               "type": "COLOR",
-              "value": "#5a93cc"
+              "value": "#6aa8e6"
             },
             {
               "name": "color/accent/fg",
@@ -1979,7 +1999,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#050a12"
+              "value": "#f7fafc"
             },
             {
               "name": "color/signal",
@@ -1988,7 +2008,7 @@
                 "signal"
               ],
               "type": "COLOR",
-              "value": "#69be28"
+              "value": "#7ac936"
             },
             {
               "name": "color/success",
@@ -1997,7 +2017,7 @@
                 "success"
               ],
               "type": "COLOR",
-              "value": "#4f9a1c"
+              "value": "#7ac936"
             },
             {
               "name": "color/danger",
@@ -2016,7 +2036,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#fcfdff"
+              "value": "#1a0a0c"
             },
             {
               "name": "color/focus",
@@ -2044,7 +2064,7 @@
                 "bg"
               ],
               "type": "COLOR",
-              "value": "#1a2a18"
+              "value": "#1a2e42"
             },
             {
               "name": "color/soft/bgHover",
@@ -2054,7 +2074,7 @@
                 "bgHover"
               ],
               "type": "COLOR",
-              "value": "#223520"
+              "value": "#234060"
             },
             {
               "name": "color/soft/fg",
@@ -2064,7 +2084,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#a8d48a"
+              "value": "#c5ddf5"
             },
             {
               "name": "color/soft/border",
@@ -2074,7 +2094,7 @@
                 "border"
               ],
               "type": "COLOR",
-              "value": "#3a4f38"
+              "value": "#3d6a94"
             },
             {
               "name": "color/glass/bg",
@@ -3035,7 +3055,7 @@
                 "muted"
               ],
               "type": "COLOR",
-              "value": "#4a5d72"
+              "value": "#3d4f63"
             },
             {
               "name": "color/accent",
@@ -3082,7 +3102,7 @@
                 "success"
               ],
               "type": "COLOR",
-              "value": "#4f9a1c"
+              "value": "#3d7a16"
             },
             {
               "name": "color/danger",
@@ -3122,6 +3142,16 @@
               "value": "rgba(6, 182, 212, 0.32)"
             },
             {
+              "name": "color/control/border",
+              "path": [
+                "color",
+                "control",
+                "border"
+              ],
+              "type": "COLOR",
+              "value": "#6a94a8"
+            },
+            {
               "name": "color/soft/bg",
               "path": [
                 "color",
@@ -3149,7 +3179,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#0e7490"
+              "value": "#0a5f73"
             },
             {
               "name": "color/soft/border",
@@ -3159,7 +3189,7 @@
                 "border"
               ],
               "type": "COLOR",
-              "value": "#7ec8d9"
+              "value": "#5eb0c4"
             },
             {
               "name": "color/glass/bg",
@@ -4086,7 +4116,7 @@
                 "border"
               ],
               "type": "COLOR",
-              "value": "rgba(148, 163, 184, 0.11)"
+              "value": "rgba(148, 163, 184, 0.26)"
             },
             {
               "name": "color/border/strong",
@@ -4096,7 +4126,17 @@
                 "strong"
               ],
               "type": "COLOR",
-              "value": "#2a7a8a"
+              "value": "#3a9bb0"
+            },
+            {
+              "name": "color/control/border",
+              "path": [
+                "color",
+                "control",
+                "border"
+              ],
+              "type": "COLOR",
+              "value": "rgba(165, 180, 200, 0.40)"
             },
             {
               "name": "color/text",
@@ -4105,7 +4145,7 @@
                 "text"
               ],
               "type": "COLOR",
-              "value": "#e8eef8"
+              "value": "#eef3fb"
             },
             {
               "name": "color/text/muted",
@@ -4115,7 +4155,7 @@
                 "muted"
               ],
               "type": "COLOR",
-              "value": "#8b9bb0"
+              "value": "#a8b6c9"
             },
             {
               "name": "color/accent",
@@ -4144,7 +4184,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#04080f"
+              "value": "#041018"
             },
             {
               "name": "color/signal",
@@ -4153,7 +4193,7 @@
                 "signal"
               ],
               "type": "COLOR",
-              "value": "#69be28"
+              "value": "#8fd44f"
             },
             {
               "name": "color/success",
@@ -4162,7 +4202,7 @@
                 "success"
               ],
               "type": "COLOR",
-              "value": "#7ac936"
+              "value": "#8fd44f"
             },
             {
               "name": "color/danger",
@@ -4181,7 +4221,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#fcfdff"
+              "value": "#1a080c"
             },
             {
               "name": "color/focus",
@@ -4229,7 +4269,7 @@
                 "fg"
               ],
               "type": "COLOR",
-              "value": "#67e8f9"
+              "value": "#a5f3fc"
             },
             {
               "name": "color/soft/border",
@@ -4239,7 +4279,7 @@
                 "border"
               ],
               "type": "COLOR",
-              "value": "rgba(34, 211, 238, 0.35)"
+              "value": "rgba(34, 211, 238, 0.42)"
             },
             {
               "name": "color/glass/bg",

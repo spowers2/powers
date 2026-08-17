@@ -392,7 +392,7 @@
         "value": "#0a2744",
         "type": "color",
         "muted": {
-          "value": "#5a6578",
+          "value": "#4a5568",
           "type": "color"
         }
       },
@@ -431,6 +431,12 @@
       "selection": {
         "value": "rgba(46, 184, 201, 0.18)",
         "type": "color"
+      },
+      "control": {
+        "border": {
+          "value": "#9aabc0",
+          "type": "color"
+        }
       },
       "soft": {
         "bg": {
@@ -936,46 +942,52 @@
         }
       },
       "border": {
-        "value": "rgba(154, 168, 188, 0.12)",
+        "value": "rgba(154, 168, 188, 0.28)",
         "type": "color",
         "strong": {
-          "value": "#4a6a78",
+          "value": "#6b8a9c",
+          "type": "color"
+        }
+      },
+      "control": {
+        "border": {
+          "value": "rgba(182, 194, 212, 0.42)",
           "type": "color"
         }
       },
       "text": {
-        "value": "#e6edf7",
+        "value": "#e8eef8",
         "type": "color",
         "muted": {
-          "value": "#8b97ab",
+          "value": "#a8b4c8",
           "type": "color"
         }
       },
       "accent": {
-        "value": "#3d7ab8",
+        "value": "#4a8fd4",
         "type": "color",
         "hover": {
-          "value": "#5a93cc",
+          "value": "#6aa8e6",
           "type": "color"
         },
         "fg": {
-          "value": "#050a12",
+          "value": "#f7fafc",
           "type": "color"
         }
       },
       "signal": {
-        "value": "#69be28",
+        "value": "#7ac936",
         "type": "color"
       },
       "success": {
-        "value": "#4f9a1c",
+        "value": "#7ac936",
         "type": "color"
       },
       "danger": {
         "value": "#f07178",
         "type": "color",
         "fg": {
-          "value": "#fcfdff",
+          "value": "#1a0a0c",
           "type": "color"
         }
       },
@@ -989,19 +1001,19 @@
       },
       "soft": {
         "bg": {
-          "value": "#1a2a18",
+          "value": "#1a2e42",
           "type": "color"
         },
         "bgHover": {
-          "value": "#223520",
+          "value": "#234060",
           "type": "color"
         },
         "fg": {
-          "value": "#a8d48a",
+          "value": "#c5ddf5",
           "type": "color"
         },
         "border": {
-          "value": "#3a4f38",
+          "value": "#3d6a94",
           "type": "color"
         }
       },
@@ -1499,7 +1511,7 @@
         "value": "#0a1e38",
         "type": "color",
         "muted": {
-          "value": "#4a5d72",
+          "value": "#3d4f63",
           "type": "color"
         }
       },
@@ -1520,7 +1532,7 @@
         "type": "color"
       },
       "success": {
-        "value": "#4f9a1c",
+        "value": "#3d7a16",
         "type": "color"
       },
       "danger": {
@@ -1539,6 +1551,12 @@
         "value": "rgba(6, 182, 212, 0.32)",
         "type": "color"
       },
+      "control": {
+        "border": {
+          "value": "#6a94a8",
+          "type": "color"
+        }
+      },
       "soft": {
         "bg": {
           "value": "#d4f4fa",
@@ -1549,11 +1567,11 @@
           "type": "color"
         },
         "fg": {
-          "value": "#0e7490",
+          "value": "#0a5f73",
           "type": "color"
         },
         "border": {
-          "value": "#7ec8d9",
+          "value": "#5eb0c4",
           "type": "color"
         }
       },
@@ -2040,18 +2058,24 @@
         }
       },
       "border": {
-        "value": "rgba(148, 163, 184, 0.11)",
+        "value": "rgba(148, 163, 184, 0.26)",
         "type": "color",
         "strong": {
-          "value": "#2a7a8a",
+          "value": "#3a9bb0",
+          "type": "color"
+        }
+      },
+      "control": {
+        "border": {
+          "value": "rgba(165, 180, 200, 0.40)",
           "type": "color"
         }
       },
       "text": {
-        "value": "#e8eef8",
+        "value": "#eef3fb",
         "type": "color",
         "muted": {
-          "value": "#8b9bb0",
+          "value": "#a8b6c9",
           "type": "color"
         }
       },
@@ -2063,23 +2087,23 @@
           "type": "color"
         },
         "fg": {
-          "value": "#04080f",
+          "value": "#041018",
           "type": "color"
         }
       },
       "signal": {
-        "value": "#69be28",
+        "value": "#8fd44f",
         "type": "color"
       },
       "success": {
-        "value": "#7ac936",
+        "value": "#8fd44f",
         "type": "color"
       },
       "danger": {
         "value": "#fb7185",
         "type": "color",
         "fg": {
-          "value": "#fcfdff",
+          "value": "#1a080c",
           "type": "color"
         }
       },
@@ -2101,11 +2125,11 @@
           "type": "color"
         },
         "fg": {
-          "value": "#67e8f9",
+          "value": "#a5f3fc",
           "type": "color"
         },
         "border": {
-          "value": "rgba(34, 211, 238, 0.35)",
+          "value": "rgba(34, 211, 238, 0.42)",
           "type": "color"
         }
       },

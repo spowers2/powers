@@ -45,23 +45,36 @@ const ensure = createStyleSheet(
 .pu-chip--neutral {
   background: var(--pu-color-surface-2);
   color: var(--pu-color-text);
-  border-color: var(--pu-color-border);
+  border-color: var(--pu-color-border-strong, var(--pu-color-border));
 }
 .pu-chip--accent {
-  background: color-mix(in srgb, var(--pu-color-accent) 14%, transparent);
-  color: var(--pu-color-accent);
+  background: var(--pu-color-soft-bg);
+  color: var(--pu-color-soft-fg);
+  border-color: var(--pu-color-soft-border);
 }
 .pu-chip--success {
-  background: color-mix(in srgb, var(--pu-color-success, #69be28) 16%, transparent);
-  color: var(--pu-color-success, #69be28);
+  background: color-mix(in srgb, var(--pu-color-success, #69be28) 16%, var(--pu-color-surface));
+  color: var(--pu-sage-800, #2a5410);
+  border-color: color-mix(in srgb, var(--pu-color-success, #69be28) 36%, var(--pu-color-border));
 }
 .pu-chip--warning {
-  background: color-mix(in srgb, var(--pu-color-warning, #d4a017) 18%, transparent);
-  color: var(--pu-color-warning, #b8860b);
+  background: color-mix(in srgb, var(--pu-color-warning, #d4a017) 18%, var(--pu-color-surface));
+  color: var(--pu-color-warning-fg, #5c4018);
+  border-color: color-mix(in srgb, var(--pu-color-warning, #d4a017) 32%, var(--pu-color-border));
 }
 .pu-chip--danger {
-  background: color-mix(in srgb, var(--pu-color-danger) 14%, transparent);
+  background: color-mix(in srgb, var(--pu-color-danger) 14%, var(--pu-color-surface));
   color: var(--pu-color-danger);
+  border-color: color-mix(in srgb, var(--pu-color-danger) 32%, var(--pu-color-border));
+}
+[data-pu-theme="dark"] .pu-chip--success {
+  color: var(--pu-sage-300, #8fd44f);
+}
+[data-pu-theme="dark"] .pu-chip--warning {
+  color: #f0c14d;
+}
+[data-pu-theme="dark"] .pu-chip--danger {
+  color: #fda4af;
 }
 .pu-chip__x {
   appearance: none;
