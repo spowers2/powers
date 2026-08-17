@@ -33,9 +33,10 @@ Every public surface (Home / System / Lab / Docs) must feel intentional:
 
 ### 2. Authoring speed (write less, ship prettier)
 - `createStyleSheet` + tokens already lower cost of new UI
-- Next: **snippet-first System** — every card has Copy JSX
-- Next: **Lab 2.0** — clear errors, recipe reset, optional AI-free autocomplete of imports
-- Next: **vite template** / one-command scaffold
+- **Lab Start here** — hello · form · tokens (~10 min path)
+- **Copy code** in Lab + **Copy JSX** on System (full App+mount)
+- **Dev warnings** for `value={signal()}` snapshots (`installDevWarnings`)
+- **vite template** / `pnpm create-app` — form + theme golden path
 
 ### 3. Integrated design (one brain)
 Tokens + primitives + motion + density in one package. No “pick a CSS framework” fork.

@@ -10,12 +10,17 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 > npm scope: `@powers/*`  
 > **License:** [Business Source License 1.1](./LICENSE) (source-available) · [Commercial](./LICENSE-COMMERCIAL.md) · [Licensing model](./docs/LICENSING.md) · [Trademarks](./docs/TRADEMARKS.md)
 
-**New here?**
+**New here? (~10 minutes)**
 
-1. **Docs / Lab / System:** `pnpm example:browser` → http://localhost:5173 (`/docs` · `/lab` · `/system`)  
-2. **designlab206:** `pnpm example:starter` → http://localhost:5180  
-3. **Hearth restaurant:** `pnpm example:restaurant` → http://localhost:5181  
-4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [docs/README.md](./docs/README.md) · [docs/RELEASE.md](./docs/RELEASE.md)
+```bash
+pnpm install
+pnpm example:browser   # http://localhost:5173/lab
+```
+
+1. Lab → **Start here**: Hello → Form → Theme (`/lab?recipe=hello`)  
+2. **System** → Copy JSX on any control  
+3. Optional apps: designlab206 (`pnpm example:starter`) · Hearth (`pnpm example:restaurant`)  
+4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [USABILITY.md](./docs/USABILITY.md) · [GOLDEN_PATH.md](./docs/GOLDEN_PATH.md)
 
 ### Design kit & Figma
 

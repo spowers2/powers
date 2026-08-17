@@ -125,12 +125,31 @@ async function main() {
     assert(selected && selected.trim().length > 0, "Tab should be selected after ArrowRight");
     console.log("✓ Tabs keyboard");
 
-    // —— Lab loads ——
+    // —— Lab loads + Start here ——
     await page.goto(`${BASE}/lab`, { waitUntil: "networkidle", timeout: 30000 });
-    await page.waitForSelector(".lab-shell, .lab-root, [class*='lab']", {
+    await page.waitForSelector(".lab-main, .lab", {
       timeout: 10000,
     });
-    console.log("✓ Lab page");
+    const startHere = page.locator(".lab-start-here");
+    await startHere.waitFor({ timeout: 5000 });
+    const startText = await startHere.innerText();
+    assert(/Start here/i.test(startText), "Lab should show Start here section");
+    assert(/Hello Powers|Form validation|Tokens/i.test(startText), "Start here should list core recipes");
+    console.log("✓ Lab page + Start here");
+
+    // Start here: form recipe via query
+    await page.goto(`${BASE}/lab?recipe=form`, {
+      waitUntil: "networkidle",
+      timeout: 30000,
+    });
+    await page.waitForSelector(".lab-toolbar-title", { timeout: 10000 });
+    const formTitle = await page.locator(".lab-toolbar-title").textContent();
+    assert(/form|validation|signup/i.test(formTitle || ""), `expected form recipe title, got ${formTitle}`);
+    const formFrame = page.frameLocator("iframe").first();
+    await formFrame.locator("button", { hasText: /Save/i }).first().waitFor({
+      timeout: 20000,
+    });
+    console.log("✓ Lab form recipe runs");
 
     // —— Lab GSAP recipe + motion assert ——
     await page.goto(`${BASE}/lab?recipe=gsap`, {

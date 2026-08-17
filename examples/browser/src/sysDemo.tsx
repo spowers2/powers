@@ -230,6 +230,70 @@ import { Button, createToaster, Toaster, Stack } from "@powers/ui";`,
     </Stack>`,
     `const toaster = createToaster();`,
   ),
+
+  switch: labProgram(
+    `import { signal } from "@powers/core";
+import { mount } from "@powers/dom";
+import { Switch, Stack, Text } from "@powers/ui";`,
+    `<Stack gap={3}>
+      <Switch label="Notifications" bind={on} />
+      <Text muted size="sm">{() => (on() ? "On" : "Off")}</Text>
+    </Stack>`,
+    `const on = signal(true);`,
+  ),
+
+  badge: labProgram(
+    `import { mount } from "@powers/dom";
+import { Badge, Stack } from "@powers/ui";`,
+    `<Stack direction="row" gap={2} wrap>
+      <Badge>Neutral</Badge>
+      <Badge tone="accent">Accent</Badge>
+      <Badge tone="success">Success</Badge>
+      <Badge tone="warning">Warning</Badge>
+    </Stack>`,
+  ),
+
+  card: labProgram(
+    `import { mount } from "@powers/dom";
+import { Button, Card, Stack, Text } from "@powers/ui";`,
+    `<Stack gap={3}>
+      <Card>
+        <Stack gap={2}>
+          <Text weight="semibold">Default card</Text>
+          <Text muted size="sm">Border + surface tokens.</Text>
+        </Stack>
+      </Card>
+      <Card variant="soft">
+        <Text size="sm">Soft variant</Text>
+      </Card>
+      <Card variant="elevated" interactive>
+        <Stack gap={2}>
+          <Text weight="semibold">Elevated</Text>
+          <Button size="sm" variant="soft">Action</Button>
+        </Stack>
+      </Card>
+    </Stack>`,
+  ),
+
+  alert: labProgram(
+    `import { mount } from "@powers/dom";
+import { Alert, Stack } from "@powers/ui";`,
+    `<Stack gap={3}>
+      <Alert tone="info" title="Info">Something to know.</Alert>
+      <Alert tone="success" title="Saved">Your changes are live.</Alert>
+      <Alert tone="danger" title="Error">Check the fields above.</Alert>
+    </Stack>`,
+  ),
+
+  text: labProgram(
+    `import { mount } from "@powers/dom";
+import { Stack, Text } from "@powers/ui";`,
+    `<Stack gap={2}>
+      <Text as="h2" size="xl">Heading</Text>
+      <Text>Body copy uses color/text.</Text>
+      <Text muted size="sm">Muted helper text.</Text>
+    </Stack>`,
+  ),
 } as const;
 
 export type SnippetKey = keyof typeof SNIPPETS;

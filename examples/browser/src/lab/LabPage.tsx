@@ -4,7 +4,13 @@
  *
  * Fully imperative DOM (no JSX) so selection/handlers cannot get lost.
  */
-import { recipes, recipeById, type Recipe } from "./recipes.js";
+import {
+  recipes,
+  recipeById,
+  startHereRecipes,
+  START_HERE_IDS,
+  type Recipe,
+} from "./recipes.js";
 import {
   runInFrame,
   encodeShare,
@@ -62,17 +68,32 @@ export function LabPage(): HTMLElement {
   const blurb = document.createElement("p");
   blurb.className = "lab-sidebar-blurb";
   blurb.textContent =
-    "Start at 01 and work down. Each card loads code + a short lesson. Edit freely — the preview re-runs as you type.";
+    "New? Do Start here (3 recipes, ~10 min). Then explore the full list. Edit freely — preview re-runs as you type.";
   head.append(brand, blurb);
 
   const badge = document.createElement("div");
   badge.className = "lab-count-badge";
   badge.textContent = `${recipes.length} recipes`;
 
+  const startHereWrap = document.createElement("div");
+  startHereWrap.className = "lab-start-here";
+  const startHereLabel = document.createElement("div");
+  startHereLabel.className = "lab-start-here__label";
+  startHereLabel.textContent = "Start here";
+  const startHereList = document.createElement("div");
+  startHereList.className = "lab-start-here__list";
+  startHereList.setAttribute("role", "listbox");
+  startHereList.setAttribute("aria-label", "Start here recipes");
+  startHereWrap.append(startHereLabel, startHereList);
+
+  const allLabel = document.createElement("div");
+  allLabel.className = "lab-start-here__label lab-start-here__label--all";
+  allLabel.textContent = "All recipes";
+
   const recipeList = document.createElement("div");
   recipeList.className = "lab-recipe-list";
   recipeList.setAttribute("role", "listbox");
-  recipeList.setAttribute("aria-label", "Recipes");
+  recipeList.setAttribute("aria-label", "All recipes");
 
   const main = document.createElement("div");
   main.className = "lab-main";
@@ -99,12 +120,22 @@ export function LabPage(): HTMLElement {
   const scaffoldBtn = makeBtn("Scaffold", "lab-btn");
   scaffoldBtn.title =
     "Wrap selection (or insert) a full App + mount program Lab can run";
+  const copyBtn = makeBtn("Copy code", "lab-btn lab-btn--soft");
+  copyBtn.title = "Copy full editor buffer (App + mount)";
   const shareBtn = makeBtn("Share", "lab-btn lab-btn--soft");
   const statusEl = document.createElement("span");
   statusEl.className = "lab-status";
-  statusEl.textContent = "Ready — pick a recipe or edit the code";
+  statusEl.textContent = "Ready — Start here: Hello → Form → Theme";
 
-  actions.append(autoLabel, runBtn, resetBtn, scaffoldBtn, shareBtn, statusEl);
+  actions.append(
+    autoLabel,
+    runBtn,
+    resetBtn,
+    scaffoldBtn,
+    copyBtn,
+    shareBtn,
+    statusEl,
+  );
   toolbar.append(titleEl, actions);
 
   // Teaching panel (goal · learn · how · try this)
@@ -209,7 +240,7 @@ export function LabPage(): HTMLElement {
     );
     if (!/\bmount\s*\(/.test(src)) {
       tips.push(
-        "Lab needs mount(document.getElementById(\"root\")!, () => <App />).",
+        'Lab needs mount(document.getElementById("root")!, () => <App />).',
       );
     }
     if (!/\bfunction\s+App\b|\bconst\s+App\b/.test(src) && looksTransform) {
@@ -222,8 +253,37 @@ export function LabPage(): HTMLElement {
         "If you pasted from System: use Copy JSX (includes App+mount) or click Scaffold after pasting the middle.",
       );
     }
+    // Snapshot value heuristic: value={email()} freezes the field
+    if (
+      /\bvalue=\{\s*[\w.]+\(\)\s*\}/.test(src) ||
+      /\bvalue=\{\s*\w+\(\)\s*\}/.test(src)
+    ) {
+      tips.push(
+        "Live inputs need bind={signal} or value={signal} — not value={signal()}. Calling the signal once freezes a string snapshot.",
+      );
+    }
+    if (/\bonInput=/.test(src) && !/\bbind=\{/.test(src)) {
+      tips.push(
+        "Prefer bind={email} on Input instead of manual onInput + casts (see recipe Form validation).",
+      );
+    }
     if (tips.length === 0) return message;
     return `${message}\n\n——\n${tips.map((t) => `• ${t}`).join("\n")}`;
+  }
+
+  /** Soft tips shown in console when code smells like common mistakes (even if run succeeds). */
+  function warnSnapshotPatterns() {
+    const src = source;
+    if (/\bvalue=\{\s*[\w.]+\(\)\s*\}/.test(src) && !/\bbind=\{/.test(src)) {
+      paintConsole([
+        {
+          level: "warn",
+          args: [
+            "[Powers] value={signal()} is a one-time string. Use bind={signal} or value={signal} for live fields.",
+          ],
+        },
+      ]);
+    }
   }
 
   function showErrorOverlay(message: string) {
@@ -313,7 +373,7 @@ mount(document.getElementById("root")!, () => <App />);
   consoleWrap.append(consoleHead, consoleEl);
 
   main.append(toolbar, teach, workspace, consoleWrap);
-  sidebar.append(head, badge, recipeList);
+  sidebar.append(head, badge, startHereWrap, allLabel, recipeList);
   root.append(sidebar, main);
 
   // —— helpers ——
@@ -343,13 +403,40 @@ mount(document.getElementById("root")!, () => <App />);
   }
 
   function syncSidebar() {
-    for (const btn of recipeList.querySelectorAll<HTMLButtonElement>(
-      ".lab-recipe",
-    )) {
+    for (const btn of root.querySelectorAll<HTMLButtonElement>(".lab-recipe")) {
       const on = btn.dataset.recipeId === current.id;
       btn.classList.toggle("is-active", on);
       btn.setAttribute("aria-current", on ? "true" : "false");
     }
+  }
+
+  function makeRecipeButton(r: Recipe, idxLabel: string): HTMLButtonElement {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "lab-recipe" + (r.id === current.id ? " is-active" : "");
+    btn.dataset.recipeId = r.id;
+    btn.setAttribute("role", "option");
+    btn.setAttribute("aria-label", `Load recipe: ${r.title}`);
+    if (r.id === current.id) btn.setAttribute("aria-current", "true");
+
+    const idx = document.createElement("span");
+    idx.className = "lab-recipe__idx";
+    idx.textContent = idxLabel;
+
+    const body = document.createElement("div");
+    body.className = "lab-recipe__body";
+    const strong = document.createElement("strong");
+    strong.textContent = r.title;
+    const span = document.createElement("span");
+    span.textContent = r.blurb;
+    body.append(strong, span);
+
+    btn.append(idx, body);
+    btn.onclick = (ev) => {
+      ev.preventDefault();
+      loadRecipe(r);
+    };
+    return btn;
   }
 
   function writeEditor(next: string) {
@@ -403,7 +490,12 @@ mount(document.getElementById("root")!, () => <App />);
       col("Try this", r.tryThis, "try"),
     );
 
-    teach.append(goal, cols);
+    const tips = document.createElement("p");
+    tips.className = "lab-teach__tips";
+    tips.innerHTML =
+      'Rules of thumb: pass <code>bind={signal}</code> (not <code>value={signal()}</code>) · read live values with <code>{() =&gt; x()}</code> · retheme via <code>tokens.css</code>.';
+
+    teach.append(goal, cols, tips);
   }
 
   function applyChrome(r: Recipe) {
@@ -444,6 +536,7 @@ mount(document.getElementById("root")!, () => <App />);
       if (result.ok) {
         hideErrorOverlay();
         setStatus("ok", "Running · edit code or pick another recipe");
+        warnSnapshotPatterns();
       } else if (result.error !== "Cancelled") {
         const msg = result.error ?? "Error — see console below";
         setStatus("error", msg);
@@ -494,33 +587,16 @@ mount(document.getElementById("root")!, () => <App />);
     void run();
   }
 
-  // —— Recipe buttons ——
+  // —— Start here (3 recipes) + full list ——
+  startHereRecipes().forEach((r, i) => {
+    const labels = ["1", "2", "3"];
+    startHereList.appendChild(makeRecipeButton(r, labels[i] ?? String(i + 1)));
+  });
+
   recipes.forEach((r, i) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "lab-recipe" + (r.id === current.id ? " is-active" : "");
-    btn.dataset.recipeId = r.id;
-    btn.setAttribute("role", "option");
-    btn.setAttribute("aria-label", `Load recipe: ${r.title}`);
-    if (r.id === current.id) btn.setAttribute("aria-current", "true");
-
-    const idx = document.createElement("span");
-    idx.className = "lab-recipe__idx";
-    idx.textContent = String(i + 1).padStart(2, "0");
-
-    const body = document.createElement("div");
-    body.className = "lab-recipe__body";
-    const strong = document.createElement("strong");
-    strong.textContent = r.title;
-    const span = document.createElement("span");
-    span.textContent = r.blurb;
-    body.append(strong, span);
-
-    btn.append(idx, body);
-    btn.onclick = (ev) => {
-      ev.preventDefault();
-      loadRecipe(r);
-    };
+    const isStart = (START_HERE_IDS as readonly string[]).includes(r.id);
+    const btn = makeRecipeButton(r, String(i + 1).padStart(2, "0"));
+    if (isStart) btn.classList.add("lab-recipe--start-ref");
     recipeList.appendChild(btn);
   });
 
@@ -542,6 +618,13 @@ mount(document.getElementById("root")!, () => <App />);
   };
 
   scaffoldBtn.onclick = () => insertScaffold();
+
+  copyBtn.onclick = () => {
+    void navigator.clipboard?.writeText(source).then(
+      () => setStatus("ok", "Code copied — paste into an app or share"),
+      () => setStatus("error", "Clipboard blocked — select all in the editor"),
+    );
+  };
 
   errReset.onclick = () => {
     writeEditor(current.code);

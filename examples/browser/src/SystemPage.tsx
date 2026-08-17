@@ -350,7 +350,7 @@ export function SystemPage(props: {
 
             <Card variant="glass">
               <Stack gap={3}>
-                <Text weight="semibold">Badges & avatars</Text>
+                <DemoHead title="Badge" snippet={SNIPPETS.badge} lab="ui" />
                 <Stack direction="row" gap={2} wrap align="center">
                   <Badge>Neutral</Badge>
                   <Badge tone="accent">Accent</Badge>
@@ -368,7 +368,7 @@ export function SystemPage(props: {
         <section id="sys-type">
           <Card>
             <Stack gap={3}>
-              <Text weight="semibold">Typography</Text>
+              <DemoHead title="Text" snippet={SNIPPETS.text} lab="hello" />
               <Text as="h1" size="2xl">
                 Display 2xl
               </Text>
@@ -452,6 +452,12 @@ export function SystemPage(props: {
                   bind={note}
                 />
               </Field>
+              <DemoHead
+                title="Switch"
+                snippet={SNIPPETS.switch}
+                lab="form"
+                hint="Prefer bind={signal} when the control owns a boolean signal."
+              />
               <Stack direction="row" gap={4} wrap>
                 <Switch
                   label="Notifications"
@@ -524,7 +530,11 @@ export function SystemPage(props: {
         <section id="sys-feedback">
           <Card>
             <Stack gap={4}>
-              <Text weight="semibold">Feedback</Text>
+              <DemoHead
+                title="Alert"
+                snippet={SNIPPETS.alert}
+                lab="feedback"
+              />
               <Alert tone="info" title="Info">
                 Integrated styling means tokens + components in one library.
               </Alert>

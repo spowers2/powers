@@ -107,6 +107,59 @@
   border: 1px solid color-mix(in srgb, var(--pu-color-accent) 22%, transparent);
 }
 
+.lab-start-here {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-bottom: var(--pu-space-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-border) 80%, transparent);
+}
+
+.lab-start-here__label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pu-color-signal, var(--pu-color-accent));
+}
+
+.lab-start-here__label--all {
+  margin-top: 0.15rem;
+  color: var(--pu-color-text-muted);
+}
+
+.lab-start-here__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.lab-start-here__list .lab-recipe {
+  border-color: color-mix(in srgb, var(--pu-color-signal, var(--pu-color-accent)) 22%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--pu-color-signal, var(--pu-color-accent)) 6%,
+    var(--lab-panel)
+  );
+}
+
+.lab-teach__tips {
+  margin: var(--pu-space-3) 0 0;
+  padding: var(--pu-space-2) var(--pu-space-3);
+  font-size: var(--pu-text-xs);
+  color: var(--pu-color-text-muted);
+  line-height: 1.45;
+  border-radius: var(--pu-radius-md);
+  background: color-mix(in srgb, var(--pu-color-surface-2) 90%, transparent);
+  border: 1px solid color-mix(in srgb, var(--lab-border) 80%, transparent);
+}
+
+.lab-teach__tips code {
+  font-family: var(--pu-font-mono, ui-monospace, monospace);
+  font-size: 0.92em;
+  color: var(--pu-color-text);
+}
+
 .lab-recipe-list {
   display: flex;
   flex-direction: column;

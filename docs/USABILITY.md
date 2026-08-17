@@ -2,6 +2,8 @@
 
 Short mental model + preferred patterns. Prefer this over inventing one-offs.
 
+**Practice in Lab:** [Start here](http://localhost:5173/lab?recipe=hello) → Hello · Form · Theme (`/lab`).
+
 ---
 
 ## 1. Mental model (learn once)

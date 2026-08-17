@@ -60,4 +60,5 @@ else
   echo "  # then: cd $DEST && pnpm install && pnpm dev"
 fi
 echo ""
-echo "Cookbook: open monorepo demo Lab → /lab?recipe=settings"
+echo "Learn: Lab Start here → http://localhost:5173/lab?recipe=hello"
+echo "       then Form → /lab?recipe=form · Theme → /lab?recipe=tokens"

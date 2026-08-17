@@ -6,16 +6,23 @@ Private monorepo today. Same path will map to `npm create` later.
 
 ---
 
-## 1. Install & run a demo (2 min)
+## 1. Install & Start here (2 min)
 
 ```bash
 cd powers   # monorepo root
 pnpm install
-pnpm example:browser   # http://localhost:5173  → /docs · /lab · /system
-pnpm example:starter   # http://localhost:5180  → designlab206 product demo
+pnpm example:browser   # http://localhost:5173
 ```
 
-**Learn here first:** Lab recipe **Form validation** · System **Forms**.
+Open **http://localhost:5173/lab** → sidebar **Start here**:
+
+| # | Recipe | URL |
+|---|---|---|
+| 1 | Hello Powers | `/lab?recipe=hello` |
+| 2 | Form validation | `/lab?recipe=form` |
+| 3 | Tokens & theme | `/lab?recipe=tokens` |
+
+Then: System (**Copy JSX**) · Docs · `pnpm example:starter` for a full app.
 
 ---
 

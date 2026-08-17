@@ -15,6 +15,12 @@ export interface Recipe {
 }
 
 /**
+ * First three recipes for new learners (Lab “Start here”).
+ * hello · form · tokens (theme) — under 10 minutes total.
+ */
+export const START_HERE_IDS = ["hello", "form", "tokens"] as const;
+
+/**
  * All recipes use the design system (@powers/ui).
  * Teaching copy is written for first-time learners — plain language, clear experiments.
  */
@@ -1555,4 +1561,13 @@ mount(document.getElementById("root")!, () => <App />);
 
 export function recipeById(id: string): Recipe | undefined {
   return recipes.find((r) => r.id === id);
+}
+
+/** Alias used in docs / Start here (tokens recipe is the theme toggle lesson). */
+export const THEME_RECIPE_ID = "tokens";
+
+export function startHereRecipes(): Recipe[] {
+  return START_HERE_IDS.map((id) => recipeById(id)).filter(
+    (r): r is Recipe => r != null,
+  );
 }
