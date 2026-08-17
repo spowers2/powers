@@ -20,13 +20,9 @@ const kitRoot = join(__dirname, "..");
 const monoRoot = join(kitRoot, "..");
 
 const SCOPES_HELP = `
-PAT scopes required (Figma → avatar → Settings → Security → Personal access tokens):
-  • File content: Read
-  • File variables: Read
-
-Update monorepo .env.local:
-  FIGMA_FILE_KEY=bdfYWkMm5oJqKBIrwWCsSd
-  FIGMA_ACCESS_TOKEN=figd_…
+Variables API needs Figma Enterprise scope file_variables:read (often not shown on other plans).
+For component audits, enable PAT UI: "Read the contents of and render images from files".
+See design-kit/FIGMA.md.
 `.trim();
 
 function loadEnvLocal() {
@@ -415,8 +411,8 @@ async function main() {
     }
     console.log(`Wrote ${join(outDir, "variables-export.json")}`);
   } else if (variables.status === "missing_scope") {
-    console.log("Variables API: MISSING SCOPE");
-    console.log(SCOPES_HELP);
+    console.log("Variables API: unavailable (Enterprise scope file_variables:read — often not on PAT list)");
+    console.log("  Component + binding audit above is complete without it. See design-kit/FIGMA.md.");
   } else {
     console.log(`Variables API: ${variables.message}`);
   }

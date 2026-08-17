@@ -63,14 +63,17 @@ No new one-off frames. Gaps you hit = polish list.
 | Section TEXT labels inside one frame | Optional pages: Foundations, Actions, Forms, … |
 | Cover missing | Page **Cover**: name, date, dual/instrument note |
 
-### 5. Variables API tooling (implemented)
+### 5. Variables API (Enterprise-only — skip if not on plan)
 
-`pnpm design-kit:figma-audit` pulls Variables when the PAT includes **File variables: Read**, and writes:
+`file_variables:read` is **Figma Enterprise only** and often **does not appear** in the PAT scope list on other plans.
 
-- `figma/audit-report.json` — full report  
-- `figma/variables-export.json` — collection names, modes, variable names vs design-kit token paths  
+On Professional / non-Enterprise:
 
-If the audit prints **Variables API: MISSING SCOPE**, regenerate the PAT with both scopes and update `.env.local`.
+- Use **Figma Local variables UI** + Tokens Studio  
+- Rely on `pnpm design-kit:figma-audit` for **catalog + binding** only  
+- Ignore **Variables API: MISSING SCOPE** in the audit output  
+
+On Enterprise: enable variables read on the PAT → audit writes `figma/variables-export.json`.
 
 ### 6. Later
 
