@@ -3,8 +3,8 @@
 **Product stance:** Powers is the **runtime and the look**.  
 One install should be enough to ship a coherent UI. External CSS frameworks are optional, not required.
 
-**Default palette — “Seahawk hologram”:** College Navy `#002244`, Action Green `#69BE28`, Wolf Grey, soft holographic cyan edges, restrained brass metal.  
-**Surface language:** clean layered glass, soft multi-shadows, refined radius — steampunk *hints* without costume.  
+**Default palettes:** **instrument** (deep navy + green signal + cool slate) and **dual electric** (navy primary + cyan secondary). Soft holographic focus edges, restrained metal.  
+**Surface language:** clean layered glass, soft multi-shadows, refined radius.  
 Retheme entirely by editing `packages/ui/src/styles/tokens.css` (product demos override tokens per app).
 
 ---

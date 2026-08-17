@@ -69,10 +69,10 @@ const SYS_SECTIONS = [
 ] as const;
 
 const ACCENT_PRESETS = [
-  { id: "navy", label: "College Navy", value: "#002244" },
-  { id: "action", label: "Action Green", value: "#69be28" },
-  { id: "holo", label: "Holo Cyan", value: "#3ecfcf" },
-  { id: "brass", label: "Brass", value: "#b8956a" },
+  { id: "navy", label: "Deep Navy", value: "#0a2744" },
+  { id: "signal", label: "Signal Green", value: "#69be28" },
+  { id: "holo", label: "Holo Cyan", value: "#06b6d4" },
+  { id: "metal", label: "Soft Metal", value: "#9aa3b2" },
   { id: "ember", label: "Hearth Ember", value: "#c45c26" },
 ] as const;
 

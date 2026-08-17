@@ -1,14 +1,14 @@
 /**
  * Powers design tokens — “instrument panel”
  * -----------------------------------------
- * Deep navy + action green signal + cool slate neutrals.
- * Cleaner / colder than steampunk: thin edges, soft glows, no brass noise.
+ * Deep navy + green signal + cool slate neutrals (instrument).
+ * Thin edges, soft glows — dual electric overrides via data-pu-palette.
  *
  * Edit this file to rebrand the entire product.
  */
 
 :root {
-  /* ---- College navy scale ---- */
+  /* ---- Brand navy scale ---- */
   --pu-brand-50: #eef3f9;
   --pu-brand-100: #d4e0ee;
   --pu-brand-200: #9bb6d4;
@@ -20,7 +20,7 @@
   --pu-brand-800: #030f1c;
   --pu-brand-900: #020a14;
 
-  /* ---- Cool slate neutrals (less “wolf warm grey”) ---- */
+  /* ---- Cool slate neutrals ---- */
   --pu-gray-0: #fcfdff;
   --pu-gray-50: #f4f6fa;
   --pu-gray-100: #e8ecf3;
@@ -34,7 +34,7 @@
   --pu-gray-900: #12161e;
   --pu-gray-950: #090c11;
 
-  /* ---- Action green (signal / success — not primary chrome) ---- */
+  /* ---- Signal green (success / live — not primary chrome) ---- */
   --pu-sage-300: #8fd44f;
   --pu-sage-400: #7ac936;
   --pu-sage-500: #69be28;
