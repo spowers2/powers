@@ -17,6 +17,21 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 3. **Hearth restaurant:** `pnpm example:restaurant` → http://localhost:5181  
 4. Hub: **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** · [docs/README.md](./docs/README.md) · [docs/RELEASE.md](./docs/RELEASE.md)
 
+### Design kit & Figma
+
+Tokens, component catalog, and Community plugin live under **[`design-kit/`](./design-kit/README.md)**.
+
+```bash
+pnpm design-kit:build          # tokens + catalog export
+pnpm design-kit:plugin:build   # Figma plugin → design-kit/plugin/dist
+pnpm design-kit:figma-audit    # optional; needs .env.local + Figma PAT
+```
+
+Import the plugin in Figma via **`design-kit/plugin/manifest.json`** (Development).  
+Library publish checklist: [`design-kit/PUBLISH_LIBRARY.md`](./design-kit/PUBLISH_LIBRARY.md).
+
+> **npm:** `@powers/*` packages are **`private: true`** until a deliberate public cut. Do not `npm publish` yet. Exports currently point at TypeScript source for monorepo DX.
+
 ---
 
 ## Packages
@@ -126,6 +141,11 @@ Canonical detail: **[`docs/ROADMAP.md`](./docs/ROADMAP.md)**
 | `pnpm example:browser` | Full demo (router + design system) |
 | `pnpm example:kitchen-sink` | Core only |
 | `pnpm example:animate` | Motion demo |
+| `pnpm design-kit:build` | Tokens + Figma catalog |
+| `pnpm design-kit:plugin:build` | Figma plugin bundle |
+| `pnpm design-kit:figma-audit` | Live Figma ↔ catalog (local PAT) |
+
+**Engines:** Node `>=20` (CI runs **Node 22**).
 
 ---
 

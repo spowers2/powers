@@ -29,13 +29,16 @@ Use this before the first public npm publish / website launch.
 
 ## Quality gates
 
-- [x] `pnpm run check` green (**typecheck · test · size budgets**) — 2026-08-13  
+- [x] `pnpm run check` green (**typecheck · test · size budgets**) — 2026-08-17  
   (alias: `pnpm run ci` → same; bare `pnpm ci` is **not** this script)
+- [x] CI Node **22**; `engines.node` `>=20`
 - [x] `pnpm size` within ceilings in [`SIZE.md`](./SIZE.md)
 - [x] No accidental private secrets in the repo (`.env*` gitignored; none committed)
 - [x] `package.json` names `@powers/*`, exports present, UI `sideEffects` for CSS
 - [x] README install + 30-second example for public readers
 - [x] [`STABLE.md`](./STABLE.md) + [`GOLDEN_PATH.md`](./GOLDEN_PATH.md) current for Powers
+- [x] Design-kit: `pnpm design-kit:check` + Figma plugin build in CI
+- [x] `@powers/*` marked **`private: true`** until deliberate public npm cut
 
 ## Docs (public hub)
 
@@ -43,14 +46,23 @@ Use this before the first public npm publish / website launch.
 - [x] LEARN · STYLING · DESIGN_SYSTEM · POWER_LAB · ROADMAP present  
 - [x] CONTRIBUTING present  
 - [x] LICENSE (BSL-1.1) + LICENSE-COMMERCIAL.md + NOTICE at repo root  
-- [x] LICENSING.md · TRADEMARKS.md · DCO in CONTRIBUTING  
+- [x] LICENSING.md · TRADEMARKS.md · DCO in CONTRIBUTING · SECURITY.md  
 - [x] All package.json `license` fields = `BUSL-1.1`  
+- [x] Design kit + Figma plugin docs under [`design-kit/`](../design-kit/README.md)
+
+## Design / Figma
+
+- [x] Tokens export + 49-component catalog  
+- [x] Figma plugin id `1671016490810398688` (Community submit)  
+- [ ] Plugin **approved/live** on Community (watch review)  
+- [ ] Publish **Powers UI Kit** as a Figma library  
+- [ ] Optional: Pro SKU (`design-kit/pro/`)
 
 ## Publish sequence (still open — first public cut)
 
-1. [ ] Set coordinated versions (`0.1.0` or keep current package versions and tag)
-2. [ ] Build packages that emit `dist` if required for publish
-3. [ ] `npm publish --access public` per package (or changesets) — packages are **BUSL-1.1** (must match LICENSE)
+1. [ ] Set coordinated versions (today: independent; core `0.1.1`, dom `0.3.0`, others `0.1.0` — document or align)
+2. [ ] Switch package exports from `src` → built `dist` for consumers
+3. [ ] Remove `"private": true` only when ready; `npm publish --access public` — **BUSL-1.1**
 4. [ ] Tag `v0.1.0` (or matching)
 5. [ ] Optional: GitHub Pages / marketing site from `examples/browser` build
 6. [x] Rename GitHub repo → `powers` + update local remote  
@@ -67,7 +79,8 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 - Streaming SSR  
 - Full a11y audit / ARIA cookbook  
 - Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  
+- AI Lab features (parked)
 
 ---
 
-**Last updated:** Sprint E — `pnpm run check` green; checklist product gates closed; **npm publish still pending**.
+**Last updated:** 2026-08-17 — harden pass: private packages, design-kit CI, clean dist, SECURITY.md; **npm/public still pending**.

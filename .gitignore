@@ -8,6 +8,10 @@ dist-size/
 *.tsbuildinfo
 coverage/
 
+# Figma plugin build (importable without local rebuild)
+!design-kit/plugin/dist/
+!design-kit/plugin/dist/**
+
 # Environment / secrets
 .env
 .env.*
@@ -38,13 +42,6 @@ temp/
 # Project-local tooling (gh CLI, etc.)
 .tools/
 
-
-# Figma plugin build (importable without local rebuild)
-!design-kit/plugin/dist/
-!design-kit/plugin/dist/**
-
 # design-kit
 design-kit/**/node_modules/
 design-kit/.DS_Store
-!design-kit/plugin/dist/
-!design-kit/plugin/dist/**

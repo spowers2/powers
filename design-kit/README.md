@@ -77,6 +77,8 @@ Notes:
 
 Keep them in sync by hand for now (phase 1). A CSS→token extractor can come later.
 
+**Sync checklist when tokens change:** edit CSS → mirror in `tokens/source.ts` → `pnpm design-kit:build` → Tokens Studio / plugin **Sync Variables**.
+
 ## Phase 2 — build the Figma UI kit
 
 1. Import tokens (phase 1) with Tokens Studio.  

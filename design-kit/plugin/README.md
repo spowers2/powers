@@ -36,9 +36,11 @@ Outputs `design-kit/plugin/dist/`.
 
 1. Open **Powers UI Kit** in Figma.  
 2. Menu → **Plugins → Development → Import plugin from manifest…**  
-3. Choose:
+3. Choose **only**:
 
    `…/power-ui/design-kit/plugin/manifest.json`
+
+   (Not `plugin/dist/manifest.json` — root manifest points at `dist/code.js` correctly.)
 
 4. Run **Plugins → Development → Powers Design Kit**.
 

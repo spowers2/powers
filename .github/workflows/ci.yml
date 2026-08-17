@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   check:
-    name: typecheck · test · size
+    name: typecheck · test · size · design-kit
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -37,3 +37,18 @@ jobs:
 
       - name: Size budgets
         run: pnpm size
+
+      - name: Design-kit tokens + component catalog
+        run: pnpm design-kit:check
+
+      - name: Figma plugin build
+        run: pnpm design-kit:plugin:build
+
+      - name: No legacy package scope in rebuilt dist
+        run: |
+          pnpm build
+          if grep -r '@power-ui' packages/*/dist 2>/dev/null; then
+            echo "Found stale @power-ui references in packages/*/dist"
+            exit 1
+          fi
+          echo "dist clean of @power-ui"
