@@ -56,12 +56,20 @@ const styles = `
   width: calc(1.4rem - 6px);
   height: calc(1.4rem - 6px);
   border-radius: 50%;
-  background: var(--pu-color-surface-elevated, #fff);
-  box-shadow: var(--pu-shadow-sm);
-  transition: transform var(--pu-duration) var(--pu-ease-spring);
+  /* Always a clear knob — surface-elevated blends into the track in dark mode */
+  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--pu-color-text) 14%, transparent);
+  box-shadow:
+    var(--pu-shadow-sm),
+    0 1px 2px color-mix(in srgb, #000 18%, transparent);
+  transition:
+    transform var(--pu-duration) var(--pu-ease-spring),
+    background var(--pu-duration) var(--pu-ease-out),
+    border-color var(--pu-duration) var(--pu-ease-out);
 }
 .pu-switch[data-checked="true"] .pu-switch__thumb {
-  background: var(--pu-color-accent-fg);
+  background: var(--pu-color-accent-fg, #fff);
+  border-color: transparent;
   transform: translateX(1.05rem);
 }
 @media (prefers-reduced-motion: reduce) {
