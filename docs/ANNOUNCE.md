@@ -43,7 +43,8 @@ Powers is a coherent stack: signals and ownership in `@powers/core`, DOM/JSX, ro
 2. Enable **Powers UI Kit** in Figma · install the Community plugin  
 3. `git clone` → `pnpm install` → `pnpm example:browser`
 
-Commercial / Pro: see [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) and [OFFER.md](./OFFER.md).
+Commercial / Pro: see [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) and [OFFER.md](./OFFER.md).  
+**Contact:** spowers2@me.com · [GitHub Issues](https://github.com/spowers2/powers/issues/new)
 
 ---
 

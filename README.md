@@ -126,6 +126,14 @@ pnpm design-kit:build && pnpm design-kit:plugin:build
 
 ---
 
+## Contact
+
+- **Email:** [spowers2@me.com](mailto:spowers2@me.com?subject=Powers%20%E2%80%94%20contact)  
+- **GitHub Issues:** [new issue](https://github.com/spowers2/powers/issues/new)  
+- **Commercial / license:** [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md) (same email; subject **Powers commercial license**)
+
+Also on [lab206.com](https://lab206.com) — nav and footer **Contact**.
+
 ## License & commercial
 
 **Business Source License 1.1** © Scott Powers

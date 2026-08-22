@@ -759,7 +759,22 @@ mount(document.getElementById("app")!, () => (
                 Figma plugin
               </a>
               <a
-                href="https://github.com/spowers2/powers"
+                class="lp-footer-link"
+                href={SITE.contact.mailto}
+                title={`Email ${SITE.contact.email}`}
+              >
+                {SITE.contact.label}
+              </a>
+              <a
+                class="lp-footer-link"
+                href={SITE.contact.githubIssues}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub Issues
+              </a>
+              <a
+                href={SITE.contact.githubRepo}
                 target="_blank"
                 rel="noreferrer"
               >

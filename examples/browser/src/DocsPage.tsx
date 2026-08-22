@@ -120,13 +120,33 @@ export function DocsPage(props: { router: Router }) {
             >
               {SITE.figma.pluginLabel}
             </a>{" "}
-            from Figma Community.
+            from Figma Community. Questions about Powers?{" "}
+            <a class="docs-inline-link" href={SITE.contact.mailto}>
+              {SITE.contact.label}
+            </a>{" "}
+            (
+            <a class="docs-inline-link" href={`mailto:${SITE.contact.email}`}>
+              {SITE.contact.email}
+            </a>
+            ) or open a{" "}
+            <a
+              class="docs-inline-link"
+              href={SITE.contact.githubIssues}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub issue
+            </a>
+            .
           </Text>
           <Stack direction="row" gap={2} wrap>
             <Button onClick={go("/lab")}>Practice in Lab</Button>
             <Button variant="soft" onClick={go("/system")}>
               Browse components
             </Button>
+            <a class="docs-demo-link" href={SITE.contact.mailto}>
+              {SITE.contact.label} →
+            </a>
             <a
               class="docs-demo-link"
               href={SITE.demos.workspace.href}

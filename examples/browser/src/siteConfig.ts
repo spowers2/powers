@@ -32,4 +32,18 @@ export const SITE = {
     target: "_blank" as const,
     rel: "noopener noreferrer" as const,
   },
+  /**
+   * How to reach the author about Powers.
+   * Email is the primary “Contact” affordance on lab206;
+   * GitHub Issues for bugs / public discussion.
+   */
+  contact: {
+    label: "Contact",
+    email: "spowers2@me.com",
+    mailto:
+      "mailto:spowers2@me.com?subject=Powers%20%E2%80%94%20contact%20from%20lab206",
+    githubProfile: "https://github.com/spowers2",
+    githubIssues: "https://github.com/spowers2/powers/issues/new",
+    githubRepo: "https://github.com/spowers2/powers",
+  },
 } as const;

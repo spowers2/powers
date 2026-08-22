@@ -53,6 +53,13 @@ export function SiteNav(props: {
             <Link router={router} to="/system" activeClass="active">
               System
             </Link>
+            <a
+              class="site-nav-contact"
+              href={SITE.contact.mailto}
+              title={`Email ${SITE.contact.email}`}
+            >
+              {SITE.contact.label}
+            </a>
             <span class="site-nav-sep" aria-hidden="true" />
             <a
               class="site-nav-demo"

@@ -2,7 +2,12 @@
 
 ## Reporting
 
-If you find a vulnerability in Powers, contact the repository owner privately (GitHub security advisory or owner contact). Do not open a public issue with exploit details.
+If you find a vulnerability in Powers, contact the repository owner privately:
+
+- GitHub **Security advisory** on [spowers2/powers](https://github.com/spowers2/powers)  
+- Or email [spowers2@me.com](mailto:spowers2@me.com?subject=Powers%20security) with subject **Powers security**
+
+Do not open a public issue with exploit details.
 
 ## Secrets
 
