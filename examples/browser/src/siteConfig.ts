@@ -27,4 +27,9 @@ export const SITE = {
       title: "Restaurant product demo",
     },
   },
+  /** Always open product demos in a new tab so lab206 stays available. */
+  demoLinkAttrs: {
+    target: "_blank" as const,
+    rel: "noopener noreferrer" as const,
+  },
 } as const;

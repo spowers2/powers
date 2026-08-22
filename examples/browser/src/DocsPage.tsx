@@ -20,9 +20,6 @@ import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import { SITE } from "./siteConfig.js";
 import "./docs.css";
 
-const demoBlank = import.meta.env.DEV ? "_blank" : undefined;
-const demoRel = import.meta.env.DEV ? "noreferrer" : undefined;
-
 const DOC_SECTIONS = [
   "paths",
   "start",
@@ -133,16 +130,14 @@ export function DocsPage(props: { router: Router }) {
             <a
               class="docs-demo-link"
               href={SITE.demos.workspace.href}
-              target={demoBlank}
-              rel={demoRel}
+              {...SITE.demoLinkAttrs}
             >
               {SITE.demos.workspace.label} demo →
             </a>
             <a
               class="docs-demo-link"
               href={SITE.demos.hearth.href}
-              target={demoBlank}
-              rel={demoRel}
+              {...SITE.demoLinkAttrs}
             >
               {SITE.demos.hearth.label} →
             </a>
@@ -761,16 +756,14 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
             <a
               class="docs-demo-link"
               href={SITE.demos.workspace.href}
-              target={demoBlank}
-              rel={demoRel}
+              {...SITE.demoLinkAttrs}
             >
               {SITE.demos.workspace.label} →
             </a>
             <a
               class="docs-demo-link"
               href={SITE.demos.hearth.href}
-              target={demoBlank}
-              rel={demoRel}
+              {...SITE.demoLinkAttrs}
             >
               {SITE.demos.hearth.label} →
             </a>

@@ -24,8 +24,7 @@ import {
 import { SITE } from "./siteConfig.js";
 import "./landing.css";
 
-const demoBlank = import.meta.env.DEV ? "_blank" : undefined;
-const demoRel = import.meta.env.DEV ? "noreferrer" : undefined;
+
 
 const SECTION_IDS = ["demos", "features", "learn", "compare"] as const;
 
@@ -219,8 +218,8 @@ export function LandingPage(props: { router: Router }) {
                     onClick={() =>
                       window.open(
                         SITE.demos.workspace.href,
-                        import.meta.env.DEV ? "_blank" : "_self",
-                        "noopener",
+                        "_blank",
+                        "noopener,noreferrer",
                       )
                     }
                   >
@@ -238,19 +237,14 @@ export function LandingPage(props: { router: Router }) {
                 <div class="lp-product-links" aria-label="Product demos">
                   <a
                     href={SITE.demos.workspace.href}
-                    target={demoBlank}
-                    rel={demoRel}
+                    {...SITE.demoLinkAttrs}
                   >
                     {SITE.demos.workspace.label}
                   </a>
                   <span class="lp-product-links__sep" aria-hidden="true">
                     ·
                   </span>
-                  <a
-                    href={SITE.demos.hearth.href}
-                    target={demoBlank}
-                    rel={demoRel}
-                  >
+                  <a href={SITE.demos.hearth.href} {...SITE.demoLinkAttrs}>
                     {SITE.demos.hearth.label}
                   </a>
                   <span class="lp-product-links__sep" aria-hidden="true">
@@ -523,8 +517,7 @@ export function LandingPage(props: { router: Router }) {
               <a
                 class="lp-demo-card"
                 href={SITE.demos.workspace.href}
-                target={demoBlank}
-                rel={demoRel}
+                {...SITE.demoLinkAttrs}
               >
                 <div class="lp-demo-card__kicker">Flagship · workspace</div>
                 <h3>{SITE.demos.workspace.label}</h3>
@@ -537,8 +530,7 @@ export function LandingPage(props: { router: Router }) {
               <a
                 class="lp-demo-card lp-demo-card--hearth"
                 href={SITE.demos.hearth.href}
-                target={demoBlank}
-                rel={demoRel}
+                {...SITE.demoLinkAttrs}
               >
                 <div class="lp-demo-card__kicker">Ops · hearth</div>
                 <h3>{SITE.demos.hearth.label}</h3>
@@ -747,16 +739,14 @@ mount(document.getElementById("app")!, () => (
               <a
                 class="lp-footer-link"
                 href={SITE.demos.workspace.href}
-                target={demoBlank}
-                rel={demoRel}
+                {...SITE.demoLinkAttrs}
               >
                 {SITE.demos.workspace.label}
               </a>
               <a
                 class="lp-footer-link"
                 href={SITE.demos.hearth.href}
-                target={demoBlank}
-                rel={demoRel}
+                {...SITE.demoLinkAttrs}
               >
                 {SITE.demos.hearth.label}
               </a>

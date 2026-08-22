@@ -18,8 +18,6 @@ export function SiteNav(props: {
   palette: PaletteController;
 }) {
   const { router, theme, palette } = props;
-  const demoTarget = import.meta.env.DEV ? "_blank" : undefined;
-  const demoRel = import.meta.env.DEV ? "noreferrer" : undefined;
 
   return (
     <header class="site-nav">
@@ -59,8 +57,7 @@ export function SiteNav(props: {
             <a
               class="site-nav-demo"
               href={SITE.demos.workspace.href}
-              target={demoTarget}
-              rel={demoRel}
+              {...SITE.demoLinkAttrs}
               title={SITE.demos.workspace.title}
             >
               <span class="site-nav-demo-full">
@@ -71,8 +68,7 @@ export function SiteNav(props: {
             <a
               class="site-nav-demo"
               href={SITE.demos.hearth.href}
-              target={demoTarget}
-              rel={demoRel}
+              {...SITE.demoLinkAttrs}
               title={SITE.demos.hearth.title}
             >
               <span class="site-nav-demo-full">{SITE.demos.hearth.label}</span>
