@@ -7,19 +7,19 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./src/index.ts",
       "development": "./src/index.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./jsx-runtime": {
-      "types": "./dist/jsx-runtime.d.ts",
+      "types": "./src/jsx-runtime.ts",
       "development": "./src/jsx-runtime.ts",
       "import": "./dist/jsx-runtime.js",
       "default": "./dist/jsx-runtime.js"
     },
     "./jsx-dev-runtime": {
-      "types": "./dist/jsx-runtime.d.ts",
+      "types": "./src/jsx-runtime.ts",
       "development": "./src/jsx-runtime.ts",
       "import": "./dist/jsx-runtime.js",
       "default": "./dist/jsx-runtime.js"
