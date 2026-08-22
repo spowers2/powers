@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:zip": "vite build && rm -f site-upload.zip && (cd dist && zip -r ../site-upload.zip .) && node -e \"console.log('\\n✓ Ready to upload: site-upload.zip\\n\\nNext:\\n  1. Host File Manager → web root (often public_html)\\n  2. Upload site-upload.zip → Extract\\n  3. Visit your domain\\n\\nGuide: docs/DEPLOY.md\\n')\""
   },
   "dependencies": {
     "@powers/core": "workspace:*",

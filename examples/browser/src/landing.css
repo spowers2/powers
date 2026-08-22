@@ -42,6 +42,8 @@
   flex-direction: column;
   gap: 0.35rem;
   padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
   border-radius: var(--pu-radius-lg);
   border: 1px solid var(--pu-color-border);
   background: var(--pu-color-surface);
@@ -753,6 +755,8 @@ html[data-pu-theme="dark"] .lp-code-mini .s { color: var(--pu-sage-400); }
   flex-direction: column;
   gap: 0.4rem;
   padding: 1.15rem 1.2rem;
+  text-decoration: none;
+  color: inherit;
   border-radius: var(--pu-radius-lg);
   border: 1px solid var(--pu-color-border);
   background: var(--pu-color-surface);

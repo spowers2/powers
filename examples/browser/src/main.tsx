@@ -1,5 +1,5 @@
 /**
- * Powers site — shared nav + landing + demos + design system
+ * lab206 site — Powers UI system demos (Lab / System / Docs + product apps)
  */
 import { signal, effect } from "@powers/core";
 import { animate, spring } from "@powers/animate";
@@ -235,7 +235,12 @@ function PlaygroundPage() {
   );
 }
 
+// Root deploy (lab206.com) → history. Subdirectory deploy → hash.
+const routerMode =
+  import.meta.env.BASE_URL === "/" ? ("history" as const) : ("hash" as const);
+
 const router = createRouter({
+  mode: routerMode,
   routes: [
     {
       path: "/",

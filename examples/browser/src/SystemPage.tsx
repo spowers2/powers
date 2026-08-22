@@ -244,9 +244,22 @@ export function SystemPage(props: {
             Design system
           </Text>
           <Text muted>
-            Living reference for Powers primitives — modern layered surfaces,
-            glass, and deep blue/green tokens. Edit{" "}
-            <Code>packages/ui/src/styles/tokens.css</Code> to retheme.
+            Living reference for Powers primitives (the UI system behind
+            lab206) — modern layered surfaces, glass, and deep blue/green
+            tokens. Edit <Code>packages/ui/src/styles/tokens.css</Code> to
+            retheme.
+          </Text>
+          <Text muted size="sm">
+            Design in Figma: install{" "}
+            <a
+              href="https://www.figma.com/community/plugin/1671016490810398688"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Powers Design Kit
+            </a>{" "}
+            (Community) to sync variables and audit the catalog against this
+            system.
           </Text>
           <Text muted size="sm">
             <strong>Lab</strong> is for editing live code recipes.{" "}

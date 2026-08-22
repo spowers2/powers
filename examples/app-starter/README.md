@@ -44,6 +44,17 @@ Kit / Lab (learn the stack): **http://localhost:5173**
 - `@powers/router` — routes  
 - `@powers/ui` — design system  
 
+## Put this online
+
+```bash
+# from monorepo root
+pnpm deploy:zip:starter
+# → examples/app-starter/site-upload.zip
+```
+
+Upload/extract to your host web root. No Node on the server required.  
+Guide: [`docs/DEPLOY.md`](../../docs/DEPLOY.md).
+
 ## Reset data
 
 **Settings → Reset demo data** restores the seed workspace.

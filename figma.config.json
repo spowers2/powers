@@ -1,0 +1,10 @@
+{
+  "codeConnect": {
+    "parser": "html",
+    "include": ["packages/ui/src/code-connect/**/*.figma.ts"],
+    "exclude": ["**/node_modules/**", "**/dist/**"],
+    "label": "Powers",
+    "language": "tsx",
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/bdfYWkMm5oJqKBIrwWCsSd/Powers-UI-Kit"
+  }
+}

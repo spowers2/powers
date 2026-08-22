@@ -6,8 +6,32 @@
 
 1. Open **Powers UI Kit** (source file).  
 2. **Assets** → **Publish library** / **Publish changes**.  
-3. Include all kit components you want shared.  
-4. Publish.
+3. If **Invalid assets** appears, expand it and fix each item (see below) before publishing.  
+4. Include all kit components you want shared.  
+5. Publish.
+
+### Invalid assets (common: unused properties)
+
+Figma blocks (or warns on) library components that define **component properties that are not applied to any layer**.
+
+**Known case: `Card`**
+
+| Property | Type | Problem |
+|---|---|---|
+| `Padded` | boolean | Defined but not linked to padding / any layer |
+| `Interactive` | boolean | Defined but not linked to any layer |
+
+`Variant` (`default` / `glass` / `elevated` / `soft`) is fine.
+
+**Fix in Figma (2 minutes):**
+
+1. Open the **Card** component set (Assets → Card, or select it on the Components page).  
+2. Right sidebar → **Properties**.  
+3. Delete **`Padded`** and **`Interactive`** (⋯ → Delete), **or** wire them to layers (visibility / content) so they are “used”.  
+4. Fastest for publish: **delete** the two unused booleans.  
+5. Re-open **Publish library** — Card should leave Invalid assets.  
+
+Code still supports `padded` / `interactive` on `<Card />`; they just aren’t Figma instance props until you rebuild them as real variants later.
 
 ## Use in product files
 

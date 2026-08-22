@@ -21,7 +21,11 @@ import {
   scrollToSection,
   tocActiveClass,
 } from "./scrollNav.js";
+import { SITE } from "./siteConfig.js";
 import "./landing.css";
+
+const demoBlank = import.meta.env.DEV ? "_blank" : undefined;
+const demoRel = import.meta.env.DEV ? "noreferrer" : undefined;
 
 const SECTION_IDS = ["demos", "features", "learn", "compare"] as const;
 
@@ -35,7 +39,12 @@ const SHOWCASE_SLIDES = [
 
 type ShowcaseId = (typeof SHOWCASE_SLIDES)[number]["id"];
 
-const FEATURES = [
+const FEATURES: Array<{
+  title: string;
+  body: string;
+  href: string;
+  external?: boolean;
+}> = [
   {
     title: "Fine-grained updates",
     body: "Only the bindings that read a signal re-run — not a virtual tree.",
@@ -62,11 +71,12 @@ const FEATURES = [
     href: "/lab?recipe=hello",
   },
   {
-    title: "Figma library",
-    body: "Published Powers UI Kit — design product screens with instances.",
-    href: "/system",
+    title: "Figma plugin",
+    body: "Powers Design Kit is live on Community — sync variables, audit catalog, stubs.",
+    href: "https://www.figma.com/community/plugin/1671016490810398688",
+    external: true,
   },
-] as const;
+];
 
 export function LandingPage(props: { router: Router }) {
   const { router } = props;
@@ -192,24 +202,29 @@ export function LandingPage(props: { router: Router }) {
           <Container size="xl">
             <div class="lp-hero-grid">
               <div class="lp-hero-copy">
-                <p class="lp-product-label">Powers</p>
+                <p class="lp-product-label">{SITE.name}</p>
                 <h1 class="lp-title">
                   Build product UI,{" "}
                   <span class="lp-title-gradient">not plumbing</span>
                 </h1>
                 <p class="lp-lede">
-                  Signals, components, and tokens in one kit. See real apps
-                  first — then Lab, the design system, and the Figma library.
+                  Built on the {SITE.systemName} UI system — signals, components,
+                  and tokens. See real apps first — then Lab, the design system,
+                  and the Figma library.
                 </p>
 
                 <div class="lp-cta-row">
                   <Button
                     size="lg"
                     onClick={() =>
-                      window.open("http://localhost:5180", "_blank", "noopener")
+                      window.open(
+                        SITE.demos.workspace.href,
+                        import.meta.env.DEV ? "_blank" : "_self",
+                        "noopener",
+                      )
                     }
                   >
-                    Open designlab206
+                    Open {SITE.demos.workspace.label}
                   </Button>
                   <Button
                     size="lg"
@@ -222,21 +237,21 @@ export function LandingPage(props: { router: Router }) {
 
                 <div class="lp-product-links" aria-label="Product demos">
                   <a
-                    href="http://localhost:5180"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={SITE.demos.workspace.href}
+                    target={demoBlank}
+                    rel={demoRel}
                   >
-                    designlab206
+                    {SITE.demos.workspace.label}
                   </a>
                   <span class="lp-product-links__sep" aria-hidden="true">
                     ·
                   </span>
                   <a
-                    href="http://localhost:5181"
-                    target="_blank"
-                    rel="noreferrer"
+                    href={SITE.demos.hearth.href}
+                    target={demoBlank}
+                    rel={demoRel}
                   >
-                    Hearth
+                    {SITE.demos.hearth.label}
                   </a>
                   <span class="lp-product-links__sep" aria-hidden="true">
                     ·
@@ -250,11 +265,22 @@ export function LandingPage(props: { router: Router }) {
                   <button type="button" onClick={go("/system")}>
                     System
                   </button>
+                  <span class="lp-product-links__sep" aria-hidden="true">
+                    ·
+                  </span>
+                  <a
+                    href={SITE.figma.pluginUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Install from Figma Community"
+                  >
+                    Figma plugin
+                  </a>
                 </div>
 
                 <ul class="lp-feature-row" aria-label="Highlights">
                   <li>Products</li>
-                  <li>Figma library</li>
+                  <li>Figma plugin</li>
                   <li>Signals</li>
                   <li>Lab</li>
                 </ul>
@@ -454,16 +480,18 @@ export function LandingPage(props: { router: Router }) {
                   <strong>Engineers</strong>
                   <span>Lab Start here · Docs · forms that stay mounted.</span>
                 </button>
-                <button
-                  type="button"
+                <a
                   class="lp-path-card"
-                  onClick={go("/system#sys-color")}
+                  href={SITE.figma.pluginUrl}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <strong>Design</strong>
                   <span>
-                    System explorer · published Figma library Powers UI Kit.
+                    Install {SITE.figma.pluginLabel} from Figma Community —
+                    sync tokens, audit the kit. Also explore System in-app.
                   </span>
-                </button>
+                </a>
                 <button
                   type="button"
                   class="lp-path-card"
@@ -483,7 +511,9 @@ export function LandingPage(props: { router: Router }) {
         <section class="lp-section" id="demos">
           <Container size="xl">
             <div class="lp-section-head">
-              <h2 class="lp-section-title">Products built with Powers</h2>
+              <h2 class="lp-section-title">
+                Products built with {SITE.systemName}
+              </h2>
               <p class="lp-section-sub">
                 Flagship demos — full apps, not kitchen sinks. This is the
                 product proof; Lab and System teach the kit underneath.
@@ -492,35 +522,31 @@ export function LandingPage(props: { router: Router }) {
             <div class="lp-demo-grid">
               <a
                 class="lp-demo-card"
-                href="http://localhost:5180"
-                target="_blank"
-                rel="noreferrer"
+                href={SITE.demos.workspace.href}
+                target={demoBlank}
+                rel={demoRel}
               >
-                <div class="lp-demo-card__kicker">Flagship · :5180</div>
-                <h3>designlab206</h3>
+                <div class="lp-demo-card__kicker">Flagship · workspace</div>
+                <h3>{SITE.demos.workspace.label}</h3>
                 <p>
                   Freelance studio workspace: clients, pipeline, invoices, time
                   → draft bills, client portal. Local-first with real workflows.
                 </p>
-                <span class="lp-demo-card__cta">
-                  Open product → <code>pnpm example:starter</code>
-                </span>
+                <span class="lp-demo-card__cta">Open product →</span>
               </a>
               <a
                 class="lp-demo-card lp-demo-card--hearth"
-                href="http://localhost:5181"
-                target="_blank"
-                rel="noreferrer"
+                href={SITE.demos.hearth.href}
+                target={demoBlank}
+                rel={demoRel}
               >
-                <div class="lp-demo-card__kicker">Ops · :5181</div>
-                <h3>Hearth</h3>
+                <div class="lp-demo-card__kicker">Ops · hearth</div>
+                <h3>{SITE.demos.hearth.label}</h3>
                 <p>
                   Restaurant floor: menu, reservations, kitchen board, table
                   map. Same kit, different product surface.
                 </p>
-                <span class="lp-demo-card__cta">
-                  Open product → <code>pnpm example:restaurant</code>
-                </span>
+                <span class="lp-demo-card__cta">Open product →</span>
               </a>
             </div>
           </Container>
@@ -540,16 +566,28 @@ export function LandingPage(props: { router: Router }) {
             </div>
 
             <div class="lp-feat-grid">
-              {FEATURES.map((f) => (
-                <button
-                  type="button"
-                  class="lp-feat-card"
-                  onClick={go(f.href)}
-                >
-                  <strong>{f.title}</strong>
-                  <span>{f.body}</span>
-                </button>
-              ))}
+              {FEATURES.map((f) =>
+                f.external ? (
+                  <a
+                    class="lp-feat-card"
+                    href={f.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <strong>{f.title}</strong>
+                    <span>{f.body}</span>
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    class="lp-feat-card"
+                    onClick={go(f.href)}
+                  >
+                    <strong>{f.title}</strong>
+                    <span>{f.body}</span>
+                  </button>
+                ),
+              )}
             </div>
           </Container>
         </section>
@@ -689,7 +727,9 @@ mount(document.getElementById("app")!, () => (
       <footer class="lp-footer">
         <Container size="xl">
           <div class="lp-footer-inner">
-            <span>Powers · BSL-1.1 · source-available</span>
+            <span>
+              {SITE.name} · powered by {SITE.systemName} · BSL-1.1
+            </span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
                 Docs
@@ -706,19 +746,27 @@ mount(document.getElementById("app")!, () => (
               </button>
               <a
                 class="lp-footer-link"
-                href="http://localhost:5180"
-                target="_blank"
-                rel="noreferrer"
+                href={SITE.demos.workspace.href}
+                target={demoBlank}
+                rel={demoRel}
               >
-                designlab206
+                {SITE.demos.workspace.label}
               </a>
               <a
                 class="lp-footer-link"
-                href="http://localhost:5181"
+                href={SITE.demos.hearth.href}
+                target={demoBlank}
+                rel={demoRel}
+              >
+                {SITE.demos.hearth.label}
+              </a>
+              <a
+                class="lp-footer-link"
+                href={SITE.figma.pluginUrl}
                 target="_blank"
                 rel="noreferrer"
               >
-                Hearth
+                Figma plugin
               </a>
               <a
                 href="https://github.com/spowers2/powers"

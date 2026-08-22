@@ -81,7 +81,33 @@ type FigmaNode = {
   children?: FigmaNode[];
   boundVariables?: Record<string, unknown>;
   fills?: Array<Record<string, unknown>>;
+  /** Component / set property defs (API) */
+  componentPropertyDefinitions?: Record<
+    string,
+    { type: string; defaultValue?: unknown; variantOptions?: string[] }
+  >;
+  /** Layer → property bindings (unused props = library "invalid assets") */
+  componentPropertyReferences?: Record<string, string>;
 };
+
+/**
+ * Figma flags components with unused non-VARIANT properties as invalid library assets.
+ * Returns props defined on the set/component that no child layer references.
+ */
+function unusedComponentProps(n: FigmaNode): string[] {
+  const defs = n.componentPropertyDefinitions ?? {};
+  const used = new Set<string>();
+  const visit = (node: FigmaNode) => {
+    for (const ref of Object.values(node.componentPropertyReferences ?? {})) {
+      used.add(ref);
+    }
+    for (const c of node.children ?? []) visit(c);
+  };
+  visit(n);
+  return Object.entries(defs)
+    .filter(([key, def]) => def.type !== "VARIANT" && !used.has(key))
+    .map(([key, def]) => `${key.split("#")[0]} (${def.type})`);
+}
 
 function walk(
   n: FigmaNode,
@@ -315,6 +341,32 @@ async function main() {
     }
   }
 
+  // Unused component properties → Figma "Invalid assets" on library publish
+  const invalidAssets: Array<{
+    name: string;
+    id: string;
+    kind: string;
+    unusedProps: string[];
+  }> = [];
+  const collectInvalid = (node: FigmaNode, parentType: string | null) => {
+    if (
+      node.type === "COMPONENT_SET" ||
+      (node.type === "COMPONENT" && parentType !== "COMPONENT_SET")
+    ) {
+      const unused = unusedComponentProps(node);
+      if (unused.length) {
+        invalidAssets.push({
+          name: node.name,
+          id: node.id,
+          kind: node.type,
+          unusedProps: unused,
+        });
+      }
+    }
+    for (const c of node.children ?? []) collectInvalid(c, node.type);
+  };
+  collectInvalid(root, null);
+
   const variables = await fetchVariables();
 
   const report = {
@@ -341,13 +393,18 @@ async function main() {
       nodeCount: acc.all.length,
     },
     bindingSample: binding,
+    /** Matches Figma library publish "Invalid assets" (unused properties). */
+    invalidAssets,
     variables,
     health: {
       catalogComplete: missing.length === 0 && extra.length === 0,
       variablesReadable: variables.status === "ok",
       patternsPagePresent: Boolean(patternsPage),
+      noInvalidAssets: invalidAssets.length === 0,
       bindingNotes:
         "pct = share of nodes with any boundVariables. rawSolidFills = solid fills without variable binding (approx).",
+      invalidAssetsNotes:
+        "Unused non-VARIANT component properties make Figma mark the component as an invalid library asset. Delete or wire them in the Properties panel.",
     },
   };
 
@@ -387,6 +444,16 @@ async function main() {
   if (missing.length) console.log("  missing:", missing.join(", "));
   if (extra.length) console.log("  extra:", extra.join(", "));
   console.log(`Patterns page: ${patternsPage?.name ?? "(none)"}`);
+  if (invalidAssets.length) {
+    console.log(`Invalid assets (unused props — library publish): ${invalidAssets.length}`);
+    for (const a of invalidAssets) {
+      console.log(`  ${a.name}: ${a.unusedProps.join(", ")}`);
+    }
+    console.log("  Fix: Figma → select component → Properties → delete or apply unused props.");
+    console.log("  See design-kit/PUBLISH_LIBRARY.md");
+  } else {
+    console.log("Invalid assets: none (no unused component properties detected)");
+  }
   console.log("Binding sample (% nodes with Variables):");
   for (const [k, v] of Object.entries(binding)) {
     console.log(

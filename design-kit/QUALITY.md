@@ -20,8 +20,9 @@ Writes `figma/audit-report.json`. Re-run after Figma edits.
 | Hard-coded solid fills | some remain on Badge, Dialog, Switch, Text muted | drive from color Variables |
 | Variables REST API | token lacks `file_variables:read` | optional — regenerate PAT |
 | File structure | one page, one mega-frame | optional split by section pages |
-| Team library published | unknown | publish when core feels solid |
-| Pattern screens | none | 2–3 composed examples |
+| Team library published | published (republish after kit edits) | keep |
+| Invalid assets on publish | **Card** had unused `Padded` / `Interactive` props | delete or wire them — see [PUBLISH_LIBRARY.md](./PUBLISH_LIBRARY.md) |
+| Pattern screens | page **99 Patterns** | expand as needed |
 
 ## Priority order (most important first)
 

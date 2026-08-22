@@ -2,6 +2,15 @@
 
 Runs **inside Figma**, so it can create/update **Local Variables** without Enterprise REST API.
 
+**Status:** **Live on Figma Community** —  
+[figma.com/community/plugin/1671016490810398688](https://www.figma.com/community/plugin/1671016490810398688)
+
+## Install (everyone)
+
+1. Open any Figma file (ideally **Powers UI Kit**).  
+2. **Resources → Plugins** (or **Plugins** menu) → search **Powers Design Kit**, **or** open the [Community page](https://www.figma.com/community/plugin/1671016490810398688) → **Open**.  
+3. Run **Sync Variables** / **Audit catalog** / **Create stubs** as needed.
+
 ## Community listing assets
 
 | Asset | Path |
@@ -32,7 +41,9 @@ pnpm design-kit:plugin:build
 
 Outputs `design-kit/plugin/dist/`.
 
-## Install in Figma (one-time)
+## Local / Development install (maintainers)
+
+Prefer the Community install for day-to-day use. Use Development only when testing an unpublished build:
 
 1. Open **Powers UI Kit** in Figma.  
 2. Menu → **Plugins → Development → Import plugin from manifest…**  
@@ -44,7 +55,7 @@ Outputs `design-kit/plugin/dist/`.
 
 4. Run **Plugins → Development → Powers Design Kit**.
 
-After token/catalog changes in the repo:
+After token/catalog changes in the repo (then publish a Community update when ready):
 
 ```bash
 pnpm design-kit:build && pnpm design-kit:plugin:build

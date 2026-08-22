@@ -25,6 +25,9 @@
     "example:browser": "pnpm --filter @powers/example-browser dev",
     "example:starter": "pnpm --filter @powers/app-starter dev",
     "example:restaurant": "pnpm --filter @powers/restaurant-demo dev",
+    "deploy:zip:starter": "pnpm --filter @powers/app-starter deploy:zip",
+    "deploy:zip:restaurant": "pnpm --filter @powers/restaurant-demo deploy:zip",
+    "build:lab206": "bash scripts/build-lab206-site.sh",
     "example:ssr-islands": "pnpm --filter @powers/example-ssr-islands start",
     "new-app": "bash scripts/new-app.sh",
     "create-app": "bash scripts/create-powers.sh",
@@ -32,11 +35,15 @@
     "design-kit:check": "pnpm --filter @powers/design-kit check",
     "design-kit:figma-audit": "pnpm --filter @powers/design-kit figma:audit",
     "design-kit:plugin:build": "pnpm --filter @powers/figma-plugin build",
+    "code-connect:parse": "figma connect parse",
+    "code-connect:publish": "figma connect publish",
+    "code-connect:unpublish": "figma connect unpublish --label=Powers",
     "clean": "pnpm -r exec rm -rf dist dist-size coverage *.tsbuildinfo",
     "gh": ".tools/gh",
     "pr:create": ".tools/gh pr create"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.5.3",
     "typescript": "^5.8.2"
   }
 }

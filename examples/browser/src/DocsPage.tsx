@@ -17,7 +17,11 @@ import {
   Text,
 } from "@powers/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
+import { SITE } from "./siteConfig.js";
 import "./docs.css";
+
+const demoBlank = import.meta.env.DEV ? "_blank" : undefined;
+const demoRel = import.meta.env.DEV ? "noreferrer" : undefined;
 
 const DOC_SECTIONS = [
   "paths",
@@ -31,6 +35,7 @@ const DOC_SECTIONS = [
   "api-ui",
   "api-animate",
   "api-router",
+  "public-sector",
   "next",
 ] as const;
 
@@ -110,6 +115,15 @@ export function DocsPage(props: { router: Router }) {
             This page is the developer entry point: install, three rules, a
             first app, then a package-by-package API cheat sheet. Lab and System
             are for practice and browsing components — start here if you’re new.
+            Designers: install{" "}
+            <a
+              href={SITE.figma.pluginUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {SITE.figma.pluginLabel}
+            </a>{" "}
+            from Figma Community.
           </Text>
           <Stack direction="row" gap={2} wrap>
             <Button onClick={go("/lab")}>Practice in Lab</Button>
@@ -118,19 +132,19 @@ export function DocsPage(props: { router: Router }) {
             </Button>
             <a
               class="docs-demo-link"
-              href="http://localhost:5180"
-              target="_blank"
-              rel="noreferrer"
+              href={SITE.demos.workspace.href}
+              target={demoBlank}
+              rel={demoRel}
             >
-              designlab206 demo →
+              {SITE.demos.workspace.label} demo →
             </a>
             <a
               class="docs-demo-link"
-              href="http://localhost:5181"
-              target="_blank"
-              rel="noreferrer"
+              href={SITE.demos.hearth.href}
+              target={demoBlank}
+              rel={demoRel}
             >
-              Hearth restaurant →
+              {SITE.demos.hearth.label} →
             </a>
           </Stack>
         </Stack>
@@ -147,6 +161,7 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("api-ui", "ui")}
           {tocBtn("api-animate", "animate")}
           {tocBtn("api-router", "router")}
+          {tocBtn("public-sector", "Public sector")}
           {tocBtn("next", "What next")}
         </nav>
 
@@ -683,6 +698,36 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           />
         </Section>
 
+        <Section id="public-sector" title="Public sector (honest)">
+          <Alert tone="info" title="UI system — not a FedRAMP product">
+            Powers can power government-facing and internal apps. Authority to
+            operate (ATO), identity, logging, and data residency belong to the{" "}
+            <strong>deployed application and its host</strong> — not to this
+            library.
+          </Alert>
+          <Stack gap={2}>
+            <Text size="sm" muted>
+              <strong>Good fit:</strong> contractors and teams building portals /
+              case tools / ops UIs with Powers components and the Figma kit.
+            </Text>
+            <Text size="sm" muted>
+              <strong>Not claimed:</strong> FedRAMP / StateRAMP for{" "}
+              <Code>@powers/*</Code>, Login.gov / CAC built-in, or hosting
+              CUI/PII on lab206 demos.
+            </Text>
+            <Text size="sm" muted>
+              <strong>Ship checklist:</strong> HTTPS, security headers, no
+              secrets in the static bundle, customer IdP, a11y plan. Formal VPAT
+              / Section 508 is a funded roadmap item — not checkbox theater.
+            </Text>
+            <Text size="sm" muted>
+              Full write-up in the repo: <Code>docs/GOVERNMENT.md</Code> ·
+              deploy notes <Code>docs/DEPLOY.md</Code> ·{" "}
+              <Code>SECURITY.md</Code>.
+            </Text>
+          </Stack>
+        </Section>
+
         <Section id="next" title="6. Recommended path for new devs">
           <ol class="docs-steps">
             <li>
@@ -699,8 +744,8 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               density
             </li>
             <li>
-              <strong>Demos</strong> — designlab206 (:5180) + Hearth (:5181) for
-              real product patterns
+              <strong>Demos</strong> — {SITE.demos.workspace.label} +{" "}
+              {SITE.demos.hearth.label} for real product patterns
             </li>
             <li>
               Repo markdown: <Code>docs/GOLDEN_PATH.md</Code>,{" "}
@@ -715,19 +760,19 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
             </Button>
             <a
               class="docs-demo-link"
-              href="http://localhost:5180"
-              target="_blank"
-              rel="noreferrer"
+              href={SITE.demos.workspace.href}
+              target={demoBlank}
+              rel={demoRel}
             >
-              designlab206 →
+              {SITE.demos.workspace.label} →
             </a>
             <a
               class="docs-demo-link"
-              href="http://localhost:5181"
-              target="_blank"
-              rel="noreferrer"
+              href={SITE.demos.hearth.href}
+              target={demoBlank}
+              rel={demoRel}
             >
-              Hearth →
+              {SITE.demos.hearth.label} →
             </a>
           </Stack>
         </Section>

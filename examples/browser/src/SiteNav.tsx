@@ -9,6 +9,7 @@ import {
   type ThemeController,
   type PaletteController,
 } from "@powers/ui";
+import { SITE } from "./siteConfig.js";
 
 export function SiteNav(props: {
   router: Router;
@@ -26,7 +27,7 @@ export function SiteNav(props: {
             to="/"
             class="site-brand"
             exact
-            aria-label="Powers home"
+            aria-label={`${SITE.name} home`}
             onClick={() => {
               router.navigate("/");
               if (typeof window !== "undefined") {
@@ -35,7 +36,7 @@ export function SiteNav(props: {
             }}
           >
             <span class="site-mark" aria-hidden="true" />
-            <span class="site-brand-label">Powers</span>
+            <span class="site-brand-label">{SITE.name}</span>
           </Link>
 
           <nav class="site-nav-links" aria-label="Primary">
@@ -54,21 +55,30 @@ export function SiteNav(props: {
             <span class="site-nav-sep" aria-hidden="true" />
             <a
               class="site-nav-demo"
-              href="http://localhost:5180"
-              target="_blank"
-              rel="noreferrer"
-              title="Flagship product — freelance workspace"
+              href={SITE.demos.workspace.href}
+              target={import.meta.env.DEV ? "_blank" : undefined}
+              rel={import.meta.env.DEV ? "noreferrer" : undefined}
+              title={SITE.demos.workspace.title}
             >
-              designlab206
+              {SITE.demos.workspace.label}
             </a>
             <a
               class="site-nav-demo"
-              href="http://localhost:5181"
+              href={SITE.demos.hearth.href}
+              target={import.meta.env.DEV ? "_blank" : undefined}
+              rel={import.meta.env.DEV ? "noreferrer" : undefined}
+              title={SITE.demos.hearth.title}
+            >
+              {SITE.demos.hearth.label}
+            </a>
+            <a
+              class="site-nav-demo"
+              href={SITE.figma.pluginUrl}
               target="_blank"
               rel="noreferrer"
-              title="Restaurant product demo"
+              title="Powers Design Kit — Figma Community"
             >
-              Hearth
+              Figma plugin
             </a>
           </nav>
 

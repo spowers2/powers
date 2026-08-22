@@ -28,7 +28,13 @@ export function createApp(opts: {
 }) {
   const { theme, density, toaster } = opts;
 
+  // Subdirectory deploys (e.g. lab206.com/workspace/) use hash routes so
+  // deep links work without a server rewrite / basename.
+  const routerMode =
+    import.meta.env.BASE_URL === "/" ? ("history" as const) : ("hash" as const);
+
   const router = createRouter({
+    mode: routerMode,
     routes: [
       {
         path: "/",

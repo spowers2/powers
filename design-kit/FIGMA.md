@@ -8,7 +8,8 @@ Visual source of truth for the design kit. Machine specs stay in this repo (`tok
 |---|---|
 | Source file **Powers UI Kit** | Live (file key below) |
 | **Team / personal library** | **Published** — enable in Assets on product files |
-| Figma plugin **Powers Design Kit** | Community submit / update (id `1671016490810398688`) |
+| Figma plugin **Powers Design Kit** | **Live on Community** — id [`1671016490810398688`](https://www.figma.com/community/plugin/1671016490810398688) |
+| **Code Connect** | Templates in `packages/ui/src/code-connect/` — see [CODE_CONNECT.md](./CODE_CONNECT.md) |
 | Code mirror | `@powers/ui` + this design-kit |
 
 ## Design with the library (product workflow)
@@ -94,8 +95,8 @@ pnpm design-kit:figma-audit    # needs .env.local; writes figma/audit-report.jso
 pnpm design-kit:plugin:build   # embed tokens/catalog → plugin/dist
 ```
 
-**Figma plugin (phase 3):** import `plugin/manifest.json` via  
-Plugins → Development → Import plugin from manifest — see [plugin/README.md](./plugin/README.md).
+**Figma plugin (phase 3):** install from [Community](https://www.figma.com/community/plugin/1671016490810398688)  
+(**Plugins → Powers Design Kit**), or import `plugin/manifest.json` via Development for local builds — see [plugin/README.md](./plugin/README.md).
 
 - Sync Variables (works without Enterprise REST)  
 - Audit catalog  

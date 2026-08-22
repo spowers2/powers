@@ -9,9 +9,10 @@ Design-side companion to `@powers/ui`.
 | **1. Tokens** | **Ready** | instrument + dual electric export |
 | **2. Component specs** | **Ready** | 49-component catalog |
 | **3. Figma file** | **Linked + audited** | [FIGMA.md](./FIGMA.md) · [QUALITY.md](./QUALITY.md) |
-| **4. Figma plugin** | **Ready** | [plugin/](./plugin/) — Sync / Audit / Stubs |
+| **4. Figma plugin** | **Live on Community** | [plugin/](./plugin/) · [Community listing](https://www.figma.com/community/plugin/1671016490810398688) |
 | **5. Library** | **Published** | Enable **Powers UI Kit** in product files · [PUBLISH_LIBRARY.md](./PUBLISH_LIBRARY.md) |
-| **6. Pro pack** | Scaffold | [pro/](./pro/) |
+| **6. Code Connect** | **Scaffolded** | Dev Mode snippets · [CODE_CONNECT.md](./CODE_CONNECT.md) |
+| **7. Pro pack** | Scaffold (free vs Pro clarified) | [pro/](./pro/) · offer [docs/OFFER.md](../docs/OFFER.md) |
 
 ### Product design loop
 
@@ -25,6 +26,8 @@ Design-side companion to `@powers/ui`.
 pnpm design-kit:build          # tokens + component catalog
 pnpm design-kit:figma-audit    # live Figma ↔ catalog (needs .env.local)
 pnpm design-kit:plugin:build   # embed data → plugin/dist
+pnpm code-connect:parse        # validate Code Connect templates
+pnpm code-connect:publish      # push snippets to Figma Dev Mode (Org/Enterprise)
 ```
 
 ## Phase 1 — import tokens into Figma
