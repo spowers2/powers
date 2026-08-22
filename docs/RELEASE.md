@@ -65,7 +65,7 @@ Use this before the first public npm publish / website launch.
 3. [x] Announce draft — [ANNOUNCE.md](./ANNOUNCE.md)  
 4. [x] Secret sweep (`.env.local` gitignored; no real tokens in git history)  
 5. [x] **`pnpm run check` green** (2026-08-22)  
-6. [ ] **Push `main`** · **Make GitHub repo public**  
+6. [x] **Push `main`** · **GitHub repo is public** (2026-08-22) · homepage https://lab206.com  
 7. [ ] Post announce (X / GH) using [ANNOUNCE.md](./ANNOUNCE.md) — **BSL / source-available**, not “open source”  
 8. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`
 
