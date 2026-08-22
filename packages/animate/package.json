@@ -7,27 +7,35 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./gsap": {
-      "types": "./src/gsap.ts",
-      "import": "./src/gsap.ts",
-      "default": "./src/gsap.ts"
+      "types": "./dist/gsap.d.ts",
+      "development": "./src/gsap.ts",
+      "import": "./dist/gsap.js",
+      "default": "./dist/gsap.js"
     }
   },
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.css",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test src/*.test.ts",
-    "size": "node --import tsx scripts/size.ts"
+    "size": "node --import tsx scripts/size.ts",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@powers/core": "workspace:*"
@@ -47,5 +55,20 @@
     "typescript": "^5.8.2"
   },
   "author": "Scott Powers",
-  "private": true
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://lab206.com",
+  "bugs": {
+    "url": "https://github.com/spowers2/powers/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spowers2/powers.git",
+    "directory": "packages/animate"
+  }
 }

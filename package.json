@@ -15,6 +15,8 @@
     "test": "pnpm -r --filter=./packages/* run test",
     "test:core": "pnpm --filter @powers/core test",
     "typecheck": "pnpm -r --filter=./packages/* run typecheck",
+    "publish:dry-run": "pnpm run build && pnpm -r --filter=./packages/* publish --dry-run --access public --no-git-checks",
+    "publish:packages": "pnpm run build && pnpm -r --filter=./packages/* publish --access public --no-git-checks",
     "bench": "pnpm --filter @powers/core bench",
     "size": "pnpm --filter @powers/core size && pnpm --filter @powers/animate size && pnpm --filter @powers/dom size && pnpm --filter @powers/router size && pnpm --filter @powers/ui size",
     "check": "pnpm typecheck && pnpm test && pnpm size",

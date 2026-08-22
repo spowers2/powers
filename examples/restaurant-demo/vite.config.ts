@@ -1,6 +1,10 @@
 import { defineConfig } from "vite";
+import { powersSrcAliases } from "../powers-vite-alias.mjs";
 
 export default defineConfig({
+  resolve: {
+    alias: powersSrcAliases(import.meta.url),
+  },
   server: {
     port: 5181,
     open: false,

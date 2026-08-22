@@ -9,7 +9,7 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 | **Try it** | [lab206.com](https://lab206.com) — Lab · Docs · System · product demos |
 | **Figma** | Library **Powers UI Kit** · [Community plugin](https://www.figma.com/community/plugin/1671016490810398688) |
 | **License** | [BSL-1.1](./LICENSE) (**source-available**, not OSI open source) · [Commercial](./LICENSE-COMMERCIAL.md) |
-| **npm** | `@powers/*` — still **`private: true`** until a deliberate public cut |
+| **npm** | `@powers/*@0.1.0` — publish-ready; see [docs/NPM.md](./docs/NPM.md) |
 
 ---
 
@@ -23,9 +23,15 @@ Hub in-repo: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [GOLDEN_PATH](./doc
 
 ---
 
-## Clone & run (from source)
+## Install
 
-Packages are not on the public registry yet. Develop against this monorepo:
+```bash
+pnpm add @powers/core @powers/dom @powers/ui
+```
+
+Full install guide: [docs/NPM.md](./docs/NPM.md). Try the demos first at [lab206.com](https://lab206.com).
+
+## Clone & run (from source)
 
 ```bash
 git clone https://github.com/spowers2/powers.git

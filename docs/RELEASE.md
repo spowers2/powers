@@ -69,14 +69,18 @@ Use this before the first public npm publish / website launch.
 7. [ ] Post announce (X / GH) using [ANNOUNCE.md](./ANNOUNCE.md) — **BSL / source-available**, not “open source”  
 8. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`
 
-## npm cut (later — separate launch)
+## npm cut (`0.1.0`)
 
-1. [ ] Set coordinated versions (today: independent; core `0.1.1`, dom `0.3.0`, others `0.1.0` — document or align)
-2. [ ] Switch package exports from `src` → built `dist` for consumers
-3. [ ] Remove `"private": true` only when ready; `npm publish --access public` — **BUSL-1.1**
-4. [ ] Tag `v0.1.0` (or matching)
-5. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro (see [LICENSING.md](./LICENSING.md) · [OFFER.md](./OFFER.md))
-6. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
+1. [x] Coordinated versions — all `@powers/*` at **0.1.0**
+2. [x] Exports point at **`dist`** (plus `development` → `src` for monorepo Vite)
+3. [x] `"private": false` + `publishConfig.access: public`
+4. [ ] **`pnpm publish:packages`** (after `npm login` to an account that can publish `@powers`)
+5. [ ] Tag `v0.1.0` on GitHub
+6. [ ] Announce npm install in [ANNOUNCE.md](./ANNOUNCE.md) / social
+7. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro
+8. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
+
+Dry run: `pnpm publish:dry-run` · Docs: [NPM.md](./NPM.md)
 
 Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). See [LICENSING.md](./LICENSING.md).
 
