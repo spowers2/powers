@@ -53,8 +53,8 @@ Use this before the first public npm publish / website launch.
 ## Design / Figma
 
 - [x] Tokens export + 49-component catalog  
-- [x] Figma plugin id `1671016490810398688` (Community submit)  
-- [ ] Plugin **approved/live** on Community (watch review)  
+- [x] Figma plugin id `1671016490810398688`  
+- [x] Plugin **approved / live** on [Figma Community](https://www.figma.com/community/plugin/1671016490810398688)  
 - [x] Publish **Powers UI Kit** as a Figma library (use in product files)  
 - [ ] Optional: Pro SKU (`design-kit/pro/`)
 
@@ -77,7 +77,8 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 
 - GSAP optional adapter — shipped as `@powers/animate/gsap` (peer)  
 - Streaming SSR  
-- Full a11y audit / ARIA cookbook  
+- Full a11y audit / ARIA cookbook (VPAT / Section 508 when funded — see [GOVERNMENT.md](./GOVERNMENT.md))  
+ 
 - Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  
 - AI Lab features (parked)
 

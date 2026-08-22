@@ -45,11 +45,14 @@ Most **app builders never pay** under BSL. Revenue comes from Pro extras + comme
 Optional paid packages under a **separate proprietary license** even while core stays BSL:
 
 - Extra components / patterns  
-- Premium themes / Figma kit  
+- Premium themes / Figma kit ([design-kit/pro/](./design-kit/pro/))  
 - Starter templates beyond the free demos  
 - Hosted Lab / design-token tooling (later SaaS)
 
 Sell via LemonSqueezy, Gumroad, or Stripe. That is the practical path to “a little cash” without banning normal app builders.
+
+**Offer sheet (who pays / what they get):** [docs/OFFER.md](./docs/OFFER.md).  
+**Put a finished app online (static):** [docs/DEPLOY.md](./docs/DEPLOY.md).
 
 ## Trademark
 

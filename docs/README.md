@@ -14,6 +14,10 @@ Private repo today; these docs are written so they can ship as-is when the proje
 | API cheat sheet (markdown) | [API.md](./API.md) |
 | **Create & customize components** | [COMPONENTS.md](./COMPONENTS.md) |
 | Getting started (private starter) | [GETTING_STARTED.md](./GETTING_STARTED.md) · `pnpm example:starter` |
+| **Put an app online (static host)** | [DEPLOY.md](./DEPLOY.md) · `pnpm deploy:zip` |
+| **lab206.com → LiveCode** | [LAB206_LIVECODE.md](./LAB206_LIVECODE.md) · `pnpm build:lab206` |
+| **What we sell (offer draft)** | [OFFER.md](./OFFER.md) |
+| **Government / public sector** | [GOVERNMENT.md](./GOVERNMENT.md) · [SECURITY.md](../SECURITY.md) |
 | **Golden path (~15 min first screen)** | [GOLDEN_PATH.md](./GOLDEN_PATH.md) |
 | Stable API freeze notes | [STABLE.md](./STABLE.md) |
 | Size budgets | [SIZE.md](./SIZE.md) · `pnpm size` |

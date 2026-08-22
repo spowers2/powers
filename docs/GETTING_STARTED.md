@@ -19,6 +19,9 @@ Lab Start here: Hello → Form → Theme at `/lab?recipe=hello`.
 
 Rules: [USABILITY.md](./USABILITY.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md).
 
+**Put it online:** build → zip → upload to any static host — [DEPLOY.md](./DEPLOY.md).  
+**Free vs paid:** [OFFER.md](./OFFER.md).
+
 ## Paths
 
 | Goal | Command / route |

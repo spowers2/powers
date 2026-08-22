@@ -53,8 +53,10 @@ Normal app developers stay free under BSL Additional Use Grant → adoption with
 - [x] README / CONTRIBUTING / RELEASE / footer say **BSL / source-available**  
 - [x] package.json `license` fields = `BUSL-1.1`  
 - [ ] Repo still **private** until you flip visibility (do this last)  
-- [ ] Optional: paid Pro package structure  
-- [ ] Optional: simple LemonSqueezy / Gumroad license SKU  
+- [x] Offer clarity draft — [OFFER.md](./OFFER.md)  
+- [x] Pro kit packaging outline — [design-kit/pro/](../design-kit/pro/)  
+- [x] Friendly static deploy path — [DEPLOY.md](./DEPLOY.md)  
+- [ ] Optional: simple LemonSqueezy / Gumroad license SKU + live prices  
 - [ ] **Do not** publish to npm until license + pricing story match
 
 ---
