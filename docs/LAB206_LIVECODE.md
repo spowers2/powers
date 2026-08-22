@@ -122,5 +122,5 @@ pnpm build:lab206
 
 - [DEPLOY.md](./DEPLOY.md) — general static hosting  
 - [OFFER.md](./OFFER.md) — product positioning  
-- [GOVERNMENT.md](./GOVERNMENT.md) — demos ≠ ATO’d production data  
+- [GOVERNMENT.md](./GOVERNMENT.md) — public sector as one audience  
 - Figma plugin (live): [Community · Powers Design Kit](https://www.figma.com/community/plugin/1671016490810398688)  

@@ -70,7 +70,7 @@ Deploy path for freelancers: [DEPLOY.md](./DEPLOY.md).
 
 - [LICENSING.md](./LICENSING.md) — model & hard truths  
 - [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) — when to buy  
-- [GOVERNMENT.md](./GOVERNMENT.md) — public sector (not FedRAMP theater)  
+- [GOVERNMENT.md](./GOVERNMENT.md) — public sector as one ICP  
 - [design-kit/pro/README.md](../design-kit/pro/README.md) — Pro vs free kit  
 - [DEPLOY.md](./DEPLOY.md) — put an app online (static)  
 - [DX_STRATEGY.md](./DX_STRATEGY.md) — how we win on product  

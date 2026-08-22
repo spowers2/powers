@@ -117,7 +117,7 @@ pnpm design-kit:build && pnpm design-kit:plugin:build
 |---|---|
 | [LEARN.md](./docs/LEARN.md) | 10-minute mental model |
 | [OFFER.md](./docs/OFFER.md) | Free vs paid (commercial / Pro) |
-| [GOVERNMENT.md](./docs/GOVERNMENT.md) | Public sector — UI layer, not FedRAMP |
+| [GOVERNMENT.md](./docs/GOVERNMENT.md) | Public sector as one audience among several |
 | [DEPLOY.md](./docs/DEPLOY.md) | Static hosting |
 | [RELEASE.md](./docs/RELEASE.md) | Public / npm checklist |
 | [STYLING.md](./docs/STYLING.md) · [DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md) | Tokens & primitives |

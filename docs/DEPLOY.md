@@ -143,7 +143,7 @@ Powers is a **product UI system**, not a Squarespace replacement. Hosting the fi
 
 ## Public-sector / hardened host checklist
 
-Use this when the **customer’s** environment (not Powers marketing demos) must pass a security review. Powers is the UI layer; **their** ATO covers the system — see [GOVERNMENT.md](./GOVERNMENT.md).
+Use this when shipping into a hardened or regulated customer environment (not lab206 demos). See [GOVERNMENT.md](./GOVERNMENT.md).
 
 - [ ] **HTTPS only** (redirect HTTP → HTTPS at the edge)  
 - [ ] **Security headers** as required by the agency (examples teams often set): `Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Frame-Ancestors` / clickjacking controls  

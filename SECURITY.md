@@ -58,10 +58,9 @@ Powers is a **UI runtime + component kit**. It does not replace your auth, API, 
 
 ---
 
-## Government / public sector
+## Public sector
 
-Powers can be used to **build** government apps. The library is **not** itself FedRAMP-authorized.  
-See [docs/GOVERNMENT.md](./docs/GOVERNMENT.md).
+Powers is used to build product UIs in many environments, including public-sector projects. See [docs/GOVERNMENT.md](./docs/GOVERNMENT.md).
 
 ## Related
 
