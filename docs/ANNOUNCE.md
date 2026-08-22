@@ -44,7 +44,7 @@ Powers is a coherent stack: signals and ownership in `@powers/core`, DOM/JSX, ro
 3. `git clone` → `pnpm install` → `pnpm example:browser`
 
 Commercial / Pro: see [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) and [OFFER.md](./OFFER.md).  
-**Contact:** spowers2@me.com · [GitHub Issues](https://github.com/spowers2/powers/issues/new)
+**Contact:** scott@lab206.com · [GitHub Issues](https://github.com/spowers2/powers/issues/new)
 
 ---
 

@@ -39,7 +39,7 @@ This doc is the internal/commercial clarity sheet. Storefront links stay TBD unt
 
 | SKU | Contents (planned) | Checkout |
 |---|---|---|
-| **Commercial license** | Competing-offering waiver, invoice, optional indemnity/support | Email [spowers2@me.com](mailto:spowers2@me.com?subject=Powers%20commercial%20license) / later LemonSqueezy |
+| **Commercial license** | Competing-offering waiver, invoice, optional indemnity/support | Email [scott@lab206.com](mailto:scott@lab206.com?subject=Powers%20commercial%20license) / later LemonSqueezy |
 | **Pro Design Kit** | Premium Figma pack, patterns, Pro plugin bits — [design-kit/pro/](../design-kit/pro/) | TBD |
 | **Paid starters** | designlab206-class / Hearth-class templates as licensed projects | TBD |
 | **Hosted Lab / demos** | Always-on proof on your server (marketing) | Free marketing; sandboxes later |

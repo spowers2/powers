@@ -128,9 +128,9 @@ pnpm design-kit:build && pnpm design-kit:plugin:build
 
 ## Contact
 
-- **Email:** [spowers2@me.com](mailto:spowers2@me.com?subject=Powers%20%E2%80%94%20contact)  
+- **Email (lab206 / Powers):** [scott@lab206.com](mailto:scott@lab206.com?subject=Powers%20%E2%80%94%20contact)  
 - **GitHub Issues:** [new issue](https://github.com/spowers2/powers/issues/new)  
-- **Commercial / license:** [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md) (same email; subject **Powers commercial license**)
+- **Commercial / license:** [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md) · [scott@lab206.com](mailto:scott@lab206.com?subject=Powers%20commercial%20license) (GitHub profile mail: spowers2@me.com also fine)
 
 Also on [lab206.com](https://lab206.com) — nav and footer **Contact**.
 

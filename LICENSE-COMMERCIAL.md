@@ -25,7 +25,7 @@ Buy (or request) a commercial license if you want to:
 
 Until a storefront exists, contact the copyright holder:
 
-- **Email:** [spowers2@me.com](mailto:spowers2@me.com?subject=Powers%20commercial%20license)  
+- **Email:** [scott@lab206.com](mailto:scott@lab206.com?subject=Powers%20commercial%20license)  
 - **GitHub:** [@spowers2](https://github.com/spowers2) / repo [spowers2/powers](https://github.com/spowers2/powers) · [open an issue](https://github.com/spowers2/powers/issues/new)  
 - Use subject line: **Powers commercial license**
 
