@@ -758,13 +758,13 @@ mount(document.getElementById("app")!, () => (
               >
                 Figma plugin
               </a>
-              <a
+              <button
+                type="button"
                 class="lp-footer-link"
-                href={SITE.contact.mailto}
-                title={`Email ${SITE.contact.email}`}
+                onClick={go(SITE.contact.href)}
               >
                 {SITE.contact.label}
-              </a>
+              </button>
               <a
                 class="lp-footer-link"
                 href={SITE.contact.githubIssues}

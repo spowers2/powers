@@ -24,10 +24,13 @@ pnpm example:restaurant # :5181
 | `/lab` | Power Lab |
 | `/system` | Design system |
 | `/docs` | Docs |
+| `/contact` | Contact **form** (no mail app) → `contact.php` → scott@lab206.com |
 | `/workspace/` | designlab206 (hash routes: `/workspace/#/clients`) |
 | `/hearth/` | Hearth (hash routes: `/hearth/#/menu`) |
 
 Sub-apps use **hash routing** so deep links work even if LiveCode does not honor Apache `.htaccess` rewrites. Lab at the domain root uses normal paths when rewrites work.
+
+**Contact form:** the site root must include `contact.php` (copied from `public/` on build). cPanel needs PHP `mail()` enabled, and a mailbox/forwarder for **scott@lab206.com**.
 
 ## Build the upload folder
 

@@ -39,10 +39,10 @@ export const SITE = {
    */
   contact: {
     label: "Contact",
-    /** Public site / lab206.com */
+    /** In-app form route (no mailto / mail app) */
+    href: "/contact",
+    /** Shown on the form; PHP delivers here */
     email: "scott@lab206.com",
-    mailto:
-      "mailto:scott@lab206.com?subject=Powers%20%E2%80%94%20contact%20from%20lab206",
     githubProfile: "https://github.com/spowers2",
     githubIssues: "https://github.com/spowers2/powers/issues/new",
     githubRepo: "https://github.com/spowers2/powers",

@@ -295,6 +295,20 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
   padding-block: var(--site-main-pad-y) var(--site-main-pad-bottom);
 }
 
+/* Contact form */
+.contact-form {
+  margin: 0;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* Landing owns its own section padding — no double top/bottom shell pad */
 .site-main--flush {
   padding-block: 0;

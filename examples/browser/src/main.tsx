@@ -28,6 +28,7 @@ import "@powers/ui/theme.css";
 import "./app.css";
 import { LandingPage } from "./LandingPage.js";
 import { DocsPage } from "./DocsPage.js";
+import { ContactPage } from "./ContactPage.js";
 import { SiteNav } from "./SiteNav.js";
 import { SystemPage } from "./SystemPage.js";
 import { LabPage } from "./lab/LabPage.js";
@@ -263,6 +264,10 @@ const router = createRouter({
     {
       path: "/system",
       component: () => SystemPage({ theme, density }),
+    },
+    {
+      path: "/contact",
+      component: () => ContactPage({ router }),
     },
   ],
   notFound: () => (
