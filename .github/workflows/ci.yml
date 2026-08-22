@@ -29,6 +29,10 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      # Package exports resolve types from dist/ — build before typecheck.
+      - name: Build packages
+        run: pnpm build
+
       - name: Typecheck packages
         run: pnpm typecheck
 
@@ -44,9 +48,8 @@ jobs:
       - name: Figma plugin build
         run: pnpm design-kit:plugin:build
 
-      - name: No legacy package scope in rebuilt dist
+      - name: No legacy package scope in dist
         run: |
-          pnpm build
           if grep -r '@power-ui' packages/*/dist 2>/dev/null; then
             echo "Found stale @power-ui references in packages/*/dist"
             exit 1
