@@ -9,5 +9,11 @@
     "jsxImportSource": "@powers/dom"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "dist"]
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/code-connect/**",
+    "src/**/*.figma.ts",
+    "dist"
+  ]
 }

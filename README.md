@@ -4,38 +4,53 @@
 
 Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos you can ship from. Not “React + a CSS framework”; one coherent stack.
 
-> Named for **Powers** — the kit behind the name.  
-> Status: **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · **design system**.  
-> Private monorepo while foundations harden (not on public npm yet).  
-> npm scope: `@powers/*`  
-> **License:** [Business Source License 1.1](./LICENSE) (source-available) · [Commercial](./LICENSE-COMMERCIAL.md) · [Licensing model](./docs/LICENSING.md) · [Trademarks](./docs/TRADEMARKS.md)
+| | |
+|---|---|
+| **Try it** | [lab206.com](https://lab206.com) — Lab · Docs · System · product demos |
+| **Figma** | Library **Powers UI Kit** · [Community plugin](https://www.figma.com/community/plugin/1671016490810398688) |
+| **License** | [BSL-1.1](./LICENSE) (**source-available**, not OSI open source) · [Commercial](./LICENSE-COMMERCIAL.md) |
+| **npm** | `@powers/*` — still **`private: true`** until a deliberate public cut |
 
-**New here?**
+---
+
+## Start here
+
+1. **See products** — [lab206.com](https://lab206.com) · [/workspace](https://lab206.com/workspace/) (designlab206) · [/hearth](https://lab206.com/hearth/)  
+2. **Design** — enable **Powers UI Kit** in Figma Assets · install [Powers Design Kit](https://www.figma.com/community/plugin/1671016490810398688)  
+3. **Learn** — [Lab · Start here](https://lab206.com/lab?recipe=hello) · [Docs](https://lab206.com/docs) · [System](https://lab206.com/system)
+
+Hub in-repo: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [GOLDEN_PATH](./docs/GOLDEN_PATH.md) · [USABILITY](./docs/USABILITY.md) · [LICENSING](./docs/LICENSING.md)
+
+---
+
+## Clone & run (from source)
+
+Packages are not on the public registry yet. Develop against this monorepo:
 
 ```bash
+git clone https://github.com/spowers2/powers.git
+cd powers
 pnpm install
-pnpm example:starter     # flagship product → http://localhost:5180  designlab206
-pnpm example:browser     # kit + Lab → http://localhost:5173
+pnpm example:browser     # Lab · Docs · System  → http://localhost:5173
+pnpm example:starter     # designlab206         → http://localhost:5180
+pnpm example:restaurant  # Hearth               → http://localhost:5181
+pnpm run check           # typecheck · test · size budgets
 ```
 
-| Order | What | Why |
-|---|---|---|
-| **1 · Product** | [designlab206](http://localhost:5180) · [Hearth](http://localhost:5181) | Real apps on Powers |
-| **2 · Design** | [Figma library **Powers UI Kit**](./design-kit/FIGMA.md) | Instances in product files |
-| **3 · Learn** | Lab [Start here](http://localhost:5173/lab?recipe=hello) · System · Docs | 10-minute path |
-
-Hub: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [USABILITY](./docs/USABILITY.md) · [GOLDEN_PATH](./docs/GOLDEN_PATH.md)
-
-### Design kit & Figma
-
-**Library published** as **Powers UI Kit** — enable it in Assets on any product file.  
-Source file, plugin, tokens: **[`design-kit/`](./design-kit/README.md)** · [FIGMA.md](./design-kit/FIGMA.md)
+Scaffold an app inside the workspace:
 
 ```bash
-pnpm design-kit:build && pnpm design-kit:plugin:build
+pnpm create-app my-ui      # minimal Vite + form + theme
+pnpm new-app my-feature    # fuller product starter
 ```
 
-> **npm:** `@powers/*` are **`private: true`** until a deliberate public cut.
+Ship a static site (e.g. lab206.com):
+
+```bash
+pnpm build:lab206          # → sites/lab206.com.zip
+```
+
+See [docs/DEPLOY.md](./docs/DEPLOY.md) · [docs/LAB206_LIVECODE.md](./docs/LAB206_LIVECODE.md).
 
 ---
 
@@ -47,27 +62,10 @@ pnpm design-kit:build && pnpm design-kit:plugin:build
 | `@powers/animate` | tween / spring on signals |
 | `@powers/dom` | mount, h, JSX, reactive props, Show, For |
 | `@powers/router` | createRouter, Link, navigate |
-| `@powers/ssr` | `renderToString` + **islands** hydrate API |
-| `@powers/ui` | **integrated styling** — tokens + primitives + BEM-ish utilities |
+| `@powers/ssr` | `renderToString` + islands hydrate API |
+| `@powers/ui` | tokens + primitives + theme / density |
 
----
-
-## Quick start
-
-```bash
-cd path/to/powers   # monorepo root
-pnpm install
-pnpm run check        # typecheck · test · size budgets (use "run" — pnpm has its own "ci")
-pnpm example:browser  # http://localhost:5173  — docs · lab · system
-pnpm example:starter  # http://localhost:5180  — designlab206
-pnpm example:restaurant  # http://localhost:5181  — Hearth
-# Minimal Vite app:           pnpm create-app my-app
-# Full product starter:       pnpm new-app my-feature
-```
-
-**Library quality:** [docs/USABILITY.md](./docs/USABILITY.md) · [docs/FOUNDATION.md](./docs/FOUNDATION.md) · [docs/STABLE.md](./docs/STABLE.md) · [docs/GOLDEN_PATH.md](./docs/GOLDEN_PATH.md) · [docs/SIZE.md](./docs/SIZE.md)
-
-### Design system + router (sketch)
+### Sketch
 
 ```tsx
 import "@powers/ui/theme.css";
@@ -97,16 +95,18 @@ mount(document.getElementById("app")!, () => (
 ));
 ```
 
-**Retheme everything:** edit `packages/ui/src/styles/tokens.css`  
-Guide: [`docs/DESIGN_SYSTEM.md`](./docs/DESIGN_SYSTEM.md)
+**Retheme:** edit `packages/ui/src/styles/tokens.css` · [DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)
 
 ---
 
-## Learn order
+## Design kit & Figma
 
-```
-signal → computed → effect → store → resource
-  → animate → mount/JSX → props → router → ui tokens/primitives
+- **Library:** **Powers UI Kit** (publish/enable in Assets)  
+- **Plugin (live):** [Powers Design Kit on Community](https://www.figma.com/community/plugin/1671016490810398688) — Sync Variables · Audit · Stubs  
+- **Repo:** [`design-kit/`](./design-kit/README.md) · [FIGMA.md](./design-kit/FIGMA.md)
+
+```bash
+pnpm design-kit:build && pnpm design-kit:plugin:build
 ```
 
 ---
@@ -115,25 +115,28 @@ signal → computed → effect → store → resource
 
 | Doc | Topic |
 |---|---|
-| [`LEARN.md`](./docs/LEARN.md) | 10-minute mental model |
-| [`ROADMAP.md`](./docs/ROADMAP.md) | **Ordered plan** (source of truth) |
-| [`STYLING.md`](./docs/STYLING.md) | **Integrated styling** (tokens · primitives · utilities) |
-| [`DESIGN_SYSTEM.md`](./docs/DESIGN_SYSTEM.md) | Tokens + primitives |
-| [`POWER_LAB.md`](./docs/POWER_LAB.md) | Learn-by-coding playground |
-| [`DOM.md`](./docs/DOM.md) | DOM + JSX + props |
-| [`ROUTER.md`](./docs/ROUTER.md) | Routing |
-| [`ANIMATION.md`](./docs/ANIMATION.md) | Motion (+ parked GSAP) |
-| [`NEXT.md`](./docs/NEXT.md) | Short checklist |
+| [LEARN.md](./docs/LEARN.md) | 10-minute mental model |
+| [OFFER.md](./docs/OFFER.md) | Free vs paid (commercial / Pro) |
+| [GOVERNMENT.md](./docs/GOVERNMENT.md) | Public sector — UI layer, not FedRAMP |
+| [DEPLOY.md](./docs/DEPLOY.md) | Static hosting |
+| [RELEASE.md](./docs/RELEASE.md) | Public / npm checklist |
+| [STYLING.md](./docs/STYLING.md) · [DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md) | Tokens & primitives |
+| [POWER_LAB.md](./docs/POWER_LAB.md) | Lab playground |
+| [SECURITY.md](./SECURITY.md) | Reporting · XSS/CSP notes |
 
 ---
 
-## Roadmap (summary)
+## License & commercial
 
-Canonical detail: **[`docs/ROADMAP.md`](./docs/ROADMAP.md)**
+**Business Source License 1.1** © Scott Powers
 
-| Done | Next (in order) | Parked |
-|---|---|---|
-| core → animate → dom → props → **router** → **ssr foundation** → **ui tokens** | Design system expansion → SSR islands → … | **GSAP adapter** (optional pro motion) |
+- **Free under BSL:** build apps and client work **with** Powers  
+- **Not free:** ship a **competing UI kit / design system** based on Powers  
+- **Commercial / Pro:** [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md) · [docs/OFFER.md](./docs/OFFER.md)
+
+Say **source-available (BSL)**, not “open source,” until a Change Date flips a version to Apache-2.0 (see [LICENSE](./LICENSE)).
+
+Trademark: the name **Powers** — [TRADEMARKS.md](./docs/TRADEMARKS.md).
 
 ---
 
@@ -141,22 +144,21 @@ Canonical detail: **[`docs/ROADMAP.md`](./docs/ROADMAP.md)**
 
 | Command | What |
 |---|---|
-| `pnpm test` | All packages |
-| `pnpm build` / `pnpm typecheck` | TypeScript |
-| `pnpm example:browser` | Full demo (router + design system) |
-| `pnpm example:kitchen-sink` | Core only |
-| `pnpm example:animate` | Motion demo |
-| `pnpm design-kit:build` | Tokens + Figma catalog |
+| `pnpm run check` | typecheck · test · size |
+| `pnpm example:browser` | Lab · Docs · System |
+| `pnpm example:starter` | designlab206 |
+| `pnpm example:restaurant` | Hearth |
+| `pnpm build:lab206` | Static zip for lab206.com |
+| `pnpm design-kit:build` | Tokens + catalog |
 | `pnpm design-kit:plugin:build` | Figma plugin bundle |
-| `pnpm design-kit:figma-audit` | Live Figma ↔ catalog (local PAT) |
 
-**Engines:** Node `>=20` (CI runs **Node 22**).
+**Engines:** Node `>=20` (CI: Node 22).
 
 ---
 
-## License
+## Status
 
-**Business Source License 1.1** © Scott Powers  
-
-Source-available: free for building apps; not free to ship a competing UI kit.  
-See [LICENSE](./LICENSE), [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md), [NOTICE](./NOTICE), [docs/LICENSING.md](./docs/LICENSING.md), and [docs/TRADEMARKS.md](./docs/TRADEMARKS.md) (the **Powers** name).
+- **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · UI design system  
+- **Public demos** — [lab206.com](https://lab206.com)  
+- **npm** — not published yet; use this repo / workspace  
+- **Announce draft** — [docs/ANNOUNCE.md](./docs/ANNOUNCE.md)

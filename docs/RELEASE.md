@@ -2,7 +2,7 @@
 
 Use this before the first public npm publish / website launch.
 
-**Repo today:** private monorepo **https://github.com/spowers2/powers** · product **Powers** · **BSL-1.1** (source-available) + commercial path + trademark policy.
+**Repo:** **https://github.com/spowers2/powers** · product **Powers** · site **[lab206.com](https://lab206.com)** · **BSL-1.1** (source-available) + commercial path + trademark policy.
 
 ---
 
@@ -58,18 +58,25 @@ Use this before the first public npm publish / website launch.
 - [x] Publish **Powers UI Kit** as a Figma library (use in product files)  
 - [ ] Optional: Pro SKU (`design-kit/pro/`)
 
-## Publish sequence (still open — first public cut)
+## Public debut sequence (site + GitHub — **not** npm)
+
+1. [x] lab206.com live with Lab · Docs · System · demos · Figma plugin link  
+2. [x] README for strangers (lab206.com first; source-available wording)  
+3. [x] Announce draft — [ANNOUNCE.md](./ANNOUNCE.md)  
+4. [x] Secret sweep (`.env.local` gitignored; no real tokens in git history)  
+5. [x] **`pnpm run check` green** (2026-08-22)  
+6. [ ] **Push `main`** · **Make GitHub repo public**  
+7. [ ] Post announce (X / GH) using [ANNOUNCE.md](./ANNOUNCE.md) — **BSL / source-available**, not “open source”  
+8. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`
+
+## npm cut (later — separate launch)
 
 1. [ ] Set coordinated versions (today: independent; core `0.1.1`, dom `0.3.0`, others `0.1.0` — document or align)
 2. [ ] Switch package exports from `src` → built `dist` for consumers
 3. [ ] Remove `"private": true` only when ready; `npm publish --access public` — **BUSL-1.1**
 4. [ ] Tag `v0.1.0` (or matching)
-5. [ ] Optional: GitHub Pages / marketing site from `examples/browser` build
-6. [x] Rename GitHub repo → `powers` + update local remote  
-7. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
-8. [ ] **Make repo public** only when you are ready (does not equal npm publish)
-9. [ ] Announce with link to Lab + LEARN — say **source-available (BSL)**, not “open source”
-10. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro (see LICENSING.md)
+5. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro (see [LICENSING.md](./LICENSING.md) · [OFFER.md](./OFFER.md))
+6. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 
 Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). See [LICENSING.md](./LICENSING.md).
 
@@ -78,10 +85,9 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 - GSAP optional adapter — shipped as `@powers/animate/gsap` (peer)  
 - Streaming SSR  
 - Full a11y audit / ARIA cookbook (VPAT / Section 508 when funded — see [GOVERNMENT.md](./GOVERNMENT.md))  
- 
 - Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  
 - AI Lab features (parked)
 
 ---
 
-**Last updated:** 2026-08-17 — harden pass: private packages, design-kit CI, clean dist, SECURITY.md; **npm/public still pending**.
+**Last updated:** 2026-08-22 — public debut prep (README · ANNOUNCE · lab206 · Figma Community live); **npm still pending**.
