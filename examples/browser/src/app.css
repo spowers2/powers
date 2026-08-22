@@ -180,15 +180,28 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
   flex-shrink: 0;
 }
 
-/* Product demos — one place only (center nav), show when width allows */
+/* Product demos — always in the primary link row (scroll on narrow) */
 .site-nav-demo {
-  display: none;
+  display: inline;
   color: var(--pu-color-text-muted);
   text-decoration: none;
   font-size: var(--pu-text-sm);
   font-weight: 600;
   white-space: nowrap;
-  transition: color var(--pu-duration) var(--pu-ease);
+  padding: 0.35rem 0.55rem;
+  border-radius: var(--pu-radius-md);
+  flex-shrink: 0;
+  transition:
+    color var(--pu-duration) var(--pu-ease),
+    background var(--pu-duration) var(--pu-ease);
+}
+
+.site-nav-demo-short {
+  display: none;
+}
+
+.site-nav-action-short {
+  display: none;
 }
 
 @media (min-width: 1100px) {
@@ -196,9 +209,23 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
     display: block;
   }
   .site-nav-demo {
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+/* Tablet / phone: shorter demo + palette labels */
+@media (max-width: 1099px) {
+  .site-nav-demo-full {
+    display: none;
+  }
+  .site-nav-demo-short {
     display: inline;
-    padding: 0.4rem 0.55rem;
-    border-radius: var(--pu-radius-md);
+  }
+  .site-nav-action-full {
+    display: none;
+  }
+  .site-nav-action-short {
+    display: inline;
   }
 }
 
@@ -221,7 +248,7 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
   flex-shrink: 0;
 }
 
-/* Mobile: scrollable primary row so Home/Docs/Lab/System still fit */
+/* Mobile: scrollable primary row includes demos (Workspace / Hearth / Plugin) */
 @media (max-width: 767px) {
   .site-nav-inner {
     flex-wrap: wrap;
@@ -245,9 +272,14 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
     display: none;
   }
 
-  .site-nav-sep,
-  .site-nav-demo {
+  .site-nav-sep {
     display: none;
+  }
+
+  .site-nav-actions .pu-btn,
+  .site-nav-actions button {
+    font-size: 0.75rem;
+    padding-inline: 0.45rem;
   }
 }
 

@@ -23,6 +23,7 @@
   );
 }
 
+/* Tablet: stack sidebar above main */
 @media (max-width: 960px) {
   .lab {
     grid-template-columns: 1fr;
@@ -30,7 +31,7 @@
   .lab-sidebar {
     border-right: 0 !important;
     border-bottom: 1px solid var(--lab-border);
-    max-height: 220px;
+    max-height: 240px;
   }
 }
 
@@ -751,3 +752,178 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+/*
+ * Phone: recipes as horizontal chips → toolbar (Run) → preview → editor.
+ * Coding on a phone is secondary; picking a recipe and seeing output comes first.
+ */
+@media (max-width: 720px) {
+  .lab {
+    grid-template-columns: 1fr;
+    margin-block: 0.75rem 1.5rem;
+    min-height: 0;
+    border-radius: var(--pu-radius-md);
+  }
+
+  .lab-sidebar {
+    max-height: none;
+    padding: var(--pu-space-3);
+    gap: var(--pu-space-2);
+  }
+
+  .lab-sidebar-blurb {
+    display: none;
+  }
+
+  .lab-count-badge {
+    display: none;
+  }
+
+  .lab-start-here {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .lab-start-here__label--all {
+    margin-top: 0.35rem;
+  }
+
+  .lab-start-here__list,
+  .lab-recipe-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0.4rem;
+    max-height: none;
+    flex: 0 0 auto;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .lab-start-here__list .lab-recipe,
+  .lab-recipe-list .lab-recipe {
+    display: inline-flex;
+    align-items: center;
+    grid-template-columns: none;
+    width: auto;
+    flex-shrink: 0;
+    padding: 0.45rem 0.7rem;
+    gap: 0.4rem;
+  }
+
+  /* Title-only chips — idx markers read as empty circles on small screens */
+  .lab-recipe__idx {
+    display: none;
+  }
+
+  .lab-recipe__body {
+    display: flex;
+    align-items: center;
+  }
+
+  .lab-recipe strong {
+    margin-bottom: 0;
+    font-size: var(--pu-text-xs);
+    white-space: nowrap;
+  }
+
+  .lab-recipe span {
+    display: none;
+  }
+
+  .lab-start-here__list .lab-recipe,
+  .lab-recipe-list .lab-recipe {
+    border-radius: var(--pu-radius-full);
+  }
+
+  .lab-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .lab-toolbar {
+    position: sticky;
+    top: var(--site-nav-h, 3.75rem);
+    z-index: 2;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.55rem 0.65rem;
+    background: color-mix(in srgb, var(--lab-panel) 94%, transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .lab-toolbar-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: var(--pu-text-sm);
+  }
+
+  .lab-toolbar-actions {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .lab-auto {
+    order: 10;
+  }
+
+  .lab-status {
+    max-width: none;
+    flex: 1 1 100%;
+    white-space: normal;
+  }
+
+  /* Keep Run + Reset; tuck soft actions to save space */
+  .lab-btn:not(.lab-btn--primary) {
+    padding: 0.35rem 0.65rem;
+    font-size: var(--pu-text-xs);
+  }
+
+  .lab-btn--soft {
+    display: none;
+  }
+
+  .lab-teach {
+    order: 2;
+    max-height: 11rem;
+    overflow: auto;
+  }
+
+  .lab-workspace {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-template-rows: none;
+  }
+
+  .lab-preview-pane {
+    order: -1;
+    min-height: 220px;
+    max-height: 42vh;
+    border-bottom: 1px solid var(--lab-border);
+  }
+
+  .lab-editor-pane {
+    order: 0;
+    min-height: 180px;
+    max-height: 36vh;
+    border-right: 0;
+  }
+
+  .lab-pane-hint {
+    display: none;
+  }
+
+  .lab-console-wrap,
+  .lab-console {
+    order: 3;
+    max-height: 8rem;
+  }
+}
+

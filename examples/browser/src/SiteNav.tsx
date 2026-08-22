@@ -1,5 +1,6 @@
 /**
- * Site navigation — kit pages center-left; product demos once; theme tools right.
+ * Site navigation — kit pages + product demos; theme tools right.
+ * Below ~1100px demos use short labels; on phones the link row scrolls.
  */
 import type { Router } from "@powers/router";
 import { Link } from "@powers/router";
@@ -17,6 +18,8 @@ export function SiteNav(props: {
   palette: PaletteController;
 }) {
   const { router, theme, palette } = props;
+  const demoTarget = import.meta.env.DEV ? "_blank" : undefined;
+  const demoRel = import.meta.env.DEV ? "noreferrer" : undefined;
 
   return (
     <header class="site-nav">
@@ -56,20 +59,24 @@ export function SiteNav(props: {
             <a
               class="site-nav-demo"
               href={SITE.demos.workspace.href}
-              target={import.meta.env.DEV ? "_blank" : undefined}
-              rel={import.meta.env.DEV ? "noreferrer" : undefined}
+              target={demoTarget}
+              rel={demoRel}
               title={SITE.demos.workspace.title}
             >
-              {SITE.demos.workspace.label}
+              <span class="site-nav-demo-full">
+                {SITE.demos.workspace.label}
+              </span>
+              <span class="site-nav-demo-short">Workspace</span>
             </a>
             <a
               class="site-nav-demo"
               href={SITE.demos.hearth.href}
-              target={import.meta.env.DEV ? "_blank" : undefined}
-              rel={import.meta.env.DEV ? "noreferrer" : undefined}
+              target={demoTarget}
+              rel={demoRel}
               title={SITE.demos.hearth.title}
             >
-              {SITE.demos.hearth.label}
+              <span class="site-nav-demo-full">{SITE.demos.hearth.label}</span>
+              <span class="site-nav-demo-short">Hearth</span>
             </a>
             <a
               class="site-nav-demo"
@@ -78,7 +85,8 @@ export function SiteNav(props: {
               rel="noreferrer"
               title="Powers Design Kit — Figma Community"
             >
-              Figma plugin
+              <span class="site-nav-demo-full">Figma plugin</span>
+              <span class="site-nav-demo-short">Plugin</span>
             </a>
           </nav>
 
@@ -87,12 +95,16 @@ export function SiteNav(props: {
               size="sm"
               variant="ghost"
               aria-label="Toggle color palette"
-              title="Palette: Dual electric ↔ Instrument"
               onClick={() => palette.toggle()}
             >
-              {() =>
-                palette.id() === "dual" ? "Instrument" : "Dual electric"
-              }
+              <span class="site-nav-action-full">
+                {() =>
+                  palette.id() === "dual" ? "Instrument" : "Dual electric"
+                }
+              </span>
+              <span class="site-nav-action-short">
+                {() => (palette.id() === "dual" ? "Instr." : "Dual")}
+              </span>
             </Button>
             <Button
               size="sm"

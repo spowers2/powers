@@ -735,12 +735,20 @@ body::before {
   .app-header {
     padding: 0.65rem 0.9rem;
   }
+  .app-brand__sub {
+    display: none;
+  }
   .app-nav {
     order: 3;
     width: 100%;
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 0.1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .app-nav::-webkit-scrollbar {
+    display: none;
   }
   .app-header-actions {
     margin-left: 0;
