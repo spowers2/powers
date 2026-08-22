@@ -1,72 +1,25 @@
-# Government & public-sector use
+# Public sector & regulated teams
 
-**Short answer:** Yes — Powers is suitable for **building** government-facing and internal UIs.  
-**Not a claim:** Powers itself is **not** FedRAMP / StateRAMP / “ATO certified.” Those apply to **cloud services and deployed systems**, not a UI library.
+Powers is a **product UI system**. Public-sector and contractor teams are **one audience among several** — alongside freelancers, studios, and product companies — not a separate product line.
 
----
+## Fit
 
-## Recommended model
+Good for portals, case/ops tools, and internal apps where you want:
 
-| Lane | What it means | Powers role |
-|---|---|---|
-| **1. Apps *for* government** (preferred) | Contractors / you ship portals, case tools, internal apps **using** Powers | UI system + Figma kit + secure defaults |
-| **2. Sell Powers *to* an agency/SI** | They standardize on the kit under a commercial license | License + support — not a hosting ATO |
-| **3. You host citizen/PII data under gov ATO** | Your servers hold regulated data | **Out of scope** unless a funded program requires it |
+- Figma library + matching `@powers/ui` components  
+- Static or conventional deploy onto **the customer’s** hosting  
+- Clear commercial licensing when needed — [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) · [OFFER.md](./OFFER.md)
 
-Authority to operate (ATO), identity (Login.gov / agency IdP), logging, data residency, and pen tests sit with the **application owner and their host** — not with `@powers/ui`.
+Deploy and security hygiene for app builders: [DEPLOY.md](./DEPLOY.md) · [SECURITY.md](../SECURITY.md).
 
----
+## How it usually works
 
-## What we provide (honest)
+1. Build the app with Powers (same as any product).  
+2. Deploy to the environment the agency or contractor already uses.  
+3. Hook identity, logging, and compliance controls at the **application / host** layer.
 
-| Area | Status |
-|---|---|
-| Product UI + Figma alignment | Strong — kit + Code Connect path |
-| Secure-by-default rendering | Text via `textContent`; see [SECURITY.md](../SECURITY.md) |
-| Accessibility trajectory | Focus management in overlays/menus; formal VPAT / Section 508 **not yet** — roadmap when funded |
-| Supply chain | Private monorepo today; lockfile in CI; SBOM when publishing |
-| Deploy on *their* hardened hosts | Static website folder — [DEPLOY.md](./DEPLOY.md) (+ gov checklist) |
-| Commercial / contractor terms | [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) · [OFFER.md](./OFFER.md) |
+lab206 demos are marketing and learning — not a place to put regulated production data.
 
-## What we do **not** provide
+## Roadmap (when funded by demand)
 
-- FedRAMP authorization of the Powers packages  
-- Guaranteed Section 508 / WCAG conformance certificate (yet)  
-- Built-in Login.gov / CAC / PIV  
-- Hosting of CUI / PII on Powers marketing demos  
-
-If a contracting officer asks “Is Powers FedRAMP?” answer:
-
-> **No. Powers is a UI system.** The deployed application and its accredited environment hold the ATO. We help teams build accessible, maintainable interfaces that fit inside that environment.
-
----
-
-## Buyer guidance
-
-| You are… | Do this |
-|---|---|
-| **Vendor / freelancer building a gov app** | Use Powers under BSL; deploy to the customer’s host; follow [SECURITY.md](../SECURITY.md) + [DEPLOY.md](./DEPLOY.md) |
-| **Agency wanting Powers as the standard kit** | Talk commercial license — [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) |
-| **Looking for a website builder + gov hosting** | Wrong product — Powers is not Squarespace |
-
----
-
-## Compliance roadmap (paid / on-demand)
-
-These are **real** next steps when revenue justifies them — not checkbox theater:
-
-1. Accessibility audit of core controls → gaps doc → fixes  
-2. VPAT / Section 508 report (often via consultant)  
-3. SBOM + signed releases when packages are published  
-4. Pen-test of a **reference app**, not “the whole monorepo is secure” mythology  
-
----
-
-## Related
-
-- [SECURITY.md](../SECURITY.md) — reporting, secrets, app-builder XSS/CSP  
-- [DEPLOY.md](./DEPLOY.md) — static deploy + public-sector checklist  
-- [OFFER.md](./OFFER.md) — who pays  
-- [LICENSING.md](./LICENSING.md) — BSL model  
-
-*Not legal advice. Procurement and ATO decisions belong to counsel and the authorizing official.*
+Accessibility audit → VPAT / Section 508 materials · SBOM on publish · optional reference hardening. See [RELEASE.md](./RELEASE.md).

@@ -710,31 +710,16 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
         </Section>
 
         <Section id="public-sector" title="Public sector">
-          <Alert tone="info" title="UI system — not a FedRAMP product">
-            Powers can power government-facing and internal apps. Authority to
-            operate (ATO), identity, logging, and data residency belong to the{" "}
-            <strong>deployed application and its host</strong> — not to this
-            library.
-          </Alert>
           <Stack gap={2}>
-            <Text size="sm" muted>
-              <strong>Good fit:</strong> contractors and teams building portals /
-              case tools / ops UIs with Powers components and the Figma kit.
+            <Text muted>
+              Powers also fits teams building portals, case tools, and internal
+              ops UIs for public-sector and regulated environments — same Figma
+              kit and components as everyone else. Deploy on the customer’s host;
+              wire their identity and compliance stack around the app.
             </Text>
             <Text size="sm" muted>
-              <strong>Not claimed:</strong> FedRAMP / StateRAMP for{" "}
-              <Code>@powers/*</Code>, Login.gov / CAC built-in, or hosting
-              CUI/PII on lab206 demos.
-            </Text>
-            <Text size="sm" muted>
-              <strong>Ship checklist:</strong> HTTPS, security headers, no
-              secrets in the static bundle, customer IdP, a11y plan. Formal VPAT
-              / Section 508 is a funded roadmap item — not checkbox theater.
-            </Text>
-            <Text size="sm" muted>
-              Full write-up in the repo: <Code>docs/GOVERNMENT.md</Code> ·
-              deploy notes <Code>docs/DEPLOY.md</Code> ·{" "}
-              <Code>SECURITY.md</Code>.
+              Practical notes: <Code>docs/GOVERNMENT.md</Code> ·{" "}
+              <Code>docs/DEPLOY.md</Code> · <Code>SECURITY.md</Code>.
             </Text>
           </Stack>
         </Section>

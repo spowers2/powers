@@ -14,11 +14,10 @@ This doc is the internal/commercial clarity sheet. Storefront links stay TBD unt
 | **Freelancer / indie** | Ship client dashboards, portals, ops tools fast | Free under BSL for normal app work; optional Pro kit / starter |
 | **Agency / studio** | Consistent UI + Figma → code across projects | Pro kit seats + commercial if they need indemnity / redistribution clarity |
 | **Product team** | Design system that matches production components | Commercial / Studio+; Pro Figma pack |
-| **Public sector / contractor** | Accessible product UI inside *their* ATO’d environment | Commercial license + Pro kit; see [GOVERNMENT.md](./GOVERNMENT.md) |
+| **Public sector / contractor** | Product UI for portals and internal tools (one of several ICPs) | Commercial license + Pro kit; see [GOVERNMENT.md](./GOVERNMENT.md) |
 | **Competing kit vendor** | Fork Powers into their own UI product | **Commercial license required** (BSL Competing Offering) |
 
-**Not the primary buyer:** “I just need a brochure site like Squarespace.” Point them elsewhere; Powers is for **product UI**.  
-**Not a FedRAMP product:** agencies buy apps/systems; Powers is the UI layer — [GOVERNMENT.md](./GOVERNMENT.md).
+**Not the primary buyer:** “I just need a brochure site.” Powers is for **product UI** — freelancers, studios, product teams, and yes public-sector builders among them.
 
 ---
 
