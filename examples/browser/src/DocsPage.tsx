@@ -698,7 +698,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           />
         </Section>
 
-        <Section id="public-sector" title="Public sector (honest)">
+        <Section id="public-sector" title="Public sector">
           <Alert tone="info" title="UI system — not a FedRAMP product">
             Powers can power government-facing and internal apps. Authority to
             operate (ATO), identity, logging, and data residency belong to the{" "}
