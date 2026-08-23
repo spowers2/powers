@@ -7,19 +7,43 @@ export function powersSrcAliases(fromUrl) {
   const root = path.resolve(exampleDir, "../..");
   const pkg = (name, sub = "src/index.ts") =>
     path.join(root, "packages", name, sub);
-  return {
-    "@lab206/core": pkg("core"),
-    "@lab206/dom/jsx-runtime": pkg("dom", "src/jsx-runtime.ts"),
-    "@lab206/dom/jsx-dev-runtime": pkg("dom", "src/jsx-runtime.ts"),
-    "@lab206/dom": pkg("dom"),
-    "@lab206/animate/gsap": pkg("animate", "src/gsap.ts"),
-    "@lab206/animate": pkg("animate"),
-    "@lab206/router": pkg("router"),
-    "@lab206/ssr": pkg("ssr"),
-    "@lab206/ui/theme.css": pkg("ui", "src/styles/theme.css"),
-    "@lab206/ui/tokens.css": pkg("ui", "src/styles/tokens.css"),
-    "@lab206/ui/base.css": pkg("ui", "src/styles/base.css"),
-    "@lab206/ui/utilities.css": pkg("ui", "src/styles/utilities.css"),
-    "@lab206/ui": pkg("ui"),
-  };
+
+  // Use exact matches for package roots so subpath imports (e.g.
+  // @lab206/ui/theme.css?inline) are not rewritten as index.ts/theme.css.
+  return [
+    {
+      find: "@lab206/ui/theme.css",
+      replacement: pkg("ui", "src/styles/theme.css"),
+    },
+    {
+      find: "@lab206/ui/tokens.css",
+      replacement: pkg("ui", "src/styles/tokens.css"),
+    },
+    {
+      find: "@lab206/ui/base.css",
+      replacement: pkg("ui", "src/styles/base.css"),
+    },
+    {
+      find: "@lab206/ui/utilities.css",
+      replacement: pkg("ui", "src/styles/utilities.css"),
+    },
+    {
+      find: "@lab206/dom/jsx-runtime",
+      replacement: pkg("dom", "src/jsx-runtime.ts"),
+    },
+    {
+      find: "@lab206/dom/jsx-dev-runtime",
+      replacement: pkg("dom", "src/jsx-runtime.ts"),
+    },
+    {
+      find: "@lab206/animate/gsap",
+      replacement: pkg("animate", "src/gsap.ts"),
+    },
+    { find: /^@lab206\/core$/, replacement: pkg("core") },
+    { find: /^@lab206\/dom$/, replacement: pkg("dom") },
+    { find: /^@lab206\/animate$/, replacement: pkg("animate") },
+    { find: /^@lab206\/router$/, replacement: pkg("router") },
+    { find: /^@lab206\/ssr$/, replacement: pkg("ssr") },
+    { find: /^@lab206\/ui$/, replacement: pkg("ui") },
+  ];
 }
