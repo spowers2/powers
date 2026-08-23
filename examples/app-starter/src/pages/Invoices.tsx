@@ -33,11 +33,11 @@ import {
 } from "../data/store.js";
 import type { Invoice, InvoiceLine, InvoiceStatus } from "../data/types.js";
 
+/** Writable statuses only — overdue is derived from due date (see effectiveInvoiceStatus). */
 const STATUS_OPTS = [
   { value: "draft", label: "Draft" },
   { value: "sent", label: "Sent" },
   { value: "paid", label: "Paid" },
-  { value: "overdue", label: "Overdue" },
 ];
 
 const FILTER_OPTS = [
@@ -138,7 +138,8 @@ export function InvoicesPage(props: {
     editingId.set(inv.id);
     clientId.set(inv.clientId);
     projectId.set(inv.projectId ?? "");
-    status.set(inv.status);
+    // Never persist "overdue" — it's computed from sent + past due date
+    status.set(inv.status === "overdue" ? "sent" : inv.status);
     issueDate.set(inv.issueDate);
     dueDate.set(inv.dueDate);
     notes.set(inv.notes);
@@ -441,6 +442,20 @@ export function InvoicesPage(props: {
               options={STATUS_OPTS}
             />
           </Field>
+          {() => {
+            const id = editingId();
+            if (!id) return null;
+            const inv = invoices().find((i) => i.id === id);
+            if (!inv) return null;
+            const eff = effectiveInvoiceStatus({ ...inv, status: status() });
+            if (eff !== "overdue") return null;
+            return (
+              <Text size="sm" muted>
+                Showing as <strong>overdue</strong> because the due date is past
+                (status stays Sent until paid).
+              </Text>
+            );
+          }}
 
           <Stack direction="row" gap={2} wrap>
             <div style={{ flex: "1 1 8rem" }}>

@@ -205,25 +205,32 @@ body::before {
   }
 }
 
-.app-nav a {
+.app-nav a,
+.app-nav__more-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
   text-decoration: none;
   color: var(--pu-color-text-muted);
+  font: inherit;
   font-size: var(--pu-text-sm);
   font-weight: var(--pu-font-semibold);
   padding: 0.45rem 0.85rem;
   border-radius: 999px;
+  cursor: pointer;
   transition:
     color var(--pu-duration) var(--pu-ease),
     background var(--pu-duration) var(--pu-ease);
 }
 
-.app-nav a:hover {
+.app-nav a:hover,
+.app-nav__more-btn:hover {
   color: var(--pu-color-text);
   background: var(--pu-color-surface-2);
 }
 
 .app-nav a.is-active,
-.app-nav-more .pu-btn.is-active {
+.app-nav__more-btn.is-active {
   color: var(--pu-color-accent);
   background: color-mix(in srgb, var(--pu-color-accent) 14%, transparent);
 }
@@ -464,6 +471,17 @@ body::before {
   background-size: cover;
   background-position: center;
   background-color: var(--pu-color-surface-2);
+}
+
+.dish-card__img.is-photo-fallback,
+.menu-row__img.is-photo-fallback,
+.hero__media.is-photo-fallback {
+  background-image: none !important;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--hearth-ember, #c45c26) 18%, var(--pu-color-surface-2)),
+    var(--pu-color-surface-2)
+  );
 }
 
 .dish-card__body {

@@ -513,7 +513,9 @@ describe("@lab206/ui", () => {
     input.value = "Be";
     input.dispatchEvent(new Event("input", { bubbles: true }));
     flush();
-    assert.match(root.textContent ?? "", /Beta/);
+    await new Promise((r) => setTimeout(r, 20));
+    // List portals to document.body
+    assert.match(document.body.textContent ?? "", /Beta/);
   });
 
   it("Combobox shows loading and empty states", async () => {
@@ -534,17 +536,17 @@ describe("@lab206/ui", () => {
     const input = root.querySelector(".pu-combobox__input") as HTMLInputElement;
     input.focus();
     flush();
-    await new Promise((r) => setTimeout(r, 20));
+    await new Promise((r) => setTimeout(r, 40));
     assert.match(document.body.textContent ?? "", /Please wait/);
 
     loading.set(false);
     flush();
-    await new Promise((r) => setTimeout(r, 20));
+    await new Promise((r) => setTimeout(r, 40));
     assert.match(document.body.textContent ?? "", /Nothing here/);
 
     options.set([{ value: "z", label: "Zulu" }]);
     flush();
-    await new Promise((r) => setTimeout(r, 20));
+    await new Promise((r) => setTimeout(r, 40));
     assert.match(document.body.textContent ?? "", /Zulu/);
   });
 

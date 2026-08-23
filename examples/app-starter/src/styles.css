@@ -210,6 +210,7 @@ body::before {
 
 .app-nav-more {
   display: inline-flex;
+  align-items: center;
 }
 
 @media (min-width: 960px) {
@@ -221,33 +222,40 @@ body::before {
   }
 }
 
-.app-nav a {
+.app-nav a,
+.app-nav__more-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
   text-decoration: none;
   color: var(--pu-color-text-muted);
+  font: inherit;
   font-size: var(--pu-text-sm);
   font-weight: var(--pu-font-semibold);
   padding: 0.45rem 0.8rem;
   border-radius: 999px;
+  cursor: pointer;
   transition:
     color var(--pu-duration) var(--pu-ease),
     background var(--pu-duration) var(--pu-ease),
     box-shadow var(--pu-duration) var(--pu-ease);
 }
 
-.app-nav a:hover {
+.app-nav a:hover,
+.app-nav__more-btn:hover {
   color: var(--pu-color-text);
   background: var(--pu-color-surface-2);
 }
 
 .app-nav a.is-active,
-.app-nav-more .pu-btn.is-active {
+.app-nav__more-btn.is-active {
   color: var(--pu-color-accent);
   background: color-mix(in srgb, var(--pu-color-accent) 12%, #fff);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
 }
 
 [data-pu-theme="dark"] .app-nav a.is-active,
-[data-pu-theme="dark"] .app-nav-more .pu-btn.is-active {
+[data-pu-theme="dark"] .app-nav__more-btn.is-active {
   background: color-mix(in srgb, var(--pu-color-accent) 16%, transparent);
 }
 

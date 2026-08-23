@@ -12,6 +12,7 @@ import {
 } from "@lab206/ui";
 import type { Router } from "@lab206/router";
 import { PageHeader } from "../components/uiBits.js";
+import { setPhotoBackground } from "../data/images.js";
 import {
   menu,
   formatMoney,
@@ -97,7 +98,7 @@ export function GuestMenuPage(props: {
               row.className = "menu-row";
               const img = document.createElement("div");
               img.className = "menu-row__img";
-              img.style.backgroundImage = `url(${item.imageUrl})`;
+              setPhotoBackground(img, item.imageUrl);
               img.style.cursor = "default";
               const main = document.createElement("div");
               main.className = "menu-row__main";

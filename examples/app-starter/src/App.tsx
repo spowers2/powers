@@ -81,12 +81,12 @@ export function createApp(opts: {
     ),
   });
 
+  // Routes hidden below 960px (see .app-nav__wide). Portal stays a header action.
   const moreItems = [
     { id: "/projects", label: "Projects" },
     { id: "/invoices", label: "Invoices" },
     { id: "/time", label: "Time" },
     { id: "/settings", label: "Settings" },
-    { id: "/portal", label: "Client portal →" },
   ];
 
   const outletNode = router.outlet();
@@ -185,20 +185,20 @@ export function createApp(opts: {
                 <div class="app-nav-more">
                   <Menu
                     items={moreItems}
+                    align="end"
                     onSelect={(id) => router.navigate(id)}
                     trigger={
-                      <Button
-                        size="sm"
-                        variant="soft"
-                        aria-label="More pages"
+                      <button
+                        type="button"
                         class={() =>
                           moreItems.some((m) => router.path().startsWith(m.id))
-                            ? "is-active"
-                            : ""
+                            ? "app-nav__more-btn is-active"
+                            : "app-nav__more-btn"
                         }
+                        aria-label="More pages"
                       >
                         More
-                      </Button>
+                      </button>
                     }
                   />
                 </div>

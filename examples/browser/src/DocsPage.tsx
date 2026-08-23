@@ -439,8 +439,7 @@ const emailError = () =>
               <Stack gap={2}>
                 <Text weight="semibold">Combobox</Text>
                 <pre class="docs-pre">{`<Combobox
-  value={city}
-  onChange={city.set}
+  bind={city}
   options={cities}
   loading={loading}
   emptyText="No cities match"

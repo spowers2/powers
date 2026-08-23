@@ -171,8 +171,7 @@ import { Combobox, Field, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Field label="City">
         <Combobox
-          value={city}
-          onChange={(v) => city.set(v)}
+          bind={city}
           options={cities}
           loading={loading}
           emptyText="No cities match"

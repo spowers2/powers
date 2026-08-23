@@ -872,8 +872,7 @@ export function SystemPage(props: {
                 />
                 <Field label="City">
                   <Combobox
-                    value={city}
-                    onChange={(v) => city.set(v)}
+                    bind={city}
                     placeholder="Search cities…"
                     options={cityOptions}
                     loading={cityLoading}

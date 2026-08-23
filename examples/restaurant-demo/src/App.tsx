@@ -188,24 +188,24 @@ export function createApp(opts: {
                     ]}
                     onSelect={(id) => router.navigate(id)}
                     trigger={
-                      <Button
-                        size="sm"
-                        variant="soft"
-                        aria-label="More pages"
+                      <button
+                        type="button"
                         class={() => {
                           const p = router.path();
-                          return [
+                          const overflow = [
                             "/reservations",
                             "/menu",
                             "/settings",
                             "/visit",
-                          ].some((id) => p === id || p.startsWith(id + "/"))
-                            ? "is-active"
-                            : "";
+                          ].some((id) => p === id || p.startsWith(id + "/"));
+                          return overflow
+                            ? "app-nav__more-btn is-active"
+                            : "app-nav__more-btn";
                         }}
+                        aria-label="More pages"
                       >
                         More
-                      </Button>
+                      </button>
                     }
                   />
                 </div>

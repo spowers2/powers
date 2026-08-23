@@ -7,7 +7,7 @@ import {
   type ToastController,
 } from "@lab206/ui";
 import type { Router } from "@lab206/router";
-import { PHOTOS, PHOTO_CREDIT } from "../data/images.js";
+import { PHOTOS, PHOTO_CREDIT, setPhotoBackground } from "../data/images.js";
 import {
   profile,
   popularMenu,
@@ -27,9 +27,9 @@ export function GuestHomePage(props: {
       <section class="hero hero--guest">
         <div
           class="hero__media"
-          style={{ backgroundImage: `url(${PHOTOS.hero})` }}
           role="img"
           aria-label="Restaurant dining room"
+          ref={(el: HTMLElement) => setPhotoBackground(el, PHOTOS.hero)}
         />
         <div class="hero__shade" aria-hidden="true" />
         <div class="hero__content">
@@ -123,7 +123,7 @@ export function GuestHomePage(props: {
               card.onclick = () => router.navigate("/visit/menu");
               const img = document.createElement("div");
               img.className = "dish-card__img";
-              img.style.backgroundImage = `url(${dish.imageUrl})`;
+              setPhotoBackground(img, dish.imageUrl);
               const body = document.createElement("div");
               body.className = "dish-card__body";
               const title = document.createElement("div");

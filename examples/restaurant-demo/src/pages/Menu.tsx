@@ -18,7 +18,7 @@ import {
   asSelectBind,
 } from "@lab206/ui";
 import { PageHeader } from "../components/uiBits.js";
-import { PHOTOS } from "../data/images.js";
+import { PHOTOS, setPhotoBackground } from "../data/images.js";
 import {
   menu,
   upsertMenuItem,
@@ -199,7 +199,7 @@ export function MenuPage(props: { toaster: ToastController }) {
               const img = document.createElement("button");
               img.type = "button";
               img.className = "menu-row__img";
-              img.style.backgroundImage = `url(${item.imageUrl})`;
+              setPhotoBackground(img, item.imageUrl);
               img.setAttribute("aria-label", `Edit ${item.name}`);
               img.onclick = () => openEdit(item);
 

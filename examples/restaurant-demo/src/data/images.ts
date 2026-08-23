@@ -24,3 +24,26 @@ export const PHOTOS = {
 
 export const PHOTO_CREDIT =
   "Photos from Unsplash (free license) — restaurant interiors & food.";
+
+/**
+ * Apply a CSS background image with a soft fallback if the CDN fails
+ * (offline, blocked, 404). Safe for menu tiles and hero media.
+ */
+export function setPhotoBackground(el: HTMLElement, url: string) {
+  el.classList.remove("is-photo-fallback");
+  if (!url) {
+    el.classList.add("is-photo-fallback");
+    el.style.backgroundImage = "";
+    return;
+  }
+  el.style.backgroundImage = `url(${url})`;
+  const probe = new Image();
+  probe.onload = () => {
+    el.classList.remove("is-photo-fallback");
+  };
+  probe.onerror = () => {
+    el.classList.add("is-photo-fallback");
+    el.style.backgroundImage = "";
+  };
+  probe.src = url;
+}

@@ -1,8 +1,9 @@
-import { signal, effect } from "@lab206/core";
+import { signal, effect, type Signal } from "@lab206/core";
 import { For, Show, component, mergeProps, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { attachOverlay } from "../overlay.js";
 import { readBool, readProp, readStr, type MaybeReactive } from "../reactive.js";
+import type { Bindable } from "../form.js";
 
 export type ComboboxOption = {
   value: string;
@@ -13,6 +14,8 @@ export type ComboboxOption = {
 export type ComboboxProps = {
   options: MaybeReactive<ComboboxOption[]>;
   value?: MaybeReactive<string>;
+  /** Two-way bind a string signal — preferred over value + onChange. */
+  bind?: Bindable<string> | Signal<string>;
   placeholder?: string;
   disabled?: MaybeReactive<boolean>;
   /**
@@ -185,6 +188,7 @@ export const Combobox = component((raw: ComboboxProps) => {
       loadingText: string;
     }
   >;
+  const bound = raw.bind;
 
   const open = signal(false);
   const query = signal("");
@@ -230,7 +234,9 @@ export const Combobox = component((raw: ComboboxProps) => {
     readProp(props.options as MaybeReactive<ComboboxOption[]>) ?? [];
 
   const getValue = () =>
-    readProp(props.value as MaybeReactive<string>) ?? "";
+    bound
+      ? (readProp(bound as MaybeReactive<string>) ?? "")
+      : (readProp(props.value as MaybeReactive<string>) ?? "");
 
   const filtered = () => {
     if (isLoading()) return [] as ComboboxOption[];
@@ -308,6 +314,7 @@ export const Combobox = component((raw: ComboboxProps) => {
 
   const pick = (opt: ComboboxOption) => {
     if (opt.disabled || isLoading()) return;
+    bound?.set(opt.value);
     props.onChange?.(opt.value);
     query.set(opt.label);
     open.set(false);
