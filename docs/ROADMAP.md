@@ -54,7 +54,7 @@ The moat is not “more components than X”. It is: **fastest path from zero �
 | D | **Private scaffold** ✅ | `examples/app-starter` · `pnpm example:starter` · `pnpm new-app` |
 | E | **Product depth** ✅ | designlab206 (time/invoices) · Hearth (tables) · demo links |
 | F | **Foundation hardening** ✅ | Week 1 contracts · Week 2 overlays · Week 3 size/CI/STABLE/golden path |
-| G | **Public later** | RELEASE.md + versioned packages when *you* decide |
+| G | **Public** ✅ | lab206.com · GitHub public · `@lab206/*@0.1.2` · [v0.1.2](https://github.com/spowers2/powers/releases/tag/v0.1.2) |
 
 Parked: streaming SSR — only when needed.
 

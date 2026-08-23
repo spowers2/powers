@@ -53,10 +53,12 @@ Commercial / Pro: see [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) and [OFF
 
 ## Checklist before you post
 
-- [ ] Latest `sites/lab206.com.zip` uploaded and https://lab206.com loads  
-- [ ] GitHub repo is **public**  
-- [ ] README leads with lab206.com (not “private monorepo”)  
-- [ ] Wording is **source-available / BSL**, not open source  
-- [ ] Install line uses `@lab206/*` **0.1.2+** (not `workspace:*` / clone-only)  
+- [x] Latest `sites/lab206.com.zip` uploaded and https://lab206.com loads  
+- [x] GitHub repo is **public**  
+- [x] README leads with lab206.com (not “private monorepo”)  
+- [x] Wording is **source-available / BSL**, not open source  
+- [x] Install line uses `@lab206/*` **0.1.2+** (not `workspace:*` / clone-only)  
+- [x] GitHub Release: https://github.com/spowers2/powers/releases/tag/v0.1.2  
+- [ ] Post short social (copy above) when ready  
 - [ ] Optional: rotate Figma PAT if it was ever pasted in chat  
 

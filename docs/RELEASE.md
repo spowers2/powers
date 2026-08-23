@@ -66,17 +66,19 @@ Use this before the first public npm publish / website launch.
 4. [x] Secret sweep (`.env.local` gitignored; no real tokens in git history)  
 5. [x] **`pnpm run check` green** (2026-08-22)  
 6. [x] **Push `main`** · **GitHub repo is public** (2026-08-22) · homepage https://lab206.com  
-7. [ ] Post announce (X / GH) using [ANNOUNCE.md](./ANNOUNCE.md) — **BSL / source-available**, not “open source”  
-8. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`
+7. [x] GitHub Release announce — [v0.1.2](https://github.com/spowers2/powers/releases/tag/v0.1.2) (X still optional — paste from [ANNOUNCE.md](./ANNOUNCE.md))  
+8. [x] Light `main` protection — no force-push/delete; CI status check on PRs; admins not enforced  
+9. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`  
+10. [ ] Optional: post short social from [ANNOUNCE.md](./ANNOUNCE.md)
 
-## npm cut (`0.1.0`)
+## npm cut (`0.1.2`)
 
-1. [x] Coordinated versions — all `@lab206/*` at **0.1.0**
+1. [x] Coordinated versions — all `@lab206/*` at **0.1.2**
 2. [x] Exports point at **`dist`** (plus `development` → `src` for monorepo Vite)
 3. [x] `"private": false` + `publishConfig.access: public`
-4. [ ] **`pnpm publish:packages`** (after `npm login` to an account that can publish `@lab206`)
-5. [ ] Tag `v0.1.0` on GitHub
-6. [ ] Announce npm install in [ANNOUNCE.md](./ANNOUNCE.md) / social
+4. [x] **`pnpm publish:packages`** → `@lab206/*@0.1.2` (use pnpm so `workspace:*` rewrites)
+5. [x] Tag **`v0.1.2`** on GitHub
+6. [x] Announce npm install in release notes + [ANNOUNCE.md](./ANNOUNCE.md)
 7. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro
 8. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 
@@ -94,4 +96,4 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 
 ---
 
-**Last updated:** 2026-08-22 — public debut prep (README · ANNOUNCE · lab206 · Figma Community live); **npm still pending**.
+**Last updated:** 2026-08-23 — public debut + npm `@lab206/*@0.1.2` + release tag + light `main` protection.
