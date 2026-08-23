@@ -234,21 +234,18 @@ export function DocsPage(props: { router: Router }) {
         </Section>
 
         <Section id="start" title="1. Install & import">
-          <Alert tone="info" title="Local monorepo today">
-            Packages are workspace-linked while the repo is private. After
-            publish you’ll use the same names on npm.
+          <Alert tone="info" title="Under 10 minutes">
+            Scaffold a Vite app with form + theme, or add packages to an
+            existing project. Live demos stay on this site.
           </Alert>
           <Text size="sm" muted>
-            Product demos (run from monorepo root):
+            Scaffold (recommended):
           </Text>
-          <pre class="docs-pre">{`pnpm example:starter     # designlab206 workspace  → http://localhost:5180
-pnpm example:restaurant  # Hearth restaurant   → http://localhost:5181
-pnpm example:browser     # Docs / Lab / System  → http://localhost:5173
-pnpm ci                  # typecheck · test · size budgets`}</pre>
+          <pre class="docs-pre">{`pnpm create powers my-app
+cd my-app && pnpm install && pnpm dev
+# → http://localhost:5190`}</pre>
           <Text size="sm" muted>
-            Full first-screen walkthrough: monorepo{" "}
-            <Code>docs/GOLDEN_PATH.md</Code> (forms that type correctly +
-            theme).
+            Or add to an existing Vite app:
           </Text>
           <pre class="docs-pre">{`pnpm add @lab206/core @lab206/dom @lab206/ui
 
@@ -260,6 +257,12 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
             Always import the theme once at the app root:
           </Text>
           <pre class="docs-pre">{`import "@lab206/ui/theme.css";`}</pre>
+          <Text size="sm" muted>
+            From source (contributors):{" "}
+            <Code>pnpm example:browser</Code> ·{" "}
+            <Code>pnpm example:starter</Code> ·{" "}
+            <Code>pnpm example:restaurant</Code>
+          </Text>
         </Section>
 
         <Section id="rules" title="2. Three rules (memorize these)">
@@ -311,7 +314,7 @@ createTheme("light").bind();
 
 const count = signal(0);
 
-mount(document.getElementById("app")!, () => (
+mount(document.getElementById("root")!, () => (
   <Card>
     <Stack gap={3}>
       <Text as="h1" size="xl">Hello</Text>

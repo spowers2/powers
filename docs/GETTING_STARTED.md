@@ -1,147 +1,26 @@
-# Getting started (private monorepo)
+# Getting started
 
-You are **not** on public npm yet. Develop against workspace packages.
+**Fastest path:** scaffold → install → first screen (&lt; 10 minutes).
 
-## Order of experience
-
-1. **Product first** — `pnpm example:starter` → http://localhost:5180 (**designlab206**)  
-2. **Design** — Figma library **Powers UI Kit** on product files ([FIGMA.md](../design-kit/FIGMA.md))  
-3. **Learn** — `pnpm example:browser` → Lab Start here (~10 min)
+## 1. Create an app
 
 ```bash
-cd powers
+pnpm create powers my-app
+# or: npm create powers@latest my-app
+cd my-app
 pnpm install
-pnpm example:starter    # flagship product
-pnpm example:browser    # kit · Lab · System
+pnpm dev   # → http://localhost:5190
 ```
 
-Lab Start here: Hello → Form → Theme at `/lab?recipe=hello`.
+You get a themed form (`createField` + `bind`) and a light/dark toggle using `@lab206/core`, `@lab206/dom`, and `@lab206/ui`.
 
-Rules: [USABILITY.md](./USABILITY.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md).
-
-**Put it online:** build → zip → upload to any static host — [DEPLOY.md](./DEPLOY.md).  
-**Free vs paid:** [OFFER.md](./OFFER.md).
-
-## Paths
-
-| Goal | Command / route |
-|---|---|
-| **designlab206** (flagship product) | `pnpm example:starter` → http://localhost:5180 |
-| **Hearth** (restaurant product) | `pnpm example:restaurant` → http://localhost:5181 |
-| **Lab (learn)** | `pnpm example:browser` → `/lab` (Start here) |
-| Design system + Docs | `pnpm example:browser` → `/docs` `/system` |
-| Figma library | Enable **Powers UI Kit** in Assets · [design-kit/FIGMA.md](../design-kit/FIGMA.md) |
-| New app from starter | `pnpm new-app my-feature` → `examples/my-feature` |
-| Minimal Vite scaffold | `pnpm create-app hello-ui` |
-
-## 1. Install once
+## 2. Or add to an existing Vite app
 
 ```bash
-cd powers
-pnpm install
+pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
-## 2. Preferred product demo: designlab206
-
-```bash
-pnpm example:starter
-```
-
-→ **http://localhost:5180**
-
-**designlab206** is a local-first freelance workspace:
-
-- Dashboard (pipeline $, outstanding invoices, paid YTD, hours this week)  
-- Clients · Projects · Tasks · Invoices · **Time** (billable log → draft invoices)  
-- Settings (profile, hourly rate, theme, reset seed data)  
-- Persisted in `localStorage`  
-
-Source: `examples/app-starter/`.
-
-## 2b. Restaurant demo (Hearth)
-
-```bash
-pnpm example:restaurant
-```
-
-→ **http://localhost:5181**
-
-**Hearth** is a neighborhood restaurant:
-
-- Floor home with Unsplash hero + featured dishes  
-- Menu (photos, 86 items, categories)  
-- Reservations + kitchen service board + **table map**  
-- Local `localStorage`  
-
-Source: `examples/restaurant-demo/`.
-
-### Minimal Vite app (recommended for learning)
-
-```bash
-pnpm create-app hello-ui
-pnpm install
-pnpm --filter @lab206/hello-ui dev
-# → http://localhost:5190  (form + theme + bind)
-```
-
-### Full product starter (clients / projects)
-
-```bash
-pnpm new-app billing-ui
-pnpm install
-pnpm --filter @lab206/billing-ui dev
-```
-
-Or copy outside the repo (still private — keep `workspace:*` or `file:` deps until publish):
-
-```bash
-./scripts/new-app.sh ../experiments/dashboard
-```
-
-## 3. Authoring loop (components)
-
-1. `pnpm example:browser` → **System**  
-2. **Copy JSX** or **Open Lab** (snippet is a full program)  
-3. Paste into `examples/app-starter/src/pages/…`  
-4. Retheme: `packages/ui/src/styles/tokens.css`
-
-## 4. App shape (reference)
-
-```tsx
-import { signal } from "@lab206/core";
-import { mount } from "@lab206/dom";
-import {
-  createTheme,
-  Button,
-  Card,
-  Stack,
-  Text,
-  Field,
-  Input,
-} from "@lab206/ui";
-import "@lab206/ui/theme.css";
-
-const theme = createTheme("light");
-theme.bind();
-const name = signal("");
-
-mount(document.getElementById("root")!, () => (
-  <Card>
-    <Stack gap={3}>
-      <Text as="h1" size="xl">Hello</Text>
-      <Field label="Name">
-        <Input bind={name} placeholder="Your name" />
-      </Field>
-      <Text muted size="sm">{() => name() || "…"}</Text>
-      <Button onClick={() => theme.toggle()}>Theme</Button>
-    </Stack>
-  </Card>
-));
-```
-
-**Usability patterns (bind, router, lists):** [USABILITY.md](./USABILITY.md)
-
-**tsconfig / Vite JSX**
+Wire JSX once:
 
 ```json
 {
@@ -154,23 +33,62 @@ mount(document.getElementById("root")!, () => (
 
 ```ts
 // vite.config.ts
-esbuild: { jsx: "automatic", jsxImportSource: "@lab206/dom" }
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  esbuild: {
+    jsx: "automatic",
+    jsxImportSource: "@lab206/dom",
+  },
+});
 ```
 
-## 5. Forms & motion
+```tsx
+import "@lab206/ui/theme.css";
+import { mount } from "@lab206/dom";
+import { Button, createTheme } from "@lab206/ui";
 
-- [FORMS.md](./FORMS.md)  
-- [MOTION.md](./MOTION.md)  
-- [COMPONENTS.md](./COMPONENTS.md)  
+createTheme("light").bind();
+mount(document.getElementById("root")!, () => (
+  <Button onClick={() => alert("Powers")}>Hello</Button>
+));
+```
 
-Lab: `/lab?recipe=form` · `/lab?recipe=motion`
+More: [NPM.md](./NPM.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md) · [FORMS.md](./FORMS.md)
 
-## 6. Public later (not now)
+## 3. Learn on lab206.com
 
-When you *do* open-source or publish:
+| Goal | Link |
+|---|---|
+| Lab Start here (~10 min) | https://lab206.com/lab?recipe=hello |
+| Docs (API + patterns) | https://lab206.com/docs |
+| System (every component) | https://lab206.com/system |
+| designlab206 demo | https://lab206.com/workspace/ |
+| Hearth demo | https://lab206.com/hearth/ |
+| Figma | [Powers Design Kit plugin](https://www.figma.com/community/plugin/1671016490810398688) |
 
-1. Harden the starter  
-2. Follow [RELEASE.md](./RELEASE.md)  
-3. Swap `workspace:*` for versioned packages  
+Rules: [USABILITY.md](./USABILITY.md) · Day 1/2/30: [LEARN_PATH.md](./LEARN_PATH.md)
 
-Until then: **starter + browser demo** are the product surface for DX.
+## 4. Put it online
+
+```bash
+pnpm build
+pnpm deploy:zip   # → site-upload.zip
+```
+
+Upload to any static host — [DEPLOY.md](./DEPLOY.md).  
+Free vs paid: [OFFER.md](./OFFER.md).
+
+---
+
+## From source (contributors)
+
+```bash
+git clone https://github.com/spowers2/powers.git
+cd powers
+pnpm install
+pnpm example:browser     # Lab · Docs · System  → :5173
+pnpm example:starter     # designlab206         → :5180
+pnpm example:restaurant  # Hearth               → :5181
+pnpm create-app hello-ui # workspace-linked scaffold under examples/
+```

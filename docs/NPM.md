@@ -1,6 +1,16 @@
 # Publishing & installing `@lab206/*`
 
-## Install (after first npm publish)
+## Scaffold (recommended)
+
+```bash
+pnpm create powers my-app
+# or: npm create powers@latest my-app
+cd my-app && pnpm install && pnpm dev
+```
+
+Uses the `create-powers` package (embeds the Vite template with `@lab206/*@^0.1.2`).
+
+## Install into an existing app
 
 ```bash
 pnpm add @lab206/core @lab206/dom @lab206/ui

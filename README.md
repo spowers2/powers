@@ -26,6 +26,8 @@ Hub in-repo: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [GOLDEN_PATH](./doc
 ## Install
 
 ```bash
+pnpm create powers my-app
+# or
 pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 

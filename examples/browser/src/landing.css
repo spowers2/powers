@@ -328,8 +328,22 @@ html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links butto
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin-bottom: 1.15rem;
+  margin-bottom: 0.85rem;
   align-items: center;
+}
+
+.lp-install {
+  margin: 0 0 1.15rem;
+  padding: 0.65rem 0.85rem;
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: var(--pu-radius-md, 8px);
+  border: 1px solid var(--pu-color-border);
+  background: var(--pu-color-surface);
+  color: var(--pu-color-text);
+  font-family: var(--pu-font-mono, ui-monospace, monospace);
+  font-size: var(--pu-text-sm, 0.875rem);
+  line-height: 1.4;
 }
 
 .lp-product-links {

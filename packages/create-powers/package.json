@@ -1,0 +1,46 @@
+{
+  "name": "create-powers",
+  "version": "0.1.2",
+  "description": "Scaffold a Powers + Vite app (pnpm create powers my-app)",
+  "type": "module",
+  "license": "BUSL-1.1",
+  "bin": {
+    "create-powers": "./bin/create-powers.js"
+  },
+  "files": [
+    "bin",
+    "template",
+    "README.md"
+  ],
+  "scripts": {
+    "sync-template": "node ./scripts/sync-template.mjs",
+    "prepublishOnly": "node ./scripts/sync-template.mjs",
+    "typecheck": "node -e \"console.log('create-powers: no tsc')\"",
+    "test": "node -e \"console.log('create-powers: smoke via scripts outside CI')\"",
+    "build": "node ./scripts/sync-template.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spowers2/powers.git",
+    "directory": "packages/create-powers"
+  },
+  "homepage": "https://lab206.com",
+  "bugs": {
+    "url": "https://github.com/spowers2/powers/issues"
+  },
+  "keywords": [
+    "powers",
+    "lab206",
+    "vite",
+    "scaffold",
+    "create"
+  ],
+  "author": "Scott Powers",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

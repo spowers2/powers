@@ -197,6 +197,8 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  packages/create-powers: {}
+
   packages/dom:
     dependencies:
       '@lab206/core':

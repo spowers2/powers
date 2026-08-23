@@ -2,7 +2,7 @@
 
 **For public users and contributors.** Start here and follow the path that matches your goal.
 
-Private repo today; these docs are written so they can ship as-is when the project goes public.
+Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab206/*@0.1.2+`.
 
 ---
 
@@ -10,10 +10,10 @@ Private repo today; these docs are written so they can ship as-is when the proje
 
 | Goal | Doc / route |
 |---|---|
-| **How to use + API (in the demo)** | **http://localhost:5173/docs** |
+| **How to use + API** | **https://lab206.com/docs** |
 | API cheat sheet (markdown) | [API.md](./API.md) |
 | **Create & customize components** | [COMPONENTS.md](./COMPONENTS.md) |
-| Getting started (private starter) | [GETTING_STARTED.md](./GETTING_STARTED.md) · `pnpm example:starter` |
+| Getting started | [GETTING_STARTED.md](./GETTING_STARTED.md) · `pnpm create powers my-app` |
 | **Put an app online (static host)** | [DEPLOY.md](./DEPLOY.md) · `pnpm deploy:zip` |
 | **lab206.com → LiveCode** | [LAB206_LIVECODE.md](./LAB206_LIVECODE.md) · `pnpm build:lab206` |
 | **npm install / publish** | [NPM.md](./NPM.md) |
@@ -38,16 +38,17 @@ Private repo today; these docs are written so they can ship as-is when the proje
 
 **Recommended path for a new developer**
 
-1. Demo **`/docs`** — pick a path (eng / design / cookbook), three rules, API  
-2. Demo **`/lab`** — recipes with Goal / Learn / How / Try this  
-3. Demo **`/system`** — brand playground + every component live  
-4. Day 1 / 2 / 30: [LEARN_PATH.md](./LEARN_PATH.md)  
-5. Markdown deep-dives as needed (LEARN, DOM, ROUTER, …)
+1. `pnpm create powers my-app` → first screen locally  
+2. [lab206.com/docs](https://lab206.com/docs) — three rules, API  
+3. [lab206.com/lab](https://lab206.com/lab?recipe=hello) — Start here recipes  
+4. [lab206.com/system](https://lab206.com/system) — brand playground + every component  
+5. Day 1 / 2 / 30: [LEARN_PATH.md](./LEARN_PATH.md)
 
-**Scaffold a minimal app**
+**Scaffold**
 
 ```bash
-pnpm create-app my-ui    # or: bash scripts/create-powers.sh my-ui
+pnpm create powers my-app
+# from this monorepo: pnpm create-app my-ui
 ```
 
 ---
@@ -65,9 +66,11 @@ pnpm create-app my-ui    # or: bash scripts/create-powers.sh my-ui
 
 ---
 
-## Quick install (when published)
+## Quick install
 
 ```bash
+pnpm create powers my-app
+# or
 pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
@@ -80,7 +83,7 @@ import { Button, createTheme } from "@lab206/ui";
 createTheme("light").bind();
 
 const n = signal(0);
-mount(document.getElementById("app")!, () => (
+mount(document.getElementById("root")!, () => (
   <Button onClick={() => n.update((x) => x + 1)}>
     {() => `Clicks: ${n()}`}
   </Button>

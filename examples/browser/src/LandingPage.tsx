@@ -208,8 +208,8 @@ export function LandingPage(props: { router: Router }) {
                 </h1>
                 <p class="lp-lede">
                   Built on the {SITE.systemName} UI system — signals, components,
-                  and tokens. See real apps first — then Lab, the design system,
-                  and the Figma library.
+                  and tokens. Scaffold a Vite app in minutes, or explore demos,
+                  Lab, and the Figma library first.
                 </p>
 
                 <div class="lp-cta-row">
@@ -232,7 +232,11 @@ export function LandingPage(props: { router: Router }) {
                   >
                     Lab · Start here
                   </Button>
+                  <Button size="lg" variant="ghost" onClick={go("/docs")}>
+                    Install
+                  </Button>
                 </div>
+                <pre class="lp-install" aria-label="Install Powers">{`pnpm create powers my-app`}</pre>
 
                 <div class="lp-product-links" aria-label="Product demos">
                   <a

@@ -1,20 +1,18 @@
 # Golden path — first polished screen (~15 minutes)
 
-**Goal:** From monorepo install → a themed form that *actually works* (live validation, no remount weirdness).
+**Goal:** A themed form that *actually works* (live validation, no remount weirdness).
 
-Private monorepo today. Same path will map to `npm create` later.
+```bash
+pnpm create powers my-app && cd my-app && pnpm install && pnpm dev
+```
+
+Or learn in the browser: https://lab206.com/lab?recipe=hello
 
 ---
 
-## 1. Install & Start here (2 min)
+## 1. Lab Start here (2 min)
 
-```bash
-cd powers   # monorepo root
-pnpm install
-pnpm example:browser   # http://localhost:5173
-```
-
-Open **http://localhost:5173/lab** → sidebar **Start here**:
+Open **https://lab206.com/lab** → sidebar **Start here**:
 
 | # | Recipe | URL |
 |---|---|---|
@@ -22,7 +20,7 @@ Open **http://localhost:5173/lab** → sidebar **Start here**:
 | 2 | Form validation | `/lab?recipe=form` |
 | 3 | Tokens & theme | `/lab?recipe=tokens` |
 
-Then: System (**Copy JSX**) · Docs · `pnpm example:starter` for a full app.
+Then: System (**Copy JSX**) · Docs · product demos on lab206.com.
 
 ---
 
@@ -117,18 +115,22 @@ mount(document.getElementById("root")!, () => (
 
 **Do not** write `value={email()}` — that snapshots once and breaks typing.
 
-Private scaffold: `pnpm new-app my-feature` or copy `examples/app-starter`.
+Prefer `createField` + `bind` (what `pnpm create powers` scaffolds). See [FORMS.md](./FORMS.md).
 
 ---
 
 ## 4. Retheme (2 min)
 
-Edit **one file**: `packages/ui/src/styles/tokens.css`
+Powers ships CSS variables on `:root` via `@lab206/ui/theme.css`. Override in your app CSS:
 
-- Brand blues: `--pu-brand-*`  
-- Accent green: `--pu-sage-*` (default `#69BE28`)
+```css
+:root {
+  --pu-brand-500: #2563eb;
+  --pu-sage-500: #69be28;
+}
+```
 
-Reload the app — Button, focus rings, and accents follow tokens.
+In the monorepo, the source tokens live in `packages/ui/src/styles/tokens.css`.
 
 ---
 
