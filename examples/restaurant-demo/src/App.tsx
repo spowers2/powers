@@ -89,7 +89,36 @@ export function createApp(opts: {
   /** Single outlet host — must not call outlet() twice (would fight over effects). */
   const outletNode = router.outlet();
 
+  const staffPhoneMenu = [
+    { id: "/", label: "Overview" },
+    { id: "/tables", label: "Map" },
+    { id: "/service", label: "Kitchen" },
+    { id: "/reservations", label: "Book" },
+    { id: "/menu", label: "Menu" },
+    { id: "/settings", label: "Team & settings" },
+    { id: "/visit", label: "Guest site" },
+  ];
+  const staffTabletMore = [
+    { id: "/reservations", label: "Book" },
+    { id: "/menu", label: "Menu" },
+    { id: "/settings", label: "Team & settings" },
+    { id: "/visit", label: "Guest site" },
+  ];
+  const guestPhoneMenu = [
+    { id: "/visit", label: "Home" },
+    { id: "/visit/menu", label: "Menu" },
+    { id: "/visit/book", label: "Book" },
+    { id: "/", label: "Staff" },
+  ];
+
   function Shell() {
+    const pathActive = (ids: string[]) =>
+      ids.some((id) =>
+        id === "/"
+          ? router.path() === "/"
+          : router.path() === id || router.path().startsWith(id + "/"),
+      );
+
     return (
       <div class="app-shell">
         {() =>
@@ -105,20 +134,53 @@ export function createApp(opts: {
                 </span>
               </Link>
               <nav class="app-nav" aria-label="Guest">
-                <Link router={router} to="/visit" exact activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/visit"
+                  exact
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Home
                 </Link>
-                <Link router={router} to="/visit/menu" activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/visit/menu"
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Menu
                 </Link>
-                <Link router={router} to="/visit/book" activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/visit/book"
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Book
                 </Link>
+                <div class="app-nav-menu app-nav-menu--phone">
+                  <Menu
+                    items={guestPhoneMenu}
+                    align="end"
+                    onSelect={(id) => router.navigate(id)}
+                    trigger={
+                      <button
+                        type="button"
+                        class="app-nav__more-btn"
+                        aria-label="Open menu"
+                      >
+                        Menu
+                      </button>
+                    }
+                  />
+                </div>
               </nav>
               <div class="app-header-actions">
                 <Button
                   size="sm"
                   variant="ghost"
+                  class="app-header-actions__wide"
                   onClick={() => router.navigate("/")}
                 >
                   Staff
@@ -145,20 +207,36 @@ export function createApp(opts: {
                 </span>
               </Link>
               <nav class="app-nav" aria-label="Staff">
-                <Link router={router} to="/" exact activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/"
+                  exact
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Overview
                 </Link>
-                <Link router={router} to="/tables" activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/tables"
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Map
                 </Link>
-                <Link router={router} to="/service" activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/service"
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Kitchen
                 </Link>
                 <Link
                   router={router}
                   to="/reservations"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Book
                 </Link>
@@ -166,7 +244,7 @@ export function createApp(opts: {
                   router={router}
                   to="/menu"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Menu
                 </Link>
@@ -174,34 +252,43 @@ export function createApp(opts: {
                   router={router}
                   to="/settings"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Team
                 </Link>
-                <div class="app-nav-more">
+                <div class="app-nav-menu app-nav-menu--phone">
                   <Menu
-                    items={[
-                      { id: "/reservations", label: "Book" },
-                      { id: "/menu", label: "Menu" },
-                      { id: "/settings", label: "Team & settings" },
-                      { id: "/visit", label: "Guest site →" },
-                    ]}
+                    items={staffPhoneMenu}
+                    align="end"
                     onSelect={(id) => router.navigate(id)}
                     trigger={
                       <button
                         type="button"
-                        class={() => {
-                          const p = router.path();
-                          const overflow = [
-                            "/reservations",
-                            "/menu",
-                            "/settings",
-                            "/visit",
-                          ].some((id) => p === id || p.startsWith(id + "/"));
-                          return overflow
+                        class={() =>
+                          pathActive(staffPhoneMenu.map((m) => m.id))
                             ? "app-nav__more-btn is-active"
-                            : "app-nav__more-btn";
-                        }}
+                            : "app-nav__more-btn"
+                        }
+                        aria-label="Open menu"
+                      >
+                        Menu
+                      </button>
+                    }
+                  />
+                </div>
+                <div class="app-nav-menu app-nav-menu--tablet">
+                  <Menu
+                    items={staffTabletMore}
+                    align="end"
+                    onSelect={(id) => router.navigate(id)}
+                    trigger={
+                      <button
+                        type="button"
+                        class={() =>
+                          pathActive(staffTabletMore.map((m) => m.id))
+                            ? "app-nav__more-btn is-active"
+                            : "app-nav__more-btn"
+                        }
                         aria-label="More pages"
                       >
                         More
@@ -214,6 +301,7 @@ export function createApp(opts: {
                 <Button
                   size="sm"
                   variant="soft"
+                  class="app-header-actions__wide"
                   onClick={() => router.navigate("/visit")}
                 >
                   Guest site

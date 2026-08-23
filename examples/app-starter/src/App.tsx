@@ -81,8 +81,20 @@ export function createApp(opts: {
     ),
   });
 
-  // Routes hidden below 960px (see .app-nav__wide). Portal stays a header action.
-  const moreItems = [
+  // Phone (<720): one Menu with everything — no sideways scroll.
+  // Tablet (720–959): a few primaries + More for the rest.
+  // Desktop (≥960): all links inline.
+  const phoneMenuItems = [
+    { id: "/", label: "Dashboard" },
+    { id: "/clients", label: "Clients" },
+    { id: "/projects", label: "Projects" },
+    { id: "/tasks", label: "Tasks" },
+    { id: "/invoices", label: "Invoices" },
+    { id: "/time", label: "Time" },
+    { id: "/settings", label: "Settings" },
+    { id: "/portal", label: "Client portal" },
+  ];
+  const tabletMoreItems = [
     { id: "/projects", label: "Projects" },
     { id: "/invoices", label: "Invoices" },
     { id: "/time", label: "Time" },
@@ -93,6 +105,12 @@ export function createApp(opts: {
 
   function Shell() {
     const isPortal = () => router.path().startsWith("/portal");
+    const pathActive = (ids: string[]) =>
+      ids.some((id) =>
+        id === "/"
+          ? router.path() === "/"
+          : router.path() === id || router.path().startsWith(id + "/"),
+      );
 
     return (
       <div class="app-shell">
@@ -107,7 +125,13 @@ export function createApp(opts: {
                 </span>
               </Link>
               <nav class="app-nav" aria-label="Portal">
-                <Link router={router} to="/portal" exact activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/portal"
+                  exact
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--always"
+                >
                   My projects
                 </Link>
               </nav>
@@ -141,28 +165,44 @@ export function createApp(opts: {
                 </span>
               </Link>
               <nav class="app-nav" aria-label="Main">
-                <Link router={router} to="/" exact activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/"
+                  exact
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Dashboard
                 </Link>
-                <Link router={router} to="/clients" activeClass="is-active">
+                <Link
+                  router={router}
+                  to="/clients"
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
                   Clients
+                </Link>
+                <Link
+                  router={router}
+                  to="/tasks"
+                  activeClass="is-active"
+                  class="app-nav__link app-nav__link--primary"
+                >
+                  Tasks
                 </Link>
                 <Link
                   router={router}
                   to="/projects"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Projects
-                </Link>
-                <Link router={router} to="/tasks" activeClass="is-active">
-                  Tasks
                 </Link>
                 <Link
                   router={router}
                   to="/invoices"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Invoices
                 </Link>
@@ -170,7 +210,7 @@ export function createApp(opts: {
                   router={router}
                   to="/time"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Time
                 </Link>
@@ -178,20 +218,40 @@ export function createApp(opts: {
                   router={router}
                   to="/settings"
                   activeClass="is-active"
-                  class="app-nav__wide"
+                  class="app-nav__link app-nav__link--desktop"
                 >
                   Settings
                 </Link>
-                <div class="app-nav-more">
+                <div class="app-nav-menu app-nav-menu--phone">
                   <Menu
-                    items={moreItems}
+                    items={phoneMenuItems}
                     align="end"
                     onSelect={(id) => router.navigate(id)}
                     trigger={
                       <button
                         type="button"
                         class={() =>
-                          moreItems.some((m) => router.path().startsWith(m.id))
+                          pathActive(phoneMenuItems.map((m) => m.id))
+                            ? "app-nav__more-btn is-active"
+                            : "app-nav__more-btn"
+                        }
+                        aria-label="Open menu"
+                      >
+                        Menu
+                      </button>
+                    }
+                  />
+                </div>
+                <div class="app-nav-menu app-nav-menu--tablet">
+                  <Menu
+                    items={tabletMoreItems}
+                    align="end"
+                    onSelect={(id) => router.navigate(id)}
+                    trigger={
+                      <button
+                        type="button"
+                        class={() =>
+                          pathActive(tabletMoreItems.map((m) => m.id))
                             ? "app-nav__more-btn is-active"
                             : "app-nav__more-btn"
                         }
@@ -207,6 +267,7 @@ export function createApp(opts: {
                 <Button
                   size="sm"
                   variant="soft"
+                  class="app-header-actions__wide"
                   onClick={() => router.navigate("/portal")}
                 >
                   Client portal

@@ -87,6 +87,31 @@ html {
   flex-shrink: 0;
 }
 
+.site-nav-phone {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 0.25rem;
+}
+
+.site-nav-phone__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--pu-color-text-muted);
+  font: inherit;
+  font-size: var(--pu-text-sm);
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--pu-radius-md);
+  cursor: pointer;
+}
+
+.site-nav-phone__btn:hover {
+  color: var(--pu-color-text);
+  background: var(--pu-color-surface-2);
+}
+
 .site-nav-links {
   display: none;
   align-items: center;
@@ -94,9 +119,13 @@ html {
   min-width: 0;
   flex: 1 1 auto;
   justify-content: center;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
+  .site-nav-phone {
+    display: none;
+  }
   .site-nav-links {
     display: flex;
   }
@@ -254,38 +283,25 @@ html[data-pu-palette="dual"] .lp-feat-card:hover {
   flex-shrink: 0;
 }
 
-/* Mobile: scrollable primary row includes demos (Workspace / Hearth / Plugin) */
+/* Phone: brand | Menu | theme — no sideways scroll, no clipped link row */
 @media (max-width: 767px) {
   .site-nav-inner {
-    flex-wrap: wrap;
-    row-gap: 0.35rem;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
     padding-block: 0.45rem;
-  }
-
-  .site-nav-links {
-    display: flex;
-    order: 3;
-    flex: 1 1 100%;
-    justify-content: flex-start;
-    gap: 0.15rem;
-    padding-bottom: 0.15rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .site-nav-links::-webkit-scrollbar {
-    display: none;
-  }
-
-  .site-nav-sep {
-    display: none;
   }
 
   .site-nav-actions .pu-btn,
   .site-nav-actions button {
     font-size: 0.75rem;
     padding-inline: 0.45rem;
+  }
+
+  .site-nav-action-full {
+    display: none;
+  }
+  .site-nav-action-short {
+    display: inline;
   }
 }
 

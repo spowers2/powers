@@ -198,26 +198,51 @@ body::before {
   display: flex;
   align-items: center;
   gap: 0.2rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex: 1;
   min-width: 0;
+  overflow: visible; /* never sideways-scroll the nav */
 }
 
-/* Narrow: hide secondary routes; show More menu */
-.app-nav__wide {
+/* Mobile-first visibility: phone = Menu only; tablet adds primaries; desktop = all */
+.app-nav__link {
+  display: none !important;
+}
+.app-nav__link--always {
+  display: inline-flex !important;
+}
+.app-nav-menu {
+  display: none;
+  align-items: center;
+  flex-shrink: 0;
+}
+.app-nav-menu--phone {
+  display: inline-flex;
+}
+.app-header-actions__wide {
   display: none !important;
 }
 
-.app-nav-more {
-  display: inline-flex;
-  align-items: center;
+@media (min-width: 720px) {
+  .app-nav__link--primary {
+    display: inline-flex !important;
+  }
+  .app-nav-menu--phone {
+    display: none !important;
+  }
+  .app-nav-menu--tablet {
+    display: inline-flex !important;
+  }
+  .app-header-actions__wide {
+    display: inline-flex !important;
+  }
 }
 
 @media (min-width: 960px) {
-  .app-nav__wide {
+  .app-nav__link {
     display: inline-flex !important;
   }
-  .app-nav-more {
+  .app-nav-menu {
     display: none !important;
   }
 }
@@ -235,6 +260,7 @@ body::before {
   padding: 0.45rem 0.8rem;
   border-radius: 999px;
   cursor: pointer;
+  white-space: nowrap;
   transition:
     color var(--pu-duration) var(--pu-ease),
     background var(--pu-duration) var(--pu-ease),
@@ -264,6 +290,7 @@ body::before {
   align-items: center;
   gap: 0.35rem;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .app-main {
@@ -741,24 +768,21 @@ body::before {
   color: var(--pu-color-text-muted);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 719px) {
   .app-header {
     padding: 0.65rem 0.9rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+  .app-brand {
+    flex: 1;
+    min-width: 0;
   }
   .app-brand__sub {
     display: none;
   }
   .app-nav {
-    order: 3;
-    width: 100%;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-bottom: 0.1rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .app-nav::-webkit-scrollbar {
-    display: none;
+    flex: 0 0 auto;
   }
   .app-header-actions {
     margin-left: 0;

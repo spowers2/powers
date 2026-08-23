@@ -1,16 +1,28 @@
 /**
  * Site navigation — kit pages + product demos; theme tools right.
- * Below ~1100px demos use short labels; on phones the link row scrolls.
+ * Phone: single Menu (no sideways scroll). Tablet+: inline links.
  */
 import type { Router } from "@lab206/router";
 import { Link } from "@lab206/router";
 import {
   Button,
   Container,
+  Menu,
   type ThemeController,
   type PaletteController,
 } from "@lab206/ui";
 import { SITE } from "./siteConfig.js";
+
+const PHONE_MENU = [
+  { id: "/", label: "Home" },
+  { id: "/docs", label: "Docs" },
+  { id: "/lab", label: "Lab" },
+  { id: "/system", label: "System" },
+  { id: SITE.contact.href, label: SITE.contact.label },
+  { id: "__workspace", label: SITE.demos.workspace.label },
+  { id: "__hearth", label: SITE.demos.hearth.label },
+  { id: "__figma", label: "Figma plugin" },
+] as const;
 
 export function SiteNav(props: {
   router: Router;
@@ -18,6 +30,31 @@ export function SiteNav(props: {
   palette: PaletteController;
 }) {
   const { router, theme, palette } = props;
+
+  const onPhoneSelect = (id: string) => {
+    if (id === "__workspace") {
+      window.open(
+        SITE.demos.workspace.href,
+        "_blank",
+        "noopener,noreferrer",
+      );
+      return;
+    }
+    if (id === "__hearth") {
+      window.open(SITE.demos.hearth.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (id === "__figma") {
+      window.open(SITE.figma.pluginUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (id === "/") {
+      router.navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    router.navigate(id);
+  };
 
   return (
     <header class="site-nav">
@@ -39,6 +76,23 @@ export function SiteNav(props: {
             <span class="site-mark" aria-hidden="true" />
             <span class="site-brand-label">{SITE.name}</span>
           </Link>
+
+          <div class="site-nav-phone">
+            <Menu
+              items={[...PHONE_MENU]}
+              align="end"
+              onSelect={onPhoneSelect}
+              trigger={
+                <button
+                  type="button"
+                  class="site-nav-phone__btn"
+                  aria-label="Open menu"
+                >
+                  Menu
+                </button>
+              }
+            />
+          </div>
 
           <nav class="site-nav-links" aria-label="Primary">
             <Link router={router} to="/" exact activeClass="active">
