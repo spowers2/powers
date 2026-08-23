@@ -26,7 +26,7 @@ export default {
     {/* children */}
   </Stack>
 `,
-  imports: ["import { Stack } from '@powers/ui'"],
+  imports: ["import { Stack } from '@lab206/ui'"],
   id: "stack",
   metadata: {
     nestable: true,

@@ -12,7 +12,7 @@ export default {
     onChange={() => {}}
   />
 `,
-  imports: ["import { Combobox } from '@powers/ui'"],
+  imports: ["import { Combobox } from '@lab206/ui'"],
   id: 'combobox',
   metadata: {
     nestable: true,

@@ -8,7 +8,7 @@ export default {
   example: figma.code`
   <Slider value={50} min={0} max={100} onChange={() => {}} showValue />
 `,
-  imports: ["import { Slider } from '@powers/ui'"],
+  imports: ["import { Slider } from '@lab206/ui'"],
   id: 'slider',
   metadata: {
     nestable: true,

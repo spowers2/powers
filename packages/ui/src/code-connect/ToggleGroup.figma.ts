@@ -23,7 +23,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { ToggleGroup } from '@powers/ui'"],
+  imports: ["import { ToggleGroup } from '@lab206/ui'"],
   id: 'toggle-group',
   metadata: {
     nestable: true,

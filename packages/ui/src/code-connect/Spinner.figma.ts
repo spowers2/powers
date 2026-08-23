@@ -16,7 +16,7 @@ export default {
   example: figma.code`
   <Spinner size={${size}} label={${label}} />
 `,
-  imports: ["import { Spinner } from '@powers/ui'"],
+  imports: ["import { Spinner } from '@lab206/ui'"],
   id: "spinner",
   metadata: {
     nestable: true,

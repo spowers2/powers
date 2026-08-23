@@ -2,14 +2,14 @@
  * Site navigation — kit pages + product demos; theme tools right.
  * Below ~1100px demos use short labels; on phones the link row scrolls.
  */
-import type { Router } from "@powers/router";
-import { Link } from "@powers/router";
+import type { Router } from "@lab206/router";
+import { Link } from "@lab206/router";
 import {
   Button,
   Container,
   type ThemeController,
   type PaletteController,
-} from "@powers/ui";
+} from "@lab206/ui";
 import { SITE } from "./siteConfig.js";
 
 export function SiteNav(props: {

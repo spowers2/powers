@@ -28,7 +28,7 @@ Open **http://localhost:5181**
 
 ## Stack
 
-- `@powers/core` · `@powers/dom` · `@powers/router` · `@powers/ui`
+- `@lab206/core` · `@lab206/dom` · `@lab206/router` · `@lab206/ui`
 
 ## Put this online
 

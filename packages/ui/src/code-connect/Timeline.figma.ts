@@ -17,7 +17,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Timeline } from '@powers/ui'"],
+  imports: ["import { Timeline } from '@lab206/ui'"],
   id: 'timeline',
   metadata: {
     nestable: true,

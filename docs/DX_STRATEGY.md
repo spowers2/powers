@@ -58,7 +58,7 @@ Never force advanced APIs into Hello World.
 ### Sprint A — Trust the demo ✅
 1. ~~TOC/scroll-spy pin + end-of-page last section~~  
 2. ~~Keyboard roving on Menu / Tabs / List~~ (`rovingFocus.ts`)  
-3. ~~Smoke tests~~ — `pnpm --filter @powers/example-browser smoke` + unit tests  
+3. ~~Smoke tests~~ — `pnpm --filter @lab206/example-browser smoke` + unit tests  
 4. ~~Focus-visible rings on Button / Menu / Tabs / List~~ (+ Combobox options / Command items)
 
 ### Sprint B — Authoring loop ✅
@@ -74,7 +74,7 @@ Never force advanced APIs into Hello World.
 
 ### Sprint D — Motion language ✅
 1. ~~Export named transition presets~~  
-2. ~~Document when to use CSS Transition vs `@powers/animate`~~ (`MOTION.md`)  
+2. ~~Document when to use CSS Transition vs `@lab206/animate`~~ (`MOTION.md`)  
 3. ~~Micro-interaction audit~~ — focus-visible rings + reduced-motion on form controls,  
    Chip/Pagination/Toggle/Accordion/Slider/Steps/Link/Breadcrumb/NumberInput,  
    Dialog/Drawer close, Menu/List hover slide  

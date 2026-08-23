@@ -1,4 +1,4 @@
-# Design system (`@powers/ui`)
+# Design system (`@lab206/ui`)
 
 **Goal:** adaptable, editable, clear, easy to use — without locking you into one brand.
 
@@ -8,8 +8,8 @@ Full model: [`STYLING.md`](./STYLING.md) — tokens · primitives · optional ut
 ## 60-second start
 
 ```tsx
-import "@powers/ui/theme.css";
-import { Button, Stack, Text, Card, createTheme } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { Button, Stack, Text, Card, createTheme } from "@lab206/ui";
 
 const theme = createTheme("light");
 theme.bind(); // sets data-pu-theme on <html>

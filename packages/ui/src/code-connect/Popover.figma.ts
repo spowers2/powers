@@ -14,7 +14,7 @@ export default {
     Popover content
   </Popover>
 `,
-  imports: ["import { Popover, Button } from '@powers/ui'"],
+  imports: ["import { Popover, Button } from '@lab206/ui'"],
   id: 'popover',
   metadata: {
     nestable: false,

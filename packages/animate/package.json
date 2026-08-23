@@ -1,7 +1,7 @@
 {
-  "name": "@powers/animate",
-  "version": "0.1.0",
-  "description": "Signal-native animation for Powers — tweens, springs, interruptible, a11y-aware.",
+  "name": "@lab206/animate",
+  "version": "0.1.2",
+  "description": "Signal-native animation for Powers \u2014 tweens, springs, interruptible, a11y-aware.",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,
@@ -38,7 +38,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@powers/core": "workspace:*"
+    "@lab206/core": "workspace:*"
   },
   "peerDependencies": {
     "gsap": "^3.12.0"

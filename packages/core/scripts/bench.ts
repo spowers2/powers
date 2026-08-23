@@ -1,5 +1,5 @@
 /**
- * Micro-benchmarks for @powers/core.
+ * Micro-benchmarks for @lab206/core.
  * Not a formal competitor suite yet — establishes a local baseline.
  */
 import { signal, computed, effect, batch, createRoot } from "../src/index.js";
@@ -19,7 +19,7 @@ function time(label: string, fn: () => void, iterations = 1): number {
 
 const N = 10_000;
 
-console.log("\n@powers/core micro-benchmarks\n");
+console.log("\n@lab206/core micro-benchmarks\n");
 
 time("create 10k signals", () => {
   for (let i = 0; i < N; i++) signal(i);

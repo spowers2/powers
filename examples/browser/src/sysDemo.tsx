@@ -4,8 +4,8 @@
  * Snippets are **Lab-runnable**: import + App + mount (same shape as recipes).
  * Lab strips imports and injects the live API — bare JSX fragments will not run.
  */
-import { signal } from "@powers/core";
-import { Button, Stack, Text } from "@powers/ui";
+import { signal } from "@lab206/core";
+import { Button, Stack, Text } from "@lab206/ui";
 import { encodeShare } from "./lab/runner.js";
 
 export async function copyText(text: string): Promise<boolean> {
@@ -54,8 +54,8 @@ mount(document.getElementById("root")!, () => <App />);
 /** Canonical snippets for System demos — paste into Lab or an app. */
 export const SNIPPETS = {
   button: labProgram(
-    `import { mount } from "@powers/dom";
-import { Button, Stack } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Button, Stack } from "@lab206/ui";`,
     `<Stack direction="row" gap={2} wrap>
       <Button>Solid</Button>
       <Button variant="soft">Soft</Button>
@@ -64,8 +64,8 @@ import { Button, Stack } from "@powers/ui";`,
   ),
 
   field: labProgram(
-    `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Field,
   Input,
@@ -74,7 +74,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";`,
+} from "@lab206/ui";`,
     `<Stack gap={3}>
       <Text weight="semibold">Email field</Text>
       <Field label="Email" htmlFor="email" error={error} required>
@@ -91,9 +91,9 @@ const error = () =>
   ),
 
   dialog: labProgram(
-    `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, Dialog, Stack, Text } from "@powers/ui";`,
+    `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, Dialog, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Button onClick={() => open.set(true)}>Open dialog</Button>
       <Dialog open={open} onClose={() => open.set(false)} title="Confirm">
@@ -107,8 +107,8 @@ import { Button, Dialog, Stack, Text } from "@powers/ui";`,
   ),
 
   tabs: labProgram(
-    `import { mount } from "@powers/dom";
-import { Tabs, Text } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Tabs, Text } from "@lab206/ui";`,
     `<Tabs
       defaultValue="a"
       items={[
@@ -119,9 +119,9 @@ import { Tabs, Text } from "@powers/ui";`,
   ),
 
   menu: labProgram(
-    `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Menu, Button, Stack, Text } from "@powers/ui";`,
+    `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Menu, Button, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Menu
         trigger={<Button size="sm">Actions</Button>}
@@ -137,8 +137,8 @@ import { Menu, Button, Stack, Text } from "@powers/ui";`,
   ),
 
   accordion: labProgram(
-    `import { mount } from "@powers/dom";
-import { Accordion, Card } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Accordion, Card } from "@lab206/ui";`,
     `<Card>
       <Accordion
         single
@@ -152,9 +152,9 @@ import { Accordion, Card } from "@powers/ui";`,
   ),
 
   drawer: labProgram(
-    `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, Drawer, Stack, Text } from "@powers/ui";`,
+    `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, Drawer, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Button onClick={() => open.set(true)}>Open drawer</Button>
       <Drawer open={open} onClose={() => open.set(false)} title="Filters">
@@ -165,9 +165,9 @@ import { Button, Drawer, Stack, Text } from "@powers/ui";`,
   ),
 
   combobox: labProgram(
-    `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Combobox, Field, Stack, Text } from "@powers/ui";`,
+    `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Combobox, Field, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Field label="City">
         <Combobox
@@ -190,8 +190,8 @@ const cities = signal([
   ),
 
   table: labProgram(
-    `import { mount } from "@powers/dom";
-import { Table } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Table } from "@lab206/ui";`,
     `<Table
       dense
       columns={[
@@ -206,8 +206,8 @@ import { Table } from "@powers/ui";`,
   ),
 
   stat: labProgram(
-    `import { mount } from "@powers/dom";
-import { Grid, Stat } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Grid, Stat } from "@lab206/ui";`,
     `<Grid cols={3} gap={4}>
       <Stat label="Users" value="12.4k" delta="+8%" tone="positive" />
       <Stat label="Errors" value="0.1%" delta="-0.02%" tone="positive" />
@@ -216,8 +216,8 @@ import { Grid, Stat } from "@powers/ui";`,
   ),
 
   toast: labProgram(
-    `import { mount } from "@powers/dom";
-import { Button, createToaster, Toaster, Stack } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Button, createToaster, Toaster, Stack } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Button
         onClick={() =>
@@ -232,9 +232,9 @@ import { Button, createToaster, Toaster, Stack } from "@powers/ui";`,
   ),
 
   switch: labProgram(
-    `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Switch, Stack, Text } from "@powers/ui";`,
+    `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Switch, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Switch label="Notifications" bind={on} />
       <Text muted size="sm">{() => (on() ? "On" : "Off")}</Text>
@@ -243,8 +243,8 @@ import { Switch, Stack, Text } from "@powers/ui";`,
   ),
 
   badge: labProgram(
-    `import { mount } from "@powers/dom";
-import { Badge, Stack } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Badge, Stack } from "@lab206/ui";`,
     `<Stack direction="row" gap={2} wrap>
       <Badge>Neutral</Badge>
       <Badge tone="accent">Accent</Badge>
@@ -254,8 +254,8 @@ import { Badge, Stack } from "@powers/ui";`,
   ),
 
   card: labProgram(
-    `import { mount } from "@powers/dom";
-import { Button, Card, Stack, Text } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Button, Card, Stack, Text } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Card>
         <Stack gap={2}>
@@ -276,8 +276,8 @@ import { Button, Card, Stack, Text } from "@powers/ui";`,
   ),
 
   alert: labProgram(
-    `import { mount } from "@powers/dom";
-import { Alert, Stack } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Alert, Stack } from "@lab206/ui";`,
     `<Stack gap={3}>
       <Alert tone="info" title="Info">Something to know.</Alert>
       <Alert tone="success" title="Saved">Your changes are live.</Alert>
@@ -286,8 +286,8 @@ import { Alert, Stack } from "@powers/ui";`,
   ),
 
   text: labProgram(
-    `import { mount } from "@powers/dom";
-import { Stack, Text } from "@powers/ui";`,
+    `import { mount } from "@lab206/dom";
+import { Stack, Text } from "@lab206/ui";`,
     `<Stack gap={2}>
       <Text as="h2" size="xl">Heading</Text>
       <Text>Body copy uses color/text.</Text>

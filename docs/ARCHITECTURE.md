@@ -53,7 +53,7 @@ Resolution order: local `effect(..., { onError })` → owner `onError` handlers 
 
 ## Size budget
 
-`pnpm size` bundles `@powers/core` with esbuild (minify) and fails if gzip exceeds 8 KB.
+`pnpm size` bundles `@lab206/core` with esbuild (minify) and fails if gzip exceeds 8 KB.
 
 ## App-author contracts
 

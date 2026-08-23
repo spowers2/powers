@@ -1,4 +1,4 @@
-import { signal, computed } from "@powers/core";
+import { signal, computed } from "@lab206/core";
 import {
   Button,
   Card,
@@ -14,8 +14,8 @@ import {
   required,
   type ToastController,
   asSelectBind,
-} from "@powers/ui";
-import type { Router } from "@powers/router";
+} from "@lab206/ui";
+import type { Router } from "@lab206/router";
 import { PageHeader } from "../components/uiBits.js";
 import {
   tasks,

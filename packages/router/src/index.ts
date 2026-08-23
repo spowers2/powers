@@ -1,5 +1,5 @@
 /**
- * @powers/router
+ * @lab206/router
  *
  * Learn in 2 minutes:
  *   createRouter({ routes }) → router.outlet() + router.navigate() + <Link />

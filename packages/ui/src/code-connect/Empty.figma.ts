@@ -8,7 +8,7 @@ export default {
   example: figma.code`
   <Empty title="Nothing here" description="Try a different filter." />
 `,
-  imports: ["import { Empty } from '@powers/ui'"],
+  imports: ["import { Empty } from '@lab206/ui'"],
   id: 'empty',
   metadata: {
     nestable: true,

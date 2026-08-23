@@ -1,4 +1,4 @@
-import { signal, computed, effect } from "@powers/core";
+import { signal, computed, effect } from "@lab206/core";
 import type {
   Client,
   Project,

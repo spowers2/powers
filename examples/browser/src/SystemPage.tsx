@@ -1,7 +1,7 @@
 /**
  * Living design-system explorer — sections for tokens, type, forms, layout.
  */
-import { signal } from "@powers/core";
+import { signal } from "@lab206/core";
 import {
   Accordion,
   Alert,
@@ -49,7 +49,7 @@ import {
   Tooltip,
   type DensityController,
   type ThemeController,
-} from "@powers/ui";
+} from "@lab206/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import { DemoHead, SNIPPETS } from "./sysDemo.js";
 
@@ -1189,8 +1189,8 @@ export function SystemPage(props: {
                 Inline <Code>createTheme()</Code> and blocks:
               </Text>
               <Code block>
-{`import { Button, createTheme, createDensity } from "@powers/ui";
-import "@powers/ui/theme.css";
+{`import { Button, createTheme, createDensity } from "@lab206/ui";
+import "@lab206/ui/theme.css";
 
 const theme = createTheme("dark");
 theme.bind();
@@ -1208,7 +1208,7 @@ density.bind();`}
             <Text muted size="sm">
               core · animate · dom · router · ssr · ui — tree-shake and compose.
               Default motion is signal tweens; GSAP is optional via{" "}
-              <code>@powers/animate/gsap</code>.
+              <code>@lab206/animate/gsap</code>.
             </Text>
           </Stack>
         </Card>

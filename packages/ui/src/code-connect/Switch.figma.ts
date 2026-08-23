@@ -13,7 +13,7 @@ export default {
   example: figma.code`
   <Switch checked={${checked}} disabled={${disabled}} label={${label}} />
 `,
-  imports: ["import { Switch } from '@powers/ui'"],
+  imports: ["import { Switch } from '@lab206/ui'"],
   id: "switch",
   metadata: {
     nestable: true,

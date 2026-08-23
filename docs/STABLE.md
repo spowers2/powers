@@ -19,7 +19,7 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@powers/core` — Stable
+## `@lab206/core` — Stable
 
 | Export | Notes |
 |---|---|
@@ -35,12 +35,12 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@powers/dom` — Stable
+## `@lab206/dom` — Stable
 
 | Export | Notes |
 |---|---|
 | `mount` | App bootstrap |
-| JSX runtime (`jsxImportSource: "@powers/dom"`) | |
+| JSX runtime (`jsxImportSource: "@lab206/dom"`) | |
 | `component` · `Show` · `For` | Components + control flow |
 | `h` · `text` · `Fragment` | |
 | `mergeProps` · `createProps` · `splitProps` | Reactive props |
@@ -51,7 +51,7 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@powers/router` — Stable
+## `@lab206/router` — Stable
 
 | Export | Notes |
 |---|---|
@@ -64,18 +64,18 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 ---
 
-## `@powers/animate` — Solid
+## `@lab206/animate` — Solid
 
 | Export | Notes |
 |---|---|
 | `animate` · `spring` · `cancel` | Signal-driven motion (default) |
-| `@powers/animate/gsap` | **Experimental / optional peer** — `gsapAnimate`, `createGsapBridge` |
+| `@lab206/animate/gsap` | **Experimental / optional peer** — `gsapAnimate`, `createGsapBridge` |
 
 Apps that never install `gsap` never pay for it.
 
 ---
 
-## `@powers/ui` — Mixed
+## `@lab206/ui` — Mixed
 
 ### Stable (app authoring)
 
@@ -94,11 +94,11 @@ Apps that never install `gsap` never pay for it.
 - `packages/ui/src/size-entries/*`
 - `__overlayStackSize` · `__resetOverlayStack` (test-only)
 
-**CSS:** import `@powers/ui/theme.css` once. Tokens live in `tokens.css` — retheme there, not with one-off component CSS when possible.
+**CSS:** import `@lab206/ui/theme.css` once. Tokens live in `tokens.css` — retheme there, not with one-off component CSS when possible.
 
 ---
 
-## `@powers/ssr` — Solid / document limits
+## `@lab206/ssr` — Solid / document limits
 
 `renderToString` + islands. Treat as advanced; see [`SSR.md`](./SSR.md).
 

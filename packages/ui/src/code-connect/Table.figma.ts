@@ -15,7 +15,7 @@ export default {
     rowKey="name"
   />
 `,
-  imports: ["import { Table } from '@powers/ui'"],
+  imports: ["import { Table } from '@lab206/ui'"],
   id: 'table',
   metadata: {
     nestable: true,

@@ -15,7 +15,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Menu, Button } from '@powers/ui'"],
+  imports: ["import { Menu, Button } from '@lab206/ui'"],
   id: 'menu',
   metadata: {
     nestable: false,

@@ -18,7 +18,7 @@ Do not open a public issue with exploit details.
 ## Supply chain
 
 - Prefer `pnpm install --frozen-lockfile` in CI.
-- Packages are **not** published to npm until an explicit release; treat `@powers/*` as monorepo-private for now.
+- Packages are **not** published to npm until an explicit release; treat `@lab206/*` as monorepo-private for now.
 - When publishing: ship lockfile discipline, document versions, plan an SBOM (e.g. CycloneDX) for downstream compliance teams.
 
 ---

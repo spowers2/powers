@@ -1,4 +1,4 @@
-import { signal, effect, type Signal } from "@powers/core";
+import { signal, effect, type Signal } from "@lab206/core";
 
 /**
  * Preview palettes for the design system.

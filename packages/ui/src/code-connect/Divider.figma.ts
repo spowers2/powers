@@ -9,7 +9,7 @@ export default {
   example: figma.code`
   <Divider />
 `,
-  imports: ["import { Divider } from '@powers/ui'"],
+  imports: ["import { Divider } from '@lab206/ui'"],
   id: 'divider',
   metadata: {
     nestable: true,

@@ -1,4 +1,4 @@
-import { signal } from "@powers/core";
+import { signal } from "@lab206/core";
 import {
   Button,
   Card,
@@ -8,8 +8,8 @@ import {
   Stack,
   Text,
   type ToastController,
-} from "@powers/ui";
-import type { Router } from "@powers/router";
+} from "@lab206/ui";
+import type { Router } from "@lab206/router";
 import {
   clients,
   clientById,

@@ -9,11 +9,11 @@
 
 1. **Read** signals with `count()` · **write** with `.set` / `.update`  
 2. Live JSX: `{() => count()}` not `{count()}`  
-3. Prefer `@powers/ui` primitives; retheme via `tokens.css`
+3. Prefer `@lab206/ui` primitives; retheme via `tokens.css`
 
 ---
 
-## `@powers/core`
+## `@lab206/core`
 
 | API | Usage |
 |---|---|
@@ -30,12 +30,12 @@
 
 ---
 
-## `@powers/dom`
+## `@lab206/dom`
 
 | API | Usage |
 |---|---|
 | `mount(el, () => tree)` | bootstrap app |
-| JSX | `"jsxImportSource": "@powers/dom"` |
+| JSX | `"jsxImportSource": "@lab206/dom"` |
 | `component(setup)` | reactive props component |
 | `Show` | conditional mount |
 | `For` | keyed list; `item()` live |
@@ -44,11 +44,11 @@
 
 ---
 
-## `@powers/ui`
+## `@lab206/ui`
 
 ```ts
-import "@powers/ui/theme.css";
-import { createTheme, createDensity, Button, … } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { createTheme, createDensity, Button, … } from "@lab206/ui";
 ```
 
 | Area | Exports |
@@ -73,7 +73,7 @@ import { createTheme, createDensity, Button, … } from "@powers/ui";
 
 ---
 
-## `@powers/animate`
+## `@lab206/animate`
 
 | API | Usage |
 |---|---|
@@ -81,7 +81,7 @@ import { createTheme, createDensity, Button, … } from "@powers/ui";
 | `spring(opts?)` | spring options for `animate` |
 | `cancel(signal)` | stop animation |
 
-### Optional: `@powers/animate/gsap` (peer: `gsap`)
+### Optional: `@lab206/animate/gsap` (peer: `gsap`)
 
 | API | Usage |
 |---|---|
@@ -91,7 +91,7 @@ import { createTheme, createDensity, Button, … } from "@powers/ui";
 
 ---
 
-## `@powers/router`
+## `@lab206/router`
 
 | API | Usage |
 |---|---|
@@ -102,7 +102,7 @@ import { createTheme, createDensity, Button, … } from "@powers/ui";
 
 ---
 
-## `@powers/ssr`
+## `@lab206/ssr`
 
 | API | Usage |
 |---|---|

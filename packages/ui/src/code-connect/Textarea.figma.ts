@@ -12,7 +12,7 @@ export default {
   example: figma.code`
   <Textarea placeholder={${placeholder}} disabled={${disabled}} />
 `,
-  imports: ["import { Textarea } from '@powers/ui'"],
+  imports: ["import { Textarea } from '@lab206/ui'"],
   id: "textarea",
   metadata: {
     nestable: true,

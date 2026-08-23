@@ -17,7 +17,7 @@ export default {
   example: figma.code`
   <Badge tone={${tone}}>{${label}}</Badge>
 `,
-  imports: ["import { Badge } from '@powers/ui'"],
+  imports: ["import { Badge } from '@lab206/ui'"],
   id: "badge",
   metadata: {
     nestable: true,

@@ -21,7 +21,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Accordion } from '@powers/ui'"],
+  imports: ["import { Accordion } from '@lab206/ui'"],
   id: 'accordion',
   metadata: {
     nestable: true,

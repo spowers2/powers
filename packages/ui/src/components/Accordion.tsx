@@ -1,5 +1,5 @@
-import { signal } from "@powers/core";
-import { For, component, mergeProps, type ComponentProps } from "@powers/dom";
+import { signal } from "@lab206/core";
+import { For, component, mergeProps, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

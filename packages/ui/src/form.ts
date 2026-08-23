@@ -18,7 +18,7 @@
  * ```
  */
 
-import { signal, type Signal } from "@powers/core";
+import { signal, type Signal } from "@lab206/core";
 
 export type FieldError = string | undefined | null | false;
 
@@ -134,7 +134,7 @@ export function eventChecked(e: Event): boolean {
  * Props to spread onto `Input` / `Textarea` for two-way signal binding.
  *
  * Prefer the control’s `bind={signal}` prop when available.
- * Named `bindInput` (not `bindText`) so it doesn’t clash with `@powers/dom`’s
+ * Named `bindInput` (not `bindText`) so it doesn’t clash with `@lab206/dom`’s
  * DOM `bindText` helper.
  */
 export function bindInput(sig: Bindable<string>): {

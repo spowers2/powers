@@ -21,7 +21,7 @@ export default {
     Content
   </Card>
 `,
-  imports: ["import { Card } from '@powers/ui'"],
+  imports: ["import { Card } from '@lab206/ui'"],
   id: 'card',
   metadata: {
     nestable: true,

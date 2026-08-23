@@ -1,7 +1,7 @@
 # Powers — what we sell (offer draft)
 
 **Positioning (one sentence):**  
-Powers is a **product UI system** — Figma library + `@powers/ui` — for people who design and ship real apps. It is **not** a Squarespace-style website builder.
+Powers is a **product UI system** — Figma library + `@lab206/ui` — for people who design and ship real apps. It is **not** a Squarespace-style website builder.
 
 This doc is the internal/commercial clarity sheet. Storefront links stay TBD until checkout exists.
 

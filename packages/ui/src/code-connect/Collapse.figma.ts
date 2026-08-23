@@ -13,7 +13,7 @@ export default {
     Collapsed content
   </Collapse>
 `,
-  imports: ["import { Collapse } from '@powers/ui'"],
+  imports: ["import { Collapse } from '@lab206/ui'"],
   id: 'collapse',
   metadata: {
     nestable: true,

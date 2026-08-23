@@ -1,12 +1,12 @@
 /**
- * @powers/dom
+ * @lab206/dom
  *
- * Thin, explicit DOM bindings over @powers/core.
+ * Thin, explicit DOM bindings over @lab206/core.
  *
  * Learn order:
  *   mount → h / JSX → component → reactive props → Show / For
  *
- * Form controls in @powers/ui use `bind={signal}` for two-way state —
+ * Form controls in @lab206/ui use `bind={signal}` for two-way state —
  * `bind` is intentionally not unwrapped by createProps (see props.ts).
  */
 

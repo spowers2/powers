@@ -21,7 +21,7 @@ export interface Recipe {
 export const START_HERE_IDS = ["hello", "form", "tokens"] as const;
 
 /**
- * All recipes use the design system (@powers/ui).
+ * All recipes use the design system (@lab206/ui).
  * Teaching copy is written for first-time learners — plain language, clear experiments.
  */
 export const recipes: Recipe[] = [
@@ -46,9 +46,9 @@ export const recipes: Recipe[] = [
       "Change signal(0) to signal(10) and press Run (or wait for auto-run)",
       "Add a second Button that does count.update(n => n - 1)",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, Card, Stack, Text } from "@powers/ui";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, Card, Stack, Text } from "@lab206/ui";
 
 const count = signal(0);
 
@@ -89,9 +89,9 @@ mount(document.getElementById("root")!, () => <App />);
       "Click “+ Qty” / “+ Price” and watch total",
       "Change the formula to price() * qty() + 5 and re-run",
     ],
-    code: `import { signal, computed } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, Card, Field, Input, Stack, Text } from "@powers/ui";
+    code: `import { signal, computed } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, Card, Field, Input, Stack, Text } from "@lab206/ui";
 
 const price = signal(42);
 const qty = signal(2);
@@ -164,10 +164,10 @@ mount(document.getElementById("root")!, () => <App />);
       "Change 140 to 220 and try Spring again",
       "Swap spring() for { duration: 600, ease: \"easeOut\" }",
     ],
-    code: `import { signal } from "@powers/core";
-import { animate, spring } from "@powers/animate";
-import { mount } from "@powers/dom";
-import { Button, Card, Stack, Text } from "@powers/ui";
+    code: `import { signal } from "@lab206/core";
+import { animate, spring } from "@lab206/animate";
+import { mount } from "@lab206/dom";
+import { Button, Card, Stack, Text } from "@lab206/ui";
 
 const x = signal(0);
 
@@ -221,7 +221,7 @@ mount(document.getElementById("root")!, () => <App />);
     goal: "Drive the same ball with gsapAnimate — still a Powers signal.",
     learn: [
       "Default motion is animate() — no GSAP required",
-      "Optional peer: import from @powers/animate/gsap (Lab injects it)",
+      "Optional peer: import from @lab206/animate/gsap (Lab injects it)",
       "Duration is in milliseconds (same unit as animate), converted for GSAP",
       "One active animation per signal — GSAP and native animate interrupt each other",
     ],
@@ -236,12 +236,12 @@ mount(document.getElementById("root")!, () => <App />);
       "Hit Back mid-flight — cancel + new tween should feel interruptible",
       "Compare with the Spring motion recipe (no GSAP)",
     ],
-    code: `import { signal } from "@powers/core";
-import { cancel } from "@powers/animate";
+    code: `import { signal } from "@lab206/core";
+import { cancel } from "@lab206/animate";
 // Optional peer path (Lab also injects gsapAnimate):
-import { gsapAnimate } from "@powers/animate/gsap";
-import { mount } from "@powers/dom";
-import { Button, Card, Stack, Text, Badge } from "@powers/ui";
+import { gsapAnimate } from "@lab206/animate/gsap";
+import { mount } from "@lab206/dom";
+import { Button, Card, Stack, Text, Badge } from "@lab206/ui";
 
 const x = signal(0);
 const label = signal("idle");
@@ -337,9 +337,9 @@ mount(document.getElementById("root")!, () => <App />);
       "Remove a middle item — others should stay put",
       "Change the default titles in the signal array",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount, For } from "@powers/dom";
-import { Badge, Button, Card, Stack, Text } from "@powers/ui";
+    code: `import { signal } from "@lab206/core";
+import { mount, For } from "@lab206/dom";
+import { Badge, Button, Card, Stack, Text } from "@lab206/ui";
 
 type Todo = { id: number; title: string };
 let next = 1;
@@ -415,8 +415,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change Button variant to \"danger\" on one button",
       "Wrap another Text with muted size=\"sm\"",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Badge,
   Button,
@@ -424,7 +424,7 @@ import {
   Stack,
   Switch,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const enabled = signal(true);
 
@@ -480,8 +480,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change the timeout from 1200 to 400",
       "Add Alert tone=\"warning\" that always shows above the divider",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount, Show } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount, Show } from "@lab206/dom";
 import {
   Alert,
   Button,
@@ -490,7 +490,7 @@ import {
   Spinner,
   Stack,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const busy = signal(false);
 const saved = signal(false);
@@ -556,15 +556,15 @@ mount(document.getElementById("root")!, () => <App />);
       "Click Likes a few times",
       "Change createTheme(\"dark\") to createTheme(\"light\")",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
   Stack,
   Text,
   createTheme,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const theme = createTheme("dark");
 theme.bind();
@@ -624,8 +624,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Switch to Loading tab — skeleton shimmer",
       "Nudge progress until 100%",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Avatar,
   Button,
@@ -636,7 +636,7 @@ import {
   Stack,
   Tabs,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const open = signal(false);
 const pct = signal(36);
@@ -718,8 +718,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change the delay from 800 to 200",
       "Make the fetcher throw sometimes to see the error Alert",
     ],
-    code: `import { resource } from "@powers/core";
-import { mount, Show } from "@powers/dom";
+    code: `import { resource } from "@lab206/core";
+import { mount, Show } from "@lab206/dom";
 import {
   Alert,
   Button,
@@ -727,7 +727,7 @@ import {
   Spinner,
   Stack,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 // Fake API — replace with fetch("/api/…") in a real app
 const user = resource(async () => {
@@ -798,8 +798,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Hit Refresh — latest stays visible while loading",
       "Swap the API URL for your own endpoint",
     ],
-    code: `import { signal, createQuery } from "@powers/core";
-import { mount, Show } from "@powers/dom";
+    code: `import { signal, createQuery } from "@lab206/core";
+import { mount, Show } from "@lab206/dom";
 import {
   Alert,
   Button,
@@ -807,7 +807,7 @@ import {
   Spinner,
   Stack,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const topic = signal("design");
 
@@ -889,8 +889,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Fix email + check the box — Save enables",
       "Add a phone Field with bind the same way",
     ],
-    code: `import { signal, computed } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal, computed } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -903,7 +903,7 @@ import {
   emailFormat,
   firstError,
   minLength,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const email = signal("");
 const name = signal("");
@@ -989,8 +989,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Pick a role and save — status shows the payload",
       "Change validate on email to require a .com address",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -1003,7 +1003,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const name = createField({
   validate: (v) => required(v, "Name required"),
@@ -1082,8 +1082,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Toggle notifications and save a valid profile",
       "Add a timezone Select the same way as role",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -1097,7 +1097,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const name = createField({
   initial: "Sam Rivera",
@@ -1194,8 +1194,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Clear the search — full table returns",
       "Add a status column to columns + rows",
     ],
-    code: `import { signal, computed } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal, computed } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -1205,7 +1205,7 @@ import {
   Stack,
   Table,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const rows = [
   { id: "1", company: "Northline Health", contact: "Avery", status: "active" },
@@ -1291,8 +1291,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Open the popover, then close with Escape or outside click",
       "Add a third menu item with danger: true",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -1301,7 +1301,7 @@ import {
   Popover,
   Stack,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const pick = signal("—");
 const open = signal(false);
@@ -1371,9 +1371,9 @@ mount(document.getElementById("root")!, () => <App />);
       "Add a Reset button that sets a and b back to 1 and 2",
       "Hard mode: show product (a * b) with a second computed",
     ],
-    code: `import { signal, computed } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, Card, Stack, Text } from "@powers/ui";
+    code: `import { signal, computed } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, Card, Stack, Text } from "@lab206/ui";
 
 // Practice: total should always equal a + b
 const a = signal(1);
@@ -1425,8 +1425,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Change name to \"pu-collapse\" on the fade panel",
       "Wrap a Card in Transition for a soft mount",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -1434,7 +1434,7 @@ import {
   Text,
   Transition,
   MOTION_PRESETS,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const fade = signal(true);
 const collapse = signal(true);
@@ -1495,8 +1495,8 @@ mount(document.getElementById("root")!, () => <App />);
       "Add a third accordion item",
       "Change Stat tone to negative and tweak the delta string",
     ],
-    code: `import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+    code: `import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Accordion,
   Button,
@@ -1507,7 +1507,7 @@ import {
   Stat,
   Table,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const open = signal(false);
 

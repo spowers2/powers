@@ -1,5 +1,5 @@
-import { signal, type Signal } from "@powers/core";
-import { For, component, type ComponentProps } from "@powers/dom";
+import { signal, type Signal } from "@lab206/core";
+import { For, component, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 
 export type ToastTone = "info" | "success" | "danger";

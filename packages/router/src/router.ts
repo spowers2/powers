@@ -5,7 +5,7 @@ import {
   untrack,
   type Dispose,
   type Signal,
-} from "@powers/core";
+} from "@lab206/core";
 import {
   createBrowserHistory,
   createHashHistory,

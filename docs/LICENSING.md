@@ -16,7 +16,7 @@
 
 | Item | Term |
 |---|---|
-| Core monorepo (`@powers/*`) | **[Business Source License 1.1](../LICENSE)** (source-available) |
+| Core monorepo (`@lab206/*`) | **[Business Source License 1.1](../LICENSE)** (source-available) |
 | Commercial / competing uses | **[LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md)** |
 | Brand **“Powers”** | Trademark reserved — [TRADEMARKS.md](./TRADEMARKS.md) |
 | Contributions | DCO sign-off ([CONTRIBUTING.md](../CONTRIBUTING.md)) |

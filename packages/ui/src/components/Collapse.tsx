@@ -1,5 +1,5 @@
-import { signal, effect } from "@powers/core";
-import { component, type ComponentProps } from "@powers/dom";
+import { signal, effect } from "@lab206/core";
+import { component, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

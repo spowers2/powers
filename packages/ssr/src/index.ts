@@ -1,5 +1,5 @@
 /**
- * @powers/ssr
+ * @lab206/ssr
  *
  * - `renderToString` — full tree → HTML (happy-dom)
  * - `htmlDocument` — wrap body in a document shell
@@ -20,8 +20,8 @@
  * ```
  */
 import { Window } from "happy-dom";
-import { mount, type MountResult } from "@powers/dom";
-import { flush } from "@powers/core";
+import { mount, type MountResult } from "@lab206/dom";
+import { flush } from "@lab206/core";
 
 export interface RenderToStringOptions {
   /** Wait for microtasks / flush reactive updates before serializing. Default true. */

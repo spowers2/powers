@@ -13,7 +13,7 @@ export default {
     <Button>Hover me</Button>
   </Tooltip>
 `,
-  imports: ["import { Tooltip, Button } from '@powers/ui'"],
+  imports: ["import { Tooltip, Button } from '@lab206/ui'"],
   id: 'tooltip',
   metadata: {
     nestable: true,

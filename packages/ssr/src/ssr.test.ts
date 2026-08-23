@@ -1,10 +1,10 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { signal } from "@powers/core";
-import { h, bindText } from "@powers/dom";
+import { signal } from "@lab206/core";
+import { h, bindText } from "@lab206/dom";
 import { renderToString, htmlDocument } from "./index.js";
 
-describe("@powers/ssr", () => {
+describe("@lab206/ssr", () => {
   it("renders static elements to HTML", async () => {
     const html = await renderToString(() =>
       h("h1", { text: "Hello SSR" }),

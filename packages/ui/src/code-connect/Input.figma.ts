@@ -17,7 +17,7 @@ export default {
     aria-invalid={${invalid}}
   />
 `,
-  imports: ["import { Input } from '@powers/ui'"],
+  imports: ["import { Input } from '@lab206/ui'"],
   id: "input",
   metadata: {
     nestable: true,

@@ -1,5 +1,5 @@
-import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -13,8 +13,8 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";
-import "@powers/ui/theme.css";
+} from "@lab206/ui";
+import "@lab206/ui/theme.css";
 import "./app.css";
 
 installDevWarnings();

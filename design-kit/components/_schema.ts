@@ -4,7 +4,7 @@
  * Specs are the contract between:
  * - Designers building the Figma UI kit by hand
  * - Phase-3 plugin generating component sets
- * - Runtime @powers/ui (names + variants must match)
+ * - Runtime @lab206/ui (names + variants must match)
  *
  * Token paths use dotted form from design-kit/tokens/source.ts
  * e.g. "color.accent", "control.height.md", "radius.md"
@@ -88,7 +88,7 @@ export type ComponentCategory =
   | "layout";
 
 export type ComponentSpec = {
-  /** Match @powers/ui export name (PascalCase) */
+  /** Match @lab206/ui export name (PascalCase) */
   name: string;
   /** CSS root class e.g. pu-btn */
   cssClass: string;

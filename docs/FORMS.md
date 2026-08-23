@@ -5,7 +5,7 @@ Powers keeps forms **boring and readable**: signals for state, `Field` for layou
 ## Preferred pattern (bind)
 
 ```tsx
-import { signal } from "@powers/core";
+import { signal } from "@lab206/core";
 import {
   Field,
   Input,
@@ -13,7 +13,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 const email = signal("");
 const emailError = () =>
@@ -30,7 +30,7 @@ const emailError = () =>
 ### createField (touched + error)
 
 ```tsx
-import { createField, required, emailFormat, firstError } from "@powers/ui";
+import { createField, required, emailFormat, firstError } from "@lab206/ui";
 
 const email = createField({
   validate: (v) => firstError(required(v), emailFormat(v)),
@@ -68,7 +68,7 @@ const ok = signal(true);
 Still supported when you need custom handlers:
 
 ```tsx
-import { bindInput, eventValue } from "@powers/ui";
+import { bindInput, eventValue } from "@lab206/ui";
 
 <Input
   {...bindInput(email)}
@@ -88,7 +88,7 @@ Controls accept `MaybeReactive<T>` (`T | (() => T)` / signals). Internally they 
 Runtime contracts (why the page must not remount while typing): [`FOUNDATION.md`](./FOUNDATION.md).  
 Usability overview: [`USABILITY.md`](./USABILITY.md).
 
-## Helpers (`@powers/ui`)
+## Helpers (`@lab206/ui`)
 
 | Helper | Role |
 |---|---|

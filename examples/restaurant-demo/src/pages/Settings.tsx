@@ -1,4 +1,4 @@
-import { signal } from "@powers/core";
+import { signal } from "@lab206/core";
 import {
   Button,
   Card,
@@ -12,7 +12,7 @@ import {
   type DensityController,
   type ThemeController,
   type ToastController,
-} from "@powers/ui";
+} from "@lab206/ui";
 import { PageHeader } from "../components/uiBits.js";
 import { PHOTO_CREDIT } from "../data/images.js";
 import {

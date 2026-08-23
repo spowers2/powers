@@ -1,5 +1,5 @@
-import { signal, createQuery } from "@powers/core";
-import { Show, For } from "@powers/dom";
+import { signal, createQuery } from "@lab206/core";
+import { Show, For } from "@lab206/dom";
 import {
   Alert,
   Button,
@@ -10,8 +10,8 @@ import {
   Stat,
   Text,
   type ToastController,
-} from "@powers/ui";
-import type { Router } from "@powers/router";
+} from "@lab206/ui";
+import type { Router } from "@lab206/router";
 import { PageHeader } from "../components/uiBits.js";
 import {
   clients,

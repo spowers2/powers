@@ -2,7 +2,7 @@
  * In-app docs: how to start + API reference.
  * Markdown lives in /docs for repo readers; this is what demo visitors actually see.
  */
-import type { Router } from "@powers/router";
+import type { Router } from "@lab206/router";
 import {
   Alert,
   Badge,
@@ -15,7 +15,7 @@ import {
   Kbd,
   Stack,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 import { createSectionNav, tocActiveClass } from "./scrollNav.js";
 import { SITE } from "./siteConfig.js";
 import "./docs.css";
@@ -250,16 +250,16 @@ pnpm ci                  # typecheck · test · size budgets`}</pre>
             <Code>docs/GOLDEN_PATH.md</Code> (forms that type correctly +
             theme).
           </Text>
-          <pre class="docs-pre">{`pnpm add @powers/core @powers/dom @powers/ui
+          <pre class="docs-pre">{`pnpm add @lab206/core @lab206/dom @lab206/ui
 
 # optional
-pnpm add @powers/animate @powers/router
+pnpm add @lab206/animate @lab206/router
 # pro motion (optional peer)
-pnpm add gsap   # then: import from "@powers/animate/gsap"`}</pre>
+pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
           <Text size="sm" muted>
             Always import the theme once at the app root:
           </Text>
-          <pre class="docs-pre">{`import "@powers/ui/theme.css";`}</pre>
+          <pre class="docs-pre">{`import "@lab206/ui/theme.css";`}</pre>
         </Section>
 
         <Section id="rules" title="2. Three rules (memorize these)">
@@ -299,13 +299,13 @@ pnpm add gsap   # then: import from "@powers/animate/gsap"`}</pre>
         <Section id="first-app" title="3. First app (copy-paste)">
           <Text muted size="sm">
             Vite / TS: set{" "}
-            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@powers/dom"`}</Code>{" "}
+            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@lab206/dom"`}</Code>{" "}
             in <Code>tsconfig</Code>.
           </Text>
-          <pre class="docs-pre">{`import "@powers/ui/theme.css";
-import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, Card, Stack, Text, createTheme } from "@powers/ui";
+          <pre class="docs-pre">{`import "@lab206/ui/theme.css";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, Card, Stack, Text, createTheme } from "@lab206/ui";
 
 createTheme("light").bind();
 
@@ -344,42 +344,42 @@ mount(document.getElementById("app")!, () => (
               <tbody>
                 <tr>
                   <td>
-                    <code>@powers/core</code>
+                    <code>@lab206/core</code>
                   </td>
                   <td>State & reactivity</td>
                   <td>Always (signals)</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@powers/dom</code>
+                    <code>@lab206/dom</code>
                   </td>
                   <td>Mount, JSX, Show/For</td>
                   <td>Always (UI tree)</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@powers/ui</code>
+                    <code>@lab206/ui</code>
                   </td>
                   <td>Theme + components</td>
                   <td>Almost always</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@powers/animate</code>
+                    <code>@lab206/animate</code>
                   </td>
                   <td>Tween / spring on signals</td>
                   <td>Motion needed</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@powers/router</code>
+                    <code>@lab206/router</code>
                   </td>
                   <td>SPA routes + Link</td>
                   <td>Multi-page app</td>
                 </tr>
                 <tr>
                   <td>
-                    <code>@powers/ssr</code>
+                    <code>@lab206/ssr</code>
                   </td>
                   <td>String render + islands</td>
                   <td>SSR / marketing HTML</td>
@@ -462,7 +462,7 @@ const emailError = () =>
 animate(x, 100, spring());
 
 // optional: pnpm add gsap
-import { gsapAnimate } from "@powers/animate/gsap";
+import { gsapAnimate } from "@lab206/animate/gsap";
 gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
                 <Text size="sm" muted>
                   Lab:{" "}
@@ -481,7 +481,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
 
         <Divider label="API reference" />
 
-        <Section id="api-core" title="@powers/core">
+        <Section id="api-core" title="@lab206/core">
           <Text muted size="sm">
             Fine-grained graph. No DOM.
           </Text>
@@ -536,7 +536,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           />
         </Section>
 
-        <Section id="api-dom" title="@powers/dom">
+        <Section id="api-dom" title="@lab206/dom">
           <Text muted size="sm">
             Mount and bind the graph to the DOM / JSX.
           </Text>
@@ -549,7 +549,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               },
               {
                 name: "h / JSX",
-                sig: 'jsxImportSource: "@powers/dom"',
+                sig: 'jsxImportSource: "@lab206/dom"',
                 note: "Automatic JSX runtime.",
               },
               {
@@ -581,7 +581,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           />
         </Section>
 
-        <Section id="api-ui" title="@powers/ui">
+        <Section id="api-ui" title="@lab206/ui">
           <Text muted size="sm">
             Design system: tokens + primitives. Import{" "}
             <Code>theme.css</Code> once.
@@ -655,7 +655,7 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           </Text>
         </Section>
 
-        <Section id="api-animate" title="@powers/animate">
+        <Section id="api-animate" title="@lab206/animate">
           <ApiTable
             rows={[
               {
@@ -675,14 +675,14 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               },
               {
                 name: "gsapAnimate",
-                sig: 'import { gsapAnimate } from "@powers/animate/gsap"',
+                sig: 'import { gsapAnimate } from "@lab206/animate/gsap"',
                 note: "Optional peer gsap. Duration in ms.",
               },
             ]}
           />
         </Section>
 
-        <Section id="api-router" title="@powers/router">
+        <Section id="api-router" title="@lab206/router">
           <ApiTable
             rows={[
               {

@@ -11,7 +11,7 @@ export default {
   example: figma.code`
   <Kbd>${label}</Kbd>
 `,
-  imports: ["import { Kbd } from '@powers/ui'"],
+  imports: ["import { Kbd } from '@lab206/ui'"],
   id: "kbd",
   metadata: {
     nestable: true,

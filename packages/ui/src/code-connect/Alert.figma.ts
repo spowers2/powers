@@ -20,7 +20,7 @@ export default {
     ${body}
   </Alert>
 `,
-  imports: ["import { Alert } from '@powers/ui'"],
+  imports: ["import { Alert } from '@lab206/ui'"],
   id: "alert",
   metadata: {
     nestable: true,

@@ -1,4 +1,4 @@
-# `@powers/dom` — Phase 2 DOM + JSX
+# `@lab206/dom` — Phase 2 DOM + JSX
 
 **Status:** v0.3.0 — bindings, JSX, and **reactive component props**.
 
@@ -13,8 +13,8 @@ Same reactivity you already know (`signal`, `effect`). The DOM layer only **subs
 ## Quick example (JSX + props)
 
 ```tsx
-import { signal } from "@powers/core";
-import { mount, component, mergeProps } from "@powers/dom";
+import { signal } from "@lab206/core";
+import { mount, component, mergeProps } from "@lab206/dom";
 
 const Hello = component((props: { name: string; mood?: string }) => {
   const p = mergeProps({ mood: "🙂" }, props);
@@ -56,14 +56,14 @@ Setup in `component()` runs **once**. Props stay live via accessors — the chil
 // vite.config.ts
 esbuild: {
   jsx: "automatic",
-  jsxImportSource: "@powers/dom",
+  jsxImportSource: "@lab206/dom",
 }
 ```
 
 ```json
 // tsconfig
 "jsx": "react-jsx",
-"jsxImportSource": "@powers/dom"
+"jsxImportSource": "@lab206/dom"
 ```
 
 ## API
@@ -89,8 +89,8 @@ esbuild: {
 ## Motion
 
 ```ts
-import { animate, spring } from "@powers/animate";
-import { bindStyle } from "@powers/dom";
+import { animate, spring } from "@lab206/animate";
+import { bindStyle } from "@lab206/dom";
 
 const x = signal(0);
 bindStyle(el, () => ({ transform: `translateX(${x()}px)` }));
@@ -102,7 +102,7 @@ animate(x, 100, spring());
 - Full template compiler / SFC files  
 - SSR / hydration  
 - Built-in FLIP / enter-exit  
-- **GSAP adapter** — shipped as `@powers/animate/gsap` (optional peer)  
+- **GSAP adapter** — shipped as `@lab206/animate/gsap` (optional peer)  
 
 ## Browser demo
 

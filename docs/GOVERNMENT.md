@@ -6,7 +6,7 @@ Powers is a **product UI system**. Public-sector and contractor teams are **one 
 
 Good for portals, case/ops tools, and internal apps where you want:
 
-- Figma library + matching `@powers/ui` components  
+- Figma library + matching `@lab206/ui` components  
 - Static or conventional deploy onto **the customer’s** hosting  
 - Clear commercial licensing when needed — [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) · [OFFER.md](./OFFER.md)
 

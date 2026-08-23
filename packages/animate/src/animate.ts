@@ -1,4 +1,4 @@
-import type { Signal } from "@powers/core";
+import type { Signal } from "@lab206/core";
 import { driver } from "./driver.js";
 import { resolveEase } from "./easings.js";
 import { createPlayback } from "./playback.js";

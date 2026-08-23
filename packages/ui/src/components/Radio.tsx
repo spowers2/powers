@@ -1,4 +1,4 @@
-import { For, component, mergeProps, type ComponentProps } from "@powers/dom";
+import { For, component, mergeProps, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 

@@ -52,7 +52,7 @@ effect(() => {
 | **Disabled / aria-invalid track** | Accessors and signals must update the control without remounting the page. |
 | **Select options are reactive** | `options={...}` may be a list, accessor, or signal; rebuild options inside an effect. |
 
-Shared helpers: `@powers/ui` → `readProp` / `MaybeReactive` in `reactive.ts`.
+Shared helpers: `@lab206/ui` → `readProp` / `MaybeReactive` in `reactive.ts`.
 
 ---
 

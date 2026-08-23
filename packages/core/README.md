@@ -1,4 +1,4 @@
-# @powers/core
+# @lab206/core
 
 Part of [Powers](https://github.com/spowers2/powers) — fine-grained UI kit with a design system built in.
 

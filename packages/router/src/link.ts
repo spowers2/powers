@@ -1,5 +1,5 @@
-import { effect } from "@powers/core";
-import { h, type Props } from "@powers/dom";
+import { effect } from "@lab206/core";
+import { h, type Props } from "@lab206/dom";
 import type { Router } from "./router.js";
 
 export interface LinkProps extends Props {

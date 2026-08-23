@@ -32,8 +32,8 @@ From the monorepo (example: designlab206 starter):
 
 ```bash
 # at repo root
-pnpm --filter @powers/app-starter build
-pnpm --filter @powers/app-starter deploy:zip
+pnpm --filter @lab206/app-starter build
+pnpm --filter @lab206/app-starter deploy:zip
 ```
 
 Or inside the app folder:
@@ -135,7 +135,7 @@ Only the **website folder** (`dist/` contents). The server just serves files.
 
 Most Powers apps are client UI + maybe `localStorage` or external APIs. **Static upload is enough.**
 
-If you later need server rendering (`@powers/ssr`) or your own API on the same machine, you need a **Node-capable host** (VPS, “Node app” product, etc.). That’s a different setup — not required to ship a normal Powers UI app. See [SSR.md](./SSR.md) when you’re ready.
+If you later need server rendering (`@lab206/ssr`) or your own API on the same machine, you need a **Node-capable host** (VPS, “Node app” product, etc.). That’s a different setup — not required to ship a normal Powers UI app. See [SSR.md](./SSR.md) when you’re ready.
 
 Powers is a **product UI system**, not a Squarespace replacement. Hosting the finished app is ordinary website hosting.
 

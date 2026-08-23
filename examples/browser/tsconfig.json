@@ -5,7 +5,7 @@
     "moduleResolution": "Bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "jsxImportSource": "@powers/dom",
+    "jsxImportSource": "@lab206/dom",
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,

@@ -1,4 +1,4 @@
-import { Badge, Text } from "@powers/ui";
+import { Badge, Text } from "@lab206/ui";
 import type {
   ClientStatus,
   InvoiceStatus,

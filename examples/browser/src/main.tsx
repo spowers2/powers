@@ -1,10 +1,10 @@
 /**
  * lab206 site — Powers UI system demos (Lab / System / Docs + product apps)
  */
-import { signal, effect } from "@powers/core";
-import { animate, spring } from "@powers/animate";
-import { mount, bindStyle } from "@powers/dom";
-import { createRouter, Link } from "@powers/router";
+import { signal, effect } from "@lab206/core";
+import { animate, spring } from "@lab206/animate";
+import { mount, bindStyle } from "@lab206/dom";
+import { createRouter, Link } from "@lab206/router";
 import { installSmoothHashLinks, scrollToSection } from "./scrollNav.js";
 import {
   Button,
@@ -23,8 +23,8 @@ import {
   createDensity,
   createPalette,
   installDevWarnings,
-} from "@powers/ui";
-import "@powers/ui/theme.css";
+} from "@lab206/ui";
+import "@lab206/ui/theme.css";
 import "./app.css";
 import { LandingPage } from "./LandingPage.js";
 import { DocsPage } from "./DocsPage.js";

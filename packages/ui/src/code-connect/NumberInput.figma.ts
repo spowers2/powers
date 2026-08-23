@@ -8,7 +8,7 @@ export default {
   example: figma.code`
   <NumberInput value={42} onChange={() => {}} />
 `,
-  imports: ["import { NumberInput } from '@powers/ui'"],
+  imports: ["import { NumberInput } from '@lab206/ui'"],
   id: 'number-input',
   metadata: {
     nestable: true,

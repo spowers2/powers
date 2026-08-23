@@ -28,7 +28,7 @@ export default {
     ${label}
   </Text>
 `,
-  imports: ["import { Text } from '@powers/ui'"],
+  imports: ["import { Text } from '@lab206/ui'"],
   id: "text",
   metadata: {
     nestable: true,

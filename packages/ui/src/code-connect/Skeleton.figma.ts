@@ -15,7 +15,7 @@ export default {
   example: figma.code`
   <Skeleton variant={${variant}} />
 `,
-  imports: ["import { Skeleton } from '@powers/ui'"],
+  imports: ["import { Skeleton } from '@lab206/ui'"],
   id: 'skeleton',
   metadata: {
     nestable: true,

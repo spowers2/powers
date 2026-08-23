@@ -1,5 +1,5 @@
 /**
- * @powers/core
+ * @lab206/core
  *
  * Fine-grained reactivity primitives.
  * No DOM. No framework. Just a correct reactive graph.

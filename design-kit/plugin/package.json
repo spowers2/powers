@@ -1,5 +1,5 @@
 {
-  "name": "@powers/figma-plugin",
+  "name": "@lab206/figma-plugin",
   "version": "0.1.0",
   "private": true,
   "description": "Powers Design Kit Figma plugin — sync variables, audit catalog, stub missing components.",

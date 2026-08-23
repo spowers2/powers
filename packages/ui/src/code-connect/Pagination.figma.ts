@@ -8,7 +8,7 @@ export default {
   example: figma.code`
   <Pagination page={1} pageCount={10} onChange={() => {}} />
 `,
-  imports: ["import { Pagination } from '@powers/ui'"],
+  imports: ["import { Pagination } from '@lab206/ui'"],
   id: 'pagination',
   metadata: {
     nestable: true,

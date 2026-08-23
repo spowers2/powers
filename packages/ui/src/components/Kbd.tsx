@@ -1,4 +1,4 @@
-import { component, type ComponentProps } from "@powers/dom";
+import { component, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 
 export type KbdProps = {

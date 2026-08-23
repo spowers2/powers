@@ -24,7 +24,7 @@ export default {
   })
 `,
   imports: [
-    "import { createToaster, Toaster } from '@powers/ui'",
+    "import { createToaster, Toaster } from '@lab206/ui'",
   ],
   id: 'toast',
   metadata: {

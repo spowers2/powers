@@ -15,7 +15,7 @@ export default {
   example: figma.code`
   <Code block={${block}}>${label}</Code>
 `,
-  imports: ["import { Code } from '@powers/ui'"],
+  imports: ["import { Code } from '@lab206/ui'"],
   id: 'code',
   metadata: {
     nestable: true,

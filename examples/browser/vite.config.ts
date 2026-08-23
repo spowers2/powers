@@ -11,15 +11,15 @@ export default defineConfig({
   },
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@powers/dom",
+    jsxImportSource: "@lab206/dom",
   },
   optimizeDeps: {
     exclude: [
-      "@powers/core",
-      "@powers/dom",
-      "@powers/animate",
-      "@powers/router",
-      "@powers/ui",
+      "@lab206/core",
+      "@lab206/dom",
+      "@lab206/animate",
+      "@lab206/router",
+      "@lab206/ui",
     ],
     include: ["esbuild-wasm", "gsap"],
   },

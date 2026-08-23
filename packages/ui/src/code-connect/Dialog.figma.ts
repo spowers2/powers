@@ -25,6 +25,6 @@ export default {
     Dialog body
   </Dialog>
 `,
-  imports: ["import { Dialog } from '@powers/ui'"],
+  imports: ["import { Dialog } from '@lab206/ui'"],
   id: "dialog",
 }

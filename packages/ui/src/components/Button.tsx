@@ -1,4 +1,4 @@
-import { component, mergeProps, type ComponentProps } from "@powers/dom";
+import { component, mergeProps, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { readBool, type MaybeReactive } from "../reactive.js";
 

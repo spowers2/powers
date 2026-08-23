@@ -17,7 +17,7 @@ export default {
     options={[{ value: 'a', label: ${label} }]}
   />
 `,
-  imports: ["import { RadioGroup } from '@powers/ui'"],
+  imports: ["import { RadioGroup } from '@lab206/ui'"],
   id: 'radio-group',
   metadata: {
     nestable: true,

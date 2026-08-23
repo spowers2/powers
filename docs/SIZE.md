@@ -11,12 +11,12 @@ pnpm run check     # typecheck + test + size
 
 | Package | How measured | gzip ceiling | ~current |
 |---|---|---|---|
-| `@powers/core` | full minify bundle | **8 KB** | ~2.1 KB |
-| `@powers/dom` | minify, `core` external | **6 KB** | ~3.3 KB |
-| `@powers/animate` | minify, `core` external | **5 KB** | ~1.6 KB |
-| `@powers/router` | minify, `core`+`dom` external | **4 KB** | ~1.9 KB |
-| `@powers/ui` full | minify public index, core+dom external | **32 KB** | ~25 KB |
-| `@powers/ui` form-kit | Button/Input/Field/Stack/theme/helpers | **12 KB** | measured on `pnpm size` |
+| `@lab206/core` | full minify bundle | **8 KB** | ~2.1 KB |
+| `@lab206/dom` | minify, `core` external | **6 KB** | ~3.3 KB |
+| `@lab206/animate` | minify, `core` external | **5 KB** | ~1.6 KB |
+| `@lab206/router` | minify, `core`+`dom` external | **4 KB** | ~1.9 KB |
+| `@lab206/ui` full | minify public index, core+dom external | **32 KB** | ~25 KB |
+| `@lab206/ui` form-kit | Button/Input/Field/Stack/theme/helpers | **12 KB** | measured on `pnpm size` |
 
 Artifacts land in each package’s `dist-size/` (`*.min.js`, `size.json`).
 

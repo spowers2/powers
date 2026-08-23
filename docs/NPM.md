@@ -1,18 +1,18 @@
-# Publishing & installing `@powers/*`
+# Publishing & installing `@lab206/*`
 
 ## Install (after first npm publish)
 
 ```bash
-pnpm add @powers/core @powers/dom @powers/ui
+pnpm add @lab206/core @lab206/dom @lab206/ui
 # optional
-pnpm add @powers/router @powers/animate @powers/ssr
+pnpm add @lab206/router @lab206/animate @lab206/ssr
 ```
 
 ```tsx
-import "@powers/ui/theme.css";
-import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, createTheme } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, createTheme } from "@lab206/ui";
 ```
 
 Vite / TSX:
@@ -21,14 +21,14 @@ Vite / TSX:
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@powers/dom"
+    "jsxImportSource": "@lab206/dom"
   }
 }
 ```
 
-## Until packages appear on npm
+## Current release
 
-Clone and use the monorepo workspace (`pnpm create-app` / examples), or wait for the first `0.1.0` publish.
+**0.1.2** on npm under the `lab206` org. Use `pnpm publish` (not bare `npm publish`) so `workspace:*` deps rewrite to real versions.
 
 ## Maintainers — publish
 
@@ -36,21 +36,21 @@ Clone and use the monorepo workspace (`pnpm create-app` / examples), or wait for
 # dry run (no upload)
 pnpm publish:dry-run
 
-# real publish (needs npm login to an account that owns @powers)
+# real publish (npm login / granular token with bypass 2FA; account must own @lab206)
 pnpm publish:packages
 ```
 
-pnpm rewrites `workspace:*` dependencies to real versions on publish.
+pnpm rewrites `workspace:*` dependencies to real versions on publish. Prefer `pnpm publish` over `npm publish` for that rewrite.
 
 **License on npm:** BUSL-1.1 (source-available). Say that in the release notes — not “open source.”
 
-## Package map (0.1.0)
+## Package map (0.1.2)
 
 | Package | Role |
 |---|---|
-| `@powers/core` | signals, store, resource |
-| `@powers/dom` | mount, JSX |
-| `@powers/ui` | design system |
-| `@powers/router` | routing |
-| `@powers/animate` | motion (`@powers/animate/gsap` optional) |
-| `@powers/ssr` | string SSR + islands |
+| `@lab206/core` | signals, store, resource |
+| `@lab206/dom` | mount, JSX |
+| `@lab206/ui` | design system |
+| `@lab206/router` | routing |
+| `@lab206/animate` | motion (`@lab206/animate/gsap` optional) |
+| `@lab206/ssr` | string SSR + islands |

@@ -1,5 +1,5 @@
 /**
- * @powers/animate
+ * @lab206/animate
  *
  * Signal-native motion. Learn it in one line:
  *   animate(mySignal, 100, { duration: 300 })
@@ -8,7 +8,7 @@
  *   animate(mySignal, 100, spring())
  *
  * Optional GSAP (peer dependency):
- *   import { gsapAnimate } from "@powers/animate/gsap"
+ *   import { gsapAnimate } from "@lab206/animate/gsap"
  *   — or createGsapBridge(gsap) from this package without importing gsap here
  */
 

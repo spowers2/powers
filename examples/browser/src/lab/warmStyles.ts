@@ -52,7 +52,7 @@ import {
   Collapse,
   AspectRatio,
   Link,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 let warmed = false;
 

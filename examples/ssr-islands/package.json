@@ -1,5 +1,5 @@
 {
-  "name": "@powers/example-ssr-islands",
+  "name": "@lab206/example-ssr-islands",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,9 +7,9 @@
     "start": "node --import tsx src/main.ts"
   },
   "dependencies": {
-    "@powers/core": "workspace:*",
-    "@powers/dom": "workspace:*",
-    "@powers/ssr": "workspace:*",
+    "@lab206/core": "workspace:*",
+    "@lab206/dom": "workspace:*",
+    "@lab206/ssr": "workspace:*",
     "happy-dom": "^17.4.4"
   },
   "devDependencies": {

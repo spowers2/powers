@@ -1,7 +1,7 @@
 import esbuild from "esbuild-wasm";
 import wasmUrl from "esbuild-wasm/esbuild.wasm?url";
 // Full design system CSS for the Lab iframe (tokens + base + utilities)
-import themeCss from "@powers/ui/theme.css?inline";
+import themeCss from "@lab206/ui/theme.css?inline";
 import { createLabApi, LAB_API_KEYS, type PowerLabApi } from "./api.js";
 import { injectDesignSystemInto } from "./warmStyles.js";
 

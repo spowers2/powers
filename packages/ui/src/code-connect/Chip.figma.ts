@@ -27,7 +27,7 @@ export default {
     ${label}
   </Chip>
 `,
-  imports: ["import { Chip } from '@powers/ui'"],
+  imports: ["import { Chip } from '@lab206/ui'"],
   id: 'chip',
   metadata: {
     nestable: true,

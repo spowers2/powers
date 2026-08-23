@@ -27,7 +27,7 @@ Short mental model + preferred patterns. Prefer this over inventing one-offs.
 ## 2. Forms (preferred path)
 
 ```tsx
-import { signal } from "@powers/core";
+import { signal } from "@lab206/core";
 import {
   Field,
   Input,
@@ -37,7 +37,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 // A) Simple bind
 const notes = signal("");
@@ -91,7 +91,7 @@ const notify = signal(true);
 ### Spread helpers (when you need extra handlers)
 
 ```tsx
-import { bindInput, bindSelect, eventValue } from "@powers/ui";
+import { bindInput, bindSelect, eventValue } from "@lab206/ui";
 
 <Input {...bindInput(email)} onBlur={…} />
 // or keep bind + onInput side effects:
@@ -103,7 +103,7 @@ import { bindInput, bindSelect, eventValue } from "@powers/ui";
 ## 3. Lists & conditionals
 
 ```tsx
-import { Show, For } from "@powers/dom";
+import { Show, For } from "@lab206/dom";
 
 <Show when={() => items().length > 0} fallback={<Empty title="Nothing yet" />}>
   {() => (
@@ -138,8 +138,8 @@ router.searchParams().get("status");
 ## 5. Theme & layout
 
 ```tsx
-import "@powers/ui/theme.css";
-import { createTheme, createDensity, Stack, Card, Text } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { createTheme, createDensity, Stack, Card, Text } from "@lab206/ui";
 
 const theme = createTheme("light");
 theme.bind();

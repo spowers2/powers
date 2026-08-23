@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-17T02:38:08.711Z",
+  "generatedAt": "2026-08-17T21:08:48.187Z",
   "file": {
     "name": "Powers UI Kit",
     "key": "bdfYWkMm5oJqKBIrwWCsSd",
-    "lastModified": "2026-08-17T02:26:27Z",
+    "lastModified": "2026-08-17T21:07:02Z",
     "pages": [
       {
         "name": "Components",
@@ -193,6 +193,17 @@
       "pct": 100
     }
   },
+  "invalidAssets": [
+    {
+      "name": "Card",
+      "id": "6:198",
+      "kind": "COMPONENT_SET",
+      "unusedProps": [
+        "Padded (BOOLEAN)",
+        "Interactive (BOOLEAN)"
+      ]
+    }
+  ],
   "variables": {
     "status": "missing_scope",
     "message": "Invalid scope(s): file_content:read. This endpoint requires the file_variables:read scope"
@@ -201,6 +212,8 @@
     "catalogComplete": true,
     "variablesReadable": false,
     "patternsPagePresent": true,
-    "bindingNotes": "pct = share of nodes with any boundVariables. rawSolidFills = solid fills without variable binding (approx)."
+    "noInvalidAssets": false,
+    "bindingNotes": "pct = share of nodes with any boundVariables. rawSolidFills = solid fills without variable binding (approx).",
+    "invalidAssetsNotes": "Unused non-VARIANT component properties make Figma mark the component as an invalid library asset. Delete or wire them in the Properties panel."
   }
 }

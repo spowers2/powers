@@ -31,8 +31,8 @@ Retheme entirely by editing `packages/ui/src/styles/tokens.css` (product demos o
 **Rule:** primitives never hard-code hex; they only use `--pu-*`.
 
 ```ts
-import "@powers/ui/theme.css"; // tokens + base + utilities
-import { createTheme, createDensity } from "@powers/ui";
+import "@lab206/ui/theme.css"; // tokens + base + utilities
+import { createTheme, createDensity } from "@lab206/ui";
 
 createTheme("dark").bind();
 createDensity("comfortable").bind();
@@ -41,16 +41,16 @@ createDensity("comfortable").bind();
 Minimal CSS (no utilities):
 
 ```ts
-import "@powers/ui/tokens.css";
-import "@powers/ui/base.css";
+import "@lab206/ui/tokens.css";
+import "@lab206/ui/base.css";
 ```
 
 ### 2. Primitives (default way to build UI)
 
-Use `@powers/ui` components. They own structure, a11y patterns, and `pu-*` classes:
+Use `@lab206/ui` components. They own structure, a11y patterns, and `pu-*` classes:
 
 ```tsx
-import { Button, Stack, Card, Field, Input } from "@powers/ui";
+import { Button, Stack, Card, Field, Input } from "@lab206/ui";
 
 <Card>
   <Stack gap={3}>
@@ -67,7 +67,7 @@ This is the Bootstrap *component* story — complete controls that match — wit
 ### 3. Utilities (optional, BEM-flavored)
 
 **File:** `packages/ui/src/styles/utilities.css`  
-**Import:** included in `theme.css`, or `@powers/ui/utilities.css`
+**Import:** included in `theme.css`, or `@lab206/ui/utilities.css`
 
 ```html
 <div class="pu-flex pu-flex--row pu-items-center pu-gap-3 pu-p-4">

@@ -80,7 +80,7 @@ Source: `examples/restaurant-demo/`.
 ```bash
 pnpm create-app hello-ui
 pnpm install
-pnpm --filter @powers/hello-ui dev
+pnpm --filter @lab206/hello-ui dev
 # → http://localhost:5190  (form + theme + bind)
 ```
 
@@ -89,7 +89,7 @@ pnpm --filter @powers/hello-ui dev
 ```bash
 pnpm new-app billing-ui
 pnpm install
-pnpm --filter @powers/billing-ui dev
+pnpm --filter @lab206/billing-ui dev
 ```
 
 Or copy outside the repo (still private — keep `workspace:*` or `file:` deps until publish):
@@ -108,8 +108,8 @@ Or copy outside the repo (still private — keep `workspace:*` or `file:` deps u
 ## 4. App shape (reference)
 
 ```tsx
-import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   createTheme,
   Button,
@@ -118,8 +118,8 @@ import {
   Text,
   Field,
   Input,
-} from "@powers/ui";
-import "@powers/ui/theme.css";
+} from "@lab206/ui";
+import "@lab206/ui/theme.css";
 
 const theme = createTheme("light");
 theme.bind();
@@ -147,14 +147,14 @@ mount(document.getElementById("root")!, () => (
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@powers/dom"
+    "jsxImportSource": "@lab206/dom"
   }
 }
 ```
 
 ```ts
 // vite.config.ts
-esbuild: { jsx: "automatic", jsxImportSource: "@powers/dom" }
+esbuild: { jsx: "automatic", jsxImportSource: "@lab206/dom" }
 ```
 
 ## 5. Forms & motion

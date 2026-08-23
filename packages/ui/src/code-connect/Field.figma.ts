@@ -19,7 +19,7 @@ export default {
     <Input placeholder="you@example.com" />
   </Field>
 `,
-  imports: ["import { Field, Input } from '@powers/ui'"],
+  imports: ["import { Field, Input } from '@lab206/ui'"],
   id: "field",
   metadata: {
     nestable: true,

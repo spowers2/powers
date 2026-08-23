@@ -8,7 +8,7 @@ export default {
   example: figma.code`
   <Stat label="Revenue" value="$12.4k" delta="+4.2%" tone="positive" />
 `,
-  imports: ["import { Stat } from '@powers/ui'"],
+  imports: ["import { Stat } from '@lab206/ui'"],
   id: 'stat',
   metadata: {
     nestable: true,

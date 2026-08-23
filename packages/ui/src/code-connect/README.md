@@ -1,6 +1,6 @@
 # Code Connect templates
 
-Maps **Powers UI Kit** Figma components → `@powers/ui` snippets for Dev Mode.
+Maps **Powers UI Kit** Figma components → `@lab206/ui` snippets for Dev Mode.
 
 See monorepo docs: [`design-kit/CODE_CONNECT.md`](../../../../design-kit/CODE_CONNECT.md).
 

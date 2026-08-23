@@ -15,7 +15,7 @@ export default {
   example: figma.code`
   <Progress value={60} size={${size}} label={${label}} />
 `,
-  imports: ["import { Progress } from '@powers/ui'"],
+  imports: ["import { Progress } from '@lab206/ui'"],
   id: 'progress',
   metadata: {
     nestable: true,

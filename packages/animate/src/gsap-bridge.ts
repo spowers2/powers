@@ -1,8 +1,8 @@
 /**
  * GSAP ↔ Powers signal bridge (no hard dependency on `gsap`).
- * Use `createGsapBridge(gsap)` or the default export from `@powers/animate/gsap`.
+ * Use `createGsapBridge(gsap)` or the default export from `@lab206/animate/gsap`.
  */
-import type { Signal } from "@powers/core";
+import type { Signal } from "@lab206/core";
 import { createPlayback } from "./playback.js";
 import { clearActive, getActive, setActive } from "./registry.js";
 import { prefersReducedMotion } from "./reduced-motion.js";
@@ -76,7 +76,7 @@ export type GsapBridge = {
  * @example
  * ```ts
  * import gsap from "gsap";
- * import { createGsapBridge } from "@powers/animate/gsap";
+ * import { createGsapBridge } from "@lab206/animate/gsap";
  *
  * const { gsapAnimate } = createGsapBridge(gsap);
  * gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });

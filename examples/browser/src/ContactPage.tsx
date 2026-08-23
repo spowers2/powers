@@ -2,8 +2,8 @@
  * Contact form — posts to /contact.php on the live host (cPanel PHP).
  * No mailto / default mail app.
  */
-import { signal } from "@powers/core";
-import type { Router } from "@powers/router";
+import { signal } from "@lab206/core";
+import type { Router } from "@lab206/router";
 import {
   Alert,
   Button,
@@ -15,7 +15,7 @@ import {
   Stack,
   Text,
   Textarea,
-} from "@powers/ui";
+} from "@lab206/ui";
 import { SITE } from "./siteConfig.js";
 
 const SUBJECTS = [

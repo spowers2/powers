@@ -9,7 +9,7 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 | **Try it** | [lab206.com](https://lab206.com) — Lab · Docs · System · product demos |
 | **Figma** | Library **Powers UI Kit** · [Community plugin](https://www.figma.com/community/plugin/1671016490810398688) |
 | **License** | [BSL-1.1](./LICENSE) (**source-available**, not OSI open source) · [Commercial](./LICENSE-COMMERCIAL.md) |
-| **npm** | `@powers/*@0.1.0` — publish-ready; see [docs/NPM.md](./docs/NPM.md) |
+| **npm** | `@lab206/*@0.1.2` on the public registry — see [docs/NPM.md](./docs/NPM.md) |
 
 ---
 
@@ -26,7 +26,7 @@ Hub in-repo: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [GOLDEN_PATH](./doc
 ## Install
 
 ```bash
-pnpm add @powers/core @powers/dom @powers/ui
+pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
 Full install guide: [docs/NPM.md](./docs/NPM.md). Try the demos first at [lab206.com](https://lab206.com).
@@ -64,20 +64,20 @@ See [docs/DEPLOY.md](./docs/DEPLOY.md) · [docs/LAB206_LIVECODE.md](./docs/LAB20
 
 | Package | Role |
 |---|---|
-| `@powers/core` | signals, computed, effect, store, resource, ownership |
-| `@powers/animate` | tween / spring on signals |
-| `@powers/dom` | mount, h, JSX, reactive props, Show, For |
-| `@powers/router` | createRouter, Link, navigate |
-| `@powers/ssr` | `renderToString` + islands hydrate API |
-| `@powers/ui` | tokens + primitives + theme / density |
+| `@lab206/core` | signals, computed, effect, store, resource, ownership |
+| `@lab206/animate` | tween / spring on signals |
+| `@lab206/dom` | mount, h, JSX, reactive props, Show, For |
+| `@lab206/router` | createRouter, Link, navigate |
+| `@lab206/ssr` | `renderToString` + islands hydrate API |
+| `@lab206/ui` | tokens + primitives + theme / density |
 
 ### Sketch
 
 ```tsx
-import "@powers/ui/theme.css";
-import { mount } from "@powers/dom";
-import { createRouter, Link } from "@powers/router";
-import { Button, Card, Stack, Text, createTheme } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { mount } from "@lab206/dom";
+import { createRouter, Link } from "@lab206/router";
+import { Button, Card, Stack, Text, createTheme } from "@lab206/ui";
 
 const theme = createTheme("light");
 theme.bind();

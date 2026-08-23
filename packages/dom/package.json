@@ -1,6 +1,6 @@
 {
-  "name": "@powers/dom",
-  "version": "0.1.0",
+  "name": "@lab206/dom",
+  "version": "0.1.2",
   "description": "Thin DOM bindings + JSX + reactive props for Powers.",
   "type": "module",
   "license": "BUSL-1.1",
@@ -44,7 +44,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@powers/core": "workspace:*"
+    "@lab206/core": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.25.1",

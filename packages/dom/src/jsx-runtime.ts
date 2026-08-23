@@ -3,7 +3,7 @@
  *
  * Vite / TypeScript:
  *   jsx: "react-jsx"
- *   jsxImportSource: "@powers/dom"
+ *   jsxImportSource: "@lab206/dom"
  *
  * Function components receive **reactive props** via `createProps`
  * (unless they already wrapped themselves with `component()`).

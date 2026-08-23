@@ -23,7 +23,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Tabs } from '@powers/ui'"],
+  imports: ["import { Tabs } from '@lab206/ui'"],
   id: 'tabs',
   metadata: {
     nestable: false,

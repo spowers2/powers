@@ -44,7 +44,7 @@ Runtime contracts (why forms stay mounted): [`FOUNDATION.md`](./FOUNDATION.md).
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@powers/dom"
+    "jsxImportSource": "@lab206/dom"
   }
 }
 ```
@@ -57,7 +57,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@powers/dom",
+    jsxImportSource: "@lab206/dom",
   },
 });
 ```
@@ -65,9 +65,9 @@ export default defineConfig({
 `main.tsx`:
 
 ```tsx
-import "@powers/ui/theme.css";
-import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
+import "@lab206/ui/theme.css";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
 import {
   Button,
   Card,
@@ -79,7 +79,7 @@ import {
   required,
   emailFormat,
   firstError,
-} from "@powers/ui";
+} from "@lab206/ui";
 
 createTheme(
   matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
@@ -135,7 +135,7 @@ Reload the app — Button, focus rings, and accents follow tokens.
 ## 5. Add a route (3 min)
 
 ```tsx
-import { createRouter, Link } from "@powers/router";
+import { createRouter, Link } from "@lab206/router";
 
 const router = createRouter({
   routes: [

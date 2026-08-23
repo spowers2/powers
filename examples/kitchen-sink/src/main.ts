@@ -14,7 +14,7 @@ import {
   createRoot,
   onError,
   flush,
-} from "@powers/core";
+} from "@lab206/core";
 
 function delay(ms: number, value: string): Promise<string> {
   return new Promise((resolve) => setTimeout(() => resolve(value), ms));

@@ -1,4 +1,4 @@
-import { effect, type Dispose } from "@powers/core";
+import { effect, type Dispose } from "@lab206/core";
 
 /** Reactive text content of an Element or Text node. */
 export function bindText(

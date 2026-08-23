@@ -1,5 +1,5 @@
-import { effect } from "@powers/core";
-import { component, mergeProps, type ComponentProps } from "@powers/dom";
+import { effect } from "@lab206/core";
+import { component, mergeProps, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 import { attachOverlay } from "../overlay.js";

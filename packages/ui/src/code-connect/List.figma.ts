@@ -14,7 +14,7 @@ export default {
     onSelect={() => {}}
   />
 `,
-  imports: ["import { List } from '@powers/ui'"],
+  imports: ["import { List } from '@lab206/ui'"],
   id: 'list',
   metadata: {
     nestable: true,

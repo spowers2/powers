@@ -1,5 +1,5 @@
 /**
- * Bundle-size gate for @powers/router (core + dom external).
+ * Bundle-size gate for @lab206/router (core + dom external).
  */
 import { build } from "esbuild";
 import { gzipSync } from "node:zlib";
@@ -19,7 +19,7 @@ const result = await build({
   platform: "browser",
   write: false,
   treeShaking: true,
-  external: ["@powers/core", "@powers/dom"],
+  external: ["@lab206/core", "@lab206/dom"],
 });
 
 const code = result.outputFiles[0]?.text ?? "";
@@ -32,8 +32,8 @@ writeFileSync(
   join(outdir, "size.json"),
   JSON.stringify(
     {
-      package: "@powers/router",
-      external: ["@powers/core", "@powers/dom"],
+      package: "@lab206/router",
+      external: ["@lab206/core", "@lab206/dom"],
       rawBytes: raw,
       gzipBytes: gzip,
       rawKb: +(raw / 1024).toFixed(2),
@@ -45,7 +45,7 @@ writeFileSync(
   ),
 );
 
-console.log("\n@powers/router size baseline (core + dom external)");
+console.log("\n@lab206/router size baseline (core + dom external)");
 console.log(`  minified : ${raw} bytes (${(raw / 1024).toFixed(2)} KB)`);
 console.log(`  gzip     : ${gzip} bytes (${(gzip / 1024).toFixed(2)} KB)`);
 

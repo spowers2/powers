@@ -2,8 +2,8 @@
  * Product landing — minimal hero + live showcase + clean feature grid.
  * Navigation is provided by the shared SiteNav in AppShell.
  */
-import { signal, computed, effect } from "@powers/core";
-import type { Router } from "@powers/router";
+import { signal, computed, effect } from "@lab206/core";
+import type { Router } from "@lab206/router";
 import {
   Avatar,
   Badge,
@@ -15,7 +15,7 @@ import {
   Stack,
   Switch,
   Text,
-} from "@powers/ui";
+} from "@lab206/ui";
 import {
   createSectionNav,
   scrollToSection,
@@ -617,8 +617,8 @@ export function LandingPage(props: { router: Router }) {
               </div>
             </div>
             <pre class="lp-snippet">
-{`import { signal, computed } from "@powers/core";
-import { mount } from "@powers/dom";
+{`import { signal, computed } from "@lab206/core";
+import { mount } from "@lab206/dom";
 
 const count = signal(0);
 const label = computed(() => \`Clicks: \${count()}\`);

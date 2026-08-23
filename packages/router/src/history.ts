@@ -1,4 +1,4 @@
-import { signal, type Signal } from "@powers/core";
+import { signal, type Signal } from "@lab206/core";
 import { normalizePath } from "./match.js";
 
 export type HistoryMode = "history" | "hash" | "memory";

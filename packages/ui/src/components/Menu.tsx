@@ -1,5 +1,5 @@
-import { signal, effect } from "@powers/core";
-import { For, component, mergeProps, type ComponentProps } from "@powers/dom";
+import { signal, effect } from "@lab206/core";
+import { For, component, mergeProps, type ComponentProps } from "@lab206/dom";
 import { cx } from "../utils.js";
 import { Popover } from "./Popover.js";
 import {

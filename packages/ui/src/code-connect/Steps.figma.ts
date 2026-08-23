@@ -22,7 +22,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Steps } from '@powers/ui'"],
+  imports: ["import { Steps } from '@lab206/ui'"],
   id: 'steps',
   metadata: {
     nestable: true,

@@ -10,7 +10,7 @@ import {
   batch,
   flush,
   createRoot,
-} from "@powers/core";
+} from "@lab206/core";
 
 createRoot((dispose) => {
   const count = signal(0, { name: "count" });

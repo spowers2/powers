@@ -1,6 +1,6 @@
-# Code Connect — Powers UI Kit ↔ `@powers/ui`
+# Code Connect — Powers UI Kit ↔ `@lab206/ui`
 
-Code Connect shows real `@powers/ui` snippets in Figma **Dev Mode** when you select a kit component. Designers stay in Figma; engineers copy production-shaped code.
+Code Connect shows real `@lab206/ui` snippets in Figma **Dev Mode** when you select a kit component. Designers stay in Figma; engineers copy production-shaped code.
 
 ## Status
 
@@ -49,7 +49,7 @@ const label = instance.getString('Label')
 
 export default {
   example: figma.code`<Button>${label}</Button>`,
-  imports: ["import { Button } from '@powers/ui'"],
+  imports: ["import { Button } from '@lab206/ui'"],
   id: 'button',
 }
 ```
@@ -85,7 +85,7 @@ npx figma connect unpublish --label=Powers
 1. Open **Powers UI Kit**.
 2. Select a component (e.g. **Button**).
 3. Switch to **Dev Mode**.
-4. Inspect panel should show a **Powers** snippet with imports from `@powers/ui`.
+4. Inspect panel should show a **Powers** snippet with imports from `@lab206/ui`.
 
 If nothing appears: plan may not include Code Connect, PAT missing **Code Connect Write**, or publish failed — re-run `pnpm code-connect:publish` and read CLI errors.
 
@@ -96,7 +96,7 @@ If nothing appears: plan may not include Code Connect, PAT missing **Code Connec
 | New Figma component | Add `packages/ui/src/code-connect/Name.figma.ts` with `// url=…node-id=…`, then publish |
 | Renamed prop / variant | Update `getString` / `getEnum` maps; publish |
 | Node recreated | Update `// url=` (and `nodes.json`); publish |
-| Code API change | Adjust `example` to match `@powers/ui` props; publish |
+| Code API change | Adjust `example` to match `@lab206/ui` props; publish |
 
 Refresh node IDs from the API (file content read):
 
@@ -114,7 +114,7 @@ node --import tsx design-kit/scripts/…  # or re-run the extract used for nodes
 | **Powers UI Kit** (library) | Design source of truth |
 | **Powers Design Kit** plugin | Sync variables / audit / stubs |
 | **Code Connect** | Dev Mode code from the same components |
-| **`@powers/ui`** | Runtime implementation |
+| **`@lab206/ui`** | Runtime implementation |
 
 Together: design in product files with library instances → Dev Mode shows Powers imports → ship with the monorepo packages.
 

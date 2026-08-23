@@ -6,8 +6,8 @@ import {
   Stat,
   Text,
   type ToastController,
-} from "@powers/ui";
-import type { Router } from "@powers/router";
+} from "@lab206/ui";
+import type { Router } from "@lab206/router";
 import {
   profile,
   tonightReservations,

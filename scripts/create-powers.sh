@@ -43,7 +43,7 @@ if [[ -f "$DEST/package.json" ]] && command -v node >/dev/null 2>&1; then
     const fs = require('fs');
     const p = process.argv[1];
     const j = JSON.parse(fs.readFileSync(p, 'utf8'));
-    j.name = '@powers/' + process.argv[2];
+    j.name = '@lab206/' + process.argv[2];
     fs.writeFileSync(p, JSON.stringify(j, null, 2) + '\n');
   " "$DEST/package.json" "$BASE"
 fi
@@ -53,7 +53,7 @@ echo ""
 echo "Next:"
 if [[ "$DEST" == "$ROOT/examples/"* ]]; then
   echo "  cd $ROOT && pnpm install"
-  echo "  pnpm --filter @powers/$BASE dev"
+  echo "  pnpm --filter @lab206/$BASE dev"
   echo "  # or: cd $DEST && pnpm dev"
 else
   echo "  # Wire package.json deps to this monorepo (workspace/file:) or npm,"

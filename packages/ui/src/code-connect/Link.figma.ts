@@ -11,7 +11,7 @@ export default {
   example: figma.code`
   <Link href="#">${label}</Link>
 `,
-  imports: ["import { Link } from '@powers/ui'"],
+  imports: ["import { Link } from '@lab206/ui'"],
   id: 'link',
   metadata: {
     nestable: true,

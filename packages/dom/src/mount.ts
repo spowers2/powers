@@ -1,4 +1,4 @@
-import { createRoot, type Dispose } from "@powers/core";
+import { createRoot, type Dispose } from "@lab206/core";
 import { remove } from "./insert.js";
 
 export type MountResult = Node | Node[] | null | undefined | void;

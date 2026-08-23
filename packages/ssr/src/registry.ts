@@ -1,4 +1,4 @@
-import type { Dispose } from "@powers/core";
+import type { Dispose } from "@lab206/core";
 import type { IslandFactory, IslandRegistry } from "./islands.js";
 import { hydrateIslands, ISLAND_ATTR } from "./islands.js";
 

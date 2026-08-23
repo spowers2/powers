@@ -35,10 +35,10 @@ importers:
 
   examples/animate-demo:
     dependencies:
-      '@powers/animate':
+      '@lab206/animate':
         specifier: workspace:*
         version: link:../../packages/animate
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -48,16 +48,16 @@ importers:
 
   examples/app-starter:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@powers/router':
+      '@lab206/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@powers/ui':
+      '@lab206/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
@@ -70,19 +70,19 @@ importers:
 
   examples/browser:
     dependencies:
-      '@powers/animate':
+      '@lab206/animate':
         specifier: workspace:*
         version: link:../../packages/animate
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@powers/router':
+      '@lab206/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@powers/ui':
+      '@lab206/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       esbuild-wasm:
@@ -107,7 +107,7 @@ importers:
 
   examples/counter:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -117,7 +117,7 @@ importers:
 
   examples/kitchen-sink:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
@@ -127,16 +127,16 @@ importers:
 
   examples/restaurant-demo:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@powers/router':
+      '@lab206/router':
         specifier: workspace:*
         version: link:../../packages/router
-      '@powers/ui':
+      '@lab206/ui':
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
@@ -149,13 +149,13 @@ importers:
 
   examples/ssr-islands:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../../packages/dom
-      '@powers/ssr':
+      '@lab206/ssr':
         specifier: workspace:*
         version: link:../../packages/ssr
       happy-dom:
@@ -168,7 +168,7 @@ importers:
 
   packages/animate:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -199,7 +199,7 @@ importers:
 
   packages/dom:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -218,10 +218,10 @@ importers:
 
   packages/router:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../dom
     devDependencies:
@@ -240,10 +240,10 @@ importers:
 
   packages/ssr:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../dom
       happy-dom:
@@ -259,10 +259,10 @@ importers:
 
   packages/ui:
     dependencies:
-      '@powers/core':
+      '@lab206/core':
         specifier: workspace:*
         version: link:../core
-      '@powers/dom':
+      '@lab206/dom':
         specifier: workspace:*
         version: link:../dom
     devDependencies:

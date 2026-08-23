@@ -19,7 +19,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Select } from '@powers/ui'"],
+  imports: ["import { Select } from '@lab206/ui'"],
   id: 'select',
   metadata: {
     nestable: true,

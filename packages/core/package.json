@@ -1,7 +1,7 @@
 {
-  "name": "@powers/core",
-  "version": "0.1.0",
-  "description": "Fine-grained reactivity primitives for Powers — signals, computed, effects, store, resource, ownership.",
+  "name": "@lab206/core",
+  "version": "0.1.2",
+  "description": "Fine-grained reactivity primitives for Powers \u2014 signals, computed, effects, store, resource, ownership.",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,

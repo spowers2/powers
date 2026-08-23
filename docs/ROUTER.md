@@ -1,10 +1,10 @@
-# `@powers/router`
+# `@lab206/router`
 
 ## Learn in 2 minutes
 
 ```tsx
-import { createRouter, Link } from "@powers/router";
-import { mount } from "@powers/dom";
+import { createRouter, Link } from "@lab206/router";
+import { mount } from "@lab206/dom";
 
 const router = createRouter({
   routes: [

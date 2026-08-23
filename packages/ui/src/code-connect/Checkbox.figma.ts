@@ -13,7 +13,7 @@ export default {
   example: figma.code`
   <Checkbox checked={${checked}} disabled={${disabled}} label={${label}} />
 `,
-  imports: ["import { Checkbox } from '@powers/ui'"],
+  imports: ["import { Checkbox } from '@lab206/ui'"],
   id: "checkbox",
   metadata: {
     nestable: true,

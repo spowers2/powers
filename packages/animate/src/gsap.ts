@@ -2,9 +2,9 @@
  * Optional GSAP adapter for Powers.
  *
  * Install peer: `pnpm add gsap`
- * Import: `import { gsapAnimate } from "@powers/animate/gsap"`
+ * Import: `import { gsapAnimate } from "@lab206/animate/gsap"`
  *
- * Default motion remains `@powers/animate` (no GSAP required).
+ * Default motion remains `@lab206/animate` (no GSAP required).
  * Use this for timelines, custom eases, ScrollTrigger (via `vars`), etc.
  */
 import gsap from "gsap";

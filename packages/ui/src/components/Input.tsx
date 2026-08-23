@@ -1,10 +1,10 @@
-import { effect, type Signal } from "@powers/core";
+import { effect, type Signal } from "@lab206/core";
 import {
   component,
   getRawProp,
   mergeProps,
   type ComponentProps,
-} from "@powers/dom";
+} from "@lab206/dom";
 import { cx } from "../utils.js";
 import { readBool, readStr, type MaybeReactive } from "../reactive.js";
 import type { Bindable } from "../form.js";

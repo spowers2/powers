@@ -35,14 +35,14 @@ Kit / Lab (learn the stack): **http://localhost:5173**
 - **Domain model** with realistic seed data (health client, e‑com, fintech lead)
 - **One persisted store** (`localStorage`) — survives refresh
 - **Workflows**: create/edit drawers, delete confirms, toasts, overdue highlighting
-- **No Lab/System chrome** — just an app built with `@powers/*`
+- **No Lab/System chrome** — just an app built with `@lab206/*`
 
 ## Stack
 
-- `@powers/core` — signals, computed, effect  
-- `@powers/dom` — JSX  
-- `@powers/router` — routes  
-- `@powers/ui` — design system  
+- `@lab206/core` — signals, computed, effect  
+- `@lab206/dom` — JSX  
+- `@lab206/router` — routes  
+- `@lab206/ui` — design system  
 
 ## Put this online
 

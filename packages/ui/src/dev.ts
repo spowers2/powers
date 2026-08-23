@@ -48,7 +48,7 @@ export function warnIfThemeMissing(doc: Document = document): void {
       if (!accent) {
         devWarnOnce(
           "theme-css",
-          'Missing design tokens. Import once at the app root: import "@powers/ui/theme.css"; then createTheme().bind().',
+          'Missing design tokens. Import once at the app root: import "@lab206/ui/theme.css"; then createTheme().bind().',
         );
       }
     } catch {

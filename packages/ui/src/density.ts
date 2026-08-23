@@ -1,4 +1,4 @@
-import { effect, signal, type Signal } from "@powers/core";
+import { effect, signal, type Signal } from "@lab206/core";
 
 export type Density = "comfortable" | "compact";
 

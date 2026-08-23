@@ -64,9 +64,9 @@ Parked: streaming SSR — only when needed.
 
 ### GSAP adapter + pro motion ✅
 
-- `@powers/animate/gsap` — optional peer `gsap`  
+- `@lab206/animate/gsap` — optional peer `gsap`  
 - `gsapAnimate` / `gsapFromTo` / `createGsapBridge` → number signals  
-- Default `@powers/animate` unchanged (no GSAP required)  
+- Default `@lab206/animate` unchanged (no GSAP required)  
 - See [`ANIMATION.md`](./ANIMATION.md)
 
 ---
@@ -74,12 +74,12 @@ Parked: streaming SSR — only when needed.
 ## Package map
 
 ```
-@powers/core      signals, store, resource, ownership
-@powers/animate  tween / spring on signals
-@powers/dom      mount, h, JSX, props, Show, For
-@powers/router   createRouter, Link, navigate
-@powers/ssr      renderToString + defineIslands / hydrate
-@powers/ui       tokens + base + utilities + primitives
+@lab206/core      signals, store, resource, ownership
+@lab206/animate  tween / spring on signals
+@lab206/dom      mount, h, JSX, props, Show, For
+@lab206/router   createRouter, Link, navigate
+@lab206/ssr      renderToString + defineIslands / hydrate
+@lab206/ui       tokens + base + utilities + primitives
 ```
 
 See `docs/STYLING.md` · `docs/DESIGN_SYSTEM.md` · `docs/POWER_LAB.md`

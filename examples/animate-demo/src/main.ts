@@ -1,14 +1,14 @@
 /**
  * Animation foundation demo — no DOM, just signals over time.
  */
-import { signal, effect, flush } from "@powers/core";
+import { signal, effect, flush } from "@lab206/core";
 import {
   animate,
   spring,
   createTestClock,
   installDriver,
   setReducedMotionOverride,
-} from "@powers/animate";
+} from "@lab206/animate";
 
 console.log("\n=== Powers animate demo ===\n");
 

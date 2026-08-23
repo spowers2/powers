@@ -56,26 +56,26 @@ pnpm create-app my-ui    # or: bash scripts/create-powers.sh my-ui
 
 | Package | Doc |
 |---|---|
-| `@powers/core` | [LEARN.md](./LEARN.md) · [ARCHITECTURE.md](./ARCHITECTURE.md) · [FOUNDATION.md](./FOUNDATION.md) |
-| `@powers/dom` | [DOM.md](./DOM.md) |
-| `@powers/animate` | [ANIMATION.md](./ANIMATION.md) |
-| `@powers/router` | [ROUTER.md](./ROUTER.md) |
-| `@powers/ssr` | [SSR.md](./SSR.md) |
-| `@powers/ui` | [STYLING.md](./STYLING.md) · [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) · [COMPONENTS.md](./COMPONENTS.md) |
+| `@lab206/core` | [LEARN.md](./LEARN.md) · [ARCHITECTURE.md](./ARCHITECTURE.md) · [FOUNDATION.md](./FOUNDATION.md) |
+| `@lab206/dom` | [DOM.md](./DOM.md) |
+| `@lab206/animate` | [ANIMATION.md](./ANIMATION.md) |
+| `@lab206/router` | [ROUTER.md](./ROUTER.md) |
+| `@lab206/ssr` | [SSR.md](./SSR.md) |
+| `@lab206/ui` | [STYLING.md](./STYLING.md) · [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) · [COMPONENTS.md](./COMPONENTS.md) |
 
 ---
 
 ## Quick install (when published)
 
 ```bash
-pnpm add @powers/core @powers/dom @powers/ui
+pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
 ```tsx
-import "@powers/ui/theme.css";
-import { signal } from "@powers/core";
-import { mount } from "@powers/dom";
-import { Button, createTheme } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, createTheme } from "@lab206/ui";
 
 createTheme("light").bind();
 
@@ -115,7 +115,7 @@ signal → computed → effect → store → resource
        ↓
   mount / JSX / component
        ↓
-  @powers/ui  (tokens · primitives · utilities)
+  @lab206/ui  (tokens · primitives · utilities)
 ```
 
 One library for **behavior and look**. External CSS frameworks are optional escape hatches, not required.

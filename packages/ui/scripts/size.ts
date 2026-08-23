@@ -1,5 +1,5 @@
 /**
- * Bundle-size gates for @powers/ui (core + dom external).
+ * Bundle-size gates for @lab206/ui (core + dom external).
  *
  * - full: entire public index (worst-case "import *")
  * - form-kit: Button + Input + Field + Stack + theme (golden path)
@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outdir = join(__dirname, "../dist-size");
-const external = ["@powers/core", "@powers/dom"];
+const external = ["@lab206/core", "@lab206/dom"];
 
 type Measure = {
   name: string;
@@ -24,14 +24,14 @@ type Measure = {
 
 const targets: Measure[] = [
   {
-    name: "@powers/ui (full index)",
+    name: "@lab206/ui (full index)",
     entry: join(__dirname, "../src/index.ts"),
     outFile: "ui-full.min.js",
     // Full catalog — leave headroom for new primitives; fail on accidental bloat
     budget: 32 * 1024,
   },
   {
-    name: "@powers/ui form-kit",
+    name: "@lab206/ui form-kit",
     entry: join(__dirname, "../src/size-entries/form-kit.ts"),
     outFile: "ui-form-kit.min.js",
     // Golden path: Button · Input · Field · Stack · theme · form helpers
@@ -62,7 +62,7 @@ for (const t of targets) {
     treeShaking: true,
     external,
     jsx: "automatic",
-    jsxImportSource: "@powers/dom",
+    jsxImportSource: "@lab206/dom",
   });
 
   const code = result.outputFiles[0]?.text ?? "";
@@ -92,7 +92,7 @@ writeFileSync(
   join(outdir, "size.json"),
   JSON.stringify(
     {
-      package: "@powers/ui",
+      package: "@lab206/ui",
       external,
       measuredAt: new Date().toISOString(),
       results,
@@ -105,6 +105,6 @@ writeFileSync(
 console.log(`\n  written  : packages/ui/dist-size/\n`);
 
 if (failed) {
-  console.error("FAIL: one or more @powers/ui size budgets exceeded");
+  console.error("FAIL: one or more @lab206/ui size budgets exceeded");
   process.exit(1);
 }

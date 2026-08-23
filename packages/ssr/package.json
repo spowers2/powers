@@ -1,7 +1,7 @@
 {
-  "name": "@powers/ssr",
-  "version": "0.1.0",
-  "description": "SSR foundation for Powers — render apps to HTML strings (happy-dom).",
+  "name": "@lab206/ssr",
+  "version": "0.1.2",
+  "description": "SSR foundation for Powers \u2014 render apps to HTML strings (happy-dom).",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,
@@ -31,8 +31,8 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@powers/core": "workspace:*",
-    "@powers/dom": "workspace:*",
+    "@lab206/core": "workspace:*",
+    "@lab206/dom": "workspace:*",
     "happy-dom": "^17.4.4"
   },
   "devDependencies": {

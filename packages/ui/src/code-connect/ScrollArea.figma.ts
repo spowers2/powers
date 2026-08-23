@@ -10,7 +10,7 @@ export default {
     Long content…
   </ScrollArea>
 `,
-  imports: ["import { ScrollArea } from '@powers/ui'"],
+  imports: ["import { ScrollArea } from '@lab206/ui'"],
   id: 'scroll-area',
   metadata: {
     nestable: true,

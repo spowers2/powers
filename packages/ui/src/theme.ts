@@ -1,5 +1,5 @@
-import { signal, type Signal } from "@powers/core";
-import { effect } from "@powers/core";
+import { signal, type Signal } from "@lab206/core";
+import { effect } from "@lab206/core";
 
 export type ThemeMode = "light" | "dark";
 

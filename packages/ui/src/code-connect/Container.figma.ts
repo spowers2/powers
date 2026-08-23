@@ -18,7 +18,7 @@ export default {
     Content
   </Container>
 `,
-  imports: ["import { Container } from '@powers/ui'"],
+  imports: ["import { Container } from '@lab206/ui'"],
   id: 'container',
   metadata: {
     nestable: true,

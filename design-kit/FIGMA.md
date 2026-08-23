@@ -10,7 +10,7 @@ Visual source of truth for the design kit. Machine specs stay in this repo (`tok
 | **Team / personal library** | **Published** — enable in Assets on product files |
 | Figma plugin **Powers Design Kit** | **Live on Community** — id [`1671016490810398688`](https://www.figma.com/community/plugin/1671016490810398688) |
 | **Code Connect** | Templates in `packages/ui/src/code-connect/` — see [CODE_CONNECT.md](./CODE_CONNECT.md) |
-| Code mirror | `@powers/ui` + this design-kit |
+| Code mirror | `@lab206/ui` + this design-kit |
 
 ## Design with the library (product workflow)
 

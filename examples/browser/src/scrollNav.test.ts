@@ -4,7 +4,7 @@
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import { Window } from "happy-dom";
-import { flush } from "@powers/core";
+import { flush } from "@lab206/core";
 import { createSectionNav } from "./scrollNav.js";
 
 function installDom() {

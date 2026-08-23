@@ -10,7 +10,7 @@ export default {
     Drawer body
   </Drawer>
 `,
-  imports: ["import { Drawer } from '@powers/ui'"],
+  imports: ["import { Drawer } from '@lab206/ui'"],
   id: 'drawer',
   metadata: {
     nestable: false,

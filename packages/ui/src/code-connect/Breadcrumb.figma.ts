@@ -13,7 +13,7 @@ export default {
     ]}
   />
 `,
-  imports: ["import { Breadcrumb } from '@powers/ui'"],
+  imports: ["import { Breadcrumb } from '@lab206/ui'"],
   id: 'breadcrumb',
   metadata: {
     nestable: true,

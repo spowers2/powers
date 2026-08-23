@@ -1,6 +1,6 @@
 # Component specs (phase 2) — **ready**
 
-Machine-readable specs for the **full Powers Figma UI kit**, aligned with `@powers/ui`.
+Machine-readable specs for the **full Powers Figma UI kit**, aligned with `@lab206/ui`.
 
 ## Quick start
 
@@ -20,7 +20,7 @@ pnpm design-kit:build
 
 ## Coverage
 
-All major `@powers/ui` primitives across:
+All major `@lab206/ui` primitives across:
 
 foundations · actions · forms · data-display · feedback · overlays · navigation · layout
 

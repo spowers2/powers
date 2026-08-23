@@ -1,5 +1,5 @@
-import { createRoot, type Dispose } from "@powers/core";
-import { mount, type MountResult } from "@powers/dom";
+import { createRoot, type Dispose } from "@lab206/core";
+import { mount, type MountResult } from "@lab206/dom";
 
 export type IslandFactory = () => MountResult;
 export type IslandRegistry = Record<string, IslandFactory>;

@@ -17,7 +17,7 @@ export default {
     {/* cells */}
   </Grid>
 `,
-  imports: ["import { Grid } from '@powers/ui'"],
+  imports: ["import { Grid } from '@lab206/ui'"],
   id: 'grid',
   metadata: {
     nestable: true,

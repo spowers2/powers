@@ -1,6 +1,6 @@
 # Powers design kit
 
-Design-side companion to `@powers/ui`.
+Design-side companion to `@lab206/ui`.
 
 **Live Figma:** **[FIGMA.md](./FIGMA.md)** — file key, **published library** workflow, plugin.
 
@@ -17,7 +17,7 @@ Design-side companion to `@powers/ui`.
 ### Product design loop
 
 ```
-@powers/ui (code)  ↔  design-kit tokens  ↔  Figma library (instances)
+@lab206/ui (code)  ↔  design-kit tokens  ↔  Figma library (instances)
          ↑                                         ↓
    demos: designlab206 · Hearth          product screen files
 ```

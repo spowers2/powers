@@ -11,7 +11,7 @@ export default {
   example: figma.code`
   <Label>${label}</Label>
 `,
-  imports: ["import { Label } from '@powers/ui'"],
+  imports: ["import { Label } from '@lab206/ui'"],
   id: "label",
   metadata: {
     nestable: true,

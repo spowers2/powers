@@ -1,5 +1,5 @@
 {
-  "name": "@powers/design-kit",
+  "name": "@lab206/design-kit",
   "version": "0.1.0",
   "private": true,
   "description": "Powers design kit — Figma tokens (phase 1), component specs (phase 2), plugin (phase 3).",
@@ -10,7 +10,7 @@
     "build:tokens": "node --import tsx scripts/build-tokens.ts",
     "build:components": "node --import tsx scripts/build-components.ts",
     "figma:audit": "node --import tsx scripts/figma-audit.ts",
-    "plugin:build": "pnpm --filter @powers/figma-plugin build",
+    "plugin:build": "pnpm --filter @lab206/figma-plugin build",
     "check": "node --import tsx scripts/build-tokens.ts --check && node --import tsx scripts/build-components.ts --check"
   },
   "devDependencies": {

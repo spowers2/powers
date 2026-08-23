@@ -1,5 +1,5 @@
 {
-  "name": "@powers/example-counter",
+  "name": "@lab206/example-counter",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,7 @@
     "start": "node --import tsx src/main.ts"
   },
   "dependencies": {
-    "@powers/core": "workspace:*"
+    "@lab206/core": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.19.3"

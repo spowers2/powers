@@ -1,6 +1,6 @@
 # Animation strategy
 
-**Status: Phase 1.2 implemented** — `@powers/animate` v0.1.0
+**Status: Phase 1.2 implemented** — `@lab206/animate` v0.1.0
 
 **Goal:** motion that feels world-class, with a **tiny learning curve**, native to Powers’s signal model — without forcing every app to swallow a second mega-framework.
 
@@ -23,8 +23,8 @@ signal → animate(signal, to, opts) → effect / future DOM reads the signal
 ```
 
 ```ts
-import { signal } from "@powers/core";
-import { animate, spring } from "@powers/animate";
+import { signal } from "@lab206/core";
+import { animate, spring } from "@lab206/animate";
 
 const x = signal(0);
 
@@ -74,7 +74,7 @@ Opt out per call: `{ respectReducedMotion: false }`.
 
 ## Optional GSAP adapter
 
-**Default path stays pure:** `import { animate } from "@powers/animate"` — no GSAP.
+**Default path stays pure:** `import { animate } from "@lab206/animate"` — no GSAP.
 
 For pro motion (custom eases, timelines, ScrollTrigger, SVG):
 
@@ -83,8 +83,8 @@ pnpm add gsap
 ```
 
 ```ts
-import { signal } from "@powers/core";
-import { gsapAnimate, gsapFromTo, cancel } from "@powers/animate/gsap";
+import { signal } from "@lab206/core";
+import { gsapAnimate, gsapFromTo, cancel } from "@lab206/animate/gsap";
 // or inject: createGsapBridge(gsap)
 
 const x = signal(0);
@@ -110,7 +110,7 @@ await anim.finished;
 
 **Design rules**
 
-1. GSAP is an **optional peer** — not bundled into the default `@powers/animate` entry.  
+1. GSAP is an **optional peer** — not bundled into the default `@lab206/animate` entry.  
 2. One active animation per signal; GSAP and native `animate()` share the registry (interrupt each other).  
 3. Reduced motion still snaps to end by default.  
 4. For pure DOM timelines (no signals), call GSAP directly on elements — no wrapper needed.
@@ -123,7 +123,7 @@ await anim.finished;
 
 - Timelines / ScrollTrigger / SVG morph (use GSAP + this adapter or DOM GSAP)  
 - Color / complex string interpolation  
-- DOM enter/exit helpers (use `@powers/ui` Transition / CSS)
+- DOM enter/exit helpers (use `@lab206/ui` Transition / CSS)
 
 ---
 
@@ -133,9 +133,9 @@ await anim.finished;
 ✅ Core 1.1
 ✅ Animate foundation
 ✅ Phase 2 thin DOM
-✅ Optional GSAP adapter (`@powers/animate/gsap`)
+✅ Optional GSAP adapter (`@lab206/animate/gsap`)
 ```
 
 ## Size
 
-Run `pnpm --filter @powers/animate size` — **default** entry only (GSAP not included).
+Run `pnpm --filter @lab206/animate size` — **default** entry only (GSAP not included).

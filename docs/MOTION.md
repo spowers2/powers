@@ -9,8 +9,8 @@ Named presets so apps feel consistent without inventing CSS every time.
 | Show/hide panel, dialog body, toast | UI `<Transition name="pu-fade">` |
 | Accordion / expand height | `<Transition name="pu-collapse">` |
 | Button press / hover | Built into controls (respects reduced motion) |
-| Number / progress tween | `@powers/animate` `animate` / `spring` on a **signal** |
-| Complex timelines, scrub, SVG | Optional peer **GSAP** via `@powers/animate/gsap` |
+| Number / progress tween | `@lab206/animate` `animate` / `spring` on a **signal** |
+| Complex timelines, scrub, SVG | Optional peer **GSAP** via `@lab206/animate/gsap` |
 
 **Rule:** prefer CSS Transition presets for enter/exit chrome. Prefer signal animation when the **value** itself moves (progress bar, counter, drag). Reach for GSAP only when product motion needs timelines.
 
@@ -26,8 +26,8 @@ Use with `<Transition name="…" show={open}>`:
 | `pu-collapse` | Height expand/collapse (accordion-like) |
 
 ```tsx
-import { signal } from "@powers/core";
-import { Transition, Button, Card } from "@powers/ui";
+import { signal } from "@lab206/core";
+import { Transition, Button, Card } from "@lab206/ui";
 
 const open = signal(true);
 
@@ -40,7 +40,7 @@ const open = signal(true);
 `MOTION_PRESETS` exports the catalog for docs/tools:
 
 ```ts
-import { MOTION_PRESETS } from "@powers/ui";
+import { MOTION_PRESETS } from "@lab206/ui";
 // [{ name: "pu-fade", label, use, duration }, …]
 ```
 
@@ -55,7 +55,7 @@ import { MOTION_PRESETS } from "@powers/ui";
 
 ## Animate package
 
-Number signals / springs: `@powers/animate` (`animate`, `spring`, `cancel`).  
+Number signals / springs: `@lab206/animate` (`animate`, `spring`, `cancel`).  
 Use for continuous values (counters, springs). Use **Transition** for mount/unmount UI chrome.
 
 ## Reduced motion

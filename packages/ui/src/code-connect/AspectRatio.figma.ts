@@ -17,7 +17,7 @@ export default {
     {/* media */}
   </AspectRatio>
 `,
-  imports: ["import { AspectRatio } from '@powers/ui'"],
+  imports: ["import { AspectRatio } from '@lab206/ui'"],
   id: 'aspect-ratio',
   metadata: {
     nestable: true,

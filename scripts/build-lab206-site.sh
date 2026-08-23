@@ -16,13 +16,13 @@ OUT="$ROOT/sites/lab206.com"
 ZIP="$ROOT/sites/lab206.com.zip"
 
 echo "→ Building Lab (base /)"
-pnpm --filter @powers/example-browser exec vite build --base=/
+pnpm --filter @lab206/example-browser exec vite build --base=/
 
 echo "→ Building designlab206 (base /workspace/)"
-pnpm --filter @powers/app-starter exec vite build --base=/workspace/
+pnpm --filter @lab206/app-starter exec vite build --base=/workspace/
 
 echo "→ Building Hearth (base /hearth/)"
-pnpm --filter @powers/restaurant-demo exec vite build --base=/hearth/
+pnpm --filter @lab206/restaurant-demo exec vite build --base=/hearth/
 
 echo "→ Assembling $OUT"
 rm -rf "$OUT"

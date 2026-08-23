@@ -5,8 +5,8 @@ import {
   Stack,
   Text,
   type ToastController,
-} from "@powers/ui";
-import type { Router } from "@powers/router";
+} from "@lab206/ui";
+import type { Router } from "@lab206/router";
 import { PHOTOS, PHOTO_CREDIT } from "../data/images.js";
 import {
   profile,

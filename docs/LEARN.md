@@ -11,7 +11,7 @@ signal → computed → effect → store → resource
 ## 1. `signal` — a value that can change
 
 ```ts
-import { signal } from "@powers/core";
+import { signal } from "@lab206/core";
 
 const count = signal(0);
 
@@ -28,7 +28,7 @@ count.peek();      // read WITHOUT subscribing
 ## 2. `computed` — a value derived from others
 
 ```ts
-import { computed } from "@powers/core";
+import { computed } from "@lab206/core";
 
 const double = computed(() => count() * 2);
 double(); // always up to date, cached until deps change
@@ -41,7 +41,7 @@ double(); // always up to date, cached until deps change
 ## 3. `effect` — run when data changes
 
 ```ts
-import { effect } from "@powers/core";
+import { effect } from "@lab206/core";
 
 const stop = effect(() => {
   console.log(double());
@@ -60,7 +60,7 @@ No dependency arrays. Ever.
 ## 4. `store` — several fields that update independently
 
 ```ts
-import { store } from "@powers/core";
+import { store } from "@lab206/core";
 
 const app = store({ count: 0, name: "Ada" });
 
@@ -77,7 +77,7 @@ app();                    // snapshot { count, name }
 ## 5. `resource` — async data without spaghetti
 
 ```ts
-import { resource, signal } from "@powers/core";
+import { resource, signal } from "@lab206/core";
 
 const id = signal(1);
 
@@ -123,7 +123,7 @@ No virtual DOM. No “re-render the component.” No dependency arrays.
 ## 6. `animate` — move a signal over time (optional)
 
 ```ts
-import { animate, spring } from "@powers/animate";
+import { animate, spring } from "@lab206/animate";
 
 const x = signal(0);
 
@@ -146,7 +146,7 @@ Honors `prefers-reduced-motion` by default (snaps to the end).
 ## 7. DOM / JSX — bind signals to the page
 
 ```tsx
-import { mount, component, mergeProps } from "@powers/dom";
+import { mount, component, mergeProps } from "@lab206/dom";
 
 const Hello = component((props: { name: string }) => (
   <p>{() => `Hello, ${props.name}`}</p>
@@ -179,8 +179,8 @@ Also: `mergeProps`, `Show`, `For`, … — see [`docs/DOM.md`](./DOM.md).
 ## 8. Styling — built in (not a second framework)
 
 ```tsx
-import "@powers/ui/theme.css";
-import { Button, Stack, createTheme } from "@powers/ui";
+import "@lab206/ui/theme.css";
+import { Button, Stack, createTheme } from "@lab206/ui";
 
 createTheme("light").bind();
 
@@ -209,6 +209,6 @@ See the docs hub: [`docs/README.md`](./README.md).
 
 - A separate CSS framework to look good  
 - Dependency arrays  
-- **GSAP** for everyday motion — default is signal tweens; optional `@powers/animate/gsap` when you need pro motion  
+- **GSAP** for everyday motion — default is signal tweens; optional `@lab206/animate/gsap` when you need pro motion  
 
 Master signals + JSX + UI tokens/primitives and you can ship real apps.

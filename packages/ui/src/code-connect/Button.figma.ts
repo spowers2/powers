@@ -25,7 +25,7 @@ export default {
     ${label}
   </Button>
 `,
-  imports: ["import { Button } from '@powers/ui'"],
+  imports: ["import { Button } from '@lab206/ui'"],
   id: "button",
   metadata: {
     nestable: true,

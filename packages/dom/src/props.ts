@@ -1,4 +1,4 @@
-import type { Signal } from "@powers/core";
+import type { Signal } from "@lab206/core";
 
 /**
  * Reactive component props.

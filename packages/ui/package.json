@@ -1,7 +1,7 @@
 {
-  "name": "@powers/ui",
-  "version": "0.1.0",
-  "description": "Powers design system — tokens, primitives, and token-mapped utilities (batteries included).",
+  "name": "@lab206/ui",
+  "version": "0.1.2",
+  "description": "Powers design system \u2014 tokens, primitives, and token-mapped utilities (batteries included).",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": [
@@ -43,8 +43,8 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@powers/core": "workspace:*",
-    "@powers/dom": "workspace:*"
+    "@lab206/core": "workspace:*",
+    "@lab206/dom": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.25.1",

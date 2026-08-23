@@ -20,12 +20,12 @@ Use this before the first public npm publish / website launch.
 
 | Package | Ready? | Notes |
 |---|---|---|
-| `@powers/core` | [x] | signals, computed, effect, store, resource · size OK |
-| `@powers/dom` | [x] | mount, JSX, Show, For, props · size OK |
-| `@powers/animate` | [x] | tween / spring (GSAP **not** required) · size OK |
-| `@powers/router` | [x] | history / hash / memory · size OK |
-| `@powers/ssr` | [x] | string render + islands (document limits) · tests green |
-| `@powers/ui` | [x] | tokens + primitives · size OK (full + form-kit) |
+| `@lab206/core` | [x] | signals, computed, effect, store, resource · size OK |
+| `@lab206/dom` | [x] | mount, JSX, Show, For, props · size OK |
+| `@lab206/animate` | [x] | tween / spring (GSAP **not** required) · size OK |
+| `@lab206/router` | [x] | history / hash / memory · size OK |
+| `@lab206/ssr` | [x] | string render + islands (document limits) · tests green |
+| `@lab206/ui` | [x] | tokens + primitives · size OK (full + form-kit) |
 
 ## Quality gates
 
@@ -34,11 +34,11 @@ Use this before the first public npm publish / website launch.
 - [x] CI Node **22**; `engines.node` `>=20`
 - [x] `pnpm size` within ceilings in [`SIZE.md`](./SIZE.md)
 - [x] No accidental private secrets in the repo (`.env*` gitignored; none committed)
-- [x] `package.json` names `@powers/*`, exports present, UI `sideEffects` for CSS
+- [x] `package.json` names `@lab206/*`, exports present, UI `sideEffects` for CSS
 - [x] README install + 30-second example for public readers
 - [x] [`STABLE.md`](./STABLE.md) + [`GOLDEN_PATH.md`](./GOLDEN_PATH.md) current for Powers
 - [x] Design-kit: `pnpm design-kit:check` + Figma plugin build in CI
-- [x] `@powers/*` marked **`private: true`** until deliberate public npm cut
+- [x] `@lab206/*` marked **`private: true`** until deliberate public npm cut
 
 ## Docs (public hub)
 
@@ -71,10 +71,10 @@ Use this before the first public npm publish / website launch.
 
 ## npm cut (`0.1.0`)
 
-1. [x] Coordinated versions — all `@powers/*` at **0.1.0**
+1. [x] Coordinated versions — all `@lab206/*` at **0.1.0**
 2. [x] Exports point at **`dist`** (plus `development` → `src` for monorepo Vite)
 3. [x] `"private": false` + `publishConfig.access: public`
-4. [ ] **`pnpm publish:packages`** (after `npm login` to an account that can publish `@powers`)
+4. [ ] **`pnpm publish:packages`** (after `npm login` to an account that can publish `@lab206`)
 5. [ ] Tag `v0.1.0` on GitHub
 6. [ ] Announce npm install in [ANNOUNCE.md](./ANNOUNCE.md) / social
 7. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro
@@ -86,7 +86,7 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 
 ## Explicitly later
 
-- GSAP optional adapter — shipped as `@powers/animate/gsap` (peer)  
+- GSAP optional adapter — shipped as `@lab206/animate/gsap` (peer)  
 - Streaming SSR  
 - Full a11y audit / ARIA cookbook (VPAT / Section 508 when funded — see [GOVERNMENT.md](./GOVERNMENT.md))  
 - Syntax highlight upgrade (Tree-sitter / CodeMirror) if Lab outgrows the lightweight highlighter  

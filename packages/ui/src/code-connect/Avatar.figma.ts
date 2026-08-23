@@ -16,7 +16,7 @@ export default {
   example: figma.code`
   <Avatar size={${size}} name={${initials}} />
 `,
-  imports: ["import { Avatar } from '@powers/ui'"],
+  imports: ["import { Avatar } from '@lab206/ui'"],
   id: 'avatar',
   metadata: {
     nestable: true,
