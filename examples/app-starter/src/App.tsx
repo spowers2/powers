@@ -187,7 +187,16 @@ export function createApp(opts: {
                     items={moreItems}
                     onSelect={(id) => router.navigate(id)}
                     trigger={
-                      <Button size="sm" variant="soft" aria-label="More pages">
+                      <Button
+                        size="sm"
+                        variant="soft"
+                        aria-label="More pages"
+                        class={() =>
+                          moreItems.some((m) => router.path().startsWith(m.id))
+                            ? "is-active"
+                            : ""
+                        }
+                      >
                         More
                       </Button>
                     }
@@ -229,7 +238,7 @@ export function createApp(opts: {
             {() => profile().email} · {() => theme.mode()} ·{" "}
             <a
               class="app-footer__link"
-              href="http://localhost:5173"
+              href={import.meta.env.DEV ? "http://localhost:5173" : "/"}
               target="_blank"
               rel="noreferrer"
             >

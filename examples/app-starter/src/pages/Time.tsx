@@ -39,10 +39,15 @@ function today(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-function initialBillableFilter(): string {
-  if (typeof window === "undefined") return "all";
+function initialBillableFilter(
+  router?: import("@lab206/router").Router,
+): string {
   try {
-    const f = new URLSearchParams(window.location.search).get("filter");
+    const f =
+      router?.query("filter") ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("filter")
+        : null);
     if (f === "unbilled" || f === "billed" || f === "non" || f === "all") {
       return f;
     }
@@ -56,9 +61,9 @@ export function TimePage(props: {
   toaster: ToastController;
   router?: import("@lab206/router").Router;
 }) {
-  const { toaster } = props;
+  const { toaster, router } = props;
   const filter = signal("");
-  const billableFilter = signal(initialBillableFilter()); // all | unbilled | billed | non
+  const billableFilter = signal(initialBillableFilter(router)); // all | unbilled | billed | non
   const drawerOpen = signal(false);
   const confirmOpen = signal(false);
   const editingId = signal<string | null>(null);

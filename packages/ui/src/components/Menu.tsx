@@ -144,6 +144,7 @@ export const Menu = component((raw: MenuProps) => {
         open={open}
         onOpenChange={(v) => open.set(v)}
         align={props.align}
+        haspopup="menu"
         trigger={props.trigger}
       >
         <div

@@ -14,6 +14,8 @@ export type PopoverProps = {
   children?: unknown;
   /** Preferred alignment under the trigger */
   align?: "start" | "center" | "end";
+  /** `aria-haspopup` on the trigger (Menu passes `"menu"`). */
+  haspopup?: "dialog" | "menu" | "true";
   class?: MaybeReactive<string>;
 };
 
@@ -59,7 +61,8 @@ const styles = `
   transform: translateY(-6px) scale(0.98);
   transform-origin: bottom center;
 }
-.pu-popover--open .pu-popover__panel {
+.pu-popover--open .pu-popover__panel,
+.pu-popover__panel.is-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -67,7 +70,8 @@ const styles = `
 }
 @media (prefers-reduced-motion: reduce) {
   .pu-popover__panel { transition: none; transform: none; }
-  .pu-popover--open .pu-popover__panel { transform: none; }
+  .pu-popover--open .pu-popover__panel,
+  .pu-popover__panel.is-open { transform: none; }
 }
 `;
 
@@ -83,11 +87,15 @@ function ensureStyles(doc: Document = document) {
 /**
  * Anchored floating panel. Control with `open` + `onOpenChange`.
  * Escape + outside dismiss via shared `attachOverlay` (stacked with modals).
+ * Panel portals to `document.body` so nav overflow cannot clip it.
  */
 export const Popover = component((raw: PopoverProps) => {
   ensureStyles();
-  const props = mergeProps({ align: "start" as const }, raw) as ComponentProps<
-    PopoverProps & { align: "start" | "center" | "end" }
+  const props = mergeProps(
+    { align: "start" as const, haspopup: "dialog" as const },
+    raw,
+  ) as ComponentProps<
+    PopoverProps & { align: "start" | "center" | "end"; haspopup: "dialog" | "menu" | "true" }
   >;
 
   const isOpen = () => readBool(props.open as MaybeReactive<boolean>);
@@ -149,14 +157,26 @@ export const Popover = component((raw: PopoverProps) => {
   };
 
   effect(() => {
-    if (!isOpen()) return;
+    if (!isOpen()) {
+      panelEl?.classList.remove("is-open");
+      return;
+    }
     return attachOverlay({
       getRoot: () => rootEl,
       onClose: () => props.onOpenChange?.(false),
       escape: true,
       dismissOutside: true,
+      isInside: (node) => {
+        if (rootEl?.contains(node)) return true;
+        if (panelEl?.contains(node)) return true;
+        return false;
+      },
       onAttach: ({ doc, win }) => {
         ensureStyles(doc);
+        if (panelEl && panelEl.parentNode !== doc.body) {
+          doc.body.appendChild(panelEl);
+        }
+        panelEl?.classList.add("is-open");
         const onReposition = () => placePanel();
         const placeTimer = win.setTimeout(() => {
           placePanel();
@@ -170,6 +190,7 @@ export const Popover = component((raw: PopoverProps) => {
           win.removeEventListener("resize", onReposition);
           doc.removeEventListener("scroll", onReposition, true);
           win.removeEventListener("scroll", onReposition, true);
+          panelEl?.classList.remove("is-open");
         };
       },
     });
@@ -196,6 +217,8 @@ export const Popover = component((raw: PopoverProps) => {
         ref={(el) => {
           triggerEl = el;
         }}
+        aria-haspopup={() => props.haspopup}
+        aria-expanded={() => (isOpen() ? "true" : "false")}
         onClick={(e: MouseEvent) => {
           e.stopPropagation();
           props.onOpenChange?.(!isOpen());

@@ -776,7 +776,8 @@ describe("@lab206/ui", () => {
     trigger.click();
     flush();
     await new Promise((r) => setTimeout(r, 20));
-    const menu = root.querySelector('[role="menu"]') as HTMLElement;
+    // Popover panel portals to document.body (avoids nav overflow clipping)
+    const menu = document.querySelector('[role="menu"]') as HTMLElement;
     assert.ok(menu);
     const items = listRovingItems(menu, '[role="menuitem"]:not([disabled])');
     assert.ok(items.length >= 2);

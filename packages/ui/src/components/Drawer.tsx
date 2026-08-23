@@ -1,6 +1,6 @@
 import { effect } from "@lab206/core";
 import { component, mergeProps, type ComponentProps } from "@lab206/dom";
-import { cx } from "../utils.js";
+import { cx, puId } from "../utils.js";
 import { createStyleSheet } from "../styles.js";
 import { attachOverlay } from "../overlay.js";
 import { readBool, type MaybeReactive } from "../reactive.js";
@@ -121,6 +121,8 @@ export const Drawer = component((raw: DrawerProps) => {
   let rootEl: HTMLElement | null = null;
   let panelEl: HTMLElement | null = null;
 
+  const titleId = puId("pu-drawer-title");
+
   effect(() => {
     if (!isOpen()) return;
     return attachOverlay({
@@ -161,6 +163,7 @@ export const Drawer = component((raw: DrawerProps) => {
         class={() => cx("pu-drawer-panel", `pu-drawer-panel--${props.side}`)}
         role="dialog"
         aria-modal="true"
+        aria-labelledby={props.title ? titleId : undefined}
         ref={(el) => {
           panelEl = el;
         }}
@@ -168,7 +171,9 @@ export const Drawer = component((raw: DrawerProps) => {
         {(props.title || props.onClose) && (
           <div class="pu-drawer__head">
             {props.title ? (
-              <h2 class="pu-drawer__title">{props.title}</h2>
+              <h2 class="pu-drawer__title" id={titleId}>
+                {props.title}
+              </h2>
             ) : (
               <span />
             )}

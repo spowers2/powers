@@ -36,25 +36,34 @@ export function ContactPage(_props: { router: Router }) {
   const companyWebsite = signal("");
   const status = signal<Status>("idle");
   const errorMsg = signal("");
+  const nameTouched = signal(false);
+  const emailTouched = signal(false);
+  const messageTouched = signal(false);
 
   const nameError = () => {
+    if (!nameTouched()) return "";
     const n = name().trim();
     if (!n) return "Name is required";
     return "";
   };
   const emailError = () => {
+    if (!emailTouched()) return "";
     const e = email().trim();
     if (!e) return "Email is required";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return "Enter a valid email";
     return "";
   };
   const messageError = () => {
+    if (!messageTouched()) return "";
     if (!message().trim()) return "Message is required";
     return "";
   };
 
   async function onSubmit(e: Event) {
     e.preventDefault();
+    nameTouched.set(true);
+    emailTouched.set(true);
+    messageTouched.set(true);
     if (nameError() || emailError() || messageError()) {
       status.set("error");
       errorMsg.set("Please fix the fields above.");
@@ -102,6 +111,9 @@ export function ContactPage(_props: { router: Router }) {
       email.set("");
       subject.set("General");
       message.set("");
+      nameTouched.set(false);
+      emailTouched.set(false);
+      messageTouched.set(false);
     } catch {
       status.set("error");
       errorMsg.set(
@@ -160,6 +172,7 @@ export function ContactPage(_props: { router: Router }) {
                   bind={name}
                   autocomplete="name"
                   disabled={() => status() === "sending"}
+                  onBlur={() => nameTouched.set(true)}
                 />
               </Field>
 
@@ -169,6 +182,7 @@ export function ContactPage(_props: { router: Router }) {
                   bind={email}
                   autocomplete="email"
                   disabled={() => status() === "sending"}
+                  onBlur={() => emailTouched.set(true)}
                 />
               </Field>
 
@@ -185,6 +199,7 @@ export function ContactPage(_props: { router: Router }) {
                   bind={message}
                   rows={6}
                   disabled={() => status() === "sending"}
+                  onBlur={() => messageTouched.set(true)}
                 />
               </Field>
 

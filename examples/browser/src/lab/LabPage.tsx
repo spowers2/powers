@@ -493,7 +493,7 @@ mount(document.getElementById("root")!, () => <App />);
     const tips = document.createElement("p");
     tips.className = "lab-teach__tips";
     tips.innerHTML =
-      'Rules of thumb: pass <code>bind={signal}</code> (not <code>value={signal()}</code>) · read live values with <code>{() =&gt; x()}</code> · retheme via <code>tokens.css</code>.';
+      "Rules of thumb: pass <code>bind={signal}</code> (not <code>value={signal()}</code>) · read live values with <code>{() => x()}</code> · retheme via <code>tokens.css</code>.";
 
     teach.append(goal, cols, tips);
   }

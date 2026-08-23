@@ -222,7 +222,8 @@ body::before {
   background: var(--pu-color-surface-2);
 }
 
-.app-nav a.is-active {
+.app-nav a.is-active,
+.app-nav-more .pu-btn.is-active {
   color: var(--pu-color-accent);
   background: color-mix(in srgb, var(--pu-color-accent) 14%, transparent);
 }

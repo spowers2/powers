@@ -1,6 +1,6 @@
 # Getting started
 
-**Fastest path:** scaffold → install → first screen (&lt; 10 minutes).
+**Fastest path:** scaffold → install → first screen (under 10 minutes).
 
 ## 1. Create an app
 

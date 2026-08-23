@@ -63,11 +63,14 @@ function plusDays(n: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-function initialStatus(): string {
-  if (typeof window === "undefined") return "all";
+function initialStatus(router?: import("@lab206/router").Router): string {
   try {
-    const q = new URLSearchParams(window.location.search);
-    const s = q.get("status") || "all";
+    const s =
+      router?.query("status") ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("status")
+        : null) ??
+      "all";
     // outstanding = open AR (sent + overdue) — synthetic filter
     if (
       s === "outstanding" ||
@@ -89,9 +92,9 @@ export function InvoicesPage(props: {
   toaster: ToastController;
   router?: import("@lab206/router").Router;
 }) {
-  const { toaster } = props;
+  const { toaster, router } = props;
   const filter = signal("");
-  const statusFilter = signal(initialStatus());
+  const statusFilter = signal(initialStatus(router));
   const drawerOpen = signal(false);
   const confirmOpen = signal(false);
   const editingId = signal<string | null>(null);

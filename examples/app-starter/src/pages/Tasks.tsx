@@ -42,11 +42,20 @@ const PRIORITY_OPTS = [
   { value: "high", label: "High" },
 ];
 
-function initialTaskStatus(): string {
-  if (typeof window === "undefined") return "open";
+function initialTaskStatus(router?: Router): string {
   try {
-    const s = new URLSearchParams(window.location.search).get("status");
-    if (s === "open" || s === "all" || s === "todo" || s === "doing" || s === "done") {
+    const s =
+      router?.query("status") ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("status")
+        : null);
+    if (
+      s === "open" ||
+      s === "all" ||
+      s === "todo" ||
+      s === "doing" ||
+      s === "done"
+    ) {
       return s;
     }
   } catch {
@@ -61,7 +70,7 @@ export function TasksPage(props: {
 }) {
   const { toaster, router } = props;
   const filter = signal("");
-  const statusFilter = signal(initialTaskStatus());
+  const statusFilter = signal(initialTaskStatus(router));
   const drawerOpen = signal(false);
   const confirmOpen = signal(false);
   const editingId = signal<string | null>(null);

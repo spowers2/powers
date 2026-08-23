@@ -239,13 +239,15 @@ body::before {
   background: var(--pu-color-surface-2);
 }
 
-.app-nav a.is-active {
+.app-nav a.is-active,
+.app-nav-more .pu-btn.is-active {
   color: var(--pu-color-accent);
   background: color-mix(in srgb, var(--pu-color-accent) 12%, #fff);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
 }
 
-[data-pu-theme="dark"] .app-nav a.is-active {
+[data-pu-theme="dark"] .app-nav a.is-active,
+[data-pu-theme="dark"] .app-nav-more .pu-btn.is-active {
   background: color-mix(in srgb, var(--pu-color-accent) 16%, transparent);
 }
 

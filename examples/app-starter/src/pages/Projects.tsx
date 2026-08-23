@@ -47,16 +47,28 @@ const FILTER_OPTS = [
   ...STATUS_OPTS,
 ];
 
-function initialProjectFilter(): string {
-  if (typeof window === "undefined") return "all";
+function initialProjectFilter(router?: Router): string {
   try {
-    const q = new URLSearchParams(window.location.search);
-    const status = q.get("status");
-    if (status === "proposal" || status === "active" || status === "blocked" || status === "done") {
+    const status =
+      router?.query("status") ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("status")
+        : null);
+    if (
+      status === "proposal" ||
+      status === "active" ||
+      status === "blocked" ||
+      status === "done"
+    ) {
       return status;
     }
     // pipeline = open book of work (not done)
-    if (q.get("view") === "pipeline") return "pipeline";
+    const view =
+      router?.query("view") ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("view")
+        : null);
+    if (view === "pipeline") return "pipeline";
   } catch {
     /* ignore */
   }
@@ -69,7 +81,7 @@ export function ProjectsPage(props: {
 }) {
   const { toaster, router } = props;
   const filter = signal("");
-  const statusFilter = signal(initialProjectFilter());
+  const statusFilter = signal(initialProjectFilter(router));
   const drawerOpen = signal(false);
   const confirmOpen = signal(false);
   const editingId = signal<string | null>(null);
