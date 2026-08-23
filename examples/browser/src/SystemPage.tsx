@@ -410,7 +410,7 @@ export function SystemPage(props: {
                 </Stack>
                 <Text muted size="xs">
                   Uses <Code>data-pu-theme</Code> / <Code>data-pu-density</Code>{" "}
-                  on <Code>&lt;html&gt;</Code>.
+                  on <Code>{"<html>"}</Code>.
                 </Text>
               </Stack>
             </Card>

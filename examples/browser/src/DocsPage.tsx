@@ -420,9 +420,9 @@ mount(document.getElementById("root")!, () => (
 const emailError = () =>
   email().includes("@") ? "" : "Invalid email";
 
-&lt;Field label="Email" error={emailError}&gt;
-  &lt;Input bind={email} /&gt;
-&lt;/Field&gt;`}</pre>
+<Field label="Email" error={emailError}>
+  <Input bind={email} />
+</Field>`}</pre>
                 <Text size="sm" muted>
                   Lab:{" "}
                   <a class="docs-inline-link" href="/lab?recipe=form">
@@ -438,13 +438,13 @@ const emailError = () =>
             <Card>
               <Stack gap={2}>
                 <Text weight="semibold">Combobox</Text>
-                <pre class="docs-pre">{`&lt;Combobox
+                <pre class="docs-pre">{`<Combobox
   value={city}
   onChange={city.set}
   options={cities}
   loading={loading}
   emptyText="No cities match"
-/&gt;`}</pre>
+/>`}</pre>
                 <Text size="sm" muted>
                   System →{" "}
                   <a class="docs-inline-link" href="/system#sys-power">
