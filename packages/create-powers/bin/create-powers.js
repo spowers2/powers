@@ -60,7 +60,7 @@ function main() {
   if (fs.existsSync(pkgPath)) {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
     pkg.name = base.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "powers-app";
-    const ver = "^0.1.2";
+    const ver = "^0.1.3";
     pkg.dependencies = {
       ...(pkg.dependencies || {}),
       "@lab206/core": ver,
