@@ -34,7 +34,7 @@ pnpm design-kit:pro:pack
 | Starter screen maps (designlab206 / Hearth) | ✅ `pack/starters/` |
 | Token + catalog export snapshot | ✅ copied into zip `exports/` |
 | LICENSE-PRO | ✅ |
-| Private `.fig` file | ✉️ Fulfilled by email after purchase (duplicate kit + invite) |
+| Private Figma **Pro Patterns** file | 🛠 Build with [FIGMA_PRO_PATTERNS.md](./FIGMA_PRO_PATTERNS.md) · invite after sale |
 | Pro plugin features | ❌ Roadmap |
 
 **Indicative price:** Indie Pro **$149** one-time (subject to change) · Studio seats TBD.
@@ -51,3 +51,7 @@ pnpm design-kit:pro:pack
 | Commercial *code* license | Inquire — [docs/COMMERCIAL.md](../../docs/COMMERCIAL.md) |
 
 Sell Pro when: checkout live **or** you’re ready to email the zip + Figma invite manually.
+
+### Maintainer: build the Figma file
+
+Follow **[FIGMA_PRO_PATTERNS.md](./FIGMA_PRO_PATTERNS.md)** — page map, frame names, instance lists, build order, acceptance checklist, screenshot set for Docs `#pro`.

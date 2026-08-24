@@ -3,9 +3,10 @@
 ## What Pro customers get
 
 1. **This pack** (patterns, themes, handoff, exports) — always in the zip.  
-2. **Private Figma kit duplicate** (optional per purchase) — Scott duplicates the Powers UI Kit file into a private project and shares edit/view access with your Figma email.
+2. **Private Figma file: Powers Pro Patterns** — finished screens (instances only). See [FILE_STRUCTURE.md](./FILE_STRUCTURE.md).  
+3. **Optional:** private duplicate of the **Powers UI Kit** library source for your team.
 
-The public Community library remains free; Pro adds licensed patterns/themes + optional private file so you’re not depending only on the public Community file.
+The public Community library remains free; Pro adds licensed patterns/themes + private pattern file.
 
 ## After purchase
 
