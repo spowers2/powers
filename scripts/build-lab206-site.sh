@@ -82,6 +82,10 @@ URLs after DNS propagates:
   https://lab206.com/hearth/     Hearth        (routes: /hearth/#/…)
 
 Do not upload node_modules or the Powers monorepo — only this folder.
+
+If the browser tab still shows a WordPress (or old host) icon after upload:
+  delete any leftover favicon.ico / favicon.png in the document root
+  that is NOT from this zip, then hard-refresh (or clear site data).
 TXT
 
 echo "→ Zipping $ZIP"
