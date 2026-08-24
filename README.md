@@ -8,7 +8,7 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 |---|---|
 | **Try it** | [lab206.com](https://lab206.com) — Lab · Docs · System · product demos |
 | **Figma** | Library **Powers UI Kit** · [Community plugin](https://www.figma.com/community/plugin/1671016490810398688) |
-| **License** | [BSL-1.1](./LICENSE) (**source-available**, not OSI open source) · [Commercial](./LICENSE-COMMERCIAL.md) |
+| **License** | [BSL-1.1](./LICENSE) (**source-available**, not OSI open source) · [Commercial inquire](https://lab206.com/contact?subject=Commercial%20license) · [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md) |
 | **npm** | `@lab206/*@0.1.2` on the public registry — see [docs/NPM.md](./docs/NPM.md) |
 
 ---

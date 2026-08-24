@@ -21,39 +21,34 @@ Buy (or request) a commercial license if you want to:
 - Redistribute Powers under terms that conflict with BSL  
 - Get a **warranty, indemnity, or priority support** for your company  
 
-## How to buy / inquire
+## How to buy / inquire (live)
 
-Until a storefront exists, contact the copyright holder:
+**Preferred:** [lab206.com/contact](https://lab206.com/contact?subject=Commercial%20license) — subject **Commercial license**.
 
-- **Email:** [scott@lab206.com](mailto:scott@lab206.com?subject=Powers%20commercial%20license)  
-- **GitHub:** [@spowers2](https://github.com/spowers2) / repo [spowers2/powers](https://github.com/spowers2/powers) · [open an issue](https://github.com/spowers2/powers/issues/new)  
-- Use subject line: **Powers commercial license**
+**Email:** [scott@lab206.com](mailto:scott@lab206.com?subject=Powers%20commercial%20license)  
+**GitHub:** [spowers2/powers](https://github.com/spowers2/powers) · [open an issue](https://github.com/spowers2/powers/issues/new)  
 
-Expect to discuss: company size, use case, support needs.
+Buyer guide: [docs/COMMERCIAL.md](./docs/COMMERCIAL.md).
 
-### Suggested tiers (not binding — set live prices later)
+### Indicative tiers (not a binding quote)
 
-| Tier | Who | Rough idea |
-|---|---|---|
-| **Indie** | Solo / small team, need invoice or indemnity lite | One-time or annual, low hundreds USD |
-| **Studio** | Agency redistributing internal kits, multi-project | Annual, mid hundreds–low thousands |
-| **Enterprise** | Large org, competing-offering waiver, SLA support | Custom quote |
+| Tier | Who | Indicative | Includes |
+|---|---|---|---|
+| **Indie** | Solo / small team | **$299 / year** | Confirmation letter, invoice, best-effort email support |
+| **Studio** | Agency / multi-seat | **$1,499 / year** | Above + multi-project language, priority email |
+| **Enterprise** | Large org / competing waiver / SLA | **Custom** | Negotiated agreement |
 
-Most **app builders never pay** under BSL. Revenue comes from Pro extras + commercial exceptions + support.
+Self-serve checkout (LemonSqueezy / Gumroad) may be added later; inquire flow stays the same.
 
-## Powers Pro (main cash product)
+Most **app builders never pay** under BSL. Revenue comes from commercial exceptions, support, and (later) Pro design packs.
 
-Optional paid packages under a **separate proprietary license** even while core stays BSL:
+## Powers Pro (design pack)
 
-- Extra components / patterns  
-- Premium themes / Figma kit ([design-kit/pro/](./design-kit/pro/))  
-- Starter templates beyond the free demos  
-- Hosted Lab / design-token tooling (later SaaS)
+Optional paid **design** deliverables under a separate EULA ([design-kit/pro/LICENSE-PRO.md](./design-kit/pro/LICENSE-PRO.md)).
 
-Sell via LemonSqueezy, Gumroad, or Stripe. That is the practical path to “a little cash” without banning normal app builders.
+**Status:** scaffold only — **not sold yet** (no zip / private Figma file to deliver). See [design-kit/pro/README.md](./design-kit/pro/README.md).
 
-**Offer sheet (who pays / what they get):** [docs/OFFER.md](./docs/OFFER.md).  
-**Put a finished app online (static):** [docs/DEPLOY.md](./docs/DEPLOY.md).
+**Offer sheet:** [docs/OFFER.md](./docs/OFFER.md).
 
 ## Trademark
 
@@ -61,4 +56,4 @@ The name **Powers** remains reserved — see [docs/TRADEMARKS.md](./docs/TRADEMA
 
 ---
 
-*Not legal advice. Have counsel review before large deals or a public launch.*
+*Not legal advice. Have counsel review before large deals.*

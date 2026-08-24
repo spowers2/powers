@@ -714,6 +714,13 @@ mount(document.getElementById("app")!, () => (
                 <Button size="lg" variant="soft" onClick={go("/lab")}>
                   Practice in Lab
                 </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  onClick={go(SITE.contact.commercialHref)}
+                >
+                  Commercial license
+                </Button>
               </Stack>
             </div>
           </div>
@@ -725,6 +732,7 @@ mount(document.getElementById("app")!, () => (
           <div class="lp-footer-inner">
             <span>
               {SITE.name} · powered by {SITE.systemName} · BSL-1.1
+              (source-available)
             </span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
@@ -739,6 +747,13 @@ mount(document.getElementById("app")!, () => (
                 onClick={go("/system")}
               >
                 System
+              </button>
+              <button
+                type="button"
+                class="lp-footer-link"
+                onClick={go(SITE.contact.commercialHref)}
+              >
+                Licensing
               </button>
               <a
                 class="lp-footer-link"

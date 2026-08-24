@@ -41,6 +41,8 @@ export const SITE = {
     label: "Contact",
     /** In-app form route (no mailto / mail app) */
     href: "/contact",
+    /** Pre-filled commercial inquire */
+    commercialHref: "/contact?subject=Commercial%20license",
     /** Shown on the form; PHP delivers here */
     email: "scott@lab206.com",
     githubProfile: "https://github.com/spowers2",

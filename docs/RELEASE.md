@@ -79,8 +79,10 @@ Use this before the first public npm publish / website launch.
 4. [x] **`pnpm publish:packages`** → `@lab206/*@0.1.2` (use pnpm so `workspace:*` rewrites)
 5. [x] Tag **`v0.1.2`** on GitHub
 6. [x] Announce npm install in release notes + [ANNOUNCE.md](./ANNOUNCE.md)
-7. [ ] Optional: LemonSqueezy / Gumroad SKU for commercial / Pro
-8. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
+7. [x] Commercial inquire path live — [COMMERCIAL.md](./COMMERCIAL.md) · contact form  
+8. [ ] Optional: LemonSqueezy / Gumroad self-serve SKU  
+9. [ ] Powers Pro deliverable before selling Pro  
+10. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 
 Dry run: `pnpm publish:dry-run` · Docs: [NPM.md](./NPM.md)
 

@@ -21,16 +21,41 @@ import { SITE } from "./siteConfig.js";
 const SUBJECTS = [
   { value: "General", label: "General" },
   { value: "Commercial license", label: "Commercial license" },
+  { value: "Powers Pro (notify me)", label: "Powers Pro (notify me)" },
   { value: "Support", label: "Support" },
   { value: "Other", label: "Other" },
 ];
 
+const SUBJECT_VALUES = new Set(SUBJECTS.map((s) => s.value));
+
+function initialSubject(router?: Router): string {
+  try {
+    const raw =
+      router?.query("subject") ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("subject")
+        : null);
+    if (!raw) return "General";
+    const decoded = decodeURIComponent(raw.replace(/\+/g, " "));
+    if (SUBJECT_VALUES.has(decoded)) return decoded;
+    // Allow short aliases from links
+    const lower = decoded.toLowerCase();
+    if (lower.includes("commercial") || lower.includes("license")) {
+      return "Commercial license";
+    }
+    if (lower.includes("pro")) return "Powers Pro (notify me)";
+  } catch {
+    /* ignore */
+  }
+  return "General";
+}
+
 type Status = "idle" | "sending" | "ok" | "error";
 
-export function ContactPage(_props: { router: Router }) {
+export function ContactPage(props: { router: Router }) {
   const name = signal("");
   const email = signal("");
-  const subject = signal("General");
+  const subject = signal(initialSubject(props.router));
   const message = signal("");
   /** Honeypot — leave empty; bots often fill it */
   const companyWebsite = signal("");
@@ -146,6 +171,21 @@ export function ContactPage(_props: { router: Router }) {
             </a>
             .
           </Text>
+          {() =>
+            subject() === "Commercial license" ? (
+              <Alert tone="info" title="Commercial license">
+                Most app builders stay free under BSL. Use this subject for a
+                competing-kit waiver, invoice, or Studio/Enterprise terms.
+                Indicative: Indie $299/yr · Studio $1,499/yr · Enterprise
+                custom. Include company size and use case.
+              </Alert>
+            ) : subject() === "Powers Pro (notify me)" ? (
+              <Alert tone="info" title="Powers Pro">
+                The Pro design pack is not for sale yet (no downloadable kit).
+                Leave your email and we’ll notify you when it’s ready.
+              </Alert>
+            ) : null
+          }
         </Stack>
 
         {() =>

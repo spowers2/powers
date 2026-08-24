@@ -48,16 +48,16 @@ Normal app developers stay free under BSL Additional Use Grant → adoption with
 ## Going public checklist (protection-minded)
 
 - [x] Relicense sole-owned code to **BSL-1.1** with clear Competing Offering grant  
-- [x] Commercial contact path documented  
+- [x] Commercial contact path documented + [COMMERCIAL.md](./COMMERCIAL.md) inquire guide  
 - [x] Trademark policy for the name  
 - [x] README / CONTRIBUTING / RELEASE / footer say **BSL / source-available**  
 - [x] package.json `license` fields = `BUSL-1.1`  
-- [ ] Repo still **private** until you flip visibility (do this last)  
-- [x] Offer clarity draft — [OFFER.md](./OFFER.md)  
-- [x] Pro kit packaging outline — [design-kit/pro/](../design-kit/pro/)  
+- [x] Repo **public** · npm `@lab206/*` published  
+- [x] Offer sheet — [OFFER.md](./OFFER.md)  
+- [x] Pro kit packaging outline — [design-kit/pro/](../design-kit/pro/) (not sold yet)  
 - [x] Friendly static deploy path — [DEPLOY.md](./DEPLOY.md)  
-- [ ] Optional: simple LemonSqueezy / Gumroad license SKU + live prices  
-- [ ] **Do not** publish to npm until license + pricing story match
+- [ ] Optional: LemonSqueezy / Gumroad self-serve SKU  
+- [ ] Pro design deliverable before selling Pro  
 
 ---
 

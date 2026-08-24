@@ -17,7 +17,8 @@ Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab
 | **Put an app online (static host)** | [DEPLOY.md](./DEPLOY.md) · `pnpm deploy:zip` |
 | **lab206.com → LiveCode** | [LAB206_LIVECODE.md](./LAB206_LIVECODE.md) · `pnpm build:lab206` |
 | **npm install / publish** | [NPM.md](./NPM.md) |
-| **What we sell (offer draft)** | [OFFER.md](./OFFER.md) |
+| **Commercial license (inquire)** | [COMMERCIAL.md](./COMMERCIAL.md) · [lab206.com/contact](https://lab206.com/contact?subject=Commercial%20license) |
+| **What we sell** | [OFFER.md](./OFFER.md) |
 | **Government / public sector** | [GOVERNMENT.md](./GOVERNMENT.md) · [SECURITY.md](../SECURITY.md) |
 | **Golden path (~15 min first screen)** | [GOLDEN_PATH.md](./GOLDEN_PATH.md) |
 | Stable API freeze notes | [STABLE.md](./STABLE.md) |
@@ -34,7 +35,7 @@ Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab
 | Public release checklist | [RELEASE.md](./RELEASE.md) |
 | Ordered product plan | [ROADMAP.md](./ROADMAP.md) |
 | DX strategy (how we win) | [DX_STRATEGY.md](./DX_STRATEGY.md) |
-| **License & commercial model** | [LICENSING.md](./LICENSING.md) · [TRADEMARKS.md](./TRADEMARKS.md) |
+| **License & commercial model** | [LICENSING.md](./LICENSING.md) · [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md) · [TRADEMARKS.md](./TRADEMARKS.md) |
 
 **Recommended path for a new developer**
 

@@ -54,6 +54,8 @@ Commercial *code* license (competing offering): [LICENSE-COMMERCIAL.md](../../LI
 |---|---|
 | Free library + plugin | Live / Community path |
 | This Pro folder | **Scaffold** — define zip contents before sale |
-| Storefront | Not live |
+| Commercial *code* license | **Inquire live** — [docs/COMMERCIAL.md](../../docs/COMMERCIAL.md) |
+| Pro storefront | Not live — do not sell Pro until deliverable exists |
 
-**Do not** sell until: price + checkout + deliverable zip/link + LICENSE-PRO reviewed.
+**Do not** sell Pro until: price + checkout + deliverable zip/link + LICENSE-PRO reviewed.  
+Commercial license inquiries are separate and do **not** require Pro assets.

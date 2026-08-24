@@ -33,6 +33,7 @@ const DOC_SECTIONS = [
   "api-animate",
   "api-router",
   "public-sector",
+  "licensing",
   "next",
 ] as const;
 
@@ -173,6 +174,7 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("api-animate", "animate")}
           {tocBtn("api-router", "router")}
           {tocBtn("public-sector", "Public sector")}
+          {tocBtn("licensing", "Licensing")}
           {tocBtn("next", "What next")}
         </nav>
 
@@ -722,6 +724,33 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
             <Text size="sm" muted>
               Practical notes: <Code>docs/GOVERNMENT.md</Code> ·{" "}
               <Code>docs/DEPLOY.md</Code> · <Code>SECURITY.md</Code>.
+            </Text>
+          </Stack>
+        </Section>
+
+        <Section id="licensing" title="License & commercial">
+          <Stack gap={3}>
+            <Alert tone="info" title="BSL-1.1 · source-available">
+              Building apps and client work with Powers is free. Shipping a
+              competing UI kit / design system based on Powers needs a
+              commercial license.
+            </Alert>
+            <Text size="sm" muted>
+              Indicative commercial tiers: Indie <strong>$299/yr</strong> ·
+              Studio <strong>$1,499/yr</strong> · Enterprise custom. Powers Pro
+              (paid Figma pack) is not for sale yet.
+            </Text>
+            <Stack direction="row" gap={2} wrap>
+              <Button onClick={go(SITE.contact.commercialHref)}>
+                Inquire — commercial license
+              </Button>
+              <Button variant="soft" onClick={go(SITE.contact.href)}>
+                Contact
+              </Button>
+            </Stack>
+            <Text size="sm" muted>
+              Details: <Code>docs/COMMERCIAL.md</Code> ·{" "}
+              <Code>LICENSE-COMMERCIAL.md</Code> · <Code>docs/OFFER.md</Code>
             </Text>
           </Stack>
         </Section>
