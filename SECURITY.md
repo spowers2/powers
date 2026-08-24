@@ -18,7 +18,7 @@ Do not open a public issue with exploit details.
 ## Supply chain
 
 - Prefer `pnpm install --frozen-lockfile` in CI.
-- Public packages: `@lab206/*` and `create-powers` on npm (use **0.1.2+**). Prefer `pnpm publish` so `workspace:*` deps rewrite.
+- Public packages: `@lab206/*` and `create-powers` on npm (use **0.1.4+** only; 0.1.0–0.1.2 are deprecated). Prefer `pnpm publish` so `workspace:*` deps rewrite.
 - Keep shipping lockfile discipline; plan an SBOM (e.g. CycloneDX) for downstream compliance teams.
 
 ---

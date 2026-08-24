@@ -66,7 +66,7 @@ if [[ -f "$DEST/package.json" ]] && command -v node >/dev/null 2>&1; then
     const inExamples = process.argv[3] === '1';
     const j = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
     j.name = inExamples ? '@lab206/' + base : base;
-    const ver = '^0.1.2';
+    const ver = '^0.1.4';
     const ws = 'workspace:*';
     const dep = inExamples ? ws : ver;
     j.dependencies = j.dependencies || {};

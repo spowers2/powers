@@ -55,7 +55,10 @@ import { defineConfig } from "vite";
 export default defineConfig({
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@lab206/dom",
+    jsxImportSource: "@lab206/dom", // not React
+  },
+  optimizeDeps: {
+    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
   },
 });
 ```

@@ -304,10 +304,38 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
         </Section>
 
         <Section id="first-app" title="3. First app (copy-paste)">
+          <Alert tone="info" title="Prefer the scaffold">
+            <Code>pnpm create powers my-app</Code> wires Vite + TS for you. If
+            you hand-roll, you need <strong>both</strong> configs below —{" "}
+            <Code>react-jsx</Code> is only the transform name; do{" "}
+            <strong>not</strong> install React. Use <Code>@lab206/*@0.1.4+</Code>
+            .
+          </Alert>
           <Text muted size="sm">
-            Vite / TS: set{" "}
-            <Code>{`"jsx": "react-jsx", "jsxImportSource": "@lab206/dom"`}</Code>{" "}
-            in <Code>tsconfig</Code>.
+            <Code>tsconfig.json</Code> — TypeScript:
+          </Text>
+          <pre class="docs-pre">{`{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@lab206/dom"
+  }
+}`}</pre>
+          <Text muted size="sm">
+            <Code>vite.config.ts</Code> — Vite does not read tsconfig for JSX:
+          </Text>
+          <pre class="docs-pre">{`import { defineConfig } from "vite";
+
+export default defineConfig({
+  esbuild: {
+    jsx: "automatic",
+    jsxImportSource: "@lab206/dom",
+  },
+  optimizeDeps: {
+    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
+  },
+});`}</pre>
+          <Text muted size="sm">
+            App entry:
           </Text>
           <pre class="docs-pre">{`import "@lab206/ui/theme.css";
 import { signal } from "@lab206/core";

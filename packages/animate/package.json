@@ -1,18 +1,18 @@
 {
   "name": "@lab206/animate",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Signal-native animation for Powers \u2014 tweens, springs, interruptible, a11y-aware.",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./src/index.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./gsap": {
-      "types": "./src/gsap.ts",
+      "types": "./dist/gsap.d.ts",
       "import": "./dist/gsap.js",
       "default": "./dist/gsap.js"
     }

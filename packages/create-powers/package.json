@@ -1,6 +1,6 @@
 {
   "name": "create-powers",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Scaffold a Powers + Vite app (pnpm create powers my-app)",
   "type": "module",
   "license": "BUSL-1.1",

@@ -32,16 +32,21 @@ Wire JSX once:
 ```
 
 ```ts
-// vite.config.ts
+// vite.config.ts — required (Vite ignores tsconfig jsxImportSource)
 import { defineConfig } from "vite";
 
 export default defineConfig({
   esbuild: {
     jsx: "automatic",
-    jsxImportSource: "@lab206/dom",
+    jsxImportSource: "@lab206/dom", // not React — do not install react
+  },
+  optimizeDeps: {
+    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
   },
 });
 ```
+
+Use **`@lab206/*@0.1.4+`**. Older tags break Vite (`React is not defined`). See [NPM.md](./NPM.md) troubleshooting.
 
 ```tsx
 import "@lab206/ui/theme.css";

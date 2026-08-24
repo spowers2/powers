@@ -1,13 +1,13 @@
 {
   "name": "@lab206/core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Fine-grained reactivity primitives for Powers \u2014 signals, computed, effects, store, resource, ownership.",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./src/index.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }

@@ -1,5 +1,7 @@
 # Publishing & installing `@lab206/*`
 
+**Supported release: `0.1.4+`.** Do not use `0.1.0`–`0.1.2` (broken Vite / `workspace:*` publishes).
+
 ## Scaffold (recommended)
 
 ```bash
@@ -8,9 +10,9 @@ pnpm create powers my-app
 cd my-app && pnpm install && pnpm dev
 ```
 
-Uses the `create-powers` package (embeds the Vite template with `@lab206/*@^0.1.2`).
+This embeds a Vite app with `jsxImportSource: "@lab206/dom"` already set. Prefer this over hand-wiring.
 
-## Install into an existing app
+## Install into an existing Vite app
 
 ```bash
 pnpm add @lab206/core @lab206/dom @lab206/ui
@@ -18,14 +20,11 @@ pnpm add @lab206/core @lab206/dom @lab206/ui
 pnpm add @lab206/router @lab206/animate @lab206/ssr
 ```
 
-```tsx
-import "@lab206/ui/theme.css";
-import { signal } from "@lab206/core";
-import { mount } from "@lab206/dom";
-import { Button, createTheme } from "@lab206/ui";
-```
+### Required: Vite + TypeScript JSX
 
-Vite / TSX:
+`react-jsx` is only the **transform mode name** — you do **not** install React.
+
+**`tsconfig.json`:**
 
 ```json
 {
@@ -36,31 +35,63 @@ Vite / TSX:
 }
 ```
 
+**`vite.config.ts`:** (Vite does **not** read jsxImportSource from tsconfig)
+
+```ts
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  esbuild: {
+    jsx: "automatic",
+    jsxImportSource: "@lab206/dom",
+  },
+  optimizeDeps: {
+    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
+  },
+});
+```
+
+```tsx
+import "@lab206/ui/theme.css";
+import { signal } from "@lab206/core";
+import { mount } from "@lab206/dom";
+import { Button, createTheme } from "@lab206/ui";
+
+createTheme("light").bind();
+```
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| `React is not defined` / `react/jsx-runtime` | You’re on **&lt;0.1.3** or Vite JSX isn’t set to `@lab206/dom`. Upgrade to **0.1.4+**, set `esbuild.jsxImportSource`, delete `node_modules/.vite`, restart. |
+| `Unsupported URL Type "workspace:"` | You installed a broken **0.1.1** publish. Use **0.1.4+**. |
+| Types / JSX weirdness | Ensure both **tsconfig** and **vite** jsxImportSource are `@lab206/dom`. |
+
 ## Current release
 
-**0.1.2** on npm under the `lab206` org. Use `pnpm publish` (not bare `npm publish`) so `workspace:*` deps rewrite to real versions.
+**0.1.4** on npm (`lab206` org) + `create-powers@0.1.4`.  
+Publish with **`pnpm publish`** so `workspace:*` rewrites to real versions — never bare `npm publish` from a workspace package.
 
 ## Maintainers — publish
 
 ```bash
-# dry run (no upload)
 pnpm publish:dry-run
-
-# real publish (npm login / granular token with bypass 2FA; account must own @lab206)
-pnpm publish:packages
+pnpm publish:packages   # needs npm auth / granular token with bypass 2FA
 ```
 
-pnpm rewrites `workspace:*` dependencies to real versions on publish. Prefer `pnpm publish` over `npm publish` for that rewrite.
+Do **not** add `"development": "./src/..."` to package `exports` — that made Vite compile package TSX as React. Monorepo HMR uses `examples/powers-vite-alias.mjs` instead.
 
-**License on npm:** BUSL-1.1 (source-available). Say that in the release notes — not “open source.”
+**License on npm:** BUSL-1.1 (source-available).
 
-## Package map (0.1.2)
+## Package map (0.1.4)
 
 | Package | Role |
 |---|---|
 | `@lab206/core` | signals, store, resource |
-| `@lab206/dom` | mount, JSX |
+| `@lab206/dom` | mount, JSX (`jsxImportSource`) |
 | `@lab206/ui` | design system |
 | `@lab206/router` | routing |
 | `@lab206/animate` | motion (`@lab206/animate/gsap` optional) |
 | `@lab206/ssr` | string SSR + islands |
+| `create-powers` | `pnpm create powers` scaffold |

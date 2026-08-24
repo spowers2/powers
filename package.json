@@ -20,6 +20,7 @@
     "bench": "pnpm --filter @lab206/core bench",
     "size": "pnpm --filter @lab206/core size && pnpm --filter @lab206/animate size && pnpm --filter @lab206/dom size && pnpm --filter @lab206/router size && pnpm --filter @lab206/ui size",
     "check": "pnpm build && pnpm typecheck && pnpm test && pnpm size",
+    "smoke:consumer": "bash scripts/smoke-consumer.sh",
     "ci": "pnpm run check",
     "example:counter": "pnpm --filter @lab206/example-counter start",
     "example:kitchen-sink": "pnpm --filter @lab206/example-kitchen-sink start",
