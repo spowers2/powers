@@ -1,0 +1,21 @@
+/* Powers Pro — Warm theme overlay
+ * Import AFTER @lab206/ui/theme.css
+ */
+:root {
+  --pu-brand-500: #9a3412;
+  --pu-brand-600: #7c2d12;
+  --pu-brand-400: #c2410c;
+  --pu-color-accent: #ea580c;
+  --pu-color-accent-fg: #fff7ed;
+  --pu-sage-500: #65a30d;
+  --pu-color-focus: #fb923c;
+}
+
+[data-pu-theme="dark"] {
+  --pu-brand-500: #fdba74;
+  --pu-brand-600: #fed7aa;
+  --pu-brand-400: #fb923c;
+  --pu-color-accent: #fb923c;
+  --pu-color-accent-fg: #431407;
+  --pu-color-focus: #fdba74;
+}

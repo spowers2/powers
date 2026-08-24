@@ -1,0 +1,22 @@
+{
+  "name": "powers-pro-warm",
+  "version": "0.1.0",
+  "description": "Sand + ember accent.",
+  "light": {
+    "color/brand/500": "#9a3412",
+    "color/brand/600": "#7c2d12",
+    "color/brand/400": "#c2410c",
+    "color/accent": "#ea580c",
+    "color/accent-fg": "#fff7ed",
+    "color/success": "#65a30d",
+    "color/focus": "#fb923c"
+  },
+  "dark": {
+    "color/brand/500": "#fdba74",
+    "color/brand/600": "#fed7aa",
+    "color/brand/400": "#fb923c",
+    "color/accent": "#fb923c",
+    "color/accent-fg": "#431407",
+    "color/focus": "#fdba74"
+  }
+}

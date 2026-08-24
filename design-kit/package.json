@@ -11,6 +11,7 @@
     "build:components": "node --import tsx scripts/build-components.ts",
     "figma:audit": "node --import tsx scripts/figma-audit.ts",
     "plugin:build": "pnpm --filter @lab206/figma-plugin build",
+    "pro:pack": "node pro/scripts/build-pro-pack.mjs",
     "check": "node --import tsx scripts/build-tokens.ts --check && node --import tsx scripts/build-components.ts --check"
   },
   "devDependencies": {

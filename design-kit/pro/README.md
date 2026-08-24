@@ -11,40 +11,33 @@ Core monorepo stays **BUSL-1.1**. Pro is a **separate paid design deliverable** 
 | Asset | Where |
 |---|---|
 | Published Figma library **Powers UI Kit** | Figma Assets (file key in [FIGMA.md](../FIGMA.md)) |
-| Community plugin **Powers Design Kit** | **Live** — [Community](https://www.figma.com/community/plugin/1671016490810398688) · [plugin/](../plugin/) |
+| Community plugin **Powers Design Kit** | **Live** — [Community](https://www.figma.com/community/plugin/1671016490810398688) |
 | Token exports | `tokens/export/` |
 | Component catalog specs | `components/export/` |
-| Code Connect templates | `packages/ui/src/code-connect/` (Org/Enterprise to publish) |
-
-Enough to design with the library and build apps under BSL.
 
 ---
 
-## Pro (paid SKU — scaffold)
+## Pro (paid SKU) — deliverable ready
 
-| Asset | Notes |
+Build the customer zip:
+
+```bash
+pnpm design-kit:pro:pack
+# → design-kit/pro/dist/powers-pro-design-kit-0.1.0.zip
+```
+
+| Asset | In pack? |
 |---|---|
-| Licensed `.fig` / share link | Full kit file under Pro EULA (not “public Community file forever”) |
-| Pattern pack | Extra screens beyond **99 Patterns** (auth, settings, admin list, billing) |
-| Pro plugin features | Reserved: private sync, stub presets, audit exports (not built yet) |
-| Token / brand packs | Extra themes beyond dual/instrument |
-| PDF / handoff pack | Catalog + quality checklist for client delivery |
-| License | [LICENSE-PRO.md](./LICENSE-PRO.md) |
+| Pattern recipes (auth, settings, admin, billing, dashboard, empty) | ✅ `pack/patterns/` |
+| Theme packs slate / warm / mono (CSS + token JSON) | ✅ `pack/themes/` |
+| Handoff + quality gates | ✅ `pack/handoff/` |
+| Starter screen maps (designlab206 / Hearth) | ✅ `pack/starters/` |
+| Token + catalog export snapshot | ✅ copied into zip `exports/` |
+| LICENSE-PRO | ✅ |
+| Private `.fig` file | ✉️ Fulfilled by email after purchase (duplicate kit + invite) |
+| Pro plugin features | ❌ Roadmap |
 
-**Not in Pro (on purpose):** “host any website like Squarespace.” Hosting demos on your server is marketing; optional “Publish” is a later perk.
-
----
-
-## Pricing sketch (not live)
-
-| Tier | Who |
-|---|---|
-| Indie | Solo designer / freelancer |
-| Studio | Agency seats |
-| Enterprise | Custom + support |
-
-Checkout: LemonSqueezy / Gumroad / Stripe when prices are set.  
-Commercial *code* license (competing offering): [LICENSE-COMMERCIAL.md](../../LICENSE-COMMERCIAL.md).
+**Indicative price:** Indie Pro **$149** one-time (subject to change) · Studio seats TBD.
 
 ---
 
@@ -52,10 +45,9 @@ Commercial *code* license (competing offering): [LICENSE-COMMERCIAL.md](../../LI
 
 | Item | State |
 |---|---|
-| Free library + plugin | Live / Community path |
-| This Pro folder | **Scaffold** — define zip contents before sale |
-| Commercial *code* license | **Inquire live** — [docs/COMMERCIAL.md](../../docs/COMMERCIAL.md) |
-| Pro storefront | Not live — do not sell Pro until deliverable exists |
+| Free library + plugin | Live |
+| Pro pack zip | **Buildable** — `pnpm design-kit:pro:pack` |
+| Storefront | Not live — inquire / notify via contact |
+| Commercial *code* license | Inquire — [docs/COMMERCIAL.md](../../docs/COMMERCIAL.md) |
 
-**Do not** sell Pro until: price + checkout + deliverable zip/link + LICENSE-PRO reviewed.  
-Commercial license inquiries are separate and do **not** require Pro assets.
+Sell Pro when: checkout live **or** you’re ready to email the zip + Figma invite manually.

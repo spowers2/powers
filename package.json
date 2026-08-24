@@ -37,6 +37,7 @@
     "design-kit:check": "pnpm --filter @lab206/design-kit check",
     "design-kit:figma-audit": "pnpm --filter @lab206/design-kit figma:audit",
     "design-kit:plugin:build": "pnpm --filter @lab206/figma-plugin build",
+    "design-kit:pro:pack": "pnpm --filter @lab206/design-kit pro:pack",
     "code-connect:parse": "figma connect parse",
     "code-connect:publish": "figma connect publish",
     "code-connect:unpublish": "figma connect unpublish --label=Powers",

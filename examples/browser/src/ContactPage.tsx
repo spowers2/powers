@@ -181,8 +181,10 @@ export function ContactPage(props: { router: Router }) {
               </Alert>
             ) : subject() === "Powers Pro (notify me)" ? (
               <Alert tone="info" title="Powers Pro">
-                The Pro design pack is not for sale yet (no downloadable kit).
-                Leave your email and we’ll notify you when it’s ready.
+                Pro pack zip is ready (patterns, themes, handoff). Checkout is
+                not self-serve yet — leave your email and we’ll follow up.
+                Indicative: Indie Pro $149 one-time. Private Figma invite after
+                purchase.
               </Alert>
             ) : null
           }

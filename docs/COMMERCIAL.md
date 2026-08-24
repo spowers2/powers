@@ -32,11 +32,18 @@ Full policy: [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md).
 
 ---
 
-## Powers Pro (design pack) — not for sale yet
+## Powers Pro (design pack)
 
-Pro Figma / pattern packs are **scaffolded** (`design-kit/pro/`) but **not deliverable**. Do not expect a Pro download after payment until that pack ships.
+**Deliverable:** `powers-pro-design-kit` zip — patterns, Pro themes (slate/warm/mono), handoff docs, catalog/token exports.  
+Private Figma kit invite is emailed after purchase.
 
-Ask about Pro on the contact form (subject **Other** / mention Pro) if you want to be notified.
+**Checkout:** not self-serve yet. Inquire or ask to be notified:
+
+→ [lab206.com/contact?subject=Powers%20Pro](https://lab206.com/contact?subject=Powers%20Pro)
+
+**Indicative:** Indie Pro **$149** one-time (subject to change).
+
+Maintainers build the zip with `pnpm design-kit:pro:pack`.
 
 ---
 

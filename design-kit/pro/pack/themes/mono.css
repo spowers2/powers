@@ -1,0 +1,21 @@
+/* Powers Pro — Mono theme overlay
+ * Import AFTER @lab206/ui/theme.css
+ */
+:root {
+  --pu-brand-500: #171717;
+  --pu-brand-600: #0a0a0a;
+  --pu-brand-400: #404040;
+  --pu-color-accent: #171717;
+  --pu-color-accent-fg: #fafafa;
+  --pu-sage-500: #525252;
+  --pu-color-focus: #737373;
+}
+
+[data-pu-theme="dark"] {
+  --pu-brand-500: #e5e5e5;
+  --pu-brand-600: #fafafa;
+  --pu-brand-400: #a3a3a3;
+  --pu-color-accent: #fafafa;
+  --pu-color-accent-fg: #0a0a0a;
+  --pu-color-focus: #d4d4d4;
+}

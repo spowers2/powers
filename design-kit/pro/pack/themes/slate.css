@@ -1,0 +1,21 @@
+/* Powers Pro — Slate theme overlay
+ * Import AFTER @lab206/ui/theme.css
+ */
+:root {
+  --pu-brand-500: #475569;
+  --pu-brand-600: #334155;
+  --pu-brand-400: #64748b;
+  --pu-color-accent: #0ea5e9;
+  --pu-color-accent-fg: #f8fafc;
+  --pu-sage-500: #10b981;
+  --pu-color-focus: #38bdf8;
+}
+
+[data-pu-theme="dark"] {
+  --pu-brand-500: #94a3b8;
+  --pu-brand-600: #cbd5e1;
+  --pu-brand-400: #64748b;
+  --pu-color-accent: #38bdf8;
+  --pu-color-accent-fg: #0f172a;
+  --pu-color-focus: #7dd3fc;
+}

@@ -46,7 +46,7 @@ Most **app builders never pay** under BSL. Revenue comes from commercial excepti
 
 Optional paid **design** deliverables under a separate EULA ([design-kit/pro/LICENSE-PRO.md](./design-kit/pro/LICENSE-PRO.md)).
 
-**Status:** scaffold only — **not sold yet** (no zip / private Figma file to deliver). See [design-kit/pro/README.md](./design-kit/pro/README.md).
+**Status:** zip **buildable** (`pnpm design-kit:pro:pack`) — patterns, themes, handoff. Private Figma fulfilled by email. Self-serve checkout pending. See [design-kit/pro/README.md](./design-kit/pro/README.md).
 
 **Offer sheet:** [docs/OFFER.md](./docs/OFFER.md).
 

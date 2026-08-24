@@ -1,0 +1,22 @@
+{
+  "name": "powers-pro-mono",
+  "version": "0.1.0",
+  "description": "Near-achromatic high contrast.",
+  "light": {
+    "color/brand/500": "#171717",
+    "color/brand/600": "#0a0a0a",
+    "color/brand/400": "#404040",
+    "color/accent": "#171717",
+    "color/accent-fg": "#fafafa",
+    "color/success": "#525252",
+    "color/focus": "#737373"
+  },
+  "dark": {
+    "color/brand/500": "#e5e5e5",
+    "color/brand/600": "#fafafa",
+    "color/brand/400": "#a3a3a3",
+    "color/accent": "#fafafa",
+    "color/accent-fg": "#0a0a0a",
+    "color/focus": "#d4d4d4"
+  }
+}

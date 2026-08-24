@@ -736,16 +736,19 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               commercial license.
             </Alert>
             <Text size="sm" muted>
-              Indicative commercial tiers: Indie <strong>$299/yr</strong> ·
-              Studio <strong>$1,499/yr</strong> · Enterprise custom. Powers Pro
-              (paid Figma pack) is not for sale yet.
+              Indicative: commercial Indie <strong>$299/yr</strong> · Studio{" "}
+              <strong>$1,499/yr</strong> · Enterprise custom. Powers Pro design
+              pack <strong>$149</strong> one-time (zip ready; checkout pending).
             </Text>
             <Stack direction="row" gap={2} wrap>
               <Button onClick={go(SITE.contact.commercialHref)}>
                 Inquire — commercial license
               </Button>
-              <Button variant="soft" onClick={go(SITE.contact.href)}>
-                Contact
+              <Button
+                variant="soft"
+                onClick={go("/contact?subject=Powers%20Pro%20(notify%20me)")}
+              >
+                Powers Pro
               </Button>
             </Stack>
             <Text size="sm" muted>

@@ -33,12 +33,12 @@ Powers is a **product UI system** — Figma library + `@lab206/ui` — for peopl
 
 Indicative: Indie **$299/yr** · Studio **$1,499/yr** · Enterprise custom.
 
-### Paid later — Powers Pro design pack
+### Powers Pro design pack
 
 | SKU | Status | Notes |
 |---|---|---|
-| **Pro Design Kit** | **Not for sale yet** | Scaffold only — [design-kit/pro/](../design-kit/pro/) |
-| **Paid starters** | Later | designlab206 / Hearth class templates |
+| **Pro Design Kit** | **Zip ready** · checkout pending | `pnpm design-kit:pro:pack` · inquire via contact · indicative **$149** |
+| **Paid starters** | Later | Full project templates as licensed downloads |
 | **Hosted Lab** | Later | Marketing demos stay free on lab206.com |
 
 ---
@@ -55,9 +55,10 @@ Indicative: Indie **$299/yr** · Studio **$1,499/yr** · Enterprise custom.
 - [x] Repo public BSL · npm `@lab206/*`  
 - [x] Commercial inquire path (contact form + docs)  
 - [x] Indicative Indie / Studio prices published as non-binding  
-- [ ] LemonSqueezy / Gumroad self-serve (optional next)  
-- [ ] Pro zip / private Figma deliverable  
-- [ ] Counsel review of LICENSE-COMMERCIAL for large deals  
+- [x] Pro pack zip buildable (`design-kit:pro:pack`)  
+- [ ] LemonSqueezy / Gumroad self-serve (Pro + optional license SKUs)  
+- [ ] Private Figma fulfillment checklist (per sale)  
+- [ ] Counsel review of LICENSE-COMMERCIAL / LICENSE-PRO for large deals  
 
 ---
 

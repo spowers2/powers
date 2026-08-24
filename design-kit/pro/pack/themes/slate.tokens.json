@@ -1,0 +1,22 @@
+{
+  "name": "powers-pro-slate",
+  "version": "0.1.0",
+  "description": "Cool gray product UI — map these to Figma Variables or CSS.",
+  "light": {
+    "color/brand/500": "#475569",
+    "color/brand/600": "#334155",
+    "color/brand/400": "#64748b",
+    "color/accent": "#0ea5e9",
+    "color/accent-fg": "#f8fafc",
+    "color/success": "#10b981",
+    "color/focus": "#38bdf8"
+  },
+  "dark": {
+    "color/brand/500": "#94a3b8",
+    "color/brand/600": "#cbd5e1",
+    "color/brand/400": "#64748b",
+    "color/accent": "#38bdf8",
+    "color/accent-fg": "#0f172a",
+    "color/focus": "#7dd3fc"
+  }
+}
