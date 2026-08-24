@@ -34,16 +34,26 @@ Full policy: [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md).
 
 ## Powers Pro (design pack)
 
-**Deliverable:** `powers-pro-design-kit` zip — patterns, Pro themes (slate/warm/mono), handoff docs, catalog/token exports.  
-Private Figma kit invite is emailed after purchase.
+**Public contents list:** [lab206.com/docs#pro](https://lab206.com/docs#pro)
 
-**Checkout:** not self-serve yet. Inquire or ask to be notified:
+**Deliverable zip includes:**
 
-→ [lab206.com/contact?subject=Powers%20Pro](https://lab206.com/contact?subject=Powers%20Pro)
+- Pattern recipes — auth, settings, admin list, billing, dashboard, empty states  
+- Themes — Slate, Warm, Mono (CSS + token JSON)  
+- Handoff — client delivery + quality gates  
+- Starter maps — designlab206-class + Hearth-class  
+- Exports — token + component catalog snapshot  
+- LICENSE-PRO  
+
+**After purchase:** optional private Figma kit invite (emailed).
+
+**Checkout:** not self-serve yet. Inquire:
+
+→ [lab206.com/contact?subject=Powers%20Pro](https://lab206.com/contact?subject=Powers%20Pro%20(notify%20me))
 
 **Indicative:** Indie Pro **$149** one-time (subject to change).
 
-Maintainers build the zip with `pnpm design-kit:pro:pack`.
+Maintainers: `pnpm design-kit:pro:pack`
 
 ---
 

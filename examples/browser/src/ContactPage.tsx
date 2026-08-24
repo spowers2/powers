@@ -181,10 +181,14 @@ export function ContactPage(props: { router: Router }) {
               </Alert>
             ) : subject() === "Powers Pro (notify me)" ? (
               <Alert tone="info" title="Powers Pro">
-                Pro pack zip is ready (patterns, themes, handoff). Checkout is
-                not self-serve yet — leave your email and we’ll follow up.
-                Indicative: Indie Pro $149 one-time. Private Figma invite after
-                purchase.
+                See the full contents list on{" "}
+                <a class="docs-inline-link" href="/docs#pro">
+                  Docs → Powers Pro
+                </a>
+                : pattern recipes, Slate/Warm/Mono themes, handoff checklist,
+                starter maps, catalog exports, plus optional private Figma
+                invite. Indicative $149 one-time · checkout not self-serve yet —
+                leave your email and we’ll follow up.
               </Alert>
             ) : null
           }

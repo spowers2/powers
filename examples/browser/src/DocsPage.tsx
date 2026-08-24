@@ -34,6 +34,7 @@ const DOC_SECTIONS = [
   "api-router",
   "public-sector",
   "licensing",
+  "pro",
   "next",
 ] as const;
 
@@ -175,6 +176,7 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("api-router", "router")}
           {tocBtn("public-sector", "Public sector")}
           {tocBtn("licensing", "Licensing")}
+          {tocBtn("pro", "Pro pack")}
           {tocBtn("next", "What next")}
         </nav>
 
@@ -736,25 +738,109 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
               commercial license.
             </Alert>
             <Text size="sm" muted>
-              Indicative: commercial Indie <strong>$299/yr</strong> · Studio{" "}
-              <strong>$1,499/yr</strong> · Enterprise custom. Powers Pro design
-              pack <strong>$149</strong> one-time (zip ready; checkout pending).
+              Indicative commercial: Indie <strong>$299/yr</strong> · Studio{" "}
+              <strong>$1,499/yr</strong> · Enterprise custom. See{" "}
+              <a class="docs-inline-link" href="#pro">
+                Powers Pro
+              </a>{" "}
+              for the paid design pack.
             </Text>
             <Stack direction="row" gap={2} wrap>
               <Button onClick={go(SITE.contact.commercialHref)}>
                 Inquire — commercial license
               </Button>
-              <Button
-                variant="soft"
-                onClick={go("/contact?subject=Powers%20Pro%20(notify%20me)")}
-              >
-                Powers Pro
+              <Button variant="soft" onClick={() => sectionNav.scrollTo("pro")}>
+                What’s in Pro
               </Button>
             </Stack>
             <Text size="sm" muted>
               Details: <Code>docs/COMMERCIAL.md</Code> ·{" "}
-              <Code>LICENSE-COMMERCIAL.md</Code> · <Code>docs/OFFER.md</Code>
+              <Code>LICENSE-COMMERCIAL.md</Code>
             </Text>
+          </Stack>
+        </Section>
+
+        <Section id="pro" title="Powers Pro — what’s included">
+          <Stack gap={4}>
+            <Text muted>
+              Paid <strong>design + handoff</strong> pack (separate from free
+              BSL code on npm). Indicative <strong>$149</strong> one-time ·
+              checkout not self-serve yet — inquire and we’ll follow up.
+            </Text>
+            <Grid cols={2} gap={3}>
+              <Card>
+                <Stack gap={2}>
+                  <Text weight="semibold">Pattern recipes</Text>
+                  <Text size="sm" muted>
+                    Figma build specs from kit instances: sign-in, sign-up,
+                    forgot password, settings hub, admin list, billing /
+                    invoices, dashboard, empty / error / loading shells.
+                  </Text>
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={2}>
+                  <Text weight="semibold">Pro themes</Text>
+                  <Text size="sm" muted>
+                    Drop-in overlays beyond free dual/instrument:{" "}
+                    <strong>Slate</strong>, <strong>Warm</strong>,{" "}
+                    <strong>Mono</strong> — CSS for apps + token JSON for Figma
+                    Variables.
+                  </Text>
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={2}>
+                  <Text weight="semibold">Handoff pack</Text>
+                  <Text size="sm" muted>
+                    Client delivery checklist and quality gates so design → eng
+                    stays aligned with Powers primitives.
+                  </Text>
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={2}>
+                  <Text weight="semibold">Starter maps</Text>
+                  <Text size="sm" muted>
+                    Screen → route maps for designlab206-class and Hearth-class
+                    product UIs (matches the live demos).
+                  </Text>
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={2}>
+                  <Text weight="semibold">Catalog exports</Text>
+                  <Text size="sm" muted>
+                    Snapshot of token exports + component catalog for offline
+                    reference in the zip.
+                  </Text>
+                </Stack>
+              </Card>
+              <Card>
+                <Stack gap={2}>
+                  <Text weight="semibold">Private Figma (after purchase)</Text>
+                  <Text size="sm" muted>
+                    Optional kit file duplicate + invite to your Figma email —
+                    fulfilled manually with the zip, not inside Community.
+                  </Text>
+                </Stack>
+              </Card>
+            </Grid>
+            <Text size="sm" muted>
+              <strong>Not included:</strong> hosting / “publish my site,” or a
+              Pro-only Figma plugin build (roadmap). Core <Code>@lab206/*</Code>{" "}
+              stays free under BSL.
+            </Text>
+            <Stack direction="row" gap={2} wrap>
+              <Button
+                onClick={go("/contact?subject=Powers%20Pro%20(notify%20me)")}
+              >
+                Ask about Pro
+              </Button>
+              <Button variant="soft" onClick={go(SITE.contact.commercialHref)}>
+                Commercial license instead
+              </Button>
+            </Stack>
           </Stack>
         </Section>
 
