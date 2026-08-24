@@ -55,3 +55,7 @@ jobs:
             exit 1
           fi
           echo "dist clean of @power-ui"
+
+      # Catches Vite/JSX consumer footguns (e.g. React is not defined) before publish.
+      - name: Consumer scaffold smoke
+        run: pnpm smoke:consumer
