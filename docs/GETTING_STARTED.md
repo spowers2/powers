@@ -65,8 +65,9 @@ More: [NPM.md](./NPM.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md) · [FORMS.md](./F
 
 | Goal | Link |
 |---|---|
+| **Five words** (`signal` … `resource`) | [LEARN.md](./LEARN.md) — designers + developers |
 | Lab Start here (~10 min) | https://lab206.com/lab?recipe=hello |
-| Docs (API + patterns) | https://lab206.com/docs |
+| Docs (API + patterns) | https://lab206.com/docs · [#reactivity](https://lab206.com/docs#reactivity) |
 | System (every component) | https://lab206.com/system |
 | designlab206 demo | https://lab206.com/workspace/ |
 | Hearth demo | https://lab206.com/hearth/ |

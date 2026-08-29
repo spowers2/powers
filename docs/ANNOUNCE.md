@@ -6,7 +6,9 @@ Copy/paste and trim for X, GitHub Discussions, Discord, newsletter, etc.
 
 ## Short (social)
 
-**Powers is out** — a fine-grained UI kit with a design system built in (not React + Tailwind soup).
+UI and UX super**Powers** for teams that ship — Powers.
+
+A fine-grained UI kit with a design system built in (not React + Tailwind soup).
 
 ```bash
 pnpm add @lab206/core @lab206/dom @lab206/ui

@@ -2,6 +2,8 @@
 
 Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 
+**Before Day 1 (10 min):** read [LEARN.md](./LEARN.md) — the five words (`signal`, `computed`, `effect`, `store`, `resource`) in plain English for designers and developers. Same industry names; no new jargon.
+
 ---
 
 ## Day 1 — First polished screen (~30–60 min)
@@ -10,7 +12,8 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 
 | Step | Where |
 |---|---|
-| 1. Three rules | Demo `/docs#rules` |
+| 0. Five words | [LEARN.md](./LEARN.md) (Rosetta stone) |
+| 1. Three rules | Demo `/docs#rules` · live values refresher `/docs#reactivity` |
 | 2. Hello signal | Lab `/lab?recipe=hello` |
 | 3. Form with `bind` | Lab `/lab?recipe=form` |
 | 4. Settings cookbook | Lab `/lab?recipe=settings` |
@@ -18,7 +21,7 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 
 **You should know**
 
-- `signal` / `.set` / `count()`
+- `signal` = live value · `.set` / `.update` · `count()`
 - `{() => count()}` vs snapshot `{count()}`
 - `<Input bind={email} />` + `Field`
 - `import "@lab206/ui/theme.css"` + `createTheme().bind()`
@@ -40,9 +43,9 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 
 **You should know**
 
-- `computed` for filtered lists
+- `computed` = formula (e.g. filtered lists)
 - `Table` + `Empty` + search field
-- Dialog open signal pattern
+- Dialog open **signal** (live boolean) pattern
 - Deep links `?status=` via `router.query` / remount on search
 
 ---
@@ -56,7 +59,7 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 | New component | [COMPONENTS.md](./COMPONENTS.md) |
 | Tokens / styling layers | [STYLING.md](./STYLING.md) |
 | Motion language | [MOTION.md](./MOTION.md) |
-| Fine-grained runtime | [LEARN.md](./LEARN.md) · [FOUNDATION.md](./FOUNDATION.md) |
+| Reactivity (five words) | [LEARN.md](./LEARN.md) · [FOUNDATION.md](./FOUNDATION.md) |
 | Animate / GSAP | [ANIMATION.md](./ANIMATION.md) · Lab `gsap` |
 | SSR islands | [SSR.md](./SSR.md) |
 | Ownership / effects | [ARCHITECTURE.md](./ARCHITECTURE.md) |
@@ -65,16 +68,17 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 
 - `createStyleSheet` + token variables
 - When CSS `Transition` vs `@lab206/animate`
-- `resource` for async data
+- `resource` = loaded data (loading / error / ready)
 - Dev warnings: snapshot values, double outlet, missing theme
 
 ---
 
 ## Design / UX track (parallel)
 
-1. `/system#sys-play` — brand playground (accent, radius, density, dark)  
-2. Export brand CSS → hand to eng  
-3. Pattern states on System cards (default / soft / danger / empty)  
-4. Open Lab from any card to tweak copy without a local repo  
+1. [LEARN.md](./LEARN.md) — **Rosetta stone only** (same five words eng uses)  
+2. `/system#sys-play` — brand playground (accent, radius, density, dark)  
+3. Export brand CSS → hand to eng  
+4. Pattern states on System cards (default / soft / danger / empty)  
+5. Open Lab from any card to tweak copy without a local repo  
 
-No need to learn signals deeply — stay on System + tokens until a pattern needs interactivity.
+You do not need to write `effect` or `resource` on Day 1. You *do* want the plain-English meanings so handoff and Lab recipes are not a foreign language.

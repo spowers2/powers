@@ -28,7 +28,7 @@ Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab
 | Day 1 / 2 / 30 learning path | [LEARN_PATH.md](./LEARN_PATH.md) |
 | Forms & validation helpers | [FORMS.md](./FORMS.md) |
 | Motion language | [MOTION.md](./MOTION.md) |
-| Learn the runtime in ~10 minutes | [LEARN.md](./LEARN.md) |
+| **Five words: signal → resource (designers + developers)** | [LEARN.md](./LEARN.md) |
 | Styling: tokens, components, utilities | [STYLING.md](./STYLING.md) |
 | Design system primitives reference | [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
 | Interactive coding playground | [POWER_LAB.md](./POWER_LAB.md) + demo `/lab` |
@@ -40,10 +40,17 @@ Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab
 **Recommended path for a new developer**
 
 1. `pnpm create powers my-app` → first screen locally  
-2. [lab206.com/docs](https://lab206.com/docs) — three rules, API  
-3. [lab206.com/lab](https://lab206.com/lab?recipe=hello) — Start here recipes  
-4. [lab206.com/system](https://lab206.com/system) — brand playground + every component  
-5. Day 1 / 2 / 30: [LEARN_PATH.md](./LEARN_PATH.md)
+2. [LEARN.md](./LEARN.md) — five words (`signal` … `resource`) in plain English  
+3. [lab206.com/docs](https://lab206.com/docs) — three rules, API  
+4. [lab206.com/lab](https://lab206.com/lab?recipe=hello) — Start here recipes  
+5. [lab206.com/system](https://lab206.com/system) — brand playground + every component  
+6. Day 1 / 2 / 30: [LEARN_PATH.md](./LEARN_PATH.md)
+
+**Recommended path for a designer / UX**
+
+1. [lab206.com/system](https://lab206.com/system) — tokens + components  
+2. [LEARN.md](./LEARN.md) — Rosetta stone only (10 min; same words eng uses)  
+3. Open Lab from any System card · Figma Community plugin
 
 **Scaffold**
 
@@ -122,7 +129,15 @@ signal → computed → effect → store → resource
   @lab206/ui  (tokens · primitives · utilities)
 ```
 
-One library for **behavior and look**. External CSS frameworks are optional escape hatches, not required.
+| Code | Means |
+|---|---|
+| `signal` | Live value |
+| `computed` | Formula |
+| `effect` | Reaction |
+| `store` | Small model |
+| `resource` | Loaded data |
+
+Full dual-audience explainer: [LEARN.md](./LEARN.md). One library for **behavior and look**. External CSS frameworks are optional escape hatches, not required.
 
 ---
 

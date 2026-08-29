@@ -30,6 +30,8 @@ Then: System (**Copy JSX**) · Docs · product demos on lab206.com.
 2. Live JSX needs an accessor: `{() => count()}` or pass the **signal** into controls  
 3. Prefer primitives + `tokens.css` — don’t invent a second design system  
 
+**Plain English:** `signal` = live value · `computed` = formula · `effect` = reaction · `store` = small model · `resource` = loaded data. Full Rosetta: [`LEARN.md`](./LEARN.md).
+
 Runtime contracts (why forms stay mounted): [`FOUNDATION.md`](./FOUNDATION.md).
 
 ---

@@ -1,6 +1,6 @@
 # API reference (cheat sheet)
 
-**For new developers.** Full narrative: [LEARN.md](./LEARN.md).  
+**For new developers.** Plain-English five words (designers + developers): [LEARN.md](./LEARN.md).  
 **In the demo app:** open **`/docs`** (same content, interactive).
 
 ---

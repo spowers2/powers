@@ -123,7 +123,7 @@ pnpm design-kit:build && pnpm design-kit:plugin:build
 
 | Doc | Topic |
 |---|---|
-| [LEARN.md](./docs/LEARN.md) | 10-minute mental model |
+| [LEARN.md](./docs/LEARN.md) | Five words (`signal` … `resource`) for designers + developers |
 | [OFFER.md](./docs/OFFER.md) | Free vs paid (commercial / Pro) |
 | [GOVERNMENT.md](./docs/GOVERNMENT.md) | Public sector as one audience among several |
 | [DEPLOY.md](./docs/DEPLOY.md) | Static hosting |

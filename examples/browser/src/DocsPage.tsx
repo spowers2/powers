@@ -24,6 +24,7 @@ const DOC_SECTIONS = [
   "paths",
   "start",
   "rules",
+  "reactivity",
   "first-app",
   "packages",
   "patterns",
@@ -111,10 +112,13 @@ export function DocsPage(props: { router: Router }) {
             How to use Powers
           </Text>
           <Text muted>
-            This page is the developer entry point: install, three rules, a
-            first app, then a package-by-package API cheat sheet. Lab and System
-            are for practice and browsing components — start here if you’re new.
-            Designers: install{" "}
+            Install, three rules, the five reactivity words in plain English,
+            a first app, then the API cheat sheet. Same terms for designers and
+            developers —{" "}
+            <Code>signal</Code>, <Code>computed</Code>, <Code>effect</Code>,{" "}
+            <Code>store</Code>, <Code>resource</Code> — explained so an outsider
+            gets them the first time. Lab and System are for practice. Designers:
+            also install{" "}
             <a
               href={SITE.figma.pluginUrl}
               target="_blank"
@@ -122,11 +126,11 @@ export function DocsPage(props: { router: Router }) {
             >
               {SITE.figma.pluginLabel}
             </a>{" "}
-            from Figma Community. Questions about Powers? Use the{" "}
+            from Figma Community. Questions?{" "}
             <a class="docs-inline-link" href={SITE.contact.href}>
               {SITE.contact.label}
             </a>{" "}
-            form, or open a{" "}
+            or a{" "}
             <a
               class="docs-inline-link"
               href={SITE.contact.githubIssues}
@@ -166,6 +170,7 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("paths", "Paths")}
           {tocBtn("start", "Start")}
           {tocBtn("rules", "Rules")}
+          {tocBtn("reactivity", "Five words")}
           {tocBtn("first-app", "First app")}
           {tocBtn("packages", "Packages")}
           {tocBtn("patterns", "Patterns")}
@@ -205,11 +210,19 @@ export function DocsPage(props: { router: Router }) {
               <Stack gap={2}>
                 <Text weight="semibold">Design / UX</Text>
                 <Text size="sm" muted>
-                  Tokens playground · density · Open Lab from any System card.
-                  Retheme without learning signals.
+                  1){" "}
+                  <a class="docs-inline-link" href="#reactivity">
+                    Five words
+                  </a>{" "}
+                  (10 min) · 2) System tokens · 3) Open Lab from any card. Same
+                  vocabulary as eng — no mystery jargon.
                 </Text>
-                <Button size="sm" variant="soft" onClick={go("/system#sys-color")}>
-                  Open System tokens
+                <Button
+                  size="sm"
+                  variant="soft"
+                  onClick={() => sectionNav.scrollTo("reactivity")}
+                >
+                  Read five words
                 </Button>
               </Stack>
             </Card>
@@ -275,8 +288,8 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
               <Stack gap={2}>
                 <Text weight="semibold">1. Signals are functions</Text>
                 <Text size="sm" muted>
-                  Read with <Code>count()</Code>. Write with{" "}
-                  <Code>count.set(1)</Code> or{" "}
+                  A <strong>signal</strong> is a live value. Read with{" "}
+                  <Code>count()</Code>. Write with <Code>count.set(1)</Code> or{" "}
                   <Code>{"count.update(n => n + 1)"}</Code>.
                 </Text>
               </Stack>
@@ -301,6 +314,79 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
               </Stack>
             </Card>
           </Grid>
+        </Section>
+
+        <Section id="reactivity" title="2b. Five words (designers + developers)">
+          <Text muted>
+            Industry names Powers uses in code — explained so you get them the
+            first time. Full write-up in the repo:{" "}
+            <Code>docs/LEARN.md</Code>.
+          </Text>
+          <Text size="sm" muted>
+            One sentence: a <strong>signal</strong> holds a changing value; a{" "}
+            <strong>computed</strong> is a formula; an <strong>effect</strong> is
+            a reaction; a <strong>store</strong> groups related values; a{" "}
+            <strong>resource</strong> is data that loads. Powers updates only
+            what depended on the change.
+          </Text>
+          <div class="docs-table-wrap">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>In code</th>
+                  <th>Plain English</th>
+                  <th>Designer analogy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Code>signal</Code>
+                  </td>
+                  <td>Live value</td>
+                  <td>Prototype variable / updating component property</td>
+                </tr>
+                <tr>
+                  <td>
+                    <Code>computed</Code>
+                  </td>
+                  <td>Formula</td>
+                  <td>
+                    Spreadsheet cell · <Code>fullName = first + last</Code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Code>effect</Code>
+                  </td>
+                  <td>Reaction</td>
+                  <td>Prototype: when X changes → do Y</td>
+                </tr>
+                <tr>
+                  <td>
+                    <Code>store</Code>
+                  </td>
+                  <td>Small model</td>
+                  <td>Form state bag (name, email, errors)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <Code>resource</Code>
+                  </td>
+                  <td>Loaded data</td>
+                  <td>Loading → content or error</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <Text size="sm" muted>
+            Keep the code names in PRs and Lab. Use the plain-English column when
+            onboarding someone new. Practice:{" "}
+            <a class="docs-inline-link" href="/lab?recipe=hello">
+              Lab hello
+            </a>
+            .
+          </Text>
         </Section>
 
         <Section id="first-app" title="3. First app (copy-paste)">
@@ -517,34 +603,38 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
 
         <Section id="api-core" title="@lab206/core">
           <Text muted size="sm">
-            Fine-grained graph. No DOM.
+            Fine-grained graph. No DOM. Plain meanings:{" "}
+            <a class="docs-inline-link" href="#reactivity">
+              Five words
+            </a>
+            .
           </Text>
           <ApiTable
             rows={[
               {
                 name: "signal",
                 sig: "signal(0) → count() · .set · .update · .peek",
-                note: "Reactive value. Call to read (tracks).",
+                note: "Live value. Call to read (tracks).",
               },
               {
                 name: "computed",
                 sig: "computed(() => a() + b())",
-                note: "Cached derived value; pure only.",
+                note: "Formula — cached derived value; pure only.",
               },
               {
                 name: "effect",
                 sig: "effect(() => { …; return cleanup })",
-                note: "Runs when deps change. No dep arrays.",
+                note: "Reaction when deps change. No dep arrays.",
               },
               {
                 name: "store",
                 sig: "store({ count: 0, name: 'Ada' })",
-                note: "Per-field signals + .set batch.",
+                note: "Small model — per-field signals + .set batch.",
               },
               {
                 name: "resource",
                 sig: "resource(source, fetcher)",
-                note: "Async data: loading / error / value.",
+                note: "Loaded data: loading / error / value.",
               },
               {
                 name: "batch / flush",
