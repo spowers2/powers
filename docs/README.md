@@ -2,7 +2,7 @@
 
 **For public users and contributors.** Start here and follow the path that matches your goal.
 
-Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab206/*@0.1.4+`.
+Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab206/*@0.1.5+`.
 
 ---
 

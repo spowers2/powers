@@ -1,3 +1,4 @@
+import { isolateTracking } from "@lab206/core";
 import type { Child } from "./h.js";
 import { h } from "./h.js";
 import { show } from "./show.js";
@@ -19,8 +20,14 @@ export type Component<P extends object = Record<string, never>> = (
 /**
  * Declare a function component with **reactive props**.
  *
- * Setup runs **once** per instance. Reading `props.x` inside effects /
- * JSX reactive scopes tracks the parent's signal or accessor.
+ * Setup runs once per **mount invocation**. Reads during setup use
+ * **`isolateTracking`** so they do not subscribe the parent consumer (a Dialog
+ * `{() => …}` slot does not remount when setup seeds state from a store).
+ * Nested effects and `{() => …}` still track normally. Live updates use those
+ * nested bindings / `bind` / effects — not parent remounts.
+ *
+ * Reading `props.x` inside effects / JSX reactive scopes still tracks the
+ * parent's signal or accessor.
  *
  * @example
  * ```tsx
@@ -44,7 +51,7 @@ export function component<P extends object>(
     const props = createProps(
       (raw ?? {}) as P & { children?: unknown },
     ) as ComponentProps<P>;
-    return setup(props);
+    return isolateTracking(() => setup(props));
   };
   Object.defineProperty(Comp, "name", {
     value: setup.name || "Component",

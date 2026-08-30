@@ -114,4 +114,89 @@ describe("jsx-runtime", () => {
     await tick();
     assert.equal(root.querySelector("li")?.textContent, "two");
   });
+
+  it("function child does not remount when child setup reads/writes a store (Dialog forms)", async () => {
+    // Same footgun as Dialog body: {() => <Note id={selected().id} />} where
+    // Note seeds from notes() and writes notes on input. Setup must not
+    // subscribe the bindDynamic slot (FOUNDATION tracking isolation).
+    const selected = signal<{ id: string } | null>({ id: "a" });
+    const notes = signal<Record<string, string>>({});
+    let inputCalls = 0;
+
+    function SavedNote(props: { id: string }) {
+      const id = props.id;
+      const draft = signal(notes()[id] || "");
+      const el = document.createElement("textarea");
+      el.dataset.id = id;
+      el.value = draft();
+      el.addEventListener("input", () => {
+        inputCalls++;
+        const v = el.value;
+        draft.set(v);
+        notes.update((n) => ({ ...n, [id]: v }));
+      });
+      return el;
+    }
+
+    const shell = jsx("div", {
+      children: () => {
+        const p = selected();
+        if (!p) return null;
+        return jsx(SavedNote as never, { id: p.id });
+      },
+    }) as HTMLElement;
+    root.appendChild(shell);
+
+    const ta1 = root.querySelector("textarea") as HTMLTextAreaElement;
+    assert.ok(ta1);
+    ta1.value = "a";
+    ta1.dispatchEvent(new Event("input", { bubbles: true }));
+    await tick();
+
+    assert.equal(inputCalls, 1, "input listener should run");
+    const ta2 = root.querySelector("textarea") as HTMLTextAreaElement;
+    assert.equal(ta2, ta1, "textarea node must stay mounted across keystrokes");
+    assert.equal(notes()["a"], "a");
+
+    ta2.value = "ab";
+    ta2.dispatchEvent(new Event("input", { bubbles: true }));
+    await tick();
+
+    assert.equal(inputCalls, 2);
+    const ta3 = root.querySelector("textarea") as HTMLTextAreaElement;
+    assert.equal(ta3, ta1, "still same node after second keystroke");
+    assert.equal(notes()["a"], "ab");
+    assert.equal(ta3.value, "ab");
+  });
+
+  it("function child still remounts when parent remount key changes", async () => {
+    const selected = signal({ id: "a" });
+    const notes = signal<Record<string, string>>({ a: "from-a", b: "from-b" });
+
+    function SavedNote(props: { id: string }) {
+      const draft = signal(notes()[props.id] || "");
+      return jsx("textarea", {
+        "data-id": props.id,
+        value: draft(),
+      });
+    }
+
+    const shell = jsx("div", {
+      children: () =>
+        jsx(SavedNote as never, { id: selected().id }),
+    }) as HTMLElement;
+    root.appendChild(shell);
+
+    const taA = root.querySelector("textarea") as HTMLTextAreaElement;
+    assert.equal(taA.getAttribute("data-id"), "a");
+    assert.equal(taA.value, "from-a");
+
+    selected.set({ id: "b" });
+    await tick();
+
+    const taB = root.querySelector("textarea") as HTMLTextAreaElement;
+    assert.notEqual(taB, taA, "new selected id should remount body");
+    assert.equal(taB.getAttribute("data-id"), "b");
+    assert.equal(taB.value, "from-b");
+  });
 });

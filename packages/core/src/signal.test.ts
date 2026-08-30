@@ -8,6 +8,7 @@ import {
   flush,
   createRoot,
   untrack,
+  isolateTracking,
 } from "./index.js";
 
 // node:test runs files as ESM; give microtasks a tick when needed
@@ -256,6 +257,33 @@ describe("createRoot", () => {
     n.set(1);
     await tick();
     assert.equal(runs, 2);
+  });
+
+  it("isolateTracking blocks parent consumer but nested effects still track", async () => {
+    const a = signal(0);
+    const b = signal(0);
+    let outerRuns = 0;
+    let innerRuns = 0;
+
+    effect(() => {
+      outerRuns++;
+      isolateTracking(() => {
+        a(); // must not subscribe outer
+        effect(() => {
+          b();
+          innerRuns++;
+        });
+      });
+    });
+
+    assert.equal(outerRuns, 1);
+    assert.equal(innerRuns, 1);
+    a.set(1);
+    await tick();
+    assert.equal(outerRuns, 1, "parent must not re-run when setup-only signal changes");
+    b.set(1);
+    await tick();
+    assert.equal(innerRuns, 2, "nested effect must still track");
   });
 
   it("nested createRoot does not leak tracking to outer root's parent effect", async () => {

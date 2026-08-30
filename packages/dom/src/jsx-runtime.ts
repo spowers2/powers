@@ -8,6 +8,7 @@
  * Function components receive **reactive props** via `createProps`
  * (unless they already wrapped themselves with `component()`).
  */
+import { isolateTracking } from "@lab206/core";
 import { h, type Props } from "./h.js";
 import { Fragment, normalizeChildren } from "./fragment.js";
 import { createProps } from "./props.js";
@@ -56,8 +57,15 @@ function create(
     // Always pass through createProps so bare function components get
     // reactive field access. component() also wraps — double-wrap is OK
     // (outer raw object, inner Proxy of raw; component's createProps runs first).
+    //
+    // Setup under isolateTracking: construction reads (e.g. seeding a draft
+    // from a store) do not subscribe a parent bindDynamic / Dialog slot —
+    // that remount wiped focused inputs on every keystroke. Nested effects
+    // and `{() => …}` still track (unlike untrack).
     const reactive = createProps(p as Record<string, unknown>);
-    const result = type(reactive as Record<string, unknown>);
+    const result = isolateTracking(() =>
+      type(reactive as Record<string, unknown>),
+    );
     if (result == null) {
       return document.createComment("powers");
     }

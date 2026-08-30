@@ -1,4 +1,11 @@
-import { effect, type Dispose } from "@lab206/core";
+import {
+  createOwner,
+  disposeOwner,
+  effect,
+  getActiveOwner,
+  runWithOwner,
+  type Dispose,
+} from "@lab206/core";
 
 /**
  * Values a reactive JSX child function may return.
@@ -22,6 +29,11 @@ export type DynamicChild =
  * (common for Tabs / Accordion / List content).
  *
  * Uses a `display: contents` host so layout is unaffected.
+ *
+ * **Tracking isolation (FOUNDATION):** `get()` still tracks the parent effect
+ * for remount keys (e.g. `selected()` in a Dialog body). Component setup uses
+ * `isolateTracking` via jsx/`h`/`component()`. Node trees are owned by a nested
+ * owner and disposed on remount so Input effects do not leak.
  */
 export function bindDynamic(
   parent: ParentNode,
@@ -35,11 +47,26 @@ export function bindDynamic(
 
   let textNode: Text | null = null;
   let mode: "empty" | "text" | "nodes" = "empty";
+  let childDispose: Dispose | undefined;
 
-  return effect(() => {
-    const value = get();
+  const stop = effect(() => {
+    // Nested owner: effects created while building nodes are disposed on remount.
+    // Do NOT use createRoot here — that clears activeNode and would stop the
+    // parent function from tracking remount keys like selected().
+    const owner = createOwner(getActiveOwner());
+    let value!: DynamicChild;
+    runWithOwner(owner, () => {
+      value = get();
+    });
+
+    const disposeOwned = () => {
+      disposeOwner(owner);
+    };
 
     if (value == null || value === false || value === true) {
+      childDispose?.();
+      childDispose = undefined;
+      disposeOwned();
       host.replaceChildren();
       textNode = null;
       mode = "empty";
@@ -47,6 +74,9 @@ export function bindDynamic(
     }
 
     if (typeof value === "string" || typeof value === "number") {
+      childDispose?.();
+      childDispose = undefined;
+      disposeOwned(); // text path owns nothing reactive from get()
       const s = String(value);
       if (mode === "text" && textNode) {
         textNode.data = s;
@@ -60,11 +90,19 @@ export function bindDynamic(
     }
 
     // Nodes / arrays — never String(object)
+    childDispose?.();
+    childDispose = disposeOwned;
     textNode = null;
     mode = "nodes";
     host.replaceChildren();
     appendValue(host, value);
   });
+
+  return () => {
+    stop();
+    childDispose?.();
+    childDispose = undefined;
+  };
 }
 
 function appendValue(parent: ParentNode, value: DynamicChild): void {

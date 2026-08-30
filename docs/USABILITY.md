@@ -159,6 +159,7 @@ Retheme globally via `packages/ui/src/styles/tokens.css`.
 | Calling `outlet()` twice | Single outlet host |
 | Putting form state in `localStorage` every keystroke without care | `effect` + debounce, or save on submit |
 | Giant page remounts while typing | Stable route components + signals |
+| Reading a store in the **parent** `{() => …}` body on every keystroke (`value={notes()}` in the slot) | Remount **keys** only in the parent (`selected()`); keep drafts / `bind` inside the child. Runtime isolates child **setup** reads (see [FOUNDATION.md](./FOUNDATION.md)) |
 
 ---
 

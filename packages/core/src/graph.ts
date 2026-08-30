@@ -69,6 +69,26 @@ export function untrack<T>(fn: () => T): T {
   }
 }
 
+/**
+ * Run `fn` so reads do not subscribe the *current* consumer, while nested
+ * `effect`s still track normally (`tracking` stays on; only `activeNode` is cleared).
+ *
+ * Use this when mounting a component under a parent `bindDynamic` / outlet:
+ * setup may read stores to seed state without remounting the parent slot, but
+ * effects and `{() => …}` bindings created inside still subscribe correctly.
+ *
+ * Prefer this over `untrack` for component setup — `untrack` would silence
+ * those nested effects’ first run and break live props / text bindings.
+ */
+export function isolateTracking<T>(fn: () => T): T {
+  const prev = setActiveNode(null);
+  try {
+    return fn();
+  } finally {
+    setActiveNode(prev);
+  }
+}
+
 export function createOwner(parent: Owner | null = activeOwner): Owner {
   return {
     parent,

@@ -14,8 +14,9 @@ These contracts were extracted from real app bugs (designlab206 forms remounting
 | **`createRoot` still owns nodes** | Signals/effects created inside are owned by the root and disposed with it. |
 | **Effects inside a root track normally** | Only the *parent* tracking context is cleared; child `effect`s subscribe as usual. |
 | **`untrack(fn)`** | Reads inside `fn` never subscribe the active consumer. |
+| **Function components / `bindDynamic`** | JSX/`h`/`component()` run setup under **`isolateTracking`** (clear parent consumer; nested effects still track). A parent `{() => …}` slot tracks only what the **function body** reads (e.g. `selected()`), not store reads inside child setup. Node trees from `bindDynamic` use a nested owner and dispose on remount. Do **not** use `untrack` for setup — it silences nested effects. |
 
-**Why it matters:** A route component that reads `value={email}` during setup must not re-run the outlet effect when `email` changes. That remount was wiping form focus and scrolling the page.
+**Why it matters:** A route component that reads `value={email}` during setup must not re-run the outlet effect when `email` changes. That remount was wiping form focus and scrolling the page. The same bug hit **Dialog / Drawer** bodies: typing into `bind` wrote a store that setup had read → `bindDynamic` `replaceChildren` → caret gone. Isolation above closes that hole (same contract as the outlet, applied to function children).
 
 ```ts
 // ✅ outlet-safe pattern (already in createRouter)

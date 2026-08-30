@@ -15,6 +15,7 @@ export { batch, flush, isBatching } from "./scheduler.js";
 export {
   createRoot,
   untrack,
+  isolateTracking,
   getActiveOwner,
   runWithOwner,
   createOwner,

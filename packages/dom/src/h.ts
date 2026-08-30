@@ -1,3 +1,4 @@
+import { isolateTracking } from "@lab206/core";
 import { bindAttr, bindClass, bindProp, bindStyle, bindText } from "./bind.js";
 import { bindDynamic, type DynamicChild } from "./dynamic.js";
 import { on } from "./on.js";
@@ -77,7 +78,8 @@ export function h(
     } else if (children.length > 1) {
       raw.children = children;
     }
-    const result = tag(createProps(raw) as never);
+    // isolateTracking: setup reads must not subscribe parent bindDynamic (forms in Dialog)
+    const result = isolateTracking(() => tag(createProps(raw) as never));
     if (result == null) {
       return document.createComment("powers");
     }

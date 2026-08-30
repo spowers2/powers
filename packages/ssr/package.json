@@ -1,7 +1,7 @@
 {
   "name": "@lab206/ssr",
-  "version": "0.1.4",
-  "description": "SSR foundation for Powers \u2014 render apps to HTML strings (happy-dom).",
+  "version": "0.1.5",
+  "description": "SSR foundation for Powers — render apps to HTML strings (happy-dom).",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,

@@ -1,7 +1,7 @@
 {
   "name": "@lab206/router",
-  "version": "0.1.4",
-  "description": "Tiny signal-based router for Powers \u2014 easy to learn, easy to own.",
+  "version": "0.1.5",
+  "description": "Tiny signal-based router for Powers — easy to learn, easy to own.",
   "type": "module",
   "license": "BUSL-1.1",
   "sideEffects": false,
