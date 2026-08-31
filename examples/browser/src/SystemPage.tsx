@@ -423,7 +423,7 @@ export function SystemPage(props: {
                   <Badge tone="accent">Accent</Badge>
                   <Badge tone="success">Success</Badge>
                   <Badge tone="warning">Warning</Badge>
-                  <Avatar name="Ada Lovelace" size="sm" />
+                  <Avatar name="Vince van Gogh" size="sm" />
                   <Avatar name="Powers" size="md" />
                   <Avatar name="SP" size="lg" />
                 </Stack>
@@ -1091,7 +1091,7 @@ export function SystemPage(props: {
                     { key: "status", header: "Status", align: "right" },
                   ]}
                   rows={[
-                    { id: "1", name: "Ada", role: "Engineer", status: "Active" },
+                    { id: "1", name: "Vince", role: "Engineer", status: "Active" },
                     { id: "2", name: "Grace", role: "Design", status: "Away" },
                     { id: "3", name: "Lin", role: "PM", status: "Active" },
                   ]}

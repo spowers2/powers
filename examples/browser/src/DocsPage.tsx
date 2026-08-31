@@ -193,19 +193,28 @@ export function DocsPage(props: { router: Router }) {
               <Stack gap={2}>
                 <Text weight="semibold">Engineer</Text>
                 <Text size="sm" muted>
-                  1) Three rules below · 2){" "}
+                  1) Three rules · 2){" "}
                   <a class="docs-inline-link" href="/lab?recipe=hello">
                     Lab hello
                   </a>{" "}
                   · 3){" "}
-                  <a class="docs-inline-link" href="/lab?recipe=form">
-                    form
+                  <a class="docs-inline-link" href="#data">
+                    Data
+                  </a>{" "}
+                  /{" "}
+                  <a class="docs-inline-link" href="/lab?recipe=data-list">
+                    data-list
                   </a>{" "}
                   · 4) System Copy JSX
                 </Text>
-                <Button size="sm" onClick={go("/lab?recipe=hello")}>
-                  Open Lab hello
-                </Button>
+                <Stack direction="row" gap={2} wrap>
+                  <Button size="sm" onClick={go("/lab?recipe=hello")}>
+                    Lab hello
+                  </Button>
+                  <Button size="sm" variant="soft" onClick={go("/lab?recipe=data-list")}>
+                    Data list
+                  </Button>
+                </Stack>
               </Stack>
             </Card>
             <Card>
@@ -257,6 +266,17 @@ export function DocsPage(props: { router: Router }) {
             Scaffold a Vite app with form + theme, or add packages to an
             existing project. Live demos stay on this site.
           </Alert>
+          <Text size="sm" muted>
+            Hook a backend when ready:{" "}
+            <a class="docs-inline-link" href="#data">
+              Data
+            </a>{" "}
+            · Lab{" "}
+            <a class="docs-inline-link" href="/lab?recipe=data-list">
+              data-list
+            </a>
+            .
+          </Text>
           <Text size="sm" muted>
             Scaffold (recommended):
           </Text>
@@ -675,7 +695,7 @@ const list = createQuery({
               },
               {
                 name: "store",
-                sig: "store({ count: 0, name: 'Ada' })",
+                sig: "store({ count: 0, name: 'Vince' })",
                 note: "Small model — per-field signals + .set batch.",
               },
               {

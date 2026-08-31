@@ -53,7 +53,7 @@ palette.bind();
 function PlaygroundPage() {
   const count = signal(0);
   const x = signal(0);
-  const name = signal("Ada");
+  const name = signal("Vince");
 
   const email = signal("");
   const role = signal("dev");
@@ -219,8 +219,8 @@ function PlaygroundPage() {
             </Text>
             <Text>{() => `Hello, ${name()}`}</Text>
             <Stack direction="row" gap={2} wrap>
-              <Button variant="ghost" onClick={() => name.set("Ada")}>
-                Ada
+              <Button variant="ghost" onClick={() => name.set("Vince")}>
+                Vince
               </Button>
               <Button variant="ghost" onClick={() => name.set("Grace")}>
                 Grace

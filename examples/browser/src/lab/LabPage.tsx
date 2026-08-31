@@ -8,7 +8,9 @@ import {
   recipes,
   recipeById,
   startHereRecipes,
+  dataRecipes,
   START_HERE_IDS,
+  DATA_RECIPE_IDS,
   type Recipe,
 } from "./recipes.js";
 import {
@@ -68,7 +70,7 @@ export function LabPage(): HTMLElement {
   const blurb = document.createElement("p");
   blurb.className = "lab-sidebar-blurb";
   blurb.textContent =
-    "New? Do Start here (3 recipes, ~10 min). Then explore the full list. Edit freely — preview re-runs as you type.";
+    "New? Start here (3 recipes, ~10 min). Then Data (list · detail · save) for any backend. Edit freely — preview re-runs as you type.";
   head.append(brand, blurb);
 
   const badge = document.createElement("div");
@@ -85,6 +87,17 @@ export function LabPage(): HTMLElement {
   startHereList.setAttribute("role", "listbox");
   startHereList.setAttribute("aria-label", "Start here recipes");
   startHereWrap.append(startHereLabel, startHereList);
+
+  const dataWrap = document.createElement("div");
+  dataWrap.className = "lab-start-here lab-data-recipes";
+  const dataLabel = document.createElement("div");
+  dataLabel.className = "lab-start-here__label";
+  dataLabel.textContent = "Data";
+  const dataList = document.createElement("div");
+  dataList.className = "lab-start-here__list";
+  dataList.setAttribute("role", "listbox");
+  dataList.setAttribute("aria-label", "Data recipes");
+  dataWrap.append(dataLabel, dataList);
 
   const allLabel = document.createElement("div");
   allLabel.className = "lab-start-here__label lab-start-here__label--all";
@@ -125,7 +138,8 @@ export function LabPage(): HTMLElement {
   const shareBtn = makeBtn("Share", "lab-btn lab-btn--soft");
   const statusEl = document.createElement("span");
   statusEl.className = "lab-status";
-  statusEl.textContent = "Ready — Start here: Hello → Form → Theme";
+  statusEl.textContent =
+    "Ready — Start here: Hello → Form → Theme · then Data";
 
   actions.append(
     autoLabel,
@@ -373,7 +387,7 @@ mount(document.getElementById("root")!, () => <App />);
   consoleWrap.append(consoleHead, consoleEl);
 
   main.append(toolbar, teach, workspace, consoleWrap);
-  sidebar.append(head, badge, startHereWrap, allLabel, recipeList);
+  sidebar.append(head, badge, startHereWrap, dataWrap, allLabel, recipeList);
   root.append(sidebar, main);
 
   // —— helpers ——
@@ -587,16 +601,22 @@ mount(document.getElementById("root")!, () => <App />);
     void run();
   }
 
-  // —— Start here (3 recipes) + full list ——
+  // —— Start here (3) + Data group + full list ——
   startHereRecipes().forEach((r, i) => {
     const labels = ["1", "2", "3"];
     startHereList.appendChild(makeRecipeButton(r, labels[i] ?? String(i + 1)));
   });
 
+  dataRecipes().forEach((r, i) => {
+    dataList.appendChild(makeRecipeButton(r, String(i + 1)));
+  });
+
   recipes.forEach((r, i) => {
     const isStart = (START_HERE_IDS as readonly string[]).includes(r.id);
+    const isData = (DATA_RECIPE_IDS as readonly string[]).includes(r.id);
     const btn = makeRecipeButton(r, String(i + 1).padStart(2, "0"));
     if (isStart) btn.classList.add("lab-recipe--start-ref");
+    if (isData) btn.classList.add("lab-recipe--data-ref");
     recipeList.appendChild(btn);
   });
 

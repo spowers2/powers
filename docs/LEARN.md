@@ -90,7 +90,7 @@ stop(); // unsubscribe
 ```ts
 import { store } from "@lab206/core";
 
-const app = store({ count: 0, name: "Ada" });
+const app = store({ count: 0, name: "Vince" });
 
 app.count();                          // 0
 app.count.set(1);

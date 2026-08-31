@@ -332,6 +332,18 @@ html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links butto
   align-items: center;
 }
 
+@media (max-width: 479px) {
+  .lp-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lp-cta-row .pu-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .lp-install {
   margin: 0 0 0.5rem;
   padding: 0.65rem 0.85rem;
@@ -381,8 +393,13 @@ html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links butto
   margin: 1rem 0 0;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
-  color: var(--pu-color-text-muted);
+  color: color-mix(in srgb, var(--pu-color-text-muted) 92%, var(--pu-color-text));
   line-height: 1.5;
+}
+
+[data-theme="dark"] .lp-trust,
+:root[data-theme="dark"] .lp-trust {
+  color: color-mix(in srgb, var(--pu-color-text-muted) 85%, var(--pu-color-text));
 }
 
 .lp-trust code {

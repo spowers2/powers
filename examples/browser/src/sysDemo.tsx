@@ -198,7 +198,7 @@ import { Table } from "@lab206/ui";`,
         { key: "role", header: "Role" },
       ]}
       rows={[
-        { name: "Ada", role: "Eng" },
+        { name: "Vince", role: "Eng" },
         { name: "Grace", role: "Design" },
       ]}
     />`,

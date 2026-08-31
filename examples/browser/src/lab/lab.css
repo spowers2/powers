@@ -144,6 +144,35 @@
   );
 }
 
+.lab-data-recipes {
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-border) 80%, transparent);
+}
+
+.lab-data-recipes .lab-start-here__label {
+  color: var(--pu-color-accent);
+}
+
+.lab-data-recipes .lab-start-here__list .lab-recipe {
+  border-color: color-mix(in srgb, var(--pu-color-accent) 20%, transparent);
+  background: color-mix(in srgb, var(--pu-color-accent) 5%, var(--lab-panel));
+}
+
+.lab-recipe--data-ref strong::after {
+  content: " · data";
+  font-weight: 500;
+  font-size: 0.65em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pu-color-text-muted);
+  opacity: 0.85;
+}
+
+@media (max-width: 720px) {
+  .lab-recipe--data-ref strong::after {
+    display: none;
+  }
+}
+
 .lab-teach__tips {
   margin: var(--pu-space-3) 0 0;
   padding: var(--pu-space-2) var(--pu-space-3);
@@ -788,7 +817,13 @@
     margin-top: 0.35rem;
   }
 
+  .lab-data-recipes {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
   .lab-start-here__list,
+  .lab-data-recipes .lab-start-here__list,
   .lab-recipe-list {
     display: flex;
     flex-direction: row;

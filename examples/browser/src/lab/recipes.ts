@@ -20,6 +20,15 @@ export interface Recipe {
  */
 export const START_HERE_IDS = ["hello", "form", "tokens"] as const;
 
+/** Data / backend hook recipes (sidebar group — not Start here). */
+export const DATA_RECIPE_IDS = [
+  "data-list",
+  "data-detail",
+  "data-form",
+  "async",
+  "query",
+] as const;
+
 /**
  * All recipes use the design system (@lab206/ui).
  * Teaching copy is written for first-time learners — plain language, clear experiments.
@@ -733,7 +742,7 @@ import {
 const user = resource(async () => {
   await new Promise((r) => setTimeout(r, 800));
   if (Math.random() < 0.15) throw new Error("Network glitch");
-  return { name: "Ada Lovelace", role: "Engineer" };
+  return { name: "Vince van Gogh", role: "Engineer" };
 });
 
 export function App() {
@@ -1263,7 +1272,7 @@ export function App() {
       <Stack gap={4}>
         <Text as="h2" size="xl">Signup</Text>
         <Field label="Name" required error={nameError}>
-          <Input bind={name} placeholder="Ada" />
+          <Input bind={name} placeholder="Vince" />
         </Field>
         <Field
           label="Email"
@@ -1347,7 +1356,7 @@ export function App() {
       <Stack gap={4}>
         <Text as="h2" size="xl">Profile</Text>
         <Field label="Name" required error={name.error}>
-          <Input bind={name.value} onBlur={name.touch} placeholder="Ada" />
+          <Input bind={name.value} onBlur={name.touch} placeholder="Vince" />
         </Field>
         <Field label="Email" required error={email.error}>
           <Input
@@ -1868,7 +1877,7 @@ export function App() {
           { key: "role", header: "Role" },
         ]}
         rows={[
-          { name: "Ada", role: "Eng" },
+          { name: "Vince", role: "Eng" },
           { name: "Grace", role: "Design" },
         ]}
       />
@@ -1895,6 +1904,12 @@ export const THEME_RECIPE_ID = "tokens";
 
 export function startHereRecipes(): Recipe[] {
   return START_HERE_IDS.map((id) => recipeById(id)).filter(
+    (r): r is Recipe => r != null,
+  );
+}
+
+export function dataRecipes(): Recipe[] {
+  return DATA_RECIPE_IDS.map((id) => recipeById(id)).filter(
     (r): r is Recipe => r != null,
   );
 }

@@ -19,7 +19,7 @@ const PHONE_MENU = [
   { id: "/lab", label: "Lab" },
   { id: "/system", label: "System" },
   { id: SITE.contact.href, label: SITE.contact.label },
-  { id: "__workspace", label: SITE.demos.workspace.label },
+  { id: "__workspace", label: "designlab206 (live)" },
   { id: "__hearth", label: SITE.demos.hearth.label },
   { id: "__figma", label: "Figma plugin" },
 ] as const;
@@ -125,7 +125,7 @@ export function SiteNav(props: {
               <span class="site-nav-demo-full">
                 {SITE.demos.workspace.label}
               </span>
-              <span class="site-nav-demo-short">Workspace</span>
+              <span class="site-nav-demo-short">designlab206</span>
             </a>
             <a
               class="site-nav-demo"

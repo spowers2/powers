@@ -28,7 +28,7 @@ import "./landing.css";
 
 const SECTION_IDS = ["demos", "features", "learn", "compare"] as const;
 
-const NAMES = ["Ada Lovelace", "Grace Hopper", "Katherine Johnson"] as const;
+const NAMES = ["Vince van Gogh", "Grace Hopper", "Katherine Johnson"] as const;
 
 const SHOWCASE_SLIDES = [
   { id: "release", label: "Release" },
@@ -60,9 +60,9 @@ const FEATURES: Array<{
     href: "/lab?recipe=form",
   },
   {
-    title: "Router, one outlet",
-    body: "Explicit routes and a single outlet host — no double-render traps.",
-    href: "/docs",
+    title: "Any backend",
+    body: "createApiClient + resource / createQuery — bring your REST or BaaS.",
+    href: "/docs#data",
   },
   {
     title: "Lab + System",
