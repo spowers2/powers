@@ -203,8 +203,8 @@ export function LandingPage(props: { router: Router }) {
               <div class="lp-hero-copy">
                 <p class="lp-product-label">{SITE.name}</p>
                 <h1 class="lp-title">
-                  Build product UI,{" "}
-                  <span class="lp-title-gradient">not plumbing</span>
+                  Ship the interface.{" "}
+                  <span class="lp-title-gradient">Skip the framework soup.</span>
                 </h1>
                 <p class="lp-lede">
                   Built on the {SITE.systemName} UI system — signals, components,
