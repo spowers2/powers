@@ -870,6 +870,333 @@ mount(document.getElementById("root")!, () => <App />);
 `,
   },
   {
+    id: "data-list",
+    title: "Data: list from API",
+    blurb: "createApiClient + Table",
+    goal: "Load a list with createApiClient + createQuery and show Spinner / Alert / Empty / Table.",
+    learn: [
+      "createApiClient({ baseUrl, fetch }) wraps JSON HTTP for any backend",
+      "createQuery drives loading / error / data — no dependency arrays",
+      "Empty + Alert match real product states",
+    ],
+    how: [
+      "A fake fetch stands in for your /api (swap later)",
+      "createQuery loads rows; Refresh calls refetch()",
+      "Table renders when data is ready",
+    ],
+    tryThis: [
+      "Click Refresh — watch Spinner then rows",
+      "Change the fake delay and re-run",
+      "Replace fakeFetch with api.get pointing at your API",
+    ],
+    code: `import { createApiClient, createQuery } from "@lab206/core";
+import { mount, Show } from "@lab206/dom";
+import {
+  Alert,
+  Button,
+  Card,
+  Empty,
+  Spinner,
+  Stack,
+  Table,
+  Text,
+} from "@lab206/ui";
+
+type Row = { id: string; name: string; status: string };
+
+// Fake backend — replace with real fetch to your API
+async function fakeFetch(input: RequestInfo | URL) {
+  await new Promise((r) => setTimeout(r, 500));
+  const url = String(input);
+  if (url.includes("/items")) {
+    return new Response(
+      JSON.stringify([
+        { id: "1", name: "Northline", status: "active" },
+        { id: "2", name: "Orbit", status: "lead" },
+      ] satisfies Row[]),
+      { status: 200, headers: { "Content-Type": "application/json" } },
+    );
+  }
+  return new Response("Not found", { status: 404 });
+}
+
+const api = createApiClient({ baseUrl: "/api", fetch: fakeFetch });
+
+const list = createQuery({
+  queryKey: () => "items",
+  queryFn: () => api.get<Row[]>("/items"),
+});
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Stack direction="row" gap={2} align="center" justify="between">
+          <Text as="h2" size="xl">Accounts</Text>
+          <Button size="sm" variant="soft" onClick={() => list.refetch()}>
+            Refresh
+          </Button>
+        </Stack>
+        <Show when={() => list.loading() && !list.latest()}>
+          {() => (
+            <Stack direction="row" gap={2} align="center">
+              <Spinner />
+              <Text muted size="sm">Loading…</Text>
+            </Stack>
+          )}
+        </Show>
+        <Show when={() => !!list.error() && !list.loading()}>
+          {() => (
+            <Alert tone="danger" title="Failed">
+              {() => String(list.error())}
+            </Alert>
+          )}
+        </Show>
+        <Show when={() => !!list() && list()!.length === 0}>
+          {() => <Empty title="No accounts" description="Create one to get started." />}
+        </Show>
+        <Show when={() => (list()?.length ?? 0) > 0}>
+          {() => (
+            <Table
+              columns={[
+                { key: "name", header: "Name" },
+                { key: "status", header: "Status" },
+              ]}
+              rows={() => list() ?? []}
+            />
+          )}
+        </Show>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "data-detail",
+    title: "Data: detail by id",
+    blurb: "Keyed createQuery",
+    goal: "Select an id signal and load detail only when an id is set.",
+    learn: [
+      "queryKey: () => id() ?? false idles the query until you pick something",
+      "Same createApiClient pattern as list",
+      "Detail UI uses loading / error / data like any other screen",
+    ],
+    how: [
+      "Buttons set selected id",
+      "createQuery fetches /items/:id when key is a string",
+      "Clear selection returns to idle",
+    ],
+    tryThis: [
+      "Click Northline / Orbit and watch detail load",
+      "Click Clear — query goes idle",
+      "Point api.get at your detail route",
+    ],
+    code: `import { createApiClient, createQuery, signal } from "@lab206/core";
+import { mount, Show } from "@lab206/dom";
+import {
+  Alert,
+  Button,
+  Card,
+  Spinner,
+  Stack,
+  Text,
+} from "@lab206/ui";
+
+type Item = { id: string; name: string; note: string };
+
+const db: Record<string, Item> = {
+  "1": { id: "1", name: "Northline", note: "Health portal" },
+  "2": { id: "2", name: "Orbit", note: "Payments ops" },
+};
+
+async function fakeFetch(input: RequestInfo | URL) {
+  await new Promise((r) => setTimeout(r, 400));
+  const m = String(input).match(/\\/items\\/([^/?]+)/);
+  if (m) {
+    const row = db[m[1]!];
+    if (!row) return new Response("{}", { status: 404 });
+    return new Response(JSON.stringify(row), { status: 200 });
+  }
+  return new Response("Not found", { status: 404 });
+}
+
+const api = createApiClient({ baseUrl: "/api", fetch: fakeFetch });
+const id = signal<string | null>(null);
+
+const detail = createQuery({
+  queryKey: () => id() ?? false,
+  queryFn: (key) => api.get<Item>(\`/items/\${key}\`),
+});
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">Account detail</Text>
+        <Stack direction="row" gap={2} wrap>
+          <Button size="sm" variant="soft" onClick={() => id.set("1")}>
+            Northline
+          </Button>
+          <Button size="sm" variant="soft" onClick={() => id.set("2")}>
+            Orbit
+          </Button>
+          <Button size="sm" variant="ghost" onClick={() => id.set(null)}>
+            Clear
+          </Button>
+        </Stack>
+        <Show when={() => id() == null}>
+          {() => <Text muted>Pick an account.</Text>}
+        </Show>
+        <Show when={() => id() != null && detail.loading()}>
+          {() => (
+            <Stack direction="row" gap={2} align="center">
+              <Spinner />
+              <Text muted size="sm">Loading…</Text>
+            </Stack>
+          )}
+        </Show>
+        <Show when={() => !!detail.error() && !detail.loading()}>
+          {() => (
+            <Alert tone="danger" title="Failed">
+              {() => String(detail.error())}
+            </Alert>
+          )}
+        </Show>
+        <Show when={() => !!detail() && !detail.loading()}>
+          {() => (
+            <Stack gap={1}>
+              <Text weight="semibold">{() => detail()!.name}</Text>
+              <Text muted size="sm">{() => detail()!.note}</Text>
+            </Stack>
+          )}
+        </Show>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
+    id: "data-form",
+    title: "Data: save form",
+    blurb: "POST then feedback",
+    goal: "bind a form, POST with createApiClient, show success or Alert error.",
+    learn: [
+      "bind={signal} for fields — no manual onInput casts",
+      "api.post on submit; catch ApiError for Alert",
+      "Keep draft signals outside remounting parents (FOUNDATION)",
+    ],
+    how: [
+      "Fake POST echoes the name",
+      "saving signal disables the button",
+      "message / error signals drive feedback",
+    ],
+    tryThis: [
+      "Save a name — see success text",
+      "Clear the name and try Save (client validation)",
+      "Swap fakeFetch for your create endpoint",
+    ],
+    code: `import { ApiError, createApiClient, signal } from "@lab206/core";
+import { mount, Show } from "@lab206/dom";
+import {
+  Alert,
+  Button,
+  Card,
+  Field,
+  Input,
+  Stack,
+  Text,
+} from "@lab206/ui";
+
+async function fakeFetch(_input: RequestInfo | URL, init?: RequestInit) {
+  await new Promise((r) => setTimeout(r, 450));
+  if ((init?.method ?? "GET") === "POST") {
+    const body = JSON.parse(String(init?.body ?? "{}")) as { name?: string };
+    if (!body.name?.trim()) {
+      return new Response(JSON.stringify({ error: "Name required" }), {
+        status: 400,
+      });
+    }
+    return new Response(JSON.stringify({ id: "9", name: body.name }), {
+      status: 201,
+    });
+  }
+  return new Response("Not found", { status: 404 });
+}
+
+const api = createApiClient({ baseUrl: "/api", fetch: fakeFetch });
+const name = signal("");
+const saving = signal(false);
+const error = signal<string | null>(null);
+const saved = signal<string | null>(null);
+
+async function onSave() {
+  error.set(null);
+  saved.set(null);
+  if (!name().trim()) {
+    error.set("Enter a name");
+    return;
+  }
+  saving.set(true);
+  try {
+    const row = await api.post<{ id: string; name: string }>("/items", {
+      name: name(),
+    });
+    saved.set(\`Saved \${row.name} (\${row.id})\`);
+    name.set("");
+  } catch (e) {
+    error.set(
+      e instanceof ApiError
+        ? String((e.body as { error?: string })?.error ?? e.message)
+        : String(e),
+    );
+  } finally {
+    saving.set(false);
+  }
+}
+
+export function App() {
+  return (
+    <Card>
+      <Stack gap={4}>
+        <Text as="h2" size="xl">New account</Text>
+        <Field label="Name">
+          <Input bind={name} placeholder="Acme Co" />
+        </Field>
+        <Show when={() => !!error()}>
+          {() => (
+            <Alert tone="danger" title="Could not save">
+              {() => error()!}
+            </Alert>
+          )}
+        </Show>
+        <Show when={() => !!saved()}>
+          {() => (
+            <Alert tone="success" title="Saved">
+              {() => saved()!}
+            </Alert>
+          )}
+        </Show>
+        <Button
+          disabled={() => saving()}
+          onClick={() => void onSave()}
+        >
+          {() => (saving() ? "Saving…" : "Save")}
+        </Button>
+      </Stack>
+    </Card>
+  );
+}
+
+mount(document.getElementById("root")!, () => <App />);
+`,
+  },
+  {
     id: "form",
     title: "Form validation",
     blurb: "bind + Field errors",

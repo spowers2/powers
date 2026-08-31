@@ -28,6 +28,7 @@ const DOC_SECTIONS = [
   "first-app",
   "packages",
   "patterns",
+  "data",
   "api-core",
   "api-dom",
   "api-ui",
@@ -174,6 +175,7 @@ export function DocsPage(props: { router: Router }) {
           {tocBtn("first-app", "First app")}
           {tocBtn("packages", "Packages")}
           {tocBtn("patterns", "Patterns")}
+          {tocBtn("data", "Data")}
           {tocBtn("api-core", "core")}
           {tocBtn("api-dom", "dom")}
           {tocBtn("api-ui", "ui")}
@@ -599,6 +601,47 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
           </Grid>
         </Section>
 
+        <Section id="data" title="5b. Data — hook any backend">
+          <Text muted>
+            Powers is the interface layer. Your REST / BaaS / GraphQL client stays
+            yours — no Powers server, no Swagger product. Full playbook:{" "}
+            <Code>docs/DATA.md</Code>.
+          </Text>
+          <Text size="sm" muted>
+            Read with <Code>resource</Code> / <Code>createQuery</Code>. Share{" "}
+            <Code>baseUrl</Code> + auth via <Code>createApiClient</Code>. Drive
+            Spinner · Alert · Empty from loading / error / data.
+          </Text>
+          <pre class="docs-pre">{`import { createApiClient, createQuery, signal } from "@lab206/core";
+
+const token = signal<string | null>(null);
+const api = createApiClient({
+  baseUrl: "/api",
+  getHeaders: () =>
+    token() ? { Authorization: \`Bearer \${token()}\` } : {},
+});
+
+const list = createQuery({
+  queryKey: () => "items",
+  queryFn: () => api.get("/items"),
+});
+// list.loading() · list.error() · list() · list.refetch()`}</pre>
+          <Stack direction="row" gap={2} wrap>
+            <Button size="sm" variant="soft" onClick={go("/lab?recipe=data-list")}>
+              Lab: list
+            </Button>
+            <Button size="sm" variant="soft" onClick={go("/lab?recipe=data-detail")}>
+              Lab: detail
+            </Button>
+            <Button size="sm" variant="soft" onClick={go("/lab?recipe=data-form")}>
+              Lab: save form
+            </Button>
+            <Button size="sm" variant="ghost" onClick={go("/lab?recipe=async")}>
+              Lab: async
+            </Button>
+          </Stack>
+        </Section>
+
         <Divider label="API reference" />
 
         <Section id="api-core" title="@lab206/core">
@@ -606,6 +649,10 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
             Fine-grained graph. No DOM. Plain meanings:{" "}
             <a class="docs-inline-link" href="#reactivity">
               Five words
+            </a>
+            . Backend:{" "}
+            <a class="docs-inline-link" href="#data">
+              Data
             </a>
             .
           </Text>
@@ -635,6 +682,16 @@ gsapAnimate(x, 100, { duration: 400, ease: "power3.out" });`}</pre>
                 name: "resource",
                 sig: "resource(source, fetcher)",
                 note: "Loaded data: loading / error / value.",
+              },
+              {
+                name: "createQuery",
+                sig: "createQuery({ queryKey, queryFn })",
+                note: "Signal-keyed resource — great for lists/detail.",
+              },
+              {
+                name: "createApiClient",
+                sig: "createApiClient({ baseUrl, getHeaders? })",
+                note: "JSON HTTP · get/post/… · throws ApiError.",
               },
               {
                 name: "batch / flush",

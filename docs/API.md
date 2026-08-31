@@ -1,6 +1,7 @@
 # API reference (cheat sheet)
 
 **For new developers.** Plain-English five words (designers + developers): [LEARN.md](./LEARN.md).  
+**Backend hooks:** [DATA.md](./DATA.md).  
 **In the demo app:** open **`/docs`** (same content, interactive).
 
 ---
@@ -23,6 +24,7 @@
 | `store(fields)` | per-key signals + `set` batch |
 | `resource(source, fetcher)` | async loading / error / value |
 | `createQuery({ queryKey, queryFn })` | signal-keyed async query (ergonomic `resource`) |
+| `createApiClient({ baseUrl, getHeaders? })` | JSON HTTP helper · `get`/`post`/… · `ApiError` |
 | `batch(fn)` / `flush()` | group updates / test flush |
 | `createRoot(fn)` | ownership + dispose |
 | `untrack(fn)` | read without tracking |

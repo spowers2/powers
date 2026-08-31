@@ -48,6 +48,9 @@ export const LAB_API_KEYS = [
   "untrack",
   "store",
   "resource",
+  "createQuery",
+  "createApiClient",
+  "ApiError",
   "createRoot",
   "onError",
   // animate

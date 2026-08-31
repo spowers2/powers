@@ -29,6 +29,7 @@ Live hub: [lab206.com/docs](https://lab206.com/docs) · packages on npm as `@lab
 | Forms & validation helpers | [FORMS.md](./FORMS.md) |
 | Motion language | [MOTION.md](./MOTION.md) |
 | **Five words: signal → resource (designers + developers)** | [LEARN.md](./LEARN.md) |
+| **Hook any backend** (`resource` · `createApiClient`) | [DATA.md](./DATA.md) · Docs `/docs#data` |
 | Styling: tokens, components, utilities | [STYLING.md](./STYLING.md) |
 | Design system primitives reference | [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) |
 | Interactive coding playground | [POWER_LAB.md](./POWER_LAB.md) + demo `/lab` |

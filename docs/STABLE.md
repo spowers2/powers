@@ -25,9 +25,10 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 |---|---|
 | `signal` · `computed` · `effect` | Core graph |
 | `batch` · `flush` | Scheduling |
-| `createRoot` · `untrack` | Ownership + isolation (**FOUNDATION**) |
+| `createRoot` · `untrack` · `isolateTracking` | Ownership + isolation (**FOUNDATION**) |
 | `store` · `cell` | Shallow multi-key store |
-| `resource` | Async data |
+| `resource` · `createQuery` | Async data |
+| `createApiClient` · `ApiError` | Thin JSON HTTP helper (Solid) |
 | `onError` | Owner error handling |
 | Types: `Signal`, `Dispose`, `Resource`, … | |
 

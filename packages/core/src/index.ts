@@ -6,6 +6,7 @@
  *
  * Learning order (intentionally short):
  *   1. signal  2. computed  3. effect  4. store  5. resource / createQuery
+ *   6. createApiClient (optional — any HTTP backend)
  */
 
 export { signal, computed } from "./signal.js";
@@ -33,6 +34,12 @@ export type {
 } from "./resource.js";
 export { createQuery } from "./query.js";
 export type { CreateQueryOptions, QueryKey } from "./query.js";
+export { createApiClient, ApiError } from "./api-client.js";
+export type {
+  ApiClient,
+  ApiClientOptions,
+  ApiRequestOptions,
+} from "./api-client.js";
 export { onError } from "./errors.js";
 
 export type {

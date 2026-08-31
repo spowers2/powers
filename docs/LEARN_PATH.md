@@ -32,18 +32,20 @@ Progressive power: shallow start, deep ceiling. Don’t skip Day 1.
 
 ## Day 2 — Product patterns (~half day)
 
-**Goal:** lists, navigation, overlays.
+**Goal:** lists, navigation, overlays, data from your API.
 
 | Step | Where |
 |---|---|
 | 1. Admin list | Lab `/lab?recipe=admin-list` |
-| 2. Dialog / Drawer / Menu | Lab recipes + `/system#sys-overlay` |
-| 3. Router sketch | [ROUTER.md](./ROUTER.md) · `createRouter` · **outlet once** |
-| 4. Real app | `pnpm example:starter` (designlab206) or `example:restaurant` |
+| 2. Data hooks | [DATA.md](./DATA.md) · Lab `data-list` · `data-detail` · `data-form` |
+| 3. Dialog / Drawer / Menu | Lab recipes + `/system#sys-overlay` |
+| 4. Router sketch | [ROUTER.md](./ROUTER.md) · `createRouter` · **outlet once** |
+| 5. Real app | `pnpm example:starter` (designlab206) or `example:restaurant` |
 
 **You should know**
 
 - `computed` = formula (e.g. filtered lists)
+- `createApiClient` + `createQuery` / `resource` for any HTTP backend
 - `Table` + `Empty` + search field
 - Dialog open **signal** (live boolean) pattern
 - Deep links `?status=` via `router.query` / remount on search
