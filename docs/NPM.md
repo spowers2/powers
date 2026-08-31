@@ -1,6 +1,6 @@
 # Publishing & installing `@lab206/*`
 
-**Supported release: `0.1.5+`.** Do not use `0.1.0`–`0.1.2` (broken Vite / `workspace:*` publishes). Prefer **0.1.5+** for Dialog/form input stability (`isolateTracking`).
+**Supported release: `0.1.6+`.** Do not use `0.1.0`–`0.1.2` (broken Vite / `workspace:*` publishes). Prefer **0.1.6+** for `createApiClient` + Dialog/form input stability (`isolateTracking`).
 
 ## Scaffold (recommended)
 
@@ -64,15 +64,18 @@ createTheme("light").bind();
 
 | Symptom | Fix |
 |---------|-----|
-| `React is not defined` / `react/jsx-runtime` | You’re on **&lt;0.1.3** or Vite JSX isn’t set to `@lab206/dom`. Upgrade to **0.1.5+**, set `esbuild.jsxImportSource`, delete `node_modules/.vite`, restart. |
-| `Unsupported URL Type "workspace:"` | You installed a broken **0.1.1** publish. Use **0.1.5+**. |
+| `React is not defined` / `react/jsx-runtime` | You’re on **&lt;0.1.3** or Vite JSX isn’t set to `@lab206/dom`. Upgrade to **0.1.6+**, set `esbuild.jsxImportSource`, delete `node_modules/.vite`, restart. |
+| `Unsupported URL Type "workspace:"` | You installed a broken **0.1.1** publish. Use **0.1.6+**. |
 | Input/textarea caret resets in Dialog on each keystroke | Upgrade to **0.1.5+** (`isolateTracking` + `bindDynamic` ownership). |
+| `createApiClient` missing from `@lab206/core` | Upgrade to **0.1.6+**. |
 | Types / JSX weirdness | Ensure both **tsconfig** and **vite** jsxImportSource are `@lab206/dom`. |
 
 ## Current release
 
-**0.1.5** on npm (`lab206` org) + `create-powers@0.1.5`.  
+**0.1.6** on npm (`lab206` org) + `create-powers@0.1.6`.  
 Publish with **`pnpm publish`** so `workspace:*` rewrites to real versions — never bare `npm publish` from a workspace package.
+
+**2FA tip:** use a **granular** access token with package write + **Bypass two-factor authentication for write/publish**. Classic tokens / sessions without bypass will keep asking for OTP.
 
 ## Maintainers — publish
 
@@ -85,7 +88,7 @@ Do **not** add `"development": "./src/..."` to package `exports` — that made V
 
 **License on npm:** BUSL-1.1 (source-available).
 
-## Package map (0.1.5)
+## Package map (0.1.6)
 
 | Package | Role |
 |---|---|

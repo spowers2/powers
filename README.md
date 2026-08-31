@@ -9,7 +9,7 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 | **Try it** | [lab206.com](https://lab206.com) — Lab · Docs · System · product demos |
 | **Figma** | Library **Powers UI Kit** · [Community plugin](https://www.figma.com/community/plugin/1671016490810398688) |
 | **License** | [BSL-1.1](./LICENSE) (**source-available**, not OSI open source) · [Commercial inquire](https://lab206.com/contact?subject=Commercial%20license) · [LICENSE-COMMERCIAL.md](./LICENSE-COMMERCIAL.md) |
-| **npm** | `@lab206/*@0.1.5` + `create-powers@0.1.5` — see [docs/NPM.md](./docs/NPM.md) |
+| **npm** | `@lab206/*@0.1.6` + `create-powers@0.1.6` — see [docs/NPM.md](./docs/NPM.md) |
 
 ---
 
@@ -175,5 +175,5 @@ Trademark: the name **Powers** — [TRADEMARKS.md](./docs/TRADEMARKS.md).
 
 - **App stack v1** — core · animate · DOM/JSX · router · SSR foundation · UI design system  
 - **Public demos** — [lab206.com](https://lab206.com)  
-- **npm** — `@lab206/*@0.1.5` · `pnpm create powers my-app` (use **0.1.5+** only)  
+- **npm** — `@lab206/*@0.1.6` · `pnpm create powers my-app` (use **0.1.6+** only)  
 - **Announce draft** — [docs/ANNOUNCE.md](./docs/ANNOUNCE.md)

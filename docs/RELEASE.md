@@ -71,9 +71,9 @@ Use this before the first public npm publish / website launch.
 9. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`  
 10. [ ] Optional: post short social from [ANNOUNCE.md](./ANNOUNCE.md)
 
-## npm cut (current: `0.1.5`)
+## npm cut (current: `0.1.6`)
 
-1. [x] Coordinated versions — `@lab206/*` + `create-powers` at **0.1.5**
+1. [x] Coordinated versions — `@lab206/*` + `create-powers` at **0.1.6**
 2. [x] Exports **`import` / `default` / `types` → `dist` only** (never `development`→`src` — that broke Vite with React JSX)
 3. [x] Monorepo HMR via `examples/powers-vite-alias.mjs`, not publish conditions
 4. [x] `"private": false` + `publishConfig.access: public`
@@ -81,8 +81,9 @@ Use this before the first public npm publish / website launch.
 6. [x] Deprecate broken tags `0.1.0`–`0.1.2` when publishing patches
 7. [x] Commercial inquire + Pro pack zip buildable
 8. [x] **0.1.5** — `isolateTracking` + `bindDynamic` ownership so Dialog/`{() => …}` forms keep caret (FOUNDATION parity with router outlet)
-9. [ ] Optional: LemonSqueezy / Gumroad self-serve SKU  
-10. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
+9. [x] **0.1.6** — `createApiClient` / `ApiError` + DATA.md + Lab data recipes
+10. [ ] Optional: LemonSqueezy / Gumroad self-serve SKU  
+11. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 
 Dry run: `pnpm publish:dry-run` · Docs: [NPM.md](./NPM.md)
 
@@ -98,4 +99,4 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 
 ---
 
-**Last updated:** 2026-08-30 — `@lab206/*@0.1.5` Dialog form remount fix + lab206 site rebuild.
+**Last updated:** 2026-08-31 — `@lab206/*@0.1.6` createApiClient + DATA playbook.

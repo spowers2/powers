@@ -46,7 +46,7 @@ export default defineConfig({
 });
 ```
 
-Use **`@lab206/*@0.1.5+`**. Older tags break Vite (`React is not defined`) or Dialog form caret (pre-0.1.5). See [NPM.md](./NPM.md) troubleshooting.
+Use **`@lab206/*@0.1.6+`**. Older tags break Vite (`React is not defined`), Dialog form caret (pre-0.1.5), or lack `createApiClient` (pre-0.1.6). See [NPM.md](./NPM.md) troubleshooting.
 
 ```tsx
 import "@lab206/ui/theme.css";

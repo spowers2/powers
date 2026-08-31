@@ -19,7 +19,7 @@ Trademark: [`docs/TRADEMARKS.md`](./docs/TRADEMARKS.md).
 
 ## Consumers vs contributors
 
-- **Using Powers in an app:** `pnpm create powers my-app` or install `@lab206/*@0.1.5+` — see [`docs/NPM.md`](./docs/NPM.md).  
+- **Using Powers in an app:** `pnpm create powers my-app` or install `@lab206/*@0.1.6+` — see [`docs/NPM.md`](./docs/NPM.md).  
 - **Changing Powers itself:** this file + the monorepo setup below.
 
 ## Setup
@@ -94,7 +94,7 @@ Present-tense, scoped messages, **with DCO** (`git commit -s`):
 
 - Commit secrets or `.env` files  
 - Reintroduce package `exports.development` → `src`  
-- Break the “one install just works” story (`create powers` / `@lab206/*@0.1.5+`) without an escape hatch  
+- Break the “one install just works” story (`create powers` / `@lab206/*@0.1.6+`) without an escape hatch  
 
 ## Questions
 

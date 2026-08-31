@@ -1,6 +1,6 @@
 {
   "name": "@lab206/core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Fine-grained reactivity primitives for Powers — signals, computed, effects, store, resource, ownership.",
   "type": "module",
   "license": "BUSL-1.1",
