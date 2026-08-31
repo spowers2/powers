@@ -15,7 +15,7 @@ pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
 Try it: **https://lab206.com**  
-Lab · Docs · System · designlab206 · Hearth  
+Lab · Docs · System · designlab206.com · Hearth  
 
 Figma: **Powers UI Kit** library + Community plugin  
 https://www.figma.com/community/plugin/1671016490810398688  

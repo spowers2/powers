@@ -333,7 +333,7 @@ html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links butto
 }
 
 .lp-install {
-  margin: 0 0 1.15rem;
+  margin: 0 0 0.5rem;
   padding: 0.65rem 0.85rem;
   max-width: 100%;
   overflow-x: auto;
@@ -344,6 +344,50 @@ html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links butto
   font-family: var(--pu-font-mono, ui-monospace, monospace);
   font-size: var(--pu-text-sm, 0.875rem);
   line-height: 1.4;
+}
+
+.lp-install-hint {
+  margin: 0 0 1.15rem;
+  font-size: var(--pu-text-sm);
+  color: var(--pu-color-text-muted);
+  line-height: 1.45;
+}
+
+.lp-text-link {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--pu-color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.lp-text-link:hover,
+.lp-install-hint a:hover {
+  color: var(--pu-color-accent);
+}
+
+.lp-install-hint a {
+  font-weight: 600;
+  color: var(--pu-color-text);
+  text-decoration: none;
+}
+
+.lp-trust {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--pu-color-text-muted);
+  line-height: 1.5;
+}
+
+.lp-trust code {
+  font-family: var(--pu-font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
 }
 
 .lp-product-links {

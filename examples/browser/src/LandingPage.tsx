@@ -207,14 +207,28 @@ export function LandingPage(props: { router: Router }) {
                   <span class="lp-title-gradient">Skip the framework soup.</span>
                 </h1>
                 <p class="lp-lede">
-                  Built on the {SITE.systemName} UI system — signals, components,
-                  and tokens. Scaffold a Vite app in minutes, or explore demos,
-                  Lab, and the Figma library first.
+                  Design and build product UI with the same {SITE.systemName}{" "}
+                  system — Figma, Lab, and production components. Bring your own
+                  API. Host anywhere.
                 </p>
 
                 <div class="lp-cta-row">
                   <Button
                     size="lg"
+                    onClick={go("/lab?recipe=hello")}
+                  >
+                    Try Powers in 10 min
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="soft"
+                    onClick={go("/system")}
+                  >
+                    Design · System + Figma
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="ghost"
                     onClick={() =>
                       window.open(
                         SITE.demos.workspace.href,
@@ -223,65 +237,46 @@ export function LandingPage(props: { router: Router }) {
                       )
                     }
                   >
-                    Open {SITE.demos.workspace.label}
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="soft"
-                    onClick={go("/lab?recipe=hello")}
-                  >
-                    Lab · Start here
-                  </Button>
-                  <Button size="lg" variant="ghost" onClick={go("/docs")}>
-                    Install
+                    See a live product
                   </Button>
                 </div>
                 <pre class="lp-install" aria-label="Install Powers">{`pnpm create powers my-app`}</pre>
-
-                <div class="lp-product-links" aria-label="Product demos">
-                  <a
-                    href={SITE.demos.workspace.href}
-                    {...SITE.demoLinkAttrs}
-                  >
-                    {SITE.demos.workspace.label}
-                  </a>
-                  <span class="lp-product-links__sep" aria-hidden="true">
-                    ·
-                  </span>
+                <p class="lp-install-hint">
+                  <button type="button" class="lp-text-link" onClick={go("/docs#start")}>
+                    Docs / Install
+                  </button>
+                  {" · "}
                   <a href={SITE.demos.hearth.href} {...SITE.demoLinkAttrs}>
                     {SITE.demos.hearth.label}
                   </a>
-                  <span class="lp-product-links__sep" aria-hidden="true">
-                    ·
-                  </span>
-                  <button type="button" onClick={go("/docs")}>
-                    Docs
-                  </button>
-                  <span class="lp-product-links__sep" aria-hidden="true">
-                    ·
-                  </span>
-                  <button type="button" onClick={go("/system")}>
-                    System
-                  </button>
-                  <span class="lp-product-links__sep" aria-hidden="true">
-                    ·
-                  </span>
+                  {" · "}
                   <a
                     href={SITE.figma.pluginUrl}
                     target="_blank"
                     rel="noreferrer"
-                    title="Install from Figma Community"
                   >
                     Figma plugin
                   </a>
-                </div>
+                </p>
 
                 <ul class="lp-feature-row" aria-label="Highlights">
-                  <li>Products</li>
-                  <li>Figma plugin</li>
+                  <li>Figma ↔ code</li>
                   <li>Signals</li>
-                  <li>Lab</li>
+                  <li>Any backend</li>
+                  <li>Ship static</li>
                 </ul>
+
+                <p class="lp-trust" aria-label="Trust">
+                  npm <code>@lab206/*</code>
+                  {" · "}
+                  BSL source-available
+                  {" · "}
+                  Your hosting
+                  {" · "}
+                  <button type="button" class="lp-text-link" onClick={go("/docs#data")}>
+                    Data hooks
+                  </button>
+                </p>
               </div>
 
               {/* Live product showcase (not a marketing banner) */}
@@ -467,39 +462,41 @@ export function LandingPage(props: { router: Router }) {
               </div>
             </div>
 
-            <div class="lp-paths" aria-label="Start here by role">
-              <p class="lp-paths-title">Then dig in</p>
+            <div class="lp-paths" aria-label="Choose your path">
+              <p class="lp-paths-title">Choose your path</p>
               <div class="lp-paths-grid">
                 <button
                   type="button"
                   class="lp-path-card"
                   onClick={go("/lab?recipe=hello")}
                 >
-                  <strong>Engineers</strong>
-                  <span>Lab Start here · Docs · forms that stay mounted.</span>
-                </button>
-                <a
-                  class="lp-path-card"
-                  href={SITE.figma.pluginUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <strong>Design</strong>
+                  <strong>I write code</strong>
                   <span>
-                    Install {SITE.figma.pluginLabel} from Figma Community —
-                    sync tokens, audit the kit. Also explore System in-app.
+                    Lab hello → Docs Data →{" "}
+                    <code>pnpm create powers</code>
                   </span>
-                </a>
+                </button>
                 <button
                   type="button"
                   class="lp-path-card"
-                  onClick={go("/lab?recipe=settings")}
+                  onClick={go("/system")}
                 >
-                  <strong>Cookbook</strong>
+                  <strong>I design in Figma</strong>
                   <span>
-                    Settings, admin lists, and validation you can steal.
+                    System tokens → {SITE.figma.pluginLabel} (Community) → Pro
                   </span>
                 </button>
+                <a
+                  class="lp-path-card"
+                  href={SITE.demos.workspace.href}
+                  {...SITE.demoLinkAttrs}
+                >
+                  <strong>I want proof</strong>
+                  <span>
+                    Live designlab206.com + {SITE.demos.hearth.label} here —
+                    real apps, not kitchen sinks.
+                  </span>
+                </a>
               </div>
             </div>
           </Container>
@@ -513,8 +510,10 @@ export function LandingPage(props: { router: Router }) {
                 Products built with {SITE.systemName}
               </h2>
               <p class="lp-section-sub">
-                Flagship demos — full apps, not kitchen sinks. This is the
-                product proof; Lab and System teach the kit underneath.
+                Flagship demos — full apps, not kitchen sinks.{" "}
+                {SITE.demos.workspace.label} runs on its own domain;{" "}
+                {SITE.demos.hearth.label} ships with this site. Lab and System
+                teach the kit underneath.
               </p>
             </div>
             <div class="lp-demo-grid">
@@ -523,13 +522,14 @@ export function LandingPage(props: { router: Router }) {
                 href={SITE.demos.workspace.href}
                 {...SITE.demoLinkAttrs}
               >
-                <div class="lp-demo-card__kicker">Flagship · workspace</div>
+                <div class="lp-demo-card__kicker">Flagship · live</div>
                 <h3>{SITE.demos.workspace.label}</h3>
                 <p>
                   Freelance studio workspace: clients, pipeline, invoices, time
-                  → draft bills, client portal. Local-first with real workflows.
+                  → draft bills, client portal. Built with {SITE.systemName} —
+                  open designlab206.com.
                 </p>
-                <span class="lp-demo-card__cta">Open product →</span>
+                <span class="lp-demo-card__cta">Open designlab206.com →</span>
               </a>
               <a
                 class="lp-demo-card lp-demo-card--hearth"

@@ -70,7 +70,7 @@ More: [NPM.md](./NPM.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md) · [FORMS.md](./F
 | Lab Start here (~10 min) | https://lab206.com/lab?recipe=hello |
 | Docs (API + patterns) | https://lab206.com/docs · [#reactivity](https://lab206.com/docs#reactivity) |
 | System (every component) | https://lab206.com/system |
-| designlab206 demo | https://lab206.com/workspace/ |
+| designlab206 demo | https://designlab206.com/ |
 | Hearth demo | https://lab206.com/hearth/ |
 | Figma | [Powers Design Kit plugin](https://www.figma.com/community/plugin/1671016490810398688) |
 

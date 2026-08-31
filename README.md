@@ -15,7 +15,7 @@ Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos
 
 ## Start here
 
-1. **See products** — [lab206.com](https://lab206.com) · [/workspace](https://lab206.com/workspace/) (designlab206) · [/hearth](https://lab206.com/hearth/)  
+1. **See products** — [lab206.com](https://lab206.com) · [designlab206.com](https://designlab206.com/) · [Hearth](https://lab206.com/hearth/)  
 2. **Design** — enable **Powers UI Kit** in Figma Assets · install [Powers Design Kit](https://www.figma.com/community/plugin/1671016490810398688)  
 3. **Learn** — [Lab · Start here](https://lab206.com/lab?recipe=hello) · [Docs](https://lab206.com/docs) · [System](https://lab206.com/system)
 

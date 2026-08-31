@@ -18,8 +18,9 @@ export const SITE = {
   demos: {
     workspace: {
       label: "designlab206",
-      href: import.meta.env.DEV ? "http://localhost:5180" : "/workspace/",
-      title: "Flagship product — freelance workspace",
+      /** Live product site (Powers). Local app: `pnpm example:starter` → :5180 */
+      href: "https://designlab206.com/",
+      title: "Flagship product — freelance workspace (live)",
     },
     hearth: {
       label: "Hearth",
