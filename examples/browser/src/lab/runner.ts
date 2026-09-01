@@ -2,7 +2,8 @@ import esbuild from "esbuild-wasm";
 import wasmUrl from "esbuild-wasm/esbuild.wasm?url";
 // Full design system CSS for the Lab iframe (tokens + base + utilities)
 import themeCss from "@lab206/ui/theme.css?inline";
-import { createLabApi, LAB_API_KEYS, type PowerLabApi } from "./api.js";
+import { createLabApi, type PowerLabApi } from "./api.js";
+import { rewriteExports, rewriteImportsToLab } from "./importRewrite.js";
 import { injectDesignSystemInto } from "./warmStyles.js";
 
 let esbuildReady: Promise<void> | null = null;
@@ -28,33 +29,15 @@ export type LabLog = {
   args: string[];
 };
 
-function stripImports(code: string): string {
-  return code
-    .replace(/^\s*import\s+type\s+[\s\S]*?;?\s*$/gm, "")
-    .replace(/^\s*import\s+[\s\S]*?from\s+["'][^"']+["']\s*;?\s*$/gm, "")
-    .replace(/^\s*import\s+["'][^"']+["']\s*;?\s*$/gm, "")
-    .replace(/^\s*export\s+\{[^}]*\}\s*;?\s*$/gm, "");
-}
-
-function rewriteExports(code: string): string {
-  return code
-    .replace(/export\s+default\s+function\s+/g, "function ")
-    .replace(/export\s+default\s+/g, "")
-    .replace(/export\s+async\s+function\s+/g, "async function ")
-    .replace(/export\s+function\s+/g, "function ")
-    .replace(/export\s+const\s+/g, "const ")
-    .replace(/export\s+let\s+/g, "let ")
-    .replace(/export\s+class\s+/g, "class ");
-}
-
 export async function compileLabCode(source: string): Promise<string> {
   await ensureEsbuild();
-  const stripped = rewriteExports(stripImports(source));
+  const stripped = rewriteExports(rewriteImportsToLab(source));
+  // Unique jsx factory names so they never clash with recipe locals (h, list, …)
   const result = await esbuild.transform(stripped, {
     loader: "tsx",
     jsx: "transform",
-    jsxFactory: "h",
-    jsxFragment: "Fragment",
+    jsxFactory: "__jsx",
+    jsxFragment: "__Fragment",
     target: "es2022",
   });
   return result.code;
@@ -108,7 +91,6 @@ export async function runInFrame(
   }
 
   const api = createLabApi();
-  const keys = LAB_API_KEYS.filter((k) => k in (api as Record<string, unknown>));
 
   const srcdoc = `<!DOCTYPE html>
 <html>
@@ -152,14 +134,13 @@ export async function runInFrame(
       }
     });
     window.__POWER_BOOT__ = function (labApi) {
-      var names = ${JSON.stringify(keys)};
       window.__POWER_RUN__ = function (code) {
         var root = document.getElementById("root");
         while (root.firstChild) root.removeChild(root.firstChild);
-        // First arg must NOT be named "api" — Data recipes use const api = createApiClient(...)
+        // Single bag __lab — recipe locals (api, list, …) must never be Function params
         var fn = new Function(
           "__lab", "console", "document", "window",
-          names.join(","),
+          "var __jsx = __lab.h, __Fragment = __lab.Fragment;\\n" +
           code + "\\n;" +
           "if (typeof App === 'function') {" +
           "  var r = document.getElementById('root');" +
@@ -168,14 +149,13 @@ export async function runInFrame(
           "  }" +
           "}"
         );
-        var args = names.map(function (n) { return labApi[n]; });
         var labConsole = {
           log: function(){ parent.postMessage({ type: "power-lab-log", level: "log", args: [].slice.call(arguments).map(String) }, "*"); },
           info: function(){ parent.postMessage({ type: "power-lab-log", level: "info", args: [].slice.call(arguments).map(String) }, "*"); },
           warn: function(){ parent.postMessage({ type: "power-lab-log", level: "warn", args: [].slice.call(arguments).map(String) }, "*"); },
           error: function(){ parent.postMessage({ type: "power-lab-log", level: "error", args: [].slice.call(arguments).map(String) }, "*"); }
         };
-        fn.apply(null, [labApi, labConsole, document, window].concat(args));
+        fn(labApi, labConsole, document, window);
       };
       parent.postMessage({ type: "power-lab-ready" }, "*");
     };
