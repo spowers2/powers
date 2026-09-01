@@ -151,30 +151,31 @@ export async function runInFrame(
         }, "*");
       }
     });
-    window.__POWER_BOOT__ = function (api) {
+    window.__POWER_BOOT__ = function (labApi) {
       var names = ${JSON.stringify(keys)};
       window.__POWER_RUN__ = function (code) {
         var root = document.getElementById("root");
         while (root.firstChild) root.removeChild(root.firstChild);
+        // First arg must NOT be named "api" — Data recipes use const api = createApiClient(...)
         var fn = new Function(
-          "api", "console", "document", "window",
+          "__lab", "console", "document", "window",
           names.join(","),
           code + "\\n;" +
           "if (typeof App === 'function') {" +
           "  var r = document.getElementById('root');" +
           "  if (r && r.childNodes.length === 0) {" +
-          "    api.mount(r, function () { return App(); });" +
+          "    __lab.mount(r, function () { return App(); });" +
           "  }" +
           "}"
         );
-        var args = names.map(function (n) { return api[n]; });
+        var args = names.map(function (n) { return labApi[n]; });
         var labConsole = {
           log: function(){ parent.postMessage({ type: "power-lab-log", level: "log", args: [].slice.call(arguments).map(String) }, "*"); },
           info: function(){ parent.postMessage({ type: "power-lab-log", level: "info", args: [].slice.call(arguments).map(String) }, "*"); },
           warn: function(){ parent.postMessage({ type: "power-lab-log", level: "warn", args: [].slice.call(arguments).map(String) }, "*"); },
           error: function(){ parent.postMessage({ type: "power-lab-log", level: "error", args: [].slice.call(arguments).map(String) }, "*"); }
         };
-        fn.apply(null, [api, labConsole, document, window].concat(args));
+        fn.apply(null, [labApi, labConsole, document, window].concat(args));
       };
       parent.postMessage({ type: "power-lab-ready" }, "*");
     };
