@@ -161,8 +161,8 @@
 }
 
 .lp-anchors-inner button.is-active {
-  color: var(--pu-color-accent);
-  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
+  color: var(--pu-color-soft-fg);
+  background: var(--pu-color-soft-bg);
   border-color: color-mix(in srgb, var(--pu-color-accent) 22%, transparent);
 }
 

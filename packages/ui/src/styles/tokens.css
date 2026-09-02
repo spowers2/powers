@@ -202,10 +202,10 @@
   --pu-color-control-border: color-mix(in srgb, #b6c2d4 42%, transparent);
   --pu-color-text: #e8eef8;
   --pu-color-text-muted: #a8b4c8; /* brighter muted for AA on dark surfaces */
-  /* Primary CTA: medium blue + light label (never dark-on-dark) */
-  --pu-color-accent: #4a8fd4;
-  --pu-color-accent-hover: #6aa8e6;
-  --pu-color-accent-fg: #f7fafc;
+  /* Primary CTA: bright blue + dark ink (AA on solid fills; never dark-on-dark) */
+  --pu-color-accent: #60a5fa;
+  --pu-color-accent-hover: #93c5fd;
+  --pu-color-accent-fg: #07111f;
   --pu-color-signal: var(--pu-sage-400);
   --pu-color-focus: var(--pu-holo-cyan);
   --pu-color-danger: #f07178;
@@ -217,7 +217,7 @@
   /* Soft chrome — light text on tinted dark wash */
   --pu-color-soft-bg: color-mix(in srgb, var(--pu-color-accent) 18%, var(--pu-color-surface));
   --pu-color-soft-bg-hover: color-mix(in srgb, var(--pu-color-accent) 26%, var(--pu-color-surface));
-  --pu-color-soft-fg: #c5ddf5;
+  --pu-color-soft-fg: #dbeafe;
   --pu-color-soft-border: color-mix(in srgb, var(--pu-color-accent) 40%, transparent);
   --pu-glass-bg: color-mix(in srgb, #0b1220 78%, transparent);
   --pu-glass-border: color-mix(in srgb, var(--pu-holo-cyan) 18%, transparent);
@@ -336,6 +336,14 @@ html[data-pu-palette="dual"] {
 }
 
 html[data-pu-palette="dual"][data-pu-theme="dark"] {
+  /* Lighten brand steps used as chrome/text on dark (dual light keeps navy 500) */
+  --pu-brand-300: #7dd3fc;
+  --pu-brand-400: #38bdf8;
+  --pu-brand-500: #7dd3fc;
+  --pu-brand-600: #38bdf8;
+  --pu-holo-cyan: #22d3ee;
+  --pu-holo-teal: #67e8f9;
+
   --pu-color-bg: #04080f;
   --pu-color-surface: #0a101c;
   --pu-color-surface-2: #111a2a;
@@ -345,7 +353,7 @@ html[data-pu-palette="dual"][data-pu-theme="dark"] {
   --pu-color-border-strong: color-mix(in srgb, #22d3ee 38%, #64748b);
   --pu-color-control-border: color-mix(in srgb, #a5b4c8 40%, transparent);
   --pu-color-text: #eef3fb;
-  --pu-color-text-muted: #a8b6c9;
+  --pu-color-text-muted: #b6c4d6;
   /* Soft electric primary for dark CTAs — dark ink on bright cyan */
   --pu-color-accent: #38bdf8;
   --pu-color-accent-hover: #7dd3fc;
@@ -361,7 +369,7 @@ html[data-pu-palette="dual"][data-pu-theme="dark"] {
 
   --pu-color-soft-bg: color-mix(in srgb, #22d3ee 18%, #0a101c);
   --pu-color-soft-bg-hover: color-mix(in srgb, #22d3ee 26%, #0a101c);
-  --pu-color-soft-fg: #a5f3fc; /* bright cyan text on dark soft wash */
+  --pu-color-soft-fg: #cffafe; /* bright cyan text on dark soft wash */
   --pu-color-soft-border: color-mix(in srgb, #22d3ee 42%, transparent);
 
   --pu-glass-bg: color-mix(in srgb, #0a101c 80%, transparent);

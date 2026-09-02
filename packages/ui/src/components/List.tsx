@@ -63,7 +63,7 @@ const ensure = createStyleSheet(
   transform: translateX(2px);
 }
 .pu-list__item.is-selected {
-  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
+  background: var(--pu-color-soft-bg);
   box-shadow: inset 2px 0 0 var(--pu-color-accent);
 }
 .pu-list__item:focus-visible:not(:disabled) {

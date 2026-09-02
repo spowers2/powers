@@ -103,9 +103,9 @@
   font-weight: var(--pu-font-semibold);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
-  color: var(--pu-color-accent);
-  border: 1px solid color-mix(in srgb, var(--pu-color-accent) 22%, transparent);
+  background: var(--pu-color-soft-bg);
+  color: var(--pu-color-soft-fg);
+  border: 1px solid var(--pu-color-soft-border);
 }
 
 .lab-start-here {
@@ -149,12 +149,12 @@
 }
 
 .lab-data-recipes .lab-start-here__label {
-  color: var(--pu-color-accent);
+  color: var(--pu-color-soft-fg);
 }
 
 .lab-data-recipes .lab-start-here__list .lab-recipe {
-  border-color: color-mix(in srgb, var(--pu-color-accent) 20%, transparent);
-  background: color-mix(in srgb, var(--pu-color-accent) 5%, var(--lab-panel));
+  border-color: var(--pu-color-soft-border);
+  background: color-mix(in srgb, var(--pu-color-soft-bg) 55%, var(--lab-panel));
 }
 
 .lab-recipe--data-ref strong::after {
@@ -245,8 +245,8 @@
 }
 
 .lab-recipe.is-active {
-  border-color: color-mix(in srgb, var(--pu-color-accent) 32%, var(--lab-border));
-  background: color-mix(in srgb, var(--pu-color-accent) 10%, var(--lab-panel));
+  border-color: var(--pu-color-soft-border);
+  background: var(--pu-color-soft-bg);
   box-shadow: var(--pu-shadow-xs);
 }
 
@@ -260,7 +260,7 @@
 }
 
 .lab-recipe.is-active .lab-recipe__idx {
-  color: var(--pu-color-accent);
+  color: var(--pu-color-soft-fg);
 }
 
 .lab-recipe__body {
@@ -385,13 +385,13 @@
   background: var(--pu-color-accent-hover);
 }
 .lab-btn--soft {
-  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
-  color: var(--pu-color-accent);
-  border-color: color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
+  background: var(--pu-color-soft-bg);
+  color: var(--pu-color-soft-fg);
+  border-color: var(--pu-color-soft-border);
   box-shadow: none;
 }
 .lab-btn--soft:hover {
-  background: color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
+  background: var(--pu-color-soft-bg-hover);
 }
 
 .lab-status {
@@ -560,8 +560,8 @@
 
 @keyframes lab-code-flash {
   0% {
-    background: color-mix(in srgb, var(--pu-color-accent) 26%, var(--pu-color-surface-2));
-    color: var(--pu-color-accent);
+    background: var(--pu-color-soft-bg-hover);
+    color: var(--pu-color-soft-fg);
   }
   100% {
     background: color-mix(in srgb, var(--pu-color-surface-2) 85%, var(--lab-panel));

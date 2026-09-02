@@ -33,15 +33,15 @@
 }
 
 .docs-toc button:hover {
-  color: var(--pu-color-accent);
-  background: color-mix(in srgb, var(--pu-color-accent) 8%, transparent);
+  color: var(--pu-color-soft-fg);
+  background: var(--pu-color-soft-bg);
 }
 
 .docs-toc button.is-active {
-  color: var(--pu-color-accent);
-  background: color-mix(in srgb, var(--pu-color-accent) 12%, transparent);
-  border-color: color-mix(in srgb, var(--pu-color-accent) 22%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pu-color-accent) 18%, transparent);
+  color: var(--pu-color-soft-fg);
+  background: var(--pu-color-soft-bg);
+  border-color: var(--pu-color-soft-border);
+  box-shadow: 0 0 0 1px var(--pu-color-soft-border);
 }
 
 .docs-section {
