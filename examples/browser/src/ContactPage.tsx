@@ -171,6 +171,9 @@ export function ContactPage(props: { router: Router }) {
             </a>
             .
           </Text>
+          <Text muted size="sm">
+            {SITE.marketing.aiNote} {SITE.marketing.aiLine}
+          </Text>
           {() =>
             subject() === "Commercial license" ? (
               <Alert tone="info" title="Commercial license">

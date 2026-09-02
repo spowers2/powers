@@ -7,6 +7,20 @@ export const SITE = {
   name: "lab206",
   /** UI system / packages / Figma kit */
   systemName: "Powers",
+  /**
+   * Craft-first AI marketing (same voice as labazine.com):
+   * accelerate with tools; don’t outsource judgment.
+   */
+  marketing: {
+    /** Short line for hero / meta */
+    aiLine: "AI where it helps; judgment where it counts.",
+    /** Contact / about */
+    aiNote:
+      "I use AI to move faster on Powers and lab206 — design and code stay in the loop. AI helps with the pace; the decisions are still mine.",
+    /** Meta description for the public site */
+    description:
+      "Powers — fine-grained UI kit with a design system built in. Figma, Lab, and production components. AI where it helps; judgment where it counts.",
+  },
   figma: {
     /** Published design library file */
     kitUrl: "https://www.figma.com/design/bdfYWkMm5oJqKBIrwWCsSd",

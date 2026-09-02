@@ -324,6 +324,12 @@ html[data-pu-palette="dual"]:not([data-pu-theme="dark"]) .lp-product-links butto
   font-weight: 450;
 }
 
+/* Labazine-style craft line — quiet, not a feature callout */
+.lp-ai-line {
+  color: color-mix(in srgb, var(--pu-color-text-muted) 70%, var(--pu-color-text));
+  font-weight: 500;
+}
+
 .lp-cta-row {
   display: flex;
   flex-wrap: wrap;

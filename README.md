@@ -4,6 +4,8 @@
 
 Signals, ownership, and near-zero runtime — plus tokens, primitives, and demos you can ship from. Not “React + a CSS framework”; one coherent stack.
 
+Built with AI in the loop — **AI where it helps; judgment where it counts.**
+
 | | |
 |---|---|
 | **Try it** | [lab206.com](https://lab206.com) — Lab · Docs · System · product demos |

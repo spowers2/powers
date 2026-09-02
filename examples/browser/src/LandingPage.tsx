@@ -209,7 +209,8 @@ export function LandingPage(props: { router: Router }) {
                 <p class="lp-lede">
                   Design and build product UI with the same {SITE.systemName}{" "}
                   system — Figma, Lab, and production components. Bring your own
-                  API. Host anywhere.
+                  API. Host anywhere.{" "}
+                  <span class="lp-ai-line">{SITE.marketing.aiLine}</span>
                 </p>
 
                 <div class="lp-cta-row">
