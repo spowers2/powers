@@ -64,13 +64,18 @@ body {
   flex-direction: column;
 }
 
-/* Single full-viewport circuit board — not tiled */
+/* Circuit atmosphere — hairline, distressed, almost wallpaper */
 .circuit-bg {
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  opacity: 0.55;
+}
+
+html[data-pu-theme="dark"] .circuit-bg {
+  opacity: 0.4;
 }
 
 .circuit-bg__svg {
@@ -78,93 +83,75 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
+  color: var(--lp-accent);
 }
 
 .circuit-bg__board path {
   fill: none;
-  stroke: var(--lp-accent);
-  stroke-width: 1.25;
+  stroke: currentColor;
+  stroke-width: 0.7;
   stroke-linecap: square;
   stroke-linejoin: miter;
-  stroke-opacity: 0.28;
+  stroke-opacity: 0.11;
+}
+
+.circuit-bg__board path.circuit-bg__broken {
+  stroke-dasharray: 10 14 4 18;
+  stroke-opacity: 0.07;
+}
+
+.circuit-bg__board path.circuit-bg__ghost {
+  stroke-opacity: 0.045;
+  stroke-width: 0.55;
 }
 
 .circuit-bg__board circle {
-  fill: var(--lp-accent);
-  fill-opacity: 0.32;
-  stroke: var(--lp-accent);
-  stroke-width: 1;
-  stroke-opacity: 0.4;
+  fill: currentColor;
+  fill-opacity: 0.1;
+  stroke: none;
 }
 
 html[data-pu-theme="dark"] .circuit-bg__board path {
-  stroke-opacity: 0.34;
+  stroke-opacity: 0.14;
+}
+
+html[data-pu-theme="dark"] .circuit-bg__board path.circuit-bg__broken {
+  stroke-opacity: 0.08;
+}
+
+html[data-pu-theme="dark"] .circuit-bg__board path.circuit-bg__ghost {
+  stroke-opacity: 0.055;
 }
 
 html[data-pu-theme="dark"] .circuit-bg__board circle {
-  fill-opacity: 0.4;
-  stroke-opacity: 0.55;
+  fill-opacity: 0.14;
 }
 
-/* Short lit segment traveling along each path (viewBox user units) */
-.circuit-pulse {
-  fill: none;
-  stroke: var(--lp-accent);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 18 320;
-  stroke-dashoffset: 0;
-  stroke-opacity: 0;
+/* Tiny point + soft glow — hidden unless motion is on */
+.circuit-bg__pulses {
+  opacity: 0;
 }
 
-html[data-lp-motion="on"] .circuit-pulse {
-  stroke-opacity: 0.95;
-  animation-name: circuit-pulse-travel;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+html[data-lp-motion="on"] .circuit-bg__pulses {
+  opacity: 1;
 }
 
-html[data-lp-motion="on"] .circuit-pulse--a {
-  animation-duration: 10s;
-  animation-delay: 0s;
+.circuit-dot {
+  fill: currentColor;
+  fill-opacity: 0.45;
+  stroke: none;
 }
 
-html[data-lp-motion="on"] .circuit-pulse--b {
-  animation-duration: 13s;
-  animation-delay: -3.5s;
-  stroke-dasharray: 16 360;
+html[data-pu-theme="dark"] .circuit-dot {
+  fill-opacity: 0.55;
 }
 
-html[data-lp-motion="on"] .circuit-pulse--c {
-  animation-duration: 11.5s;
-  animation-delay: -7s;
-  stroke-dasharray: 20 340;
+.circuit-dot--b {
+  fill-opacity: 0.35;
 }
 
-html[data-lp-motion="on"] .circuit-pulse--d {
-  animation-duration: 8.5s;
-  animation-delay: -1.8s;
-  stroke-dasharray: 14 280;
-}
-
-html[data-lp-motion="on"] .circuit-pulse--e {
-  animation-duration: 12s;
-  animation-delay: -5.2s;
-  stroke-dasharray: 16 300;
-}
-
-html[data-pu-theme="dark"][data-lp-motion="on"] .circuit-pulse {
-  stroke-opacity: 1;
-}
-
-@keyframes circuit-pulse-travel {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -338;
-  }
+.circuit-dot--c {
+  fill-opacity: 0.3;
 }
 
 @keyframes panel-in {

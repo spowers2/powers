@@ -1,6 +1,6 @@
 /**
- * Full-viewport circuit atmosphere (not tiled).
- * Static traces always visible; traveling pulses only when motion is on.
+ * Full-viewport circuit atmosphere — sparse, distressed, not tiled.
+ * Pulses are tiny glowing points (animateMotion), not dash segments.
  */
 export function CircuitBackground() {
   return (
@@ -12,72 +12,94 @@ export function CircuitBackground() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <radialGradient id="lp-circuit-fade" cx="50%" cy="42%" r="78%">
-            <stop offset="0%" stop-color="white" stop-opacity="1" />
-            <stop offset="55%" stop-color="white" stop-opacity="0.75" />
-            <stop offset="100%" stop-color="white" stop-opacity="0.15" />
+          <radialGradient id="lp-circuit-fade" cx="50%" cy="45%" r="72%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.35" />
+            <stop offset="45%" stop-color="white" stop-opacity="0.7" />
+            <stop offset="100%" stop-color="white" stop-opacity="0" />
           </radialGradient>
           <mask id="lp-circuit-mask">
             <rect width="1440" height="900" fill="url(#lp-circuit-fade)" />
           </mask>
-          <filter id="lp-pulse-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.6" result="b" />
+          <filter
+            id="lp-dot-glow"
+            x="-200%"
+            y="-200%"
+            width="500%"
+            height="500%"
+          >
+            <feGaussianBlur stdDeviation="2.2" result="b" />
             <feMerge>
+              <feMergeNode in="b" />
               <feMergeNode in="b" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+
+          {/* Motion paths (referenced by animateMotion) */}
+          <path id="lp-route-a" d="M48 140 H200 V270 H340 V175 H490" />
+          <path id="lp-route-b" d="M1320 760 H1160 V640 H1000 V720" />
+          <path id="lp-route-c" d="M1180 110 V230 H1300 V310" />
         </defs>
 
-        <g mask="url(#lp-circuit-mask)">
-          {/* Static board traces — asymmetric, one composition */}
+        <g mask="url(#lp-circuit-mask)" class="circuit-bg__ink">
+          {/* Static board — incomplete / broken traces, hairlines */}
           <g class="circuit-bg__board">
-            <path d="M40 120 H220 V280 H380 V160 H560 V320 H720" />
-            <path d="M120 780 H300 V620 H480 V740 H680 V560 H860" />
-            <path d="M980 80 V220 H1140 V380 H1280 V200 H1400" />
-            <path d="M820 820 H1000 V680 H1180 V780 H1360" />
-            <path d="M60 420 H180 V520 H340 V440 H500 V600" />
-            <path d="M640 100 V240 H780 V140 H920 V300" />
-            <path d="M400 500 H560 V420 H700 V540 H840 V460" />
-            <path d="M1080 520 H1220 V640 H1340" />
-            <path d="M200 200 V120 H80" />
-            <path d="M1320 720 V800 H1200" />
-            {/* vias / pads */}
-            <circle cx="220" cy="280" r="3.5" />
-            <circle cx="380" cy="160" r="3.5" />
-            <circle cx="560" cy="320" r="3.5" />
-            <circle cx="300" cy="620" r="3.5" />
-            <circle cx="680" cy="560" r="3.5" />
-            <circle cx="1140" cy="380" r="3.5" />
-            <circle cx="1000" cy="680" r="3.5" />
-            <circle cx="180" cy="520" r="3.5" />
-            <circle cx="780" cy="240" r="3.5" />
-            <circle cx="700" cy="540" r="3.5" />
-            <circle cx="1220" cy="640" r="3.5" />
+            <path d="M48 140 H200 V270 H340 V175 H490" />
+            <path d="M490 175 H540" class="circuit-bg__broken" />
+            <path d="M80 520 H160 V590 H280 V545" />
+            <path d="M280 545 H320" class="circuit-bg__broken" />
+            <path d="M1180 110 V230 H1300 V310 H1380" />
+            <path d="M1320 760 H1160 V640 H1000 V720 H920" />
+            <path d="M920 720 H870" class="circuit-bg__broken" />
+            <path d="M700 90 V180 H820 V130" />
+            <path d="M820 130 H860" class="circuit-bg__broken" />
+            <path d="M1080 480 H1180 V560" />
+            <path d="M200 700 H280 V650" />
+            <path d="M40 380 H90" class="circuit-bg__ghost" />
+            <path d="M1360 420 V480" class="circuit-bg__ghost" />
+
+            {/* Sparse vias — uneven sizes for a worn board feel */}
+            <circle cx="200" cy="270" r="1.6" />
+            <circle cx="340" cy="175" r="1.3" />
+            <circle cx="160" cy="590" r="1.5" />
+            <circle cx="1300" cy="310" r="1.4" />
+            <circle cx="1160" cy="640" r="1.7" />
+            <circle cx="820" cy="130" r="1.2" />
+            <circle cx="1180" cy="560" r="1.3" />
+            <circle cx="280" cy="650" r="1.1" />
           </g>
 
-          {/* Traveling light pulses — dash values are viewBox units (not pathLength/CSS px) */}
-          <g class="circuit-bg__pulses" filter="url(#lp-pulse-glow)">
-            <path
-              class="circuit-pulse circuit-pulse--a"
-              d="M40 120 H220 V280 H380 V160 H560 V320 H720"
-            />
-            <path
-              class="circuit-pulse circuit-pulse--b"
-              d="M120 780 H300 V620 H480 V740 H680 V560 H860"
-            />
-            <path
-              class="circuit-pulse circuit-pulse--c"
-              d="M980 80 V220 H1140 V380 H1280 V200 H1400"
-            />
-            <path
-              class="circuit-pulse circuit-pulse--d"
-              d="M400 500 H560 V420 H700 V540 H840 V460"
-            />
-            <path
-              class="circuit-pulse circuit-pulse--e"
-              d="M820 820 H1000 V680 H1180 V780 H1360"
-            />
+          {/* Tiny glowing points traveling a few routes */}
+          <g class="circuit-bg__pulses" filter="url(#lp-dot-glow)">
+            <circle class="circuit-dot circuit-dot--a" r="1.75" cx="0" cy="0">
+              <animateMotion
+                dur="22s"
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href="#lp-route-a" />
+              </animateMotion>
+            </circle>
+            <circle class="circuit-dot circuit-dot--b" r="1.5" cx="0" cy="0">
+              <animateMotion
+                dur="28s"
+                begin="-9s"
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href="#lp-route-b" />
+              </animateMotion>
+            </circle>
+            <circle class="circuit-dot circuit-dot--c" r="1.35" cx="0" cy="0">
+              <animateMotion
+                dur="19s"
+                begin="-4s"
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href="#lp-route-c" />
+              </animateMotion>
+            </circle>
           </g>
         </g>
       </svg>
