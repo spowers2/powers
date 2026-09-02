@@ -18,6 +18,7 @@ import {
   severityChipClass,
   statusChipClass,
 } from "../components/status.js";
+import { PageChrome } from "../components/PageChrome.js";
 
 export function ShipmentDetailPage(props: {
   router: Router;
@@ -31,19 +32,23 @@ export function ShipmentDetailPage(props: {
   const saving = signal(false);
 
   return (
-    <div class="stack-gap">
-      <div class="page-head">
-        <div>
-          <h1>Shipment detail</h1>
-          <p class="mono">{id}</p>
-        </div>
-        <div class="row-gap">
+    <PageChrome
+      router={router}
+      title="Shipment detail"
+      purpose="Inspect one load: route, status, timeline, and related issues. Update the ETA if plans change."
+      crumbs={[
+        { label: "Overview", href: "/" },
+        { label: "Shipments", href: "/shipments" },
+        { label: id || "Detail" },
+      ]}
+      actions={
+        <>
           <Button
             size="sm"
             variant="ghost"
             onClick={() => router.navigate("/shipments")}
           >
-            Back to list
+            ← Back to list
           </Button>
           <Button
             size="sm"
@@ -52,12 +57,12 @@ export function ShipmentDetailPage(props: {
           >
             Refresh
           </Button>
-        </div>
-      </div>
-
+        </>
+      }
+    >
       <Show when={() => detail.loading() && !detail.latest()}>
         {() => (
-          <div class="row-gap mono muted">
+          <div class="row-gap muted">
             <Spinner /> Loading shipment…
           </div>
         )}
@@ -76,21 +81,20 @@ export function ShipmentDetailPage(props: {
           const ex = detail()!.exceptions;
           return (
             <div class="stack-gap">
-              <div class="hud-panel">
-                <div class="hud-panel__inner">
-                  <h2 class="hud-panel__title">
-                    <span class="led led--cyan" />
-                    {s.reference}
-                  </h2>
+              <div class="panel">
+                <div class="panel__inner">
+                  <h2 class="panel__title">{s.reference}</h2>
                   <Stack gap={3}>
                     <div class="row-gap">
                       {formatLane(s.origin, s.destination)}
                       <span class={statusChipClass(s.status)}>{s.status}</span>
-                      <span class="chip">P{s.priority}</span>
+                      <span class="chip">priority P{s.priority}</span>
                     </div>
-                    <div class="mono muted">
-                      Carrier {s.carrier} · {s.weightKg.toLocaleString()} kg ·
-                      ETA {formatWhen(s.eta)} · Updated {formatWhen(s.updatedAt)}
+                    <div class="muted">
+                      Carrier <b>{s.carrier}</b> ·{" "}
+                      {s.weightKg.toLocaleString()} kg · ETA{" "}
+                      <b>{formatWhen(s.eta)}</b> · Updated{" "}
+                      {formatWhen(s.updatedAt)}
                     </div>
                     <div class="row-gap">
                       <Button
@@ -107,31 +111,28 @@ export function ShipmentDetailPage(props: {
                         variant="soft"
                         onClick={() => router.navigate("/exceptions")}
                       >
-                        View all issues
+                        Go to issues
                       </Button>
                     </div>
                   </Stack>
                 </div>
               </div>
 
-              <div class="hud-panel">
-                <div class="hud-panel__inner">
-                  <h2 class="hud-panel__title">
-                    <span class="led" />
-                    Timeline
-                  </h2>
+              <div class="panel">
+                <div class="panel__inner">
+                  <h2 class="panel__title">What happened so far</h2>
                   <ul class="timeline">
                     <li>Last update · {formatWhen(s.updatedAt)}</li>
                     <li>
-                      Status · {s.status} · {s.carrier}
+                      Status is <b>{s.status}</b> with {s.carrier}
                     </li>
                     <li>
-                      Route · {s.origin} → {s.destination}
+                      Route {s.origin} → {s.destination}
                     </li>
                     {ex.map((e) => (
                       <li>
-                        Issue: {e.type.replaceAll("_", " ")} ({e.severity}) ·{" "}
-                        {formatWhen(e.openedAt)}
+                        Issue logged: {e.type.replaceAll("_", " ")} (
+                        {e.severity}) · {formatWhen(e.openedAt)}
                       </li>
                     ))}
                   </ul>
@@ -140,22 +141,22 @@ export function ShipmentDetailPage(props: {
 
               <Show when={() => ex.length > 0}>
                 {() => (
-                  <div class="hud-panel">
-                    <div class="hud-panel__inner">
-                      <h2 class="hud-panel__title">
-                        <span class="led led--amber" />
-                        Related issues
-                      </h2>
+                  <div class="panel">
+                    <div class="panel__inner">
+                      <h2 class="panel__title">Related issues</h2>
                       {ex.map((e) => (
                         <div class="ex-row">
                           <span class={severityChipClass(e.severity)}>
                             {e.severity}
                           </span>
-                          <div class="mono">
-                            {e.type} · {e.note}
+                          <div>
+                            <div class="mono">
+                              {e.type.replaceAll("_", " ")}
+                            </div>
+                            <div class="muted">{e.note}</div>
                           </div>
-                          <span class="mono muted">
-                            {e.acked ? "ACK" : "OPEN"}
+                          <span class="muted">
+                            {e.acked ? "Acknowledged" : "Still open"}
                           </span>
                         </div>
                       ))}
@@ -214,6 +215,6 @@ export function ShipmentDetailPage(props: {
           </div>
         </Stack>
       </Dialog>
-    </div>
+    </PageChrome>
   );
 }

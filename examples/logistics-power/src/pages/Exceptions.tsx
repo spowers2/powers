@@ -12,6 +12,7 @@ import {
   formatWhen,
   severityChipClass,
 } from "../components/status.js";
+import { PageChrome } from "../components/PageChrome.js";
 
 export function ExceptionsPage(props: {
   router: Router;
@@ -20,12 +21,15 @@ export function ExceptionsPage(props: {
   const { router, toaster } = props;
 
   return (
-    <div class="stack-gap">
-      <div class="page-head">
-        <div>
-          <h1>Issues</h1>
-          <p>Open problems — acknowledge to clear them from the queue</p>
-        </div>
+    <PageChrome
+      router={router}
+      title="Issues"
+      purpose="Work the problem queue. Acknowledge an issue when it’s handled, or open the related shipment."
+      crumbs={[
+        { label: "Overview", href: "/" },
+        { label: "Issues" },
+      ]}
+      actions={
         <Button
           size="sm"
           variant="soft"
@@ -33,21 +37,22 @@ export function ExceptionsPage(props: {
         >
           Refresh
         </Button>
-      </div>
-
-      <div class="hud-panel">
-        <div class="hud-panel__inner">
-          <h2 class="hud-panel__title">
-            <span class="led led--red" />
-            Open queue
-          </h2>
+      }
+    >
+      <div class="panel">
+        <div class="panel__inner">
+          <h2 class="panel__title">Open queue</h2>
+          <p class="muted" style={{ margin: "0 0 0.75rem", fontSize: "0.88rem" }}>
+            <b>critical / high</b> = act first · <b>Acknowledge</b> removes it
+            from this list and updates the Overview KPI.
+          </p>
           <Show
             when={() =>
               exceptionsQuery.loading() && !exceptionsQuery.latest()
             }
           >
             {() => (
-              <div class="row-gap mono muted">
+              <div class="row-gap muted">
                 <Spinner /> Loading issues…
               </div>
             )}
@@ -67,7 +72,7 @@ export function ExceptionsPage(props: {
             {() => (
               <Empty
                 title="No open issues"
-                description="Everything looks clear right now."
+                description="You’re caught up. Check Shipments if you want to browse the network."
               />
             )}
           </Show>
@@ -81,11 +86,13 @@ export function ExceptionsPage(props: {
                     </span>
                     <div>
                       <div class="mono">
-                        {ex.type} · {ex.shipmentId}
+                        {ex.type.replaceAll("_", " ")} · {ex.shipmentId}
                       </div>
-                      <div class="mono muted">{ex.note}</div>
-                      <div class="mono muted">
-                        {formatWhen(ex.openedAt)}
+                      <div class="muted" style={{ fontSize: "0.85rem" }}>
+                        {ex.note}
+                      </div>
+                      <div class="muted" style={{ fontSize: "0.8rem" }}>
+                        Opened {formatWhen(ex.openedAt)}
                       </div>
                     </div>
                     <div class="row-gap">
@@ -131,6 +138,6 @@ export function ExceptionsPage(props: {
           </Show>
         </div>
       </div>
-    </div>
+    </PageChrome>
   );
 }

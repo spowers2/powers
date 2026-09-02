@@ -10,20 +10,25 @@ import {
 } from "@lab206/ui";
 import { partnersQuery } from "../data/api.js";
 import type { Partner } from "../data/types.js";
+import { PageChrome } from "../components/PageChrome.js";
 
 export function PartnersPage(props: {
   router: Router;
   toaster: ToastController;
 }) {
   void props.toaster;
+  const { router } = props;
 
   return (
-    <div class="stack-gap">
-      <div class="page-head">
-        <div>
-          <h1>Partners</h1>
-          <p>Carriers, consignees, and brokers on this sample network</p>
-        </div>
+    <PageChrome
+      router={router}
+      title="Partners"
+      purpose="See who is moving freight. Score is a demo reliability rating; Active is how many loads they have open."
+      crumbs={[
+        { label: "Overview", href: "/" },
+        { label: "Partners" },
+      ]}
+      actions={
         <Button
           size="sm"
           variant="soft"
@@ -31,11 +36,11 @@ export function PartnersPage(props: {
         >
           Refresh
         </Button>
-      </div>
-
+      }
+    >
       <Show when={() => partnersQuery.loading() && !partnersQuery.latest()}>
         {() => (
-          <div class="row-gap mono muted">
+          <div class="row-gap muted">
             <Spinner /> Loading partners…
           </div>
         )}
@@ -60,38 +65,40 @@ export function PartnersPage(props: {
 
       <Show when={() => (partnersQuery()?.length ?? 0) > 0}>
         {() => (
-          <div class="hud-panel lp-table-wrap">
-            <div class="hud-panel__inner">
-              <h2 class="hud-panel__title">
-                <span class="led led--cyan" />
-                Partner list
-              </h2>
+          <div class="panel lp-table-wrap">
+            <div class="panel__inner">
+              <h2 class="panel__title">Partner directory</h2>
               <Table
                 columns={[
-                  { key: "name", header: "Partner" },
-                  { key: "type", header: "Type" },
+                  { key: "name", header: "Name" },
+                  { key: "type", header: "Role" },
                   {
                     key: "score",
-                    header: "Score",
-                    cell: (row) => `${(row as Partner).score}`,
+                    header: "Reliability",
+                    cell: (row) => `${(row as Partner).score}/100`,
                   },
                   {
                     key: "activeShipments",
-                    header: "Active",
+                    header: "Active loads",
                     cell: (row) => `${(row as Partner).activeShipments}`,
                   },
                 ]}
                 rows={() => partnersQuery()!}
                 rowKey="id"
               />
-              <p class="mono muted" style={{ marginTop: "0.75rem" }}>
-                A simpler list view — same Powers table kit as the dense
-                shipment screen.
-              </p>
+              <div class="row-gap" style={{ marginTop: "0.85rem" }}>
+                <Button
+                  size="sm"
+                  variant="soft"
+                  onClick={() => router.navigate("/shipments")}
+                >
+                  Browse shipments →
+                </Button>
+              </div>
             </div>
           </div>
         )}
       </Show>
-    </div>
+    </PageChrome>
   );
 }

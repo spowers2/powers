@@ -23,6 +23,8 @@ import {
   formatWhen,
   statusChipClass,
 } from "../components/status.js";
+import { PageChrome } from "../components/PageChrome.js";
+import { StatusLegend } from "../components/StatusLegend.js";
 
 const STATUS_FILTERS: Array<ShipmentStatus | ""> = [
   "",
@@ -42,27 +44,32 @@ export function ShipmentsPage(props: {
   const draftQ = signal(filterQ());
 
   return (
-    <div class="stack-gap">
-      <div class="page-head">
-        <div>
-          <h1>Shipments</h1>
-          <p>Search and filter 640 sample shipments — click a row for detail</p>
-        </div>
+    <PageChrome
+      router={router}
+      title="Shipments"
+      purpose="Find a load, then click the row to see detail, ETA, and related issues."
+      crumbs={[
+        { label: "Overview", href: "/" },
+        { label: "Shipments" },
+      ]}
+      actions={
         <Button
           size="sm"
           variant="soft"
           onClick={() => void shipmentsQuery.refetch()}
         >
-          Refresh
+          Refresh list
         </Button>
-      </div>
+      }
+    >
+      <StatusLegend />
 
-      <div class="hud-panel">
-        <div class="hud-panel__inner">
-          <h2 class="hud-panel__title">
-            <span class="led led--cyan" />
-            Filters
-          </h2>
+      <div class="panel">
+        <div class="panel__inner">
+          <h2 class="panel__title">Filter the list</h2>
+          <p class="muted" style={{ margin: "0 0 0.65rem", fontSize: "0.88rem" }}>
+            Pick a status chip, type a search, then press Search (or Enter).
+          </p>
           <div class="row-gap">
             {STATUS_FILTERS.map((s) => (
               <button
@@ -80,10 +87,10 @@ export function ShipmentsPage(props: {
             ))}
           </div>
           <div class="row-gap" style={{ marginTop: "0.75rem" }}>
-            <Field label="Search by reference, carrier, or airport code">
+            <Field label="Search reference, carrier, or airport (e.g. ORD)">
               <Input
                 bind={draftQ}
-                placeholder="e.g. LP-240 or ORD"
+                placeholder="LP-240… or ORD"
                 onKeyDown={(e: KeyboardEvent) => {
                   if (e.key === "Enter") {
                     filterQ.set(draftQ());
@@ -107,7 +114,7 @@ export function ShipmentsPage(props: {
 
       <Show when={() => shipmentsQuery.loading() && !shipmentsQuery.latest()}>
         {() => (
-          <div class="row-gap mono muted">
+          <div class="row-gap muted">
             <Spinner /> Loading shipments…
           </div>
         )}
@@ -127,25 +134,25 @@ export function ShipmentsPage(props: {
         {() => (
           <Empty
             title="No shipments match"
-            description="Try another status filter or clear the search."
+            description="Try “all” status or clear the search box."
           />
         )}
       </Show>
 
       <Show when={() => (shipmentsQuery()?.items.length ?? 0) > 0}>
         {() => (
-          <div class="hud-panel lp-table-wrap">
-            <div class="hud-panel__inner">
-              <h2 class="hud-panel__title">
-                <span class="led" />
-                Results · {() => shipmentsQuery()!.total} shipments
+          <div class="panel lp-table-wrap">
+            <div class="panel__inner">
+              <h2 class="panel__title">
+                Results · {() => shipmentsQuery()!.total} shipments · click a
+                row
               </h2>
               <Table
                 columns={[
-                  { key: "reference", header: "Ref" },
+                  { key: "reference", header: "Reference" },
                   {
                     key: "lane",
-                    header: "Lane",
+                    header: "From → To",
                     cell: (row) =>
                       formatLane(
                         (row as Shipment).origin,
@@ -171,7 +178,7 @@ export function ShipmentsPage(props: {
                   },
                   {
                     key: "priority",
-                    header: "Pri",
+                    header: "Priority",
                     cell: (row) => `P${(row as Shipment).priority}`,
                   },
                 ]}
@@ -188,10 +195,10 @@ export function ShipmentsPage(props: {
                   disabled={() => page() <= 1}
                   onClick={() => page.update((p) => Math.max(1, p - 1))}
                 >
-                  Prev
+                  Previous page
                 </Button>
-                <span class="mono muted">
-                  Page {() => page()} /{" "}
+                <span class="muted">
+                  Page {() => page()} of{" "}
                   {() =>
                     Math.max(
                       1,
@@ -212,13 +219,13 @@ export function ShipmentsPage(props: {
                   }}
                   onClick={() => page.update((p) => p + 1)}
                 >
-                  Next
+                  Next page
                 </Button>
               </div>
             </div>
           </div>
         )}
       </Show>
-    </div>
+    </PageChrome>
   );
 }

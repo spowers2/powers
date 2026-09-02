@@ -7,34 +7,36 @@ import {
   type ToastController,
 } from "@lab206/ui";
 import { signal } from "@lab206/core";
+import { PageChrome } from "../components/PageChrome.js";
+import type { Router } from "@lab206/router";
 
 export function SettingsPage(props: {
+  router: Router;
   theme: ThemeController;
   density: DensityController;
   toaster: ToastController;
 }) {
-  const { theme, density, toaster } = props;
-  const telemetry = signal(true);
+  const { router, theme, density, toaster } = props;
+  const hints = signal(true);
 
   return (
-    <div class="stack-gap">
-      <div class="page-head">
-        <div>
-          <h1>Settings</h1>
-          <p>Theme and density — same Powers controls, instrument-panel look</p>
-        </div>
-      </div>
-      <div class="hud-panel">
-        <div class="hud-panel__inner">
-          <h2 class="hud-panel__title">
-            <span class="led" />
-            Display
-          </h2>
+    <PageChrome
+      router={router}
+      title="Settings"
+      purpose="Toggle light/dark and spacing. Same Powers theme controls you’d use in a client app."
+      crumbs={[
+        { label: "Overview", href: "/" },
+        { label: "Settings" },
+      ]}
+    >
+      <div class="panel">
+        <div class="panel__inner">
+          <h2 class="panel__title">Display</h2>
           <Stack gap={3}>
             <div class="row-gap">
               <Button size="sm" variant="soft" onClick={() => theme.toggle()}>
                 {() =>
-                  theme.mode() === "dark" ? "Switch to light" : "Switch to dark"
+                  theme.mode() === "dark" ? "Use light theme" : "Use dark theme"
                 }
               </Button>
               <Button size="sm" variant="ghost" onClick={() => density.toggle()}>
@@ -46,24 +48,31 @@ export function SettingsPage(props: {
               </Button>
             </div>
             <Switch
-              label="Show live activity hints"
-              bind={telemetry}
-              onChange={() =>
+              label="Show tip toasts when toggling options"
+              bind={hints}
+              onChange={() => {
+                if (!hints()) return;
                 toaster.push({
-                  title: telemetry()
-                    ? "Activity hints on"
-                    : "Activity hints off",
+                  title: "Tips on",
+                  description: "You’ll see a short confirmation on changes.",
                   tone: "info",
-                })
-              }
+                });
+              }}
             />
-            <p class="mono muted">
-              Tip for clients: this screen shows how one Powers theme toggle
-              restyles a whole product — try Light vs Dark in the header.
+            <p class="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
+              Prefer the header <b>Light / Dark</b> control while walking a
+              client through the demo — it shows one design system, two skins.
             </p>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => router.navigate("/")}
+            >
+              ← Back to overview
+            </Button>
           </Stack>
         </div>
       </div>
-    </div>
+    </PageChrome>
   );
 }

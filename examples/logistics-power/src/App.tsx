@@ -58,7 +58,8 @@ export function createApp(opts: {
       },
       {
         path: "/settings",
-        component: () => SettingsPage({ theme, density, toaster }),
+        component: () =>
+          SettingsPage({ router, theme, density, toaster }),
       },
     ],
     notFound: () => (
@@ -76,7 +77,7 @@ export function createApp(opts: {
   const phoneMenuItems = [
     { id: "/", label: "Overview" },
     { id: "/shipments", label: "Shipments" },
-    { id: "/exceptions", label: "Exceptions" },
+    { id: "/exceptions", label: "Issues" },
     { id: "/partners", label: "Partners" },
     { id: "/settings", label: "Settings" },
   ];
@@ -91,7 +92,7 @@ export function createApp(opts: {
             <span class="app-brand__mark" aria-hidden="true" />
             <span class="app-brand__text">
               <span class="app-brand__name">Logistics Power</span>
-              <span class="app-brand__sub">Shipment ops demo</span>
+              <span class="app-brand__sub">Ops console demo</span>
             </span>
           </Link>
 
@@ -119,7 +120,7 @@ export function createApp(opts: {
               activeClass="is-active"
               class="app-nav__link"
             >
-              Exceptions
+              Issues
             </Link>
             <Link
               router={router}
