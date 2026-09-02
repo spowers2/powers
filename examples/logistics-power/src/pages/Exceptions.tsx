@@ -23,15 +23,15 @@ export function ExceptionsPage(props: {
     <div class="stack-gap">
       <div class="page-head">
         <div>
-          <h1>Exception bus</h1>
-          <p>Open faults · acknowledge to clear KPI pressure</p>
+          <h1>Issues</h1>
+          <p>Open problems — acknowledge to clear them from the queue</p>
         </div>
         <Button
           size="sm"
           variant="soft"
           onClick={() => void exceptionsQuery.refetch()}
         >
-          Rescan
+          Refresh
         </Button>
       </div>
 
@@ -39,7 +39,7 @@ export function ExceptionsPage(props: {
         <div class="hud-panel__inner">
           <h2 class="hud-panel__title">
             <span class="led led--red" />
-            Live queue
+            Open queue
           </h2>
           <Show
             when={() =>
@@ -48,13 +48,13 @@ export function ExceptionsPage(props: {
           >
             {() => (
               <div class="row-gap mono muted">
-                <Spinner /> Polling fault bus…
+                <Spinner /> Loading issues…
               </div>
             )}
           </Show>
           <Show when={() => !!exceptionsQuery.error()}>
             {() => (
-              <Alert tone="danger" title="Bus offline">
+              <Alert tone="danger" title="Couldn’t load issues">
                 {() => String(exceptionsQuery.error())}
               </Alert>
             )}
@@ -66,8 +66,8 @@ export function ExceptionsPage(props: {
           >
             {() => (
               <Empty
-                title="Queue clear"
-                description="No open exceptions. Network nominal."
+                title="No open issues"
+                description="Everything looks clear right now."
               />
             )}
           </Show>
@@ -96,7 +96,7 @@ export function ExceptionsPage(props: {
                           router.navigate(`/shipments/${ex.shipmentId}`)
                         }
                       >
-                        Trace
+                        Open shipment
                       </Button>
                       <Button
                         size="sm"
@@ -107,13 +107,13 @@ export function ExceptionsPage(props: {
                               await api.post(`/exceptions/${ex.id}/ack`);
                               await exceptionsQuery.refetch();
                               toaster.push({
-                                title: "ACK committed",
+                                title: "Issue acknowledged",
                                 description: ex.id,
                                 tone: "success",
                               });
                             } catch (e) {
                               toaster.push({
-                                title: "ACK failed",
+                                title: "Couldn’t acknowledge",
                                 description: String(e),
                                 tone: "danger",
                               });
@@ -121,7 +121,7 @@ export function ExceptionsPage(props: {
                           })();
                         }}
                       >
-                        ACK
+                        Acknowledge
                       </Button>
                     </div>
                   </div>

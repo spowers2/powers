@@ -1,22 +1,42 @@
-/* Logistics Power — LED instrument panel / sci-fi ops HUD */
+/* Logistics Power — clean instrument panel (light default + dark HUD) */
 
 :root {
+  /* Light — crisp digital console */
+  --lp-bg: #f0f7fb;
+  --lp-panel: #ffffff;
+  --lp-panel-2: #f8fcff;
+  --lp-border: rgba(8, 145, 178, 0.28);
+  --lp-border-hot: rgba(8, 145, 178, 0.55);
+  --lp-cyan: #0e7490;
+  --lp-cyan-bright: #0891b2;
+  --lp-green: #15803d;
+  --lp-amber: #b45309;
+  --lp-red: #be123c;
+  --lp-text: #0f172a;
+  --lp-muted: #475569;
+  --lp-grid: rgba(8, 145, 178, 0.07);
+  --lp-glow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 8px 28px rgba(8, 145, 178, 0.08);
+  --lp-scan: rgba(15, 23, 42, 0.03);
+  --pu-font-sans: "Rajdhani", system-ui, sans-serif;
+  --pu-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html[data-pu-theme="dark"] {
   --lp-bg: #020617;
   --lp-panel: #0a1224;
   --lp-panel-2: #0f1c33;
   --lp-border: rgba(34, 211, 238, 0.22);
   --lp-border-hot: rgba(34, 211, 238, 0.55);
   --lp-cyan: #22d3ee;
+  --lp-cyan-bright: #67e8f9;
   --lp-green: #4ade80;
   --lp-amber: #fbbf24;
   --lp-red: #fb7185;
-  --lp-violet: #a78bfa;
   --lp-text: #e2e8f0;
-  --lp-muted: #7dd3fc99;
+  --lp-muted: #94a3b8;
   --lp-grid: rgba(34, 211, 238, 0.06);
   --lp-glow: 0 0 24px rgba(34, 211, 238, 0.15);
-  --pu-font-sans: "Rajdhani", system-ui, sans-serif;
-  --pu-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --lp-scan: rgba(0, 0, 0, 0.12);
 }
 
 html,
@@ -32,7 +52,11 @@ body {
   background-image:
     linear-gradient(var(--lp-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--lp-grid) 1px, transparent 1px),
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34, 211, 238, 0.12), transparent 55%);
+    radial-gradient(
+      ellipse 80% 45% at 50% -8%,
+      color-mix(in srgb, var(--lp-cyan-bright) 18%, transparent),
+      transparent 55%
+    );
   background-size: 28px 28px, 28px 28px, 100% 100%;
   background-attachment: fixed;
 }
@@ -47,7 +71,7 @@ body {
   flex-direction: column;
 }
 
-/* —— Header / bezel —— */
+/* —— Header —— */
 .app-header {
   position: sticky;
   top: 0;
@@ -57,7 +81,7 @@ body {
   gap: 0.75rem;
   padding: 0.55rem 1rem;
   border-bottom: 1px solid var(--lp-border);
-  background: color-mix(in srgb, var(--lp-panel) 92%, transparent);
+  background: color-mix(in srgb, var(--lp-panel) 94%, transparent);
   backdrop-filter: blur(12px);
   box-shadow: var(--lp-glow);
 }
@@ -76,10 +100,15 @@ body {
   height: 1.65rem;
   border: 1px solid var(--lp-cyan);
   border-radius: 2px;
-  box-shadow: inset 0 0 8px rgba(34, 211, 238, 0.45), 0 0 10px rgba(34, 211, 238, 0.35);
+  box-shadow: inset 0 0 8px color-mix(in srgb, var(--lp-cyan) 35%, transparent);
   background:
-    linear-gradient(135deg, transparent 40%, rgba(34, 211, 238, 0.35) 50%, transparent 60%),
-    #04101f;
+    linear-gradient(
+      135deg,
+      transparent 40%,
+      color-mix(in srgb, var(--lp-cyan) 30%, transparent) 50%,
+      transparent 60%
+    ),
+    var(--lp-panel-2);
   flex-shrink: 0;
 }
 
@@ -94,18 +123,16 @@ body {
   font-family: "Orbitron", var(--pu-font-sans);
   font-weight: 700;
   font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--lp-cyan);
-  text-shadow: 0 0 12px rgba(34, 211, 238, 0.55);
 }
 
 .app-brand__sub {
   font-family: var(--pu-font-mono);
   font-size: 0.62rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--lp-muted);
-  text-transform: uppercase;
 }
 
 .app-nav {
@@ -129,7 +156,7 @@ body {
 .app-nav__link {
   font-family: var(--pu-font-mono);
   font-size: 0.68rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--lp-muted);
@@ -144,10 +171,13 @@ body {
 }
 
 .app-nav__link.is-active {
-  color: var(--lp-bg);
+  color: #fff;
   background: var(--lp-cyan);
   border-color: var(--lp-cyan);
-  box-shadow: 0 0 14px rgba(34, 211, 238, 0.45);
+}
+
+html[data-pu-theme="dark"] .app-nav__link.is-active {
+  color: #020617;
 }
 
 .app-header-actions {
@@ -170,12 +200,45 @@ body {
   box-sizing: border-box;
 }
 
-/* —— Instrument panels —— */
+/* Client explainer */
+.demo-banner {
+  border: 1px solid var(--lp-border);
+  background: var(--lp-panel);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--lp-glow);
+}
+
+.demo-banner strong {
+  font-family: "Orbitron", var(--pu-font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lp-cyan);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.demo-banner p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--lp-muted);
+  max-width: 52rem;
+}
+
+.demo-banner p b {
+  color: var(--lp-text);
+  font-weight: 650;
+}
+
+/* —— Panels —— */
 .hud-panel {
   border: 1px solid var(--lp-border);
   background: linear-gradient(180deg, var(--lp-panel-2), var(--lp-panel));
   border-radius: 4px;
-  box-shadow: var(--lp-glow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: var(--lp-glow);
   position: relative;
   overflow: hidden;
 }
@@ -189,9 +252,9 @@ body {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.12) 3px
+    var(--lp-scan) 3px
   );
-  opacity: 0.35;
+  opacity: 0.5;
 }
 
 .hud-panel__inner {
@@ -203,7 +266,7 @@ body {
 .hud-panel__title {
   font-family: "Orbitron", var(--pu-font-sans);
   font-size: 0.65rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--lp-cyan);
   margin: 0 0 0.75rem;
@@ -224,26 +287,25 @@ body {
   height: 0.45rem;
   border-radius: 50%;
   background: var(--lp-green);
-  box-shadow: 0 0 8px var(--lp-green);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--lp-green) 70%, transparent);
   flex-shrink: 0;
 }
 
 .led--amber {
   background: var(--lp-amber);
-  box-shadow: 0 0 8px var(--lp-amber);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--lp-amber) 70%, transparent);
 }
 
 .led--red {
   background: var(--lp-red);
-  box-shadow: 0 0 8px var(--lp-red);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--lp-red) 70%, transparent);
 }
 
 .led--cyan {
-  background: var(--lp-cyan);
-  box-shadow: 0 0 8px var(--lp-cyan);
+  background: var(--lp-cyan-bright);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--lp-cyan-bright) 70%, transparent);
 }
 
-/* KPI strip */
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -264,7 +326,7 @@ body {
 .kpi__label {
   font-family: var(--pu-font-mono);
   font-size: 0.62rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--lp-muted);
   margin: 0 0 0.35rem;
@@ -276,25 +338,22 @@ body {
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--lp-cyan);
-  text-shadow: 0 0 18px rgba(34, 211, 238, 0.4);
   margin: 0;
   line-height: 1;
 }
 
 .kpi__value--warn {
   color: var(--lp-amber);
-  text-shadow: 0 0 18px rgba(251, 191, 36, 0.35);
 }
 
 .kpi__value--hot {
   color: var(--lp-red);
-  text-shadow: 0 0 18px rgba(251, 113, 133, 0.4);
 }
 
 .kpi__bar {
   margin-top: 0.55rem;
   height: 3px;
-  background: rgba(34, 211, 238, 0.12);
+  background: color-mix(in srgb, var(--lp-cyan) 12%, transparent);
   border-radius: 1px;
   overflow: hidden;
 }
@@ -303,10 +362,8 @@ body {
   display: block;
   height: 100%;
   background: linear-gradient(90deg, var(--lp-cyan), var(--lp-green));
-  box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
 }
 
-/* Layout helpers */
 .stack-gap {
   display: flex;
   flex-direction: column;
@@ -342,7 +399,7 @@ body {
 .page-head h1 {
   font-family: "Orbitron", var(--pu-font-sans);
   font-size: 1.05rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0;
   color: var(--lp-text);
@@ -350,14 +407,13 @@ body {
 
 .page-head p {
   margin: 0.25rem 0 0;
-  font-family: var(--pu-font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
   color: var(--lp-muted);
-  text-transform: uppercase;
+  text-transform: none;
+  font-family: var(--pu-font-sans);
 }
 
-/* Status chips */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -370,32 +426,32 @@ body {
   border: 1px solid var(--lp-border);
   border-radius: 2px;
   color: var(--lp-cyan);
-  background: rgba(34, 211, 238, 0.08);
+  background: color-mix(in srgb, var(--lp-cyan) 8%, transparent);
+  cursor: pointer;
 }
 
 .chip--ok {
   color: var(--lp-green);
-  border-color: rgba(74, 222, 128, 0.35);
-  background: rgba(74, 222, 128, 0.08);
+  border-color: color-mix(in srgb, var(--lp-green) 40%, transparent);
+  background: color-mix(in srgb, var(--lp-green) 8%, transparent);
 }
 
 .chip--warn {
   color: var(--lp-amber);
-  border-color: rgba(251, 191, 36, 0.4);
-  background: rgba(251, 191, 36, 0.1);
+  border-color: color-mix(in srgb, var(--lp-amber) 40%, transparent);
+  background: color-mix(in srgb, var(--lp-amber) 10%, transparent);
 }
 
 .chip--hot {
   color: var(--lp-red);
-  border-color: rgba(251, 113, 133, 0.45);
-  background: rgba(251, 113, 133, 0.1);
+  border-color: color-mix(in srgb, var(--lp-red) 45%, transparent);
+  background: color-mix(in srgb, var(--lp-red) 10%, transparent);
 }
 
 .chip--dim {
   color: var(--lp-muted);
 }
 
-/* Dense data table overlay on pu-table */
 .lp-table-wrap .pu-table-wrap {
   border-color: var(--lp-border);
   background: transparent;
@@ -420,7 +476,7 @@ body {
   gap: 0.65rem;
   align-items: start;
   padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+  border-bottom: 1px solid color-mix(in srgb, var(--lp-cyan) 12%, transparent);
 }
 
 .ex-row:last-child {
@@ -462,7 +518,6 @@ body {
   height: 5px;
   border-radius: 50%;
   background: var(--lp-cyan);
-  box-shadow: 0 0 6px var(--lp-cyan);
 }
 
 .not-found {
@@ -471,7 +526,6 @@ body {
   font-family: var(--pu-font-mono);
 }
 
-/* Override Powers soft surfaces inside this app */
 .app-shell .pu-card,
 .app-shell .pu-alert,
 .app-shell .pu-empty {
@@ -484,10 +538,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .app-brand__name,
-  .kpi__value,
   .led {
-    text-shadow: none;
     box-shadow: none;
   }
 }

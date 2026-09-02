@@ -45,15 +45,15 @@ export function ShipmentsPage(props: {
     <div class="stack-gap">
       <div class="page-head">
         <div>
-          <h1>Shipment matrix</h1>
-          <p>640-lane synthetic network · paged uplink</p>
+          <h1>Shipments</h1>
+          <p>Search and filter 640 sample shipments — click a row for detail</p>
         </div>
         <Button
           size="sm"
           variant="soft"
           onClick={() => void shipmentsQuery.refetch()}
         >
-          Refresh matrix
+          Refresh
         </Button>
       </div>
 
@@ -80,10 +80,10 @@ export function ShipmentsPage(props: {
             ))}
           </div>
           <div class="row-gap" style={{ marginTop: "0.75rem" }}>
-            <Field label="Scan reference / carrier / lane">
+            <Field label="Search by reference, carrier, or airport code">
               <Input
                 bind={draftQ}
-                placeholder="LP-240…"
+                placeholder="e.g. LP-240 or ORD"
                 onKeyDown={(e: KeyboardEvent) => {
                   if (e.key === "Enter") {
                     filterQ.set(draftQ());
@@ -99,7 +99,7 @@ export function ShipmentsPage(props: {
                 page.set(1);
               }}
             >
-              Apply
+              Search
             </Button>
           </div>
         </div>
@@ -108,13 +108,13 @@ export function ShipmentsPage(props: {
       <Show when={() => shipmentsQuery.loading() && !shipmentsQuery.latest()}>
         {() => (
           <div class="row-gap mono muted">
-            <Spinner /> Locking shipment grid…
+            <Spinner /> Loading shipments…
           </div>
         )}
       </Show>
       <Show when={() => !!shipmentsQuery.error()}>
         {() => (
-          <Alert tone="danger" title="Matrix fault">
+          <Alert tone="danger" title="Couldn’t load shipments">
             {() => String(shipmentsQuery.error())}
           </Alert>
         )}
@@ -126,8 +126,8 @@ export function ShipmentsPage(props: {
       >
         {() => (
           <Empty
-            title="No lanes match"
-            description="Widen filters or clear the scan query."
+            title="No shipments match"
+            description="Try another status filter or clear the search."
           />
         )}
       </Show>
@@ -138,7 +138,7 @@ export function ShipmentsPage(props: {
             <div class="hud-panel__inner">
               <h2 class="hud-panel__title">
                 <span class="led" />
-                Grid · {() => shipmentsQuery()!.total} records
+                Results · {() => shipmentsQuery()!.total} shipments
               </h2>
               <Table
                 columns={[

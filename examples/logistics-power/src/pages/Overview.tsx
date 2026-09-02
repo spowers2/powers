@@ -4,7 +4,6 @@ import {
   Alert,
   Button,
   Spinner,
-  Stack,
   type ToastController,
 } from "@lab206/ui";
 import { exceptionsQuery, kpisQuery } from "../data/api.js";
@@ -18,10 +17,20 @@ export function OverviewPage(props: {
 
   return (
     <div class="stack-gap">
+      <div class="demo-banner">
+        <strong>Powers demo · logistics ops</strong>
+        <p>
+          This is a <b>sample freight control tower</b> — the kind of data-heavy
+          app agencies and product teams build for clients. Click a KPI issue,
+          open the shipment list, or drill into a row. Built with the same Powers
+          components as Lab and System (not a real TMS).
+        </p>
+      </div>
+
       <div class="page-head">
         <div>
-          <h1>Command overview</h1>
-          <p>Network telemetry · live board</p>
+          <h1>Overview</h1>
+          <p>Live KPIs and issues that need attention</p>
         </div>
         <div class="row-gap">
           <Button
@@ -32,10 +41,10 @@ export function OverviewPage(props: {
               void exceptionsQuery.refetch();
             }}
           >
-            Sync feeds
+            Refresh
           </Button>
           <Button size="sm" onClick={() => router.navigate("/shipments")}>
-            Open matrix
+            View shipments
           </Button>
         </div>
       </div>
@@ -43,13 +52,13 @@ export function OverviewPage(props: {
       <Show when={() => kpisQuery.loading() && !kpisQuery.latest()}>
         {() => (
           <div class="row-gap mono muted">
-            <Spinner /> Acquiring KPI lock…
+            <Spinner /> Loading KPIs…
           </div>
         )}
       </Show>
       <Show when={() => !!kpisQuery.error()}>
         {() => (
-          <Alert tone="danger" title="Uplink fault">
+          <Alert tone="danger" title="Couldn’t load KPIs">
             {() => String(kpisQuery.error())}
           </Alert>
         )}
@@ -62,10 +71,12 @@ export function OverviewPage(props: {
             <div class="kpi-grid">
               <div class="hud-panel kpi">
                 <div class="hud-panel__inner">
-                  <p class="kpi__label">On-time index</p>
+                  <p class="kpi__label">On-time %</p>
                   <p
                     class={() =>
-                      k.onTimePct < 85 ? "kpi__value kpi__value--warn" : "kpi__value"
+                      k.onTimePct < 85
+                        ? "kpi__value kpi__value--warn"
+                        : "kpi__value"
                     }
                   >
                     {k.onTimePct}%
@@ -86,7 +97,7 @@ export function OverviewPage(props: {
               </div>
               <div class="hud-panel kpi">
                 <div class="hud-panel__inner">
-                  <p class="kpi__label">Open exceptions</p>
+                  <p class="kpi__label">Open issues</p>
                   <p
                     class={() =>
                       k.exceptionsOpen > 40
@@ -108,7 +119,7 @@ export function OverviewPage(props: {
               </div>
               <div class="hud-panel kpi">
                 <div class="hud-panel__inner">
-                  <p class="kpi__label">Avg dwell (h)</p>
+                  <p class="kpi__label">Avg dwell (hours)</p>
                   <p class="kpi__value">{k.avgDwellHours}</p>
                   <div class="kpi__bar">
                     <i style={{ width: "48%" }} />
@@ -124,18 +135,22 @@ export function OverviewPage(props: {
         <div class="hud-panel__inner">
           <h2 class="hud-panel__title">
             <span class="led led--amber" />
-            Priority exceptions
+            Issues needing attention
           </h2>
-          <Show when={() => exceptionsQuery.loading() && !exceptionsQuery.latest()}>
+          <Show
+            when={() =>
+              exceptionsQuery.loading() && !exceptionsQuery.latest()
+            }
+          >
             {() => (
               <div class="row-gap mono muted">
-                <Spinner /> Scanning fault bus…
+                <Spinner /> Loading issues…
               </div>
             )}
           </Show>
           <Show when={() => !!exceptionsQuery.error()}>
             {() => (
-              <Alert tone="danger" title="Exception feed offline">
+              <Alert tone="danger" title="Couldn’t load issues">
                 {() => String(exceptionsQuery.error())}
               </Alert>
             )}
@@ -146,7 +161,7 @@ export function OverviewPage(props: {
             }
           >
             {() => (
-              <p class="mono muted">No open exceptions on the fault bus.</p>
+              <p class="mono muted">No open issues — network looks healthy.</p>
             )}
           </Show>
           <Show when={() => (exceptionsQuery()?.length ?? 0) > 0}>
@@ -161,12 +176,14 @@ export function OverviewPage(props: {
                       </span>
                       <div>
                         <div class="mono">
-                          {ex.type} · {ex.shipmentId}
+                          {ex.type.replaceAll("_", " ")} · {ex.shipmentId}
                         </div>
                         <div class="mono muted">{ex.note}</div>
                       </div>
                       <div class="stack-gap" style={{ gap: "0.35rem" }}>
-                        <span class="mono muted">{formatWhen(ex.openedAt)}</span>
+                        <span class="mono muted">
+                          {formatWhen(ex.openedAt)}
+                        </span>
                         <Button
                           size="sm"
                           variant="ghost"
@@ -174,7 +191,7 @@ export function OverviewPage(props: {
                             router.navigate(`/shipments/${ex.shipmentId}`)
                           }
                         >
-                          Trace
+                          Open shipment
                         </Button>
                       </div>
                     </div>
@@ -185,7 +202,7 @@ export function OverviewPage(props: {
                     variant="soft"
                     onClick={() => router.navigate("/exceptions")}
                   >
-                    Full exception queue
+                    See all issues
                   </Button>
                 </div>
               </div>

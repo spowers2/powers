@@ -21,28 +21,28 @@ export function PartnersPage(props: {
     <div class="stack-gap">
       <div class="page-head">
         <div>
-          <h1>Partner mesh</h1>
-          <p>Carriers · consignees · brokers</p>
+          <h1>Partners</h1>
+          <p>Carriers, consignees, and brokers on this sample network</p>
         </div>
         <Button
           size="sm"
           variant="soft"
           onClick={() => void partnersQuery.refetch()}
         >
-          Sync mesh
+          Refresh
         </Button>
       </div>
 
       <Show when={() => partnersQuery.loading() && !partnersQuery.latest()}>
         {() => (
           <div class="row-gap mono muted">
-            <Spinner /> Mapping partner nodes…
+            <Spinner /> Loading partners…
           </div>
         )}
       </Show>
       <Show when={() => !!partnersQuery.error()}>
         {() => (
-          <Alert tone="danger" title="Mesh fault">
+          <Alert tone="danger" title="Couldn’t load partners">
             {() => String(partnersQuery.error())}
           </Alert>
         )}
@@ -51,7 +51,10 @@ export function PartnersPage(props: {
         when={() => !!partnersQuery() && partnersQuery()!.length === 0}
       >
         {() => (
-          <Empty title="No partners" description="Seed uplink returned empty." />
+          <Empty
+            title="No partners"
+            description="No partner records in this demo dataset."
+          />
         )}
       </Show>
 
@@ -61,7 +64,7 @@ export function PartnersPage(props: {
             <div class="hud-panel__inner">
               <h2 class="hud-panel__title">
                 <span class="led led--cyan" />
-                Active nodes
+                Partner list
               </h2>
               <Table
                 columns={[
@@ -82,8 +85,8 @@ export function PartnersPage(props: {
                 rowKey="id"
               />
               <p class="mono muted" style={{ marginTop: "0.75rem" }}>
-                Portal-style surface — simpler than the shipment matrix, same
-                kit.
+                A simpler list view — same Powers table kit as the dense
+                shipment screen.
               </p>
             </div>
           </div>

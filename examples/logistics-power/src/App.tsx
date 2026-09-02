@@ -64,9 +64,9 @@ export function createApp(opts: {
     notFound: () => (
       <Container size="xl">
         <div class="not-found">
-          <p>Signal lost — route not on the mesh.</p>
+          <p>That page isn’t in this demo.</p>
           <Button size="sm" onClick={() => router.navigate("/")}>
-            Return to command
+            Back to overview
           </Button>
         </div>
       </Container>
@@ -91,7 +91,7 @@ export function createApp(opts: {
             <span class="app-brand__mark" aria-hidden="true" />
             <span class="app-brand__text">
               <span class="app-brand__name">Logistics Power</span>
-              <span class="app-brand__sub">Control tower · v0.1</span>
+              <span class="app-brand__sub">Shipment ops demo</span>
             </span>
           </Link>
 
@@ -146,7 +146,7 @@ export function createApp(opts: {
               onSelect={(id) => router.navigate(id)}
               trigger={
                 <Button size="sm" variant="soft">
-                  Panels
+                  Menu
                 </Button>
               }
             />
@@ -157,9 +157,9 @@ export function createApp(opts: {
               size="sm"
               variant="ghost"
               onClick={() => theme.toggle()}
-              aria-label="Toggle theme"
+              aria-label="Toggle light or dark theme"
             >
-              {() => (theme.mode() === "dark" ? "LT" : "DK")}
+              {() => (theme.mode() === "dark" ? "Light" : "Dark")}
             </Button>
           </div>
         </header>
@@ -174,10 +174,10 @@ export function createApp(opts: {
 }
 
 export function bootstrapTheme() {
-  // Always arm dark HUD by default — sci-fi instrument panel
-  const theme = createTheme("dark");
+  // Light instrument panel by default (client-friendly); Dark still available
+  const theme = createTheme("light");
   theme.bind();
-  const density = createDensity("compact");
+  const density = createDensity("comfortable");
   density.bind();
   const toaster = createToaster();
   return { theme, density, toaster };

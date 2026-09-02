@@ -20,8 +20,8 @@ export function SettingsPage(props: {
     <div class="stack-gap">
       <div class="page-head">
         <div>
-          <h1>Console settings</h1>
-          <p>Bezel · density · telemetry</p>
+          <h1>Settings</h1>
+          <p>Theme and density — same Powers controls, instrument-panel look</p>
         </div>
       </div>
       <div class="hud-panel">
@@ -34,30 +34,32 @@ export function SettingsPage(props: {
             <div class="row-gap">
               <Button size="sm" variant="soft" onClick={() => theme.toggle()}>
                 {() =>
-                  theme.mode() === "dark" ? "Force light bezel" : "Force dark bezel"
+                  theme.mode() === "dark" ? "Switch to light" : "Switch to dark"
                 }
               </Button>
               <Button size="sm" variant="ghost" onClick={() => density.toggle()}>
                 {() =>
                   density.density() === "compact"
-                    ? "Comfort density"
-                    : "Compact density"
+                    ? "Comfortable spacing"
+                    : "Compact spacing"
                 }
               </Button>
             </div>
             <Switch
-              label="HUD telemetry ticks"
+              label="Show live activity hints"
               bind={telemetry}
               onChange={() =>
                 toaster.push({
-                  title: telemetry() ? "Telemetry armed" : "Telemetry muted",
+                  title: telemetry()
+                    ? "Activity hints on"
+                    : "Activity hints off",
                   tone: "info",
                 })
               }
             />
             <p class="mono muted">
-              Logistics Power dogfoods the same theme/density controls as any
-              Powers app — restyled as an instrument panel.
+              Tip for clients: this screen shows how one Powers theme toggle
+              restyles a whole product — try Light vs Dark in the header.
             </p>
           </Stack>
         </div>

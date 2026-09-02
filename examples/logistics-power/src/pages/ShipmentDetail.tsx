@@ -34,7 +34,7 @@ export function ShipmentDetailPage(props: {
     <div class="stack-gap">
       <div class="page-head">
         <div>
-          <h1>Shipment trace</h1>
+          <h1>Shipment detail</h1>
           <p class="mono">{id}</p>
         </div>
         <div class="row-gap">
@@ -43,14 +43,14 @@ export function ShipmentDetailPage(props: {
             variant="ghost"
             onClick={() => router.navigate("/shipments")}
           >
-            Back to matrix
+            Back to list
           </Button>
           <Button
             size="sm"
             variant="soft"
             onClick={() => void detail.refetch()}
           >
-            Re-acquire
+            Refresh
           </Button>
         </div>
       </div>
@@ -58,13 +58,13 @@ export function ShipmentDetailPage(props: {
       <Show when={() => detail.loading() && !detail.latest()}>
         {() => (
           <div class="row-gap mono muted">
-            <Spinner /> Resolving shipment packet…
+            <Spinner /> Loading shipment…
           </div>
         )}
       </Show>
       <Show when={() => !!detail.error()}>
         {() => (
-          <Alert tone="danger" title="Trace failed">
+          <Alert tone="danger" title="Couldn’t load shipment">
             {() => String(detail.error())}
           </Alert>
         )}
@@ -107,7 +107,7 @@ export function ShipmentDetailPage(props: {
                         variant="soft"
                         onClick={() => router.navigate("/exceptions")}
                       >
-                        Exception bus
+                        View all issues
                       </Button>
                     </div>
                   </Stack>
@@ -118,19 +118,20 @@ export function ShipmentDetailPage(props: {
                 <div class="hud-panel__inner">
                   <h2 class="hud-panel__title">
                     <span class="led" />
-                    Event timeline
+                    Timeline
                   </h2>
                   <ul class="timeline">
-                    <li>Packet opened · {formatWhen(s.updatedAt)}</li>
+                    <li>Last update · {formatWhen(s.updatedAt)}</li>
                     <li>
-                      Status lock · {s.status} · {s.carrier}
+                      Status · {s.status} · {s.carrier}
                     </li>
                     <li>
-                      Lane vector · {s.origin} → {s.destination}
+                      Route · {s.origin} → {s.destination}
                     </li>
                     {ex.map((e) => (
                       <li>
-                        Fault {e.type} ({e.severity}) · {formatWhen(e.openedAt)}
+                        Issue: {e.type.replaceAll("_", " ")} ({e.severity}) ·{" "}
+                        {formatWhen(e.openedAt)}
                       </li>
                     ))}
                   </ul>
@@ -143,7 +144,7 @@ export function ShipmentDetailPage(props: {
                     <div class="hud-panel__inner">
                       <h2 class="hud-panel__title">
                         <span class="led led--amber" />
-                        Linked exceptions
+                        Related issues
                       </h2>
                       {ex.map((e) => (
                         <div class="ex-row">
@@ -170,11 +171,11 @@ export function ShipmentDetailPage(props: {
       <Dialog
         open={etaOpen}
         onClose={() => etaOpen.set(false)}
-        title="Recalibrate ETA"
-        description="Writes through the fake API — same pattern as your backend."
+        title="Update ETA"
+        description="Saves through the demo API — same pattern you’d use with your real backend."
       >
         <Stack gap={3}>
-          <Field label="ETA (ISO local)">
+          <Field label="New arrival time">
             <Input bind={etaDraft} placeholder="2026-09-02T14:00" />
           </Field>
           <div class="row-gap">
@@ -189,13 +190,13 @@ export function ShipmentDetailPage(props: {
                     etaOpen.set(false);
                     await detail.refetch();
                     toaster.push({
-                      title: "ETA locked",
+                      title: "ETA updated",
                       description: id,
                       tone: "success",
                     });
                   } catch (e) {
                     toaster.push({
-                      title: "Write failed",
+                      title: "Couldn’t save",
                       description: String(e),
                       tone: "danger",
                     });
@@ -205,7 +206,7 @@ export function ShipmentDetailPage(props: {
                 })();
               }}
             >
-              {() => (saving() ? "Writing…" : "Commit")}
+              {() => (saving() ? "Saving…" : "Save")}
             </Button>
             <Button variant="ghost" onClick={() => etaOpen.set(false)}>
               Cancel
