@@ -74,4 +74,10 @@ export const SITE = {
     githubIssues: "https://github.com/spowers2/powers/issues/new",
     githubRepo: "https://github.com/spowers2/powers",
   },
+  /** Personal portfolio — subtle “built by” credit */
+  portfolio: {
+    label: "labazine",
+    href: "https://www.labazine.com/",
+    credit: "built by labazine",
+  },
 } as const;

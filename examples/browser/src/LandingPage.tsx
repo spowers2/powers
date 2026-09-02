@@ -759,9 +759,18 @@ mount(document.getElementById("app")!, () => (
       <footer class="lp-footer">
         <Container size="xl">
           <div class="lp-footer-inner">
-            <span>
+            <span class="lp-footer-credit">
               {SITE.name} · powered by {SITE.systemName} · BSL-1.1
               (source-available)
+              {" · "}
+              <a
+                class="lp-footer-by"
+                href={SITE.portfolio.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {SITE.portfolio.credit}
+              </a>
             </span>
             <Stack direction="row" gap={4}>
               <button type="button" class="lp-footer-link" onClick={go("/docs")}>
