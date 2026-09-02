@@ -199,4 +199,68 @@ describe("jsx-runtime", () => {
     assert.equal(taB.getAttribute("data-id"), "b");
     assert.equal(taB.value, "from-b");
   });
+
+  it("creates SVG elements in the SVG namespace", () => {
+    const SVG_NS = "http://www.w3.org/2000/svg";
+    const tree = jsxs("svg", {
+      class: "icon",
+      viewBox: "0 0 24 24",
+      children: [
+        jsx("path", {
+          class: "trace",
+          d: "M2 12 H22",
+        }),
+        jsx("circle", { cx: "12", cy: "12", r: "3" }),
+      ],
+    }) as SVGSVGElement;
+
+    root.appendChild(tree);
+    assert.equal(tree.namespaceURI, SVG_NS);
+    assert.equal(tree.getAttribute("class"), "icon");
+    assert.equal(tree.getAttribute("viewBox"), "0 0 24 24");
+
+    const path = tree.querySelector("path") as SVGPathElement;
+    const circle = tree.querySelector("circle") as SVGCircleElement;
+    assert.ok(path);
+    assert.ok(circle);
+    assert.equal(path.namespaceURI, SVG_NS);
+    assert.equal(circle.namespaceURI, SVG_NS);
+    assert.equal(typeof path.getTotalLength, "function");
+    assert.equal(path.getAttribute("class"), "trace");
+    assert.equal(path.getAttribute("d"), "M2 12 H22");
+  });
+
+  it("creates camelCase SVG filter tags correctly", () => {
+    const SVG_NS = "http://www.w3.org/2000/svg";
+    const tree = jsxs("svg", {
+      children: [
+        jsxs("defs", {
+          children: [
+            jsxs("filter", {
+              id: "glow",
+              children: [
+                jsx("feGaussianBlur", {
+                  stdDeviation: "2",
+                  result: "b",
+                }),
+              ],
+            }),
+            jsxs("radialGradient", {
+              id: "fade",
+              children: [jsx("stop", { offset: "0%", "stop-color": "white" })],
+            }),
+          ],
+        }),
+      ],
+    }) as SVGSVGElement;
+
+    root.appendChild(tree);
+    const blur = tree.querySelector("feGaussianBlur");
+    const grad = tree.querySelector("radialGradient");
+    assert.ok(blur);
+    assert.ok(grad);
+    assert.equal(blur?.namespaceURI, SVG_NS);
+    assert.equal(grad?.namespaceURI, SVG_NS);
+    assert.equal(blur?.getAttribute("stdDeviation"), "2");
+  });
 });

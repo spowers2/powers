@@ -41,11 +41,97 @@ const RESERVED = new Set([
   "children",
 ]);
 
+export const SVG_NS = "http://www.w3.org/2000/svg";
+
+/**
+ * SVG-only tags (and `svg` itself). Created with createElementNS so
+ * `<svg><path/></svg>` renders as real vector graphics.
+ *
+ * Dual-namespace tags (`a`, `script`, `style`, `title`, …) stay HTML —
+ * put them in HTML, or nest HTML inside `<foreignObject>`.
+ */
+const SVG_TAGS = new Set([
+  "svg",
+  "animate",
+  "animateMotion",
+  "animateTransform",
+  "circle",
+  "clipPath",
+  "defs",
+  "desc",
+  "ellipse",
+  "feBlend",
+  "feColorMatrix",
+  "feComponentTransfer",
+  "feComposite",
+  "feConvolveMatrix",
+  "feDiffuseLighting",
+  "feDisplacementMap",
+  "feDistantLight",
+  "feDropShadow",
+  "feFlood",
+  "feFuncA",
+  "feFuncB",
+  "feFuncG",
+  "feFuncR",
+  "feGaussianBlur",
+  "feImage",
+  "feMerge",
+  "feMergeNode",
+  "feMorphology",
+  "feOffset",
+  "fePointLight",
+  "feSpecularLighting",
+  "feSpotLight",
+  "feTile",
+  "feTurbulence",
+  "filter",
+  "foreignObject",
+  "g",
+  "image",
+  "line",
+  "linearGradient",
+  "marker",
+  "mask",
+  "metadata",
+  "mpath",
+  "path",
+  "pattern",
+  "polygon",
+  "polyline",
+  "radialGradient",
+  "rect",
+  "set",
+  "stop",
+  "switch",
+  "symbol",
+  "text",
+  "textPath",
+  "tspan",
+  "use",
+  "view",
+]);
+
+export function isSvgTag(tag: string): boolean {
+  return SVG_TAGS.has(tag);
+}
+
+/** Set class on HTML or SVG (SVGElement.className is SVGAnimatedString). */
+export function setClassName(el: Element, value: string): void {
+  if (el.namespaceURI === SVG_NS) {
+    el.setAttribute("class", value);
+  } else {
+    (el as HTMLElement).className = value;
+  }
+}
+
 /**
  * Create an element — or invoke a function component.
  *
  * Classic JSX (`jsxFactory: "h"`) compiles `<App />` to `h(App, props)`.
  * Automatic runtime uses `jsx()` which also supports function types.
+ *
+ * SVG tags use the SVG namespace so paths/circles actually paint.
  */
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -57,7 +143,7 @@ export function h(
   tag: string,
   props?: Props | null,
   ...children: Child[]
-): HTMLElement;
+): HTMLElement | SVGElement;
 
 export function h<P extends Record<string, unknown>>(
   tag: FunctionComponent<P>,
@@ -92,7 +178,9 @@ export function h(
     );
   }
 
-  const el = document.createElement(tag);
+  const el = isSvgTag(tag)
+    ? document.createElementNS(SVG_NS, tag)
+    : document.createElement(tag);
 
   if (props) {
     applyProps(el, props);
@@ -128,7 +216,7 @@ export function text(
   return node;
 }
 
-function applyProps(el: HTMLElement, props: Props): void {
+function applyProps(el: Element, props: Props): void {
   for (const key of Object.keys(props)) {
     if (RESERVED.has(key)) continue;
     const value = props[key];
@@ -136,12 +224,12 @@ function applyProps(el: HTMLElement, props: Props): void {
     if (key.startsWith("on") && key.length > 2 && typeof value === "function") {
       // onClick → click, onMouseDown → mousedown
       const event = key.slice(2).toLowerCase();
-      on(el, event, value as EventListener);
+      on(el as HTMLElement | SVGElement, event, value as EventListener);
       continue;
     }
 
     if (typeof value === "function") {
-      if (isDomProp(key)) {
+      if (isDomProp(key) && el.namespaceURI !== SVG_NS) {
         bindProp(el, key, value as () => unknown);
       } else {
         bindAttr(
@@ -153,7 +241,7 @@ function applyProps(el: HTMLElement, props: Props): void {
       continue;
     }
 
-    if (isDomProp(key)) {
+    if (isDomProp(key) && el.namespaceURI !== SVG_NS) {
       (el as unknown as Record<string, unknown>)[key] = value;
     } else if (value === true) {
       el.setAttribute(toAttrName(key), "");
@@ -167,15 +255,15 @@ function applyProps(el: HTMLElement, props: Props): void {
     if (typeof classValue === "function") {
       bindClass(el, classValue);
     } else if (classValue != null) {
-      el.className = classValue;
+      setClassName(el, classValue);
     }
   }
 
   if (props.style !== undefined) {
     if (typeof props.style === "function") {
-      bindStyle(el, props.style);
+      bindStyle(el as HTMLElement | SVGElement, props.style);
     } else if (props.style) {
-      bindStyle(el, () => props.style as Record<string, string | number>);
+      bindStyle(el as HTMLElement | SVGElement, () => props.style as Record<string, string | number>);
     }
   }
 
@@ -188,7 +276,7 @@ function applyProps(el: HTMLElement, props: Props): void {
   }
 
   if (typeof props.ref === "function") {
-    props.ref(el);
+    props.ref(el as HTMLElement);
   }
 }
 

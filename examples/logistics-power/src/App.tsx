@@ -17,6 +17,8 @@ import { ShipmentDetailPage } from "./pages/ShipmentDetail.js";
 import { ExceptionsPage } from "./pages/Exceptions.js";
 import { PartnersPage } from "./pages/Partners.js";
 import { SettingsPage } from "./pages/Settings.js";
+import { CircuitBackground } from "./components/CircuitBackground.js";
+import "./prefs.js";
 
 export function createApp(opts: {
   theme: ThemeController;
@@ -87,11 +89,7 @@ export function createApp(opts: {
   function Shell() {
     return (
       <div class="app-shell">
-        <div class="circuit-bg" aria-hidden="true">
-          <div class="circuit-bg__grid" />
-          <div class="circuit-bg__traces" />
-          <div class="circuit-bg__pulse" />
-        </div>
+        <CircuitBackground />
         <header class="app-header">
           <Link router={router} to="/" class="app-brand" exact>
             <span class="app-brand__mark" aria-hidden="true" />

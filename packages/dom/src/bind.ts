@@ -53,6 +53,16 @@ export function bindProp<T>(
   });
 }
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function setClassName(el: Element, value: string): void {
+  if (el.namespaceURI === SVG_NS) {
+    el.setAttribute("class", value);
+  } else {
+    (el as HTMLElement).className = value;
+  }
+}
+
 /**
  * Reactive className.
  * - string → full className
@@ -65,18 +75,18 @@ export function bindClass(
   return effect(() => {
     const value = get();
     if (value == null || value === "") {
-      el.className = "";
+      setClassName(el, "");
       return;
     }
     if (typeof value === "string") {
-      el.className = value;
+      setClassName(el, value);
       return;
     }
     const parts: string[] = [];
     for (const key of Object.keys(value)) {
       if (value[key]) parts.push(key);
     }
-    el.className = parts.join(" ");
+    setClassName(el, parts.join(" "));
   });
 }
 

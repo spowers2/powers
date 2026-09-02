@@ -13,7 +13,7 @@
 export { mount } from "./mount.js";
 export type { MountResult } from "./mount.js";
 
-export { h, text } from "./h.js";
+export { h, text, SVG_NS, isSvgTag, setClassName } from "./h.js";
 export type { Child, Props, FunctionComponent } from "./h.js";
 
 export { Fragment, normalizeChildren, appendChild } from "./fragment.js";

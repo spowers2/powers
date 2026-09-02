@@ -8,6 +8,7 @@ import {
 } from "@lab206/ui";
 import { signal } from "@lab206/core";
 import { PageChrome } from "../components/PageChrome.js";
+import { circuitMotion } from "../prefs.js";
 import type { Router } from "@lab206/router";
 
 export function SettingsPage(props: {
@@ -48,6 +49,22 @@ export function SettingsPage(props: {
               </Button>
             </div>
             <Switch
+              label="Circuit pulse animation"
+              bind={circuitMotion}
+              onChange={() => {
+                if (!hints()) return;
+                toaster.push({
+                  title: circuitMotion()
+                    ? "Circuit pulses on"
+                    : "Circuit pulses off",
+                  description: circuitMotion()
+                    ? "Soft lights travel the background traces."
+                    : "Background stays still. Traces remain.",
+                  tone: "info",
+                });
+              }}
+            />
+            <Switch
               label="Show tip toasts when toggling options"
               bind={hints}
               onChange={() => {
@@ -60,8 +77,9 @@ export function SettingsPage(props: {
               }}
             />
             <p class="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
-              Prefer the header <b>Light / Dark</b> control while walking a
-              client through the demo — it shows one design system, two skins.
+              Circuit animation defaults off when your OS has reduced motion
+              enabled. Prefer the header <b>Light / Dark</b> control while
+              walking a client through the demo — one design system, two skins.
             </p>
             <Button
               size="sm"
