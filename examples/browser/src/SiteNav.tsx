@@ -20,6 +20,7 @@ const PHONE_MENU = [
   { id: "/system", label: "System" },
   { id: SITE.contact.href, label: SITE.contact.label },
   { id: "__workspace", label: "designlab206 (live)" },
+  { id: "__logistics", label: SITE.demos.logistics.label },
   { id: "__hearth", label: SITE.demos.hearth.label },
   { id: "__figma", label: "Figma plugin" },
 ] as const;
@@ -35,6 +36,14 @@ export function SiteNav(props: {
     if (id === "__workspace") {
       window.open(
         SITE.demos.workspace.href,
+        "_blank",
+        "noopener,noreferrer",
+      );
+      return;
+    }
+    if (id === "__logistics") {
+      window.open(
+        SITE.demos.logistics.href,
         "_blank",
         "noopener,noreferrer",
       );
@@ -126,6 +135,17 @@ export function SiteNav(props: {
                 {SITE.demos.workspace.label}
               </span>
               <span class="site-nav-demo-short">designlab206</span>
+            </a>
+            <a
+              class="site-nav-demo"
+              href={SITE.demos.logistics.href}
+              {...SITE.demoLinkAttrs}
+              title={SITE.demos.logistics.title}
+            >
+              <span class="site-nav-demo-full">
+                {SITE.demos.logistics.label}
+              </span>
+              <span class="site-nav-demo-short">Logistics</span>
             </a>
             <a
               class="site-nav-demo"

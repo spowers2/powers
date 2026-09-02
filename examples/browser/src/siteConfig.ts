@@ -27,6 +27,11 @@ export const SITE = {
       href: import.meta.env.DEV ? "http://localhost:5181" : "/hearth/",
       title: "Restaurant product demo",
     },
+    logistics: {
+      label: "Logistics Power",
+      href: import.meta.env.DEV ? "http://localhost:5182" : "/logistics/",
+      title: "Freight ops control tower — dense data demo",
+    },
   },
   /** Always open product demos in a new tab so lab206 stays available. */
   demoLinkAttrs: {

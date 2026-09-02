@@ -1,0 +1,24 @@
+{
+  "name": "@lab206/logistics-power",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Logistics Power — sci-fi freight ops control tower demo (KPIs, shipments, exceptions).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@lab206/core": "workspace:*",
+    "@lab206/dom": "workspace:*",
+    "@lab206/router": "workspace:*",
+    "@lab206/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.2.2"
+  },
+  "license": "BUSL-1.1"
+}

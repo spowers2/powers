@@ -28,6 +28,7 @@
     "example:browser": "pnpm --filter @lab206/example-browser dev",
     "example:starter": "pnpm --filter @lab206/app-starter dev",
     "example:restaurant": "pnpm --filter @lab206/restaurant-demo dev",
+    "example:logistics": "pnpm --filter @lab206/logistics-power dev",
     "deploy:zip:starter": "pnpm --filter @lab206/app-starter deploy:zip",
     "deploy:zip:restaurant": "pnpm --filter @lab206/restaurant-demo deploy:zip",
     "build:lab206": "bash scripts/build-lab206-site.sh",

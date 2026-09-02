@@ -2,9 +2,10 @@
 # Build a static site for lab206.com (LiveCode / any static host).
 #
 # Layout:
-#   /            → Lab (browser: landing, /lab, /system, /docs)
-#   /workspace/  → designlab206 (hash routes when not at domain root)
-#   /hearth/     → Hearth restaurant (hash routes)
+#   /              → Lab (browser: landing, /lab, /system, /docs)
+#   /workspace/    → designlab206 archive build (flagship live at designlab206.com)
+#   /logistics/    → Logistics Power (sci-fi freight control tower)
+#   /hearth/       → Hearth restaurant (hash routes)
 #
 # Usage (monorepo root):
 #   pnpm build:lab206
@@ -18,22 +19,24 @@ ZIP="$ROOT/sites/lab206.com.zip"
 echo "→ Building Lab (base /)"
 pnpm --filter @lab206/example-browser exec vite build --base=/
 
-echo "→ Building designlab206 (base /workspace/)"
+echo "→ Building designlab206 archive (base /workspace/)"
 pnpm --filter @lab206/app-starter exec vite build --base=/workspace/
+
+echo "→ Building Logistics Power (base /logistics/)"
+pnpm --filter @lab206/logistics-power exec vite build --base=/logistics/
 
 echo "→ Building Hearth (base /hearth/)"
 pnpm --filter @lab206/restaurant-demo exec vite build --base=/hearth/
 
 echo "→ Assembling $OUT"
 rm -rf "$OUT"
-mkdir -p "$OUT/workspace" "$OUT/hearth"
+mkdir -p "$OUT/workspace" "$OUT/logistics" "$OUT/hearth"
 cp -R "$ROOT/examples/browser/dist/." "$OUT/"
 cp -R "$ROOT/examples/app-starter/dist/." "$OUT/workspace/"
+cp -R "$ROOT/examples/logistics-power/dist/." "$OUT/logistics/"
 cp -R "$ROOT/examples/restaurant-demo/dist/." "$OUT/hearth/"
 
 # Root .htaccess: SPA fallback ONLY when the file/dir does not exist.
-# (A bare RewriteRule without !-f/!-d was serving index.html for /assets/*.js
-#  → browser MIME error "text/html" instead of JavaScript.)
 cat > "$OUT/.htaccess" <<'HTA'
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -53,6 +56,17 @@ cat > "$OUT/workspace/.htaccess" <<'HTA'
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /workspace/index.html [L]
+</IfModule>
+HTA
+
+cat > "$OUT/logistics/.htaccess" <<'HTA'
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /logistics/
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /logistics/index.html [L]
 </IfModule>
 HTA
 
@@ -78,8 +92,10 @@ URLs after DNS propagates:
   https://lab206.com/lab         Power Lab
   https://lab206.com/system      Design system
   https://lab206.com/docs        Docs
-  https://lab206.com/workspace/  designlab206  (routes: /workspace/#/…)
+  https://designlab206.com/      Flagship product (live, separate domain)
+  https://lab206.com/logistics/  Logistics Power (routes: /logistics/#/…)
   https://lab206.com/hearth/     Hearth        (routes: /hearth/#/…)
+  https://lab206.com/workspace/  designlab206 archive build (optional)
 
 Do not upload node_modules or the Powers monorepo — only this folder.
 

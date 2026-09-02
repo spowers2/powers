@@ -159,6 +159,13 @@ export function DocsPage(props: { router: Router }) {
             </a>
             <a
               class="docs-demo-link"
+              href={SITE.demos.logistics.href}
+              {...SITE.demoLinkAttrs}
+            >
+              {SITE.demos.logistics.label} →
+            </a>
+            <a
+              class="docs-demo-link"
               href={SITE.demos.hearth.href}
               {...SITE.demoLinkAttrs}
             >
@@ -1056,7 +1063,7 @@ const list = createQuery({
             </li>
             <li>
               <strong>Demos</strong> — {SITE.demos.workspace.label} +{" "}
-              {SITE.demos.hearth.label} for real product patterns
+              {SITE.demos.logistics.label} + {SITE.demos.hearth.label}
             </li>
             <li>
               Repo markdown: <Code>docs/GOLDEN_PATH.md</Code>,{" "}

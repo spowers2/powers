@@ -511,9 +511,9 @@ export function LandingPage(props: { router: Router }) {
               </h2>
               <p class="lp-section-sub">
                 Flagship demos — full apps, not kitchen sinks.{" "}
-                {SITE.demos.workspace.label} runs on its own domain;{" "}
-                {SITE.demos.hearth.label} ships with this site. Lab and System
-                teach the kit underneath.
+                {SITE.demos.workspace.label} is live on its own domain;{" "}
+                {SITE.demos.logistics.label} and {SITE.demos.hearth.label} ship
+                with this site. Lab and System teach the kit underneath.
               </p>
             </div>
             <div class="lp-demo-grid">
@@ -530,6 +530,19 @@ export function LandingPage(props: { router: Router }) {
                   open designlab206.com.
                 </p>
                 <span class="lp-demo-card__cta">Open designlab206.com →</span>
+              </a>
+              <a
+                class="lp-demo-card"
+                href={SITE.demos.logistics.href}
+                {...SITE.demoLinkAttrs}
+              >
+                <div class="lp-demo-card__kicker">Ops · data tower</div>
+                <h3>{SITE.demos.logistics.label}</h3>
+                <p>
+                  Sci-fi freight control tower: KPIs, 640-lane shipment matrix,
+                  exception bus. Dense data UI — not hospitality, not studio.
+                </p>
+                <span class="lp-demo-card__cta">Open Logistics Power →</span>
               </a>
               <a
                 class="lp-demo-card lp-demo-card--hearth"
