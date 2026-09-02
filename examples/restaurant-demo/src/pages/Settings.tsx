@@ -73,8 +73,15 @@ export function SettingsPage(props: {
     <Stack gap={6}>
       <PageHeader
         title="Settings"
-        subtitle="Restaurant profile, floor team (servers & sections), theme, and demo data."
+        subtitle="Restaurant profile, floor team, theme — session playground only (not saved after you leave)."
       />
+
+      <Alert tone="info" title="Session playground">
+        <Text size="sm">
+          Edits to the menu, book, floor, and profile stay in this browser tab for
+          the visit. Closing the tab clears them — nothing is stored on a server.
+        </Text>
+      </Alert>
 
       <Card>
         <Stack gap={4}>
@@ -274,10 +281,11 @@ export function SettingsPage(props: {
 
       <Card>
         <Stack gap={3}>
-          <Text weight="semibold">Demo data</Text>
+          <Text weight="semibold">Playground data</Text>
           <Text muted size="sm">
-            Reset restores seed menu, reservations, and tickets. Photos reload
-            from Unsplash CDN.
+            Reset restores the seed menu, reservations, and tickets for this
+            session. Photos reload from Unsplash CDN. Nothing persists after you
+            leave.
           </Text>
           <Text size="xs" muted>
             {PHOTO_CREDIT}
@@ -286,7 +294,9 @@ export function SettingsPage(props: {
             confirmReset() ? (
               <Alert tone="warning" title="Reset everything?">
                 <Stack gap={2}>
-                  <Text size="sm">This overwrites local restaurant data.</Text>
+                  <Text size="sm">
+                    This overwrites session playground data with the seed.
+                  </Text>
                   <Stack direction="row" gap={2}>
                     <Button
                       size="sm"
@@ -322,7 +332,7 @@ export function SettingsPage(props: {
               Button({
                 size: "sm",
                 variant: "danger",
-                children: "Reset demo data",
+                children: "Reset playground data",
                 onClick: () => confirmReset.set(true),
               })
             )

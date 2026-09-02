@@ -1,4 +1,4 @@
-/** Hearth — neighborhood restaurant demo (local-first). */
+/** Restaurant Power — neighborhood restaurant demo (session playground). */
 
 export type MenuCategory =
   | "starters"

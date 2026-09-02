@@ -17,8 +17,13 @@ import type {
   ZoneServerMap,
 } from "./types.js";
 
-const KEY = "hearth-workspace-v3";
-const KEY_V2 = "hearth-workspace-v2";
+/** Session-only playground storage (clears when the tab/window closes). */
+const KEY = "restaurant-power-session-v1";
+const LEGACY_KEYS = [
+  "hearth-workspace-v3",
+  "hearth-workspace-v2",
+  "hearth-workspace-v1",
+];
 
 function id(prefix: string): string {
   return `${prefix}_${Math.random().toString(36).slice(2, 9)}`;
@@ -517,11 +522,18 @@ function normalizeReservation(
   };
 }
 
-function load(): Workspace {
+function clearLegacyLocal() {
   try {
-    let raw = localStorage.getItem(KEY);
-    if (!raw) raw = localStorage.getItem(KEY_V2);
-    if (!raw) raw = localStorage.getItem("hearth-workspace-v1");
+    for (const k of LEGACY_KEYS) localStorage.removeItem(k);
+  } catch {
+    /* private mode */
+  }
+}
+
+function load(): Workspace {
+  clearLegacyLocal();
+  try {
+    const raw = sessionStorage.getItem(KEY);
     if (!raw) return seed();
     const migrated = migrate(JSON.parse(raw));
     return migrated ?? seed();
@@ -532,9 +544,9 @@ function load(): Workspace {
 
 function save(ws: Workspace) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(ws));
+    sessionStorage.setItem(KEY, JSON.stringify(ws));
   } catch {
-    /* quota / private mode */
+    /* quota / private mode — in-memory signals still work for this tab */
   }
 }
 

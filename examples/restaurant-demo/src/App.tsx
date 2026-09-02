@@ -121,9 +121,21 @@ export function createApp(opts: {
 
     return (
       <div class="app-shell">
-        {() =>
-          router.path().startsWith("/visit") ? (
-            <header class="app-header app-header--guest">
+        <div class="app-top">
+          <div
+            class="playground-banner"
+            role="status"
+            aria-label="Session playground notice"
+          >
+            <span class="playground-banner__pill">Playground</span>
+            <span class="playground-banner__text">
+              Session-only — edit the menu, book tables, run the floor. Changes
+              stay for this visit and reset when you leave.
+            </span>
+          </div>
+          {() =>
+            router.path().startsWith("/visit") ? (
+              <header class="app-header app-header--guest">
               <Link router={router} to="/visit" class="app-brand" exact>
                 <span class="app-brand__mark" aria-hidden="true" />
                 <span class="app-brand__text">
@@ -316,8 +328,9 @@ export function createApp(opts: {
                 </Button>
               </div>
             </header>
-          )
-        }
+            )
+          }
+        </div>
         <main class="app-main">
           <Container size="xl">{outletNode}</Container>
         </main>

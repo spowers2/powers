@@ -1,6 +1,8 @@
 # Restaurant Power — restaurant demo (Powers)
 
-A **local-first neighborhood restaurant** product example: guest-facing floor, menu with photos, reservations, and a service/kitchen board.
+A **session playground** for a neighborhood restaurant: guest-facing site, menu with photos, reservations, kitchen board, and floor map.
+
+**Playground only** — edits live in `sessionStorage` for the current tab/visit. Closing the tab clears them. Nothing is saved on a server or across return visits.
 
 Photos load from the **Unsplash CDN** (free license — see in-app credit).
 
@@ -42,7 +44,7 @@ Upload/extract to your host web root. Guide: [`docs/DEPLOY.md`](../../docs/DEPLO
 
 ## Note
 
-Data never leaves the browser. No backend.
+Session-only playground. Data never leaves the browser. No backend.
 
 ## Imagery
 

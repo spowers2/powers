@@ -154,7 +154,7 @@ export function GuestHomePage(props: {
           </Text>
           <Text muted size="sm">
             Call {() => profile().phone} for same-day questions. Online booking
-            holds a table in our book (demo — local only).
+            holds a table in our book (session playground — clears when you leave).
           </Text>
           <Stack direction="row" gap={2} wrap>
             <Button onClick={() => router.navigate("/visit/book")}>
