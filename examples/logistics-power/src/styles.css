@@ -57,9 +57,143 @@ body {
 }
 
 .app-shell {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Subtle circuitry atmosphere — behind content, never competing */
+.circuit-bg {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.55;
+}
+
+html[data-pu-theme="dark"] .circuit-bg {
+  opacity: 0.4;
+}
+
+.circuit-bg__grid {
+  position: absolute;
+  inset: -10%;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--lp-accent) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--lp-accent) 7%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+  animation: circuit-drift 48s linear infinite;
+}
+
+.circuit-bg__traces {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320' fill='none'%3E%3Cpath d='M20 40H90V110H160V40H240V160H280V240H200V200H120V280H40V160H20V40Z' stroke='%230f766e' stroke-opacity='0.14' stroke-width='1.25'/%3E%3Ccircle cx='90' cy='110' r='3' fill='%230f766e' fill-opacity='0.2'/%3E%3Ccircle cx='160' cy='40' r='3' fill='%230f766e' fill-opacity='0.2'/%3E%3Ccircle cx='240' cy='160' r='3' fill='%230f766e' fill-opacity='0.2'/%3E%3Ccircle cx='120' cy='200' r='3' fill='%230f766e' fill-opacity='0.2'/%3E%3Cpath d='M280 40V100H300' stroke='%230f766e' stroke-opacity='0.12' stroke-width='1'/%3E%3Cpath d='M40 300H100V260' stroke='%230f766e' stroke-opacity='0.12' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 320px 320px;
+  background-repeat: repeat;
+  animation: circuit-drift-rev 90s linear infinite;
+}
+
+html[data-pu-theme="dark"] .circuit-bg__traces {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320' fill='none'%3E%3Cpath d='M20 40H90V110H160V40H240V160H280V240H200V200H120V280H40V160H20V40Z' stroke='%232dd4bf' stroke-opacity='0.16' stroke-width='1.25'/%3E%3Ccircle cx='90' cy='110' r='3' fill='%232dd4bf' fill-opacity='0.22'/%3E%3Ccircle cx='160' cy='40' r='3' fill='%232dd4bf' fill-opacity='0.22'/%3E%3Ccircle cx='240' cy='160' r='3' fill='%232dd4bf' fill-opacity='0.22'/%3E%3Ccircle cx='120' cy='200' r='3' fill='%232dd4bf' fill-opacity='0.22'/%3E%3Cpath d='M280 40V100H300' stroke='%232dd4bf' stroke-opacity='0.14' stroke-width='1'/%3E%3Cpath d='M40 300H100V260' stroke='%232dd4bf' stroke-opacity='0.14' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.circuit-bg__pulse {
+  position: absolute;
+  width: 42%;
+  height: 42%;
+  left: -8%;
+  top: 18%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lp-accent) 16%, transparent),
+    transparent 70%
+  );
+  animation: circuit-glow 14s ease-in-out infinite;
+}
+
+.circuit-bg__pulse::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  right: -40%;
+  bottom: -30%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lp-accent) 10%, transparent),
+    transparent 72%
+  );
+  animation: circuit-glow 18s ease-in-out infinite reverse;
+}
+
+@keyframes circuit-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(48px, 48px, 0);
+  }
+}
+
+@keyframes circuit-drift-rev {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-40px, 20px, 0);
+  }
+}
+
+@keyframes circuit-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate3d(6%, 4%, 0) scale(1.05);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.app-header,
+.app-main {
+  position: relative;
+  z-index: 1;
 }
 
 .app-header {
@@ -92,6 +226,7 @@ body {
   border: 1px solid var(--lp-accent);
   background: var(--lp-accent-soft);
   flex-shrink: 0;
+  animation: soft-pulse 4.5s ease-in-out infinite;
 }
 
 .app-brand__text {
@@ -234,6 +369,7 @@ body {
   padding: 0.9rem 1rem;
   margin-bottom: 0.35rem;
   box-shadow: var(--lp-shadow);
+  animation: panel-in 0.45s ease-out both;
 }
 
 .demo-banner strong {
@@ -281,10 +417,25 @@ body {
   padding: 0.75rem 0.85rem;
   box-shadow: var(--lp-shadow);
   color: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  animation: panel-in 0.5s ease-out both;
+}
+
+.next-step:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.next-step:nth-child(3) {
+  animation-delay: 0.12s;
 }
 
 .next-step:hover {
   border-color: color-mix(in srgb, var(--lp-accent) 40%, var(--lp-border));
+  box-shadow: var(--lp-shadow), 0 0 0 1px color-mix(in srgb, var(--lp-accent) 12%, transparent);
+  transform: translateY(-1px);
 }
 
 .next-step__n {
@@ -313,6 +464,23 @@ body {
   background: var(--lp-panel);
   border-radius: 8px;
   box-shadow: var(--lp-shadow);
+  animation: panel-in 0.4s ease-out both;
+}
+
+.kpi-grid .panel {
+  animation: panel-in 0.45s ease-out both;
+}
+
+.kpi-grid .panel:nth-child(2) {
+  animation-delay: 0.04s;
+}
+
+.kpi-grid .panel:nth-child(3) {
+  animation-delay: 0.08s;
+}
+
+.kpi-grid .panel:nth-child(4) {
+  animation-delay: 0.12s;
 }
 
 .panel__inner {
@@ -562,4 +730,29 @@ body {
 .app-shell .pu-input,
 .app-shell .pu-btn {
   border-radius: 6px;
+}
+
+.app-nav__link.is-active {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circuit-bg__grid,
+  .circuit-bg__traces,
+  .circuit-bg__pulse,
+  .circuit-bg__pulse::after,
+  .app-brand__mark,
+  .demo-banner,
+  .next-step,
+  .panel,
+  .kpi-grid .panel {
+    animation: none !important;
+  }
+
+  .next-step:hover {
+    transform: none;
+  }
 }
