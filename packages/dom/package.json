@@ -1,6 +1,6 @@
 {
   "name": "@lab206/dom",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Thin DOM bindings + JSX + reactive props for Powers.",
   "type": "module",
   "license": "BUSL-1.1",

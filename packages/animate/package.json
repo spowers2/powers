@@ -1,6 +1,6 @@
 {
   "name": "@lab206/animate",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Signal-native animation for Powers — tweens, springs, interruptible, a11y-aware.",
   "type": "module",
   "license": "BUSL-1.1",
