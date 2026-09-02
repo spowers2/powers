@@ -3,11 +3,14 @@ import { buildSeed } from "./seed.js";
 import type {
   Account,
   AccountType,
+  CapitalProduct,
+  CapitalSnapshot,
   Card,
   KpiSnapshot,
   Transaction,
   TransferRecord,
   TxStatus,
+  Workflow,
 } from "./types.js";
 
 const seed = buildSeed();
@@ -16,21 +19,22 @@ const db = {
   transactions: seed.transactions.map((t) => ({ ...t })),
   cards: seed.cards.map((c) => ({ ...c })),
   transfers: seed.transfers.map((t) => ({ ...t })),
+  workflows: seed.workflows.map((w) => ({ ...w })),
+  capitalProducts: seed.capitalProducts.map((p) => ({ ...p })),
+  capital: { ...seed.capital },
   kpis: { ...seed.kpis },
 };
 
 function recomputeKpis() {
-  db.kpis.totalBalance = db.accounts
-    .filter((a) => a.type !== "credit")
-    .reduce((s, a) => s + a.balance, 0);
-  db.kpis.pendingCount = db.transactions.filter(
-    (t) => t.status === "pending",
-  ).length;
+  db.kpis.totalBalance = db.accounts.reduce((s, a) => s + a.balance, 0);
   db.kpis.accountCount = db.accounts.length;
-  db.kpis.monthSpend = Math.abs(
-    db.transactions
-      .filter((t) => t.amount < 0 && t.status !== "failed")
-      .reduce((s, t) => s + t.amount, 0),
+  db.kpis.activeWorkflows = db.workflows.filter(
+    (w) => w.status === "active",
+  ).length;
+  db.kpis.pendingApprovals = Math.max(
+    0,
+    db.transactions.filter((t) => t.status === "pending").length +
+      db.workflows.filter((w) => w.status === "error").length,
   );
 }
 
@@ -99,12 +103,48 @@ async function fakeFetch(
     return json(db.cards);
   }
 
-  if (path.startsWith("/api/cards/") && path.endsWith("/toggle") && method === "POST") {
+  if (
+    path.startsWith("/api/cards/") &&
+    path.endsWith("/toggle") &&
+    method === "POST"
+  ) {
     const id = path.replace("/api/cards/", "").replace("/toggle", "");
     const card = db.cards.find((c) => c.id === id);
     if (!card) return json({ error: "not_found" }, 404);
     card.status = card.status === "active" ? "frozen" : "active";
     return json(card);
+  }
+
+  if (path === "/api/workflows" && method === "GET") {
+    return json(db.workflows);
+  }
+
+  if (
+    path.startsWith("/api/workflows/") &&
+    path.endsWith("/toggle") &&
+    method === "POST"
+  ) {
+    const id = path.replace("/api/workflows/", "").replace("/toggle", "");
+    const wf = db.workflows.find((w) => w.id === id);
+    if (!wf) return json({ error: "not_found" }, 404);
+    if (wf.status === "error") {
+      wf.status = "active";
+      wf.lastRun = "just now";
+    } else if (wf.status === "active") {
+      wf.status = "paused";
+    } else {
+      wf.status = "active";
+      wf.lastRun = "just now";
+    }
+    recomputeKpis();
+    return json(wf);
+  }
+
+  if (path === "/api/capital" && method === "GET") {
+    return json({
+      snapshot: db.capital,
+      products: db.capitalProducts,
+    });
   }
 
   if (path === "/api/transfers" && method === "POST") {
@@ -119,19 +159,14 @@ async function fakeFetch(
     if (!from || !to) return json({ error: "bad_accounts" }, 400);
     const amount = Number(body.amount);
     if (!(amount > 0)) return json({ error: "bad_amount" }, 400);
-    if (from.available < amount && from.type !== "credit") {
+    if (from.available < amount) {
       return json({ error: "insufficient" }, 400);
     }
 
     from.balance -= amount;
     from.available -= amount;
-    if (to.type === "credit") {
-      to.balance += amount; // pay down credit (less negative / toward zero)
-      to.available += amount;
-    } else {
-      to.balance += amount;
-      to.available += amount;
-    }
+    to.balance += amount;
+    to.available += amount;
 
     const id = `tr-${Date.now()}`;
     const createdAt = new Date().toISOString();
@@ -183,6 +218,11 @@ export type AccountDetail = {
   transactions: Transaction[];
 };
 
+export type CapitalPayload = {
+  snapshot: CapitalSnapshot;
+  products: CapitalProduct[];
+};
+
 export const activityQ = signal("");
 export const activityStatus = signal<TxStatus | "">("");
 
@@ -223,6 +263,18 @@ export const cardsQuery = createQuery({
   name: "cards",
 });
 
+export const workflowsQuery = createQuery({
+  queryKey: () => "workflows",
+  queryFn: () => api.get<Workflow[]>("/workflows"),
+  name: "workflows",
+});
+
+export const capitalQuery = createQuery({
+  queryKey: () => "capital",
+  queryFn: () => api.get<CapitalPayload>("/capital"),
+  name: "capital",
+});
+
 export async function submitTransfer(input: {
   fromAccountId: string;
   toAccountId: string;
@@ -241,6 +293,12 @@ export async function submitTransfer(input: {
 export async function toggleCard(id: string) {
   const res = await api.post<Card>(`/cards/${id}/toggle`, {});
   await cardsQuery.refetch();
+  return res;
+}
+
+export async function toggleWorkflow(id: string) {
+  const res = await api.post<Workflow>(`/workflows/${id}/toggle`, {});
+  await Promise.all([workflowsQuery.refetch(), kpisQuery.refetch()]);
   return res;
 }
 

@@ -25,7 +25,7 @@ export function SettingsPage(props: {
       title="Settings"
       purpose="Theme and spacing — same Powers controls you’d use in a client app."
       crumbs={[
-        { label: "Overview", href: "/" },
+        { label: "Dashboard", href: "/dashboard" },
         { label: "Settings" },
       ]}
     >

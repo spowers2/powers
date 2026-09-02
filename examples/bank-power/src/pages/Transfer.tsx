@@ -75,7 +75,7 @@ export function TransferPage(props: {
       title="Transfer"
       purpose="Move money between your accounts. Confirm before it posts."
       crumbs={[
-        { label: "Overview", href: "/" },
+        { label: "Dashboard", href: "/dashboard" },
         { label: "Transfer" },
       ]}
     >

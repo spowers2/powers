@@ -554,8 +554,8 @@ export function LandingPage(props: { router: Router }) {
                 <div class="lp-demo-card__kicker">Product · banking</div>
                 <h3>{SITE.demos.bank.label}</h3>
                 <p>
-                  Personal banking: balances, accounts, transfers, and cards.
-                  Calm product UI with live demo mutations.
+                  Business banking: dashboard, workflows, capital, accounts, and
+                  cards. Corporate product UI with live demo mutations.
                 </p>
                 <span class="lp-demo-card__cta">Open Bank Power →</span>
               </a>

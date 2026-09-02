@@ -20,7 +20,7 @@ export function CardsPage(props: {
       title="Cards"
       purpose="Debit and credit on this profile. Freeze instantly if something looks off."
       crumbs={[
-        { label: "Overview", href: "/" },
+        { label: "Dashboard", href: "/dashboard" },
         { label: "Cards" },
       ]}
     >

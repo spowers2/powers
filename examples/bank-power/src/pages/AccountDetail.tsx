@@ -13,7 +13,7 @@ export function AccountDetailPage(props: { router: Router; id: string }) {
       title="Account"
       purpose="Balance, availability, and recent transactions for this product."
       crumbs={[
-        { label: "Overview", href: "/" },
+        { label: "Dashboard", href: "/dashboard" },
         { label: "Accounts", href: "/accounts" },
         { label: id },
       ]}

@@ -12,7 +12,7 @@ export function AccountsPage(props: { router: Router }) {
       title="Accounts"
       purpose="Every product on this profile. Open one for history and available balance."
       crumbs={[
-        { label: "Overview", href: "/" },
+        { label: "Dashboard", href: "/dashboard" },
         { label: "Accounts" },
       ]}
       actions={

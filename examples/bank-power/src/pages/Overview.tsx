@@ -18,11 +18,11 @@ export function OverviewPage(props: {
   return (
     <PageChrome
       router={router}
-      title="Overview"
-      purpose="See balances at a glance, then jump into accounts, transfers, or cards."
+      title="Dashboard"
+      purpose="Liquidity, workflows, and pending approvals for the business."
       crumbs={[
         { label: "Bank Power" },
-        { label: "Overview" },
+        { label: "Dashboard" },
       ]}
       actions={
         <>
@@ -38,8 +38,9 @@ export function OverviewPage(props: {
       <div class="demo-banner">
         <strong>What is this demo?</strong>
         <p>
-          A sample <b>personal banking app</b> — balances, activity, transfers,
-          and cards. Fake data; same Powers UI kit as Lab and System.
+          A sample <b>business banking console</b> — operating accounts,
+          automated workflows, capital products, and cards. Fake data; same
+          Powers UI kit as Lab and System.
         </p>
       </div>
 
@@ -52,28 +53,28 @@ export function OverviewPage(props: {
           <div class="next-step__n">Step 1</div>
           <div class="next-step__t">Review accounts</div>
           <div class="next-step__d">
-            Checking, savings, and credit with available balances.
+            Operating, payroll, and reserve with available balances.
           </div>
         </button>
         <button
           type="button"
           class="next-step"
-          onClick={() => router.navigate("/transfer")}
+          onClick={() => router.navigate("/workflows")}
         >
           <div class="next-step__n">Step 2</div>
-          <div class="next-step__t">Move money</div>
+          <div class="next-step__t">Check workflows</div>
           <div class="next-step__d">
-            Transfer between accounts with a confirm step.
+            Pause, resume, or clear automation errors.
           </div>
         </button>
         <button
           type="button"
           class="next-step"
-          onClick={() => router.navigate("/cards")}
+          onClick={() => router.navigate("/capital")}
         >
           <div class="next-step__n">Step 3</div>
-          <div class="next-step__t">Manage cards</div>
-          <div class="next-step__d">Freeze or unfreeze debit and credit.</div>
+          <div class="next-step__t">Explore capital</div>
+          <div class="next-step__d">Facility and loan products for growth.</div>
         </button>
       </div>
 
@@ -91,28 +92,28 @@ export function OverviewPage(props: {
         return (
           <div class="kpi-grid">
             <div class="panel kpi">
-              <p class="kpi__label">Total cash</p>
+              <p class="kpi__label">Total liquidity</p>
               <p class="kpi__value">{money(kpi.totalBalance)}</p>
               <p class="kpi__help">
-                Checking + savings. Credit balance is tracked separately.
+                Sum of operating, payroll, and reserve balances.
               </p>
             </div>
             <div class="panel kpi">
-              <p class="kpi__label">Month spend</p>
-              <p class="kpi__value">{money(kpi.monthSpend)}</p>
-              <p class="kpi__help">Posted and pending debits this period.</p>
+              <p class="kpi__label">Monthly revenue</p>
+              <p class="kpi__value">{money(kpi.monthRevenue)}</p>
+              <p class="kpi__help">Indicative inflow for the walkthrough.</p>
             </div>
             <div class="panel kpi">
-              <p class="kpi__label">Pending</p>
-              <p class="kpi__value">{String(kpi.pendingCount)}</p>
+              <p class="kpi__label">Pending approvals</p>
+              <p class="kpi__value">{String(kpi.pendingApprovals)}</p>
               <p class="kpi__help">
-                Authorizations not yet posted. Open Activity to review.
+                Payments and workflow exceptions that need attention.
               </p>
             </div>
             <div class="panel kpi">
-              <p class="kpi__label">Accounts</p>
-              <p class="kpi__value">{String(kpi.accountCount)}</p>
-              <p class="kpi__help">Products on this demo profile.</p>
+              <p class="kpi__label">Active workflows</p>
+              <p class="kpi__value">{String(kpi.activeWorkflows)}</p>
+              <p class="kpi__help">Automations currently running.</p>
             </div>
           </div>
         );

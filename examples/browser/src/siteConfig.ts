@@ -49,7 +49,7 @@ export const SITE = {
     bank: {
       label: "Bank Power",
       href: import.meta.env.DEV ? "http://localhost:5183" : "/bank/",
-      title: "Bank Power — personal banking demo",
+      title: "Bank Power — business banking console demo",
     },
   },
   /** Always open product demos in a new tab so lab206 stays available. */

@@ -20,7 +20,7 @@ export function ActivityPage(props: { router: Router }) {
       title="Activity"
       purpose="Cross-account feed. Filter by status or search a merchant."
       crumbs={[
-        { label: "Overview", href: "/" },
+        { label: "Dashboard", href: "/dashboard" },
         { label: "Activity" },
       ]}
     >

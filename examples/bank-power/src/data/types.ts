@@ -4,6 +4,8 @@ export type TxStatus = "posted" | "pending" | "failed";
 
 export type CardStatus = "active" | "frozen";
 
+export type WorkflowStatus = "active" | "paused" | "error";
+
 export type Account = {
   id: string;
   name: string;
@@ -44,9 +46,38 @@ export type TransferRecord = {
   createdAt: string;
 };
 
+export type Workflow = {
+  id: string;
+  name: string;
+  description: string;
+  status: WorkflowStatus;
+  triggers: number;
+  lastRun: string;
+  category: string;
+};
+
+export type CapitalProduct = {
+  id: string;
+  name: string;
+  range: string;
+  term: string;
+  rate: string;
+  features: string[];
+};
+
+export type CapitalSnapshot = {
+  available: number;
+  approved: number;
+  deployed: string;
+  approvalRate: string;
+  avgDecisionMin: number;
+  partners: string;
+};
+
 export type KpiSnapshot = {
   totalBalance: number;
-  monthSpend: number;
-  pendingCount: number;
+  monthRevenue: number;
+  pendingApprovals: number;
+  activeWorkflows: number;
   accountCount: number;
 };
