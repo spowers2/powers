@@ -21,6 +21,7 @@ const PHONE_MENU = [
   { id: SITE.contact.href, label: SITE.contact.label },
   { id: "__workspace", label: "designlab206 (live)" },
   { id: "__logistics", label: SITE.demos.logistics.label },
+  { id: "__bank", label: SITE.demos.bank.label },
   { id: "__hearth", label: SITE.demos.hearth.label },
   { id: "__figma", label: "Figma plugin" },
 ] as const;
@@ -47,6 +48,10 @@ export function SiteNav(props: {
         "_blank",
         "noopener,noreferrer",
       );
+      return;
+    }
+    if (id === "__bank") {
+      window.open(SITE.demos.bank.href, "_blank", "noopener,noreferrer");
       return;
     }
     if (id === "__hearth") {
@@ -149,12 +154,21 @@ export function SiteNav(props: {
             </a>
             <a
               class="site-nav-demo"
+              href={SITE.demos.bank.href}
+              {...SITE.demoLinkAttrs}
+              title={SITE.demos.bank.title}
+            >
+              <span class="site-nav-demo-full">{SITE.demos.bank.label}</span>
+              <span class="site-nav-demo-short">Bank</span>
+            </a>
+            <a
+              class="site-nav-demo"
               href={SITE.demos.hearth.href}
               {...SITE.demoLinkAttrs}
               title={SITE.demos.hearth.title}
             >
               <span class="site-nav-demo-full">{SITE.demos.hearth.label}</span>
-              <span class="site-nav-demo-short">Hearth</span>
+              <span class="site-nav-demo-short">Restaurant</span>
             </a>
             <a
               class="site-nav-demo"

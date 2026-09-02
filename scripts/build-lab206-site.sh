@@ -4,8 +4,9 @@
 # Layout:
 #   /              → Lab (browser: landing, /lab, /system, /docs)
 #   /workspace/    → designlab206 archive build (flagship live at designlab206.com)
-#   /logistics/    → Logistics Power (sci-fi freight control tower)
-#   /hearth/       → Hearth restaurant (hash routes)
+#   /logistics/    → Logistics Power
+#   /bank/         → Bank Power (personal banking)
+#   /hearth/       → Restaurant Power (hash routes; path kept for bookmarks)
 #
 # Usage (monorepo root):
 #   pnpm build:lab206
@@ -25,15 +26,19 @@ pnpm --filter @lab206/app-starter exec vite build --base=/workspace/
 echo "→ Building Logistics Power (base /logistics/)"
 pnpm --filter @lab206/logistics-power exec vite build --base=/logistics/
 
-echo "→ Building Hearth (base /hearth/)"
+echo "→ Building Bank Power (base /bank/)"
+pnpm --filter @lab206/bank-power exec vite build --base=/bank/
+
+echo "→ Building Restaurant Power (base /hearth/)"
 pnpm --filter @lab206/restaurant-demo exec vite build --base=/hearth/
 
 echo "→ Assembling $OUT"
 rm -rf "$OUT"
-mkdir -p "$OUT/workspace" "$OUT/logistics" "$OUT/hearth"
+mkdir -p "$OUT/workspace" "$OUT/logistics" "$OUT/bank" "$OUT/hearth"
 cp -R "$ROOT/examples/browser/dist/." "$OUT/"
 cp -R "$ROOT/examples/app-starter/dist/." "$OUT/workspace/"
 cp -R "$ROOT/examples/logistics-power/dist/." "$OUT/logistics/"
+cp -R "$ROOT/examples/bank-power/dist/." "$OUT/bank/"
 cp -R "$ROOT/examples/restaurant-demo/dist/." "$OUT/hearth/"
 
 # Root .htaccess: SPA fallback ONLY when the file/dir does not exist.
@@ -70,6 +75,17 @@ cat > "$OUT/logistics/.htaccess" <<'HTA'
 </IfModule>
 HTA
 
+cat > "$OUT/bank/.htaccess" <<'HTA'
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /bank/
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /bank/index.html [L]
+</IfModule>
+HTA
+
 cat > "$OUT/hearth/.htaccess" <<'HTA'
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -94,7 +110,8 @@ URLs after DNS propagates:
   https://lab206.com/docs        Docs
   https://designlab206.com/      Flagship product (live, separate domain)
   https://lab206.com/logistics/  Logistics Power (routes: /logistics/#/…)
-  https://lab206.com/hearth/     Hearth        (routes: /hearth/#/…)
+  https://lab206.com/bank/       Bank Power     (routes: /bank/#/…)
+  https://lab206.com/hearth/     Restaurant Power (routes: /hearth/#/…)
   https://lab206.com/workspace/  designlab206 archive build (optional)
 
 Do not upload node_modules or the Powers monorepo — only this folder.

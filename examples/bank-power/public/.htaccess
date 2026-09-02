@@ -1,0 +1,10 @@
+# Powers SPA — only rewrite when the requested file does not exist
+# (so /assets/*.js and *.css are never replaced by index.html).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

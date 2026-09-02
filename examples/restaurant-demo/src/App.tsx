@@ -128,7 +128,7 @@ export function createApp(opts: {
                 <span class="app-brand__mark" aria-hidden="true" />
                 <span class="app-brand__text">
                   <span class="app-brand__name">
-                    {() => profile().name || "Hearth"}
+                    {() => profile().name || "Restaurant Power"}
                   </span>
                   <span class="app-brand__sub">Dining</span>
                 </span>
@@ -201,7 +201,7 @@ export function createApp(opts: {
                 <span class="app-brand__mark" aria-hidden="true" />
                 <span class="app-brand__text">
                   <span class="app-brand__name">
-                    {() => profile().name || "Hearth"}
+                    {() => profile().name || "Restaurant Power"}
                   </span>
                   <span class="app-brand__sub">Staff</span>
                 </span>

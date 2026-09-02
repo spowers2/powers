@@ -1,4 +1,4 @@
-# Hearth — restaurant demo (Powers)
+# Restaurant Power — restaurant demo (Powers)
 
 A **local-first neighborhood restaurant** product example: guest-facing floor, menu with photos, reservations, and a service/kitchen board.
 

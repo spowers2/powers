@@ -513,8 +513,9 @@ export function LandingPage(props: { router: Router }) {
               <p class="lp-section-sub">
                 Flagship demos — full apps, not kitchen sinks.{" "}
                 {SITE.demos.workspace.label} is live on its own domain;{" "}
-                {SITE.demos.logistics.label} and {SITE.demos.hearth.label} ship
-                with this site. Lab and System teach the kit underneath.
+                {SITE.demos.logistics.label}, {SITE.demos.bank.label}, and{" "}
+                {SITE.demos.hearth.label} ship with this site. Lab and System
+                teach the kit underneath.
               </p>
             </div>
             <div class="lp-demo-grid">
@@ -540,23 +541,36 @@ export function LandingPage(props: { router: Router }) {
                 <div class="lp-demo-card__kicker">Ops · data tower</div>
                 <h3>{SITE.demos.logistics.label}</h3>
                 <p>
-                  Sci-fi freight control tower: KPIs, 640-lane shipment matrix,
-                  exception bus. Dense data UI — not hospitality, not studio.
+                  Freight control tower: KPIs, shipment matrix, exception bus.
+                  Dense data UI — not hospitality, not studio.
                 </p>
                 <span class="lp-demo-card__cta">Open Logistics Power →</span>
+              </a>
+              <a
+                class="lp-demo-card"
+                href={SITE.demos.bank.href}
+                {...SITE.demoLinkAttrs}
+              >
+                <div class="lp-demo-card__kicker">Product · banking</div>
+                <h3>{SITE.demos.bank.label}</h3>
+                <p>
+                  Personal banking: balances, accounts, transfers, and cards.
+                  Calm product UI with live demo mutations.
+                </p>
+                <span class="lp-demo-card__cta">Open Bank Power →</span>
               </a>
               <a
                 class="lp-demo-card lp-demo-card--hearth"
                 href={SITE.demos.hearth.href}
                 {...SITE.demoLinkAttrs}
               >
-                <div class="lp-demo-card__kicker">Ops · hearth</div>
+                <div class="lp-demo-card__kicker">Ops · restaurant</div>
                 <h3>{SITE.demos.hearth.label}</h3>
                 <p>
                   Restaurant floor: menu, reservations, kitchen board, table
                   map. Same kit, different product surface.
                 </p>
-                <span class="lp-demo-card__cta">Open product →</span>
+                <span class="lp-demo-card__cta">Open Restaurant Power →</span>
               </a>
             </div>
           </Container>
@@ -718,7 +732,8 @@ mount(document.getElementById("app")!, () => (
                 <h2>Ship something that feels inevitable</h2>
                 <p>
                   Learn in the Lab, explore System, or open a full product demo:
-                  designlab206 (:5180) or Hearth (:5181).
+                  designlab206 (:5180), Restaurant Power (:5181), Logistics
+                  (:5182), or Bank Power (:5183).
                 </p>
               </div>
               <Stack direction="row" gap={2} wrap>
@@ -775,6 +790,13 @@ mount(document.getElementById("app")!, () => (
                 {...SITE.demoLinkAttrs}
               >
                 {SITE.demos.workspace.label}
+              </a>
+              <a
+                class="lp-footer-link"
+                href={SITE.demos.bank.href}
+                {...SITE.demoLinkAttrs}
+              >
+                {SITE.demos.bank.label}
               </a>
               <a
                 class="lp-footer-link"

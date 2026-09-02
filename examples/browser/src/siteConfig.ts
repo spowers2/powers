@@ -37,14 +37,19 @@ export const SITE = {
       title: "Flagship product — freelance workspace (live)",
     },
     hearth: {
-      label: "Hearth",
+      label: "Restaurant Power",
       href: import.meta.env.DEV ? "http://localhost:5181" : "/hearth/",
-      title: "Restaurant product demo",
+      title: "Restaurant Power — hospitality product demo",
     },
     logistics: {
       label: "Logistics Power",
       href: import.meta.env.DEV ? "http://localhost:5182" : "/logistics/",
       title: "Freight ops control tower — dense data demo",
+    },
+    bank: {
+      label: "Bank Power",
+      href: import.meta.env.DEV ? "http://localhost:5183" : "/bank/",
+      title: "Bank Power — personal banking demo",
     },
   },
   /** Always open product demos in a new tab so lab206 stays available. */

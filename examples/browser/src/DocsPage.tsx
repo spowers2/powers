@@ -166,6 +166,13 @@ export function DocsPage(props: { router: Router }) {
             </a>
             <a
               class="docs-demo-link"
+              href={SITE.demos.bank.href}
+              {...SITE.demoLinkAttrs}
+            >
+              {SITE.demos.bank.label} →
+            </a>
+            <a
+              class="docs-demo-link"
               href={SITE.demos.hearth.href}
               {...SITE.demoLinkAttrs}
             >
@@ -1004,7 +1011,7 @@ const list = createQuery({
                 <Stack gap={2}>
                   <Text weight="semibold">Starter maps</Text>
                   <Text size="sm" muted>
-                    Screen → route maps for designlab206-class and Hearth-class
+                    Screen → route maps for designlab206-class and Restaurant Power-class
                     product UIs (matches the live demos).
                   </Text>
                 </Stack>
@@ -1063,7 +1070,8 @@ const list = createQuery({
             </li>
             <li>
               <strong>Demos</strong> — {SITE.demos.workspace.label} +{" "}
-              {SITE.demos.logistics.label} + {SITE.demos.hearth.label}
+              {SITE.demos.logistics.label} + {SITE.demos.bank.label} +{" "}
+              {SITE.demos.hearth.label}
             </li>
             <li>
               Repo markdown: <Code>docs/GOLDEN_PATH.md</Code>,{" "}

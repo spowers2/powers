@@ -204,7 +204,7 @@ function seed(): Workspace {
   return {
     version: 3,
     profile: {
-      name: "Hearth",
+      name: "Restaurant Power",
       tagline: "Wood-fired plates · neighborhood wine · open kitchen",
       address: "412 Ember Lane, Portland",
       hours: "Tue–Sun · 5–10pm · Brunch Sat–Sun 10–2",

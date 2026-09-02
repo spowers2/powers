@@ -8,12 +8,16 @@ Host the Powers demos on your LiveCode server and point **lab206.com** at that d
 |---|---|
 | Lab · System · Docs | http://localhost:5173/ |
 | designlab206 | http://localhost:5180/ |
-| Hearth | http://localhost:5181/ |
+| Restaurant Power | http://localhost:5181/ |
+| Logistics Power | http://localhost:5182/ |
+| Bank Power | http://localhost:5183/ |
 
 ```bash
 pnpm example:browser    # :5173
 pnpm example:starter    # :5180
 pnpm example:restaurant # :5181
+pnpm example:logistics  # :5182
+pnpm example:bank       # :5183
 ```
 
 ## Site layout (production)
@@ -26,7 +30,9 @@ pnpm example:restaurant # :5181
 | `/docs` | Docs |
 | `/contact` | Contact **form** (no mail app) → `contact.php` → scott@lab206.com |
 | `/workspace/` | designlab206 (hash routes: `/workspace/#/clients`) |
-| `/hearth/` | Hearth (hash routes: `/hearth/#/menu`) |
+| `/logistics/` | Logistics Power (hash routes: `/logistics/#/…`) |
+| `/bank/` | Bank Power (hash routes: `/bank/#/…`) |
+| `/hearth/` | Restaurant Power (hash routes: `/hearth/#/menu`) |
 
 Sub-apps use **hash routing** so deep links work even if LiveCode does not honor Apache `.htaccess` rewrites. Lab at the domain root uses normal paths when rewrites work.
 
@@ -85,7 +91,7 @@ SFTP/FTP works the same: upload into the same domain folder and unzip (or upload
 - [ ] `https://lab206.com/lab` works (refresh once)  
 - [ ] `https://lab206.com/workspace/` opens designlab206  
 - [ ] Click Clients — URL like `/workspace/#/clients`  
-- [ ] `https://lab206.com/hearth/` opens Hearth  
+- [ ] `https://lab206.com/hearth/` opens Restaurant Power  
 
 ## If the page is blank / MIME errors for JS/CSS
 

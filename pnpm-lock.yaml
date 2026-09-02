@@ -68,6 +68,28 @@ importers:
         specifier: ^6.2.2
         version: 6.4.3(tsx@4.23.11)
 
+  examples/bank-power:
+    dependencies:
+      '@lab206/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@lab206/dom':
+        specifier: workspace:*
+        version: link:../../packages/dom
+      '@lab206/router':
+        specifier: workspace:*
+        version: link:../../packages/router
+      '@lab206/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+    devDependencies:
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+      vite:
+        specifier: ^6.2.2
+        version: 6.4.3(tsx@4.23.11)
+
   examples/browser:
     dependencies:
       '@lab206/animate':
