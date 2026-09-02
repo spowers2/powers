@@ -44,6 +44,9 @@ temp/
 # Project-local tooling (gh CLI, etc.)
 .tools/
 
+# Local-only reference assets (Figma Make exports, etc. — never commit)
+localonly/
+
 # design-kit
 design-kit/**/node_modules/
 design-kit/.DS_Store
