@@ -65,17 +65,40 @@
 .lab-sidebar-mark {
   width: 1.65rem;
   height: 1.65rem;
-  border-radius: 8px;
   flex-shrink: 0;
-  background: linear-gradient(
-    145deg,
-    var(--pu-brand-500),
-    var(--pu-brand-700) 50%,
-    var(--pu-sage-600)
-  );
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, #fff 12%, transparent),
-    0 6px 16px var(--pu-color-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pu-color-text);
+}
+
+.lab-sidebar-mark .site-mark {
+  width: 1.65rem;
+  height: 1.65rem;
+}
+
+.lab-sidebar-mark .brand-mark__liquid {
+  fill: var(--pu-color-signal);
+}
+
+.lab-sidebar-mark .brand-mark__meniscus {
+  stroke: color-mix(in srgb, var(--pu-color-signal) 70%, #fff);
+}
+
+.lab-sidebar-mark .brand-mark__bubble {
+  fill: color-mix(in srgb, var(--pu-color-signal) 45%, #fff);
+}
+
+html[data-pu-palette="dual"] .lab-sidebar-mark .brand-mark__liquid {
+  fill: var(--pu-holo-cyan);
+}
+
+html[data-pu-palette="dual"] .lab-sidebar-mark .brand-mark__meniscus {
+  stroke: color-mix(in srgb, var(--pu-holo-cyan) 55%, #fff);
+}
+
+html[data-pu-palette="dual"] .lab-sidebar-mark .brand-mark__bubble {
+  fill: color-mix(in srgb, var(--pu-holo-cyan) 40%, #fff);
 }
 
 .lab-sidebar h2 {

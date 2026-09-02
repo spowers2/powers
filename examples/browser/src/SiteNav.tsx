@@ -12,6 +12,7 @@ import {
   type PaletteController,
 } from "@lab206/ui";
 import { SITE } from "./siteConfig.js";
+import { BrandMark } from "./BrandMark.js";
 
 const PHONE_MENU = [
   { id: "/", label: "Home" },
@@ -87,7 +88,7 @@ export function SiteNav(props: {
               }
             }}
           >
-            <span class="site-mark" aria-hidden="true" />
+            <BrandMark class="site-mark" />
             <span class="site-brand-label">{SITE.name}</span>
           </Link>
 

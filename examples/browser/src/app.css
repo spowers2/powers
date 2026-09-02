@@ -72,19 +72,21 @@ html {
 .site-mark {
   width: 1.55rem;
   height: 1.55rem;
-  border-radius: 8px;
-  background:
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--pu-brand-400) 40%, var(--pu-brand-500)),
-      var(--pu-brand-500) 48%,
-      color-mix(in srgb, var(--pu-sage-500) 55%, var(--pu-brand-600))
-    );
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--pu-holo-cyan) 35%, transparent),
-    0 0 16px color-mix(in srgb, var(--pu-sage-500) 25%, transparent),
-    0 4px 12px rgba(0, 34, 68, 0.2);
   flex-shrink: 0;
+  display: block;
+  color: var(--pu-color-text);
+}
+
+.site-mark .brand-mark__liquid {
+  fill: var(--pu-color-signal);
+}
+
+.site-mark .brand-mark__meniscus {
+  stroke: color-mix(in srgb, var(--pu-color-signal) 70%, #fff);
+}
+
+.site-mark .brand-mark__bubble {
+  fill: color-mix(in srgb, var(--pu-color-signal) 45%, #fff);
 }
 
 .site-nav-phone {
@@ -182,16 +184,19 @@ html[data-pu-palette="dual"] .site-nav-links a:hover {
 }
 
 html[data-pu-palette="dual"] .site-mark {
-  background: linear-gradient(
-    145deg,
-    color-mix(in srgb, var(--pu-holo-cyan) 55%, var(--pu-brand-400)),
-    var(--pu-brand-500) 50%,
-    color-mix(in srgb, var(--pu-holo-cyan) 35%, var(--pu-brand-600))
-  );
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--pu-holo-cyan) 45%, transparent),
-    0 0 18px color-mix(in srgb, var(--pu-holo-cyan) 30%, transparent),
-    0 4px 12px rgba(10, 30, 56, 0.18);
+  color: var(--pu-color-text);
+}
+
+html[data-pu-palette="dual"] .site-mark .brand-mark__liquid {
+  fill: var(--pu-holo-cyan);
+}
+
+html[data-pu-palette="dual"] .site-mark .brand-mark__meniscus {
+  stroke: color-mix(in srgb, var(--pu-holo-cyan) 55%, #fff);
+}
+
+html[data-pu-palette="dual"] .site-mark .brand-mark__bubble {
+  fill: color-mix(in srgb, var(--pu-holo-cyan) 40%, #fff);
 }
 
 html[data-pu-palette="dual"] .lp-showcase-tab.is-active {
