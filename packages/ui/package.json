@@ -1,6 +1,6 @@
 {
   "name": "@lab206/ui",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Powers design system — tokens, primitives, and token-mapped utilities (batteries included).",
   "type": "module",
   "license": "BUSL-1.1",

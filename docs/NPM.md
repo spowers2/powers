@@ -1,6 +1,6 @@
 # Publishing & installing `@lab206/*`
 
-**Supported release: `0.1.6+`.** Do not use `0.1.0`–`0.1.2` (broken Vite / `workspace:*` publishes). Prefer **0.1.6+** for `createApiClient` + Dialog/form input stability (`isolateTracking`).
+**Supported release: `0.1.7+`.** Do not use `0.1.0`–`0.1.2` (broken Vite / `workspace:*` publishes). Prefer **0.1.7+** for SVG JSX (`createElementNS`), `createApiClient`, and Dialog/form input stability (`isolateTracking`).
 
 ## Scaffold (recommended)
 
@@ -72,7 +72,7 @@ createTheme("light").bind();
 
 ## Current release
 
-**0.1.6** on npm (`lab206` org) + `create-powers@0.1.6`.  
+**0.1.7** on npm (`lab206` org) + `create-powers@0.1.7`.  
 Publish with **`pnpm publish`** so `workspace:*` rewrites to real versions — never bare `npm publish` from a workspace package.
 
 **2FA tip:** use a **granular** access token with package write + **Bypass two-factor authentication for write/publish**. Classic tokens / sessions without bypass will keep asking for OTP.
@@ -88,7 +88,7 @@ Do **not** add `"development": "./src/..."` to package `exports` — that made V
 
 **License on npm:** BUSL-1.1 (source-available).
 
-## Package map (0.1.6)
+## Package map (0.1.7)
 
 | Package | Role |
 |---|---|
