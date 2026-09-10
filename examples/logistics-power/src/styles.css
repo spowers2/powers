@@ -64,95 +64,263 @@ body {
   flex-direction: column;
 }
 
-/* Circuit atmosphere — hairline, distressed, almost wallpaper */
-.circuit-bg {
+/*
+ * Outer-space atmosphere — CSS layers only (no SVG filters / canvas).
+ * Stars = radial-gradient dots on two sheets; motion = slow translate3d.
+ */
+.space-bg {
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  contain: strict;
+  opacity: 0.7;
+}
+
+html[data-pu-theme="dark"] .space-bg {
+  opacity: 0.95;
+}
+
+.space-bg__nebula,
+.space-bg__stars,
+.space-bg__twinkles {
+  position: absolute;
+  inset: 0;
+}
+
+/* Soft color washes — static, cheap paints */
+.space-bg__nebula {
+  background:
+    radial-gradient(
+      ellipse 55% 40% at 18% 22%,
+      color-mix(in srgb, #6366f1 14%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 82% 68%,
+      color-mix(in srgb, #0ea5e9 12%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 55% 88%,
+      color-mix(in srgb, #a855f7 8%, transparent),
+      transparent 70%
+    );
   opacity: 0.55;
 }
 
-html[data-pu-theme="dark"] .circuit-bg {
-  opacity: 0.4;
-}
-
-.circuit-bg__svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--lp-accent);
-}
-
-.circuit-bg__board path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 0.7;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-  stroke-opacity: 0.11;
-}
-
-.circuit-bg__board path.circuit-bg__broken {
-  stroke-dasharray: 10 14 4 18;
-  stroke-opacity: 0.07;
-}
-
-.circuit-bg__board path.circuit-bg__ghost {
-  stroke-opacity: 0.045;
-  stroke-width: 0.55;
-}
-
-.circuit-bg__board circle {
-  fill: currentColor;
-  fill-opacity: 0.1;
-  stroke: none;
-}
-
-html[data-pu-theme="dark"] .circuit-bg__board path {
-  stroke-opacity: 0.14;
-}
-
-html[data-pu-theme="dark"] .circuit-bg__board path.circuit-bg__broken {
-  stroke-opacity: 0.08;
-}
-
-html[data-pu-theme="dark"] .circuit-bg__board path.circuit-bg__ghost {
-  stroke-opacity: 0.055;
-}
-
-html[data-pu-theme="dark"] .circuit-bg__board circle {
-  fill-opacity: 0.14;
-}
-
-/* Tiny point + soft glow — hidden unless motion is on */
-.circuit-bg__pulses {
-  opacity: 0;
-}
-
-html[data-lp-motion="on"] .circuit-bg__pulses {
+html[data-pu-theme="dark"] .space-bg__nebula {
+  background:
+    radial-gradient(
+      ellipse 60% 42% at 15% 18%,
+      rgba(99, 102, 241, 0.16),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 55% 48% at 88% 72%,
+      rgba(14, 165, 233, 0.14),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 45% 38% at 48% 92%,
+      rgba(168, 85, 247, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 35% 28% at 70% 28%,
+      rgba(45, 212, 191, 0.06),
+      transparent 65%
+    );
   opacity: 1;
 }
 
-.circuit-dot {
-  fill: currentColor;
-  fill-opacity: 0.45;
-  stroke: none;
+.space-bg__stars {
+  inset: -12%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-html[data-pu-theme="dark"] .circuit-dot {
-  fill-opacity: 0.55;
+html[data-lp-motion="on"] .space-bg__stars {
+  will-change: transform;
 }
 
-.circuit-dot--b {
-  fill-opacity: 0.35;
+/* Far field — denser, dimmer */
+.space-bg__stars--far {
+  opacity: 0.45;
+  background-image:
+    radial-gradient(1px 1px at 4% 8%, rgba(15, 23, 42, 0.35), transparent),
+    radial-gradient(1px 1px at 12% 22%, rgba(15, 23, 42, 0.28), transparent),
+    radial-gradient(1px 1px at 18% 61%, rgba(15, 23, 42, 0.32), transparent),
+    radial-gradient(1px 1px at 27% 14%, rgba(15, 23, 42, 0.22), transparent),
+    radial-gradient(1px 1px at 33% 47%, rgba(15, 23, 42, 0.3), transparent),
+    radial-gradient(1px 1px at 41% 81%, rgba(15, 23, 42, 0.25), transparent),
+    radial-gradient(1px 1px at 49% 19%, rgba(15, 23, 42, 0.28), transparent),
+    radial-gradient(1px 1px at 56% 55%, rgba(15, 23, 42, 0.22), transparent),
+    radial-gradient(1px 1px at 63% 9%, rgba(15, 23, 42, 0.3), transparent),
+    radial-gradient(1px 1px at 71% 38%, rgba(15, 23, 42, 0.26), transparent),
+    radial-gradient(1px 1px at 78% 72%, rgba(15, 23, 42, 0.3), transparent),
+    radial-gradient(1px 1px at 86% 26%, rgba(15, 23, 42, 0.24), transparent),
+    radial-gradient(1px 1px at 92% 58%, rgba(15, 23, 42, 0.28), transparent),
+    radial-gradient(1px 1px at 8% 88%, rgba(15, 23, 42, 0.22), transparent),
+    radial-gradient(1px 1px at 22% 74%, rgba(15, 23, 42, 0.26), transparent),
+    radial-gradient(1px 1px at 37% 33%, rgba(15, 23, 42, 0.2), transparent),
+    radial-gradient(1px 1px at 52% 91%, rgba(15, 23, 42, 0.28), transparent),
+    radial-gradient(1px 1px at 67% 64%, rgba(15, 23, 42, 0.22), transparent),
+    radial-gradient(1px 1px at 81% 12%, rgba(15, 23, 42, 0.26), transparent),
+    radial-gradient(1px 1px at 95% 84%, rgba(15, 23, 42, 0.24), transparent),
+    radial-gradient(1.5px 1.5px at 15% 42%, rgba(15, 118, 110, 0.28), transparent),
+    radial-gradient(1.5px 1.5px at 74% 51%, rgba(15, 118, 110, 0.22), transparent);
 }
 
-.circuit-dot--c {
-  fill-opacity: 0.3;
+html[data-pu-theme="dark"] .space-bg__stars--far {
+  opacity: 0.82;
+  background-image:
+    radial-gradient(1px 1px at 4% 8%, rgba(226, 232, 240, 0.55), transparent),
+    radial-gradient(1px 1px at 12% 22%, rgba(226, 232, 240, 0.35), transparent),
+    radial-gradient(1px 1px at 18% 61%, rgba(226, 232, 240, 0.45), transparent),
+    radial-gradient(1px 1px at 27% 14%, rgba(226, 232, 240, 0.3), transparent),
+    radial-gradient(1px 1px at 33% 47%, rgba(226, 232, 240, 0.4), transparent),
+    radial-gradient(1px 1px at 41% 81%, rgba(226, 232, 240, 0.32), transparent),
+    radial-gradient(1px 1px at 49% 19%, rgba(226, 232, 240, 0.38), transparent),
+    radial-gradient(1px 1px at 56% 55%, rgba(226, 232, 240, 0.28), transparent),
+    radial-gradient(1px 1px at 63% 9%, rgba(226, 232, 240, 0.42), transparent),
+    radial-gradient(1px 1px at 71% 38%, rgba(226, 232, 240, 0.34), transparent),
+    radial-gradient(1px 1px at 78% 72%, rgba(226, 232, 240, 0.4), transparent),
+    radial-gradient(1px 1px at 86% 26%, rgba(226, 232, 240, 0.3), transparent),
+    radial-gradient(1px 1px at 92% 58%, rgba(226, 232, 240, 0.36), transparent),
+    radial-gradient(1px 1px at 8% 88%, rgba(226, 232, 240, 0.28), transparent),
+    radial-gradient(1px 1px at 22% 74%, rgba(226, 232, 240, 0.34), transparent),
+    radial-gradient(1px 1px at 37% 33%, rgba(226, 232, 240, 0.26), transparent),
+    radial-gradient(1px 1px at 52% 91%, rgba(226, 232, 240, 0.38), transparent),
+    radial-gradient(1px 1px at 67% 64%, rgba(226, 232, 240, 0.28), transparent),
+    radial-gradient(1px 1px at 81% 12%, rgba(226, 232, 240, 0.34), transparent),
+    radial-gradient(1px 1px at 95% 84%, rgba(226, 232, 240, 0.3), transparent),
+    radial-gradient(1px 1px at 44% 6%, rgba(186, 230, 253, 0.35), transparent),
+    radial-gradient(1px 1px at 59% 43%, rgba(196, 181, 253, 0.3), transparent),
+    radial-gradient(1px 1px at 6% 48%, rgba(226, 232, 240, 0.32), transparent),
+    radial-gradient(1px 1px at 25% 5%, rgba(226, 232, 240, 0.28), transparent),
+    radial-gradient(1px 1px at 46% 62%, rgba(226, 232, 240, 0.3), transparent),
+    radial-gradient(1px 1px at 69% 88%, rgba(186, 230, 253, 0.28), transparent),
+    radial-gradient(1px 1px at 88% 91%, rgba(226, 232, 240, 0.26), transparent),
+    radial-gradient(1.5px 1.5px at 15% 42%, rgba(45, 212, 191, 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 74% 51%, rgba(125, 211, 252, 0.4), transparent);
 }
+
+/* Near field — fewer, slightly brighter */
+.space-bg__stars--near {
+  opacity: 0.35;
+  background-image:
+    radial-gradient(1.5px 1.5px at 9% 31%, rgba(15, 23, 42, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 29% 68%, rgba(15, 23, 42, 0.32), transparent),
+    radial-gradient(1.5px 1.5px at 48% 12%, rgba(15, 23, 42, 0.36), transparent),
+    radial-gradient(1.5px 1.5px at 61% 79%, rgba(15, 23, 42, 0.3), transparent),
+    radial-gradient(1.5px 1.5px at 83% 44%, rgba(15, 23, 42, 0.34), transparent),
+    radial-gradient(2px 2px at 17% 56%, rgba(15, 118, 110, 0.28), transparent),
+    radial-gradient(2px 2px at 72% 21%, rgba(15, 118, 110, 0.24), transparent),
+    radial-gradient(1px 1px at 38% 89%, rgba(15, 23, 42, 0.28), transparent),
+    radial-gradient(1px 1px at 91% 67%, rgba(15, 23, 42, 0.26), transparent);
+}
+
+html[data-pu-theme="dark"] .space-bg__stars--near {
+  opacity: 0.85;
+  background-image:
+    radial-gradient(1.5px 1.5px at 9% 31%, rgba(248, 250, 252, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 29% 68%, rgba(226, 232, 240, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 48% 12%, rgba(248, 250, 252, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 61% 79%, rgba(226, 232, 240, 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 83% 44%, rgba(248, 250, 252, 0.55), transparent),
+    radial-gradient(2px 2px at 17% 56%, rgba(45, 212, 191, 0.55), transparent),
+    radial-gradient(2px 2px at 72% 21%, rgba(125, 211, 252, 0.5), transparent),
+    radial-gradient(1px 1px at 38% 89%, rgba(226, 232, 240, 0.4), transparent),
+    radial-gradient(1px 1px at 91% 67%, rgba(196, 181, 253, 0.45), transparent),
+    radial-gradient(1px 1px at 54% 37%, rgba(226, 232, 240, 0.35), transparent);
+}
+
+html[data-lp-motion="on"] .space-bg__stars--far {
+  animation: space-drift-far 160s linear infinite;
+}
+
+html[data-lp-motion="on"] .space-bg__stars--near {
+  animation: space-drift-near 95s linear infinite;
+}
+
+@keyframes space-drift-far {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-2.5%, 1.8%, 0);
+  }
+}
+
+@keyframes space-drift-near {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(3.2%, -2.4%, 0);
+  }
+}
+
+.space-bg__twinkle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--lp-accent) 55%, #fff);
+  opacity: 0.25;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--lp-accent) 35%, transparent);
+}
+
+html[data-pu-theme="dark"] .space-bg__twinkle {
+  background: #f8fafc;
+  box-shadow: 0 0 8px rgba(125, 211, 252, 0.45);
+  opacity: 0.35;
+}
+
+.space-bg__twinkle--a {
+  top: 18%;
+  left: 24%;
+}
+
+.space-bg__twinkle--b {
+  top: 62%;
+  left: 71%;
+  width: 2.5px;
+  height: 2.5px;
+}
+
+.space-bg__twinkle--c {
+  top: 41%;
+  left: 86%;
+}
+
+html[data-lp-motion="on"] .space-bg__twinkle--a {
+  animation: space-twinkle 7.5s ease-in-out infinite;
+}
+
+html[data-lp-motion="on"] .space-bg__twinkle--b {
+  animation: space-twinkle 9.2s ease-in-out infinite 2.1s;
+}
+
+html[data-lp-motion="on"] .space-bg__twinkle--c {
+  animation: space-twinkle 6.4s ease-in-out infinite 4s;
+}
+
+@keyframes space-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.35);
+  }
+}
+
+
 
 @keyframes panel-in {
   from {
@@ -724,15 +892,21 @@ html[data-pu-theme="dark"] .circuit-dot {
     border-color 0.2s ease;
 }
 
-/* Circuit pulses are gated by [data-lp-motion] (Settings + OS default).
+/* Starfield motion is gated by [data-lp-motion] (Settings + OS default).
    Other UI motion still respects OS reduced-motion. */
 @media (prefers-reduced-motion: reduce) {
   .app-brand__mark,
   .demo-banner,
   .next-step,
   .panel,
-  .kpi-grid .panel {
+  .kpi-grid .panel,
+  .space-bg__stars,
+  .space-bg__twinkle {
     animation: none !important;
+  }
+
+  .space-bg__stars {
+    will-change: auto;
   }
 
   .next-step:hover {

@@ -8,7 +8,7 @@ import {
 } from "@lab206/ui";
 import { signal } from "@lab206/core";
 import { PageChrome } from "../components/PageChrome.js";
-import { circuitMotion } from "../prefs.js";
+import { spaceMotion } from "../prefs.js";
 import type { Router } from "@lab206/router";
 
 export function SettingsPage(props: {
@@ -49,17 +49,17 @@ export function SettingsPage(props: {
               </Button>
             </div>
             <Switch
-              label="Circuit pulse animation"
-              bind={circuitMotion}
+              label="Space background animation"
+              bind={spaceMotion}
               onChange={() => {
                 if (!hints()) return;
                 toaster.push({
-                  title: circuitMotion()
-                    ? "Circuit pulses on"
-                    : "Circuit pulses off",
-                  description: circuitMotion()
-                    ? "Soft lights travel the background traces."
-                    : "Background stays still. Traces remain.",
+                  title: spaceMotion()
+                    ? "Starfield motion on"
+                    : "Starfield motion off",
+                  description: spaceMotion()
+                    ? "Soft drift and twinkles behind the console."
+                    : "Background stays still. Stars remain.",
                   tone: "info",
                 });
               }}
@@ -77,7 +77,7 @@ export function SettingsPage(props: {
               }}
             />
             <p class="muted" style={{ margin: 0, fontSize: "0.9rem" }}>
-              Circuit animation defaults off when your OS has reduced motion
+              Space animation defaults off when your OS has reduced motion
               enabled. Prefer the header <b>Light / Dark</b> control while
               walking a client through the demo — one design system, two skins.
             </p>
