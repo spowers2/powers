@@ -15,7 +15,7 @@ pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
 Try it: **https://lab206.com**  
-Lab · Docs · System · designlab206.com · Hearth  
+Lab · Docs · System · designlab206.com · Restaurant Power  
 
 Figma: **Powers UI Kit** library + Community plugin  
 https://www.figma.com/community/plugin/1671016490810398688  
@@ -34,7 +34,7 @@ Powers is a coherent stack: signals and ownership in `@lab206/core`, DOM/JSX, ro
 **Today**
 
 - **npm** — `@lab206/core`, `@lab206/dom`, `@lab206/ui`, `@lab206/router`, `@lab206/animate`, `@lab206/ssr` at **0.1.2**  
-- **lab206.com** — live Lab, Docs, System, and product demos (designlab206, Hearth)  
+- **lab206.com** — live Lab, Docs, System, and product demos (flagship designlab206, Restaurant Power)  
 - **Figma** — published **Powers UI Kit** library + **Powers Design Kit** [Community plugin](https://www.figma.com/community/plugin/1671016490810398688)  
 - **GitHub** — https://github.com/spowers2/powers under **Business Source License 1.1** (source-available)
 

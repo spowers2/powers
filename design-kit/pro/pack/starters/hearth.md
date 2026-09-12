@@ -1,4 +1,4 @@
-# Starter map · Hearth-class
+# Starter map · Restaurant Power-class
 
 Product: neighborhood restaurant (demo: https://lab206.com/hearth/).
 

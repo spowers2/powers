@@ -26,4 +26,5 @@ PY
 (cd "$ROOT" && pnpm --filter @lab206/core --filter @lab206/dom --filter @lab206/ui run build) >/dev/null
 npm install --silent
 npm run build
+grep -q 'powers()' vite.config.ts
 echo "✓ smoke-consumer: template builds against workspace packages"

@@ -160,7 +160,7 @@ Do **not** put real CUI/PII only on a casual shared-host demo account. Use the c
 
 ## lab206.com on LiveCode
 
-Full demos (Lab + designlab206 + Hearth) as one upload:
+Full demos (Lab + designlab206 + Restaurant Power) as one upload:
 
 ```bash
 pnpm build:lab206

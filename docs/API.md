@@ -37,7 +37,7 @@
 | API | Usage |
 |---|---|
 | `mount(el, () => tree)` | bootstrap app |
-| JSX | `"jsxImportSource": "@lab206/dom"` |
+| JSX | `plugins: [powers()]` from `@lab206/dom/vite` + tsconfig `"jsxImportSource": "@lab206/dom"` |
 | `component(setup)` | reactive props component |
 | `Show` | conditional mount |
 | `For` | keyed list; `item()` live |

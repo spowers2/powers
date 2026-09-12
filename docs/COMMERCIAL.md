@@ -41,7 +41,7 @@ Full policy: [LICENSE-COMMERCIAL.md](../LICENSE-COMMERCIAL.md).
 - Pattern recipes — auth, settings, admin list, billing, dashboard, empty states  
 - Themes — Slate, Warm, Mono (CSS + token JSON)  
 - Handoff — client delivery + quality gates  
-- Starter maps — designlab206-class + Hearth-class  
+- Starter maps — designlab206-class + Restaurant Power-class  
 - Exports — token + component catalog snapshot  
 - LICENSE-PRO  
 

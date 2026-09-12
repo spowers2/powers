@@ -19,7 +19,7 @@ Design-side companion to `@lab206/ui`.
 ```
 @lab206/ui (code)  ↔  design-kit tokens  ↔  Figma library (instances)
          ↑                                         ↓
-   demos: designlab206 · Hearth          product screen files
+   demos: designlab206 (flagship) · Restaurant Power          product screen files
 ```
 
 ```bash

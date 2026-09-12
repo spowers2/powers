@@ -174,4 +174,4 @@ Retheme globally via `packages/ui/src/styles/tokens.css`.
 | Motions | [MOTION.md](./MOTION.md) |
 | Scaffold | `pnpm create-app my-ui` |
 | Contracts (why inputs don’t remount) | [FOUNDATION.md](./FOUNDATION.md) |
-| Product patterns | designlab206 `:5180` · Hearth `:5181` |
+| Product patterns | **Flagship** designlab206 `:5180` · Restaurant Power `:5181` |

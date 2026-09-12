@@ -19,7 +19,7 @@ pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
 Use this folder as the project (or copy it from the [Powers repo](https://github.com/spowers2/powers/tree/main/templates/powers-vite)).  
-Vite is already wired with `jsxImportSource: "@lab206/dom"`.
+Vite is already wired with `plugins: [powers()]`.
 
 ## From the Powers monorepo (contributors)
 

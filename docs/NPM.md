@@ -10,7 +10,7 @@ pnpm create powers my-app
 cd my-app && pnpm install && pnpm dev
 ```
 
-This embeds a Vite app with `jsxImportSource: "@lab206/dom"` already set. Prefer this over hand-wiring.
+This embeds a Vite app with `plugins: [powers()]` from `@lab206/dom/vite`. Prefer this over hand-wiring.
 
 ## Install into an existing Vite app
 
@@ -39,15 +39,10 @@ pnpm add @lab206/router @lab206/animate @lab206/ssr
 
 ```ts
 import { defineConfig } from "vite";
+import { powers } from "@lab206/dom/vite";
 
 export default defineConfig({
-  esbuild: {
-    jsx: "automatic",
-    jsxImportSource: "@lab206/dom",
-  },
-  optimizeDeps: {
-    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
-  },
+  plugins: [powers()],
 });
 ```
 
@@ -64,11 +59,11 @@ createTheme("light").bind();
 
 | Symptom | Fix |
 |---------|-----|
-| `React is not defined` / `react/jsx-runtime` | You’re on **&lt;0.1.3** or Vite JSX isn’t set to `@lab206/dom`. Upgrade to **0.1.6+**, set `esbuild.jsxImportSource`, delete `node_modules/.vite`, restart. |
-| `Unsupported URL Type "workspace:"` | You installed a broken **0.1.1** publish. Use **0.1.6+**. |
+| `React is not defined` / `react/jsx-runtime` | Vite JSX isn’t `@lab206/dom`. Use **0.1.8+** and `plugins: [powers()]`, delete `node_modules/.vite`, restart. |
+| `Unsupported URL Type "workspace:"` | You installed a broken **0.1.1** publish. Use **0.1.8+**. |
 | Input/textarea caret resets in Dialog on each keystroke | Upgrade to **0.1.5+** (`isolateTracking` + `bindDynamic` ownership). |
-| `createApiClient` missing from `@lab206/core` | Upgrade to **0.1.6+**. |
-| Types / JSX weirdness | Ensure both **tsconfig** and **vite** jsxImportSource are `@lab206/dom`. |
+| `createApiClient` missing from `@lab206/core` | Upgrade to **0.1.6+** (current: **0.1.8+**). |
+| Types / JSX weirdness | `tsconfig` jsxImportSource **and** `powers()` (or vite `esbuild.jsxImportSource`) must be `@lab206/dom`. |
 
 ## Current release
 

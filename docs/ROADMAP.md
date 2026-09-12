@@ -42,9 +42,16 @@ Public docs hub: [`docs/README.md`](./README.md)
 
 ---
 
-## Now / next (in order) — win on **developer experience**
+## Now / next
 
-The moat is not “more components than X”. It is: **fastest path from zero → beautiful interactive UI** with fine-grained power underneath.
+Win on **one start path**, not more components. Public: [GETTING_STARTED.md](./GETTING_STARTED.md) + Lab. Flagship dogfood: **designlab206**. Supporting: Restaurant Power, Bank, Logistics.
+
+| # | Milestone | Status |
+|---|---|---|
+| Names | Restaurant Power + `@lab206/*@0.1.8+` | done this slice |
+| JSX | `powers()` Vite plugin | done in repo; npm next tag |
+| CI | required check on `main` | do not bypass |
+| Pro | zip + [FULFILLMENT.md](../design-kit/pro/FULFILLMENT.md) | inquire, no fake checkout |
 
 | # | Milestone | Why it wins |
 |---|---|---|
@@ -52,7 +59,7 @@ The moat is not “more components than X”. It is: **fastest path from zero �
 | B | **Authoring loop** ✅ | Copy JSX (Lab-runnable) · Open Lab with snippet · error overlay |
 | C | **Forms + motion** ✅ | form helpers · MOTION_PRESETS · recipes + docs |
 | D | **Private scaffold** ✅ | `examples/app-starter` · `pnpm example:starter` · `pnpm new-app` |
-| E | **Product depth** ✅ | designlab206 (time/invoices) · Hearth (tables) · demo links |
+| E | **Product depth** ✅ | designlab206 flagship (time/invoices) · Restaurant Power (tables) · demo links |
 | F | **Foundation hardening** ✅ | Week 1 contracts · Week 2 overlays · Week 3 size/CI/STABLE/golden path |
 | G | **Public** ✅ | lab206.com · GitHub public · `@lab206/*@0.1.2` · [v0.1.2](https://github.com/spowers2/powers/releases/tag/v0.1.2) |
 

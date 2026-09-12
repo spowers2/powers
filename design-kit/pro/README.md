@@ -31,7 +31,7 @@ pnpm design-kit:pro:pack
 | Pattern recipes (auth, settings, admin, billing, dashboard, empty) | ✅ `pack/patterns/` |
 | Theme packs slate / warm / mono (CSS + token JSON) | ✅ `pack/themes/` |
 | Handoff + quality gates | ✅ `pack/handoff/` |
-| Starter screen maps (designlab206 / Hearth) | ✅ `pack/starters/` |
+| Starter screen maps (designlab206 / Restaurant Power) | ✅ `pack/starters/` |
 | Token + catalog export snapshot | ✅ copied into zip `exports/` |
 | LICENSE-PRO | ✅ |
 | Private Figma **Pro Patterns** file | 🛠 Build with [FIGMA_PRO_PATTERNS.md](./FIGMA_PRO_PATTERNS.md) · invite after sale |
@@ -50,7 +50,7 @@ pnpm design-kit:pro:pack
 | Storefront | Not live — inquire / notify via contact |
 | Commercial *code* license | Inquire — [docs/COMMERCIAL.md](../../docs/COMMERCIAL.md) |
 
-Sell Pro when: checkout live **or** you’re ready to email the zip + Figma invite manually.
+Storefront: **not live** — inquire only. Do not invent a checkout URL. Manual zip + Figma invite: [FULFILLMENT.md](./FULFILLMENT.md).
 
 ### Maintainer: build the Figma file
 

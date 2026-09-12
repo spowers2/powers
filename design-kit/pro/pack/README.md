@@ -14,7 +14,7 @@ This pack is licensed under **LICENSE-PRO.md** (not BSL). It is for design and p
 | `themes/` | Extra brand palettes as CSS + Figma-oriented token tables (beyond free dual/instrument) |
 | `handoff/` | Client delivery checklist, catalog snapshot, quality gates |
 | `figma/` | How to get / use the private kit file + import variables |
-| `starters/` | Screen maps for designlab206-class and Hearth-class product UIs |
+| `starters/` | Screen maps for designlab206-class and Restaurant Power-class product UIs |
 | `exports/` | Snapshot of token + component catalog exports (at pack build time) |
 
 **Version:** see `MANIFEST.json`

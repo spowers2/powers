@@ -51,13 +51,13 @@ Indicative: Indie **$299/yr** · Studio **$1,499/yr** · Enterprise custom.
 
 ## Checklist
 
-- [x] Public demos online (Lab + flagship apps)  
+- [x] Public demos online (Lab + flagship designlab206)  
 - [x] Repo public BSL · npm `@lab206/*`  
 - [x] Commercial inquire path (contact form + docs)  
 - [x] Indicative Indie / Studio prices published as non-binding  
 - [x] Pro pack zip buildable (`design-kit:pro:pack`)  
-- [ ] LemonSqueezy / Gumroad self-serve (Pro + optional license SKUs)  
-- [ ] Private Figma fulfillment checklist (per sale)  
+- [x] Private Figma fulfillment checklist (per sale) — [design-kit/pro/FULFILLMENT.md](../design-kit/pro/FULFILLMENT.md)  
+- [ ] LemonSqueezy / Gumroad self-serve — **not faked**; stay on inquire until keys exist  
 - [ ] Counsel review of LICENSE-COMMERCIAL / LICENSE-PRO for large deals  
 
 ---

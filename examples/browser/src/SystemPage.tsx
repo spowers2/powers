@@ -73,7 +73,7 @@ const ACCENT_PRESETS = [
   { id: "signal", label: "Signal Green", value: "#69be28" },
   { id: "holo", label: "Holo Cyan", value: "#06b6d4" },
   { id: "metal", label: "Soft Metal", value: "#9aa3b2" },
-  { id: "ember", label: "Hearth Ember", value: "#c45c26" },
+  { id: "ember", label: "Restaurant Ember", value: "#c45c26" },
 ] as const;
 
 function Swatch(props: { name: string; css: string }) {

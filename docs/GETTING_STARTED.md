@@ -1,6 +1,8 @@
 # Getting started
 
-**Fastest path:** scaffold → install → first screen (under 10 minutes).
+**Fastest path:** scaffold → first screen (under 10 minutes).
+
+This is the **public start page**. Then Lab: https://lab206.com/lab?recipe=hello
 
 ## 1. Create an app
 
@@ -12,7 +14,7 @@ pnpm install
 pnpm dev   # → http://localhost:5190
 ```
 
-You get a themed form (`createField` + `bind`) and a light/dark toggle using `@lab206/core`, `@lab206/dom`, and `@lab206/ui`.
+You get a themed form (`createField` + `bind`) and a light/dark toggle using `@lab206/core`, `@lab206/dom`, and `@lab206/ui`. Vite is already wired with `plugins: [powers()]`.
 
 ## 2. Or add to an existing Vite app
 
@@ -20,7 +22,9 @@ You get a themed form (`createField` + `bind`) and a light/dark toggle using `@l
 pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
-Wire JSX once:
+Use **`@lab206/*@0.1.8+`**. Older tags break Vite (`React is not defined`), Dialog form caret (pre-0.1.5), or lack `createApiClient` (pre-0.1.6). See [NPM.md](./NPM.md).
+
+**`tsconfig.json`:**
 
 ```json
 {
@@ -31,22 +35,18 @@ Wire JSX once:
 }
 ```
 
+**`vite.config.ts`:** Vite ignores tsconfig for JSX. Use the plugin — do not install React.
+
 ```ts
-// vite.config.ts — required (Vite ignores tsconfig jsxImportSource)
 import { defineConfig } from "vite";
+import { powers } from "@lab206/dom/vite";
 
 export default defineConfig({
-  esbuild: {
-    jsx: "automatic",
-    jsxImportSource: "@lab206/dom", // not React — do not install react
-  },
-  optimizeDeps: {
-    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
-  },
+  plugins: [powers()],
 });
 ```
 
-Use **`@lab206/*@0.1.6+`**. Older tags break Vite (`React is not defined`), Dialog form caret (pre-0.1.5), or lack `createApiClient` (pre-0.1.6). See [NPM.md](./NPM.md) troubleshooting.
+If `jsxImportSource` is overridden to something else, **build throws** instead of `React is not defined`.
 
 ```tsx
 import "@lab206/ui/theme.css";
@@ -59,23 +59,20 @@ mount(document.getElementById("root")!, () => (
 ));
 ```
 
-More: [NPM.md](./NPM.md) · [GOLDEN_PATH.md](./GOLDEN_PATH.md) · [FORMS.md](./FORMS.md)
+More: [NPM.md](./NPM.md) · [FORMS.md](./FORMS.md)
 
 ## 3. Learn on lab206.com
 
 | Goal | Link |
 |---|---|
-| **Five words** (`signal` … `resource`) | [LEARN.md](./LEARN.md) — designers + developers |
-| **Hook a backend** | [DATA.md](./DATA.md) · Lab `data-list` |
 | Lab Start here (~10 min) | https://lab206.com/lab?recipe=hello |
-| Docs (API + patterns) | https://lab206.com/docs · [#reactivity](https://lab206.com/docs#reactivity) |
+| Docs (API + patterns) | https://lab206.com/docs |
 | System (every component) | https://lab206.com/system |
-| designlab206 demo | https://designlab206.com/ |
-| Logistics Power | https://lab206.com/logistics/ (or `pnpm example:logistics`) |
-| Hearth demo | https://lab206.com/hearth/ |
+| **Flagship product** | [designlab206.com](https://designlab206.com/) (`pnpm example:starter`) |
+| Restaurant Power | https://lab206.com/hearth/ (`pnpm example:restaurant`) — URL `/hearth/` is stable |
+| Logistics Power · Bank Power | https://lab206.com/logistics/ · https://lab206.com/bank/ |
+| Five words (`signal` … `resource`) | [LEARN.md](./LEARN.md) |
 | Figma | [Powers Design Kit plugin](https://www.figma.com/community/plugin/1671016490810398688) |
-
-Rules: [USABILITY.md](./USABILITY.md) · Day 1/2/30: [LEARN_PATH.md](./LEARN_PATH.md)
 
 ## 4. Put it online
 
@@ -84,8 +81,7 @@ pnpm build
 pnpm deploy:zip   # → site-upload.zip
 ```
 
-Upload to any static host — [DEPLOY.md](./DEPLOY.md).  
-Free vs paid: [OFFER.md](./OFFER.md).
+[DEPLOY.md](./DEPLOY.md) · free vs paid: [OFFER.md](./OFFER.md)
 
 ---
 
@@ -96,7 +92,7 @@ git clone https://github.com/spowers2/powers.git
 cd powers
 pnpm install
 pnpm example:browser     # Lab · Docs · System  → :5173
-pnpm example:starter     # designlab206         → :5180
-pnpm example:restaurant  # Hearth               → :5181
-pnpm create-app hello-ui # workspace-linked scaffold under examples/
+pnpm example:starter     # designlab206 (flagship) → :5180
+pnpm example:restaurant  # Restaurant Power        → :5181
+pnpm run check           # typecheck · test · size budgets
 ```

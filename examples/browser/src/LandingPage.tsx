@@ -511,11 +511,10 @@ export function LandingPage(props: { router: Router }) {
                 Products built with {SITE.systemName}
               </h2>
               <p class="lp-section-sub">
-                Flagship demos — full apps, not kitchen sinks.{" "}
-                {SITE.demos.workspace.label} is live on its own domain;{" "}
-                {SITE.demos.logistics.label}, {SITE.demos.bank.label}, and{" "}
-                {SITE.demos.hearth.label} ship with this site. Lab and System
-                teach the kit underneath.
+                One flagship product app — {SITE.demos.workspace.label} on its
+                own domain. {SITE.demos.logistics.label}, {SITE.demos.bank.label},
+                and {SITE.demos.hearth.label} are supporting demos of the same
+                kit. Lab and System teach the primitives.
               </p>
             </div>
             <div class="lp-demo-grid">
@@ -538,7 +537,7 @@ export function LandingPage(props: { router: Router }) {
                 href={SITE.demos.logistics.href}
                 {...SITE.demoLinkAttrs}
               >
-                <div class="lp-demo-card__kicker">Ops · data tower</div>
+                <div class="lp-demo-card__kicker">Supporting · ops</div>
                 <h3>{SITE.demos.logistics.label}</h3>
                 <p>
                   Freight control tower: KPIs, shipment matrix, exception bus.
@@ -551,7 +550,7 @@ export function LandingPage(props: { router: Router }) {
                 href={SITE.demos.bank.href}
                 {...SITE.demoLinkAttrs}
               >
-                <div class="lp-demo-card__kicker">Product · banking</div>
+                <div class="lp-demo-card__kicker">Supporting · banking</div>
                 <h3>{SITE.demos.bank.label}</h3>
                 <p>
                   Business banking: dashboard, workflows, capital, accounts, and
@@ -564,7 +563,7 @@ export function LandingPage(props: { router: Router }) {
                 href={SITE.demos.hearth.href}
                 {...SITE.demoLinkAttrs}
               >
-                <div class="lp-demo-card__kicker">Ops · restaurant</div>
+                <div class="lp-demo-card__kicker">Supporting · restaurant</div>
                 <h3>{SITE.demos.hearth.label}</h3>
                 <p>
                   Restaurant floor: menu, reservations, kitchen board, table

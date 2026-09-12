@@ -54,10 +54,8 @@ Setup in `component()` runs **once**. Props stay live via accessors — the chil
 
 ```ts
 // vite.config.ts
-esbuild: {
-  jsx: "automatic",
-  jsxImportSource: "@lab206/dom",
-}
+import { powers } from "@lab206/dom/vite";
+export default defineConfig({ plugins: [powers()] });
 ```
 
 ```json

@@ -1,5 +1,7 @@
 # Golden path — first polished screen (~15 minutes)
 
+**Canonical start:** [GETTING_STARTED.md](./GETTING_STARTED.md). This page is the long form of the same path.
+
 **Goal:** A themed form that *actually works* (live validation, no remount weirdness).
 
 ```bash
@@ -53,15 +55,10 @@ Runtime contracts (why forms stay mounted): [`FOUNDATION.md`](./FOUNDATION.md).
 
 ```ts
 import { defineConfig } from "vite";
+import { powers } from "@lab206/dom/vite";
 
 export default defineConfig({
-  esbuild: {
-    jsx: "automatic",
-    jsxImportSource: "@lab206/dom", // not React
-  },
-  optimizeDeps: {
-    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
-  },
+  plugins: [powers()],
 });
 ```
 
@@ -173,7 +170,7 @@ Outlet remounts only when the **path** changes — form state on the page is saf
 |---|---|
 | Drawers / dialogs | `Drawer` · `Dialog` (shared `attachOverlay`) |
 | Async data | `resource()` + Lab **Async** recipe |
-| Full product patterns | designlab206 `:5180` · Hearth `:5181` |
+| Full product patterns | **Flagship** designlab206 `:5180` · Restaurant Power `:5181` (`/hearth/`) |
 | New primitive | [`COMPONENTS.md`](./COMPONENTS.md) |
 
 ---

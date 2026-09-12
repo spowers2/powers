@@ -50,6 +50,8 @@ Related: [`FOUNDATION.md`](./FOUNDATION.md) (runtime contracts) · [`API.md`](./
 
 **Contract:** `createRoot` isolation + keyed `list`/`For` identity (see FOUNDATION).
 
+**Tooling (Solid):** `powers()` from `@lab206/dom/vite` — Vite plugin; not part of the browser bundle. Ship with the next npm tag; until then set `esbuild.jsxImportSource` by hand (npm **0.1.8**).
+
 ---
 
 ## `@lab206/router` — Stable

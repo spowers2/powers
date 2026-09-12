@@ -66,14 +66,28 @@ if [[ -f "$DEST/package.json" ]] && command -v node >/dev/null 2>&1; then
     const inExamples = process.argv[3] === '1';
     const j = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
     j.name = inExamples ? '@lab206/' + base : base;
-    const ver = '^0.1.4';
+    const ver = '^0.1.8';
     const ws = 'workspace:*';
     const dep = inExamples ? ws : ver;
     j.dependencies = j.dependencies || {};
     for (const name of ['@lab206/core', '@lab206/dom', '@lab206/ui']) {
       j.dependencies[name] = dep;
     }
-    fs.writeFileSync(pkgPath, JSON.stringify(j, null, 2) + '\n');
+    fs.writeFileSync(pkgPath, JSON.stringify(j, null, 2) + '\\n');
+    if (!inExamples) {
+      const vitePath = pkgPath.replace(/package\\.json$/, 'vite.config.ts');
+      fs.writeFileSync(vitePath, [
+        'import { defineConfig } from "vite";',
+        '',
+        '// npm 0.1.8 has no @lab206/dom/vite yet. Next tag: plugins: [powers()]',
+        'export default defineConfig({',
+        '  esbuild: { jsx: "automatic", jsxImportSource: "@lab206/dom" },',
+        '  optimizeDeps: { include: ["@lab206/core", "@lab206/dom", "@lab206/ui"] },',
+        '  server: { port: 5190 },',
+        '});',
+        '',
+      ].join('\\n'));
+    }
   " "$DEST/package.json" "$BASE" "$IN_EXAMPLES"
 fi
 

@@ -17,11 +17,11 @@ Built with AI in the loop — **AI where it helps; judgment where it counts.**
 
 ## Start here
 
-1. **See products** — [lab206.com](https://lab206.com) · [designlab206.com](https://designlab206.com/) · [Restaurant Power](https://lab206.com/hearth/) · [Bank Power](https://lab206.com/bank/)  
+1. **See products** — **Flagship:** [designlab206.com](https://designlab206.com/) · Kit: [lab206.com](https://lab206.com) · [Restaurant Power](https://lab206.com/hearth/) · [Bank Power](https://lab206.com/bank/)  
 2. **Design** — enable **Powers UI Kit** in Figma Assets · install [Powers Design Kit](https://www.figma.com/community/plugin/1671016490810398688)  
 3. **Learn** — [Lab · Start here](https://lab206.com/lab?recipe=hello) · [Docs](https://lab206.com/docs) · [System](https://lab206.com/system)
 
-Hub in-repo: [GETTING_STARTED](./docs/GETTING_STARTED.md) · [GOLDEN_PATH](./docs/GOLDEN_PATH.md) · [USABILITY](./docs/USABILITY.md) · [LICENSING](./docs/LICENSING.md)
+Hub in-repo: [GETTING_STARTED](./docs/GETTING_STARTED.md) (public start) · [LICENSING](./docs/LICENSING.md)
 
 ---
 
@@ -42,7 +42,7 @@ git clone https://github.com/spowers2/powers.git
 cd powers
 pnpm install
 pnpm example:browser     # Lab · Docs · System  → http://localhost:5173
-pnpm example:starter     # designlab206         → http://localhost:5180
+pnpm example:starter     # designlab206 (flagship) → http://localhost:5180
 pnpm example:restaurant  # Restaurant Power     → http://localhost:5181
 pnpm example:bank        # Bank Power           → http://localhost:5183
 pnpm run check           # typecheck · test · size budgets

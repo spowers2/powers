@@ -430,7 +430,8 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
             <Code>pnpm create powers my-app</Code> wires Vite + TS for you. If
             you hand-roll, you need <strong>both</strong> configs below —{" "}
             <Code>react-jsx</Code> is only the transform name; do{" "}
-            <strong>not</strong> install React. Use <Code>@lab206/*@0.1.6+</Code>
+            <strong>not</strong> install React. Use <Code>@lab206/*@0.1.8+</Code>
+            and <Code>plugins: [powers()]</Code> from <Code>@lab206/dom/vite</Code>
             .
           </Alert>
           <Text muted size="sm">
@@ -443,18 +444,13 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
   }
 }`}</pre>
           <Text muted size="sm">
-            <Code>vite.config.ts</Code> — Vite does not read tsconfig for JSX:
+            <Code>vite.config.ts</Code> — use <Code>powers()</Code> so Vite cannot miss JSX:
           </Text>
           <pre class="docs-pre">{`import { defineConfig } from "vite";
+import { powers } from "@lab206/dom/vite";
 
 export default defineConfig({
-  esbuild: {
-    jsx: "automatic",
-    jsxImportSource: "@lab206/dom",
-  },
-  optimizeDeps: {
-    include: ["@lab206/core", "@lab206/dom", "@lab206/ui"],
-  },
+  plugins: [powers()],
 });`}</pre>
           <Text muted size="sm">
             App entry:

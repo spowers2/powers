@@ -5,7 +5,7 @@
 **One-liner:** Logistics ops control tower for shipments, exceptions, and partner status — built with Powers to show **dense data UI** and “any backend” hooks.
 
 **Role on lab206:** Third vertical proof (not studio, not restaurant).  
-**Live product stays external:** [designlab206.com](https://designlab206.com/) · **Hearth** stays hospitality on lab206.
+**Live product stays external:** [designlab206.com](https://designlab206.com/) (flagship) · **Restaurant Power** stays hospitality on lab206 (`/hearth/`).
 
 ---
 
@@ -28,7 +28,7 @@
 | **Is** | Fictional mid-market shipper ops desk + light partner view |
 | **Is not** | Real TMS, map platform, or warehouse engine |
 | **Data story** | Feels “big data”: KPIs, fat tables, filters, paged queries — via `createApiClient` + fake/paged JSON |
-| **Design story** | Distinct tokens (industrial / signal accent) — not Hearth warm, not studio purple |
+| **Design story** | Distinct tokens (industrial / signal accent) — not Restaurant Power warm, not studio purple |
 | **Naming story** | Smack-in-the-face clarity: **Logistics Power** — Powers applied to logistics |
 
 ---
@@ -77,7 +77,7 @@ Deep links: `?status=at_risk`, `?q=` search — outlet remount-on-query already 
 
 | Surface | Change |
 |---|---|
-| **Nav** | Add **Logistics Power** next to Hearth (`/logistics/`, new tab OK) |
+| **Nav** | Add **Logistics Power** next to Restaurant Power (`/logistics/`, new tab OK) |
 | **Landing Products** | Card: “Ops · Logistics Power” — dense logistics control tower |
 | **Phone Menu** | `Logistics Power` entry |
 | **Zip build** | `pnpm build:lab206` includes `logistics/` like `hearth/` |
@@ -85,9 +85,9 @@ Deep links: `?status=at_risk`, `?q=` search — outlet remount-on-query already 
 
 ---
 
-## Tech spine (match Hearth / starter)
+## Tech spine (match Restaurant Power / starter)
 
-- Package: `examples/logistics-power` (Vite + `@lab206/*@0.1.6+`)  
+- Package: `examples/logistics-power` (Vite + `@lab206/*@0.1.8+`)  
 - Router: `createRouter` · **one outlet**  
 - Data: `createApiClient` + in-memory / static JSON faker (swap URL later)  
 - UI: Table, Empty, Alert, Spinner, Dialog, Drawer, Badge, Stack, Field  

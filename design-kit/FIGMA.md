@@ -14,7 +14,7 @@ Visual source of truth for the design kit. Machine specs stay in this repo (`tok
 
 ## Design with the library (product workflow)
 
-1. **New product file** (e.g. `designlab206 screens`, `Hearth ops`) — not the kit source.  
+1. **New product file** (e.g. `designlab206 screens`, `Restaurant Power ops`) — not the kit source.  
 2. **Assets** → enable library **Powers UI Kit**.  
 3. Place **instances** only: `Button`, `Input`, `Field`, `Card`, `Text`, `Dialog`, …  
 4. Prefer **semantic Variables** (`color/accent`, `space/4`) over hard hex.  

@@ -13,7 +13,7 @@ Use this before the first public npm publish / website launch.
 - [x] Demo site routes work: `/` · `/docs` · `/lab` · `/system`
 - [x] Lab recipes load, teach (goal / learn / how / try), and run with design-system CSS in the iframe
 - [x] Design tokens retheme via `packages/ui/src/styles/tokens.css` only
-- [x] Light + dark theme smoke-tested (browser smoke + Hearth guest/staff)
+- [x] Light + dark theme smoke-tested (browser smoke + Restaurant Power guest/staff)
 - [x] Dense / comfortable density smoke-tested (System page)
 
 ## Packages

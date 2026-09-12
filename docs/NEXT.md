@@ -79,13 +79,13 @@
 
 - [x] **designlab206** (`pnpm example:starter` → :5180) — clients, projects, tasks, invoices, dashboard  
 - [x] **Invoices** — draft/sent/paid/overdue, line items, outstanding + paid YTD  
-- [x] **Hearth** (`pnpm example:restaurant` → :5181) — menu photos (Unsplash), reservations, service board  
+- [x] **Restaurant Power** (`pnpm example:restaurant` → :5181) — menu photos (Unsplash), reservations, service board  
 - [x] **Demo links** on System site nav, landing, and Docs → :5180 / :5181  
 
 ## Just shipped (product depth)
 
 - [x] **designlab206 time** — log hours, unbilled value, invoice unbilled → draft invoices  
-- [x] **Hearth table map** — floor plan, seat/reserve/clear, tickets per table  
+- [x] **Restaurant Power table map** — floor plan, seat/reserve/clear, tickets per table  
 
 ## Foundation hardening (library-first) — in progress
 
@@ -111,19 +111,26 @@
 - [x] Optional **GSAP adapter** (`@lab206/animate/gsap`)  
 - [x] Lab recipe **GSAP adapter** (`/lab?recipe=gsap`)  
 - [x] Review pass: Dialog unique title ids · Select fallback · Combobox overlay · GSAP harden · smoke  
-- [x] **Tighten batch:** Field auto `htmlFor`/aria · Combobox + Tooltip **body portal** · overlay `isInside` · designlab206/Hearth **More** nav · Playwright GSAP **x advances** assert  
+- [x] **Tighten batch:** Field auto `htmlFor`/aria · Combobox + Tooltip **body portal** · overlay `isInside` · designlab206/Restaurant Power **More** nav · Playwright GSAP **x advances** assert  
 
 ### Product UX (just done)
 
 - [x] designlab206 dashboard stats → filtered deep links (`?status=` / `?view=pipeline`)  
 - [x] Renamed **Project pipeline** + explainer card  
-- [x] Hearth **guest site** `/visit` · menu · book (staff chrome separate)  
+- [x] Restaurant Power **guest site** `/visit` · menu · book (staff chrome separate)  
 - [x] Router tracks `search` so query changes remount list pages  
 
-### Next (optional)
+### Next (focus slice — 2026-09)
 
-- Keep tightening from real dogfood  
-- Public cut when you decide (`RELEASE.md`)  
+- [x] One public name: **Restaurant Power** (URL `/hearth/` unchanged) · npm docs **0.1.8+**
+- [x] `powers()` Vite plugin (`@lab206/dom/vite`) · fail build if jsxImportSource is overridden
+- [x] Flagship product app: **designlab206** · others supporting
+- [x] Docs hub thinned: [GETTING_STARTED.md](./GETTING_STARTED.md) + Lab
+- [x] Pro fulfillment checklist (inquire-only checkout)
+- [ ] Keep CI required on `main` (do not bypass)
+- [ ] Next npm tag so `powers()` is on the public `@lab206/dom`
+
+**Not now:** more primitives · another product demo · streaming SSR · fake storefront.  
 
 **Not now:** public npm until you flip the switch · more product apps as primary work.
 
