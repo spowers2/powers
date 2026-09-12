@@ -87,7 +87,7 @@ Deep links: `?status=at_risk`, `?q=` search — outlet remount-on-query already 
 
 ## Tech spine (match Restaurant Power / starter)
 
-- Package: `examples/logistics-power` (Vite + `@lab206/*@0.1.8+`)  
+- Package: `examples/logistics-power` (Vite + `@lab206/*@0.1.9+`)  
 - Router: `createRouter` · **one outlet**  
 - Data: `createApiClient` + in-memory / static JSON faker (swap URL later)  
 - UI: Table, Empty, Alert, Spinner, Dialog, Drawer, Badge, Stack, Field  

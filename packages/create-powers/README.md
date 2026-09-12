@@ -14,7 +14,7 @@ pnpm install
 pnpm dev   # → http://localhost:5190
 ```
 
-Installs `@lab206/core`, `@lab206/dom`, and `@lab206/ui` (**^0.1.8**).  
+Installs `@lab206/core`, `@lab206/dom`, and `@lab206/ui` (**^0.1.9**).  
 Vite is preconfigured with `plugins: [powers()]` from `@lab206/dom/vite` (no React).
 
 - Docs: https://lab206.com/docs  

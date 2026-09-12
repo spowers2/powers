@@ -430,7 +430,7 @@ pnpm add gsap   # then: import from "@lab206/animate/gsap"`}</pre>
             <Code>pnpm create powers my-app</Code> wires Vite + TS for you. If
             you hand-roll, you need <strong>both</strong> configs below —{" "}
             <Code>react-jsx</Code> is only the transform name; do{" "}
-            <strong>not</strong> install React. Use <Code>@lab206/*@0.1.8+</Code>
+            <strong>not</strong> install React. Use <Code>@lab206/*@0.1.9+</Code>
             and <Code>plugins: [powers()]</Code> from <Code>@lab206/dom/vite</Code>
             .
           </Alert>

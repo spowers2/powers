@@ -21,7 +21,7 @@ import { powers } from "@lab206/dom/vite";
 export default defineConfig({ plugins: [powers()] });
 ```
 
-Use `@lab206/*@0.1.8+`. Do not install React.
+Use `@lab206/*@0.1.9+`. Do not install React.
 
 - Docs: https://lab206.com/docs  
 - License: BUSL-1.1 (source-available)

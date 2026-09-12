@@ -2,7 +2,7 @@
 
 **Start here:** [GETTING_STARTED.md](./GETTING_STARTED.md) · Lab: [lab206.com/lab?recipe=hello](https://lab206.com/lab?recipe=hello)
 
-Live API: [lab206.com/docs](https://lab206.com/docs) · npm **`@lab206/*@0.1.8+`**
+Live API: [lab206.com/docs](https://lab206.com/docs) · npm **`@lab206/*@0.1.9+`**
 
 Everything else in this folder is reference. You do not need to read it to ship a first screen.
 

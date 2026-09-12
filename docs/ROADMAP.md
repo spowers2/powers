@@ -48,7 +48,7 @@ Win on **one start path**, not more components. Public: [GETTING_STARTED.md](./G
 
 | # | Milestone | Status |
 |---|---|---|
-| Names | Restaurant Power + `@lab206/*@0.1.8+` | done this slice |
+| Names | Restaurant Power + `@lab206/*@0.1.9+` | done this slice |
 | JSX | `powers()` Vite plugin | done in repo; npm next tag |
 | CI | required check on `main` | do not bypass |
 | Pro | zip + [FULFILLMENT.md](../design-kit/pro/FULFILLMENT.md) | inquire, no fake checkout |

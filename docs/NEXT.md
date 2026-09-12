@@ -122,13 +122,14 @@
 
 ### Next (focus slice — 2026-09)
 
-- [x] One public name: **Restaurant Power** (URL `/hearth/` unchanged) · npm docs **0.1.8+**
+- [x] One public name: **Restaurant Power** (URL `/hearth/` unchanged) · npm docs **0.1.9+**
 - [x] `powers()` Vite plugin (`@lab206/dom/vite`) · fail build if jsxImportSource is overridden
 - [x] Flagship product app: **designlab206** · others supporting
 - [x] Docs hub thinned: [GETTING_STARTED.md](./GETTING_STARTED.md) + Lab
 - [x] Pro fulfillment checklist (inquire-only checkout)
+- [ ] **Next commit:** bump CI actions off Node 20 (`checkout@v5`, `setup-node@v5`, newer `pnpm/action-setup`)
 - [ ] Keep CI required on `main` (do not bypass)
-- [ ] Next npm tag so `powers()` is on the public `@lab206/dom`
+- [ ] npm **0.1.9** so `powers()` is on public `@lab206/dom`
 
 **Not now:** more primitives · another product demo · streaming SSR · fake storefront.  
 

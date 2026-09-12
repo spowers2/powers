@@ -71,7 +71,7 @@ Use this before the first public npm publish / website launch.
 9. [ ] Optional: rotate Figma PAT if it was ever pasted outside `.env.local`  
 10. [ ] Optional: post short social from [ANNOUNCE.md](./ANNOUNCE.md)
 
-## npm cut (current: `0.1.8`)
+## npm cut (current: `0.1.9`)
 
 1. [x] Coordinated versions — `@lab206/*` + `create-powers` at **0.1.8**
 2. [x] Exports **`import` / `default` / `types` → `dist` only** (never `development`→`src` — that broke Vite with React JSX)
@@ -84,8 +84,9 @@ Use this before the first public npm publish / website launch.
 9. [x] **0.1.6** — `createApiClient` / `ApiError` + DATA.md + Lab data recipes
 10. [x] **0.1.7** — SVG namespace in `@lab206/dom` (`createElementNS`) so JSX `<svg><path/>` paints; Logistics Power circuit pulses
 11. [x] **0.1.8** — dark-mode / Dual Electric contrast (soft-fg tokens, solid CTA AA); Bank Power + Restaurant Power demos
-12. [ ] Optional: LemonSqueezy / Gumroad self-serve SKU  
-13. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
+12. [ ] **0.1.9** — `powers()` Vite plugin (`@lab206/dom/vite`); Restaurant Power naming; designlab206 flagship; thinner docs hub
+13. [ ] Optional: LemonSqueezy / Gumroad self-serve SKU  
+14. [ ] Optional: register **Powers** trademark (see TRADEMARKS.md)
 
 Dry run: `pnpm publish:dry-run` · Docs: [NPM.md](./NPM.md)
 
@@ -101,4 +102,4 @@ Core is **BSL-1.1** by design (protect Competing Offerings + commercial path). S
 
 ---
 
-**Last updated:** 2026-09-02 — `@lab206/*@0.1.8` contrast + Bank Power.
+**Last updated:** 2026-09-11 — `@lab206/*@0.1.9` `powers()` Vite plugin.

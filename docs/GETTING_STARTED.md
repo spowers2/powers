@@ -22,7 +22,7 @@ You get a themed form (`createField` + `bind`) and a light/dark toggle using `@l
 pnpm add @lab206/core @lab206/dom @lab206/ui
 ```
 
-Use **`@lab206/*@0.1.8+`**. Older tags break Vite (`React is not defined`), Dialog form caret (pre-0.1.5), or lack `createApiClient` (pre-0.1.6). See [NPM.md](./NPM.md).
+Use **`@lab206/*@0.1.9+`**. Older tags break Vite (`React is not defined`), Dialog form caret (pre-0.1.5), or lack `createApiClient` (pre-0.1.6). `powers()` requires **0.1.9**. See [NPM.md](./NPM.md).
 
 **`tsconfig.json`:**
 
